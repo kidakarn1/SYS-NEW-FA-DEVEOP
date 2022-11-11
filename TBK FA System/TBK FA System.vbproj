@@ -1,0 +1,949 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>TBK_FA_System.My.MyApplication</StartupObject>
+    <RootNamespace>TBK_FA_System</RootNamespace>
+    <AssemblyName>TBK FA System</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>TBK FA System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>TBK FA System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>Off</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>Off</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>fa_logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>TBK FA System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>TBK FA System.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>TBK FA System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>TBK FA System.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="cdio.net, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\cdio.net.0.1.0\lib\netstandard2.0\cdio.net.dll</HintPath>
+    </Reference>
+    <Reference Include="CircularProgressBar, Version=2.7.0.7, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\CircularProgressBar.2.7.0.7\lib\net40\CircularProgressBar.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GenCode128">
+      <HintPath>..\..\New folder\Barcode Generator DLL\GenCode128.dll</HintPath>
+    </Reference>
+    <Reference Include="IDAutomation.LinearBarCode">
+      <HintPath>..\..\New folder\Barcode Generator DLL\IDAutomation.LinearBarCode.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.QRCode, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagingToolkit.QRCode.1.3.0\lib\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.Common, Version=19.1.40.49152, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\National Instruments\Measurement Studio\DotNET\v4.0\AnyCPU\NationalInstruments.Common 19.1.40\NationalInstruments.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.DAQmx, Version=22.5.45.49247, Culture=neutral, PublicKeyToken=4febd62461bf11a4, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\National Instruments\MeasurementStudioVS2012\DotNET\Assemblies\Current\NationalInstruments.DAQmx.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PACKING_CONTROL\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite.Designer">
+      <HintPath>..\..\FA System\SQLite.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=2.0.5.1324, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.2.0.5-pre20210817120427\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.114.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.114.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.114.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.114.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.114.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Log" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PACKING_CONTROL\packages\System.Text.Json.5.0.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Vse.Web.Serialization">
+      <HintPath>..\..\PACKING_CONTROL\packages\Vse.Web.Serialization.ControlledSerializationJsonConverter.1.0.4\lib\net45\Vse.Web.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApiContrib.Formatting.JavaScriptSerializer">
+      <HintPath>..\WebApiContrib.Formatting.JavaScriptSerializer.dll</HintPath>
+    </Reference>
+    <Reference Include="WinFormAnimation, Version=1.6.0.4, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinFormAnimation.1.6.0.4\lib\net40\WinFormAnimation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="cdio.net" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Add_skill.Designer.vb">
+      <DependentUpon>Add_skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add_skill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_success.Designer.vb">
+      <DependentUpon>Add_success.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add_success.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_user.Designer.vb">
+      <DependentUpon>Add_user.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add_user.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adm_login.Designer.vb">
+      <DependentUpon>Adm_login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Adm_login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adm_manage.Designer.vb">
+      <DependentUpon>Adm_manage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Adm_manage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adm_page.Designer.vb">
+      <DependentUpon>Adm_page.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Adm_page.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.vb" />
+    <Compile Include="AutoUpdate.vb" />
+    <Compile Include="Auto_close_lot.Designer.vb">
+      <DependentUpon>Auto_close_lot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auto_close_lot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backoffice_model.vb" />
+    <Compile Include="CDIO.vb" />
+    <Compile Include="Change_Loss2.Designer.vb">
+      <DependentUpon>Change_Loss2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Change_Loss2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Chang_sh.Designer.vb">
+      <DependentUpon>Chang_sh.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Chang_sh.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Close_lot.Designer.vb">
+      <DependentUpon>Close_lot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Close_lot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Close_lot_cfm.Designer.vb">
+      <DependentUpon>Close_lot_cfm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Close_lot_cfm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Completed_rework.Designer.vb">
+      <DependentUpon>Completed_rework.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Completed_rework.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Confrime_work_production.Designer.vb">
+      <DependentUpon>Confrime_work_production.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Confrime_work_production.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_add_skill.Designer.vb">
+      <DependentUpon>Conf_add_skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_add_skill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_del_line.Designer.vb">
+      <DependentUpon>Conf_del_line.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_del_line.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_del_skill.Designer.vb">
+      <DependentUpon>Conf_del_skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_del_skill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_edit_line.Designer.vb">
+      <DependentUpon>Conf_edit_line.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_edit_line.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_edit_skill.Designer.vb">
+      <DependentUpon>Conf_edit_skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_edit_skill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_edit_user.Designer.vb">
+      <DependentUpon>Conf_edit_user.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_edit_user.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controller.vb" />
+    <Compile Include="Confrm_end.Designer.vb">
+      <DependentUpon>Confrm_end.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Confrm_end.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Conf_login.Designer.vb">
+      <DependentUpon>Conf_login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Conf_login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Defect_menu.Designer.vb">
+      <DependentUpon>Defect_menu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Defect_menu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Defect_nc_adj.Designer.vb">
+      <DependentUpon>Defect_nc_adj.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Defect_nc_adj.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Del_success.Designer.vb">
+      <DependentUpon>Del_success.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Del_success.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Desc_act.Designer.vb">
+      <DependentUpon>Desc_act.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Desc_act.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edit_line_mst.Designer.vb">
+      <DependentUpon>Edit_line_mst.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Edit_line_mst.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edit_skill.Designer.vb">
+      <DependentUpon>Edit_skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Edit_skill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edit_user.Designer.vb">
+      <DependentUpon>Edit_user.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Edit_user.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtractionOptions.vb" />
+    <Compile Include="Finish_work.Designer.vb">
+      <DependentUpon>Finish_work.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Finish_work.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IArchive.vb" />
+    <Compile Include="Inf_manage.Designer.vb">
+      <DependentUpon>Inf_manage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inf_manage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inf_save_conf.Designer.vb">
+      <DependentUpon>inf_save_conf.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inf_save_conf.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Insert_list.Designer.vb">
+      <DependentUpon>Insert_list.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Insert_list.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ins_qty.Designer.vb">
+      <DependentUpon>ins_qty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ins_qty.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ins_qty_special_time.Designer.vb">
+      <DependentUpon>ins_qty_special_time.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ins_qty_special_time.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ins_time_loss.Designer.vb">
+      <DependentUpon>ins_time_loss.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ins_time_loss.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="int_qty_rework.Designer.vb">
+      <DependentUpon>int_qty_rework.vb</DependentUpon>
+    </Compile>
+    <Compile Include="int_qty_rework.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Line_conf.Designer.vb">
+      <DependentUpon>Line_conf.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Line_conf.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="line_manage.Designer.vb">
+      <DependentUpon>line_manage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="line_manage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="List_Production.Designer.vb">
+      <DependentUpon>List_Production.vb</DependentUpon>
+    </Compile>
+    <Compile Include="List_Production.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Chang_Loss.Designer.vb">
+      <DependentUpon>Chang_Loss.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Chang_Loss.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="load_show.Designer.vb">
+      <DependentUpon>load_show.vb</DependentUpon>
+    </Compile>
+    <Compile Include="load_show.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loss_reg.Designer.vb">
+      <DependentUpon>Loss_reg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Loss_reg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loss_reg_pass.Designer.vb">
+      <DependentUpon>Loss_reg_pass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Loss_reg_pass.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFrm.designer.vb">
+      <DependentUpon>MainFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model_change_alert.Designer.vb">
+      <DependentUpon>Model_change_alert.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Model_change_alert.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Prd_detail.Designer.vb">
+      <DependentUpon>Prd_detail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Prd_detail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prd_status.Designer.vb">
+      <DependentUpon>Prd_status.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Prd_status.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="print_back.Designer.vb">
+      <DependentUpon>print_back.vb</DependentUpon>
+    </Compile>
+    <Compile Include="print_back.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Print_Defact.Designer.vb">
+      <DependentUpon>Print_Defact.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Print_Defact.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rm_scan.Designer.vb">
+      <DependentUpon>Rm_scan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Rm_scan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sc.Designer.vb">
+      <DependentUpon>Sc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Sc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="List_Emp.Designer.vb">
+      <DependentUpon>List_Emp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="List_Emp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scan_reprint.Designer.vb">
+      <DependentUpon>Scan_reprint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Scan_reprint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sc_prd_plan.Designer.vb">
+      <DependentUpon>sc_prd_plan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sc_prd_plan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sc_wi_plan.Designer.vb">
+      <DependentUpon>sc_wi_plan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sc_wi_plan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="select_int_qty.Designer.vb">
+      <DependentUpon>select_int_qty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="select_int_qty.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sel_defect_cd_nc.Designer.vb">
+      <DependentUpon>Sel_defect_cd_nc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Sel_defect_cd_nc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ccc.Designer.vb">
+      <DependentUpon>ccc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ccc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sel_prod_start.Designer.vb">
+      <DependentUpon>Sel_prod_start.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Sel_prod_start.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Set_print_tag.Designer.vb">
+      <DependentUpon>Set_print_tag.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Set_print_tag.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="show_information.Designer.vb">
+      <DependentUpon>show_information.vb</DependentUpon>
+    </Compile>
+    <Compile Include="show_information.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="show_list_information.Designer.vb">
+      <DependentUpon>show_list_information.vb</DependentUpon>
+    </Compile>
+    <Compile Include="show_list_information.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Show_reprint_wi.Designer.vb">
+      <DependentUpon>Show_reprint_wi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Show_reprint_wi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="skill_manage.Designer.vb">
+      <DependentUpon>skill_manage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="skill_manage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Api\api.vb" />
+    <Compile Include="Tag_reprint.Designer.vb">
+      <DependentUpon>Tag_reprint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tag_reprint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tag_reprint_new.Designer.vb">
+      <DependentUpon>tag_reprint_new.vb</DependentUpon>
+    </Compile>
+    <Compile Include="tag_reprint_new.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Time_Loss.Designer.vb">
+      <DependentUpon>Time_Loss.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Time_Loss.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Unit_test.vb" />
+    <Compile Include="Update_Patch.Designer.vb">
+      <DependentUpon>Update_Patch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Update_Patch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="user_manage.Designer.vb">
+      <DependentUpon>user_manage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="user_manage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wait_data.Designer.vb">
+      <DependentUpon>Wait_data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Wait_data.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Working_Pro.Designer.vb">
+      <DependentUpon>Working_Pro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Working_Pro.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Add_skill.resx">
+      <DependentUpon>Add_skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_success.resx">
+      <DependentUpon>Add_success.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_user.resx">
+      <DependentUpon>Add_user.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adm_login.resx">
+      <DependentUpon>Adm_login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adm_manage.resx">
+      <DependentUpon>Adm_manage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adm_page.resx">
+      <DependentUpon>Adm_page.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auto_close_lot.resx">
+      <DependentUpon>Auto_close_lot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Change_Loss2.resx">
+      <DependentUpon>Change_Loss2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chang_sh.resx">
+      <DependentUpon>Chang_sh.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Close_lot.resx">
+      <DependentUpon>Close_lot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Close_lot_cfm.resx">
+      <DependentUpon>Close_lot_cfm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Completed_rework.resx">
+      <DependentUpon>Completed_rework.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Confrime_work_production.resx">
+      <DependentUpon>Confrime_work_production.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Confrm_end.resx">
+      <DependentUpon>Confrm_end.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_add_skill.resx">
+      <DependentUpon>Conf_add_skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_del_line.resx">
+      <DependentUpon>Conf_del_line.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_del_skill.resx">
+      <DependentUpon>Conf_del_skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_edit_line.resx">
+      <DependentUpon>Conf_edit_line.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_edit_skill.resx">
+      <DependentUpon>Conf_edit_skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_edit_user.resx">
+      <DependentUpon>Conf_edit_user.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conf_login.resx">
+      <DependentUpon>Conf_login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Defect_menu.resx">
+      <DependentUpon>Defect_menu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Defect_nc_adj.resx">
+      <DependentUpon>Defect_nc_adj.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Del_success.resx">
+      <DependentUpon>Del_success.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Desc_act.resx">
+      <DependentUpon>Desc_act.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Edit_line_mst.resx">
+      <DependentUpon>Edit_line_mst.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Edit_skill.resx">
+      <DependentUpon>Edit_skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Edit_user.resx">
+      <DependentUpon>Edit_user.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finish_work.resx">
+      <DependentUpon>Finish_work.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inf_manage.resx">
+      <DependentUpon>Inf_manage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inf_save_conf.resx">
+      <DependentUpon>inf_save_conf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Insert_list.resx">
+      <DependentUpon>Insert_list.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ins_qty.resx">
+      <DependentUpon>ins_qty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ins_qty_special_time.resx">
+      <DependentUpon>ins_qty_special_time.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ins_time_loss.resx">
+      <DependentUpon>ins_time_loss.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="int_qty_rework.resx">
+      <DependentUpon>int_qty_rework.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Line_conf.resx">
+      <DependentUpon>Line_conf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="line_manage.resx">
+      <DependentUpon>line_manage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="List_Production.resx">
+      <DependentUpon>List_Production.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chang_Loss.resx">
+      <DependentUpon>Chang_Loss.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="load_show.resx">
+      <DependentUpon>load_show.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loss_reg.resx">
+      <DependentUpon>Loss_reg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loss_reg_pass.resx">
+      <DependentUpon>Loss_reg_pass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFrm.resx">
+      <DependentUpon>MainFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model_change_alert.resx">
+      <DependentUpon>Model_change_alert.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prd_detail.resx">
+      <DependentUpon>Prd_detail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prd_status.resx">
+      <DependentUpon>Prd_status.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="print_back.resx">
+      <DependentUpon>print_back.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Print_Defact.resx">
+      <DependentUpon>Print_Defact.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rm_scan.resx">
+      <DependentUpon>Rm_scan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sc.resx">
+      <DependentUpon>Sc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="List_Emp.resx">
+      <DependentUpon>List_Emp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scan_reprint.resx">
+      <DependentUpon>Scan_reprint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sc_prd_plan.resx">
+      <DependentUpon>sc_prd_plan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sc_wi_plan.resx">
+      <DependentUpon>sc_wi_plan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="select_int_qty.resx">
+      <DependentUpon>select_int_qty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sel_defect_cd_nc.resx">
+      <DependentUpon>Sel_defect_cd_nc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ccc.resx">
+      <DependentUpon>ccc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sel_prod_start.resx">
+      <DependentUpon>Sel_prod_start.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Set_print_tag.resx">
+      <DependentUpon>Set_print_tag.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="show_information.resx">
+      <DependentUpon>show_information.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="show_list_information.resx">
+      <DependentUpon>show_list_information.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Show_reprint_wi.resx">
+      <DependentUpon>Show_reprint_wi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="skill_manage.resx">
+      <DependentUpon>skill_manage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tag_reprint.resx">
+      <DependentUpon>Tag_reprint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tag_reprint_new.resx">
+      <DependentUpon>tag_reprint_new.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Time_Loss.resx">
+      <DependentUpon>Time_Loss.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Update_Patch.resx">
+      <DependentUpon>Update_Patch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="user_manage.resx">
+      <DependentUpon>user_manage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wait_data.resx">
+      <DependentUpon>Wait_data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Working_Pro.resx">
+      <DependentUpon>Working_Pro.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fa_logo.ico" />
+    <None Include="Resources\inst_qty2.png" />
+    <None Include="Resources\inst_qty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Newtonsoft\" />
+    <Folder Include="System\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+</Project>
