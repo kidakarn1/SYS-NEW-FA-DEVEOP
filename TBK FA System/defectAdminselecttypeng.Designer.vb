@@ -131,7 +131,7 @@ Partial Class defectAdminselecttypeng
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.Location = New System.Drawing.Point(596, 513)
+        Me.PictureBox1.Location = New System.Drawing.Point(595, 513)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(193, 83)
         Me.PictureBox1.TabIndex = 67
