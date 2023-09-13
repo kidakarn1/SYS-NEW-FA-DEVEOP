@@ -127,8 +127,8 @@
   <data name="defectHome3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectHome3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Information" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectSelectcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectSelectcode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdmindetailadjustNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdmindetailadjustNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,11 +139,14 @@
   <data name="defectRegister2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectRegister2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAlertsure1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAlertsure1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectAdminselecttypeNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAdminselecttypeNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdmindetailNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdmindetailNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="defectHome1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectHome1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdminselectcodeNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminselectcodeNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,8 +157,8 @@
   <data name="defectNumpadadjust" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectNumpadadjust.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAdminsearchNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAdminsearchNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectAdminregister1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAdminregister1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectHome4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectHome4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,9 +184,6 @@
   <data name="defectAlertsure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAlertsure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAdminregister1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAdminregister1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="closeLotsummary" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\closeLotsummary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -196,8 +196,8 @@
   <data name="defectHome5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectHome5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAdminselecttypeNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAdminselecttypeNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loginAdmin1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loginAdmin1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdminnumpadregister2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminnumpadregister2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -207,6 +207,9 @@
   </data>
   <data name="defectAdminnumpadregister1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminnumpadregister1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdminselectcodeNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminselectcodeNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -235,11 +238,11 @@
   <data name="defectSelecttype" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectSelecttype.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectSelectcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectSelectcode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectAlertsure1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAlertsure1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectHome1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectHome1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectAdminsearchNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAdminsearchNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Information1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Information1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,8 +253,8 @@
   <data name="defectAdmindetailselectadjustNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdmindetailselectadjustNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="loginAdmin1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loginAdmin1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectAdminselecttypeNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAdminselecttypeNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectNumpadregister" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectNumpadregister.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -268,10 +271,10 @@
   <data name="defectAdmindetailselectadjustNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdmindetailselectadjustNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAdminselecttypeNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAdminselecttypeNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Information" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MainMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MainMenu1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainMenu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

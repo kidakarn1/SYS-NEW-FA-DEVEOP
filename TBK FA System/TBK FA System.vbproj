@@ -1214,6 +1214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\MainMenu1.png" />
     <None Include="Resources\MainMenu.png" />
     <None Include="Resources\defectAdminregister1.png" />
     <None Include="Resources\defectAdminregister.png" />
