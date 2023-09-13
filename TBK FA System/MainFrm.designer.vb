@@ -57,6 +57,7 @@ Partial Class MainFrm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.PictureBox8 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -69,6 +70,7 @@ Partial Class MainFrm
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Timer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
+        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -80,22 +82,22 @@ Partial Class MainFrm
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Arial Black", 13.0!)
         Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(526, 550)
+        Me.Label9.Location = New System.Drawing.Point(541, 551)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(257, 26)
+        Me.Label9.Size = New System.Drawing.Size(251, 26)
         Me.Label9.TabIndex = 23
-        Me.Label9.Text = "New FA system (V 1.6.7) "
+        Me.Label9.Text = "New FA system (V 1.7.3)"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Arial Black", 8.0!)
         Me.Label8.ForeColor = System.Drawing.Color.White
-        Me.Label8.Location = New System.Drawing.Point(387, 576)
+        Me.Label8.Location = New System.Drawing.Point(385, 577)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(409, 15)
+        Me.Label8.Size = New System.Drawing.Size(417, 15)
         Me.Label8.TabIndex = 21
-        Me.Label8.Text = "Copyright Â© TBKK (Thailand) Company Limited. All rights reserved"
+        Me.Label8.Text = "Copyright © TBKK (Thailand) Company Limited. All rights reservedS"
         '
         'Label4
         '
@@ -103,7 +105,7 @@ Partial Class MainFrm
         Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(14, Byte), Integer))
         Me.Label4.Font = New System.Drawing.Font("Arial Black", 15.0!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.Color.Aqua
-        Me.Label4.Location = New System.Drawing.Point(85, 562)
+        Me.Label4.Location = New System.Drawing.Point(86, 562)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(106, 28)
         Me.Label4.TabIndex = 3
@@ -410,7 +412,7 @@ Partial Class MainFrm
         Me.menu4.FlatAppearance.BorderSize = 0
         Me.menu4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.menu4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(33, Byte), Integer))
-        Me.menu4.Location = New System.Drawing.Point(570, 140)
+        Me.menu4.Location = New System.Drawing.Point(572, 140)
         Me.menu4.Name = "menu4"
         Me.menu4.Size = New System.Drawing.Size(210, 391)
         Me.menu4.TabIndex = 14
@@ -459,6 +461,7 @@ Partial Class MainFrm
         '
         Me.Panel5.BackgroundImage = CType(resources.GetObject("Panel5.BackgroundImage"), System.Drawing.Image)
         Me.Panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel5.Controls.Add(Me.PictureBox8)
         Me.Panel5.Controls.Add(Me.Label1)
         Me.Panel5.Controls.Add(Me.Label2)
         Me.Panel5.Location = New System.Drawing.Point(1, 16)
@@ -466,12 +469,21 @@ Partial Class MainFrm
         Me.Panel5.Size = New System.Drawing.Size(168, 116)
         Me.Panel5.TabIndex = 4605
         '
+        'PictureBox8
+        '
+        Me.PictureBox8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.PictureBox8.Location = New System.Drawing.Point(41, 3)
+        Me.PictureBox8.Name = "PictureBox8"
+        Me.PictureBox8.Size = New System.Drawing.Size(13, 10)
+        Me.PictureBox8.TabIndex = 4630
+        Me.PictureBox8.TabStop = False
+        '
         'PictureBox1
         '
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.InitialImage = CType(resources.GetObject("PictureBox1.InitialImage"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(681, 16)
+        Me.PictureBox1.Location = New System.Drawing.Point(683, 16)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(100, 100)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -537,6 +549,7 @@ Partial Class MainFrm
         CType(Me.Timer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -579,4 +592,5 @@ Partial Class MainFrm
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents lb_ctrl_sc_flg As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents PictureBox8 As PictureBox
 End Class

@@ -13,7 +13,7 @@
         'MsgBox(emp_cd)
         Backoffice_model.inf_update(inf_text, emp_cd)
 
-        Adm_page.TextBox1.Text = Inf_manage.TextBox1.Text
+        'Adm_page.TextBox1.Text = Inf_manage.TextBox1.Text
         Inf_manage.Enabled = True
         Adm_manage.Show()
         Me.Close()

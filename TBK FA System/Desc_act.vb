@@ -232,18 +232,20 @@ break_loop:
 		Dim prd_qty As Integer = Convert.ToInt32(Label1.Text)
 		Dim inp_qty As Integer
 		Dim result As Integer = 0
-
-		Working_Pro._Edit_Up_0.Text = "0"
-		Try
-			inp_qty = Convert.ToInt32(TextBox1.Text)
-		Catch ex As Exception
-			inp_qty = 0
-		End Try
-		If inp_qty > prd_qty Then
-			MsgBox("Can't input the Qty. over : " + Label1.Text)
-			TextBox1.Clear()
-		Else
-			If CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) > 0 Then
+        Dim md As New modelDefect()
+        Working_Pro._Edit_Up_0.Text = "0"
+        Try
+            inp_qty = Convert.ToInt32(TextBox1.Text)
+        Catch ex As Exception
+            inp_qty = 0
+        End Try
+        Dim totalDefect As Integer = (CDbl(Val(Working_Pro.lb_nc_qty.Text)) + CDbl(Val(Working_Pro.lb_ng_qty.Text))) 'CDbl(Val(md.mGetDefect(Working_Pro.wi_no.Text, Working_Pro.Label18.Text, Working_Pro.Label14.Text) + (CDbl(Val(Working_Pro.lb_nc_qty.Text)) + CDbl(Val(Working_Pro.lb_ng_qty.Text)))))
+        'If inp_qty > (prd_qty - totalDefect) Then
+        If inp_qty > (CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text) - totalDefect)) Then
+            MsgBox("Can't input the Qty. over : " & Label1.Text & " And Have Defect : " & totalDefect)
+            TextBox1.Clear()
+        Else
+            If CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) > 0 Then
 				Working_Pro._Edit_Up_0.Text = Working_Pro.LB_COUNTER_SHIP.Text
 				If CDbl(Val(TextBox1.Text)) <= CDbl(Val(Label1.Text)) Then
 					cal_qty()
@@ -306,18 +308,18 @@ break_loop:
 						End If
 						If My.Computer.Network.Ping("192.168.161.101") Then
 							tr_status = "1"
-							Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status)
-							Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, start_time, end_time, use_timee, number_qty)
-							'MsgBox("Ping completed")
-						Else
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.Label18.Text)
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, start_time, end_time, use_timee, number_qty, Working_Pro.Label18.Text)
+                            'MsgBox("Ping completed")
+                        Else
 							tr_status = "0"
-							Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status)
-							'MsgBox("Ping incompleted")
-						End If
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.Label18.Text)
+                            'MsgBox("Ping incompleted")
+                        End If
 					Catch ex As Exception
 						tr_status = "0"
-						Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status)
-					End Try
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.Label18.Text)
+                    End Try
 					Working_Pro.Enabled = True
 					Me.Close()
 				Else

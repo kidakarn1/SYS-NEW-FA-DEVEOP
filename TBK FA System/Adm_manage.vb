@@ -5,7 +5,7 @@
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Dim LoadSQL = Backoffice_model.get_information()
 
         While LoadSQL.Read()
@@ -44,7 +44,7 @@
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) 
         Dim LoadSQL = Backoffice_model.get_all_skill()
         Dim num As Integer = 1
         While LoadSQL.Read()
@@ -61,25 +61,24 @@
 
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim LoadSQL = Backoffice_model.get_all_line()
-        Dim num As Integer = 1
-        While LoadSQL.Read()
-            line_manage.ListView1.View = View.Details
-            line_manage.ListView1.Items.Add(num).SubItems.AddRange(New String() {LoadSQL("line_cd").ToString(), LoadSQL("line_name").ToString()})
-            line_manage.ListBox1.Items.Add(LoadSQL("line_id").ToString())
-            num = num + 1
-        End While
-
-        line_manage.Label2.Text = Label2.Text
-        line_manage.Label3.Text = Label3.Text
-        line_manage.Show()
-        Me.Hide()
-    End Sub
+    ' Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    ' Dim objDefectAdminhome As New defectAdminhome()
+    '     objDefectAdminhome.Show()
+    ' End Sub
 
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.Enabled = False
         'Scan_reprint.TextBox1.Select()
         Scan_reprint.Show()
+    End Sub
+
+    Private Sub Adm_manage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lbLine.Text = MainFrm.Label4.Text
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        'Dim objDefectAdminhome As New defectAdminhome()
+        defectAdminhome.Show()
+        Me.Hide()
     End Sub
 End Class

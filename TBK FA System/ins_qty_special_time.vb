@@ -289,19 +289,19 @@ Public Class ins_qty_special_time
 	Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
 		TextBox1.Clear()
 		TextBox2.Clear()
-		ena012()
-		'Button1.Enabled = True
-		'Button2.Enabled = True
-		'Button3.Enabled = True
-		'Button4.Enabled = True
-		'Button5.Enabled = True
-		'Button6.Enabled = True
-		'Button7.Enabled = True
-		'Button8.Enabled = True
-		'Button9.Enabled = True
-		'Button13.Enabled = True
+        ena012()
+        'Button1.Enabled = True
+        'Button2.Enabled = True
+        'Button3.Enabled = True
+        'Button4.Enabled = True
+        'Button5.Enabled = True
+        'Button6.Enabled = True
+        'Button7.Enabled = True
+        'Button8.Enabled = True
+        'Button9.Enabled = True
+        'Button13.Enabled = True
 
-	End Sub
+    End Sub
 
 	Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
 		Dim text_to2 As String = TextBox2.Text

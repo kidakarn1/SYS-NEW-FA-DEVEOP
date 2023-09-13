@@ -13,7 +13,7 @@ Imports System.Drawing.Printing
 Imports System.Configuration
 Imports GenCode128
 Imports BarcodeLib.Barcode
-Imports NationalInstruments.DAQmx
+'Imports NationalInstruments.DAQmx
 Imports System.Net
 Imports System.Web.Script.Serialization
 Public Class Working_Pro
@@ -41,12 +41,18 @@ Public Class Working_Pro
     Public Shared check_tag_type = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
     Public Shared load_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & Prd_detail.lb_wi.Text)
     Public Shared V_check_line_reprint As String = Backoffice_model.check_line_reprint()
-    Dim digitalReadTask_new_dio As New Task()
-    Dim reader_new_dio As DigitalSingleChannelReader
-    Dim data_new_dio As UInt32
+    'Dim digitalReadTask_new_dio As New Task()
+    'Dim reader_new_dio As DigitalSingleChannelReader
+    'Dim data_new_dio As UInt32
     Public s_mecg_name As String = ""
     Public s_delay As String = ""
-
+    Public Shared wiNo As String = ""
+    Public Shared pFg As String = ""
+    Public Shared lineCd As String = ""
+    Public Shared lotNo As String = ""
+    Public Shared seqNo As String = ""
+    Public Shared model As String = ""
+    Public Shared pwi_id As String = ""
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label44.Text = TimeOfDay.ToString("H:mm:ss")
         Label43.Text = DateTime.Now.ToString("yyyy/MM/dd")
@@ -74,10 +80,18 @@ Public Class Working_Pro
         Label47.Visible = False
         Timer1.Start()
         'sc_prd_plan.SerialPort1.Close()
-
+        wiNo = wi_no.Text
+        pFg = Label3.Text
+        lineCd = Label24.Text
+        lotNo = Label18.Text
+        seqNo = Label22.Text
+        model = lb_model.Text
         lb_loss_status.Parent = Panel6
         check_tag_type = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
         load_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & Prd_detail.lb_wi.Text)
+        BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text)
+        lbNextTime.Text = BreakTime
+        TimerLossBT.Start()
         V_check_line_reprint = Backoffice_model.check_line_reprint()
         Dim next_process = Backoffice_model.GET_NEXT_PROCESS()
         Backoffice_model.S_chk_spec_line = Backoffice_model.chk_spec_line()
@@ -156,12 +170,16 @@ Public Class Working_Pro
             Next BitNo
             Call DioGetErrorString(Ret, szError)
         Else
-            digitalReadTask_new_dio.DIChannels.CreateChannel(
-                   "Dev1/port0",
-                   "port0",
-                   ChannelLineGrouping.OneChannelForAllLines)
-            reader_new_dio = New DigitalSingleChannelReader(digitalReadTask_new_dio.Stream)
-            Timer_new_dio.Start()
+            'Try
+            'digitalReadTask_new_dio.DIChannels.CreateChannel(
+            '      "Dev1/port0",
+            '      "port0",
+            'ChannelLineGrouping.OneChannelForAllLines)
+            'reader_new_dio = New DigitalSingleChannelReader(digitalReadTask_new_dio.Stream)
+            'Timer_new_dio.Start()
+            'Catch ex As Exception
+            'MsgBox("Please Check USB DIO")
+            'End Try
         End If
         Dim date_now As String = DateTime.Now.ToString("dd-MM-yyyy")
         Dim date_now_date As Date = DateTime.Now.ToString("dd-MM-yyyy")
@@ -310,7 +328,8 @@ Public Class Working_Pro
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles btn_defect.Click
-        Defect_menu.Show()
+        Dim dfHome As New defectHome()
+        dfHome.Show()
         Me.Enabled = False
         'Close_lot.Show()
         'Me.Close()
@@ -403,17 +422,17 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, Label18.Text)
                     'MsgBox("Ping incompleted")
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, Label18.Text)
             End Try
             st_time.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
             st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
@@ -452,6 +471,31 @@ Public Class Working_Pro
     End Sub
 
     Private Sub btn_start_Click(sender As Object, e As EventArgs) Handles btn_start.Click
+        Start_Production()
+    End Sub
+    Public Sub ins_loss_code(pd As String, line_cd As String, wi_plan As String, item_cd As String, seq_no As String, shift_prd As String, start_loss As String, end_loss As String, total_loss As String, loss_type As String, loss_cd_id As String, op_id As String, pwi_id As String)
+        Dim flg_control As String = "0"
+        If loss_cd_id = "36" Then
+            flg_control = "1"
+            op_id = "0"
+        Else
+            flg_control = "0"
+        End If
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                transfer_flg = "1"
+                Backoffice_model.ins_loss_act(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, flg_control, pwi_id)
+                Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, flg_control, pwi_id)
+            Else
+                transfer_flg = "0"
+                Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, flg_control, pwi_id)
+            End If
+        Catch ex As Exception
+            transfer_flg = "0"
+            Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, flg_control, pwi_id)
+        End Try
+    End Sub
+    Public Sub Start_Production()
         If check_network_frist = 0 Then
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
@@ -461,11 +505,18 @@ Public Class Working_Pro
 
             End Try
         End If
+
         If check_in_up_seq = 0 Then
             Dim date_st1 As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
             Dim date_end1 As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
             Backoffice_model.date_time_click_start = DateTime.Now.ToString("yyyy-MM-dd HH:mm") & ":00"
-
+            Dim rsTime As Integer = calTimeBreakTime(Backoffice_model.date_time_click_start, lbNextTime.Text)
+            TimerCountBT.Interval = rsTime * 1000
+            If rsTime <> 0 Then
+                TimerCountBT.Enabled = True
+                TimerCountBT.Start()
+            End If
+            Dim rsInsertData = Backoffice_model.INSERT_production_working_info(LB_IND_ROW.Text, Label18.Text, Label22.Text, Label14.Text)
             Dim GET_SEQ = Backoffice_model.GET_SEQ_PLAN_current(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1)
             Try
                 If GET_SEQ.Read() Then
@@ -484,14 +535,43 @@ Public Class Working_Pro
             End Try
             GET_SEQ.close()
             Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
+            pwi_id = Backoffice_model.GET_DATA_PRODUCTION_WORKING_INFO(LB_IND_ROW.Text, Label18.Text, Label22.Text)
             For i = 0 To temp_co_emp - 1
                 emp_cd = List_Emp.ListView1.Items(i).Text
-                Backoffice_model.Insert_production_emp_detail_realtime(wi_no.Text, emp_cd, Label22.Text)
+                Backoffice_model.Insert_production_emp_detail_realtime(wi_no.Text, emp_cd, Label22.Text, pwi_id)
                 'MsgBox(List_Emp.ListView1.Items(i).Text)
             Next
             check_in_up_seq += 1
         End If
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                Dim bf = New Backoffice_model
+                Dim RsCheckProduction_Plan = bf.Get_Plan_All_By_Line(Backoffice_model.GET_LINE_PRODUCTION(), Label14.Text, DateTime.Now.ToString("yyyy-MM-dd"))
+                If RsCheckProduction_Plan <> "0" Then
+                    Dim loss_type As String = "0"
+                    Dim op_id As String = "0"
+                    Dim dict3 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(RsCheckProduction_Plan)
+                    Dim start_loss As String = ""
+                    Dim end_loss_codex As String = ""
+                    Dim start_loss_codex As String = ""
+                    Dim Loss_Time_codex As String = ""
+                    Try
+                        For Each item As Object In dict3
+                            start_loss_codex = item("Start_Loss").ToString()
+                            end_loss_codex = item("End_Loss").ToString()
+                            Loss_Time_codex = item("Loss_Time").ToString()
+                            If CDbl(Val(Loss_Time_codex)) > 0 Then
+                                ins_loss_code(MainFrm.Label6.Text, Label24.Text, Prd_detail.lb_wi.Text, Label3.Text, CDbl(Val(Label22.Text)), Label14.Text, start_loss_codex, end_loss_codex, Loss_Time_codex, loss_type, "36", "0", pwi_id)
+                            End If
+                        Next
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                End If
+            End If
+        Catch ex As Exception
 
+        End Try
         Dim line_id As String = MainFrm.line_id.Text
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
@@ -503,10 +583,8 @@ Public Class Working_Pro
         Catch ex As Exception
             Backoffice_model.line_status_upd_sqlite(line_id)
         End Try
-
         Dim date_st As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
-
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Backoffice_model.line_status_ins(line_id, date_st, date_end, "2", "0", 0, "0", Prd_detail.lb_wi.Text)
@@ -523,11 +601,8 @@ Public Class Working_Pro
         Else
             Button1.Visible = False
         End If
-
         start_flg = 1
-
         'Button1.Visible = True
-
         Dim st_counter As String = Label32.Text
 
         If st_counter = "0" Then
@@ -541,13 +616,13 @@ Public Class Working_Pro
                 Dim newDate1 As Date = DateAdd("n", testt1, Now)
                 Label20.Text = newDate1.ToString("H : mm")
             End If
-            Dim pd As String = MainFrm.Label6.Text
+            pd = MainFrm.Label6.Text
             Dim line_cd As String = MainFrm.Label4.Text
             Dim wi_plan As String = wi_no.Text
             Dim item_cd As String = Label3.Text
             Dim item_name As String = Label12.Text
             Dim staff_no As String = Label29.Text
-            Dim seq_no As String = Label22.Text
+            seq_no = Label22.Text
             Dim prd_qty As Integer = 0
             Dim start_time As Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
             Dim end_time As Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
@@ -559,17 +634,17 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                     'MsgBox("Ping incompleted")
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, Label18.Text)
             End Try
             st_time.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
             st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
@@ -603,6 +678,8 @@ Public Class Working_Pro
         Prd_detail.Timer3.Enabled = False
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text)
+        lbNextTime.Text = BreakTime
         Dim yearNow As Integer = DateTime.Now.ToString("yyyy")
         Dim monthNow As Integer = DateTime.Now.ToString("MM")
         Dim dayNow As Integer = DateTime.Now.ToString("dd")
@@ -780,15 +857,15 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty)
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, number_qty, start_time2, end_time, use_timee, number_qty, tr_status)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, Label18.Text)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, number_qty, start_time2, end_time, use_timee, number_qty, tr_status, Label18.Text)
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, number_qty, start_time2, end_time, use_timee, number_qty, tr_status)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, number_qty, start_time2, end_time, use_timee, number_qty, tr_status, Label18.Text)
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, number_qty, start_time2, end_time, use_timee, number_qty, tr_status)
+                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, number_qty, start_time2, end_time, use_timee, number_qty, tr_status, Label18.Text)
             End Try
             Dim sum_diff As Integer = Label8.Text - Label6.Text
             If sum_diff < 0 Then
@@ -1161,17 +1238,17 @@ Public Class Working_Pro
                         Try
                             If My.Computer.Network.Ping("192.168.161.101") Then
                                 tr_status = "1"
-                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
-                                Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty)
+                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                                Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id)
                                 'MsgBox("Ping completed")
                             Else
                                 tr_status = "0"
-                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                                 'MsgBox("Ping incompleted")
                             End If
                         Catch ex As Exception
                             tr_status = "0"
-                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                         End Try
                         'Label16.Text.ToString("H : mm") - Now.ToString("H : mm")
 
@@ -1219,41 +1296,33 @@ Public Class Working_Pro
                             Dim prd_flg As String = "1"
                             Dim close_lot_flg As String = "1"
                             Dim avarage_act_prd_time As Double = Average
-                            Try
-                                act_qty = LB_COUNTER_SEQ.Text 'Working_Pro._Edit_Up_0.Text
-                                LB_COUNTER_SHIP.Text = 0
-                                LB_COUNTER_SEQ.Text = 0
-                            Catch ex As Exception
-                                act_qty = 0
-                            End Try
-                            Try
-                                If My.Computer.Network.Ping("192.168.161.101") Then
-                                    transfer_flg = "1"
-                                    Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                                    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                                    'Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty)
-                                    Backoffice_model.work_complete(wi_plan)
-                                    Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                                    Dim emp_cd As String
-                                    For I = 0 To temp_co_emp - 1
-                                        emp_cd = List_Emp.ListView1.Items(I).Text
-                                        Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                                        'MsgBox(List_Emp.ListView1.Items(i).Text)
-                                    Next
-                                    'MsgBox("Ins completed")
-                                Else
-                                    transfer_flg = "0"
-                                    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                                    'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time, end_time, use_timee, tr_status)
-
-                                    'MsgBox("Ins incompleted1")
-                                End If
-                            Catch ex As Exception
-                                'MsgBox("Ins incompleted2")
-                                transfer_flg = "0"
-                                Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                                'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time, end_time, use_timee, tr_status)
-                            End Try
+                            '  Try
+                            'act_qty = LB_COUNTER_SEQ.Text
+                            'LB_COUNTER_SHIP.Text = 0
+                            'LB_COUNTER_SEQ.Text = 0
+                            'Catch ex As Exception
+                            'act_qty = 0
+                            'End Try
+                            'Try
+                            'If My.Computer.Network.Ping("192.168.161.101") Then
+                            'transfer_flg = "1"
+                            'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                            'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                            'Backoffice_model.work_complete(wi_plan)
+                            'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
+                            'Dim emp_cd As String
+                            'For I = 0 To temp_co_emp - 1
+                            'emp_cd = List_Emp.ListView1.Items(I).Text
+                            'Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
+                            'Next
+                            'Else
+                            '    transfer_flg = "0"
+                            '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                            'End If
+                            '    Catch ex As Exception
+                            '    transfer_flg = "0"
+                            '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                            '    End Try
                         End If
                     End If
                     '--------------------------------------
@@ -1275,9 +1344,11 @@ Public Class Working_Pro
 
     Private Sub btn_closelot_Click(sender As Object, e As EventArgs) Handles btn_closelot.Click
         'MsgBox("Please confirm")
-
         Me.Enabled = False
-        Close_lot_cfm.Show()
+        ' Dim clSummary As New closeLotsummary()
+        closeLotsummary.statusPage.Text = "working"
+        closeLotsummary.Show()
+        'Close_lot_cfm.Show()
     End Sub
     Public Function check_tagprint()
         Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
@@ -1294,7 +1365,6 @@ Public Class Working_Pro
     Private Sub PrintDocument1_PrintPage(sender As Object, e As PrintPageEventArgs) Handles PrintDocument1.PrintPage
         Dim aPen = New Pen(Color.Black)
         aPen.Width = 2.0F
-        'MsgBox(Label10.Text)
         'vertical
         e.Graphics.DrawLine(aPen, 150, 10, 150, 290)
         e.Graphics.DrawLine(aPen, 300, 175, 300, 290)
@@ -1319,7 +1389,6 @@ Public Class Working_Pro
         e.Graphics.DrawString("QTY.", lb_font1.Font, Brushes.Black, 492, 13)
         Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
         Dim status_tag As String = "[ Incomplete Tag ]"
-        'MsgBox("result_snp = " & result_snp)
         If V_check_line_reprint = "0" Then
             If result_snp = "0" Then
                 result_snp = Label27.Text
@@ -1327,20 +1396,13 @@ Public Class Working_Pro
             End If
         Else
             If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
-                'If result_snp = "0" Then
                 result_snp = LB_COUNTER_SEQ.Text
                 status_tag = " "
-                'End If
             Else
-                'MsgBox("result_snp ===>" & result_snp)
-                'MsgBox(" CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) ===>" & CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)))
                 If result_snp = "0" Then
-                    'MsgBox("IF")
                     result_snp = Label27.Text
                     status_tag = " "
                 Else
-                    'MsgBox("ELSE PRINT")
-                    'MsgBox("LB_COUNTER_SEQ.Text = " & LB_COUNTER_SEQ.Text)
                     result_snp = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
                     status_tag = "[ Incomplete Tag ]"
                 End If
@@ -1396,27 +1458,19 @@ Public Class Working_Pro
         e.Graphics.DrawString("FACTORY", lb_font1.Font, Brushes.Black, 522, 178)
         e.Graphics.DrawString(factory_cd, lb_font5.Font, Brushes.Black, 522, 196)
         e.Graphics.DrawString("INFO.", lb_font1.Font, Brushes.Black, 612, 178)
-        'e.Graphics.DrawString(Label14.Text, lb_font2.Font, Brushes.Black, 626, 190)
         e.Graphics.DrawString("LINE", lb_font1.Font, Brushes.Black, 152, 238)
         e.Graphics.DrawString(Label24.Text, lb_font2.Font, Brushes.Black, 152, 250)
         Dim result_plan_date As String = ""
         Try
-            'Dim d As Date = Date.ParseExact(lb_dlv_date.Text, "dd/MM/yy", CultureInfo.InvariantCulture)
-            'lb_dlv_date.Text = d.ToString("dd/MM/yyyy")
             Dim da As Date = Date.ParseExact(lb_dlv_date.Text.Substring(0, 10), "yyyy-MM-dd", CultureInfo.InvariantCulture)
-            'lb_dlv_date.Text = da.ToString("dd/MM/yyyy")
             result_plan_date = da.ToString("dd/MM/yyyy")
         Catch ex As Exception
-            'Dim d As Date = Date.ParseExact(lb_dlv_date.Text, "dd/MM/yy", CultureInfo.InvariantCulture)
-            'lb_dlv_date.Text = lb_dlv_date.Text
             result_plan_date = lb_dlv_date.Text
         End Try
         e.Graphics.DrawString("PLAN DATE", lb_font1.Font, Brushes.Black, 302, 238)
         e.Graphics.DrawString(result_plan_date, lb_font6.Font, Brushes.Black, 334, 250)
         e.Graphics.DrawString("LOT NO.", lb_font1.Font, Brushes.Black, 522, 238)
         e.Graphics.DrawString(Label18.Text, lb_font2.Font, Brushes.Black, 522, 250)
-        'e.Graphics.DrawString("PROD. SEQ.", lb_font1.Font, Brushes.Black, 612, 238)
-        'e.Graphics.DrawString(plan_seq, lb_font2.Font, Brushes.Black, 622, 250)
         e.Graphics.DrawString("TBKK", lb_font2.Font, Brushes.Black, 15, 13)
         e.Graphics.DrawString("(Thailand) Co., Ltd.", lb_font1.Font, Brushes.Black, 15, 45)
         e.Graphics.DrawString("Shop floor system", lb_font3.Font, Brushes.Black, 15, 73)
@@ -1438,13 +1492,7 @@ Public Class Working_Pro
         Else
             iden_cd = "GB"
         End If
-        'MsgBox("Y :" & lb_dlv_date.Text.Substring(6, 4) & " M :" & lb_dlv_date.Text.Substring(3, 2) & " D :" & lb_dlv_date.Text.Substring(0, 2))
-        'MsgBox(lb_dlv_date.Text)
-        'Dim plan_date As String = lb_dlv_date.Text.Substring(6, 4) & lb_dlv_date.Text.Substring(3, 2) & lb_dlv_date.Text.Substring(0, 2)
         Dim plan_date As String = result_plan_date.Substring(6, 4) & result_plan_date.Substring(3, 2) & result_plan_date.Substring(0, 2)
-        'Dim dateConv As Date = lb_dlv_date.Text
-        'plan_date = Format(dateConv, "yyyyMMdd")
-        'plan_date = dateConv.ToString("yyyyMMdd")
         Dim part_no_res1 As String
         Dim part_no_res As String
         Dim part_numm As Integer = 0
@@ -1493,22 +1541,145 @@ Public Class Working_Pro
         Catch ex As Exception
             qr_detailss = ""
         End Try
-        'MsgBox(box_no)
-        Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
-                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text)
-                'MsgBox("Ping completed")
-            Else
-                'MsgBox("Ping incompleted")
-            End If
-        Catch ex As Exception
-            'tr_status = "0"
-            ' Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_timee, tr_status)
-        End Try
-        'lb_box_count.Text = lb_box_count.Text + 1
+        ' Try
+        'If My.Computer.Network.Ping("192.168.161.101") Then
+        ' Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text)
+        'Else
+        'End If
+        'Catch ex As Exception
+        'End Try
         lb_qty_for_box.Text = "0"
     End Sub
+    Public Sub keep_data_and_gen_qr_tag_fa_completed()
+        Dim L_wi As String = ""
+        Dim L_boxNo As String = ""
+        Dim L_printCount As String = ""
+        Dim L_SeqNo As String = ""
+        Dim L_Shift As String = ""
+        Dim L_flg_control As String = ""
+        Dim L_item_cd As String = ""
+        Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
+        Dim status_tag As String = "[ Incomplete Tag ]"
+        If V_check_line_reprint = "0" Then
+            If result_snp = "0" Then
+                result_snp = Label27.Text
+                status_tag = " "
+            End If
+        Else
+            If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
+                result_snp = LB_COUNTER_SEQ.Text
+                status_tag = " "
+            Else
+                If result_snp = "0" Then
+                    result_snp = Label27.Text
+                    status_tag = " "
+                Else
+                    result_snp = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
+                    status_tag = "[ Incomplete Tag ]"
+                End If
+            End If
+        End If
+        Dim plan_seq As String
+        Dim num_char_seq As Integer
+        num_char_seq = Label22.Text.Length
+        If num_char_seq = 1 Then
+            plan_seq = "00" & Label22.Text
+        ElseIf num_char_seq = 2 Then
+            plan_seq = "0" & Label22.Text
+        Else
+            plan_seq = Label22.Text
+        End If
+
+        Dim the_box_seq As String
+        Dim num_box_seq As Integer
+        num_box_seq = lb_box_count.Text.Length
+        If num_box_seq = 1 Then
+            the_box_seq = "00" & lb_box_count.Text
+        ElseIf num_box_seq = 2 Then
+            the_box_seq = "0" & lb_box_count.Text
+        Else
+            the_box_seq = lb_box_count.Text
+        End If
+        Dim plan_cd As String
+        Dim factory_cd As String
+        If MainFrm.Label6.Text = "K2PD06" Then
+            factory_cd = "Phase8"
+            plan_cd = "52"
+        Else
+            factory_cd = "Phase10"
+            plan_cd = "51"
+        End If
+        Dim result_plan_date As String = ""
+        Try
+            Dim da As Date = Date.ParseExact(lb_dlv_date.Text.Substring(0, 10), "yyyy-MM-dd", CultureInfo.InvariantCulture)
+            result_plan_date = da.ToString("dd/MM/yyyy")
+        Catch ex As Exception
+            result_plan_date = lb_dlv_date.Text
+        End Try
+        Dim prdtype As String
+        If lb_prd_type.Text = "10" Then
+            prdtype = "PART TYPE : FG"
+        ElseIf lb_prd_type.Text = "40" Then
+            prdtype = "PART TYPE : Parts"
+        Else
+            prdtype = "PART TYPE : FW"
+        End If
+        Dim iden_cd As String
+        If MainFrm.Label6.Text = "K1PD01" Then
+            iden_cd = "GA"
+        Else
+            iden_cd = "GB"
+        End If
+        Dim plan_date As String = result_plan_date.Substring(6, 4) & result_plan_date.Substring(3, 2) & result_plan_date.Substring(0, 2)
+        Dim part_no_res1 As String
+        Dim part_no_res As String
+        Dim part_numm As Integer = 0
+        For part_numm = Label3.Text.Length To 24
+            part_no_res = part_no_res & " "
+        Next part_numm
+        part_no_res1 = Label3.Text & part_no_res
+        Dim act_date As String
+        Dim actdateConv As Date = DateTime.Now.ToString("dd/MM/yyyy")
+        act_date = Format(actdateConv, "yyyyMMdd")
+        Dim qty_num As String
+        Dim num_char_qty As Integer
+        num_char_qty = Len(Trim(result_snp)) 'Label27.Text.Length 'lb_qty_for_box.Text.Length
+        If num_char_qty = 1 Then
+            qty_num = "     " & result_snp 'lb_qty_for_box.Text
+        ElseIf num_char_qty = 2 Then
+            qty_num = "    " & result_snp 'lb_qty_for_box.Text
+        ElseIf num_char_qty = 3 Then
+            qty_num = "   " & result_snp 'lb_qty_for_box.Text
+        ElseIf num_char_qty = 4 Then
+            qty_num = "  " & result_snp 'lb_qty_for_box.Text
+        ElseIf num_char_qty = 5 Then
+            qty_num = " " & result_snp 'lb_qty_for_box.Text
+        Else
+            qty_num = result_snp 'lb_qty_for_box.Text
+        End If
+        Dim cus_part_no As String = "                         "
+        Dim box_no As String
+        Dim num_char_box As Integer
+        num_char_box = lb_box_count.Text.Length
+        If num_char_box = 1 Then
+            box_no = "00" & lb_box_count.Text
+        ElseIf num_char_box = 2 Then
+            box_no = "0" & lb_box_count.Text
+        Else
+            box_no = lb_box_count.Text
+        End If
+        Dim qr_detailss As String = ""
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                Dim qr_detailsss = iden_cd & Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no
+                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailsss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id)
+            Else
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
     Public Shared Function tag_print()
+        Working_Pro.keep_data_and_gen_qr_tag_fa_completed()
         If check_tag_type = "1" Then
             Working_Pro.PrintDocument1.Print()
         ElseIf check_tag_type = "2" Then
@@ -1629,7 +1800,7 @@ Public Class Working_Pro
         e.Graphics.DrawString("Use @ TBKK(Thailand) Co., Ltd.", lb_font1.Font, Brushes.Black, 525, 282)
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
-                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text)
+                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id)
                 'MsgBox("Ping completed")
             Else
                 'MsgBox("Ping incompleted")
@@ -1653,9 +1824,7 @@ Public Class Working_Pro
             value_label6 += 1
         End If
         Dim flg_reprint As String = V_check_line_reprint
-
         For index_check_print As Integer = value_label6 To result_add   '10
-
             Label6.Text = index_check_print
             'For index_check As Integer = 1 To loop_check
             Dim result_mod As Integer = index_check_print Mod CDbl(Val(Label27.Text))
@@ -1721,7 +1890,6 @@ Public Class Working_Pro
         Dim seq_no As String = Label22.Text
         Dim prd_qty As Integer = cnt_btn
         Dim end_time As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-        Dim use_time As Double = "1"
         Dim tr_status As String = "0"
         Dim number_qty As Integer = Label6.Text
         Dim start_time As Date = st_count_ct.Text
@@ -1732,6 +1900,7 @@ Public Class Working_Pro
             start_time2 = Backoffice_model.start_check_date_paralell_line
             end_time2 = Backoffice_model.end_check_date_paralell_line
         End If
+        Dim use_time As Double = Cal_Use_Time_ins_qty_fn_manual(start_time2, end_time2) '"1"
         If CDbl(Val(Label8.Text)) > CDbl(Val(Label6.Text)) Then
             Dim result_friff As Integer = CDbl(Val(Label8.Text)) - CDbl(Val(Label6.Text))
             Dim driff As Integer = 0
@@ -1744,15 +1913,15 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id)
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status)
+                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
             End Try
         End If
         If CDbl(Val(Label8.Text)) = CDbl(Val(Label6.Text)) Then
@@ -1769,15 +1938,15 @@ Public Class Working_Pro
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         tr_status = "1"
-                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status)
-                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty)
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id)
                     Else
                         tr_status = "0"
-                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status)
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                     End If
                 Catch ex As Exception
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                 End Try
                 Dim shift_prd3 As String = Label14.Text
                 Dim prd_st_datetime3 As Date = st_time.Text
@@ -1789,26 +1958,26 @@ Public Class Working_Pro
                 Dim prd_flg3 As String = "1"
                 Dim close_lot_flg3 As String = "1"
                 Dim avarage_act_prd_time3 As Double = Average
-                Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
-                        transfer_flg = "1"
-                        Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
-                        Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
-                        Backoffice_model.work_complete(wi_plan)
-                        Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                        Dim emp_cd As String
-                        For I = 0 To temp_co_emp - 1
-                            emp_cd = List_Emp.ListView1.Items(I).Text
-                            Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                        Next
-                    Else
-                        transfer_flg = "0"
-                        Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
-                    End If
-                Catch ex As Exception
-                    transfer_flg = "0"
-                    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
-                End Try
+                'Try
+                'If My.Computer.Network.Ping("192.168.161.101") Then
+                'transfer_flg = "1"
+                'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
+                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
+                'Backoffice_model.work_complete(wi_plan)
+                'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
+                'Dim emp_cd As String
+                'For I = 0 To temp_co_emp - 1
+                'emp_cd = List_Emp.ListView1.Items(I).Text
+                'Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
+                'Next
+                'Else
+                '    transfer_flg = "0"
+                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
+                'End If
+                '    Catch ex As Exception
+                '    transfer_flg = "0"
+                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
+                '    End Try
             End If
             Me.Enabled = False
             Dim result_mod As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
@@ -1818,6 +1987,17 @@ Public Class Working_Pro
             End If
             Finish_work.Show() ' เกี่ยว
         End If
+    End Function
+    Public Function Cal_Use_Time_ins_qty_fn_manual(date_start_data As Date, date_end As Date)
+        Dim total_ins_qty As Integer = DateDiff(DateInterval.Second, date_start_data, date_end)
+        lb_use_time.Text = total_ins_qty
+        If total_ins_qty < 0 Then
+            Minutes_total = Math.Abs(CDbl(Val(lb_use_time.Text)))
+            lb_use_time.Text = Minutes_total
+        ElseIf total_ins_qty = 0 Then
+            lb_use_time.Text = 1
+        End If
+        Return lb_use_time.Text
     End Function
 
     Public Function ins_qty_fn()
@@ -1996,15 +2176,15 @@ Public Class Working_Pro
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         tr_status = "1"
-                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
-                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time2, end_time2, use_time, number_qty)
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time2, end_time2, use_time, number_qty, pwi_id)
                     Else
                         tr_status = "0"
-                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                     End If
                 Catch ex As Exception
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                 End Try
                 Dim sum_diff As Integer = Label8.Text - Label6.Text
                 If sum_diff < 0 Then
@@ -2090,7 +2270,7 @@ Public Class Working_Pro
         Else
             result = LB_COUNTER_SHIP.Text
         End If
-        Desc_act.Label1.Text = result
+        Desc_act.Label1.Text = CDbl(Val(LB_COUNTER_SEQ.Text)) 'result
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Backoffice_model.updated_data_to_dbsvr()
@@ -2109,25 +2289,19 @@ Public Class Working_Pro
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
         Dim date_data As Date = DateTime.Now.ToString("HH:mm:ss")
         If TimeOfDay.ToString("HH:mm:ss") >= Backoffice_model.coles_lot_start_shift And TimeOfDay.ToString("HH:mm:ss") <= Backoffice_model.coles_lot_end_shift Then
-            If Auto_close_lot.Visible = True Then
+            'If Auto_close_lot.Visible = True Then
+            If closeLotsummary.Visible = True Then
 
             Else
-                Auto_close_lot.Show()
+                ' Auto_close_lot.Show()
                 If btn_start.Enabled Then
                     stop_working()
                 End If
+                Dim rs = Backoffice_model.AlertCheck_close_lot(Label24.Text, MainFrm.Label6.Text)
+                closeLotsummary.Show()
             End If
         End If
-        'If TimeOfDay.ToString("HH:mm:ss") >= "19:57:00" And TimeOfDay.ToString("HH:mm:ss") <= "19:59:00" Then
-        '	If Auto_close_lot.Visible = True Then
 
-        'Else
-        'Auto_close_lot.Show()
-        '	If btn_start.Enabled Then
-        '	stop_working()
-        '	End If
-        '	End If
-        '		End If
     End Sub
     Private Sub Panel5_Paint(sender As Object, e As PaintEventArgs) Handles Panel5.Paint
 
@@ -2247,31 +2421,18 @@ Public Class Working_Pro
             Dim dt1 As DateTime = DateTime.Now
             Dim dt2 As DateTime = st_count_ct.Text
             Dim dtspan As TimeSpan = dt1 - dt2
-            'MsgBox(("Second: " & dtspan.Seconds))
-            'use_time = 1
-            'MsgBox(dtspan)
-            'MsgBox(dtspan.Minutes)
-
             Dim actCT_jing As Double = Format((dtspan.Seconds / _Edit_Up_0.Text) + (dtspan.Minutes * 60), "0.00")
-            'Label37.Text = actCT_jing
-
             ListBox1.Items.Add((dtspan.Seconds) + (dtspan.Minutes * 60) + (dtspan.Hours * 3600))
-
             Dim Total As Double = 0
             Dim Count As Double = 0
             Dim Average As Double = 0
             Dim I As Integer
-
             For I = 0 To ListBox1.Items.Count - 1
                 Total += Val(ListBox1.Items(I))
                 Count += 1
             Next
             Average = Total / Count
-            'MsgBox(Count)
-
             If Count = 1 Then
-                'MsgBox(lb_ref_scan.Text)
-
                 Try
                     Backoffice_model.Tag_seq_rec_sqlite(lb_ref_scan.Text.Substring(0, 10), lb_ref_scan.Text.Substring(10, 3), lb_ref_scan.Text.Substring(13, (lb_ref_scan.Text.Length - 13)), RTrim(lb_ref_scan.Text))
                 Catch ex As Exception
@@ -2293,8 +2454,6 @@ Public Class Working_Pro
             End If
 
             Dim temppola As Double = ((dtspan1.Seconds / 60) + (dtspan1.Minutes + (dtspan1.Hours * 60)))
-            'MsgBox("Minute diff : " & dtspan1.Minutes)
-            'MsgBox("Hour diff : " & (dtspan1.Hours * 60))
             If temppola < 1 Then
                 temppola = 1
             End If
@@ -2360,17 +2519,17 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                     'MsgBox("Ping incompleted")
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status)
+                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
             End Try
             'Label16.Text.ToString("H : mm") - Now.ToString("H : mm")
 
@@ -2407,7 +2566,6 @@ Public Class Working_Pro
                 comp_flg = 1
                 Finish_work.Show() ' เกี่ยว
                 Dim plan_qty As Integer = Label8.Text
-                'Dim act_qty As Integer = _Edit_Up_0.Text
                 Dim shift_prd As String = Label14.Text
                 Dim prd_st_datetime As Date = st_time.Text
                 Dim prd_end_datetime As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
@@ -2418,53 +2576,120 @@ Public Class Working_Pro
                 Dim prd_flg As String = "1"
                 Dim close_lot_flg As String = "1"
                 Dim avarage_act_prd_time As Double = Average
-                Try
-                    act_qty = LB_COUNTER_SEQ.Text 'Working_Pro._Edit_Up_0.Text
-                    LB_COUNTER_SHIP.Text = 0
-                    LB_COUNTER_SEQ.Text = 0
-                Catch ex As Exception
-                    act_qty = 0
-                End Try
-                Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
-                        transfer_flg = "1"
-                        Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                        Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                        'Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty)
-                        Backoffice_model.work_complete(wi_plan)
-                        Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                        Dim emp_cd As String
-                        For I = 0 To temp_co_emp - 1
-                            emp_cd = List_Emp.ListView1.Items(I).Text
-                            Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                            'MsgBox(List_Emp.ListView1.Items(i).Text)
-                        Next
-                        'MsgBox("Ins completed")
-                    Else
-                        transfer_flg = "0"
-                        Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                        'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time, end_time, use_timee, tr_status)
-
-                        'MsgBox("Ins incompleted1")
-                    End If
-                Catch ex As Exception
-                    'MsgBox("Ins incompleted2")
-                    transfer_flg = "0"
-                    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                    'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time, end_time, use_timee, tr_status)
-                End Try
+                ' Try
+                ' act_qty = LB_COUNTER_SEQ.Text
+                ' LB_COUNTER_SHIP.Text = 0
+                ' LB_COUNTER_SEQ.Text = 0
+                ' Catch ex As Exception
+                ' act_qty = 0
+                ' End Try
+                'Try
+                'If My.Computer.Network.Ping("192.168.161.101") Then
+                'transfer_flg = "1"
+                'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                'Backoffice_model.work_complete(wi_plan)
+                'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
+                'Dim emp_cd As String
+                'For I = 0 To temp_co_emp - 1
+                'emp_cd = List_Emp.ListView1.Items(I).Text
+                'Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
+                'Next
+                'Else
+                '    transfer_flg = "0"
+                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                'End If
+                '    Catch ex As Exception
+                '    transfer_flg = "0"
+                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                '    End Try
             End If
         End If
     End Sub
     Private Sub Tiemr_new_dio_Tick(sender As Object, e As EventArgs) Handles Timer_new_dio.Tick
-        data_new_dio = reader_new_dio.ReadSingleSamplePortUInt32()
-        If data_new_dio <> "255" Then
-            If check_bull = 0 Then
-                Timer3.Enabled = True
-                If start_flg = 1 Then
-                    counter_data_new_dio()
+        ' Try
+        ' data_new_dio = reader_new_dio.ReadSingleSamplePortUInt32()
+        ' If data_new_dio <> "255" Then
+        ' If check_bull = 0 Then
+        ' Timer3.Enabled = True
+        ' If start_flg = 1 Then
+        ' counter_data_new_dio()
+        ' End If
+        ' End If
+        ' End If
+        ' Catch ex As Exception
+        '   MsgBox("Please Check DIO")
+        '  End Try
+
+    End Sub
+
+    Private Sub TimerCountBT_Tick(sender As Object, e As EventArgs) Handles TimerCountBT.Tick
+        Try
+            If Application.OpenForms().OfType(Of Loss_reg).Any Or Application.OpenForms().OfType(Of Loss_reg_pass).Any Then
+
+            ElseIf Application.OpenForms().OfType(Of closeLotsummary).Any Then
+                If TimeOfDay.ToString("HH:mm:ss") = Backoffice_model.TimeShowBreakTime Then
+                    Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+                    Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
+                    lbNextTime.Text = BreakTime
+                End If
+            Else
+                If Backoffice_model.TimeShowBreakTime <> "" Then
+                    If TimeOfDay.ToString("HH:mm:ss") = Backoffice_model.TimeShowBreakTime Then
+                        check_network_frist = 1
+                        stop_working()
+                        Backoffice_model.TimeStartBreakTime = TimeOfDay.ToString("HH:mm:ss")
+                        StopMenu.Show()
+                        Me.Enabled = False
+                    End If
+                Else
+                    ' TimerLossBT.Enabled = False
                 End If
             End If
-        End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Function calTimeBreakTime(pdStart As Date, timeNextBreak As String)
+        Dim total_loss As Integer = 0
+        Dim dateNow As String = DateTime.Now.ToString("yyyy-MM-dd")
+        Dim dueDateTime As Date = dateNow & " " & timeNextBreak
+        Dim condueDateTime As Date = dueDateTime.ToString("yyyy-MM-dd HH:mm:ss")
+        Try
+            total_loss = DateDiff(DateInterval.Second, DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), DateTime.Parse((condueDateTime).ToString("yyyy-MM-dd HH:mm") & ":00"))
+            If total_loss < 0 Then
+                total_loss = Math.Abs(CDbl(Val(total_loss)))
+            End If
+        Catch ex As Exception
+            total_loss = 0
+        End Try
+        Return total_loss
+    End Function
+    Private Sub TimerLossBT_Tick(sender As Object, e As EventArgs) Handles TimerLossBT.Tick
+        Try
+            If Application.OpenForms().OfType(Of Loss_reg).Any Or Application.OpenForms().OfType(Of Loss_reg_pass).Any Then
+
+            ElseIf Application.OpenForms().OfType(Of closeLotsummary).Any Then
+                If TimeOfDay.ToString("HH:mm:ss") = Backoffice_model.TimeShowBreakTime Then
+                    Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+                    Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
+                    lbNextTime.Text = BreakTime
+                End If
+            Else
+                If Backoffice_model.TimeShowBreakTime <> "" Then
+                    If TimeOfDay.ToString("HH:mm:ss") = Backoffice_model.TimeShowBreakTime Then
+                        check_network_frist = 1
+                        stop_working()
+                        Backoffice_model.TimeStartBreakTime = TimeOfDay.ToString("HH:mm:ss")
+                        StopMenu.Show()
+                        Me.Enabled = False
+                    End If
+                Else
+                    ' TimerLossBT.Enabled = False
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

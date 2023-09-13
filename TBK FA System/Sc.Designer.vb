@@ -32,8 +32,10 @@ Partial Class Sc
         Me.Label1 = New System.Windows.Forms.Label()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -104,12 +106,22 @@ Partial Class Sc
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(34, 266)
+        Me.TextBox1.Location = New System.Drawing.Point(382, 61)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(330, 79)
+        Me.TextBox1.Size = New System.Drawing.Size(22, 23)
         Me.TextBox1.TabIndex = 8
         Me.TextBox1.Visible = False
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Location = New System.Drawing.Point(34, 173)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(98, 79)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox3.TabIndex = 9
+        Me.PictureBox3.TabStop = False
         '
         'Sc
         '
@@ -117,6 +129,7 @@ Partial Class Sc
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(154, Byte), Integer), CType(CType(156, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(405, 290)
+        Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox2)
@@ -130,6 +143,7 @@ Partial Class Sc
         Me.Text = "Sc"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -142,4 +156,5 @@ Partial Class Sc
     Friend WithEvents Label1 As Label
     Friend WithEvents SerialPort1 As IO.Ports.SerialPort
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents PictureBox3 As PictureBox
 End Class

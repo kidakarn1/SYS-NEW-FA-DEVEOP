@@ -71,6 +71,7 @@ Partial Class List_Emp
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(147, 100)
         Me.Button2.TabIndex = 2
+        Me.Button2.Text = "ee"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'ListView1

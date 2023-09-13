@@ -30,51 +30,36 @@ re_load:
 							GoTo re_load
 						End If
 						Backoffice_model.NEXT_PROCESS = Backoffice_model.F_NEXT_PROCESS(Prd_detail.lb_item_cd.Text)
-
-						'Dim client As HttpClient = New HttpClient()
-						'client.BaseAddress = New Uri("http://192.168.161.207/API_NEW_FA/Check_detail_actual_insert_act_test/Get_detail_act?line_cd=" & Backoffice_model.GET_LINE_PRODUCTION())
-						'Dim response As HttpResponseMessage = client.GetAsync("").Result
-						'Try
-						'	Dim strNotify As String
-						'If response.IsSuccessStatusCode Then
-
-						'Else
-						'MsgBox("Please check API http://192.168.161.207/API_NEW_FA/Check_detail_actual_insert_act_test/Get_detail_act")
-						'End If
-						'Catch ex As Exception
-						'MsgBox("error = " & ex.Message)
-						'			Finally
-						'		client.Dispose()
-						'End Try
-						Insert_list.Label3.Text = MainFrm.Label4.Text
-						Insert_list.ListView1.View = View.Details
+                        Insert_list.Label3.Text = MainFrm.Label4.Text
+                        Insert_list.ListView1.View = View.Details
 						Dim line_cd As String = MainFrm.Label4.Text
 						Dim LoadSQL_prd_plan = Backoffice_model.Get_prd_plan_new(line_cd)
 						Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(LoadSQL_prd_plan)
-						For Each item As Object In dict
-							Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
-							'		Prd_detail.lb_snp.Text = LoadSQL("PS_UNIT_NUMERATOR")
-							Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
-							Prd_detail.lb_ct.Text = item("CT").ToString()
-							Prd_detail.lb_seq.Text = item("seq_no").ToString()
-							Prd_detail.lb_dlv_date.Text = item("WORK_ODR_DLV_DATE").ToString()
-							Prd_detail.lb_location.Text = item("LOCATION_PART").ToString()
-							Prd_detail.lb_model.Text = item("MODEL").ToString()
-							Prd_detail.lb_prd_type.Text = item("PRODUCT_TYP").ToString()
-							'If Prd_detail.QTY_NC.Text Is Nothing Then
-							'Prd_detail.QTY_NC.Text = item("QTY_NC").ToString()
-							'Else
-							Prd_detail.QTY_NC.Text = 0
-							'End If
-							'If Prd_detail.QTY_NG.Text Is Nothing Then
-							'	Prd_detail.QTY_NG.Text = item("QTY_NG").ToString()
-							'	Else
-							Prd_detail.QTY_NG.Text = 0
-							'	End If
-							Prd_detail.lb_plan_qty.Text = item("QTY").ToString()
-							Prd_detail.lb_remain_qty.Text = (item("QTY").ToString() - item("prd_qty_sum").ToString())
-						Next
-						Dim numberOfindex As Integer = 0
+                        For Each item As Object In dict
+                            Working_Pro.LB_IND_ROW.Text = item("IND_ROW").ToString()
+                            Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
+                            '		Prd_detail.lb_snp.Text = LoadSQL("PS_UNIT_NUMERATOR")
+                            Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
+                            Prd_detail.lb_ct.Text = item("CT").ToString()
+                            Prd_detail.lb_seq.Text = item("seq_no").ToString()
+                            Prd_detail.lb_dlv_date.Text = item("WORK_ODR_DLV_DATE").ToString()
+                            Prd_detail.lb_location.Text = item("LOCATION_PART").ToString()
+                            Prd_detail.lb_model.Text = item("MODEL").ToString()
+                            Prd_detail.lb_prd_type.Text = item("PRODUCT_TYP").ToString()
+                            'If Prd_detail.QTY_NC.Text Is Nothing Then
+                            'Prd_detail.QTY_NC.Text = item("QTY_NC").ToString()
+                            'Else
+                            Prd_detail.QTY_NC.Text = 0
+                            'End If
+                            'If Prd_detail.QTY_NG.Text Is Nothing Then
+                            '	Prd_detail.QTY_NG.Text = item("QTY_NG").ToString()
+                            '	Else
+                            Prd_detail.QTY_NG.Text = 0
+                            '	End If
+                            Prd_detail.lb_plan_qty.Text = item("QTY").ToString()
+                            Prd_detail.lb_remain_qty.Text = (item("QTY").ToString() - item("prd_qty_sum").ToString())
+                        Next
+                        Dim numberOfindex As Integer = 0
 						'If LoadSQL.Read() Then
 						'	Working_Pro.Label27.Text = LoadSQL("PS_UNIT_NUMERATOR")
 						'		Prd_detail.lb_snp.Text = LoadSQL("PS_UNIT_NUMERATOR")

@@ -496,7 +496,7 @@ Partial Class Prd_detail
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(487, 488)
+        Me.Button4.Location = New System.Drawing.Point(486, 488)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(147, 100)
         Me.Button4.TabIndex = 18

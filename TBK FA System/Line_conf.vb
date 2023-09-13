@@ -79,8 +79,8 @@ Public Class Line_conf
             dio_detail = load_sqlite_master_line("dio_detail").ToString()
         End While
         load_sqlite_master_line.close()
-
         If load_defeult_master_server(line_cd) <> "0" Then 'load data on server
+            ' MsgBox("HAVE")
             load_data_defeult_master_server(line_cd)
             Load_PD()
             Load_Line()
@@ -89,9 +89,10 @@ Public Class Line_conf
             Load_printer()
             combo_cavity.SelectedIndex = (s_cavity - 1)
             device_id = Load_CAT_COUNTER()
-            'Load_DIO_PORT(device_id)
+            Load_DIO_PORT(device_id)
             Load_delay()
         Else ' load data on sqlite
+            '   MsgBox("NO HAVE")
             Load_PD()
             Load_Line()
             Load_COUNTER()
@@ -109,7 +110,6 @@ Public Class Line_conf
         Dim BF = New Backoffice_model()
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
-        Dim get_default_pd = BF.Get_default_pd_detail()
         Dim PD As String = ""
         Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_COUNTER")
         If result_data <> "0" Then
@@ -153,13 +153,8 @@ Public Class Line_conf
         Dim BF = New Backoffice_model()
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
-        Dim get_default_pd = BF.Get_default_pd_detail()
-        Dim PD As String = ""
+        Dim PD = BF.Get_default_pd_detail_PD("scanner_port")
         Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_SCANNER")
-        While get_default_pd.Read()
-            PD = get_default_pd("scanner_port").ToString()
-        End While
-        get_default_pd.close()
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -178,12 +173,8 @@ Public Class Line_conf
         Dim BF = New Backoffice_model()
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
-        Dim get_default_pd = BF.Get_default_pd_detail()
-        Dim PD As String = ""
+        Dim PD = BF.Get_default_pd_detail_PD("pd")
         Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_PD")
-        While get_default_pd.Read()
-            PD = get_default_pd("pd").ToString()
-        End While
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -202,15 +193,10 @@ Public Class Line_conf
         Dim BF = New Backoffice_model()
         Dim result_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE?PD=" & ComboBox3.Text)
         Dim PD As String = "NO_DATA"
-        Dim LINE_CD As String = "NO_DATA"
         Dim I_PD As Integer = 0
         Dim check_I_LINE As Integer = 0
         Dim I_LINE_CD As Integer = 0
-        Dim get_default_line = BF.Get_default_line_detail()
-        While get_default_line.Read()
-            PD = get_default_line("pd").ToString()
-            LINE_CD = get_default_line("line_cd").ToString()
-        End While
+        Dim LINE_CD = BF.Get_default_pd_detail_PD("line_cd")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -224,6 +210,9 @@ Public Class Line_conf
         End If
     End Sub
     Public Sub Load_delay()
+        If me_sig_del = "" Then
+            me_sig_del = 0
+        End If
         delay_sec.Items.Clear()
         Dim delay_defalue As Integer = 3
         Dim delay_load As Integer = 0
@@ -241,7 +230,6 @@ Public Class Line_conf
         Dim BF = New Backoffice_model()
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
-        Dim get_default_pd = BF.Get_default_pd_detail()
         Dim PD As String = ""
         Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_COUNTER")
         If result_data <> "0" Then
@@ -320,6 +308,8 @@ Public Class Line_conf
         End If
         Return device_id
     End Function
+
+
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim LoadSQL As String
         Dim pd As String = ComboBox3.Items(ComboBox3.SelectedIndex)
@@ -344,6 +334,7 @@ Public Class Line_conf
             Backoffice_model.SCANNER_PORT = sqlss("scanner_port").ToString()
             'MsgBox(sqlss("pd").ToString())
         End While
+        sqlss.close
         If Backoffice_model.SCANNER_PORT <> "" And Backoffice_model.SCANNER_PORT <> "USB" Then
             MainFrm.lb_ctrl_sc_flg.Text = "emp"
         End If
@@ -351,7 +342,7 @@ Public Class Line_conf
         Prd_detail.Label3.Text = MainFrm.Label4.Text
         Dim total_delay As Integer = (CDbl(Val(delay_sec.Text)) * 10)
         Dim api = New api()
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/INSERT_DATA_NEW_FA/INSERT_COTROL_MASTER?line_cd=" & ComboBox2.Text & "&ComboBox_master_device=" & ComboBox_master_device.Text & "&device_dio_port_id=" & dio_port & "&printer=" & printer.Text & "&typ_counter=" & type_counter.Text & "&cavity=" & combo_cavity.Text & "&total_delay=" & total_delay & "&scanner=" & scanner.Text)
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/INSERT_COTROL_MASTER?line_cd=" & ComboBox2.Text & "&ComboBox_master_device=" & ComboBox_master_device.Text & "&device_dio_port_id=" & dio_port & "&printer=" & printer.Text & "&typ_counter=" & type_counter.Text & "&cavity=" & combo_cavity.Text & "&total_delay=" & total_delay & "&scanner=" & scanner.Text)
         MsgBox("Update Success.")
         MainFrm.Show()
         Me.Hide()
@@ -412,6 +403,7 @@ Public Class Line_conf
                 LineItems.Add(New LineItem(LoadSQL("line_id"), LoadSQL("line_cd")))
             End While
         End If
+        LoadSQL.close
         Return LineItems
     End Function
     Public Class LineItem

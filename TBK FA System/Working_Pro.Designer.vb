@@ -101,7 +101,6 @@ Partial Class Working_Pro
         Me.lb_box_count = New System.Windows.Forms.Label()
         Me.lb_qty_for_box = New System.Windows.Forms.Label()
         Me.Label41 = New System.Windows.Forms.Label()
-        Me.Label42 = New System.Windows.Forms.Label()
         Me.lb_emp1 = New System.Windows.Forms.Label()
         Me.lb_emp2 = New System.Windows.Forms.Label()
         Me.lb_emp3 = New System.Windows.Forms.Label()
@@ -139,7 +138,6 @@ Partial Class Working_Pro
         Me.Label43 = New System.Windows.Forms.Label()
         Me.Label44 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.btn_back = New System.Windows.Forms.Button()
         Me.btn_start = New System.Windows.Forms.Button()
         Me.btn_closelot = New System.Windows.Forms.Button()
@@ -151,6 +149,17 @@ Partial Class Working_Pro
         Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.Label_bach = New System.Windows.Forms.Label()
         Me.Timer_new_dio = New System.Windows.Forms.Timer(Me.components)
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.lb_nc_child_part = New System.Windows.Forms.Label()
+        Me.lb_ng_child_part = New System.Windows.Forms.Label()
+        Me.lbNextTime = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.PanelBreakTime = New System.Windows.Forms.Panel()
+        Me.TimerCountBT = New System.Windows.Forms.Timer(Me.components)
+        Me.TimerLossBT = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.lb_use_time = New System.Windows.Forms.Label()
+        Me.LB_IND_ROW = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -167,6 +176,7 @@ Partial Class Working_Pro
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelBreakTime.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -175,7 +185,7 @@ Partial Class Working_Pro
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Arial Black", 14.25!)
         Me.Label1.ForeColor = System.Drawing.Color.Aqua
-        Me.Label1.Location = New System.Drawing.Point(2, 4)
+        Me.Label1.Location = New System.Drawing.Point(3, 4)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(162, 27)
         Me.Label1.TabIndex = 24
@@ -260,12 +270,12 @@ Partial Class Working_Pro
         Me.Label8.BackColor = System.Drawing.Color.Transparent
         Me.Label8.Font = New System.Drawing.Font("Arial Black", 42.0!)
         Me.Label8.ForeColor = System.Drawing.Color.Blue
-        Me.Label8.Location = New System.Drawing.Point(4, -1)
+        Me.Label8.Location = New System.Drawing.Point(-8, 7)
         Me.Label8.Name = "Label8"
         Me.Label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label8.Size = New System.Drawing.Size(212, 66)
+        Me.Label8.Size = New System.Drawing.Size(243, 66)
         Me.Label8.TabIndex = 4512
-        Me.Label8.Text = "1000"
+        Me.Label8.Text = "10000"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.Label8.UseMnemonic = False
         '
@@ -562,7 +572,7 @@ Partial Class Working_Pro
         Me.Label47.AutoSize = True
         Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label47.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label47.Location = New System.Drawing.Point(324, 104)
+        Me.Label47.Location = New System.Drawing.Point(300, 115)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(314, 37)
         Me.Label47.TabIndex = 4632
@@ -951,7 +961,7 @@ Partial Class Working_Pro
         Me.lb_font3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lb_font3.Location = New System.Drawing.Point(218, 69)
         Me.lb_font3.Name = "lb_font3"
-        Me.lb_font3.Size = New System.Drawing.Size(54, 16)
+        Me.lb_font3.Size = New System.Drawing.Size(55, 16)
         Me.lb_font3.TabIndex = 4590
         Me.lb_font3.Text = "Label7"
         Me.lb_font3.Visible = False
@@ -1060,18 +1070,6 @@ Partial Class Working_Pro
         Me.Label41.Size = New System.Drawing.Size(96, 30)
         Me.Label41.TabIndex = 4602
         Me.Label41.Text = "Model :"
-        '
-        'Label42
-        '
-        Me.Label42.AutoSize = True
-        Me.Label42.BackColor = System.Drawing.Color.Transparent
-        Me.Label42.Font = New System.Drawing.Font("Arial Black", 14.25!)
-        Me.Label42.ForeColor = System.Drawing.Color.Aqua
-        Me.Label42.Location = New System.Drawing.Point(27, 27)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(97, 27)
-        Me.Label42.TabIndex = 4603
-        Me.Label42.Text = "STATUS"
         '
         'lb_emp1
         '
@@ -1363,7 +1361,7 @@ Partial Class Working_Pro
         Me.btn_desc_act.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_desc_act.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_desc_act.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_desc_act.Location = New System.Drawing.Point(7, 530)
+        Me.btn_desc_act.Location = New System.Drawing.Point(6, 531)
         Me.btn_desc_act.Name = "btn_desc_act"
         Me.btn_desc_act.Size = New System.Drawing.Size(110, 60)
         Me.btn_desc_act.TabIndex = 4626
@@ -1408,7 +1406,7 @@ Partial Class Working_Pro
         'PictureBox7
         '
         Me.PictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox7.Location = New System.Drawing.Point(567, 4)
+        Me.PictureBox7.Location = New System.Drawing.Point(565, 4)
         Me.PictureBox7.Name = "PictureBox7"
         Me.PictureBox7.Size = New System.Drawing.Size(60, 70)
         Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -1496,9 +1494,9 @@ Partial Class Working_Pro
         Me.Label44.ForeColor = System.Drawing.Color.White
         Me.Label44.Location = New System.Drawing.Point(26, 39)
         Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(53, 14)
+        Me.Label44.Size = New System.Drawing.Size(10, 14)
         Me.Label44.TabIndex = 1
-        Me.Label44.Text = "Label44"
+        Me.Label44.Text = " "
         '
         'PictureBox1
         '
@@ -1508,22 +1506,6 @@ Partial Class Working_Pro
         Me.PictureBox1.TabIndex = 4594
         Me.PictureBox1.TabStop = False
         Me.PictureBox1.Visible = False
-        '
-        'Button1
-        '
-        Me.Button1.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.inst_qty2
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Button1.Image = Global.TBK_FA_System.My.Resources.Resources.inst_qty2
-        Me.Button1.Location = New System.Drawing.Point(144, 526)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(128, 73)
-        Me.Button1.TabIndex = 4561
-        Me.Button1.Text = "1 Qty."
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button1.UseVisualStyleBackColor = False
-        Me.Button1.Visible = False
         '
         'btn_back
         '
@@ -1651,12 +1633,133 @@ Partial Class Working_Pro
         'Timer_new_dio
         '
         '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.BackColor = System.Drawing.Color.Transparent
+        Me.Label49.Font = New System.Drawing.Font("Arial Black", 14.25!)
+        Me.Label49.ForeColor = System.Drawing.Color.Aqua
+        Me.Label49.Location = New System.Drawing.Point(23, 31)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(97, 27)
+        Me.Label49.TabIndex = 4634
+        Me.Label49.Text = "STATUS"
+        '
+        'lb_nc_child_part
+        '
+        Me.lb_nc_child_part.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.lb_nc_child_part.Font = New System.Drawing.Font("Arial Black", 24.0!)
+        Me.lb_nc_child_part.ForeColor = System.Drawing.Color.White
+        Me.lb_nc_child_part.Location = New System.Drawing.Point(36, 361)
+        Me.lb_nc_child_part.Name = "lb_nc_child_part"
+        Me.lb_nc_child_part.Size = New System.Drawing.Size(100, 57)
+        Me.lb_nc_child_part.TabIndex = 4513
+        Me.lb_nc_child_part.Text = "0"
+        Me.lb_nc_child_part.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lb_nc_child_part.Visible = False
+        '
+        'lb_ng_child_part
+        '
+        Me.lb_ng_child_part.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.lb_ng_child_part.Font = New System.Drawing.Font("Arial Black", 24.0!)
+        Me.lb_ng_child_part.ForeColor = System.Drawing.Color.White
+        Me.lb_ng_child_part.Location = New System.Drawing.Point(33, 433)
+        Me.lb_ng_child_part.Name = "lb_ng_child_part"
+        Me.lb_ng_child_part.Size = New System.Drawing.Size(100, 57)
+        Me.lb_ng_child_part.TabIndex = 4635
+        Me.lb_ng_child_part.Text = "0"
+        Me.lb_ng_child_part.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lb_ng_child_part.Visible = False
+        '
+        'lbNextTime
+        '
+        Me.lbNextTime.AutoSize = True
+        Me.lbNextTime.BackColor = System.Drawing.Color.Black
+        Me.lbNextTime.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbNextTime.ForeColor = System.Drawing.Color.White
+        Me.lbNextTime.Location = New System.Drawing.Point(34, 59)
+        Me.lbNextTime.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lbNextTime.Name = "lbNextTime"
+        Me.lbNextTime.Size = New System.Drawing.Size(98, 22)
+        Me.lbNextTime.TabIndex = 4638
+        Me.lbNextTime.Text = "XX:XX:XX"
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.BackColor = System.Drawing.Color.Black
+        Me.Label42.Font = New System.Drawing.Font("Arial", 13.0!, System.Drawing.FontStyle.Bold)
+        Me.Label42.ForeColor = System.Drawing.Color.Cyan
+        Me.Label42.Location = New System.Drawing.Point(3, 19)
+        Me.Label42.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(175, 21)
+        Me.Label42.TabIndex = 4637
+        Me.Label42.Text = "NEXT BREAK TIME"
+        '
+        'PanelBreakTime
+        '
+        Me.PanelBreakTime.BackColor = System.Drawing.Color.Black
+        Me.PanelBreakTime.Controls.Add(Me.lbNextTime)
+        Me.PanelBreakTime.Controls.Add(Me.Label42)
+        Me.PanelBreakTime.Location = New System.Drawing.Point(6, 425)
+        Me.PanelBreakTime.Margin = New System.Windows.Forms.Padding(6)
+        Me.PanelBreakTime.Name = "PanelBreakTime"
+        Me.PanelBreakTime.Size = New System.Drawing.Size(183, 95)
+        Me.PanelBreakTime.TabIndex = 4638
+        '
+        'TimerCountBT
+        '
+        '
+        'TimerLossBT
+        '
+        '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.inst_qty2
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Button1.Image = Global.TBK_FA_System.My.Resources.Resources.inst_qty2
+        Me.Button1.Location = New System.Drawing.Point(144, 526)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(128, 73)
+        Me.Button1.TabIndex = 4561
+        Me.Button1.Text = "1 Qty."
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = False
+        Me.Button1.Visible = False
+        '
+        'lb_use_time
+        '
+        Me.lb_use_time.AutoSize = True
+        Me.lb_use_time.Location = New System.Drawing.Point(660, 20)
+        Me.lb_use_time.Name = "lb_use_time"
+        Me.lb_use_time.Size = New System.Drawing.Size(13, 13)
+        Me.lb_use_time.TabIndex = 4639
+        Me.lb_use_time.Text = "1"
+        '
+        'LB_IND_ROW
+        '
+        Me.LB_IND_ROW.AutoSize = True
+        Me.LB_IND_ROW.Location = New System.Drawing.Point(631, 33)
+        Me.LB_IND_ROW.Name = "LB_IND_ROW"
+        Me.LB_IND_ROW.Size = New System.Drawing.Size(45, 13)
+        Me.LB_IND_ROW.TabIndex = 4640
+        Me.LB_IND_ROW.Text = "Label50"
+        '
         'Working_Pro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(14, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.LB_IND_ROW)
+        Me.Controls.Add(Me.lb_use_time)
+        Me.Controls.Add(Me.PanelBreakTime)
+        Me.Controls.Add(Me.lb_ng_child_part)
+        Me.Controls.Add(Me.lb_nc_child_part)
+        Me.Controls.Add(Me.Label49)
         Me.Controls.Add(Me.Label_bach)
         Me.Controls.Add(Me.Label24)
         Me.Controls.Add(Me.Label47)
@@ -1685,7 +1788,6 @@ Partial Class Working_Pro
         Me.Controls.Add(Me.lb_emp1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.Label42)
         Me.Controls.Add(Me.Label41)
         Me.Controls.Add(Me.lb_qty_for_box)
         Me.Controls.Add(Me.lb_box_count)
@@ -1787,6 +1889,8 @@ Partial Class Working_Pro
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelBreakTime.ResumeLayout(False)
+        Me.PanelBreakTime.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1836,7 +1940,6 @@ Partial Class Working_Pro
     Friend WithEvents CircularProgressBar2 As CircularProgressBar.CircularProgressBar
     Friend WithEvents btn_start As Button
     Friend WithEvents btn_back As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents Label32 As Label
     Friend WithEvents Edit_DeviceName As TextBox
     Friend WithEvents Button2 As Button
@@ -1876,7 +1979,6 @@ Partial Class Working_Pro
     Friend WithEvents lb_box_count As Label
     Friend WithEvents lb_qty_for_box As Label
     Friend WithEvents Label41 As Label
-    Friend WithEvents Label42 As Label
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label43 As Label
     Friend WithEvents Label44 As Label
@@ -1919,4 +2021,15 @@ Partial Class Working_Pro
     Friend WithEvents Timer3 As Timer
     Friend WithEvents Label_bach As Label
     Friend WithEvents Timer_new_dio As Timer
+    Friend WithEvents Label49 As Label
+    Friend WithEvents lb_nc_child_part As Label
+    Friend WithEvents lb_ng_child_part As Label
+    Friend WithEvents lbNextTime As Label
+    Friend WithEvents Label42 As Label
+    Friend WithEvents PanelBreakTime As Panel
+    Friend WithEvents TimerCountBT As Timer
+    Friend WithEvents TimerLossBT As Timer
+    Friend WithEvents Button1 As Button
+    Friend WithEvents lb_use_time As Label
+    Friend WithEvents LB_IND_ROW As Label
 End Class

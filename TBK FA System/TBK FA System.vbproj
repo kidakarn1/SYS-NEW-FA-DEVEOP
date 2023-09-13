@@ -190,6 +190,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\PACKING_CONTROL\packages\System.Text.Json.5.0.2\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -240,6 +241,12 @@
     <Compile Include="Add_user.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="adminPrintdefect.Designer.vb">
+      <DependentUpon>adminPrintdefect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="adminPrintdefect.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Adm_login.Designer.vb">
       <DependentUpon>Adm_login.vb</DependentUpon>
     </Compile>
@@ -274,10 +281,22 @@
     <Compile Include="Change_Loss2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Chang_Admin_Shift.Designer.vb">
+      <DependentUpon>Chang_Admin_Shift.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Chang_Admin_Shift.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Chang_sh.Designer.vb">
       <DependentUpon>Chang_sh.vb</DependentUpon>
     </Compile>
     <Compile Include="Chang_sh.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="closeLotsummary.Designer.vb">
+      <DependentUpon>closeLotsummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="closeLotsummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Close_lot.Designer.vb">
@@ -353,10 +372,154 @@
     <Compile Include="Conf_login.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Defect_menu.Designer.vb">
-      <DependentUpon>Defect_menu.vb</DependentUpon>
+    <Compile Include="defecAdmintnumpadregister.Designer.vb">
+      <DependentUpon>defecAdmintnumpadregister.vb</DependentUpon>
     </Compile>
-    <Compile Include="Defect_menu.vb">
+    <Compile Include="defecAdmintnumpadregister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminAdjustdetail.Designer.vb">
+      <DependentUpon>defectAdminAdjustdetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminAdjustdetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminAdjustnumpadadjust.Designer.vb">
+      <DependentUpon>defectAdminAdjustnumpadadjust.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminAdjustnumpadadjust.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdmindetailnc.Designer.vb">
+      <DependentUpon>defectAdmindetailnc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdmindetailnc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdmindetailng.Designer.vb">
+      <DependentUpon>defectAdmindetailng.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdmindetailng.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminhome.Designer.vb">
+      <DependentUpon>defectAdminhome.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminhome.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminNumpadadjust.Designer.vb">
+      <DependentUpon>defectAdminNumpadadjust.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminNumpadadjust.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminregister.Designer.vb">
+      <DependentUpon>defectAdminregister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminregister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminsearch.Designer.vb">
+      <DependentUpon>defectAdminsearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminsearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminsearchng.Designer.vb">
+      <DependentUpon>defectAdminsearchng.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminsearchng.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminselectcodenc.Designer.vb">
+      <DependentUpon>defectAdminselectcodenc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminselectcodenc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminselectcodeng.Designer.vb">
+      <DependentUpon>defectAdminselectcodeng.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminselectcodeng.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminselectdetailncadjust.Designer.vb">
+      <DependentUpon>defectAdminselectdetailncadjust.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminselectdetailncadjust.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminselecttypenc.Designer.vb">
+      <DependentUpon>defectAdminselecttypenc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminselecttypenc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAdminselecttypeng.Designer.vb">
+      <DependentUpon>defectAdminselecttypeng.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAdminselecttypeng.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAlertsuredefect.Designer.vb">
+      <DependentUpon>defectAlertsuredefect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAlertsuredefect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectAlertupdatesuccess.Designer.vb">
+      <DependentUpon>defectAlertupdatesuccess.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectAlertupdatesuccess.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectDetailnc.Designer.vb">
+      <DependentUpon>defectDetailnc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectDetailnc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectDetailng.Designer.vb">
+      <DependentUpon>defectDetailng.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectDetailng.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectHome.Designer.vb">
+      <DependentUpon>defectHome.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectHome.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectNumpadadjust.Designer.vb">
+      <DependentUpon>defectNumpadadjust.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectNumpadadjust.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectNumpadregister.Designer.vb">
+      <DependentUpon>defectNumpadregister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectNumpadregister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectRegister.Designer.vb">
+      <DependentUpon>defectRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectSelectcode.Designer.vb">
+      <DependentUpon>defectSelectcode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectSelectcode.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="defectSelecttype.Designer.vb">
+      <DependentUpon>defectSelecttype.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectSelecttype.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Defect_nc_adj.Designer.vb">
@@ -402,6 +565,7 @@
     <Compile Include="Finish_work.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FunctionGobal.vb" />
     <Compile Include="IArchive.vb" />
     <Compile Include="Inf_manage.Designer.vb">
       <DependentUpon>Inf_manage.vb</DependentUpon>
@@ -443,6 +607,12 @@
       <DependentUpon>int_qty_rework.vb</DependentUpon>
     </Compile>
     <Compile Include="int_qty_rework.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Keyboard.Designer.vb">
+      <DependentUpon>Keyboard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Keyboard.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Line_conf.Designer.vb">
@@ -487,12 +657,21 @@
     <Compile Include="Loss_reg_pass.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MainFA.Designer.vb">
+      <DependentUpon>MainFA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainFA.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainFrm.designer.vb">
       <DependentUpon>MainFrm.vb</DependentUpon>
     </Compile>
     <Compile Include="MainFrm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="maintenance.vb" />
+    <Compile Include="manageVariable.vb" />
+    <Compile Include="modelDefect.vb" />
     <Compile Include="Model_change_alert.Designer.vb">
       <DependentUpon>Model_change_alert.vb</DependentUpon>
     </Compile>
@@ -525,6 +704,12 @@
       <DependentUpon>Prd_status.vb</DependentUpon>
     </Compile>
     <Compile Include="Prd_status.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="printDefect.Designer.vb">
+      <DependentUpon>printDefect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="printDefect.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="print_back.Designer.vb">
@@ -623,10 +808,22 @@
     <Compile Include="Show_reprint_wi.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Show_Worker.Designer.vb">
+      <DependentUpon>Show_Worker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Show_Worker.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="skill_manage.Designer.vb">
       <DependentUpon>skill_manage.vb</DependentUpon>
     </Compile>
     <Compile Include="skill_manage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StopMenu.Designer.vb">
+      <DependentUpon>StopMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StopMenu.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="System\Api\api.vb" />
@@ -640,6 +837,12 @@
       <DependentUpon>tag_reprint_new.vb</DependentUpon>
     </Compile>
     <Compile Include="tag_reprint_new.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test_scrobar.Designer.vb">
+      <DependentUpon>Test_scrobar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test_scrobar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Time_Loss.Designer.vb">
@@ -684,6 +887,9 @@
     <EmbeddedResource Include="Add_user.resx">
       <DependentUpon>Add_user.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="adminPrintdefect.resx">
+      <DependentUpon>adminPrintdefect.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Adm_login.resx">
       <DependentUpon>Adm_login.vb</DependentUpon>
     </EmbeddedResource>
@@ -699,8 +905,14 @@
     <EmbeddedResource Include="Change_Loss2.resx">
       <DependentUpon>Change_Loss2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Chang_Admin_Shift.resx">
+      <DependentUpon>Chang_Admin_Shift.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Chang_sh.resx">
       <DependentUpon>Chang_sh.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="closeLotsummary.resx">
+      <DependentUpon>closeLotsummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Close_lot.resx">
       <DependentUpon>Close_lot.vb</DependentUpon>
@@ -738,8 +950,80 @@
     <EmbeddedResource Include="Conf_login.resx">
       <DependentUpon>Conf_login.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Defect_menu.resx">
-      <DependentUpon>Defect_menu.vb</DependentUpon>
+    <EmbeddedResource Include="defecAdmintnumpadregister.resx">
+      <DependentUpon>defecAdmintnumpadregister.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminAdjustdetail.resx">
+      <DependentUpon>defectAdminAdjustdetail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminAdjustnumpadadjust.resx">
+      <DependentUpon>defectAdminAdjustnumpadadjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdmindetailnc.resx">
+      <DependentUpon>defectAdmindetailnc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdmindetailng.resx">
+      <DependentUpon>defectAdmindetailng.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminhome.resx">
+      <DependentUpon>defectAdminhome.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminNumpadadjust.resx">
+      <DependentUpon>defectAdminNumpadadjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminregister.resx">
+      <DependentUpon>defectAdminregister.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminsearch.resx">
+      <DependentUpon>defectAdminsearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminsearchng.resx">
+      <DependentUpon>defectAdminsearchng.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminselectcodenc.resx">
+      <DependentUpon>defectAdminselectcodenc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminselectcodeng.resx">
+      <DependentUpon>defectAdminselectcodeng.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminselectdetailncadjust.resx">
+      <DependentUpon>defectAdminselectdetailncadjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminselecttypenc.resx">
+      <DependentUpon>defectAdminselecttypenc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAdminselecttypeng.resx">
+      <DependentUpon>defectAdminselecttypeng.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAlertsuredefect.resx">
+      <DependentUpon>defectAlertsuredefect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectAlertupdatesuccess.resx">
+      <DependentUpon>defectAlertupdatesuccess.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectDetailnc.resx">
+      <DependentUpon>defectDetailnc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectDetailng.resx">
+      <DependentUpon>defectDetailng.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectHome.resx">
+      <DependentUpon>defectHome.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectNumpadadjust.resx">
+      <DependentUpon>defectNumpadadjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectNumpadregister.resx">
+      <DependentUpon>defectNumpadregister.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectRegister.resx">
+      <DependentUpon>defectRegister.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectSelectcode.resx">
+      <DependentUpon>defectSelectcode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="defectSelecttype.resx">
+      <DependentUpon>defectSelecttype.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Defect_nc_adj.resx">
       <DependentUpon>Defect_nc_adj.vb</DependentUpon>
@@ -783,6 +1067,9 @@
     <EmbeddedResource Include="int_qty_rework.resx">
       <DependentUpon>int_qty_rework.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Keyboard.resx">
+      <DependentUpon>Keyboard.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Line_conf.resx">
       <DependentUpon>Line_conf.vb</DependentUpon>
     </EmbeddedResource>
@@ -804,6 +1091,9 @@
     <EmbeddedResource Include="Loss_reg_pass.resx">
       <DependentUpon>Loss_reg_pass.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainFA.resx">
+      <DependentUpon>MainFA.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.vb</DependentUpon>
     </EmbeddedResource>
@@ -821,6 +1111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Prd_status.resx">
       <DependentUpon>Prd_status.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="printDefect.resx">
+      <DependentUpon>printDefect.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="print_back.resx">
       <DependentUpon>print_back.vb</DependentUpon>
@@ -870,14 +1163,23 @@
     <EmbeddedResource Include="Show_reprint_wi.resx">
       <DependentUpon>Show_reprint_wi.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Show_Worker.resx">
+      <DependentUpon>Show_Worker.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="skill_manage.resx">
       <DependentUpon>skill_manage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StopMenu.resx">
+      <DependentUpon>StopMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tag_reprint.resx">
       <DependentUpon>Tag_reprint.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tag_reprint_new.resx">
       <DependentUpon>tag_reprint_new.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test_scrobar.resx">
+      <DependentUpon>Test_scrobar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Time_Loss.resx">
       <DependentUpon>Time_Loss.vb</DependentUpon>
@@ -912,6 +1214,56 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\MainMenu.png" />
+    <None Include="Resources\defectAdminregister1.png" />
+    <None Include="Resources\defectAdminregister.png" />
+    <None Include="Resources\defectRegister2.png" />
+    <None Include="Resources\defectAdminnumpadregister2.png" />
+    <None Include="Resources\defectAdminnumpadregister1.png" />
+    <None Include="Resources\defectAdmindetailselectadjustNC1.png" />
+    <None Include="Resources\defectAdmindetailselectadjustNC.png" />
+    <None Include="Resources\defectAdmindetailNC2.png" />
+    <None Include="Resources\defectAdmindetailadjustNC1.png" />
+    <None Include="Resources\defectAdmindetailadjustNC.png" />
+    <None Include="Resources\defectAlertsure1.png" />
+    <None Include="Resources\defectAlertupdate.png" />
+    <None Include="Resources\defectAlertsure.png" />
+    <None Include="Resources\defectAdminnumpadadjust.png" />
+    <None Include="Resources\defectAdminnumpadregister.png" />
+    <None Include="Resources\defectAdminselectcodeNG.png" />
+    <None Include="Resources\defectAdminselectcodeNC.png" />
+    <None Include="Resources\defectAdminselecttypeNG.png" />
+    <None Include="Resources\defectAdminselecttypeNC1.png" />
+    <None Include="Resources\defectAdminselecttypeNC.png" />
+    <None Include="Resources\defectAdminsearchNG.png" />
+    <None Include="Resources\defectAdminsearchNC.png" />
+    <None Include="Resources\defectAdmindetailNG.png" />
+    <None Include="Resources\defectAdmindetailNC1.png" />
+    <None Include="Resources\defectAdmindetailNC.png" />
+    <None Include="Resources\defectHome6.png" />
+    <None Include="Resources\defectHome11.png" />
+    <None Include="Resources\defectHome5.png" />
+    <None Include="Resources\defectHome4.png" />
+    <None Include="Resources\defectHome3.png" />
+    <None Include="Resources\defectHome2.png" />
+    <None Include="Resources\defectHome1.png" />
+    <None Include="Resources\menuLogin.png" />
+    <None Include="Resources\loginAdmin1.png" />
+    <None Include="Resources\Information2.png" />
+    <None Include="Resources\Information1.png" />
+    <None Include="Resources\loginAdmin.png" />
+    <None Include="Resources\Information.png" />
+    <None Include="Resources\closeLotsummary.png" />
+    <None Include="Resources\defectSelecttype.png" />
+    <None Include="Resources\defectSelectcode.png" />
+    <None Include="Resources\defectRegister1.png" />
+    <None Include="Resources\defectRegister.png" />
+    <None Include="Resources\defectNumpadregister.png" />
+    <None Include="Resources\defectNumpadadjust.png" />
+    <None Include="Resources\defectHome.png" />
+    <None Include="Resources\defectDetailnc2.png" />
+    <None Include="Resources\defectDetailnc1.png" />
+    <None Include="Resources\defectDetailnc.png" />
     <None Include="Resources\inst_qty2.png" />
     <None Include="Resources\inst_qty.png" />
   </ItemGroup>

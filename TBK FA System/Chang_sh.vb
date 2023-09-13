@@ -142,8 +142,8 @@ Public Class Chang_sh
 			End If
     End Sub
 
-	Private Sub Chang_sh_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		Timer1.Start()
-		check_shift()
-	End Sub
+    Private Sub Chang_sh_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Start()
+        check_shift()
+    End Sub
 End Class

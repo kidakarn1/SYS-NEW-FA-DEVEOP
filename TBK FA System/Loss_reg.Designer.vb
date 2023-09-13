@@ -42,6 +42,7 @@ Partial Class Loss_reg
         Me.loss_cd = New System.Windows.Forms.Label()
         Me.date_time_commit_data = New System.Windows.Forms.Label()
         Me.test_time_loss_time = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -242,12 +243,26 @@ Partial Class Loss_reg
         Me.test_time_loss_time.TabIndex = 44
         Me.test_time_loss_time.Text = "XXXXXXXXXXXXXX"
         '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.CadetBlue
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Button4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button4.Location = New System.Drawing.Point(248, 457)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(191, 70)
+        Me.Button4.TabIndex = 55
+        Me.Button4.Text = "Maintenance"
+        Me.Button4.UseVisualStyleBackColor = False
+        Me.Button4.Visible = False
+        '
         'Loss_reg
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Firebrick
         Me.ClientSize = New System.Drawing.Size(670, 536)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.test_time_loss_time)
         Me.Controls.Add(Me.date_time_commit_data)
         Me.Controls.Add(Me.loss_cd)
@@ -294,4 +309,5 @@ Partial Class Loss_reg
     Friend WithEvents loss_cd As Label
     Friend WithEvents date_time_commit_data As Label
     Friend WithEvents test_time_loss_time As Label
+    Friend WithEvents Button4 As Button
 End Class

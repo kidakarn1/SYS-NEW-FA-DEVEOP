@@ -1,7 +1,7 @@
 ﻿Public Class Sel_defect_cd_nc
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         'Working_Pro.Enabled = True
-        Defect_menu.Show()
+        defectHome.Show()
         Me.Hide()
     End Sub
 
