@@ -15,7 +15,9 @@ Public Class List_Emp
             End If
             Sc.TextBox2.Select()
             Me.Enabled = False
+
             Sc.Show()
+
         End If
     End Sub
     Public Function set_data_Month(lotSubstMonth)
@@ -555,7 +557,7 @@ Public Class List_Emp
         MaxManPower = back.Get_MaxManPower(MainFrm.Label4.Text)
         Timer1.Start()
     End Sub
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs)
         Dim list_item As ListViewItem
         Dim str As String = lb_count_emp.Text
         'MsgBox(str)
@@ -587,10 +589,11 @@ Public Class List_Emp
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label3.Text = TimeOfDay.ToString("H:mm:ss")
+        Label1.Text = DateTime.Now.ToString("D")
         Label2.Text = DateTime.Now.ToString("yyyy/MM/dd")
     End Sub
 
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 

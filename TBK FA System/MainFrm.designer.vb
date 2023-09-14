@@ -57,6 +57,7 @@ Partial Class MainFrm
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,13 +76,14 @@ Partial Class MainFrm
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Arial Black", 13.0!)
+        Me.Label9.BackColor = System.Drawing.Color.Transparent
+        Me.Label9.Font = New System.Drawing.Font("Catamaran", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(298, 314)
+        Me.Label9.Location = New System.Drawing.Point(624, 136)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(251, 26)
+        Me.Label9.Size = New System.Drawing.Size(174, 19)
         Me.Label9.TabIndex = 23
-        Me.Label9.Text = "New FA system (V 1.7.3)"
+        Me.Label9.Text = "FA SYSTEM V 1.7.4 "
         '
         'Panel1
         '
@@ -105,9 +107,9 @@ Partial Class MainFrm
         Me.Panel1.Controls.Add(Me.PictureBox4)
         Me.Panel1.Controls.Add(Me.lb_emp1)
         Me.Panel1.Controls.Add(Me.PictureBox3)
-        Me.Panel1.Location = New System.Drawing.Point(608, 12)
+        Me.Panel1.Location = New System.Drawing.Point(629, 241)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(10, 137)
+        Me.Panel1.Size = New System.Drawing.Size(10, 67)
         Me.Panel1.TabIndex = 12
         '
         'lb_ctrl_sc_flg
@@ -328,11 +330,12 @@ Partial Class MainFrm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Arial Black", 15.0!, System.Drawing.FontStyle.Bold)
-        Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(238, 12)
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Font = New System.Drawing.Font("Catamaran", 23.0!, System.Drawing.FontStyle.Bold)
+        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(223, Byte), Integer))
+        Me.Label6.Location = New System.Drawing.Point(236, 19)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(42, 28)
+        Me.Label6.Size = New System.Drawing.Size(60, 34)
         Me.Label6.TabIndex = 25
         Me.Label6.Text = "PD"
         '
@@ -387,7 +390,7 @@ Partial Class MainFrm
         Me.menu4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.menu4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.menu4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.menu4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(33, Byte), Integer))
+        Me.menu4.ForeColor = System.Drawing.Color.White
         Me.menu4.Location = New System.Drawing.Point(585, 171)
         Me.menu4.Name = "menu4"
         Me.menu4.Size = New System.Drawing.Size(201, 391)
@@ -415,9 +418,10 @@ Partial Class MainFrm
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Arial Black", 15.0!, System.Drawing.FontStyle.Bold)
         Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(16, 102)
+        Me.Label1.Location = New System.Drawing.Point(17, 167)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(84, 28)
         Me.Label1.TabIndex = 0
@@ -427,17 +431,18 @@ Partial Class MainFrm
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Arial Black", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(17, 130)
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Catamaran", 25.0!, System.Drawing.FontStyle.Bold)
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(244, Byte), Integer))
+        Me.Label2.Location = New System.Drawing.Point(9, 98)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(70, 23)
+        Me.Label2.Size = New System.Drawing.Size(165, 37)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Label2"
+        Me.Label2.Text = "XX:XX:XX"
         '
         'PictureBox8
         '
-        Me.PictureBox8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.PictureBox8.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox8.Location = New System.Drawing.Point(17, 12)
         Me.PictureBox8.Name = "PictureBox8"
         Me.PictureBox8.Size = New System.Drawing.Size(95, 75)
@@ -460,13 +465,26 @@ Partial Class MainFrm
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("Castellar", 69.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.MintCream
-        Me.Label4.Location = New System.Drawing.Point(167, 40)
+        Me.Label4.Font = New System.Drawing.Font("Catamaran", 77.74999!, System.Drawing.FontStyle.Bold)
+        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(236, Byte), Integer))
+        Me.Label4.Location = New System.Drawing.Point(218, 37)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(484, 112)
+        Me.Label4.Size = New System.Drawing.Size(362, 110)
         Me.Label4.TabIndex = 3
-        Me.Label4.Text = "LINE_CD"
+        Me.Label4.Text = "XXXXX"
+        '
+        'Label3
+        '
+        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Arial Black", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(223, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(13, 136)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(46, 15)
+        Me.Label3.TabIndex = 4631
+        Me.Label3.Text = "Label3"
         '
         'MainFrm
         '
@@ -474,13 +492,13 @@ Partial Class MainFrm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(14, Byte), Integer))
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.MainMenu1
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.MainMenu2
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.PictureBox8)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.menu3)
@@ -489,6 +507,7 @@ Partial Class MainFrm
         Me.Controls.Add(Me.menu4)
         Me.Controls.Add(Me.menu2)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "MainFrm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -543,4 +562,5 @@ Partial Class MainFrm
     Friend WithEvents lb_ctrl_sc_flg As Label
     Friend WithEvents PictureBox8 As PictureBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
 End Class

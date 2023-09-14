@@ -24,11 +24,11 @@ Public Class Line_conf
     Dim me_sig_del As String = ""
     Dim BF = New Backoffice_model()
 
-    Private Sub Label11_Click(sender As Object, e As EventArgs) Handles Label11.Click
+    Private Sub Label11_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+    Private Sub Label5_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -36,7 +36,7 @@ Public Class Line_conf
 
     End Sub
 
-    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+    Private Sub Label9_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -46,6 +46,7 @@ Public Class Line_conf
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
         Label1.Text = TimeOfDay.ToString("H:mm:ss")
+        Label3.Text = DateTime.Now.ToString("D")
         Label22.Text = DateTime.Now.ToString("yyyy/MM/dd")
     End Sub
 
@@ -347,7 +348,7 @@ Public Class Line_conf
         MainFrm.Show()
         Me.Hide()
     End Sub
-    Private Sub menu3_Click(sender As Object, e As EventArgs) Handles menu3.Click
+    Private Sub menu3_Click(sender As Object, e As EventArgs)
         Me.Enabled = False
         Me.ComboBox2.DataSource = Nothing
         Try
@@ -443,7 +444,7 @@ Public Class Line_conf
         End Try
 
     End Sub
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
     Private Sub ComboBox7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DIO_PORT.SelectedIndexChanged

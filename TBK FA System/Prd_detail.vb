@@ -7,7 +7,7 @@ Public Class Prd_detail
 		'Label2.Text = TimeOfDay.ToString("H:mm:ss")
 		'Label1.Text = DateTime.Now.ToString("yyyy/MM/dd")
 	End Sub
-	Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+	Private Sub Label4_Click(sender As Object, e As EventArgs)
 
 	End Sub
 	Public Function check_network()
@@ -196,6 +196,7 @@ Public Class Prd_detail
 	End Sub
 	Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
 		Label1.Text = TimeOfDay.ToString("H:mm:ss")
+		Label4.Text = DateTime.Now.ToString("D")
 		Label22.Text = DateTime.Now.ToString("yyyy/MM/dd")
 	End Sub
 	Private Sub Label22_Click(sender As Object, e As EventArgs) Handles Label22.Click
@@ -204,40 +205,40 @@ Public Class Prd_detail
 	Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 		Dim shift = Trim(Label12.Text.Substring(0, 1))
 		Try
-            If shift = "A" Then 'กะเช้า'
-                If TimeOfDay.ToString("HH:mm:ss") <= "07:40:00" And TimeOfDay.ToString("HH:mm:ss") <= "07:40:00" Then 'กะเช้า'
-                    Confrime_work_production.Show()
-                Else
-                    Confrime_work_production.next_pae()
-                End If
-            ElseIf shift = "P" Then 'กะเช้า'
-                If TimeOfDay.ToString("HH:mm:ss") >= "19:40:00" And TimeOfDay.ToString("HH:mm:ss") <= "20:00:00" Then 'กะเช้า'
-                    Confrime_work_production.Show()
-                Else
-                    Confrime_work_production.next_pae()
-                End If
-            ElseIf shift = "B" Then 'กะดึก'
-                If TimeOfDay.ToString("HH:mm:ss") >= "19:40:00" And TimeOfDay.ToString("HH:mm:ss") <= "20:00:00" Then 'กะเช้า'
-                    Confrime_work_production.Show()
-                Else
-                    Confrime_work_production.next_pae()
-                End If
-            ElseIf shift = "Q" Then 'กะดึก'
-                If TimeOfDay.ToString("HH:mm:ss") >= "20:00:00" And TimeOfDay.ToString("HH:mm:ss") <= "23:59:59" Then
-                    Confrime_work_production.next_pae()
-                ElseIf TimeOfDay.ToString("HH:mm:ss") >= "00:00:00" And TimeOfDay.ToString("HH:mm:ss") <= "07:39:59" Then
-                    'Confrime_work_production.next_pae()
-                    Confrime_work_production.next_pae()
-                Else
-                    Confrime_work_production.Show()
-                End If
-                'If TimeOfDay.ToString("HH:mm:ss") <= "19:40:00" Then
-                '	Confrime_work_production.Show()
-                '	Else
-                '			Confrime_work_production.next_pae()
-                '			End If
-            Else
-                Confrime_work_production.next_pae()
+			If shift = "A" Then 'กะเช้า'
+				If TimeOfDay.ToString("HH:mm:ss") <= "07:40:00" And TimeOfDay.ToString("HH:mm:ss") <= "07:40:00" Then 'กะเช้า'
+					Confrime_work_production.Show()
+				Else
+					Confrime_work_production.next_pae()
+				End If
+			ElseIf shift = "P" Then 'กะเช้า'
+				If TimeOfDay.ToString("HH:mm:ss") >= "19:40:00" And TimeOfDay.ToString("HH:mm:ss") <= "20:00:00" Then 'กะเช้า'
+					Confrime_work_production.Show()
+				Else
+					Confrime_work_production.next_pae()
+				End If
+			ElseIf shift = "B" Then 'กะดึก'
+				If TimeOfDay.ToString("HH:mm:ss") >= "19:40:00" And TimeOfDay.ToString("HH:mm:ss") <= "20:00:00" Then 'กะเช้า'
+					Confrime_work_production.Show()
+				Else
+					Confrime_work_production.next_pae()
+				End If
+			ElseIf shift = "Q" Then 'กะดึก'
+				If TimeOfDay.ToString("HH:mm:ss") >= "20:00:00" And TimeOfDay.ToString("HH:mm:ss") <= "23:59:59" Then
+					Confrime_work_production.next_pae()
+				ElseIf TimeOfDay.ToString("HH:mm:ss") >= "00:00:00" And TimeOfDay.ToString("HH:mm:ss") <= "07:39:59" Then
+					'Confrime_work_production.next_pae()
+					Confrime_work_production.next_pae()
+				Else
+					Confrime_work_production.Show()
+				End If
+				'If TimeOfDay.ToString("HH:mm:ss") <= "19:40:00" Then
+				'	Confrime_work_production.Show()
+				'	Else
+				'			Confrime_work_production.next_pae()
+				'			End If
+			Else
+				Confrime_work_production.next_pae()
 			End If
 		Catch ex As Exception
 			MsgBox("ERROR = " & ex.Message)
@@ -260,13 +261,17 @@ Public Class Prd_detail
 		Rm_scan.scan_item_cd.Focus()
 		Rm_scan.Show()
 	End Sub
-	Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+	Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs)
 	End Sub
 	Private Sub cc(sender As Object, e As EventArgs) Handles Timer3.Tick
 		check_lot()
 	End Sub
 
 	Private Sub Timer_delay_api_Tick(sender As Object, e As EventArgs)
+
+	End Sub
+
+	Private Sub lb_seq_Click(sender As Object, e As EventArgs) Handles lb_seq.Click
 
 	End Sub
 End Class

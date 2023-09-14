@@ -130,7 +130,6 @@ Public Class Chang_sh
 			Button22_hide.Visible = False
 			Button77.Visible = True
 			Button77_hide.Visible = False
-
 			Button66.Visible = False
 				Button66_hide.Visible = True
 				Button55.Visible = False
@@ -142,8 +141,9 @@ Public Class Chang_sh
 			End If
     End Sub
 
-    Private Sub Chang_sh_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Timer1.Start()
-        check_shift()
-    End Sub
+	Private Sub Chang_sh_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+		Me.Location = New Point(210, 12)
+		Timer1.Start()
+		check_shift()
+	End Sub
 End Class

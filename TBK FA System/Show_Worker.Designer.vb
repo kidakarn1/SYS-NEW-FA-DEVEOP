@@ -82,11 +82,11 @@ Partial Class Show_Worker
         '
         Me.lbTotalWorker.AutoSize = True
         Me.lbTotalWorker.BackColor = System.Drawing.Color.Transparent
-        Me.lbTotalWorker.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbTotalWorker.Font = New System.Drawing.Font("Catamaran", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbTotalWorker.ForeColor = System.Drawing.Color.White
-        Me.lbTotalWorker.Location = New System.Drawing.Point(747, 20)
+        Me.lbTotalWorker.Location = New System.Drawing.Point(753, 23)
         Me.lbTotalWorker.Name = "lbTotalWorker"
-        Me.lbTotalWorker.Size = New System.Drawing.Size(31, 20)
+        Me.lbTotalWorker.Size = New System.Drawing.Size(28, 17)
         Me.lbTotalWorker.TabIndex = 4
         Me.lbTotalWorker.Text = "XX"
         '
@@ -104,6 +104,7 @@ Partial Class Show_Worker
         Me.Controls.Add(Me.Panel_show_worker)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Show_Worker"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnBack, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btn_up, System.ComponentModel.ISupportInitialize).EndInit()

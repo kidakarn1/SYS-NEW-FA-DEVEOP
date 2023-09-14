@@ -39,7 +39,7 @@ Partial Class Conf_login
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(-16, -2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(434, 47)
+        Me.Panel1.Size = New System.Drawing.Size(535, 66)
         Me.Panel1.TabIndex = 0
         '
         'Label1
@@ -58,7 +58,7 @@ Partial Class Conf_login
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Window
-        Me.Label2.Location = New System.Drawing.Point(12, 71)
+        Me.Label2.Location = New System.Drawing.Point(56, 109)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(172, 37)
         Me.Label2.TabIndex = 2
@@ -69,7 +69,7 @@ Partial Class Conf_login
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.Window
-        Me.Label3.Location = New System.Drawing.Point(12, 137)
+        Me.Label3.Location = New System.Drawing.Point(56, 175)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(166, 37)
         Me.Label3.TabIndex = 3
@@ -78,7 +78,7 @@ Partial Class Conf_login
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(190, 70)
+        Me.TextBox1.Location = New System.Drawing.Point(234, 108)
         Me.TextBox1.MaxLength = 20
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(196, 38)
@@ -88,7 +88,7 @@ Partial Class Conf_login
         '
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Button1.Location = New System.Drawing.Point(59, 209)
+        Me.Button1.Location = New System.Drawing.Point(103, 247)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(99, 45)
         Me.Button1.TabIndex = 6
@@ -99,7 +99,7 @@ Partial Class Conf_login
         '
         Me.Button2.BackColor = System.Drawing.Color.DodgerBlue
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Button2.Location = New System.Drawing.Point(248, 209)
+        Me.Button2.Location = New System.Drawing.Point(292, 247)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(99, 45)
         Me.Button2.TabIndex = 7
@@ -109,7 +109,7 @@ Partial Class Conf_login
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(190, 137)
+        Me.TextBox2.Location = New System.Drawing.Point(234, 175)
         Me.TextBox2.MaxLength = 20
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -121,7 +121,8 @@ Partial Class Conf_login
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(154, Byte), Integer), CType(CType(156, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(405, 290)
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.scanAdminAccount
+        Me.ClientSize = New System.Drawing.Size(518, 384)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TextBox2)

@@ -67,8 +67,9 @@ Public Class MainFrm
 
 	Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 		check_close_fa()
-		Label2.Text = TimeOfDay.ToString("H:mm:ss")
-		Label1.Text = DateTime.Now.ToString("yyyy/MM/dd")
+        Label2.Text = TimeOfDay.ToString("H:mm:ss")
+        Label3.Text = DateTime.Now.ToString("D")
+        Label1.Text = DateTime.Now.ToString("yyyy/MM/dd")
 	End Sub
 	Private Sub Label2_Click(sender As Object, e As EventArgs)
 
@@ -430,5 +431,13 @@ Public Class MainFrm
 
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
         load_worker()
+    End Sub
+
+    Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
     End Sub
 End Class

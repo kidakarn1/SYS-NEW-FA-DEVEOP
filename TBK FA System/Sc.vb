@@ -7,6 +7,7 @@ Public Class Sc
     Dim myPort As Array
     Delegate Sub SetTextCallback(ByVal [text] As String)
     Private Sub Sc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Location = New Point(13, 95)
         myPort = IO.Ports.SerialPort.GetPortNames()
 
         Dim sc_type As String = MainFrm.lb_scanner_port.Text

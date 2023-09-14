@@ -1214,6 +1214,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\scanAdminAccount.png" />
+    <None Include="Resources\selectShift.png" />
+    <None Include="Resources\productionDetail.png" />
+    <None Include="Resources\configLine2.png" />
+    <None Include="Resources\configLine.png" />
+    <None Include="Resources\configLine1.png" />
+    <None Include="Resources\manageEmp2.png" />
+    <None Include="Resources\manageEmp1.png" />
+    <None Include="Resources\scanEmpCard.png" />
+    <None Include="Resources\manageEmp.png" />
+    <None Include="Resources\MainMenu2.png" />
     <None Include="Resources\MainMenu1.png" />
     <None Include="Resources\MainMenu.png" />
     <None Include="Resources\defectAdminregister1.png" />

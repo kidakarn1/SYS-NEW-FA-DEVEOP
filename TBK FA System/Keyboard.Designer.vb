@@ -502,9 +502,11 @@ Partial Class Keyboard
         'btnClose
         '
         Me.btnClose.BackColor = System.Drawing.Color.OrangeRed
-        Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.FlatAppearance.BorderSize = 0
+        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClose.Font = New System.Drawing.Font("Catamaran", 16.75!, System.Drawing.FontStyle.Bold)
         Me.btnClose.ForeColor = System.Drawing.Color.White
-        Me.btnClose.Location = New System.Drawing.Point(282, 248)
+        Me.btnClose.Location = New System.Drawing.Point(18, 246)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(158, 44)
         Me.btnClose.TabIndex = 44
@@ -518,7 +520,7 @@ Partial Class Keyboard
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.ClientSize = New System.Drawing.Size(760, 293)
+        Me.ClientSize = New System.Drawing.Size(760, 297)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnenter)
         Me.Controls.Add(Me.btnshiftlingth)
@@ -564,6 +566,7 @@ Partial Class Keyboard
         Me.Controls.Add(Me.btn1)
         Me.Controls.Add(Me.btn0)
         Me.ForeColor = System.Drawing.SystemColors.ControlDark
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Keyboard"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Keyboard"
