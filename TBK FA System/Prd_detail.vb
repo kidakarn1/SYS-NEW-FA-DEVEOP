@@ -204,6 +204,7 @@ Public Class Prd_detail
 	End Sub
 	Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 		Dim shift = Trim(Label12.Text.Substring(0, 1))
+
 		Try
 			If shift = "A" Then 'กะเช้า'
 				If TimeOfDay.ToString("HH:mm:ss") <= "07:40:00" And TimeOfDay.ToString("HH:mm:ss") <= "07:40:00" Then 'กะเช้า'

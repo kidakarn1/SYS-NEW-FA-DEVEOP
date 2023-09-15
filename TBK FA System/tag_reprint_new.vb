@@ -747,15 +747,21 @@ Public Class tag_reprint_new
 			MessageBox.Show("An Error has halted thid process")
 		End If
 	End Sub
-	Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    Private Sub Label1_Click(sender As Object, e As EventArgs)
 
-	End Sub
-	Private Sub tag_reprint_new_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		ListBox1.Visible = False
-		ListBox2.Visible = False
-	End Sub
+    End Sub
+    Private Sub tag_reprint_new_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ListBox1.Visible = False
+        ListBox2.Visible = False
+        Timer1.Start()
+    End Sub
 
-	Private Sub PrintPreviewDialog1_Load(sender As Object, e As EventArgs) Handles PrintPreviewDialog1.Load
+    Private Sub PrintPreviewDialog1_Load(sender As Object, e As EventArgs) Handles PrintPreviewDialog1.Load
 
-	End Sub
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label1.Text = TimeOfDay.ToString("H:mm:ss")
+        Label4.Text = DateTime.Now.ToString("D")
+    End Sub
 End Class

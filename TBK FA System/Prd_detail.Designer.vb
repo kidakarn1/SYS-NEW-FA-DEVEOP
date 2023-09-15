@@ -69,7 +69,7 @@ Partial Class Prd_detail
         Me.lb_remain_qty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.lb_remain_qty.Font = New System.Drawing.Font("Catamaran", 29.25!, System.Drawing.FontStyle.Bold)
         Me.lb_remain_qty.ForeColor = System.Drawing.Color.Tomato
-        Me.lb_remain_qty.Location = New System.Drawing.Point(622, 361)
+        Me.lb_remain_qty.Location = New System.Drawing.Point(641, 361)
         Me.lb_remain_qty.Name = "lb_remain_qty"
         Me.lb_remain_qty.Size = New System.Drawing.Size(139, 43)
         Me.lb_remain_qty.TabIndex = 38
@@ -85,7 +85,7 @@ Partial Class Prd_detail
         Me.lb_plan_qty.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
         Me.lb_plan_qty.Font = New System.Drawing.Font("Catamaran", 29.25!, System.Drawing.FontStyle.Bold)
         Me.lb_plan_qty.ForeColor = System.Drawing.Color.SpringGreen
-        Me.lb_plan_qty.Location = New System.Drawing.Point(430, 361)
+        Me.lb_plan_qty.Location = New System.Drawing.Point(443, 361)
         Me.lb_plan_qty.Name = "lb_plan_qty"
         Me.lb_plan_qty.Size = New System.Drawing.Size(139, 43)
         Me.lb_plan_qty.TabIndex = 37
@@ -157,11 +157,11 @@ Partial Class Prd_detail
         Me.Label12.AutoSize = True
         Me.Label12.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
         Me.Label12.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Label12.Font = New System.Drawing.Font("Catamaran", 23.25!, System.Drawing.FontStyle.Bold)
+        Me.Label12.Font = New System.Drawing.Font("Catamaran", 21.25!, System.Drawing.FontStyle.Bold)
         Me.Label12.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.Label12.Location = New System.Drawing.Point(44, 421)
+        Me.Label12.Location = New System.Drawing.Point(44, 422)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(278, 34)
+        Me.Label12.Size = New System.Drawing.Size(263, 32)
         Me.Label12.TabIndex = 18
         Me.Label12.Text = "A (08:00 - 17:00)"
         '

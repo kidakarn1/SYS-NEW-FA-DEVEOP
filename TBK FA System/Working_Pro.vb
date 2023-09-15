@@ -54,7 +54,9 @@ Public Class Working_Pro
     Public Shared model As String = ""
     Public Shared pwi_id As String = ""
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Label44.Text = TimeOfDay.ToString("H:mm:ss")
+        'Label44.Text = TimeOfDay.ToString("H:mm:ss")
+        Label17.Text = TimeOfDay.ToString("H:mm:ss")
+        Label1.Text = DateTime.Now.ToString("D")
         Label43.Text = DateTime.Now.ToString("yyyy/MM/dd")
         lb_loss_status.Text = lb_loss_status.Text
         If lb_loss_status.Right < 0 Then
@@ -75,6 +77,9 @@ Public Class Working_Pro
         End If
     End Function
     Private Sub Working_Pro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        PictureBox12.Visible = False
+        PictureBox10.Visible = False
+        PictureBox11.Visible = False
         Wait_data.Close()
         'Prd_detail.Timer3.Enabled = False
         Label47.Visible = False
@@ -284,6 +289,42 @@ Public Class Working_Pro
 
     End Sub
     Public Sub stop_working()
+        btn_start.BringToFront()
+        btn_start.Visible = True
+        PictureBox11.Visible = True
+        'Panel3.Location = New Point(47, 209)
+        ' Panel2.Location = New Point(38, 324)
+        'Panel4.Location = New Point(38, 439)
+
+        Label24.BackColor = Color.FromArgb(63, 63, 63)
+        Label17.BackColor = Color.FromArgb(63, 63, 63)
+        Label1.BackColor = Color.FromArgb(63, 63, 63)
+        Label3.BackColor = Color.FromArgb(63, 63, 63)
+        Label18.BackColor = Color.FromArgb(63, 63, 63)
+        Label18.Location = New Point(488, 124)
+        Label16.BackColor = Color.FromArgb(63, 63, 63)
+        Label20.Visible = False
+        Label20.BackColor = Color.FromArgb(63, 63, 63)
+        LB_COUNTER_SEQ.SendToBack()
+        CircularProgressBar2.Visible = False
+        CircularProgressBar2.BackColor = Color.FromArgb(63, 63, 63)
+        CircularProgressBar2.InnerColor = Color.FromArgb(63, 63, 63)
+
+        Panel3.Location = New Point(48, 215)
+        Panel3.BackColor = Color.FromArgb(12, 27, 45)
+        Panel3.BringToFront()
+
+        Panel2.Location = New Point(43, 355)
+        Panel2.BackColor = Color.FromArgb(12, 27, 45)
+        Panel2.BringToFront()
+
+        Panel4.Location = New Point(43, 495)
+        Panel4.BackColor = Color.FromArgb(12, 27, 45)
+        Panel4.BringToFront()
+
+
+
+
         Dim line_id As String = MainFrm.line_id.Text
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
@@ -337,7 +378,7 @@ Public Class Working_Pro
     Private Sub Label10_Click(sender As Object, e As EventArgs)
 
     End Sub
-    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+    Private Sub Label7_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -496,6 +537,57 @@ Public Class Working_Pro
         End Try
     End Sub
     Public Sub Start_Production()
+
+        btn_start.Visible = False
+        PictureBox12.Visible = True
+        PictureBox11.Visible = False
+        PictureBox10.Visible = True
+
+        Label24.BackColor = Color.FromArgb(44, 93, 129)
+        Label24.BringToFront()
+        btn_stop.BringToFront()
+        Label17.BackColor = Color.FromArgb(44, 93, 129)
+        Label17.BringToFront()
+        Label1.BackColor = Color.FromArgb(44, 93, 129)
+        Label1.BringToFront()
+        'Label29.BackColor = Color.FromArgb(44, 93, 129)
+
+        Label3.BackColor = Color.FromArgb(44, 88, 130)
+        Label3.BringToFront()
+        Label18.BackColor = Color.FromArgb(44, 88, 130)
+        Label18.BringToFront()
+
+        Label16.BackColor = Color.FromArgb(44, 82, 131)
+        Label16.BringToFront()
+        Label20.BackColor = Color.FromArgb(44, 82, 131)
+        Label20.BringToFront()
+
+        CircularProgressBar2.BackColor = Color.FromArgb(44, 67, 133)
+        CircularProgressBar2.InnerColor = Color.FromArgb(44, 67, 133)
+        CircularProgressBar2.BringToFront()
+
+        PanelBreakTime.BringToFront()
+        Panel7.BringToFront()
+        lb_ng_qty.BringToFront()
+        LB_COUNTER_SHIP.BringToFront()
+        LB_COUNTER_SEQ.BringToFront()
+        Label29.BringToFront()
+
+        Panel3.Location = New Point(48, 215)
+        Panel3.BackColor = Color.FromArgb(12, 27, 45)
+        Panel3.BringToFront()
+
+        Panel2.Location = New Point(43, 355)
+        Panel2.BackColor = Color.FromArgb(12, 27, 45)
+        Panel2.BringToFront()
+
+        Panel4.Location = New Point(43, 495)
+        Panel4.BackColor = Color.FromArgb(12, 27, 45)
+        Panel4.BringToFront()
+        Label20.Visible = True
+        LB_COUNTER_SEQ.Visible = True
+        'LB_COUNTER_SEQ.BringToFront()
+        CircularProgressBar2.Visible = True
         If check_network_frist = 0 Then
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
@@ -648,11 +740,19 @@ Public Class Working_Pro
             End Try
             st_time.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
             st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+
+            'Starting
             btn_setup.Enabled = True
             btn_ins_act.Enabled = True
             btn_desc_act.Enabled = True
             btn_defect.Enabled = True
             btn_closelot.Enabled = True
+            'Starting
+
+            'End
+
+            'End
+
             'Dim temppo As Double = Label34.Text
             CircularProgressBar2.Text = 0 & "%"
             CircularProgressBar2.Value = 0
@@ -2303,7 +2403,7 @@ Public Class Working_Pro
         End If
 
     End Sub
-    Private Sub Panel5_Paint(sender As Object, e As PaintEventArgs) Handles Panel5.Paint
+    Private Sub Panel5_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
@@ -2691,5 +2791,29 @@ Public Class Working_Pro
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
+
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+
+    End Sub
+
+    Private Sub lb_ref_scan_Click(sender As Object, e As EventArgs) Handles lb_ref_scan.Click
+
+    End Sub
+
+    Private Sub CircularProgressBar2_Click(sender As Object, e As EventArgs) Handles CircularProgressBar2.Click
+
+    End Sub
+
+    Private Sub Label23_Click(sender As Object, e As EventArgs) Handles Label23.Click
+
+    End Sub
+
+    Private Sub PictureBox10_Click(sender As Object, e As EventArgs) Handles PictureBox10.Click
+
     End Sub
 End Class

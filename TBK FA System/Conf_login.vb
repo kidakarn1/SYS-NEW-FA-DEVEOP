@@ -3,7 +3,7 @@
 
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -11,9 +11,6 @@
         MainFrm.Enabled = True
         MainFrm.Hide()
 
-
-        'Dim f2 = New MainFrm()
-        'f2.Show()
         MainFrm.Show()
         Me.Hide()
 
@@ -50,7 +47,7 @@
     End Sub
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message,
-                                           ByVal keyData As System.Windows.Forms.Keys) _
+           ByVal keyData As System.Windows.Forms.Keys) _
                                            As Boolean
         Dim usernm As String = TextBox1.Text
         Dim passwd As String = TextBox2.Text
@@ -82,6 +79,6 @@
     End Function
 
     Private Sub Conf_login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Me.Location = New Point(12, 90)
     End Sub
 End Class

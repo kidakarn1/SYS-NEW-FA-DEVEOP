@@ -105,15 +105,24 @@ Public Class Sel_prd_setup
             load_show.Show()
         End Try
     End Sub
-
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Rm_scan.Panel_scan_picking.Visible = True
         Rm_scan.scan_item_cd.Select()
         Rm_scan.scan_item_cd.Focus()
         Rm_scan.Show()
     End Sub
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    End Sub
+    Private Sub Sel_prd_setup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Start()
+    End Sub
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label1.Text = TimeOfDay.ToString("H:mm:ss")
+        Label4.Text = DateTime.Now.ToString("D")
+    End Sub
+
+    Private Sub Label1_Click_1(sender As Object, e As EventArgs) Handles Label1.Click
 
     End Sub
 End Class

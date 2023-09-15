@@ -131,6 +131,7 @@ Partial Class Change_Loss2
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(196, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.selectLoss1
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Button1)
