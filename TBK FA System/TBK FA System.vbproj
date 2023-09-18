@@ -1214,15 +1214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
-    <None Include="Resources\ok.png" />
-    <None Include="Resources\manualLossAfter1.png" />
-    <None Include="Resources\addLossNumpad.png" />
-    <None Include="Resources\manualLossBefor1.png" />
-    <None Include="Resources\manualLossBefore.png" />
-    <None Include="Resources\selectLoss3.png" />
-    <None Include="Resources\selectLoss2.png" />
-    <None Include="Resources\autoLoss.png" />
-    <None Include="Resources\manualLossAfter.png" />
     <None Include="Resources\selectLoss1.png" />
     <None Include="Resources\selectLoss.png" />
     <None Include="Resources\reprintTag1.png" />

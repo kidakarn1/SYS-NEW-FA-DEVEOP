@@ -514,11 +514,10 @@ Public Class ins_time_loss
                                     Dim check_double_loss As Integer = 0
                                     Dim count_check_double As String = ""
                                     count_check_double = GET_CHECK_LOSS_reuslt
-									If CDbl(Val(count_check_double)) > 0 Then
-										MsgBox("Loss double please check start loss and end loss")
-									Else
-
-										Loss_reg_pass.Label8.Text = TextBox1.Text
+                                    If CDbl(Val(count_check_double)) > 0 Then
+                                        MsgBox("Loss double please check start loss and end loss")
+                                    Else
+                                        Loss_reg_pass.Label8.Text = TextBox1.Text
                                         Loss_reg_pass.Label9.Text = TextBox2.Text
                                         Loss_reg_pass.Enabled = True
                                         Loss_reg_pass.Button1.Visible = True
