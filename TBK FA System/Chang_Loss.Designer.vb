@@ -22,6 +22,7 @@ Partial Class Chang_Loss
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ListView2 = New System.Windows.Forms.ListView()
@@ -29,6 +30,9 @@ Partial Class Chang_Loss
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'Button3
@@ -63,11 +67,11 @@ Partial Class Chang_Loss
         '
         'ListView2
         '
-        Me.ListView2.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.ListView2.AllowColumnReorder = True
         Me.ListView2.AllowDrop = True
         Me.ListView2.AutoArrange = False
-        Me.ListView2.BackColor = System.Drawing.Color.White
+        Me.ListView2.BackColor = System.Drawing.Color.FromArgb(CType(CType(8, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.ListView2.BackgroundImageTiled = True
         Me.ListView2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.ListView2.Cursor = System.Windows.Forms.Cursors.Default
@@ -111,13 +115,44 @@ Partial Class Chang_Loss
         Me.ListBox1.TabIndex = 34
         Me.ListBox1.Visible = False
         '
+        'Label4
+        '
+        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
+        Me.Label4.Font = New System.Drawing.Font("Arial Black", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(223, Byte), Integer))
+        Me.Label4.Location = New System.Drawing.Point(566, 66)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(46, 15)
+        Me.Label4.TabIndex = 4636
+        Me.Label4.Text = "Label4"
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Catamaran", 25.0!, System.Drawing.FontStyle.Bold)
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(560, 27)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(136, 37)
+        Me.Label1.TabIndex = 4635
+        Me.Label1.Text = "Label1"
+        '
+        'Timer1
+        '
+        '
         'Chang_Loss
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(196, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.selectLoss
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.selectLoss2
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ListView2)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Button1)
@@ -127,6 +162,7 @@ Partial Class Chang_Loss
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Loss"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Button3 As Button
@@ -136,4 +172,7 @@ Partial Class Chang_Loss
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents ListView2 As ListView
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Timer1 As Timer
 End Class

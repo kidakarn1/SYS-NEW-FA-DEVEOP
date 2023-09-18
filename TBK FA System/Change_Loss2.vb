@@ -64,7 +64,7 @@ Public Class Change_Loss2
                 '                    numm = numm + 1
                 '                    End While
                 Loss_reg_pass.ComboBox1.Visible = True
-                Loss_reg_pass.Label10.Visible = True
+                'Loss_reg_pass.Label10.Visible = True
                 Loss_reg_pass.ComboBox1.SelectedIndex = 0
                 'End If
                 'Loss_reg_pass.Label8.Text = TimeOfDay.ToString("H:mm")
@@ -92,5 +92,11 @@ Public Class Change_Loss2
 
     Private Sub Change_Loss2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ListView2.Items(1).Selected = True
+        Timer1.Start()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label1.Text = TimeOfDay.ToString("H:mm:ss")
+        Label4.Text = DateTime.Now.ToString("D")
     End Sub
 End Class
