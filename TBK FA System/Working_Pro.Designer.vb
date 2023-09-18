@@ -147,6 +147,7 @@ Partial Class Working_Pro
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
         Me.PictureBox13 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox14 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -167,6 +168,7 @@ Partial Class Working_Pro
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label4
@@ -1158,7 +1160,7 @@ Partial Class Working_Pro
         Me.btn_desc_act.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_desc_act.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_desc_act.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_desc_act.Location = New System.Drawing.Point(573, 93)
+        Me.btn_desc_act.Location = New System.Drawing.Point(573, 92)
         Me.btn_desc_act.Name = "btn_desc_act"
         Me.btn_desc_act.Size = New System.Drawing.Size(245, 78)
         Me.btn_desc_act.TabIndex = 4626
@@ -1647,6 +1649,15 @@ Partial Class Working_Pro
         Me.PictureBox13.TabIndex = 4646
         Me.PictureBox13.TabStop = False
         '
+        'PictureBox14
+        '
+        Me.PictureBox14.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox14.Location = New System.Drawing.Point(693, 81)
+        Me.PictureBox14.Name = "PictureBox14"
+        Me.PictureBox14.Size = New System.Drawing.Size(100, 86)
+        Me.PictureBox14.TabIndex = 4647
+        Me.PictureBox14.TabStop = False
+        '
         'Working_Pro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1654,12 +1665,13 @@ Partial Class Working_Pro
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStart5
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.btn_desc_act)
+        Me.Controls.Add(Me.PictureBox14)
         Me.Controls.Add(Me.PictureBox13)
         Me.Controls.Add(Me.btn_closelot)
         Me.Controls.Add(Me.btn_setup)
         Me.Controls.Add(Me.btn_defect)
         Me.Controls.Add(Me.btn_ins_act)
-        Me.Controls.Add(Me.btn_desc_act)
         Me.Controls.Add(Me.PictureBox11)
         Me.Controls.Add(Me.PictureBox12)
         Me.Controls.Add(Me.btn_stop)
@@ -1789,6 +1801,7 @@ Partial Class Working_Pro
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1917,4 +1930,5 @@ Partial Class Working_Pro
     Friend WithEvents PictureBox11 As PictureBox
     Friend WithEvents PictureBox12 As PictureBox
     Friend WithEvents PictureBox13 As PictureBox
+    Friend WithEvents PictureBox14 As PictureBox
 End Class

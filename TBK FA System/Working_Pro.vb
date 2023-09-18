@@ -2830,4 +2830,8 @@ Public Class Working_Pro
             Return True
         End If
     End Function
+
+    Private Sub PictureBox14_Click(sender As Object, e As EventArgs) Handles PictureBox14.Click
+        show_detail_production.Show()
+    End Sub
 End Class
