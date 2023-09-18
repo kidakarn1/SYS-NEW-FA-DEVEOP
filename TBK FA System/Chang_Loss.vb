@@ -76,7 +76,7 @@ Public Class Chang_Loss
                     ' numm = numm + 1
                     ' End While
                     Loss_reg.ComboBox1.Visible = True
-                    Loss_reg.Label10.Visible = True
+                    'Loss_reg.Label10.Visible = True
                     Loss_reg.ComboBox1.SelectedIndex = 0
                     Loss_reg.Button4.Visible = True
                 End If
@@ -146,5 +146,13 @@ Public Class Chang_Loss
 
     Private Sub Chang_Loss_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ListView2.Items(0).Selected = True
+        Timer1.Start()
     End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label1.Text = TimeOfDay.ToString("H:mm:ss")
+        Label4.Text = DateTime.Now.ToString("D")
+    End Sub
+
+
 End Class

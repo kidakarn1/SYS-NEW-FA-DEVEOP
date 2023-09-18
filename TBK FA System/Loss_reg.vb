@@ -176,23 +176,23 @@ Public Class Loss_reg
 		Label2.Text = MainFrm.Label4.Text
 	End Sub
 
-	Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+    Private Sub Label6_Click(sender As Object, e As EventArgs)
 
-	End Sub
+    End Sub
 
-	Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+    Private Sub Label5_Click(sender As Object, e As EventArgs)
 
-	End Sub
+    End Sub
 
-	Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
 
-	End Sub
+    End Sub
 
-	Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
-	End Sub
+    End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    Private Sub Label1_Click(sender As Object, e As EventArgs)
 
     End Sub
 

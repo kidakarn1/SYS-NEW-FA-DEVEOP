@@ -144,4 +144,8 @@ Public Class Loss_reg_pass
     Private Sub Button4_Click_1(sender As Object, e As EventArgs)
         Shell("C:\Program Files (x86)\Default Company Name\Maintenance\Maintenance.exe")
     End Sub
+
+    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+
+    End Sub
 End Class
