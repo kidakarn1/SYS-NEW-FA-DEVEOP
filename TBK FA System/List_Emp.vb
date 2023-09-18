@@ -80,6 +80,7 @@ Public Class List_Emp
         Dim tclient As New WebClient
         Dim i As Integer = ListView1.Items.Count
         lb_count_emp.Text = i
+        MainFrm.LB_Number_worker.Text = lb_count_emp.Text
         If i > 0 Then
             flag_emp.Text = "1"
         ElseIf i = 0 Then
