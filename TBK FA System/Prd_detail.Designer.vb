@@ -53,6 +53,7 @@ Partial Class Prd_detail
         Me.QTY_NG = New System.Windows.Forms.Label()
         Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.LB_PLAN_DATE = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -408,6 +409,18 @@ Partial Class Prd_detail
         Me.Label4.TabIndex = 4632
         Me.Label4.Text = "Label4"
         '
+        'LB_PLAN_DATE
+        '
+        Me.LB_PLAN_DATE.AutoSize = True
+        Me.LB_PLAN_DATE.BackColor = System.Drawing.Color.Transparent
+        Me.LB_PLAN_DATE.Font = New System.Drawing.Font("Catamaran", 22.0!, System.Drawing.FontStyle.Bold)
+        Me.LB_PLAN_DATE.ForeColor = System.Drawing.Color.White
+        Me.LB_PLAN_DATE.Location = New System.Drawing.Point(445, 237)
+        Me.LB_PLAN_DATE.Name = "LB_PLAN_DATE"
+        Me.LB_PLAN_DATE.Size = New System.Drawing.Size(207, 33)
+        Me.LB_PLAN_DATE.TabIndex = 4633
+        Me.LB_PLAN_DATE.Text = "YYYY-MM-DD"
+        '
         'Prd_detail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -416,6 +429,7 @@ Partial Class Prd_detail
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionDetail
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
+        Me.Controls.Add(Me.LB_PLAN_DATE)
         Me.Controls.Add(Me.lb_item_name)
         Me.Controls.Add(Me.lb_wi)
         Me.Controls.Add(Me.lb_item_cd)
@@ -482,4 +496,5 @@ Partial Class Prd_detail
     Friend WithEvents QTY_NG As Label
     Friend WithEvents Timer3 As Timer
     Friend WithEvents Label4 As Label
+    Friend WithEvents LB_PLAN_DATE As Label
 End Class

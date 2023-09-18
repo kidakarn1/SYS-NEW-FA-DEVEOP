@@ -112,7 +112,7 @@ Public Class Line_conf
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
         Dim PD As String = ""
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_COUNTER")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_COUNTER")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -127,7 +127,7 @@ Public Class Line_conf
     End Sub
     Public Function load_data_defeult_master_server(line_cd As String)
         Dim api = New api()
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -145,7 +145,7 @@ Public Class Line_conf
     End Function
     Public Function load_defeult_master_server(line_cd As String)
         Dim api = New api()
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
         Return result_data
     End Function
     Private Sub Load_scanner()
@@ -155,7 +155,7 @@ Public Class Line_conf
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
         Dim PD = BF.Get_default_pd_detail_PD("scanner_port")
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_SCANNER")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_SCANNER")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -175,7 +175,7 @@ Public Class Line_conf
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
         Dim PD = BF.Get_default_pd_detail_PD("pd")
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_PD")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_PD")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -192,7 +192,7 @@ Public Class Line_conf
         ComboBox2.Items.Clear()
         Dim api = New api()
         Dim BF = New Backoffice_model()
-        Dim result_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE?PD=" & ComboBox3.Text)
+        Dim result_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE?PD=" & ComboBox3.Text)
         Dim PD As String = "NO_DATA"
         Dim I_PD As Integer = 0
         Dim check_I_LINE As Integer = 0
@@ -232,7 +232,7 @@ Public Class Line_conf
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
         Dim PD As String = ""
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_COUNTER")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_COUNTER")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -249,7 +249,7 @@ Public Class Line_conf
         printer.Items.Clear()
         Dim api = New api()
         Dim BF = New Backoffice_model()
-        Dim result_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_PRINTER")
+        Dim result_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_PRINTER")
         Dim PD As String = "NO_DATA"
         Dim LINE_CD As String = "NO_DATA"
         Dim I_PD As Integer = 0
@@ -275,7 +275,7 @@ Public Class Line_conf
         Dim check_I_PD As Integer = 0
         Dim PD As String = ""
         Dim ID As Integer = 0
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_CAT_COUNTER")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_CAT_COUNTER")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -295,7 +295,7 @@ Public Class Line_conf
         Dim api = New api()
         Dim check_cat_dio As Integer = 0
         Dim i = 0
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_DIO_PORT?device_name=" & ComboBox_master_device.Text)
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DIO_PORT?device_name=" & ComboBox_master_device.Text)
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2

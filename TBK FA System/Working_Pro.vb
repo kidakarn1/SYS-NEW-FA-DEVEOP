@@ -17,6 +17,7 @@ Imports BarcodeLib.Barcode
 Imports System.Net
 Imports System.Web.Script.Serialization
 Public Class Working_Pro
+    Public counterNewDIO
     Dim QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
     Dim start_flg As Integer = 0
     Dim comp_flg As Integer = 0
@@ -53,6 +54,7 @@ Public Class Working_Pro
     Public Shared seqNo As String = ""
     Public Shared model As String = ""
     Public Shared pwi_id As String = ""
+    Public Shared rsWindow
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         'Label44.Text = TimeOfDay.ToString("H:mm:ss")
         Label17.Text = TimeOfDay.ToString("H:mm:ss")
@@ -77,6 +79,10 @@ Public Class Working_Pro
         End If
     End Function
     Private Sub Working_Pro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If CheckOs() Then
+            counterNewDIO = New CheckWindow
+            counterNewDIO.Per_CheckCounter()
+        End If
         PictureBox12.Visible = False
         PictureBox10.Visible = False
         PictureBox11.Visible = False
@@ -175,16 +181,11 @@ Public Class Working_Pro
             Next BitNo
             Call DioGetErrorString(Ret, szError)
         Else
-            'Try
-            'digitalReadTask_new_dio.DIChannels.CreateChannel(
-            '      "Dev1/port0",
-            '      "port0",
-            'ChannelLineGrouping.OneChannelForAllLines)
-            'reader_new_dio = New DigitalSingleChannelReader(digitalReadTask_new_dio.Stream)
-            'Timer_new_dio.Start()
-            'Catch ex As Exception
-            'MsgBox("Please Check USB DIO")
-            'End Try
+            If CheckOs() Then
+                counterNewDIO.count_NIMAX()
+            Else
+                MsgBox("Not Support Counter NI MAX because  OS window 7.")
+            End If
         End If
         Dim date_now As String = DateTime.Now.ToString("dd-MM-yyyy")
         Dim date_now_date As Date = DateTime.Now.ToString("dd-MM-yyyy")
@@ -2707,20 +2708,22 @@ Public Class Working_Pro
         End If
     End Sub
     Private Sub Tiemr_new_dio_Tick(sender As Object, e As EventArgs) Handles Timer_new_dio.Tick
-        ' Try
-        ' data_new_dio = reader_new_dio.ReadSingleSamplePortUInt32()
-        ' If data_new_dio <> "255" Then
-        ' If check_bull = 0 Then
-        ' Timer3.Enabled = True
-        ' If start_flg = 1 Then
-        ' counter_data_new_dio()
-        ' End If
-        ' End If
-        ' End If
-        ' Catch ex As Exception
-        '   MsgBox("Please Check DIO")
-        '  End Try
-
+        If rsWindow Then
+            Try
+                'ReadSingleSamplePortUInt32
+                data_new_dio = counterNewDIO.reader_new_dio.ReadSingleSamplePortUInt32
+                If data_new_dio <> "255" Then
+                    If check_bull = 0 Then
+                        Timer3.Enabled = True
+                        If start_flg = 1 Then
+                            counter_data_new_dio()
+                        End If
+                    End If
+                End If
+            Catch ex As Exception
+                MsgBox("Please Check DIO")
+            End Try
+        End If
     End Sub
 
     Private Sub TimerCountBT_Tick(sender As Object, e As EventArgs) Handles TimerCountBT.Tick
@@ -2808,12 +2811,23 @@ Public Class Working_Pro
     Private Sub CircularProgressBar2_Click(sender As Object, e As EventArgs) Handles CircularProgressBar2.Click
 
     End Sub
-
     Private Sub Label23_Click(sender As Object, e As EventArgs) Handles Label23.Click
 
     End Sub
-
     Private Sub PictureBox10_Click(sender As Object, e As EventArgs) Handles PictureBox10.Click
 
     End Sub
+    Private Sub PictureBox13_Click(sender As Object, e As EventArgs) Handles PictureBox13.Click
+        Dim work = New Show_Worker
+        work.Show()
+    End Sub
+
+    Public Shared Function CheckOs()
+        Dim arr_os = My.Computer.Info.OSFullName.Split(" ")
+        If arr_os(2).ToString = "7" Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
 End Class

@@ -394,9 +394,9 @@ Partial Class MainFrm
         Me.menu4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.menu4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.menu4.ForeColor = System.Drawing.Color.White
-        Me.menu4.Location = New System.Drawing.Point(585, 171)
+        Me.menu4.Location = New System.Drawing.Point(585, 160)
         Me.menu4.Name = "menu4"
-        Me.menu4.Size = New System.Drawing.Size(201, 391)
+        Me.menu4.Size = New System.Drawing.Size(201, 403)
         Me.menu4.TabIndex = 14
         Me.menu4.UseVisualStyleBackColor = False
         '

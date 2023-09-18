@@ -293,6 +293,12 @@
     <Compile Include="Chang_sh.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CheckWindow.Designer.vb">
+      <DependentUpon>CheckWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CheckWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="closeLotsummary.Designer.vb">
       <DependentUpon>closeLotsummary.vb</DependentUpon>
     </Compile>
@@ -910,6 +916,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Chang_sh.resx">
       <DependentUpon>Chang_sh.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckWindow.resx">
+      <DependentUpon>CheckWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="closeLotsummary.resx">
       <DependentUpon>closeLotsummary.vb</DependentUpon>

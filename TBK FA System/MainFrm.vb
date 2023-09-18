@@ -250,11 +250,12 @@ Public Class MainFrm
                         Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
                         Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
                         Prd_detail.lb_item_cd.Text = item("ITEM_CD").ToString()
-                        Prd_detail.lb_item_name.Text = item("ITEM_NAME").ToString()
+                        Prd_detail.lb_item_name.Text = CStr(item("ITEM_NAME").ToString())
                         Prd_detail.lb_model.Text = item("MODEL").ToString()
                         Prd_detail.lb_plan_qty.Text = item("QTY").ToString()
                         Prd_detail.lb_remain_qty.Text = (item("QTY").ToString() - item("prd_qty_sum").ToString())
                         Prd_detail.lb_wi.Text = item("WI").ToString()
+                        Prd_detail.LB_PLAN_DATE.Text = item("WORK_ODR_DLV_DATE").ToString().Substring(0, 10)
                         Prd_detail.Show()
                     Next
                 Else

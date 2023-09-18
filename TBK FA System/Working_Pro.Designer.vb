@@ -146,6 +146,7 @@ Partial Class Working_Pro
         Me.Label8 = New System.Windows.Forms.Label()
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox13 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -165,6 +166,7 @@ Partial Class Working_Pro
         Me.Panel3.SuspendLayout()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label4
@@ -1636,6 +1638,15 @@ Partial Class Working_Pro
         Me.PictureBox12.TabIndex = 4645
         Me.PictureBox12.TabStop = False
         '
+        'PictureBox13
+        '
+        Me.PictureBox13.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox13.Location = New System.Drawing.Point(494, 4)
+        Me.PictureBox13.Name = "PictureBox13"
+        Me.PictureBox13.Size = New System.Drawing.Size(113, 72)
+        Me.PictureBox13.TabIndex = 4646
+        Me.PictureBox13.TabStop = False
+        '
         'Working_Pro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1643,6 +1654,7 @@ Partial Class Working_Pro
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStart5
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.PictureBox13)
         Me.Controls.Add(Me.btn_closelot)
         Me.Controls.Add(Me.btn_setup)
         Me.Controls.Add(Me.btn_defect)
@@ -1776,6 +1788,7 @@ Partial Class Working_Pro
         Me.Panel3.ResumeLayout(False)
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1903,4 +1916,5 @@ Partial Class Working_Pro
     Public WithEvents Label18 As Label
     Friend WithEvents PictureBox11 As PictureBox
     Friend WithEvents PictureBox12 As PictureBox
+    Friend WithEvents PictureBox13 As PictureBox
 End Class
