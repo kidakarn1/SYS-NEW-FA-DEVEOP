@@ -796,6 +796,12 @@
     <Compile Include="Set_print_tag.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="show_detail_production.Designer.vb">
+      <DependentUpon>show_detail_production.vb</DependentUpon>
+    </Compile>
+    <Compile Include="show_detail_production.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="show_information.Designer.vb">
       <DependentUpon>show_information.vb</DependentUpon>
     </Compile>
@@ -1162,6 +1168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Set_print_tag.resx">
       <DependentUpon>Set_print_tag.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="show_detail_production.resx">
+      <DependentUpon>show_detail_production.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="show_information.resx">
       <DependentUpon>show_information.vb</DependentUpon>
