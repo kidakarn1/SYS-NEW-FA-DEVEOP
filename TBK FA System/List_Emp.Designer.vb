@@ -38,6 +38,10 @@ Partial Class List_Emp
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.pbUp = New System.Windows.Forms.PictureBox()
+        Me.pb_down = New System.Windows.Forms.PictureBox()
+        CType(Me.pbUp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_down, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ListView1
@@ -215,6 +219,24 @@ Partial Class List_Emp
         Me.Label1.TabIndex = 4632
         Me.Label1.Text = "Label1"
         '
+        'pbUp
+        '
+        Me.pbUp.BackColor = System.Drawing.Color.Transparent
+        Me.pbUp.Location = New System.Drawing.Point(553, 162)
+        Me.pbUp.Name = "pbUp"
+        Me.pbUp.Size = New System.Drawing.Size(75, 201)
+        Me.pbUp.TabIndex = 4633
+        Me.pbUp.TabStop = False
+        '
+        'pb_down
+        '
+        Me.pb_down.BackColor = System.Drawing.Color.Transparent
+        Me.pb_down.Location = New System.Drawing.Point(553, 367)
+        Me.pb_down.Name = "pb_down"
+        Me.pb_down.Size = New System.Drawing.Size(76, 201)
+        Me.pb_down.TabIndex = 4634
+        Me.pb_down.TabStop = False
+        '
         'List_Emp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -223,6 +245,8 @@ Partial Class List_Emp
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(14, Byte), Integer))
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.manageEmp2
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.pb_down)
+        Me.Controls.Add(Me.pbUp)
         Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label3)
@@ -239,6 +263,8 @@ Partial Class List_Emp
         Me.Name = "List_Emp"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ำ"
+        CType(Me.pbUp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_down, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -259,4 +285,6 @@ Partial Class List_Emp
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents ListView1 As ListView
+    Friend WithEvents pbUp As PictureBox
+    Friend WithEvents pb_down As PictureBox
 End Class
