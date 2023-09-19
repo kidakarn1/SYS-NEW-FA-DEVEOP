@@ -54,7 +54,9 @@ Partial Class Prd_detail
         Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.Label4 = New System.Windows.Forms.Label()
         Me.LB_PLAN_DATE = New System.Windows.Forms.Label()
+        Me.LB_ShowWorker = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LB_ShowWorker, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
@@ -147,7 +149,7 @@ Partial Class Prd_detail
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Catamaran", 15.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(540, 17)
+        Me.Label2.Location = New System.Drawing.Point(539, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(23, 22)
         Me.Label2.TabIndex = 22
@@ -421,6 +423,15 @@ Partial Class Prd_detail
         Me.LB_PLAN_DATE.TabIndex = 4633
         Me.LB_PLAN_DATE.Text = "YYYY-MM-DD"
         '
+        'LB_ShowWorker
+        '
+        Me.LB_ShowWorker.BackColor = System.Drawing.Color.Transparent
+        Me.LB_ShowWorker.Location = New System.Drawing.Point(475, 12)
+        Me.LB_ShowWorker.Name = "LB_ShowWorker"
+        Me.LB_ShowWorker.Size = New System.Drawing.Size(89, 62)
+        Me.LB_ShowWorker.TabIndex = 4634
+        Me.LB_ShowWorker.TabStop = False
+        '
         'Prd_detail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -429,12 +440,13 @@ Partial Class Prd_detail
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionDetail
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.LB_ShowWorker)
         Me.Controls.Add(Me.LB_PLAN_DATE)
         Me.Controls.Add(Me.lb_item_name)
         Me.Controls.Add(Me.lb_wi)
         Me.Controls.Add(Me.lb_item_cd)
         Me.Controls.Add(Me.lb_plan_qty)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lb_model)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lb_remain_qty)
@@ -462,6 +474,7 @@ Partial Class Prd_detail
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Prd_detail"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LB_ShowWorker, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -497,4 +510,5 @@ Partial Class Prd_detail
     Friend WithEvents Timer3 As Timer
     Friend WithEvents Label4 As Label
     Friend WithEvents LB_PLAN_DATE As Label
+    Friend WithEvents LB_ShowWorker As PictureBox
 End Class
