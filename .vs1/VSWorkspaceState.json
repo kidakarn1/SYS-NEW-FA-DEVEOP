@@ -1,14 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\.vs1",
-    "\\.vs1\\TBK FA System",
-    "\\.vs1\\TBK FA System\\lut",
-    "\\.vs1\\TBK FA System\\lut\\13796",
-    "\\.vs1\\TBK FA System\\lut\\13796\\0",
-    "\\.vs1\\TBK FA System\\lut\\13796\\1",
     "\\TBK FA System"
   ],
-  "SelectedNode": "\\TBK FA System\\modelDefect.vb",
+  "SelectedNode": "\\TBK FA System\\Backoffice_model.vb",
   "PreviewInSolutionExplorer": false
 }
