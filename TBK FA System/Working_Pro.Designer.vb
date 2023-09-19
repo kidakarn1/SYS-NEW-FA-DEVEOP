@@ -1160,7 +1160,7 @@ Partial Class Working_Pro
         Me.btn_desc_act.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_desc_act.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_desc_act.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_desc_act.Location = New System.Drawing.Point(573, 92)
+        Me.btn_desc_act.Location = New System.Drawing.Point(575, 93)
         Me.btn_desc_act.Name = "btn_desc_act"
         Me.btn_desc_act.Size = New System.Drawing.Size(245, 78)
         Me.btn_desc_act.TabIndex = 4626
@@ -1381,7 +1381,7 @@ Partial Class Working_Pro
         Me.btn_setup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_setup.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_setup.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_setup.Location = New System.Drawing.Point(571, 258)
+        Me.btn_setup.Location = New System.Drawing.Point(572, 258)
         Me.btn_setup.Name = "btn_setup"
         Me.btn_setup.Size = New System.Drawing.Size(245, 78)
         Me.btn_setup.TabIndex = 4502

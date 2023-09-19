@@ -2832,6 +2832,7 @@ Public Class Working_Pro
     End Function
 
     Private Sub PictureBox14_Click(sender As Object, e As EventArgs) Handles PictureBox14.Click
-        show_detail_production.Show()
+        Dim showD = New show_detail_production
+        showD.show
     End Sub
 End Class
