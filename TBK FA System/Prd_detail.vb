@@ -275,9 +275,4 @@ Public Class Prd_detail
 	Private Sub lb_seq_Click(sender As Object, e As EventArgs) Handles lb_seq.Click
 
 	End Sub
-
-    Private Sub LB_ShowWorker_Click(sender As Object, e As EventArgs) Handles LB_ShowWorker.Click
-        Dim showWork = New Show_Worker
-        showWork.show
-    End Sub
 End Class
