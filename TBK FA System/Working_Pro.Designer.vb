@@ -1050,10 +1050,10 @@ Partial Class Working_Pro
         Me.LB_COUNTER_SHIP.BackColor = System.Drawing.Color.Transparent
         Me.LB_COUNTER_SHIP.Font = New System.Drawing.Font("Catamaran", 35.0!, System.Drawing.FontStyle.Bold)
         Me.LB_COUNTER_SHIP.ForeColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(22, Byte), Integer))
-        Me.LB_COUNTER_SHIP.Location = New System.Drawing.Point(326, 294)
+        Me.LB_COUNTER_SHIP.Location = New System.Drawing.Point(387, 294)
         Me.LB_COUNTER_SHIP.Name = "LB_COUNTER_SHIP"
         Me.LB_COUNTER_SHIP.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.LB_COUNTER_SHIP.Size = New System.Drawing.Size(205, 50)
+        Me.LB_COUNTER_SHIP.Size = New System.Drawing.Size(93, 50)
         Me.LB_COUNTER_SHIP.TabIndex = 4631
         Me.LB_COUNTER_SHIP.Text = "0"
         Me.LB_COUNTER_SHIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1625,18 +1625,18 @@ Partial Class Working_Pro
         'PictureBox11
         '
         Me.PictureBox11.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStopped5
-        Me.PictureBox11.Location = New System.Drawing.Point(-4, 0)
+        Me.PictureBox11.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox11.Name = "PictureBox11"
-        Me.PictureBox11.Size = New System.Drawing.Size(804, 600)
+        Me.PictureBox11.Size = New System.Drawing.Size(800, 600)
         Me.PictureBox11.TabIndex = 4644
         Me.PictureBox11.TabStop = False
         '
         'PictureBox12
         '
         Me.PictureBox12.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStarting5
-        Me.PictureBox12.Location = New System.Drawing.Point(-4, 0)
+        Me.PictureBox12.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox12.Name = "PictureBox12"
-        Me.PictureBox12.Size = New System.Drawing.Size(804, 600)
+        Me.PictureBox12.Size = New System.Drawing.Size(800, 600)
         Me.PictureBox12.TabIndex = 4645
         Me.PictureBox12.TabStop = False
         '
