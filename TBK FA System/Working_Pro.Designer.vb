@@ -1341,7 +1341,7 @@ Partial Class Working_Pro
         Me.btn_closelot.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_closelot.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btn_closelot.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_closelot.Location = New System.Drawing.Point(548, 423)
+        Me.btn_closelot.Location = New System.Drawing.Point(549, 423)
         Me.btn_closelot.Name = "btn_closelot"
         Me.btn_closelot.Size = New System.Drawing.Size(248, 87)
         Me.btn_closelot.TabIndex = 4556
