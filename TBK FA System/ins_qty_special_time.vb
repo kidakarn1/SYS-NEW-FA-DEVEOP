@@ -359,7 +359,13 @@ Public Class ins_qty_special_time
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Try
 
-                    Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift
+                    'Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift เอาเวลา ของ Shift ตั้งต้นขึ้นมา
+                    '''' เป็นการเอาเวลาของการ กด ปุ่ม STarts มาแทน 
+                    Dim timeclickStart As Date = DateTime.Now.ToString()
+                    Dim DatetimeclickStart = timeclickStart.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                    DatetimeclickStart = DatetimeclickStart & " " & show_time_add_qty.Text & ":00"
+                    ''''end เป็นการเอาเวลาของการ กด ปุ่ม STarts มาแทน 
+                    Dim date_start_shift As Date = DatetimeclickStart
                     Dim date_end_shift As Date = Backoffice_model.date_time_end_check_date_paralell_linet
                     Dim date_start_time As String = date_start_shift.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
                     Dim convert_date_start_time As String = date_start_shift.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
@@ -439,24 +445,25 @@ Public Class ins_qty_special_time
                                         ins_qty.End_input_data_spc.Text = TextBox2.Text
                                         Backoffice_model.start_check_date_paralell_line = start_time
                                         Backoffice_model.end_check_date_paralell_line = end_time
+                                        ins_qty.pb_ok.Visible = True
                                         Me.Close()
                                     Else
                                         MsgBox("TIME DOUBLE.")
                                     End If
                                 Else
-                                    MsgBox("Please Check Time.")
+                                    MsgBox("Please Check Time")
                                 End If
                             Else
-                                MsgBox("Please Check Shift.")
+                                MsgBox("Please Check Shift")
                             End If
                         Else
-                            MsgBox("Please Check Shift.")
+                            MsgBox("Please Check Shift  Or Time Start.")
                         End If
                     Else
-                        MsgBox("Please Check time.")
+                        MsgBox("Please Check time")
                     End If
                 Catch ex As Exception
-                    MsgBox("Please check time.")
+                    MsgBox("Please check time ")
                 End Try
             Else
                 load_show.Show()
@@ -613,7 +620,9 @@ Public Class ins_qty_special_time
 
     Private Sub ins_qty_special_time_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift
-        show_time_add_qty.Text = date_start_shift.ToString("HH:mm", CultureInfo.InvariantCulture)
+        'show_time_add_qty.Text = date_start_shift.ToString("HH:mm", CultureInfo.InvariantCulture)
+        Dim timestart As Date = Working_Pro.Label16.Text
+        show_time_add_qty.Text = timestart.ToString("HH:mm", CultureInfo.InvariantCulture)
         chk_ins()
     End Sub
 End Class

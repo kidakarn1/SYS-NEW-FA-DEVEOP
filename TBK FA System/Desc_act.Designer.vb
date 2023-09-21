@@ -38,6 +38,7 @@ Partial Class Desc_act
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
+        Me.lbpartNo = New System.Windows.Forms.Label()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -278,6 +279,18 @@ Partial Class Desc_act
         Me.Button12.TabIndex = 50
         Me.Button12.UseVisualStyleBackColor = False
         '
+        'lbpartNo
+        '
+        Me.lbpartNo.AutoSize = True
+        Me.lbpartNo.BackColor = System.Drawing.Color.Transparent
+        Me.lbpartNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!)
+        Me.lbpartNo.ForeColor = System.Drawing.Color.White
+        Me.lbpartNo.Location = New System.Drawing.Point(169, 21)
+        Me.lbpartNo.Name = "lbpartNo"
+        Me.lbpartNo.Size = New System.Drawing.Size(306, 25)
+        Me.lbpartNo.TabIndex = 51
+        Me.lbpartNo.Text = "XXXXXXXXXXXXXXXXXXXXX"
+        '
         'Desc_act
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -285,6 +298,7 @@ Partial Class Desc_act
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.decreaseActualNumpad
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.lbpartNo)
         Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button10)
@@ -328,4 +342,5 @@ Partial Class Desc_act
     Friend WithEvents Button10 As Button
     Friend WithEvents Button11 As Button
     Friend WithEvents Button12 As Button
+    Friend WithEvents lbpartNo As Label
 End Class

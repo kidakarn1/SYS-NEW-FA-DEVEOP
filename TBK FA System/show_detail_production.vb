@@ -19,7 +19,7 @@
         LB_SNP.Text = Working_Pro.Label27.Text
         LB_SHIFT.Text = Working_Pro.Label14.Text
 
-        LB_START_TIME.Text = Working_Pro.st_time.Text
+        LB_START_TIME.Text = Working_Pro.Label16.Text
         LB_END_TIME.Text = Working_Pro.Label20.Text
 
         LB_STD_CT.Text = Working_Pro.Label38.Text

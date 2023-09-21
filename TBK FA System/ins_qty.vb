@@ -174,7 +174,7 @@ Public Class ins_qty
         Me.Close()
     End Sub
 
-    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles pb_ok.Click
         If Trim(TextBox1.Text) = "" Then
             MsgBox("Please check QTY.")
         Else
@@ -226,6 +226,7 @@ Public Class ins_qty
 
     Private Sub ins_qty_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         show_remain_qty.Text = CDbl(Val(Working_Pro.Label8.Text)) - CDbl(Val(Working_Pro.Label6.Text))
+        lbpartNo.Text = Working_Pro.Label3.Text
         Backoffice_model.start_check_date_paralell_line = ""
         Backoffice_model.end_check_date_paralell_line = ""
         TextBox1.Enabled = False

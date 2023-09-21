@@ -71,161 +71,161 @@ Public Class Desc_act
 		Dim tmp_qty_update As Integer = 0
 		Dim check_qty_frith = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
 		Dim tmp_del3 As Integer = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text))
-		If CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) = 0 Then
-			seq = CDbl(Val(Working_Pro.Label22.Text)) - 1
-		Else
-			seq = CDbl(Val(Working_Pro.Label22.Text))
-		End If
-		For number_seq As Integer = seq To 1 Step -1
-			Try
-				If My.Computer.Network.Ping("192.168.161.101") Then
-					reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
-				Else
-					reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
-				End If
-			Catch ex As Exception
-				reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
-			End Try
-			If App_qty_seq > 0 And check_qty_frith >= 0 Then 'เดินแผนไปแล้ว
-				' MsgBox("condition 01")
-				App_qty_seq = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
-				App_qty_ship = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) - want_del
-				If CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) = want_del Then
-					Working_Pro.LB_COUNTER_SEQ.Text = 0
-					App_qty_seq = 0
-					GoTo break_loop
-				End If
-				If App_qty_seq < 0 Then
-					Working_Pro.LB_COUNTER_SEQ.Text = 0
-					App_qty_seq = 0
-				End If
-				'End If
-			ElseIf App_qty_seq = 0 And App_qty_ship > 0 Then 'ยังไม่ได้เดินแผน แต่มี qty seq เก่าค้างอยู่
-				'MsgBox("condition 02")
-				While reader.read()
-					'    MsgBox("SEQ = " & number_seq & " : LOAD_QTY = " & reader("QTY_ACTUAL").ToString())
-					If reader("QTY_ACTUAL").ToString() <> "" Then
-						qty = reader("QTY_ACTUAL").ToString()
-					End If
-				End While
-				reader.close()
-				If qty > 0 Then
-					qty_update = want_del - qty
-					' App_qty_seq = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
-					' App_qty_ship = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) - want_del
-					tmp_qty_update = qty_update
-					want_del = qty_update
-					'    MsgBox("want_del = " & want_del)
-					'   MsgBox("App_qty_seq = " & App_qty_seq)
-					If qty_update > 0 Then
-						'  MsgBox("IF TOP")
-						If want_del > 0 Then
-							tmp_qty_update = 0
-						End If
-						Try
-							If My.Computer.Network.Ping("192.168.161.101") Then
-								tr_status = "1"
-								Dim update_qty_seq = Backoffice_model.update_qty_seq(Working_Pro.wi_no.Text, number_seq, tmp_qty_update)
-								update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, tmp_qty_update, tr_status)
-							Else
-								tr_status = "0"
-								Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, tmp_qty_update, tr_status)
-							End If
-						Catch ex As Exception
-							tr_status = "0"
-							Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, tmp_qty_update, tr_status)
-						End Try
-					End If
-					If qty_update <= 0 Then
-						' MsgBox("IF DOWN")
-						Try
-							If My.Computer.Network.Ping("192.168.161.101") Then
-								tr_status = "1"
-								Dim update_qty_seq = Backoffice_model.update_qty_seq(Working_Pro.wi_no.Text, number_seq, Math.Abs(qty_update))
-								update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, Math.Abs(qty_update), tr_status)
-							Else
-								tr_status = "0"
-								Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, Math.Abs(qty_update), tr_status)
-							End If
-						Catch ex As Exception
-							tr_status = "0"
-							Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, Math.Abs(qty_update), tr_status)
-						End Try
-						GoTo break_loop
-					End If
-				End If
-			ElseIf App_qty_seq > 0 And App_qty_ship > 0 Then
-				'  MsgBox("condition 03")
-				Dim temp_data_seq_3 As Integer = 0
-				temp_data_seq_3 = tmp_del3 'CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text))
-				'App_qty_ship = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) - want_del
-				If number_seq = Working_Pro.Label22.Text Then
-					want_del = want_del - temp_data_seq_3
-				End If
-				tmp_del3 = want_del
-				If App_qty_seq < 0 Then
-					Working_Pro.LB_COUNTER_SEQ.Text = 0
-					App_qty_seq = 0
-				End If
-				Try
-					If My.Computer.Network.Ping("192.168.161.101") Then
-						reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq - 1)
-					Else
-						reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq - 1)
-					End If
-				Catch ex As Exception
-					reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq - 1)
-				End Try
-				While reader.read()
-					' MsgBox("SEQ = " & number_seq - 1 & " : LOAD_QTY = " & reader("QTY_ACTUAL").ToString())
-					qty = reader("QTY_ACTUAL").ToString()
-				End While
-				reader.close()
-				If qty > 0 Then
-					'  MsgBox("reulst tmp_del3 = " & tmp_del3)
-					qty_update = tmp_del3 - qty
-					' MsgBox("reulst qty_update = " & qty_update)
-					' App_qty_seq = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
-					' App_qty_ship = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) - want_del
-					tmp_qty_update = qty_update
-					want_del = qty_update
-					If qty_update > 0 Then
-						' MsgBox("IF TOP3 ")
-						If tmp_del3 > 0 Then
-							tmp_qty_update = 0
-						End If
-						Try
-							If My.Computer.Network.Ping("192.168.161.101") Then
-								tr_status = "1"
-								Dim update_qty_seq = Backoffice_model.update_qty_seq(Working_Pro.wi_no.Text, number_seq - 1, tmp_qty_update)
-								update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, tmp_qty_update, tr_status)
-							Else
-								Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, tmp_qty_update, tr_status)
-							End If
-						Catch ex As Exception
-							Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, tmp_qty_update, tr_status)
-						End Try
-					End If
-					If qty_update <= 0 Then
-						' MsgBox("IF DOWN3 ")
-						Try
-							If My.Computer.Network.Ping("192.168.161.101") Then
-								tr_status = "1"
-								Dim update_qty_seq = Backoffice_model.update_qty_seq(Working_Pro.wi_no.Text, number_seq - 1, Math.Abs(qty_update))
-								update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, Math.Abs(qty_update), tr_status)
-							Else
-								tr_status = "0"
-								Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, Math.Abs(qty_update), tr_status)
-							End If
-						Catch ex As Exception
-							tr_status = "0"
-							Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, Math.Abs(qty_update), tr_status)
-						End Try
-						GoTo break_loop
-					End If
-				End If
-			End If
-		Next
+        If CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) = 0 Then
+            seq = CDbl(Val(Working_Pro.Label22.Text)) - 1
+        Else
+            seq = CDbl(Val(Working_Pro.Label22.Text))
+        End If
+        For number_seq As Integer = seq To 1 Step -1
+            Try
+                If My.Computer.Network.Ping("192.168.161.101") Then
+                    reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
+                Else
+                    reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
+                End If
+            Catch ex As Exception
+                reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
+            End Try
+            If App_qty_seq > 0 And check_qty_frith >= 0 Then 'เดินแผนไปแล้ว
+                ' MsgBox("condition 01")
+                App_qty_seq = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
+                App_qty_ship = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) - want_del
+                If CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) = want_del Then
+                    Working_Pro.LB_COUNTER_SEQ.Text = 0
+                    App_qty_seq = 0
+                    GoTo break_loop
+                End If
+                If App_qty_seq < 0 Then
+                    Working_Pro.LB_COUNTER_SEQ.Text = 0
+                    App_qty_seq = 0
+                End If
+                'End If
+            ElseIf App_qty_seq = 0 And App_qty_ship > 0 Then 'ยังไม่ได้เดินแผน แต่มี qty seq เก่าค้างอยู่
+                'MsgBox("condition 02")
+                While reader.read()
+                    '    MsgBox("SEQ = " & number_seq & " : LOAD_QTY = " & reader("QTY_ACTUAL").ToString())
+                    If reader("QTY_ACTUAL").ToString() <> "" Then
+                        qty = reader("QTY_ACTUAL").ToString()
+                    End If
+                End While
+                reader.close()
+                If qty > 0 Then
+                    qty_update = want_del - qty
+                    ' App_qty_seq = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
+                    ' App_qty_ship = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) - want_del
+                    tmp_qty_update = qty_update
+                    want_del = qty_update
+                    '    MsgBox("want_del = " & want_del)
+                    '   MsgBox("App_qty_seq = " & App_qty_seq)
+                    If qty_update > 0 Then
+                        '  MsgBox("IF TOP")
+                        If want_del > 0 Then
+                            tmp_qty_update = 0
+                        End If
+                        Try
+                            If My.Computer.Network.Ping("192.168.161.101") Then
+                                tr_status = "1"
+                                Dim update_qty_seq = Backoffice_model.update_qty_seq(Working_Pro.wi_no.Text, number_seq, tmp_qty_update)
+                                update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, tmp_qty_update, tr_status)
+                            Else
+                                tr_status = "0"
+                                Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, tmp_qty_update, tr_status)
+                            End If
+                        Catch ex As Exception
+                            tr_status = "0"
+                            Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, tmp_qty_update, tr_status)
+                        End Try
+                    End If
+                    If qty_update <= 0 Then
+                        ' MsgBox("IF DOWN")
+                        Try
+                            If My.Computer.Network.Ping("192.168.161.101") Then
+                                tr_status = "1"
+                                Dim update_qty_seq = Backoffice_model.update_qty_seq(Working_Pro.wi_no.Text, number_seq, Math.Abs(qty_update))
+                                update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, Math.Abs(qty_update), tr_status)
+                            Else
+                                tr_status = "0"
+                                Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, Math.Abs(qty_update), tr_status)
+                            End If
+                        Catch ex As Exception
+                            tr_status = "0"
+                            Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq, Math.Abs(qty_update), tr_status)
+                        End Try
+                        GoTo break_loop
+                    End If
+                End If
+            ElseIf App_qty_seq > 0 And App_qty_ship > 0 Then
+                '  MsgBox("condition 03")
+                Dim temp_data_seq_3 As Integer = 0
+                temp_data_seq_3 = tmp_del3 'CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text))
+                'App_qty_ship = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) - want_del
+                If number_seq = Working_Pro.Label22.Text Then
+                    want_del = want_del - temp_data_seq_3
+                End If
+                tmp_del3 = want_del
+                If App_qty_seq < 0 Then
+                    Working_Pro.LB_COUNTER_SEQ.Text = 0
+                    App_qty_seq = 0
+                End If
+                Try
+                    If My.Computer.Network.Ping("192.168.161.101") Then
+                        reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq - 1)
+                    Else
+                        reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq - 1)
+                    End If
+                Catch ex As Exception
+                    reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq - 1)
+                End Try
+                While reader.read()
+                    ' MsgBox("SEQ = " & number_seq - 1 & " : LOAD_QTY = " & reader("QTY_ACTUAL").ToString())
+                    qty = reader("QTY_ACTUAL").ToString()
+                End While
+                reader.close()
+                If qty > 0 Then
+                    '  MsgBox("reulst tmp_del3 = " & tmp_del3)
+                    qty_update = tmp_del3 - qty
+                    ' MsgBox("reulst qty_update = " & qty_update)
+                    ' App_qty_seq = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
+                    ' App_qty_ship = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) - want_del
+                    tmp_qty_update = qty_update
+                    want_del = qty_update
+                    If qty_update > 0 Then
+                        ' MsgBox("IF TOP3 ")
+                        If tmp_del3 > 0 Then
+                            tmp_qty_update = 0
+                        End If
+                        Try
+                            If My.Computer.Network.Ping("192.168.161.101") Then
+                                tr_status = "1"
+                                Dim update_qty_seq = Backoffice_model.update_qty_seq(Working_Pro.wi_no.Text, number_seq - 1, tmp_qty_update)
+                                update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, tmp_qty_update, tr_status)
+                            Else
+                                Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, tmp_qty_update, tr_status)
+                            End If
+                        Catch ex As Exception
+                            Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, tmp_qty_update, tr_status)
+                        End Try
+                    End If
+                    If qty_update <= 0 Then
+                        ' MsgBox("IF DOWN3 ")
+                        Try
+                            If My.Computer.Network.Ping("192.168.161.101") Then
+                                tr_status = "1"
+                                Dim update_qty_seq = Backoffice_model.update_qty_seq(Working_Pro.wi_no.Text, number_seq - 1, Math.Abs(qty_update))
+                                update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, Math.Abs(qty_update), tr_status)
+                            Else
+                                tr_status = "0"
+                                Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, Math.Abs(qty_update), tr_status)
+                            End If
+                        Catch ex As Exception
+                            tr_status = "0"
+                            Dim update_qty_seq = Backoffice_model.update_qty_seq_sqlite(Working_Pro.wi_no.Text, number_seq - 1, Math.Abs(qty_update), tr_status)
+                        End Try
+                        GoTo break_loop
+                    End If
+                End If
+            End If
+        Next
 break_loop:
 	End Sub
 	Public Function set_data_del()
@@ -248,11 +248,11 @@ break_loop:
             If CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) > 0 Then
 				Working_Pro._Edit_Up_0.Text = Working_Pro.LB_COUNTER_SHIP.Text
 				If CDbl(Val(TextBox1.Text)) <= CDbl(Val(Label1.Text)) Then
-					cal_qty()
-					Working_Pro.LB_COUNTER_SHIP.Text -= inp_qty
-					Working_Pro.LB_COUNTER_SEQ.Text -= inp_qty
-					Dim yearNow As Integer = DateTime.Now.ToString("yyyy")
-					Dim monthNow As Integer = DateTime.Now.ToString("MM")
+                    cal_qty()
+                    Working_Pro.LB_COUNTER_SHIP.Text -= inp_qty
+                    Working_Pro.LB_COUNTER_SEQ.Text -= inp_qty
+                    Dim yearNow As Integer = DateTime.Now.ToString("yyyy")
+                    Dim monthNow As Integer = DateTime.Now.ToString("MM")
 					Dim dayNow As Integer = DateTime.Now.ToString("dd")
 					Dim hourNow As Integer = DateTime.Now.ToString("HH")
 					Dim minNow As Integer = DateTime.Now.ToString("mm")
@@ -302,26 +302,26 @@ break_loop:
 					'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, tr_status)
 					Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
 					Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-					Try
-						If Working_Pro.LB_COUNTER_SEQ.Text.Substring(0, 1) = "-" Then
-							Working_Pro.LB_COUNTER_SEQ.Text = 0
-						End If
-						If My.Computer.Network.Ping("192.168.161.101") Then
-							tr_status = "1"
-                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.Label18.Text)
-                            Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, start_time, end_time, use_timee, number_qty, Working_Pro.Label18.Text)
+                    Try
+                        If Working_Pro.LB_COUNTER_SEQ.Text.Substring(0, 1) = "-" Then
+                            Working_Pro.LB_COUNTER_SEQ.Text = 0
+                        End If
+                        If My.Computer.Network.Ping("192.168.161.101") Then
+                            tr_status = "1"
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.pwi_id)
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, start_time, end_time, use_timee, number_qty, Working_Pro.pwi_id)
                             'MsgBox("Ping completed")
                         Else
-							tr_status = "0"
-                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.Label18.Text)
+                            tr_status = "0"
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.pwi_id)
                             'MsgBox("Ping incompleted")
                         End If
-					Catch ex As Exception
-						tr_status = "0"
-                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.Label18.Text)
+                    Catch ex As Exception
+                        tr_status = "0"
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.pwi_id)
                     End Try
-					Working_Pro.Enabled = True
-					Me.Close()
+                    Working_Pro.Enabled = True
+                    Me.Close()
 				Else
 					MsgBox("Please check QTY OF SHIFT")
 				End If
@@ -424,11 +424,12 @@ break_loop:
 		' End Try
 		'End If
 	End Sub
-	Private Sub Desc_act_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		TextBox1.Enabled = False
-	End Sub
+    Private Sub Desc_act_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lbpartNo.Text = Working_Pro.Label3.Text
+        TextBox1.Enabled = False
+    End Sub
 
-	Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
 
 	End Sub
 

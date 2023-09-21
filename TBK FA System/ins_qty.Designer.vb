@@ -38,7 +38,7 @@ Partial Class ins_qty
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.pb_ok = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.SPECIAL_MENU = New System.Windows.Forms.Button()
@@ -48,7 +48,8 @@ Partial Class ins_qty
         Me.Label3 = New System.Windows.Forms.Label()
         Me.show_remain_qty = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.lbpartNo = New System.Windows.Forms.Label()
+        CType(Me.pb_ok, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -270,15 +271,16 @@ Partial Class ins_qty
         Me.Button14.TabIndex = 15
         Me.Button14.UseVisualStyleBackColor = False
         '
-        'PictureBox3
+        'pb_ok
         '
-        Me.PictureBox3.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox3.Location = New System.Drawing.Point(596, 511)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(208, 80)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox3.TabIndex = 35
-        Me.PictureBox3.TabStop = False
+        Me.pb_ok.BackColor = System.Drawing.Color.Transparent
+        Me.pb_ok.Location = New System.Drawing.Point(596, 511)
+        Me.pb_ok.Name = "pb_ok"
+        Me.pb_ok.Size = New System.Drawing.Size(208, 80)
+        Me.pb_ok.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pb_ok.TabIndex = 35
+        Me.pb_ok.TabStop = False
+        Me.pb_ok.Visible = False
         '
         'PictureBox2
         '
@@ -381,6 +383,18 @@ Partial Class ins_qty
         Me.PictureBox1.TabIndex = 46
         Me.PictureBox1.TabStop = False
         '
+        'lbpartNo
+        '
+        Me.lbpartNo.AutoSize = True
+        Me.lbpartNo.BackColor = System.Drawing.Color.Transparent
+        Me.lbpartNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!)
+        Me.lbpartNo.ForeColor = System.Drawing.Color.White
+        Me.lbpartNo.Location = New System.Drawing.Point(176, 21)
+        Me.lbpartNo.Name = "lbpartNo"
+        Me.lbpartNo.Size = New System.Drawing.Size(306, 25)
+        Me.lbpartNo.TabIndex = 52
+        Me.lbpartNo.Text = "XXXXXXXXXXXXXXXXXXXXX"
+        '
         'ins_qty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -388,6 +402,7 @@ Partial Class ins_qty
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.addActualNumpadspaissue
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.lbpartNo)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.show_remain_qty)
         Me.Controls.Add(Me.Label3)
@@ -395,7 +410,7 @@ Partial Class ins_qty
         Me.Controls.Add(Me.End_input_data_spc)
         Me.Controls.Add(Me.Start_input_data_spc)
         Me.Controls.Add(Me.SPECIAL_MENU)
-        Me.Controls.Add(Me.PictureBox3)
+        Me.Controls.Add(Me.pb_ok)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Button14)
         Me.Controls.Add(Me.Button13)
@@ -416,7 +431,7 @@ Partial Class ins_qty
         Me.Name = "ins_qty"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ins_qty"
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_ok, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -438,7 +453,7 @@ Partial Class ins_qty
     Friend WithEvents Button12 As Button
     Friend WithEvents Button13 As Button
     Friend WithEvents Button14 As Button
-    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents pb_ok As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents Timer1 As Timer
     Friend WithEvents SPECIAL_MENU As Button
@@ -448,4 +463,5 @@ Partial Class ins_qty
     Friend WithEvents Label3 As Label
     Friend WithEvents show_remain_qty As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents lbpartNo As Label
 End Class
