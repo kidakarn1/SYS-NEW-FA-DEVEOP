@@ -1,5 +1,6 @@
 ﻿Public Class show_detail_production
     Private Sub show_detail_production_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Location = New Point(7, 78)
         Dim plan_seq As String
         Dim num_char_seq As Integer
         num_char_seq = Working_Pro.Label22.Text.Length

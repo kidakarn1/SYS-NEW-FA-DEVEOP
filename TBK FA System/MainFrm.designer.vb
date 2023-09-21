@@ -80,11 +80,11 @@ Partial Class MainFrm
         '
         Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.Color.Transparent
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Font = New System.Drawing.Font("Catamaran", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(624, 136)
+        Me.Label9.Location = New System.Drawing.Point(624, 137)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(181, 20)
+        Me.Label9.Size = New System.Drawing.Size(174, 19)
         Me.Label9.TabIndex = 23
         Me.Label9.Text = "FA SYSTEM V 1.7.4 "
         '
@@ -334,11 +334,11 @@ Partial Class MainFrm
         '
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 23.0!, System.Drawing.FontStyle.Bold)
+        Me.Label6.Font = New System.Drawing.Font("Catamaran", 23.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(223, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(236, 19)
+        Me.Label6.Location = New System.Drawing.Point(236, 20)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(60, 35)
+        Me.Label6.Size = New System.Drawing.Size(60, 34)
         Me.Label6.TabIndex = 25
         Me.Label6.Text = "PD"
         '
@@ -435,11 +435,11 @@ Partial Class MainFrm
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 25.0!, System.Drawing.FontStyle.Bold)
+        Me.Label2.Font = New System.Drawing.Font("Catamaran", 24.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(244, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(9, 98)
+        Me.Label2.Location = New System.Drawing.Point(9, 104)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(181, 39)
+        Me.Label2.Size = New System.Drawing.Size(163, 35)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "XX:XX:XX"
         '
@@ -457,7 +457,7 @@ Partial Class MainFrm
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.PictureBox1.InitialImage = CType(resources.GetObject("PictureBox1.InitialImage"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(657, 6)
+        Me.PictureBox1.Location = New System.Drawing.Point(657, 7)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(123, 122)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -468,11 +468,11 @@ Partial Class MainFrm
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 77.74999!, System.Drawing.FontStyle.Bold)
+        Me.Label4.Font = New System.Drawing.Font("Catamaran", 77.99999!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(236, Byte), Integer))
         Me.Label4.Location = New System.Drawing.Point(218, 37)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(400, 118)
+        Me.Label4.Size = New System.Drawing.Size(362, 110)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "XXXXX"
         '
@@ -481,11 +481,11 @@ Partial Class MainFrm
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Arial Black", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.Label3.Font = New System.Drawing.Font("Catamaran", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(223, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(13, 136)
+        Me.Label3.Location = New System.Drawing.Point(13, 137)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(46, 15)
+        Me.Label3.Size = New System.Drawing.Size(62, 17)
         Me.Label3.TabIndex = 4631
         Me.Label3.Text = "Label3"
         '
@@ -493,11 +493,11 @@ Partial Class MainFrm
         '
         Me.LB_Number_worker.AutoSize = True
         Me.LB_Number_worker.BackColor = System.Drawing.Color.Transparent
-        Me.LB_Number_worker.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.5!, System.Drawing.FontStyle.Bold)
+        Me.LB_Number_worker.Font = New System.Drawing.Font("Catamaran", 11.0!, System.Drawing.FontStyle.Bold)
         Me.LB_Number_worker.ForeColor = System.Drawing.Color.White
-        Me.LB_Number_worker.Location = New System.Drawing.Point(1, 1)
+        Me.LB_Number_worker.Location = New System.Drawing.Point(1, 0)
         Me.LB_Number_worker.Name = "LB_Number_worker"
-        Me.LB_Number_worker.Size = New System.Drawing.Size(15, 15)
+        Me.LB_Number_worker.Size = New System.Drawing.Size(18, 17)
         Me.LB_Number_worker.TabIndex = 4632
         Me.LB_Number_worker.Text = "0"
         '
@@ -507,7 +507,7 @@ Partial Class MainFrm
         Me.Panel2.Controls.Add(Me.LB_Number_worker)
         Me.Panel2.Location = New System.Drawing.Point(82, 28)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(17, 19)
+        Me.Panel2.Size = New System.Drawing.Size(17, 20)
         Me.Panel2.TabIndex = 4633
         '
         'MainFrm

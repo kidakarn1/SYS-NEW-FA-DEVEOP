@@ -1232,6 +1232,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\addSpeNumpad.png" />
+    <None Include="Resources\addActualNumpadspaissue.png" />
+    <None Include="Resources\addActualNumpadspa.png" />
+    <None Include="Resources\productionListDetail2.png" />
+    <None Include="Resources\productionListDetail.png" />
+    <None Include="Resources\21.png" />
+    <None Include="Resources\2.png" />
+    <None Include="Resources\productionStoppedtarget.png" />
+    <None Include="Resources\btnDetail.png" />
+    <None Include="Resources\man.png" />
+    <None Include="Resources\productionStartingtarget.png" />
+    <None Include="Resources\productionStarttarget.png" />
     <None Include="Resources\ok.png" />
     <None Include="Resources\manualLossAfter1.png" />
     <None Include="Resources\addLossNumpad.png" />

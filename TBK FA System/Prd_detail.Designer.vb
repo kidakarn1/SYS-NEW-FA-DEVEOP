@@ -149,7 +149,7 @@ Partial Class Prd_detail
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Catamaran", 15.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(539, 17)
+        Me.Label2.Location = New System.Drawing.Point(540, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(23, 22)
         Me.Label2.TabIndex = 22

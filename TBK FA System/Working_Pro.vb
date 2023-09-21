@@ -39,8 +39,8 @@ Public Class Working_Pro
     Dim value_next_process As String = ""
     Public check_format_tag As String = Backoffice_model.B_check_format_tag()
     Public Shared api = New api()
-    Public Shared check_tag_type = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
-    Public Shared load_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & Prd_detail.lb_wi.Text)
+    Public Shared check_tag_type = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
+    Public Shared load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & Prd_detail.lb_wi.Text)
     Public Shared V_check_line_reprint As String = Backoffice_model.check_line_reprint()
     'Dim digitalReadTask_new_dio As New Task()
     'Dim reader_new_dio As DigitalSingleChannelReader
@@ -69,7 +69,7 @@ Public Class Working_Pro
     End Sub
     Public Function load_data_defeult_master_server(line_cd As String)
         Dim api = New api()
-        Dim result_data As String = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -84,7 +84,7 @@ Public Class Working_Pro
             counterNewDIO.Per_CheckCounter()
         End If
         PictureBox12.Visible = False
-        PictureBox10.Visible = False
+        'PictureBox10.Visible = False
         PictureBox11.Visible = False
         Wait_data.Close()
         'Prd_detail.Timer3.Enabled = False
@@ -98,8 +98,8 @@ Public Class Working_Pro
         seqNo = Label22.Text
         model = lb_model.Text
         lb_loss_status.Parent = Panel6
-        check_tag_type = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
-        load_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & Prd_detail.lb_wi.Text)
+        check_tag_type = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
+        load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & Prd_detail.lb_wi.Text)
         BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text)
         lbNextTime.Text = BreakTime
         TimerLossBT.Start()
@@ -294,15 +294,15 @@ Public Class Working_Pro
         btn_start.Visible = True
         PictureBox11.Visible = True
         'Panel3.Location = New Point(47, 209)
-        ' Panel2.Location = New Point(38, 324)
-        'Panel4.Location = New Point(38, 439)
+        ' Label6.Location = New Point(38, 324)
+        'Label10.Location = New Point(38, 439)
 
         Label24.BackColor = Color.FromArgb(63, 63, 63)
         Label17.BackColor = Color.FromArgb(63, 63, 63)
         Label1.BackColor = Color.FromArgb(63, 63, 63)
         Label3.BackColor = Color.FromArgb(63, 63, 63)
         Label18.BackColor = Color.FromArgb(63, 63, 63)
-        Label18.Location = New Point(488, 124)
+        Label18.Location = New Point(490, 121)
         Label16.BackColor = Color.FromArgb(63, 63, 63)
         Label20.Visible = False
         Label20.BackColor = Color.FromArgb(63, 63, 63)
@@ -311,18 +311,22 @@ Public Class Working_Pro
         CircularProgressBar2.BackColor = Color.FromArgb(63, 63, 63)
         CircularProgressBar2.InnerColor = Color.FromArgb(63, 63, 63)
 
-        Panel3.Location = New Point(48, 215)
-        Panel3.BackColor = Color.FromArgb(12, 27, 45)
-        Panel3.BringToFront()
 
-        Panel2.Location = New Point(43, 355)
-        Panel2.BackColor = Color.FromArgb(12, 27, 45)
-        Panel2.BringToFront()
+        Label7.Location = New Point(98, 196)
+        Label7.BackColor = Color.FromArgb(12, 27, 45)
+        Label7.BringToFront()
 
-        Panel4.Location = New Point(43, 495)
-        Panel4.BackColor = Color.FromArgb(12, 27, 45)
-        Panel4.BringToFront()
+        Label8.Location = New Point(56, 297)
+        Label8.BackColor = Color.FromArgb(12, 27, 45)
+        Label8.BringToFront()
 
+        Label6.Location = New Point(43, 403)
+        Label6.BackColor = Color.FromArgb(12, 27, 45)
+        Label6.BringToFront()
+
+        Label10.Location = New Point(41, 510)
+        Label10.BackColor = Color.FromArgb(12, 27, 45)
+        Label10.BringToFront()
 
 
 
@@ -540,9 +544,9 @@ Public Class Working_Pro
     Public Sub Start_Production()
 
         btn_start.Visible = False
-        PictureBox12.Visible = True
         PictureBox11.Visible = False
-        PictureBox10.Visible = True
+        PictureBox12.Visible = True
+        'PictureBox10.Visible = True
 
         Label24.BackColor = Color.FromArgb(44, 93, 129)
         Label24.BringToFront()
@@ -567,24 +571,31 @@ Public Class Working_Pro
         CircularProgressBar2.InnerColor = Color.FromArgb(44, 67, 133)
         CircularProgressBar2.BringToFront()
 
-        PanelBreakTime.BringToFront()
+        lbNextTime.BringToFront()
         Panel7.BringToFront()
         lb_ng_qty.BringToFront()
         LB_COUNTER_SHIP.BringToFront()
         LB_COUNTER_SEQ.BringToFront()
         Label29.BringToFront()
 
-        Panel3.Location = New Point(48, 215)
-        Panel3.BackColor = Color.FromArgb(12, 27, 45)
-        Panel3.BringToFront()
+        PictureBox13.BackColor = Color.FromArgb(44, 93, 129)
+        PictureBox14.BackColor = Color.FromArgb(44, 88, 130)
 
-        Panel2.Location = New Point(43, 355)
-        Panel2.BackColor = Color.FromArgb(12, 27, 45)
-        Panel2.BringToFront()
+        Label7.Location = New Point(98, 196)
+        Label7.BackColor = Color.FromArgb(12, 27, 45)
+        Label7.BringToFront()
 
-        Panel4.Location = New Point(43, 495)
-        Panel4.BackColor = Color.FromArgb(12, 27, 45)
-        Panel4.BringToFront()
+        Label8.Location = New Point(56, 297)
+        Label8.BackColor = Color.FromArgb(12, 27, 45)
+        Label8.BringToFront()
+
+        Label6.Location = New Point(43, 403)
+        Label6.BackColor = Color.FromArgb(12, 27, 45)
+        Label6.BringToFront()
+
+        Label10.Location = New Point(41, 510)
+        Label10.BackColor = Color.FromArgb(12, 27, 45)
+        Label10.BringToFront()
         Label20.Visible = True
         LB_COUNTER_SEQ.Visible = True
         'LB_COUNTER_SEQ.BringToFront()
@@ -1041,7 +1052,7 @@ Public Class Working_Pro
 
     End Sub
 
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+    Private Sub Label6_Paint(sender As Object, e As PaintEventArgs) Handles Label6.Paint
 
     End Sub
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
@@ -2721,7 +2732,7 @@ Public Class Working_Pro
                     End If
                 End If
             Catch ex As Exception
-                MsgBox("Please Check DIO 2")
+                MsgBox("Please Check DIO ")
             End Try
         End If
     End Sub
@@ -2814,7 +2825,7 @@ Public Class Working_Pro
     Private Sub Label23_Click(sender As Object, e As EventArgs) Handles Label23.Click
 
     End Sub
-    Private Sub PictureBox10_Click(sender As Object, e As EventArgs) Handles PictureBox10.Click
+    Private Sub PictureBox10_Click(sender As Object, e As EventArgs)
 
     End Sub
     Private Sub PictureBox13_Click(sender As Object, e As EventArgs) Handles PictureBox13.Click
@@ -2834,5 +2845,13 @@ Public Class Working_Pro
     Private Sub PictureBox14_Click(sender As Object, e As EventArgs) Handles PictureBox14.Click
         Dim showD = New show_detail_production
         showD.show
+    End Sub
+
+    Private Sub PictureBox12_Click(sender As Object, e As EventArgs) Handles PictureBox12.Click
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
     End Sub
 End Class

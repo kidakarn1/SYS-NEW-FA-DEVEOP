@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -63,6 +63,26 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _2() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _21() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("21", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property addActualNumpad() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("addActualNumpad", resourceCulture)
@@ -83,9 +103,39 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property addActualNumpadspa() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("addActualNumpadspa", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property addActualNumpadspaissue() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("addActualNumpadspaissue", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property addLossNumpad() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("addLossNumpad", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property addSpeNumpad() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("addSpeNumpad", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -126,6 +176,16 @@ Namespace My.Resources
         Friend ReadOnly Property btnDesc() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("btnDesc", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property btnDetail() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("btnDetail", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -743,6 +803,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property man() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("man", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property manageEmp() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("manageEmp", resourceCulture)
@@ -836,6 +906,26 @@ Namespace My.Resources
         Friend ReadOnly Property productionDetail() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("productionDetail", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property productionListDetail() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("productionListDetail", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property productionListDetail2() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("productionListDetail2", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -963,6 +1053,26 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property productionStartingtarget() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("productionStartingtarget", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property productionStarttarget() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("productionStarttarget", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property productionStopped() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("productionStopped", resourceCulture)
@@ -1016,6 +1126,16 @@ Namespace My.Resources
         Friend ReadOnly Property productionStopped5() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("productionStopped5", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property productionStoppedtarget() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("productionStoppedtarget", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
