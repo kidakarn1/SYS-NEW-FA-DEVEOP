@@ -1352,7 +1352,7 @@ Partial Class Working_Pro
         Me.btn_defect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_defect.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_defect.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_defect.Location = New System.Drawing.Point(571, 339)
+        Me.btn_defect.Location = New System.Drawing.Point(570, 339)
         Me.btn_defect.Name = "btn_defect"
         Me.btn_defect.Size = New System.Drawing.Size(245, 78)
         Me.btn_defect.TabIndex = 4519
