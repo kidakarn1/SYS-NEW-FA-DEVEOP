@@ -26,7 +26,6 @@
             Me.Close()
         End If
     End Sub
-
     Public Sub UpdateAutoLoss()
         Dim pd As String = MainFrm.Label6.Text
         Dim sel_combo As String = 0 'ComboBox1.SelectedIndex

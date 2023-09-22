@@ -346,19 +346,16 @@ Public Class ins_qty_special_time
 		'MsgBox(TextBox2.Text.Length)
 		chk_ins()
 	End Sub
-
-	Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
-		TextBox1.Clear()
-		TextBox2.Clear()
-		ena012()
-		Me.Close()
-	End Sub
-
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        TextBox1.Clear()
+        TextBox2.Clear()
+        ena012()
+        Me.Close()
+    End Sub
     Public Sub check_spc_time_time()
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Try
-
                     'Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift เอาเวลา ของ Shift ตั้งต้นขึ้นมา
                     '''' เป็นการเอาเวลาของการ กด ปุ่ม STarts มาแทน 
                     Dim timeclickStart As Date = DateTime.Now.ToString()
@@ -406,7 +403,6 @@ Public Class ins_qty_special_time
                                 Dim update_end_shift_date_time As Date = date_end_shift.AddDays(-1)
                                 convert_date_end_time = update_end_shift_date_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                             End If
-
                         End If
                     End If
                     Dim start_time As String = date1.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
