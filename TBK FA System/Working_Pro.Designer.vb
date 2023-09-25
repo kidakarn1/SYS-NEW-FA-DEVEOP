@@ -1614,7 +1614,7 @@ Partial Class Working_Pro
         'PictureBox11
         '
         Me.PictureBox11.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStoppedtarget
-        Me.PictureBox11.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox11.Location = New System.Drawing.Point(131, 220)
         Me.PictureBox11.Name = "PictureBox11"
         Me.PictureBox11.Size = New System.Drawing.Size(800, 600)
         Me.PictureBox11.TabIndex = 4644
