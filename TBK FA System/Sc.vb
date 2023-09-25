@@ -9,9 +9,7 @@ Public Class Sc
     Private Sub Sc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Location = New Point(13, 95)
         myPort = IO.Ports.SerialPort.GetPortNames()
-
         Dim sc_type As String = MainFrm.lb_scanner_port.Text
-
         If sc_type = "USB" Then
             'MsgBox("Data")
         Else

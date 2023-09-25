@@ -309,7 +309,7 @@ break_loop:
                         If My.Computer.Network.Ping("192.168.161.101") Then
                             tr_status = "1"
                             Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.pwi_id)
-                            Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, start_time, end_time, use_timee, number_qty, Working_Pro.pwi_id)
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, start_time, end_time, use_timee, number_qty, Working_Pro.pwi_id, tr_status)
                             'MsgBox("Ping completed")
                         Else
                             tr_status = "0"

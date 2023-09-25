@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.TBK_FA_System.Test_scrobar
+            Me.MainForm = Global.TBK_FA_System.MainFrm
         End Sub
     End Class
 End Namespace

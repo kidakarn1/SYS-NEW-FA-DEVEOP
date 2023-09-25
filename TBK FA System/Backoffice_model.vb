@@ -3,7 +3,6 @@ Imports System.Data.SQLite
 Imports System.Globalization
 Imports System.Data
 Imports System.Web.Script.Serialization
-
 Public Class Backoffice_model
     Public Shared total_nc As Integer = 0
     Public Shared flg_cat_layout_line As Integer = 0
@@ -1118,7 +1117,7 @@ where
 
     End Function
 
-    Public Shared Function Insert_prd_detail(pd As String, line_cd As String, wi_plan As String, item_cd As String, item_name As String, staff_no As Integer, seq_no As Integer, qty As Integer, st_time As String, end_time As String, use_time As Double, number_qty As Integer, pwi_id As String)
+    Public Shared Function Insert_prd_detail(pd As String, line_cd As String, wi_plan As String, item_cd As String, item_name As String, staff_no As Integer, seq_no As Integer, qty As Integer, st_time As String, end_time As String, use_time As Double, number_qty As Integer, pwi_id As String, status_sqlite As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -1132,7 +1131,7 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "INSERT INTO production_actual_detail(pd,line_cd,wi_plan,item_cd,item_name,staff_no,seq_no,qty,st_time,end_time,use_time,updated_date,number_qty,pwi_id) VALUES ('" & pd & "','" & line_cd & "','" & wi_plan & "','" & item_cd & "','" & item_name & "','" & staff_no & "','" & seq_no & "','" & qty & "','" & st_time2 & "','" & end_time2 & "','" & use_time & "','" & currdated & "','" & number_qty & "','" & pwi_id & "')"
+            SQLCmd.CommandText = "INSERT INTO production_actual_detail(pd,line_cd,wi_plan,item_cd,item_name,staff_no,seq_no,qty,st_time,end_time,use_time,updated_date,number_qty,pwi_id ,status_transfer_sqlite) VALUES ('" & pd & "','" & line_cd & "','" & wi_plan & "','" & item_cd & "','" & item_name & "','" & staff_no & "','" & seq_no & "','" & qty & "','" & st_time2 & "','" & end_time2 & "','" & use_time & "','" & currdated & "','" & number_qty & "','" & pwi_id & "','" & status_sqlite & "')"
             reader = SQLCmd.ExecuteReader()
             reader.Close()
         Catch ex As Exception
@@ -2771,8 +2770,9 @@ re_insert_data:
             Dim end_time As Date = LoadSQL("end_time").ToString()
             Dim use_time As Integer = LoadSQL("use_time").ToString()
             Dim pwi_id As Integer = LoadSQL("pwi_id").ToString()
+            Dim status_sqlite = "0"
             Check_connect_sqlite()
-            Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, qty, st_time, end_time, use_time, number_qty, pwi_id)
+            Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, qty, st_time, end_time, use_time, number_qty, pwi_id, status_sqlite)
             arr_list_id.Add(id)
         End While
         'End If
