@@ -6,6 +6,7 @@ Public Class ins_qty
         Try
             TextBox1.Text = TextBox1.Text.Substring(0, txt_lenght - 1)
         Catch ex As Exception
+
         End Try
     End Sub
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
@@ -222,6 +223,7 @@ Public Class ins_qty
             count_time = 0
         End If
     End Sub
+
     Private Sub ins_qty_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         show_remain_qty.Text = CDbl(Val(Working_Pro.Label8.Text)) - CDbl(Val(Working_Pro.Label6.Text))
         lbpartNo.Text = Working_Pro.Label3.Text

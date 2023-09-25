@@ -55,14 +55,8 @@ Public Class Working_Pro
     Public Shared model As String = ""
     Public Shared pwi_id As String = ""
     Public Shared rsWindow
-    Public Sub calOEE()
-        MsgBox("sss===>>" & Backoffice_model.date_time_start_master_shift)
-        Dim convert_date_start_time As Date = Backoffice_model.date_time_start_master_shift.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-        Dim convert_date_end_time As Date = Backoffice_model.date_time_end_check_date_paralell_linet.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-        Dim Second = DateDiff(DateInterval.Second, convert_date_start_time, convert_date_end_time)
-        Label7.Text = CDbl(Val(Second)) / CDbl(Val(Label38.Text))
-    End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        'Label44.Text = TimeOfDay.ToString("H:mm:ss")
         Label17.Text = TimeOfDay.ToString("H:mm:ss")
         Label1.Text = DateTime.Now.ToString("D")
         Label43.Text = DateTime.Now.ToString("yyyy/MM/dd")
@@ -254,7 +248,6 @@ Public Class Working_Pro
                 LB_COUNTER_SEQ.Text = 0
             End If
         End While
-        calOEE()
         Backoffice_model.Get_close_lot_time(Label14.Text)
         Timer2.Start()
     End Sub
@@ -476,7 +469,7 @@ Public Class Working_Pro
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id, status_sqlite)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
@@ -746,7 +739,7 @@ Public Class Working_Pro
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id, status_sqlite)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
@@ -976,7 +969,7 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, Label18.Text)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, Label18.Text, status_sqlite)
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, number_qty, start_time2, end_time, use_timee, number_qty, tr_status, Label18.Text)
                 Else
                     tr_status = "0"
@@ -1358,7 +1351,7 @@ Public Class Working_Pro
                             If My.Computer.Network.Ping("192.168.161.101") Then
                                 tr_status = "1"
                                 Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                                Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id)
+                                Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, status_sqlite)
                                 'MsgBox("Ping completed")
                             Else
                                 tr_status = "0"
@@ -2033,7 +2026,7 @@ Public Class Working_Pro
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, status_sqlite)
                 Else
                     tr_status = "0"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
@@ -2058,7 +2051,7 @@ Public Class Working_Pro
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         tr_status = "1"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, status_sqlite)
                     Else
                         tr_status = "0"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
@@ -2296,7 +2289,7 @@ Public Class Working_Pro
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         tr_status = "1"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time2, end_time2, use_time, number_qty, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time2, end_time2, use_time, number_qty, pwi_id, status_sqlite)
                     Else
                         tr_status = "0"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
@@ -2639,7 +2632,7 @@ Public Class Working_Pro
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, status_sqlite)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
