@@ -57,12 +57,22 @@
             Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")            'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
         End Try
     End Sub
-
     Private Sub btnBreakTime_Click(sender As Object, e As EventArgs) Handles btnBreakTime.Click
-        btnBreakTime.Visible = False
+        'btnContinue.Size = New Drawing.Size(312, 553)
+        'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
+        'btnContinue.BackgroundImage = System.Drawing.Image.FromFile("btnstartbreaktime.png")
+        'BtConfirm.Location = New Point(15, 15)
+        ' btnContinue.Size = New Size(312, 555)
+        lock.Visible = True
+        btnContinue.Visible = True
+        'btnContinue.BringToFront()
+        'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
+
         lbLossCode.Text = Backoffice_model.LossCodeAuto
         lbStartCount.Text = Backoffice_model.TimeStartBreakTime
-        PanelShowLoss.Visible = True
+        lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
+        btnBreakTime.Visible = False
+        PanelShowLoss.Visible = False
     End Sub
     Private Sub TimerLossBT_Tick(sender As Object, e As EventArgs) Handles TimerLossBT.Tick
         Try
@@ -73,10 +83,19 @@
                     If btnBreakTime.Visible = True Then
                         If CDbl(Val(contDelay)) = CDbl(Val((Backoffice_model.CountDelay * 10))) Then
                             'MsgBox("ครบ 5 นาที")
+
+                            btnContinue.BringToFront()
+                            btnContinue.Visible = True
+                            'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
+                            'btnContinue.Size = New Size(312, 555)
                             insLoss()
+                            lock.Visible = True
                             btnBreakTime.Visible = False
                             lbLossCode.Text = Backoffice_model.LossCodeAuto
                             lbStartCount.Text = Backoffice_model.TimeStartBreakTime
+                            lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
+
+                            btnBreakTime.Visible = False
                             PanelShowLoss.Visible = True
                         End If
                     End If
@@ -126,5 +145,6 @@
     End Sub
     Private Sub StopMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TimerLossBT.Enabled = True
+        lbLineCode.Text = MainFrm.Label4.Text
     End Sub
 End Class

@@ -1233,6 +1233,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\BLOCK.png" />
+    <None Include="Resources\Untitled-4.png" />
+    <None Include="Resources\breaktime3.png" />
+    <None Include="Resources\btnstartbreaktime2.png" />
+    <None Include="Resources\btnstartbreaktime1.png" />
+    <None Include="Resources\btnstartbreaktime.png" />
+    <None Include="Resources\breaktime2.png" />
+    <None Include="Resources\addActualNumpad3.png" />
+    <None Include="Resources\addActualNumpad2.png" />
+    <None Include="Resources\btnokkk.png" />
+    <None Include="Resources\manageEmp3.png" />
+    <None Include="Resources\sw.gif" />
+    <None Include="Resources\breaktime1.png" />
+    <None Include="Resources\breaktime.png" />
+    <None Include="Resources\closeLotsummary1.png" />
+    <None Include="Resources\sweetAlertSuccess.png" />
+    <None Include="Resources\btnOK.png" />
+    <None Include="Resources\sweetAlertWarningUnseccess.png" />
     <None Include="Resources\addSpeNumpad.png" />
     <None Include="Resources\addActualNumpadspaissue.png" />
     <None Include="Resources\addActualNumpadspa.png" />

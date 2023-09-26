@@ -347,18 +347,16 @@ Public Class ins_qty_special_time
 		chk_ins()
 	End Sub
 
-	Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
-		TextBox1.Clear()
-		TextBox2.Clear()
-		ena012()
-		Me.Close()
-	End Sub
-
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        TextBox1.Clear()
+        TextBox2.Clear()
+        ena012()
+        Me.Close()
+    End Sub
     Public Sub check_spc_time_time()
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Try
-
                     'Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift เอาเวลา ของ Shift ตั้งต้นขึ้นมา
                     '''' เป็นการเอาเวลาของการ กด ปุ่ม STarts มาแทน 
                     Dim timeclickStart As Date = DateTime.Now.ToString()
@@ -394,7 +392,6 @@ Public Class ins_qty_special_time
                                 convert_date_start_time = update_start_shift_date_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                             End If
                             If TextBox2.Text >= "00:00:00" And TextBox2.Text <= "07:59:59" Then
-
                             Else
                             End If
                             If date_cerrunt_now1 > date_start_time Then
@@ -406,7 +403,6 @@ Public Class ins_qty_special_time
                                 Dim update_end_shift_date_time As Date = date_end_shift.AddDays(-1)
                                 convert_date_end_time = update_end_shift_date_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                             End If
-
                         End If
                     End If
                     Dim start_time As String = date1.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
@@ -448,22 +444,96 @@ Public Class ins_qty_special_time
                                         ins_qty.pb_ok.Visible = True
                                         Me.Close()
                                     Else
-                                        MsgBox("TIME DOUBLE.")
+                                        'MsgBox("TIME DOUBLE.")
+                                        Button10.Enabled = False
+                                        Button11.Enabled = False
+                                        Dim listdetail = "TIME DOUBLE."
+                                        PictureBox10.BringToFront()
+                                        PictureBox10.Show()
+                                        PictureBox2.BringToFront()
+                                        PictureBox2.Show()
+                                        Panel2.BringToFront()
+                                        Panel2.Show()
+                                        Label3.Text = listdetail
+                                        Label3.BringToFront()
+                                        Label3.Show()
                                     End If
                                 Else
-                                    MsgBox("Please Check Time")
+                                    ' MsgBox("Please Check Time")
+                                    Button10.Enabled = False
+                                    Button11.Enabled = False
+                                    Dim listdetail = "TIME DOUBLE."
+                                    PictureBox10.BringToFront()
+                                    PictureBox10.Show()
+                                    PictureBox2.BringToFront()
+                                    PictureBox2.Show()
+                                    Panel2.BringToFront()
+                                    Panel2.Show()
+                                    Label3.Text = listdetail
+                                    Label3.BringToFront()
+                                    Label3.Show()
+                                    'MsgBox("Please Check Time")
                                 End If
                             Else
-                                MsgBox("Please Check Shift")
+                                ' MsgBox("Please Check Shift")
+                                ' MsgBox("Please Check Time")
+                                Button10.Enabled = False
+                                Button11.Enabled = False
+                                Dim listdetail = "Please Check Shift"
+                                PictureBox10.BringToFront()
+                                PictureBox10.Show()
+                                PictureBox2.BringToFront()
+                                PictureBox2.Show()
+                                Panel2.BringToFront()
+                                Panel2.Show()
+                                Label3.Text = listdetail
+                                Label3.BringToFront()
+                                Label3.Show()
                             End If
                         Else
-                            MsgBox("Please Check Shift  Or Time Start.")
+                            'MsgBox("Please Check Shift  Or Time Start.")
+                            Button10.Enabled = False
+                            Button11.Enabled = False
+                            Dim listdetail = "Please Check Shift  Or Time Start."
+                            PictureBox10.BringToFront()
+                            PictureBox10.Show()
+                            PictureBox2.BringToFront()
+                            PictureBox2.Show()
+                            Panel2.BringToFront()
+                            Panel2.Show()
+                            Label3.Text = listdetail
+                            Label3.BringToFront()
+                            Label3.Show()
                         End If
                     Else
-                        MsgBox("Please Check time")
+                        'MsgBox("Please Check time")
+                        Button10.Enabled = False
+                        Button11.Enabled = False
+                        Dim listdetail = "Please Check time."
+                        PictureBox10.BringToFront()
+                        PictureBox10.Show()
+                        PictureBox2.BringToFront()
+                        PictureBox2.Show()
+                        Panel2.BringToFront()
+                        Panel2.Show()
+                        Label3.Text = listdetail
+                        Label3.BringToFront()
+                        Label3.Show()
                     End If
                 Catch ex As Exception
-                    MsgBox("Please check time ")
+                    'MsgBox("Please check time")
+                    Button10.Enabled = False
+                    Button11.Enabled = False
+                    Dim listdetail = "Please Check time."
+                    PictureBox10.BringToFront()
+                    PictureBox10.Show()
+                    PictureBox2.BringToFront()
+                    PictureBox2.Show()
+                    Panel2.BringToFront()
+                    Panel2.Show()
+                    Label3.Text = listdetail
+                    Label3.BringToFront()
+                    Label3.Show()
                 End Try
             Else
                 load_show.Show()
@@ -619,10 +689,24 @@ Public Class ins_qty_special_time
 	End Sub
 
     Private Sub ins_qty_special_time_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Start()
         Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift
         'show_time_add_qty.Text = date_start_shift.ToString("HH:mm", CultureInfo.InvariantCulture)
         Dim timestart As Date = Working_Pro.Label16.Text
         show_time_add_qty.Text = timestart.ToString("HH:mm", CultureInfo.InvariantCulture)
         chk_ins()
+
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label1.Text = TimeOfDay.ToString("H:mm:ss")
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+        Button10.Enabled = True
+        Button11.Enabled = True
+        PictureBox10.Hide()
+        PictureBox2.Hide()
+        Panel2.Hide()
     End Sub
 End Class

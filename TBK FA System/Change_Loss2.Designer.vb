@@ -103,17 +103,17 @@ Partial Class Change_Loss2
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "N"
-        Me.ColumnHeader1.Width = 42
+        Me.ColumnHeader1.Width = 83
         '
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "CD"
-        Me.ColumnHeader2.Width = 55
+        Me.ColumnHeader2.Width = 107
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Detail_TH"
-        Me.ColumnHeader3.Width = 695
+        Me.ColumnHeader3.Width = 495
         '
         'Label4
         '

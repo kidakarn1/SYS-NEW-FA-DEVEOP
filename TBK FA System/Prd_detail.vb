@@ -241,7 +241,7 @@ Public Class Prd_detail
                 Confrime_work_production.next_pae()
             End If
         Catch ex As Exception
-            MsgBox("ERROR = " & ex.Message)
+            MsgBox("ERROR = 111 " & ex.Message)
         End Try
     End Sub
 
@@ -254,15 +254,17 @@ Public Class Prd_detail
 		Rm_scan.scan_item_cd.Focus()
 		Rm_scan.Show()
 	End Sub
-	Private Sub PictureBox1_Click_1(sender As Object, e As EventArgs) Handles PictureBox1.Click
-		Rm_scan.Panel_scan_picking.Visible = True
-		Rm_scan.scan_item_cd.Select()
-		Rm_scan.scan_item_cd.Focus()
-		Rm_scan.Show()
-	End Sub
-	Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs)
-	End Sub
-	Private Sub cc(sender As Object, e As EventArgs) Handles Timer3.Tick
+    Private Sub PictureBox1_Click_1(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        Rm_scan.Panel_scan_picking.Visible = True
+        Rm_scan.scan_item_cd.Select()
+        Rm_scan.scan_item_cd.Focus()
+        Rm_scan.Show()
+    End Sub
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs)
+    End Sub
+
+    Private Sub cc(sender As Object, e As EventArgs) Handles Timer3.Tick
 		check_lot()
 	End Sub
 

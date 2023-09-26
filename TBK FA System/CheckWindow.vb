@@ -11,7 +11,7 @@ Public Class CheckWindow
         ' This call is required by the designer.
         ' Add any initialization after the InitializeComponent() call.
     End Function
-    Public Sub count_NIMAX()
+    Public Function count_NIMAX()
         Try
             If Working_Pro.rsWindow Then
                 digitalReadTask_new_dio.DIChannels.CreateChannel(
@@ -21,10 +21,14 @@ Public Class CheckWindow
                 reader_new_dio = New DigitalSingleChannelReader(digitalReadTask_new_dio.Stream)
                 Working_Pro.Timer_new_dio.Start()
             End If
+            Return "OK"
         Catch ex As Exception
-            MsgBox(" Please Check USB DIO")
+            Return "Please Check USB DIO"
+            ' MsgBox(" Please Check USB DIO")
         End Try
+    End Function
+
+    Private Sub CheckWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
-
-
 End Class

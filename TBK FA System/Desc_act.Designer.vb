@@ -39,8 +39,17 @@ Partial Class Desc_act
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.lbpartNo = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.PictureBox10 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox16 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
+        CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox2
@@ -283,13 +292,71 @@ Partial Class Desc_act
         '
         Me.lbpartNo.AutoSize = True
         Me.lbpartNo.BackColor = System.Drawing.Color.Transparent
-        Me.lbpartNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!)
+        Me.lbpartNo.Font = New System.Drawing.Font("Catamaran", 19.0!, System.Drawing.FontStyle.Bold)
         Me.lbpartNo.ForeColor = System.Drawing.Color.White
-        Me.lbpartNo.Location = New System.Drawing.Point(169, 21)
+        Me.lbpartNo.Location = New System.Drawing.Point(168, 21)
         Me.lbpartNo.Name = "lbpartNo"
-        Me.lbpartNo.Size = New System.Drawing.Size(306, 25)
+        Me.lbpartNo.Size = New System.Drawing.Size(348, 28)
         Me.lbpartNo.TabIndex = 51
         Me.lbpartNo.Text = "XXXXXXXXXXXXXXXXXXXXX"
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Location = New System.Drawing.Point(250, 333)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(298, 81)
+        Me.Panel2.TabIndex = 4653
+        Me.Panel2.Visible = False
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.White
+        Me.Label2.Font = New System.Drawing.Font("Catamaran", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(12, 10)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(275, 35)
+        Me.Label2.TabIndex = 12
+        Me.Label2.Text = "XXXXX"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label2.Visible = False
+        '
+        'PictureBox10
+        '
+        Me.PictureBox10.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox10.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.sweetAlertWarningUnseccess
+        Me.PictureBox10.Location = New System.Drawing.Point(245, 110)
+        Me.PictureBox10.Name = "PictureBox10"
+        Me.PictureBox10.Size = New System.Drawing.Size(310, 380)
+        Me.PictureBox10.TabIndex = 4652
+        Me.PictureBox10.TabStop = False
+        Me.PictureBox10.Visible = False
+        '
+        'PictureBox16
+        '
+        Me.PictureBox16.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnOK
+        Me.PictureBox16.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox16.Location = New System.Drawing.Point(328, 419)
+        Me.PictureBox16.Name = "PictureBox16"
+        Me.PictureBox16.Size = New System.Drawing.Size(145, 61)
+        Me.PictureBox16.TabIndex = 4654
+        Me.PictureBox16.TabStop = False
+        Me.PictureBox16.Visible = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnOK
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Location = New System.Drawing.Point(328, 419)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(145, 61)
+        Me.PictureBox1.TabIndex = 4655
+        Me.PictureBox1.TabStop = False
+        Me.PictureBox1.Visible = False
         '
         'Desc_act
         '
@@ -298,6 +365,10 @@ Partial Class Desc_act
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.decreaseActualNumpad
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.PictureBox10)
+        Me.Controls.Add(Me.PictureBox16)
         Me.Controls.Add(Me.lbpartNo)
         Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Button11)
@@ -321,6 +392,10 @@ Partial Class Desc_act
         Me.Text = "d"
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
+        CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -343,4 +418,9 @@ Partial Class Desc_act
     Friend WithEvents Button11 As Button
     Friend WithEvents Button12 As Button
     Friend WithEvents lbpartNo As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label2 As Label
+    Friend WithEvents PictureBox10 As PictureBox
+    Friend WithEvents PictureBox16 As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

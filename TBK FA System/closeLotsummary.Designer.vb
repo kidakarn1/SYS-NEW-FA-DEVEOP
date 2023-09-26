@@ -57,6 +57,10 @@ Partial Class closeLotsummary
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.lbPart = New System.Windows.Forms.Label()
         Me.statusPage = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         CType(Me.Button1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnOk, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,11 +73,11 @@ Partial Class closeLotsummary
         '
         Me.lbWi.AutoSize = True
         Me.lbWi.BackColor = System.Drawing.Color.Transparent
-        Me.lbWi.Font = New System.Drawing.Font("Yu Gothic", 17.0!, System.Drawing.FontStyle.Bold)
+        Me.lbWi.Font = New System.Drawing.Font("Catamaran", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbWi.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbWi.Location = New System.Drawing.Point(329, 124)
+        Me.lbWi.Location = New System.Drawing.Point(382, 109)
         Me.lbWi.Name = "lbWi"
-        Me.lbWi.Size = New System.Drawing.Size(189, 30)
+        Me.lbWi.Size = New System.Drawing.Size(213, 32)
         Me.lbWi.TabIndex = 4
         Me.lbWi.Text = "XXXXXXXXXXX"
         '
@@ -81,11 +85,11 @@ Partial Class closeLotsummary
         '
         Me.lbModel.AutoSize = True
         Me.lbModel.BackColor = System.Drawing.Color.Transparent
-        Me.lbModel.Font = New System.Drawing.Font("Yu Gothic", 13.0!, System.Drawing.FontStyle.Bold)
+        Me.lbModel.Font = New System.Drawing.Font("Catamaran", 15.75!, System.Drawing.FontStyle.Bold)
         Me.lbModel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbModel.Location = New System.Drawing.Point(87, 82)
+        Me.lbModel.Location = New System.Drawing.Point(90, 85)
         Me.lbModel.Name = "lbModel"
-        Me.lbModel.Size = New System.Drawing.Size(142, 23)
+        Me.lbModel.Size = New System.Drawing.Size(153, 23)
         Me.lbModel.TabIndex = 6
         Me.lbModel.Text = "XXXXXXXXXXX"
         '
@@ -111,35 +115,37 @@ Partial Class closeLotsummary
         '
         Me.lbNc.AutoSize = True
         Me.lbNc.BackColor = System.Drawing.Color.Transparent
-        Me.lbNc.Font = New System.Drawing.Font("Yu Gothic", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbNc.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbNc.Location = New System.Drawing.Point(432, 529)
+        Me.lbNc.Font = New System.Drawing.Font("Catamaran", 24.0!)
+        Me.lbNc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lbNc.Location = New System.Drawing.Point(534, 481)
         Me.lbNc.Name = "lbNc"
-        Me.lbNc.Size = New System.Drawing.Size(62, 31)
+        Me.lbNc.Size = New System.Drawing.Size(25, 34)
         Me.lbNc.TabIndex = 13
-        Me.lbNc.Text = "XXX"
+        Me.lbNc.Text = "1"
+        Me.lbNc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbNg
         '
         Me.lbNg.AutoSize = True
         Me.lbNg.BackColor = System.Drawing.Color.Transparent
-        Me.lbNg.Font = New System.Drawing.Font("Yu Gothic", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbNg.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbNg.Location = New System.Drawing.Point(540, 526)
+        Me.lbNg.Font = New System.Drawing.Font("Catamaran", 24.0!)
+        Me.lbNg.ForeColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.lbNg.Location = New System.Drawing.Point(533, 525)
         Me.lbNg.Name = "lbNg"
-        Me.lbNg.Size = New System.Drawing.Size(62, 31)
+        Me.lbNg.Size = New System.Drawing.Size(25, 34)
         Me.lbNg.TabIndex = 14
-        Me.lbNg.Text = "XXX"
+        Me.lbNg.Text = "1"
+        Me.lbNg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbLine
         '
         Me.lbLine.AutoSize = True
         Me.lbLine.BackColor = System.Drawing.Color.Transparent
-        Me.lbLine.Font = New System.Drawing.Font("Yu Gothic", 13.0!, System.Drawing.FontStyle.Bold)
+        Me.lbLine.Font = New System.Drawing.Font("Catamaran", 15.75!, System.Drawing.FontStyle.Bold)
         Me.lbLine.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbLine.Location = New System.Drawing.Point(74, 57)
+        Me.lbLine.Location = New System.Drawing.Point(71, 57)
         Me.lbLine.Name = "lbLine"
-        Me.lbLine.Size = New System.Drawing.Size(82, 23)
+        Me.lbLine.Size = New System.Drawing.Size(88, 23)
         Me.lbLine.TabIndex = 17
         Me.lbLine.Text = "XXXXXX"
         '
@@ -156,13 +162,13 @@ Partial Class closeLotsummary
         Me.lvSumarychild.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.lvSumarychild.ForeColor = System.Drawing.Color.White
         Me.lvSumarychild.FullRowSelect = True
-        Me.lvSumarychild.GridLines = True
+        Me.lvSumarychild.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvSumarychild.HideSelection = False
-        Me.lvSumarychild.Location = New System.Drawing.Point(42, 345)
+        Me.lvSumarychild.Location = New System.Drawing.Point(44, 326)
         Me.lvSumarychild.MultiSelect = False
         Me.lvSumarychild.Name = "lvSumarychild"
         Me.lvSumarychild.ShowGroups = False
-        Me.lvSumarychild.Size = New System.Drawing.Size(610, 132)
+        Me.lvSumarychild.Size = New System.Drawing.Size(661, 137)
         Me.lvSumarychild.TabIndex = 41
         Me.lvSumarychild.UseCompatibleStateImageBehavior = False
         Me.lvSumarychild.View = System.Windows.Forms.View.Details
@@ -219,25 +225,27 @@ Partial Class closeLotsummary
         '
         Me.lbGood.AutoSize = True
         Me.lbGood.BackColor = System.Drawing.Color.Transparent
-        Me.lbGood.Font = New System.Drawing.Font("Yu Gothic", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbGood.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbGood.Location = New System.Drawing.Point(322, 529)
+        Me.lbGood.Font = New System.Drawing.Font("Catamaran", 24.0!)
+        Me.lbGood.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lbGood.Location = New System.Drawing.Point(351, 526)
         Me.lbGood.Name = "lbGood"
-        Me.lbGood.Size = New System.Drawing.Size(62, 31)
+        Me.lbGood.Size = New System.Drawing.Size(55, 34)
         Me.lbGood.TabIndex = 48
-        Me.lbGood.Text = "XXX"
+        Me.lbGood.Text = "98"
+        Me.lbGood.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbAct
         '
         Me.lbAct.AutoSize = True
         Me.lbAct.BackColor = System.Drawing.Color.Transparent
-        Me.lbAct.Font = New System.Drawing.Font("Yu Gothic", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbAct.Font = New System.Drawing.Font("Catamaran", 24.0!)
         Me.lbAct.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbAct.Location = New System.Drawing.Point(201, 530)
+        Me.lbAct.Location = New System.Drawing.Point(349, 481)
         Me.lbAct.Name = "lbAct"
-        Me.lbAct.Size = New System.Drawing.Size(78, 31)
+        Me.lbAct.Size = New System.Drawing.Size(65, 34)
         Me.lbAct.TabIndex = 47
-        Me.lbAct.Text = "XXXX"
+        Me.lbAct.Text = "100"
+        Me.lbAct.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label15
         '
@@ -272,11 +280,11 @@ Partial Class closeLotsummary
         Me.lvSumaryfg.FullRowSelect = True
         Me.lvSumaryfg.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvSumaryfg.HideSelection = False
-        Me.lvSumaryfg.Location = New System.Drawing.Point(40, 188)
+        Me.lvSumaryfg.Location = New System.Drawing.Point(45, 178)
         Me.lvSumaryfg.MultiSelect = False
         Me.lvSumaryfg.Name = "lvSumaryfg"
         Me.lvSumaryfg.ShowGroups = False
-        Me.lvSumaryfg.Size = New System.Drawing.Size(612, 79)
+        Me.lvSumaryfg.Size = New System.Drawing.Size(661, 73)
         Me.lvSumaryfg.TabIndex = 41
         Me.lvSumaryfg.UseCompatibleStateImageBehavior = False
         Me.lvSumaryfg.View = System.Windows.Forms.View.Details
@@ -314,25 +322,25 @@ Partial Class closeLotsummary
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.Transparent
-        Me.Button1.Location = New System.Drawing.Point(12, 496)
+        Me.Button1.Location = New System.Drawing.Point(2, 509)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(132, 101)
+        Me.Button1.Size = New System.Drawing.Size(194, 88)
         Me.Button1.TabIndex = 51
         Me.Button1.TabStop = False
         '
         'btnOk
         '
         Me.btnOk.BackColor = System.Drawing.Color.Transparent
-        Me.btnOk.Location = New System.Drawing.Point(666, 486)
+        Me.btnOk.Location = New System.Drawing.Point(608, 509)
         Me.btnOk.Name = "btnOk"
-        Me.btnOk.Size = New System.Drawing.Size(132, 101)
+        Me.btnOk.Size = New System.Drawing.Size(191, 88)
         Me.btnOk.TabIndex = 52
         Me.btnOk.TabStop = False
         '
         'btnUp
         '
         Me.btnUp.BackColor = System.Drawing.Color.Transparent
-        Me.btnUp.Location = New System.Drawing.Point(661, 340)
+        Me.btnUp.Location = New System.Drawing.Point(712, 317)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(67, 76)
         Me.btnUp.TabIndex = 53
@@ -341,7 +349,7 @@ Partial Class closeLotsummary
         'btnDown
         '
         Me.btnDown.BackColor = System.Drawing.Color.Transparent
-        Me.btnDown.Location = New System.Drawing.Point(661, 418)
+        Me.btnDown.Location = New System.Drawing.Point(712, 396)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(67, 76)
         Me.btnDown.TabIndex = 54
@@ -350,7 +358,7 @@ Partial Class closeLotsummary
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.Location = New System.Drawing.Point(657, 176)
+        Me.PictureBox1.Location = New System.Drawing.Point(712, 163)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(67, 50)
         Me.PictureBox1.TabIndex = 55
@@ -359,7 +367,7 @@ Partial Class closeLotsummary
         'PictureBox2
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Location = New System.Drawing.Point(658, 227)
+        Me.PictureBox2.Location = New System.Drawing.Point(712, 214)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(67, 50)
         Me.PictureBox2.TabIndex = 56
@@ -386,12 +394,56 @@ Partial Class closeLotsummary
         Me.statusPage.Text = "Label1"
         Me.statusPage.Visible = False
         '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.BackColor = System.Drawing.Color.Transparent
+        Me.Panel1.Location = New System.Drawing.Point(325, 480)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(113, 36)
+        Me.Panel1.TabIndex = 59
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackColor = System.Drawing.Color.Transparent
+        Me.Panel2.Location = New System.Drawing.Point(325, 525)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(113, 36)
+        Me.Panel2.TabIndex = 60
+        '
+        'Panel3
+        '
+        Me.Panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel3.BackColor = System.Drawing.Color.Transparent
+        Me.Panel3.Location = New System.Drawing.Point(489, 480)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(113, 36)
+        Me.Panel3.TabIndex = 60
+        '
+        'Panel4
+        '
+        Me.Panel4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.BackColor = System.Drawing.Color.Transparent
+        Me.Panel4.Location = New System.Drawing.Point(488, 523)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(113, 36)
+        Me.Panel4.TabIndex = 61
+        '
         'closeLotsummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.closeLotsummary
-        Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.closeLotsummary1
+        Me.ClientSize = New System.Drawing.Size(801, 600)
         Me.Controls.Add(Me.statusPage)
         Me.Controls.Add(Me.lbPart)
         Me.Controls.Add(Me.PictureBox2)
@@ -415,6 +467,10 @@ Partial Class closeLotsummary
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.lbModel)
         Me.Controls.Add(Me.lbWi)
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel3)
+        Me.Controls.Add(Me.Panel4)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "closeLotsummary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -464,4 +520,8 @@ Partial Class closeLotsummary
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents lbPart As Label
     Friend WithEvents statusPage As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel4 As Panel
 End Class

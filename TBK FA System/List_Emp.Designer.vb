@@ -71,7 +71,7 @@ Partial Class List_Emp
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Emp CD"
-        Me.ColumnHeader1.Width = 41
+        Me.ColumnHeader1.Width = 140
         '
         'ColumnHeader2
         '
@@ -243,7 +243,7 @@ Partial Class List_Emp
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(14, Byte), Integer))
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.manageEmp2
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.manageEmp3
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.pb_down)
         Me.Controls.Add(Me.pbUp)

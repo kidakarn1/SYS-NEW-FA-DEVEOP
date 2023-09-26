@@ -49,9 +49,16 @@ Partial Class ins_qty
         Me.show_remain_qty = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lbpartNo = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.PictureBox10 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         CType(Me.pb_ok, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
+        CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -274,9 +281,10 @@ Partial Class ins_qty
         'pb_ok
         '
         Me.pb_ok.BackColor = System.Drawing.Color.Transparent
-        Me.pb_ok.Location = New System.Drawing.Point(596, 511)
+        Me.pb_ok.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnokkk
+        Me.pb_ok.Location = New System.Drawing.Point(596, 506)
         Me.pb_ok.Name = "pb_ok"
-        Me.pb_ok.Size = New System.Drawing.Size(208, 80)
+        Me.pb_ok.Size = New System.Drawing.Size(208, 90)
         Me.pb_ok.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pb_ok.TabIndex = 35
         Me.pb_ok.TabStop = False
@@ -303,9 +311,9 @@ Partial Class ins_qty
         Me.SPECIAL_MENU.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.SPECIAL_MENU.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SPECIAL_MENU.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SPECIAL_MENU.Location = New System.Drawing.Point(388, 511)
+        Me.SPECIAL_MENU.Location = New System.Drawing.Point(407, 511)
         Me.SPECIAL_MENU.Name = "SPECIAL_MENU"
-        Me.SPECIAL_MENU.Size = New System.Drawing.Size(200, 80)
+        Me.SPECIAL_MENU.Size = New System.Drawing.Size(181, 80)
         Me.SPECIAL_MENU.TabIndex = 40
         Me.SPECIAL_MENU.UseVisualStyleBackColor = False
         Me.SPECIAL_MENU.Visible = False
@@ -387,21 +395,71 @@ Partial Class ins_qty
         '
         Me.lbpartNo.AutoSize = True
         Me.lbpartNo.BackColor = System.Drawing.Color.Transparent
-        Me.lbpartNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!)
+        Me.lbpartNo.Font = New System.Drawing.Font("Catamaran", 20.0!, System.Drawing.FontStyle.Bold)
         Me.lbpartNo.ForeColor = System.Drawing.Color.White
-        Me.lbpartNo.Location = New System.Drawing.Point(176, 21)
+        Me.lbpartNo.Location = New System.Drawing.Point(170, 19)
         Me.lbpartNo.Name = "lbpartNo"
-        Me.lbpartNo.Size = New System.Drawing.Size(306, 25)
+        Me.lbpartNo.Size = New System.Drawing.Size(234, 29)
         Me.lbpartNo.TabIndex = 52
-        Me.lbpartNo.Text = "XXXXXXXXXXXXXXXXXXXXX"
+        Me.lbpartNo.Text = "XXXXXXXXXXXXX"
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Location = New System.Drawing.Point(250, 333)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(298, 81)
+        Me.Panel2.TabIndex = 4661
+        Me.Panel2.Visible = False
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.White
+        Me.Label2.Font = New System.Drawing.Font("Catamaran", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(12, 10)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(275, 35)
+        Me.Label2.TabIndex = 12
+        Me.Label2.Text = "XXXXX"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label2.Visible = False
+        '
+        'PictureBox10
+        '
+        Me.PictureBox10.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox10.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.sweetAlertWarningUnseccess
+        Me.PictureBox10.Location = New System.Drawing.Point(245, 110)
+        Me.PictureBox10.Name = "PictureBox10"
+        Me.PictureBox10.Size = New System.Drawing.Size(310, 380)
+        Me.PictureBox10.TabIndex = 4660
+        Me.PictureBox10.TabStop = False
+        Me.PictureBox10.Visible = False
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnOK
+        Me.PictureBox3.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox3.Location = New System.Drawing.Point(328, 420)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(145, 61)
+        Me.PictureBox3.TabIndex = 4662
+        Me.PictureBox3.TabStop = False
+        Me.PictureBox3.Visible = False
         '
         'ins_qty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.addActualNumpadspaissue
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.addActualNumpad3
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.PictureBox10)
+        Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.lbpartNo)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.show_remain_qty)
@@ -434,6 +492,9 @@ Partial Class ins_qty
         CType(Me.pb_ok, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
+        CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -464,4 +525,8 @@ Partial Class ins_qty
     Friend WithEvents show_remain_qty As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lbpartNo As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label2 As Label
+    Friend WithEvents PictureBox10 As PictureBox
+    Friend WithEvents PictureBox3 As PictureBox
 End Class

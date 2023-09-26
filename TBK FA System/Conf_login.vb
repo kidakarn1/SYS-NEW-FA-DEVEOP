@@ -38,7 +38,20 @@
             TextBox1.Text = ""
             TextBox2.Text = ""
         Else
-            MsgBox("Username or password is incorrect!. Please try again.")
+            Button1.Enabled = False
+            TextBox1.Enabled = False
+            TextBox2.Enabled = False
+            Dim listdetail = "Username or password is incorrect!. Please try again."
+            PictureBox4.BringToFront()
+            PictureBox4.Show()
+            PictureBox5.BringToFront()
+            PictureBox5.Show()
+            Panel1.BringToFront()
+            Panel1.Show()
+            Label1.Text = listdetail
+            Label1.BringToFront()
+            Label1.Show()
+            'MsgBox("Username or password is incorrect!. Please try again.")
             TextBox1.Text = ""
             TextBox2.Text = ""
             TextBox1.Select()
@@ -69,7 +82,19 @@
                 TextBox1.Text = ""
                 TextBox2.Text = ""
             Else
-                MsgBox("Username or password is incorrect!. Please try again.")
+                Button1.Enabled = False
+                TextBox1.Enabled = False
+                TextBox2.Enabled = False
+                Dim listdetail = "Username or password is incorrect!. Please try again."
+                PictureBox4.BringToFront()
+                PictureBox4.Show()
+                PictureBox5.BringToFront()
+                PictureBox5.Show()
+                Panel1.BringToFront()
+                Panel1.Show()
+                Label1.Text = listdetail
+                Label1.BringToFront()
+                Label1.Show()
                 TextBox1.Text = ""
                 TextBox2.Text = ""
                 TextBox1.Select()
@@ -79,6 +104,16 @@
     End Function
 
     Private Sub Conf_login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Location = New Point(12, 90)
+        Me.Location = New Point(12, 60)
+    End Sub
+
+    Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
+        PictureBox4.Hide()
+        PictureBox5.Hide()
+        Panel1.Hide()
+        Button1.Enabled = True
+        TextBox1.Enabled = True
+        TextBox2.Enabled = True
+        TextBox1.Focus()
     End Sub
 End Class

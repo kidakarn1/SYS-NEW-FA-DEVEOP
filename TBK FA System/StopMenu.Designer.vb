@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class StopMenu
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,66 +20,56 @@ Partial Class StopMenu
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.btnBreakTime = New System.Windows.Forms.Button()
         Me.btnContinue = New System.Windows.Forms.Button()
         Me.TimerLossBT = New System.Windows.Forms.Timer(Me.components)
-        Me.PanelShowLoss = New System.Windows.Forms.Panel()
         Me.test_time_loss_time = New System.Windows.Forms.Label()
         Me.lbLossCode = New System.Windows.Forms.Label()
         Me.lbEndCount = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.lbStartCount = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.PanelShowLoss.SuspendLayout()
+        Me.lbLineCode = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PanelShowLoss = New System.Windows.Forms.Panel()
+        Me.lock = New System.Windows.Forms.Button()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnBreakTime
         '
-        Me.btnBreakTime.BackColor = System.Drawing.Color.OrangeRed
+        Me.btnBreakTime.BackColor = System.Drawing.Color.Transparent
+        Me.btnBreakTime.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.Untitled_4
+        Me.btnBreakTime.FlatAppearance.BorderSize = 0
+        Me.btnBreakTime.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnBreakTime.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnBreakTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBreakTime.Font = New System.Drawing.Font("Arial Rounded MT Bold", 48.0!)
         Me.btnBreakTime.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnBreakTime.Location = New System.Drawing.Point(49, 259)
+        Me.btnBreakTime.Location = New System.Drawing.Point(466, 293)
         Me.btnBreakTime.Name = "btnBreakTime"
-        Me.btnBreakTime.Size = New System.Drawing.Size(546, 201)
+        Me.btnBreakTime.Size = New System.Drawing.Size(319, 280)
         Me.btnBreakTime.TabIndex = 8
-        Me.btnBreakTime.Text = "Break Time"
         Me.btnBreakTime.UseVisualStyleBackColor = False
         '
         'btnContinue
         '
-        Me.btnContinue.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.btnContinue.BackColor = System.Drawing.Color.Transparent
+        Me.btnContinue.FlatAppearance.BorderSize = 0
+        Me.btnContinue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnContinue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnContinue.Font = New System.Drawing.Font("Arial Rounded MT Bold", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnContinue.ForeColor = System.Drawing.SystemColors.ControlLight
-        Me.btnContinue.Location = New System.Drawing.Point(48, 25)
+        Me.btnContinue.Location = New System.Drawing.Point(469, 13)
         Me.btnContinue.Name = "btnContinue"
-        Me.btnContinue.Size = New System.Drawing.Size(546, 201)
+        Me.btnContinue.Size = New System.Drawing.Size(312, 279)
         Me.btnContinue.TabIndex = 7
-        Me.btnContinue.Text = "Continue Work"
         Me.btnContinue.UseVisualStyleBackColor = False
         '
         'TimerLossBT
         '
-        '
-        'PanelShowLoss
-        '
-        Me.PanelShowLoss.Controls.Add(Me.test_time_loss_time)
-        Me.PanelShowLoss.Controls.Add(Me.lbLossCode)
-        Me.PanelShowLoss.Controls.Add(Me.lbEndCount)
-        Me.PanelShowLoss.Controls.Add(Me.Label4)
-        Me.PanelShowLoss.Controls.Add(Me.lbStartCount)
-        Me.PanelShowLoss.Controls.Add(Me.Label3)
-        Me.PanelShowLoss.Controls.Add(Me.Label2)
-        Me.PanelShowLoss.Controls.Add(Me.Label1)
-        Me.PanelShowLoss.Location = New System.Drawing.Point(33, 245)
-        Me.PanelShowLoss.Name = "PanelShowLoss"
-        Me.PanelShowLoss.Size = New System.Drawing.Size(589, 226)
-        Me.PanelShowLoss.TabIndex = 9
-        Me.PanelShowLoss.Visible = False
         '
         'test_time_loss_time
         '
@@ -87,7 +77,7 @@ Partial Class StopMenu
         Me.test_time_loss_time.BackColor = System.Drawing.Color.Black
         Me.test_time_loss_time.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.test_time_loss_time.ForeColor = System.Drawing.Color.White
-        Me.test_time_loss_time.Location = New System.Drawing.Point(395, 67)
+        Me.test_time_loss_time.Location = New System.Drawing.Point(274, 378)
         Me.test_time_loss_time.Name = "test_time_loss_time"
         Me.test_time_loss_time.Size = New System.Drawing.Size(180, 25)
         Me.test_time_loss_time.TabIndex = 13
@@ -97,116 +87,123 @@ Partial Class StopMenu
         'lbLossCode
         '
         Me.lbLossCode.AutoSize = True
-        Me.lbLossCode.BackColor = System.Drawing.Color.Black
-        Me.lbLossCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbLossCode.ForeColor = System.Drawing.Color.White
-        Me.lbLossCode.Location = New System.Drawing.Point(182, 67)
+        Me.lbLossCode.BackColor = System.Drawing.Color.Transparent
+        Me.lbLossCode.Font = New System.Drawing.Font("Catamaran", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbLossCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(197, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.lbLossCode.Location = New System.Drawing.Point(228, 412)
         Me.lbLossCode.Name = "lbLossCode"
-        Me.lbLossCode.Size = New System.Drawing.Size(82, 25)
+        Me.lbLossCode.Size = New System.Drawing.Size(167, 51)
         Me.lbLossCode.TabIndex = 12
         Me.lbLossCode.Text = "XXXXX"
         '
         'lbEndCount
         '
         Me.lbEndCount.AutoSize = True
-        Me.lbEndCount.BackColor = System.Drawing.Color.Black
-        Me.lbEndCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbEndCount.ForeColor = System.Drawing.Color.White
-        Me.lbEndCount.Location = New System.Drawing.Point(374, 180)
+        Me.lbEndCount.BackColor = System.Drawing.Color.Transparent
+        Me.lbEndCount.Font = New System.Drawing.Font("Catamaran", 29.25!, System.Drawing.FontStyle.Bold)
+        Me.lbEndCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(92, Byte), Integer))
+        Me.lbEndCount.Location = New System.Drawing.Point(229, 518)
         Me.lbEndCount.Name = "lbEndCount"
-        Me.lbEndCount.Size = New System.Drawing.Size(55, 25)
+        Me.lbEndCount.Size = New System.Drawing.Size(189, 43)
         Me.lbEndCount.TabIndex = 11
-        Me.lbEndCount.Text = "H:i:s"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.Black
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(7, 67)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(152, 25)
-        Me.Label4.TabIndex = 10
-        Me.Label4.Text = "LOSS CODE : "
+        Me.lbEndCount.Text = "XX:XX:XX"
         '
         'lbStartCount
         '
         Me.lbStartCount.AutoSize = True
-        Me.lbStartCount.BackColor = System.Drawing.Color.Black
-        Me.lbStartCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbStartCount.ForeColor = System.Drawing.Color.White
-        Me.lbStartCount.Location = New System.Drawing.Point(374, 124)
+        Me.lbStartCount.BackColor = System.Drawing.Color.Transparent
+        Me.lbStartCount.Font = New System.Drawing.Font("Catamaran", 25.25!, System.Drawing.FontStyle.Bold)
+        Me.lbStartCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer))
+        Me.lbStartCount.Location = New System.Drawing.Point(231, 472)
         Me.lbStartCount.Name = "lbStartCount"
-        Me.lbStartCount.Size = New System.Drawing.Size(55, 25)
+        Me.lbStartCount.Size = New System.Drawing.Size(165, 37)
         Me.lbStartCount.TabIndex = 9
-        Me.lbStartCount.Text = "H:i:s"
+        Me.lbStartCount.Text = "XX:XX:XX"
         '
-        'Label3
+        'lbLineCode
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Black
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(7, 124)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(348, 25)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "START BREAK TIME COUNTING : "
+        Me.lbLineCode.AutoSize = True
+        Me.lbLineCode.BackColor = System.Drawing.Color.Transparent
+        Me.lbLineCode.Font = New System.Drawing.Font("Catamaran", 31.75!, System.Drawing.FontStyle.Bold)
+        Me.lbLineCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lbLineCode.Location = New System.Drawing.Point(150, 313)
+        Me.lbLineCode.Name = "lbLineCode"
+        Me.lbLineCode.Size = New System.Drawing.Size(182, 46)
+        Me.lbLineCode.TabIndex = 10
+        Me.lbLineCode.Text = "Label5"
         '
-        'Label2
+        'PictureBox1
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Black
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(62, 17)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(473, 25)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "BREAK TIME - LOSS COUNTING AUTOMATICS"
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Image = Global.TBK_FA_System.My.Resources.Resources.sw
+        Me.PictureBox1.Location = New System.Drawing.Point(40, 2)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(383, 304)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 11
+        Me.PictureBox1.TabStop = False
         '
-        'Label1
+        'PanelShowLoss
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Black
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(7, 180)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(323, 25)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "END BREAK TIME COUNTING : "
+        Me.PanelShowLoss.BackColor = System.Drawing.Color.Transparent
+        Me.PanelShowLoss.Location = New System.Drawing.Point(40, 247)
+        Me.PanelShowLoss.Name = "PanelShowLoss"
+        Me.PanelShowLoss.Size = New System.Drawing.Size(244, 201)
+        Me.PanelShowLoss.TabIndex = 14
+        '
+        'lock
+        '
+        Me.lock.BackColor = System.Drawing.Color.Transparent
+        Me.lock.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.BLOCK
+        Me.lock.FlatAppearance.BorderSize = 0
+        Me.lock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.lock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.lock.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lock.Font = New System.Drawing.Font("Arial Rounded MT Bold", 48.0!)
+        Me.lock.ForeColor = System.Drawing.SystemColors.Control
+        Me.lock.Location = New System.Drawing.Point(466, 294)
+        Me.lock.Name = "lock"
+        Me.lock.Size = New System.Drawing.Size(319, 280)
+        Me.lock.TabIndex = 15
+        Me.lock.UseVisualStyleBackColor = False
+        Me.lock.Visible = False
         '
         'StopMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(654, 497)
-        Me.Controls.Add(Me.PanelShowLoss)
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.breaktime3
+        Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.lbEndCount)
+        Me.Controls.Add(Me.lock)
+        Me.Controls.Add(Me.test_time_loss_time)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.lbStartCount)
+        Me.Controls.Add(Me.lbLossCode)
+        Me.Controls.Add(Me.lbLineCode)
         Me.Controls.Add(Me.btnBreakTime)
         Me.Controls.Add(Me.btnContinue)
+        Me.Controls.Add(Me.PanelShowLoss)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "StopMenu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "StopMenu"
-        Me.PanelShowLoss.ResumeLayout(False)
-        Me.PanelShowLoss.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents btnBreakTime As Button
     Friend WithEvents btnContinue As Button
     Friend WithEvents TimerLossBT As Timer
-    Friend WithEvents PanelShowLoss As Panel
     Friend WithEvents test_time_loss_time As Label
     Friend WithEvents lbLossCode As Label
     Friend WithEvents lbEndCount As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents lbStartCount As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lbLineCode As Label
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PanelShowLoss As Panel
+    Friend WithEvents lock As Button
 End Class

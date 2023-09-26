@@ -22,8 +22,18 @@ Public Class Sc
                     SerialPort1.DataBits = 8
                     SerialPort1.Open()
                 Catch ex As Exception
-                    MsgBox("Please check the USB cable or contact administrator!")
-
+                    Dim textlist = "Please check the USB cable or contact administrator!"
+                    Button1.Enabled = False
+                    PictureBox3.Enabled = False
+                    PictureBox1.Enabled = False
+                    Label1.Text = textlist
+                    Label1.BringToFront()
+                    Label1.Show()
+                    PictureBox5.BringToFront()
+                    PictureBox5.Show()
+                    PictureBox4.Show()
+                    PictureBox3.Focus()
+                    'MsgBox("Please check the USB cable or contact administrator!")
                 End Try
 
             End If
@@ -109,7 +119,22 @@ recheck:
                 If total < List_Emp.MaxManPower Then
                     TextBox2.Text = TextBox2.Text.ToUpper()
                     If Ck_dup(List_Emp.ListBox2, TextBox2.Text) Then
-                        MsgBox("คุณลงทะเบียนไว้เรียบร้อยแล้ว")
+
+                        'MsgBox("คุณลงทะเบียนไว้เรียบร้อยแล้ว")
+                        Button1.Enabled = False
+                        PictureBox3.Enabled = False
+                        PictureBox1.Enabled = False
+                        Dim listdetail = "You are already registered."
+                        PictureBox6.BringToFront()
+                        PictureBox6.Show()
+                        PictureBox5.BringToFront()
+                        PictureBox5.Show()
+                        Panel1.BringToFront()
+                        Panel1.Show()
+                        Label1.Text = listdetail
+                        Label1.BringToFront()
+                        Label1.Show()
+
                         TextBox2.Text = ""
                         List_Emp.Enabled = True
                         'List_Emp.Show()
@@ -191,15 +216,54 @@ recheck:
                                     '    'Me.Hide()
                                     'End If
                                 Else
-                                    MsgBox("คุณไม่มีสิทธิ์ในการเดินไลน์การผลิต")
+                                    Button1.Enabled = False
+                                    PictureBox3.Enabled = False
+                                    PictureBox1.Enabled = False
+                                    Dim listdetail = "You not have right to run production line."
+                                    PictureBox4.BringToFront()
+                                    PictureBox4.Show()
+                                    PictureBox5.BringToFront()
+                                    PictureBox5.Show()
+                                    Panel1.BringToFront()
+                                    Panel1.Show()
+                                    Label1.Text = listdetail
+                                    Label1.BringToFront()
+                                    Label1.Show()
+                                    ' MsgBox("คุณไม่มีสิทธิ์ในการเดินไลน์การผลิต")
                                     TextBox2.Text = ""
                                 End If
                             Else
-                                MsgBox("พนักงานคนนี้ไม่มี สิทธิในการเดินไลน์นี้")
+                                Button1.Enabled = False
+                                PictureBox3.Enabled = False
+                                PictureBox1.Enabled = False
+                                Dim listdetail = "You not have right to run production line."
+                                PictureBox4.BringToFront()
+                                PictureBox4.Show()
+                                PictureBox5.BringToFront()
+                                PictureBox5.Show()
+                                Panel1.BringToFront()
+                                Panel1.Show()
+                                Label1.Text = listdetail
+                                Label1.BringToFront()
+                                Label1.Show()
                                 TextBox2.Text = ""
                             End If
                         Else
-                            MsgBox("Please scan employee card only!!!")
+                            Button1.Enabled = False
+                            PictureBox3.Enabled = False
+                            PictureBox1.Enabled = False
+                            Dim listdetail = "Please scan employee card only!"
+                            PictureBox4.BringToFront()
+                            PictureBox4.Show()
+                            PictureBox5.BringToFront()
+                            PictureBox5.Show()
+                            Panel1.BringToFront()
+                            Panel1.Show()
+                            Label1.Text = listdetail
+                            Label1.BringToFront()
+                            Label1.Show()
+
+
                             TextBox2.Text = ""
                             List_Emp.Enabled = True
                             'List_Emp.Show()
@@ -266,5 +330,27 @@ recheck:
 
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Keyboard.Show()
+    End Sub
+
+    Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
+        PictureBox4.Hide()
+        PictureBox5.Hide()
+        PictureBox6.Hide()
+        Panel1.Hide()
+        Button1.Enabled = True
+        PictureBox3.Enabled = True
+        PictureBox1.Enabled = True
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+
+    End Sub
+
+    Private Sub Label1_Click_1(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub PictureBox6_Click(sender As Object, e As EventArgs) Handles PictureBox6.Click
+
     End Sub
 End Class

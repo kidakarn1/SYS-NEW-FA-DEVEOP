@@ -38,6 +38,13 @@ Partial Class Line_conf
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox16 = New System.Windows.Forms.PictureBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label22
@@ -220,6 +227,53 @@ Partial Class Line_conf
         Me.Label3.TabIndex = 4632
         Me.Label3.Text = "Label3"
         '
+        'PictureBox6
+        '
+        Me.PictureBox6.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox6.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.sweetAlertSuccess
+        Me.PictureBox6.Location = New System.Drawing.Point(245, 110)
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.Size = New System.Drawing.Size(310, 380)
+        Me.PictureBox6.TabIndex = 4633
+        Me.PictureBox6.TabStop = False
+        Me.PictureBox6.Visible = False
+        '
+        'PictureBox16
+        '
+        Me.PictureBox16.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnOK
+        Me.PictureBox16.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox16.Location = New System.Drawing.Point(329, 419)
+        Me.PictureBox16.Name = "PictureBox16"
+        Me.PictureBox16.Size = New System.Drawing.Size(145, 61)
+        Me.PictureBox16.TabIndex = 4653
+        Me.PictureBox16.TabStop = False
+        Me.PictureBox16.Visible = False
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.White
+        Me.Label2.Font = New System.Drawing.Font("Catamaran", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(12, 10)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(275, 35)
+        Me.Label2.TabIndex = 12
+        Me.Label2.Text = "XXXXX"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label2.Visible = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Location = New System.Drawing.Point(251, 333)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(298, 81)
+        Me.Panel2.TabIndex = 4652
+        Me.Panel2.Visible = False
+        '
         'Line_conf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -228,6 +282,9 @@ Partial Class Line_conf
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.configLine2
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
+        Me.Controls.Add(Me.PictureBox16)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.PictureBox6)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.delay_sec)
         Me.Controls.Add(Me.ComboBox_master_device)
@@ -246,6 +303,9 @@ Partial Class Line_conf
         Me.Name = "Line_conf"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Line_conf"
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -265,4 +325,8 @@ Partial Class Line_conf
     Friend WithEvents ComboBox_master_device As ComboBox
     Public WithEvents delay_sec As ComboBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents PictureBox6 As PictureBox
+    Friend WithEvents PictureBox16 As PictureBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel2 As Panel
 End Class

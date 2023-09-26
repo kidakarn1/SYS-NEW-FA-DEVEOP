@@ -242,66 +242,78 @@ break_loop:
         Dim totalDefect As Integer = (CDbl(Val(Working_Pro.lb_nc_qty.Text)) + CDbl(Val(Working_Pro.lb_ng_qty.Text))) 'CDbl(Val(md.mGetDefect(Working_Pro.wi_no.Text, Working_Pro.Label18.Text, Working_Pro.Label14.Text) + (CDbl(Val(Working_Pro.lb_nc_qty.Text)) + CDbl(Val(Working_Pro.lb_ng_qty.Text)))))
         'If inp_qty > (prd_qty - totalDefect) Then
         If inp_qty > (CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text) - totalDefect)) Then
-            MsgBox("Can't input the Qty. over : " & Label1.Text & " And Have Defect : " & totalDefect)
+            PictureBox3.Enabled = False
+            PictureBox2.Enabled = False
+            Dim listdetail = "Can't input the Qty. over : " & Label1.Text & " And Have Defect : " & totalDefect
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox1.BringToFront()
+            PictureBox1.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            'MsgBox("Can't input the Qty. over : " & Label1.Text & " And Have Defect : " & totalDefect)
             TextBox1.Clear()
         Else
             If CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) > 0 Then
-				Working_Pro._Edit_Up_0.Text = Working_Pro.LB_COUNTER_SHIP.Text
-				If CDbl(Val(TextBox1.Text)) <= CDbl(Val(Label1.Text)) Then
+                Working_Pro._Edit_Up_0.Text = Working_Pro.LB_COUNTER_SHIP.Text
+                If CDbl(Val(TextBox1.Text)) <= CDbl(Val(Label1.Text)) Then
                     cal_qty()
                     Working_Pro.LB_COUNTER_SHIP.Text -= inp_qty
                     Working_Pro.LB_COUNTER_SEQ.Text -= inp_qty
                     Dim yearNow As Integer = DateTime.Now.ToString("yyyy")
                     Dim monthNow As Integer = DateTime.Now.ToString("MM")
-					Dim dayNow As Integer = DateTime.Now.ToString("dd")
-					Dim hourNow As Integer = DateTime.Now.ToString("HH")
-					Dim minNow As Integer = DateTime.Now.ToString("mm")
-					Dim secNow As Integer = DateTime.Now.ToString("ss")
-					Dim yearSt As Integer = Working_Pro.st_time.Text.Substring(0, 4)
-					Dim monthSt As Integer = Working_Pro.st_time.Text.Substring(5, 2)
-					Dim daySt As Integer = Working_Pro.st_time.Text.Substring(8, 2)
-					Dim hourSt As Integer = Working_Pro.st_time.Text.Substring(11, 2)
-					Dim minSt As Integer = Working_Pro.st_time.Text.Substring(14, 2)
-					Dim secSt As Integer = Working_Pro.st_time.Text.Substring(17, 2)
-					Dim firstDate As New System.DateTime(yearSt, monthSt, daySt, hourSt, minSt, secSt)
-					Dim secondDate As New System.DateTime(yearNow, monthNow, dayNow, hourNow, minNow, secNow)
-					Dim diff As System.TimeSpan = secondDate.Subtract(firstDate)
-					Dim diff1 As System.TimeSpan = secondDate - firstDate
-					Dim diff2 As String = (secondDate - firstDate).TotalSeconds.ToString()
-					Dim actCT As Double = Format(diff2 / 60, "0.00")
-					Dim cnt_btn As Integer = Integer.Parse(MainFrm.cavity.Text)
-					Dim snp As Integer = Integer.Parse(Working_Pro.Label27.Text)
-					Working_Pro._Edit_Up_0.Text = Integer.Parse(Working_Pro._Edit_Up_0.Text) - inp_qty
-					Working_Pro.Label6.Text = Integer.Parse(Working_Pro.Label6.Text) - inp_qty
-					Working_Pro.Label10.Text = Integer.Parse(Working_Pro.Label10.Text.Substring(1)) + inp_qty
-					Working_Pro.Label10.Text = "-" + Working_Pro.Label10.Text
-					Working_Pro.count = Working_Pro.count - inp_qty
-					Working_Pro.lb_qty_for_box.Text = Integer.Parse(Working_Pro.lb_qty_for_box.Text) - inp_qty
-					If Working_Pro.lb_qty_for_box.Text < 0 Then
-						Working_Pro.lb_qty_for_box.Text = "0"
-					End If
-					Dim sum_prg As Integer = (Working_Pro.Label6.Text * 100) / Working_Pro.Label8.Text
-					If sum_prg > 100 Then
-						sum_prg = 100
-					End If
-					Working_Pro.CircularProgressBar1.Text = sum_prg & "%"
-					Working_Pro.CircularProgressBar1.Value = sum_prg
-					Dim start_time As Date = Working_Pro.st_count_ct.Text
-					Dim pd As String = MainFrm.Label6.Text
-					Dim line_cd As String = MainFrm.Label4.Text
-					Dim wi_plan As String = Working_Pro.wi_no.Text
-					Dim item_cd As String = Working_Pro.Label3.Text
-					Dim item_name As String = Working_Pro.Label12.Text
-					Dim staff_no As String = Working_Pro.Label29.Text
-					Dim seq_no As String = Working_Pro.Label22.Text
-					Dim prd_qty2 As Integer = inp_qty - (inp_qty * 2)
-					Dim end_time As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-					Dim use_timee As Double = "0"
-					Dim tr_status As String = "0"
-					Dim number_qty As Integer = Working_Pro.Label6.Text
-					'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, tr_status)
-					Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-					Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+                    Dim dayNow As Integer = DateTime.Now.ToString("dd")
+                    Dim hourNow As Integer = DateTime.Now.ToString("HH")
+                    Dim minNow As Integer = DateTime.Now.ToString("mm")
+                    Dim secNow As Integer = DateTime.Now.ToString("ss")
+                    Dim yearSt As Integer = Working_Pro.st_time.Text.Substring(0, 4)
+                    Dim monthSt As Integer = Working_Pro.st_time.Text.Substring(5, 2)
+                    Dim daySt As Integer = Working_Pro.st_time.Text.Substring(8, 2)
+                    Dim hourSt As Integer = Working_Pro.st_time.Text.Substring(11, 2)
+                    Dim minSt As Integer = Working_Pro.st_time.Text.Substring(14, 2)
+                    Dim secSt As Integer = Working_Pro.st_time.Text.Substring(17, 2)
+                    Dim firstDate As New System.DateTime(yearSt, monthSt, daySt, hourSt, minSt, secSt)
+                    Dim secondDate As New System.DateTime(yearNow, monthNow, dayNow, hourNow, minNow, secNow)
+                    Dim diff As System.TimeSpan = secondDate.Subtract(firstDate)
+                    Dim diff1 As System.TimeSpan = secondDate - firstDate
+                    Dim diff2 As String = (secondDate - firstDate).TotalSeconds.ToString()
+                    Dim actCT As Double = Format(diff2 / 60, "0.00")
+                    Dim cnt_btn As Integer = Integer.Parse(MainFrm.cavity.Text)
+                    Dim snp As Integer = Integer.Parse(Working_Pro.Label27.Text)
+                    Working_Pro._Edit_Up_0.Text = Integer.Parse(Working_Pro._Edit_Up_0.Text) - inp_qty
+                    Working_Pro.Label6.Text = Integer.Parse(Working_Pro.Label6.Text) - inp_qty
+                    Working_Pro.Label10.Text = Integer.Parse(Working_Pro.Label10.Text.Substring(1)) + inp_qty
+                    Working_Pro.Label10.Text = "-" + Working_Pro.Label10.Text
+                    Working_Pro.count = Working_Pro.count - inp_qty
+                    Working_Pro.lb_qty_for_box.Text = Integer.Parse(Working_Pro.lb_qty_for_box.Text) - inp_qty
+                    If Working_Pro.lb_qty_for_box.Text < 0 Then
+                        Working_Pro.lb_qty_for_box.Text = "0"
+                    End If
+                    Dim sum_prg As Integer = (Working_Pro.Label6.Text * 100) / Working_Pro.Label8.Text
+                    If sum_prg > 100 Then
+                        sum_prg = 100
+                    End If
+                    Working_Pro.CircularProgressBar1.Text = sum_prg & "%"
+                    Working_Pro.CircularProgressBar1.Value = sum_prg
+                    Dim start_time As Date = Working_Pro.st_count_ct.Text
+                    Dim pd As String = MainFrm.Label6.Text
+                    Dim line_cd As String = MainFrm.Label4.Text
+                    Dim wi_plan As String = Working_Pro.wi_no.Text
+                    Dim item_cd As String = Working_Pro.Label3.Text
+                    Dim item_name As String = Working_Pro.Label12.Text
+                    Dim staff_no As String = Working_Pro.Label29.Text
+                    Dim seq_no As String = Working_Pro.Label22.Text
+                    Dim prd_qty2 As Integer = inp_qty - (inp_qty * 2)
+                    Dim end_time As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                    Dim use_timee As Double = "0"
+                    Dim tr_status As String = "0"
+                    Dim number_qty As Integer = Working_Pro.Label6.Text
+                    'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, tr_status)
+                    Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+                    Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                     Try
                         If Working_Pro.LB_COUNTER_SEQ.Text.Substring(0, 1) = "-" Then
                             Working_Pro.LB_COUNTER_SEQ.Text = 0
@@ -322,12 +334,36 @@ break_loop:
                     End Try
                     Working_Pro.Enabled = True
                     Me.Close()
-				Else
-					MsgBox("Please check QTY OF SHIFT")
-				End If
-			Else
-				MsgBox("Can't input the Qty. over : " + Label1.Text)
-				TextBox1.Clear()
+                Else
+                    'MsgBox("Please check QTY OF SHIFT")
+                    PictureBox3.Enabled = False
+                    PictureBox2.Enabled = False
+                    Dim listdetail = "Please check QTY OF SHIFT"
+                    PictureBox10.BringToFront()
+                    PictureBox10.Show()
+                    PictureBox1.BringToFront()
+                    PictureBox1.Show()
+                    Panel2.BringToFront()
+                    Panel2.Show()
+                    Label2.Text = listdetail
+                    Label2.BringToFront()
+                    Label2.Show()
+                End If
+            Else
+                PictureBox3.Enabled = False
+                PictureBox2.Enabled = False
+                Dim listdetail = "Can't input the Qty. over : " + Label1.Text
+                PictureBox10.BringToFront()
+                PictureBox10.Show()
+                PictureBox1.BringToFront()
+                PictureBox1.Show()
+                Panel2.BringToFront()
+                Panel2.Show()
+                Label2.Text = listdetail
+                Label2.BringToFront()
+                Label2.Show()
+                'MsgBox("Can't input the Qty. over : " + Label1.Text)
+                TextBox1.Clear()
 			End If
 		End If
 	End Function
@@ -436,4 +472,16 @@ break_loop:
 	Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
 	End Sub
+
+    Private Sub PictureBox10_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub PictureBox1_Click_1(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        PictureBox3.Enabled = True
+        PictureBox2.Enabled = True
+        PictureBox10.Visible = False
+        Panel2.Visible = False
+        PictureBox1.Visible = False
+    End Sub
 End Class

@@ -83,8 +83,10 @@ Public Class Working_Pro
             counterNewDIO = New CheckWindow
             counterNewDIO.Per_CheckCounter()
         End If
+        Label7.Text = OEE.OEE_GET_TARGET(Label14.Text, Prd_detail.lb_wi.Text, Label6.Text)
         PictureBox12.Visible = False
-        'PictureBox10.Visible = False
+        PictureBox10.Visible = True
+        Label29.BringToFront()
         PictureBox11.Visible = False
         Wait_data.Close()
         'Prd_detail.Timer3.Enabled = False
@@ -182,9 +184,41 @@ Public Class Working_Pro
             Call DioGetErrorString(Ret, szError)
         Else
             If CheckOs() Then
-                counterNewDIO.count_NIMAX()
+                Dim rs = counterNewDIO.count_NIMAX()
+                If rs <> "OK" Then
+                    Button1.Enabled = False
+                    btn_start.Enabled = False
+                    btn_back.Enabled = False
+                    PictureBox13.Enabled = False
+                    PictureBox14.Enabled = False
+                    Dim listdetail = "Please check DIO !"
+                    PictureBox10.BringToFront()
+                    PictureBox10.Show()
+                    PictureBox16.BringToFront()
+                    PictureBox16.Show()
+                    Panel2.BringToFront()
+                    Panel2.Show()
+                    Label2.Text = listdetail
+                    Label2.BringToFront()
+                    Label2.Show()
+                End If
             Else
-                MsgBox("Not Support Counter NI MAX because  OS window 7.")
+                'MsgBox("")
+                Button1.Enabled = False
+                btn_start.Enabled = False
+                btn_back.Enabled = False
+                PictureBox13.Enabled = False
+                PictureBox14.Enabled = False
+                Dim listdetail = "Not Support Counter NI MAX because  OS window 7."
+                PictureBox10.BringToFront()
+                PictureBox10.Show()
+                PictureBox16.BringToFront()
+                PictureBox16.Show()
+                Panel2.BringToFront()
+                Panel2.Show()
+                Label2.Text = listdetail
+                Label2.BringToFront()
+                Label2.Show()
             End If
         End If
         Dim date_now As String = DateTime.Now.ToString("dd-MM-yyyy")
@@ -293,6 +327,7 @@ Public Class Working_Pro
         btn_start.BringToFront()
         btn_start.Visible = True
         PictureBox11.Visible = True
+        PictureBox13.BackColor = Color.FromArgb(63, 63, 63)
         'Panel3.Location = New Point(47, 209)
         ' Label6.Location = New Point(38, 324)
         'Label10.Location = New Point(38, 439)
@@ -312,7 +347,7 @@ Public Class Working_Pro
         CircularProgressBar2.InnerColor = Color.FromArgb(63, 63, 63)
 
 
-        Label7.Location = New Point(98, 196)
+        Label7.Location = New Point(98, 192)
         Label7.BackColor = Color.FromArgb(12, 27, 45)
         Label7.BringToFront()
 
@@ -469,7 +504,7 @@ Public Class Working_Pro
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id, status_sqlite)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id, tr_status)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
@@ -543,63 +578,7 @@ Public Class Working_Pro
     End Sub
     Public Sub Start_Production()
 
-        btn_start.Visible = False
-        PictureBox11.Visible = False
-        PictureBox12.Visible = True
-        'PictureBox10.Visible = True
 
-        Label24.BackColor = Color.FromArgb(44, 93, 129)
-        Label24.BringToFront()
-        btn_stop.BringToFront()
-        Label17.BackColor = Color.FromArgb(44, 93, 129)
-        Label17.BringToFront()
-        Label1.BackColor = Color.FromArgb(44, 93, 129)
-        Label1.BringToFront()
-        'Label29.BackColor = Color.FromArgb(44, 93, 129)
-
-        Label3.BackColor = Color.FromArgb(44, 88, 130)
-        Label3.BringToFront()
-        Label18.BackColor = Color.FromArgb(44, 88, 130)
-        Label18.BringToFront()
-
-        Label16.BackColor = Color.FromArgb(44, 82, 131)
-        Label16.BringToFront()
-        Label20.BackColor = Color.FromArgb(44, 82, 131)
-        Label20.BringToFront()
-
-        CircularProgressBar2.BackColor = Color.FromArgb(44, 67, 133)
-        CircularProgressBar2.InnerColor = Color.FromArgb(44, 67, 133)
-        CircularProgressBar2.BringToFront()
-
-        lbNextTime.BringToFront()
-        Panel7.BringToFront()
-        lb_ng_qty.BringToFront()
-        LB_COUNTER_SHIP.BringToFront()
-        LB_COUNTER_SEQ.BringToFront()
-        Label29.BringToFront()
-
-        PictureBox13.BackColor = Color.FromArgb(44, 93, 129)
-        PictureBox14.BackColor = Color.FromArgb(44, 88, 130)
-
-        Label7.Location = New Point(98, 196)
-        Label7.BackColor = Color.FromArgb(12, 27, 45)
-        Label7.BringToFront()
-
-        Label8.Location = New Point(56, 297)
-        Label8.BackColor = Color.FromArgb(12, 27, 45)
-        Label8.BringToFront()
-
-        Label6.Location = New Point(43, 403)
-        Label6.BackColor = Color.FromArgb(12, 27, 45)
-        Label6.BringToFront()
-
-        Label10.Location = New Point(41, 510)
-        Label10.BackColor = Color.FromArgb(12, 27, 45)
-        Label10.BringToFront()
-        Label20.Visible = True
-        LB_COUNTER_SEQ.Visible = True
-        'LB_COUNTER_SEQ.BringToFront()
-        CircularProgressBar2.Visible = True
         If check_network_frist = 0 Then
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
@@ -739,7 +718,7 @@ Public Class Working_Pro
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id, status_sqlite)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id, tr_status)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
@@ -788,6 +767,65 @@ Public Class Working_Pro
         btn_closelot.Visible = False
         btn_stop.Visible = True
         Prd_detail.Timer3.Enabled = False
+
+
+        btn_start.Visible = False
+        PictureBox11.Visible = False
+        PictureBox12.Visible = True
+        'PictureBox10.Visible = True
+
+        Label24.BackColor = Color.FromArgb(44, 93, 129)
+        Label24.BringToFront()
+        btn_stop.BringToFront()
+        Label17.BackColor = Color.FromArgb(44, 93, 129)
+        Label17.BringToFront()
+        Label1.BackColor = Color.FromArgb(44, 93, 129)
+        Label1.BringToFront()
+        'Label29.BackColor = Color.FromArgb(44, 93, 129)
+
+        Label3.BackColor = Color.FromArgb(44, 88, 130)
+        Label3.BringToFront()
+        Label18.BackColor = Color.FromArgb(44, 88, 130)
+        Label18.BringToFront()
+
+        Label16.BackColor = Color.FromArgb(44, 82, 131)
+        Label16.BringToFront()
+        Label20.BackColor = Color.FromArgb(44, 82, 131)
+        Label20.BringToFront()
+
+        CircularProgressBar2.BackColor = Color.FromArgb(44, 67, 133)
+        CircularProgressBar2.InnerColor = Color.FromArgb(44, 67, 133)
+        CircularProgressBar2.BringToFront()
+
+        lbNextTime.BringToFront()
+        Panel7.BringToFront()
+        lb_ng_qty.BringToFront()
+        LB_COUNTER_SHIP.BringToFront()
+        LB_COUNTER_SEQ.BringToFront()
+        Label29.BringToFront()
+
+        PictureBox13.BackColor = Color.FromArgb(44, 93, 129)
+        PictureBox14.BackColor = Color.FromArgb(44, 88, 130)
+
+        Label7.Location = New Point(98, 192)
+        Label7.BackColor = Color.FromArgb(12, 27, 45)
+        Label7.BringToFront()
+
+        Label8.Location = New Point(56, 297)
+        Label8.BackColor = Color.FromArgb(12, 27, 45)
+        Label8.BringToFront()
+
+        Label6.Location = New Point(43, 403)
+        Label6.BackColor = Color.FromArgb(12, 27, 45)
+        Label6.BringToFront()
+
+        Label10.Location = New Point(41, 510)
+        Label10.BackColor = Color.FromArgb(12, 27, 45)
+        Label10.BringToFront()
+        Label20.Visible = True
+        LB_COUNTER_SEQ.Visible = True
+        'LB_COUNTER_SEQ.BringToFront()
+        CircularProgressBar2.Visible = True
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text)
@@ -969,7 +1007,7 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, Label18.Text, status_sqlite)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, Label18.Text, tr_status)
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, number_qty, start_time2, end_time, use_timee, number_qty, tr_status, Label18.Text)
                 Else
                     tr_status = "0"
@@ -1351,7 +1389,7 @@ Public Class Working_Pro
                             If My.Computer.Network.Ping("192.168.161.101") Then
                                 tr_status = "1"
                                 Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                                Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, status_sqlite)
+                                Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, tr_status)
                                 'MsgBox("Ping completed")
                             Else
                                 tr_status = "0"
@@ -2026,7 +2064,7 @@ Public Class Working_Pro
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, status_sqlite)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, tr_status)
                 Else
                     tr_status = "0"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
@@ -2051,7 +2089,7 @@ Public Class Working_Pro
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         tr_status = "1"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, status_sqlite)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, tr_status)
                     Else
                         tr_status = "0"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
@@ -2289,7 +2327,7 @@ Public Class Working_Pro
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         tr_status = "1"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time2, end_time2, use_time, number_qty, pwi_id, status_sqlite)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time2, end_time2, use_time, number_qty, pwi_id, tr_status)
                     Else
                         tr_status = "0"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
@@ -2632,7 +2670,7 @@ Public Class Working_Pro
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, status_sqlite)
+                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, tr_status)
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
@@ -2732,7 +2770,20 @@ Public Class Working_Pro
                     End If
                 End If
             Catch ex As Exception
-                MsgBox("Please Check DIO ")
+
+                Button1.Enabled = False
+                btn_start.Enabled = False
+                btn_back.Enabled = False
+                Dim listdetail = "Please Check DIO"
+                PictureBox10.BringToFront()
+                PictureBox10.Show()
+                PictureBox16.BringToFront()
+                PictureBox16.Show()
+                Panel2.BringToFront()
+                Panel2.Show()
+                Label2.Text = listdetail
+                Label2.BringToFront()
+                Label2.Show()
             End Try
         End If
     End Sub
@@ -2843,8 +2894,8 @@ Public Class Working_Pro
     End Function
 
     Private Sub PictureBox14_Click(sender As Object, e As EventArgs) Handles PictureBox14.Click
-        Dim showD = New show_detail_production
-        showD.show
+        'Dim showD = New show_detail_production
+        show_detail_production.Show()
     End Sub
 
     Private Sub PictureBox12_Click(sender As Object, e As EventArgs) Handles PictureBox12.Click
@@ -2853,5 +2904,20 @@ Public Class Working_Pro
 
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
+    End Sub
+
+    Private Sub PictureBox11_Click(sender As Object, e As EventArgs) Handles PictureBox11.Click
+
+    End Sub
+
+    Private Sub PictureBox16_Click(sender As Object, e As EventArgs) Handles PictureBox16.Click
+        PictureBox10.Hide()
+        PictureBox16.Hide()
+        Panel2.Hide()
+        PictureBox13.Enabled = True
+        PictureBox14.Enabled = True
+        Button1.Enabled = True
+        btn_start.Enabled = True
+        btn_back.Enabled = True
     End Sub
 End Class

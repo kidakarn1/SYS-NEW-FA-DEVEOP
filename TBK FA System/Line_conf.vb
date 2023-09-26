@@ -344,7 +344,23 @@ Public Class Line_conf
         Dim total_delay As Integer = (CDbl(Val(delay_sec.Text)) * 10)
         Dim api = New api()
         Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/INSERT_COTROL_MASTER?line_cd=" & ComboBox2.Text & "&ComboBox_master_device=" & ComboBox_master_device.Text & "&device_dio_port_id=" & dio_port & "&printer=" & printer.Text & "&typ_counter=" & type_counter.Text & "&cavity=" & combo_cavity.Text & "&total_delay=" & total_delay & "&scanner=" & scanner.Text)
-        MsgBox("Update Success.")
+
+        ' Button1.Enabled = False
+        'btn_start.Enabled = False
+        'btn_back.Enabled = False
+        Dim listdetail = "Updated Success !"
+        PictureBox6.BringToFront()
+        PictureBox6.Show()
+        PictureBox16.BringToFront()
+        PictureBox16.Show()
+        Panel2.BringToFront()
+        Panel2.Show()
+        Label2.Text = listdetail
+        Label2.BringToFront()
+        Label2.Show()
+
+        'MsgBox("Update Success.")
+
         MainFrm.Show()
         Me.Hide()
     End Sub

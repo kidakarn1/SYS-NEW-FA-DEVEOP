@@ -157,8 +157,8 @@
   <data name="productionStopped1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productionStopped1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="manualLossAfter1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\manualLossAfter1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sweetAlertSuccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sweetAlertSuccess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="configLine1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\configLine1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,20 +172,20 @@
   <data name="manualLossAfter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\manualLossAfter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="loginAdmin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loginAdmin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectAdmindetailadjustNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAdmindetailadjustNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="manageEmp2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\manageEmp2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="defectRegister2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectRegister2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="productionStart4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productionStart4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectHome4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectHome4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="breaktime2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\breaktime2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnInc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnInc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -196,11 +196,14 @@
   <data name="defectAlertupdate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAlertupdate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAdmindetailNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAdmindetailNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="btnokkk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnokkk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="configLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\configLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="scanAdminAccount" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scanAdminAccount.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loginAdmin1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loginAdmin1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="addActualNumpadspa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addActualNumpadspa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,8 +214,14 @@
   <data name="Information2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Information2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnCloselot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnCloselot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sweetAlertWarningUnseccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sweetAlertWarningUnseccess.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="productionStopped5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\productionStopped5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addActualNumpad3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addActualNumpad3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="productionDetail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productionDetail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,8 +232,8 @@
   <data name="defectAdminselectcodeNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminselectcodeNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="manageEmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\manageEmp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MainMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="productionStart3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productionStart3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,8 +241,8 @@
   <data name="selectShift" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\selectShift.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="manualLossBefore" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\manualLossBefore.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="addSpeNumpad" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addSpeNumpad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectHome1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectHome1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,14 +259,29 @@
   <data name="defectRegister1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectRegister1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="defectRegister" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectRegister.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="defectAdminnumpadregister1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminnumpadregister1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnstartbreaktime" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnstartbreaktime.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="setupMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\setupMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MainMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Untitled-4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Untitled-4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manageEmp1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\manageEmp1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="productionStart2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\productionStart2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="defectAdmindetailNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAdmindetailNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="inst_qty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\inst_qty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -265,8 +289,8 @@
   <data name="defectHome6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectHome6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="scanAdminAccount" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\scanAdminAccount.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectAdminselectcodeNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAdminselectcodeNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="autoLoss" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\autoLoss.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -277,17 +301,26 @@
   <data name="defectHome11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectHome11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Information1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Information1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="defectHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="configLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\configLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MainMenu2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainMenu2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="defectHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="breaktime3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\breaktime3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="MainMenu1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainMenu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnCloselot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnCloselot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addActualNumpad2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addActualNumpad2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectDetailnc2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectDetailnc2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -295,8 +328,8 @@
   <data name="defectDetailnc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectDetailnc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="productionStopped5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\productionStopped5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="btnstartbreaktime1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnstartbreaktime1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdmindetailNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdmindetailNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -304,20 +337,23 @@
   <data name="selectLoss1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\selectLoss1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="scanAdminAccount1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\scanAdminAccount1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="loginAdmin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loginAdmin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="inst_qty2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\inst_qty2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="closeLotsummary1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\closeLotsummary1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="productionStarting3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productionStarting3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="productionListDetail2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\productionListDetail2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="scanAdminAccount1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scanAdminAccount1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAdmindetailadjustNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAdmindetailadjustNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="manageEmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\manageEmp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdminsearchNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminsearchNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -334,14 +370,17 @@
   <data name="defectNumpadadjust" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectNumpadadjust.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAdminselectcodeNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAdminselectcodeNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="breaktime" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\breaktime.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="productionListDetail2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\productionListDetail2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="defectAlertsure" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAlertsure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="scanEmpCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\scanEmpCard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="manageEmp1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\manageEmp1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="productionListDetail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productionListDetail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -349,11 +388,17 @@
   <data name="2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="breaktime1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\breaktime1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="defectAdminnumpadregister" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminnumpadregister.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="addActualNumpad1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addActualNumpad1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="productionStopped3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\productionStopped3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdminsearchNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdminsearchNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -370,8 +415,11 @@
   <data name="btnSetting" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnSetting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="loginAdmin1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loginAdmin1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sw.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btnOK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnOK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="productionStartingtarget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productionStartingtarget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -382,8 +430,8 @@
   <data name="productionStarting" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\productionStarting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAdmindetailNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAdmindetailNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="manualLossBefore" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\manualLossBefore.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="addLossNumpad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addLossNumpad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -394,11 +442,11 @@
   <data name="decreaseActualNumpad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\decreaseActualNumpad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="productionStopped3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\productionStopped3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defectRegister2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectRegister2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectAlertsure" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectAlertsure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="selectNormalRework" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\selectNormalRework.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="man" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\man.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -427,8 +475,11 @@
   <data name="defectAdmindetailNC2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdmindetailNC2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defectRegister" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defectRegister.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="manageEmp3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\manageEmp3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="defectAdmindetailNC1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defectAdmindetailNC1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defectAdmindetailadjustNC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectAdmindetailadjustNC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -457,6 +508,9 @@
   <data name="defectDetailnc1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defectDetailnc1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Information1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Information1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -469,16 +523,16 @@
   <data name="btnDefect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnDefect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="productionStart2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\productionStart2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="manualLossAfter1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\manualLossAfter1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="selectNormalRework" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\selectNormalRework.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="btnstartbreaktime2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btnstartbreaktime2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="reprintTag1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reprintTag1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="addSpeNumpad" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\addSpeNumpad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BLOCK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BLOCK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

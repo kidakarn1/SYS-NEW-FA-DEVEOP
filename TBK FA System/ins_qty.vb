@@ -18,7 +18,20 @@ Public Class ins_qty
         Dim sum_str As Integer = text_now & "1"
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
+            ' MsgBox("Insert mitaked! Please try it again.")
         Else
             TextBox1.Text = text_now & "1"
             Button10.Enabled = True
@@ -30,7 +43,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "2"
             Button10.Enabled = True
@@ -43,7 +68,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "3"
             Button10.Enabled = True
@@ -56,7 +93,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "4"
             Button10.Enabled = True
@@ -69,7 +118,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "5"
             Button10.Enabled = True
@@ -82,7 +143,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "6"
             Button10.Enabled = True
@@ -95,7 +168,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "7"
             Button10.Enabled = True
@@ -108,7 +193,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "8"
             Button10.Enabled = True
@@ -121,7 +218,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "9"
             Button10.Enabled = True
@@ -134,7 +243,19 @@ Public Class ins_qty
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
 
         If sum_str > rem_qty Then
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             TextBox1.Text = text_now & "0"
             Button10.Enabled = True
@@ -162,9 +283,20 @@ Public Class ins_qty
             Working_Pro.Enabled = True
             Me.Close()
         Else
-            MsgBox("Insert mitaked! Please try it again.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Insert mitaked! Please try it again."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
             Working_Pro.Enabled = False
-
+            TextBox1.Text = ""
         End If
     End Sub
 
@@ -176,13 +308,52 @@ Public Class ins_qty
 
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles pb_ok.Click
         If Trim(TextBox1.Text) = "" Then
-            MsgBox("Please check QTY.")
+            'MsgBox("Please check QTY.")
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Dim listdetail = "Please check QTY."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox3.BringToFront()
+            PictureBox3.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            TextBox1.Text = ""
         Else
             If Trim(TextBox1.Text) <= 0 Then
-                MsgBox("Please check QTY.")
+                'MsgBox("Please check QTY.")
+                Button10.Enabled = False
+                Button11.Enabled = False
+                Dim listdetail = "Please check QTY."
+                PictureBox10.BringToFront()
+                PictureBox10.Show()
+                PictureBox3.BringToFront()
+                PictureBox3.Show()
+                Panel2.BringToFront()
+                Panel2.Show()
+                Label2.Text = listdetail
+                Label2.BringToFront()
+                Label2.Show()
+                TextBox1.Text = ""
             Else
                 If TextBox1.Text = "" Then
-                    MsgBox("Please check QTY.")
+                    'MsgBox("Please check QTY.")
+                    Button10.Enabled = False
+                    Button11.Enabled = False
+                    Dim listdetail = "Please check QTY."
+                    PictureBox10.BringToFront()
+                    PictureBox10.Show()
+                    PictureBox3.BringToFront()
+                    PictureBox3.Show()
+                    Panel2.BringToFront()
+                    Panel2.Show()
+                    Label2.Text = listdetail
+                    Label2.BringToFront()
+                    Label2.Show()
+                    TextBox1.Text = ""
                 Else
                     Wait_data.Label1.Text = "กรุณารอสักครู่ ระบบกำลังบันทึกข้อมูล"
                     Wait_data.Label2.Text = "PLEASE WAIT SYSTEM SAVING DATA."
@@ -209,7 +380,19 @@ Public Class ins_qty
                 Wait_data.Close()
                 Me.Close()
             Else
-                MsgBox("Insert mitaked! Please try it again.")
+                Button10.Enabled = False
+                Button11.Enabled = False
+                Dim listdetail = "Insert mitaked! Please try it again."
+                PictureBox10.BringToFront()
+                PictureBox10.Show()
+                PictureBox3.BringToFront()
+                PictureBox3.Show()
+                Panel2.BringToFront()
+                Panel2.Show()
+                Label2.Text = listdetail
+                Label2.BringToFront()
+                Label2.Show()
+                TextBox1.Text = ""
                 Working_Pro.Enabled = False
             End If
         End If
@@ -238,5 +421,17 @@ Public Class ins_qty
     End Sub
     Private Sub SPECIAL_MENU_Click(sender As Object, e As EventArgs) Handles SPECIAL_MENU.Click
         ins_qty_special_time.Show()
+    End Sub
+
+    Private Sub PictureBox3_Click_1(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Button10.Enabled = True
+        Button11.Enabled = True
+        PictureBox10.Visible = False
+        PictureBox3.Visible = False
+        Panel2.Visible = False
+    End Sub
+
+    Private Sub PictureBox10_Click(sender As Object, e As EventArgs) Handles PictureBox10.Click
+
     End Sub
 End Class

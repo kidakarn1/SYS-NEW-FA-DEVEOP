@@ -211,7 +211,23 @@ Public Class MainFrm
                         Prd_detail.Label6.Text = lotFirstDigit & lotSecondDigit & lotthirdDigit
                     End If
                 Else
-                    MsgBox("กรุณาลงข้อมูลพนักงานเพื่อเริ่มการผลิต")
+                    menu1.Enabled = False
+                    menu4.Enabled = False
+                    menu2.Enabled = False
+                    menu3.Enabled = False
+                    PictureBox8.Enabled = False
+                    PictureBox1.Enabled = False
+                    Dim listdetail = "Please enter employee information to start production."
+                    PictureBox9.BringToFront()
+                    PictureBox9.Show()
+                    PictureBox11.BringToFront()
+                    PictureBox11.Show()
+                    Panel3.BringToFront()
+                    Panel3.Show()
+                    Label5.Text = listdetail
+                    Label5.BringToFront()
+                    Label5.Show()
+                    ' MsgBox("กรุณาลงข้อมูลพนักงานเพื่อเริ่มการผลิต")
                 End If
             Else
                 load_show.Show()
@@ -259,7 +275,23 @@ Public Class MainFrm
                         Prd_detail.Show()
                     Next
                 Else
-                    MsgBox("Not have production plan!")
+                    menu1.Enabled = False
+                    menu4.Enabled = False
+                    menu2.Enabled = False
+                    menu3.Enabled = False
+                    PictureBox8.Enabled = False
+                    PictureBox1.Enabled = False
+                    Dim listdetail = "Not have production plan !"
+                    PictureBox9.BringToFront()
+                    PictureBox9.Show()
+                    PictureBox11.BringToFront()
+                    PictureBox11.Show()
+                    Panel3.BringToFront()
+                    Panel3.Show()
+                    Label5.Text = listdetail
+                    Label5.BringToFront()
+                    Label5.Show()
+                    'MsgBox("Not have production plan!")
                     Me.Enabled = True
                 End If
                 'If LoadSQL_prd_plan.Read() Then
@@ -440,5 +472,17 @@ Public Class MainFrm
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
 
+    End Sub
+
+    Private Sub PictureBox11_Click(sender As Object, e As EventArgs) Handles PictureBox11.Click
+        PictureBox9.Hide()
+        PictureBox11.Hide()
+        Panel3.Hide()
+        menu1.Enabled = True
+        menu4.Enabled = True
+        menu2.Enabled = True
+        menu3.Enabled = True
+        PictureBox8.Enabled = True
+        PictureBox1.Enabled = True
     End Sub
 End Class

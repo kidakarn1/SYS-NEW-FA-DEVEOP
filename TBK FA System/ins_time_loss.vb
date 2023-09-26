@@ -514,11 +514,23 @@ Public Class ins_time_loss
                                     Dim check_double_loss As Integer = 0
                                     Dim count_check_double As String = ""
                                     count_check_double = GET_CHECK_LOSS_reuslt
-									If CDbl(Val(count_check_double)) > 0 Then
-										MsgBox("Loss double please check start loss and end loss")
-									Else
+                                    If CDbl(Val(count_check_double)) > 0 Then
+                                        ' MsgBox("Loss double please check start loss and end loss")
+                                        Button10.Enabled = False
+                                        Button11.Enabled = False
+                                        Dim listdetail = "Loss double please check start loss and end loss"
+                                        PictureBox10.BringToFront()
+                                        PictureBox10.Show()
+                                        PictureBox2.BringToFront()
+                                        PictureBox2.Show()
+                                        Panel2.BringToFront()
+                                        Panel2.Show()
+                                        Label3.Text = listdetail
+                                        Label3.BringToFront()
+                                        Label3.Show()
+                                    Else
 
-										Loss_reg_pass.Label8.Text = TextBox1.Text
+                                        Loss_reg_pass.Label8.Text = TextBox1.Text
                                         Loss_reg_pass.Label9.Text = TextBox2.Text
                                         Loss_reg_pass.Enabled = True
                                         Loss_reg_pass.Button1.Visible = True
@@ -526,16 +538,64 @@ Public Class ins_time_loss
                                     End If
                                     'MsgBox("OK READY CAL")
                                 Else
-                                    MsgBox("Please Check Time.")
+                                    Button10.Enabled = False
+                                    Button11.Enabled = False
+                                    Dim listdetail = "Please Check Time."
+                                    PictureBox10.BringToFront()
+                                    PictureBox10.Show()
+                                    PictureBox2.BringToFront()
+                                    PictureBox2.Show()
+                                    Panel2.BringToFront()
+                                    Panel2.Show()
+                                    Label3.Text = listdetail
+                                    Label3.BringToFront()
+                                    Label3.Show()
+                                    'MsgBox("Please Check Time.")
                                 End If
                             Else
-                                MsgBox("Please Check Shift.")
+                                Button10.Enabled = False
+                                Button11.Enabled = False
+                                Dim listdetail = "Please Check Shift."
+                                PictureBox10.BringToFront()
+                                PictureBox10.Show()
+                                PictureBox2.BringToFront()
+                                PictureBox2.Show()
+                                Panel2.BringToFront()
+                                Panel2.Show()
+                                Label3.Text = listdetail
+                                Label3.BringToFront()
+                                Label3.Show()
+                                'MsgBox("Please Check Shift.")
                             End If
                         Else
-                            MsgBox("Please Check Shift.")
+                            Button10.Enabled = False
+                            Button11.Enabled = False
+                            Dim listdetail = "Please Check Shift."
+                            PictureBox10.BringToFront()
+                            PictureBox10.Show()
+                            PictureBox2.BringToFront()
+                            PictureBox2.Show()
+                            Panel2.BringToFront()
+                            Panel2.Show()
+                            Label3.Text = listdetail
+                            Label3.BringToFront()
+                            Label3.Show()
+                            ' MsgBox("Please Check Shift.")
                         End If
                     Else
-                        MsgBox("Please Check time.")
+                        Button10.Enabled = False
+                        Button11.Enabled = False
+                        Dim listdetail = "Please Check time."
+                        PictureBox10.BringToFront()
+                        PictureBox10.Show()
+                        PictureBox2.BringToFront()
+                        PictureBox2.Show()
+                        Panel2.BringToFront()
+                        Panel2.Show()
+                        Label3.Text = listdetail
+                        Label3.BringToFront()
+                        Label3.Show()
+                        ' MsgBox("Please Check time.")
                     End If
 
 
@@ -602,8 +662,19 @@ Public Class ins_time_loss
                     '    End If
                     ' End If
                 Catch ex As Exception
-                    MsgBox("Please check time ")
-				End Try
+                    Button10.Enabled = False
+                    Button11.Enabled = False
+                    Dim listdetail = "Please Check time."
+                    PictureBox10.BringToFront()
+                    PictureBox10.Show()
+                    PictureBox2.BringToFront()
+                    PictureBox2.Show()
+                    Panel2.BringToFront()
+                    Panel2.Show()
+                    Label3.Text = listdetail
+                    Label3.BringToFront()
+                    Label3.Show()
+                End Try
 			Else
 				load_show.Show()
 			End If
@@ -716,5 +787,15 @@ Public Class ins_time_loss
 
 	End Sub
 
+    Private Sub ins_time_loss_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+        Button10.Enabled = True
+        Button11.Enabled = True
+        PictureBox10.Visible = False
+        PictureBox2.Visible = False
+        Panel2.Visible = False
+    End Sub
 End Class
