@@ -11,7 +11,6 @@ Public Class Scan_reprint
         Me.Close()
 
     End Sub
-
     Public Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim date_reprint As String
         Dim data_start_naja As String = Date_start_reprint.Value

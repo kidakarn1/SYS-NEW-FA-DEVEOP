@@ -15,85 +15,86 @@ Imports GenCode128
 Imports BarcodeLib.Barcode
 Imports System.Web.Script.Serialization
 Public Class tag_reprint_new
-	Dim g_index As Integer = 0
-	Dim QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
-	Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
-		If Application.OpenForms().OfType(Of Sel_prd_setup).Any Then
-			Sel_prd_setup.Enabled = True
-			Sel_prd_setup.Show()
-			Me.Close()
-		Else
-			Show_reprint_wi.Show()
-			Me.Close()
-		End If
-	End Sub
-	Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-		Try
-			If My.Computer.Network.Ping("192.168.161.101") Then
-				tag_print()
-				Dim numOfindex As Integer = ListView1.SelectedIndices(0)
-				Dim qr_code As String = ListBox1.Items(numOfindex)
-				If Application.OpenForms().OfType(Of Sel_prd_setup).Any Then
-					Sel_prd_setup.Enabled = True
-					Working_Pro.Enabled = True
-					Working_Pro.Show()
-					Me.Close()
-				End If
-			Else
-				load_show.Show()
-			End If
-		Catch ex As Exception
-			load_show.Show()
-		End Try
-	End Sub
-	Public Function tag_print()
-		Dim wi As String = ""
-		If Application.OpenForms().OfType(Of Sel_prd_setup).Any Then
-			wi = Working_Pro.wi_no.Text
-		Else
-			wi = Show_reprint_wi.hide_wi_select.Text
-		End If
-		Dim seq_plan = ListView1.Items(g_index).SubItems(2).Text
-		Dim seq_box = ListView1.Items(g_index).SubItems(4).Text
-		Try
-			If My.Computer.Network.Ping("192.168.161.101") Then
-				Dim numOfindex As Integer = ListView1.SelectedIndices(0)
-				Dim qr_code As String = ListBox1.Items(numOfindex)
-				Backoffice_model.update_data_new_qr_detail(qr_code)
-			Else
-				load_show.Show()
-			End If
-		Catch ex As Exception
-			load_show.Show()
-		End Try
-		Dim api = New api()
-		PrintDocument1.Print()
-		Return 0
-	End Function
-	Public Sub print_batch()
+    Public Shared S_index As Integer = 0
+    Dim g_index As Integer = 0
+    Dim QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+        If Application.OpenForms().OfType(Of Sel_prd_setup).Any Then
+            Sel_prd_setup.Enabled = True
+            Sel_prd_setup.Show()
+            Me.Close()
+        Else
+            Show_reprint_wi.Show()
+            Me.Close()
+        End If
+    End Sub
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                tag_print()
+                Dim numOfindex As Integer = ListView1.SelectedIndices(0)
+                Dim qr_code As String = ListBox1.Items(numOfindex)
+                If Application.OpenForms().OfType(Of Sel_prd_setup).Any Then
+                    Sel_prd_setup.Enabled = True
+                    Working_Pro.Enabled = True
+                    Working_Pro.Show()
+                    Me.Close()
+                End If
+            Else
+                load_show.Show()
+            End If
+        Catch ex As Exception
+            load_show.Show()
+        End Try
+    End Sub
+    Public Function tag_print()
+        Dim wi As String = ""
+        If Application.OpenForms().OfType(Of Sel_prd_setup).Any Then
+            wi = Working_Pro.wi_no.Text
+        Else
+            wi = Show_reprint_wi.hide_wi_select.Text
+        End If
+        Dim seq_plan = ListView1.Items(g_index).SubItems(2).Text
+        Dim seq_box = ListView1.Items(g_index).SubItems(4).Text
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                Dim numOfindex As Integer = ListView1.SelectedIndices(0)
+                Dim qr_code As String = ListBox1.Items(numOfindex)
+                Backoffice_model.update_data_new_qr_detail(qr_code)
+            Else
+                load_show.Show()
+            End If
+        Catch ex As Exception
+            load_show.Show()
+        End Try
+        Dim api = New api()
+        PrintDocument1.Print()
+        Return 0
+    End Function
+    Public Sub print_batch()
 
-	End Sub
-	Private Sub PrintDocument1_PrintPage(sender As Object, e As PrintPageEventArgs) Handles PrintDocument1.PrintPage
-		Dim numOfindex As Integer = ListView1.SelectedIndices(0)
-		'Working_Pro.Label27.Text = ListBox1.Items(numOfindex)
-		Dim next_process = Backoffice_model.GET_NEXT_PROCESS()
-		Dim value_next_process As String = ""
-		Dim api = New api()
-		Dim qr_detailss As String = ListBox1.Items(numOfindex)
-		Dim part_no As String = "NO_DATA"
-		Dim qty As String = "NO_DATA"
-		Dim part_name As String = "NO_DATA"
-		Dim model As String = "NO_DATA"
-		Dim location As String = "NO_DATA"
-		Dim shift As String = "NO_DATA"
-		Dim pro_seq As String = "NO_DATA"
-		Dim aPen = New Pen(Color.Black)
-		Dim plan_seq As String
-		Dim num_char_seq As Integer
-		Dim product_type As String = "NO_DATA"
-		Dim DLV_DATE As String = "NO_DATA"
-		Dim WI As String = "NO_DATA"
-		Dim line_cd As String = MainFrm.Label4.Text
+    End Sub
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Dim numOfindex As Integer = ListView1.SelectedIndices(0)
+        'Working_Pro.Label27.Text = ListBox1.Items(numOfindex)
+        Dim next_process = Backoffice_model.GET_NEXT_PROCESS()
+        Dim value_next_process As String = ""
+        Dim api = New api()
+        Dim qr_detailss As String = ListBox1.Items(numOfindex)
+        Dim part_no As String = "NO_DATA"
+        Dim qty As String = "NO_DATA"
+        Dim part_name As String = "NO_DATA"
+        Dim model As String = "NO_DATA"
+        Dim location As String = "NO_DATA"
+        Dim shift As String = "NO_DATA"
+        Dim pro_seq As String = "NO_DATA"
+        Dim aPen = New Pen(Color.Black)
+        Dim plan_seq As String
+        Dim num_char_seq As Integer
+        Dim product_type As String = "NO_DATA"
+        Dim DLV_DATE As String = "NO_DATA"
+        Dim WI As String = "NO_DATA"
+        Dim line_cd As String = MainFrm.Label4.Text
         Dim check_tag_type = Backoffice_model.B_check_format_tag() ' api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
         If check_tag_type = "0" Then
             While next_process.read()
@@ -733,20 +734,20 @@ Public Class tag_reprint_new
                     MsgBox("error data3 =  " & ex.Message)
                 End Try
             End If
-		End If
+        End If
 
-	End Sub
-	Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
-		If IsNothing(Me.ListView1.FocusedItem) Then
-		ElseIf ListView1.FocusedItem.Index >= 0 Then
-			If ListView1.Items.Count > 0 Then
-				Dim index As Integer = ListView1.FocusedItem.Index
-				g_index = index
-			End If
-		Else
-			MessageBox.Show("An Error has halted thid process")
-		End If
-	End Sub
+    End Sub
+    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+        If IsNothing(Me.ListView1.FocusedItem) Then
+        ElseIf ListView1.FocusedItem.Index >= 0 Then
+            If ListView1.Items.Count > 0 Then
+                Dim index As Integer = ListView1.FocusedItem.Index
+                g_index = index
+            End If
+        Else
+            MessageBox.Show("An Error has halted thid process")
+        End If
+    End Sub
     Private Sub Label1_Click(sender As Object, e As EventArgs)
 
     End Sub
@@ -763,5 +764,54 @@ Public Class tag_reprint_new
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label1.Text = TimeOfDay.ToString("H:mm:ss")
         Label4.Text = DateTime.Now.ToString("D")
+    End Sub
+
+    Private Sub pb_down_Click(sender As Object, e As EventArgs) Handles pb_down.Click
+        BTNDOWN1()
+    End Sub
+
+    Private Sub pbUp_Click(sender As Object, e As EventArgs) Handles pbUp.Click
+        BTNUP1()
+    End Sub
+    Public Sub BTNUP1()
+        If S_index < 0 Then
+            S_index = 0
+        ElseIf S_index > CDbl(Val((ListView1.Items.Count - 1))) Then
+            S_index = CDbl(Val((ListView1.Items.Count - 1)))
+        End If
+        Try
+            ListView1.Items(S_index).Selected = False
+            S_index -= 1
+            If S_index < 0 Then
+                S_index = 0
+                'ElseIf lvDefectact.Items.Count > S_index Then
+                'S_index = CDbl(Val((lvDefectact.Items.Count - 1)))
+            End If
+            ListView1.Items(S_index).Selected = True
+            ListView1.Items(S_index).EnsureVisible()
+            ListView1.Select()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Sub BTNDOWN1()
+        If S_index < 0 Then
+            S_index = 0
+        ElseIf S_index > CDbl(Val((ListView1.Items.Count - 1))) Then
+            S_index = CDbl(Val((ListView1.Items.Count - 1)))
+        End If
+        Try
+            ListView1.Items(S_index).Selected = False
+            S_index += 1
+            If S_index < 0 Then
+                S_index = 0
+                'ElseIf S_index > lvDefectact.Items.Count Then
+                '  S_index = CDbl(Val((lvDefectact.Items.Count - 1)))
+            End If
+            ListView1.Items(S_index).Selected = True
+            ListView1.Items(S_index).EnsureVisible()
+            ListView1.Select()
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

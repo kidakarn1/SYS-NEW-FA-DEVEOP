@@ -22,48 +22,70 @@ Partial Class Confrm_end
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Confrm_end))
         Me.menu4 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.btn_restart = New System.Windows.Forms.PictureBox()
+        CType(Me.btn_restart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'menu4
         '
-        Me.menu4.BackgroundImage = CType(resources.GetObject("menu4.BackgroundImage"), System.Drawing.Image)
+        Me.menu4.BackColor = System.Drawing.Color.Transparent
         Me.menu4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.menu4.Location = New System.Drawing.Point(289, 37)
+        Me.menu4.FlatAppearance.BorderSize = 0
+        Me.menu4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.menu4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.menu4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.menu4.Location = New System.Drawing.Point(316, 334)
         Me.menu4.Name = "menu4"
-        Me.menu4.Size = New System.Drawing.Size(185, 269)
+        Me.menu4.Size = New System.Drawing.Size(239, 101)
         Me.menu4.TabIndex = 8
-        Me.menu4.UseVisualStyleBackColor = True
+        Me.menu4.UseVisualStyleBackColor = False
         '
         'Button1
         '
-        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
+        Me.Button1.BackColor = System.Drawing.Color.Transparent
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button1.Location = New System.Drawing.Point(54, 37)
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(64, 334)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(185, 269)
+        Me.Button1.Size = New System.Drawing.Size(239, 101)
         Me.Button1.TabIndex = 9
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'btn_restart
+        '
+        Me.btn_restart.BackColor = System.Drawing.Color.Transparent
+        Me.btn_restart.Location = New System.Drawing.Point(471, 27)
+        Me.btn_restart.Name = "btn_restart"
+        Me.btn_restart.Size = New System.Drawing.Size(137, 106)
+        Me.btn_restart.TabIndex = 10
+        Me.btn_restart.TabStop = False
         '
         'Confrm_end
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSlateGray
-        Me.ClientSize = New System.Drawing.Size(534, 361)
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.exitProgram
+        Me.ClientSize = New System.Drawing.Size(620, 450)
         Me.ControlBox = False
+        Me.Controls.Add(Me.btn_restart)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.menu4)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Confrm_end"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form1"
+        CType(Me.btn_restart, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents menu4 As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents btn_restart As PictureBox
 End Class

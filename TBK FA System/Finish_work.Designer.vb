@@ -27,6 +27,13 @@ Partial Class Finish_work
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.PictureBox16 = New System.Windows.Forms.PictureBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -43,13 +50,14 @@ Partial Class Finish_work
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 58.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLight
-        Me.Label2.Location = New System.Drawing.Point(12, 57)
+        Me.Label2.BackColor = System.Drawing.Color.White
+        Me.Label2.Font = New System.Drawing.Font("Catamaran", 14.0!)
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(75, 226)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(619, 89)
+        Me.Label2.Size = New System.Drawing.Size(161, 21)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Congratulations!"
+        Me.Label2.Text = "COMPLETE PLAN"
         '
         'Button1
         '
@@ -64,19 +72,72 @@ Partial Class Finish_work
         'Timer1
         '
         '
+        'PictureBox6
+        '
+        Me.PictureBox6.BackColor = System.Drawing.Color.White
+        Me.PictureBox6.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.sweetAlertSuccess
+        Me.PictureBox6.Location = New System.Drawing.Point(-2, -2)
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.Size = New System.Drawing.Size(317, 384)
+        Me.PictureBox6.TabIndex = 4654
+        Me.PictureBox6.TabStop = False
+        Me.PictureBox6.Visible = False
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.White
+        Me.Label3.Font = New System.Drawing.Font("Catamaran", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(12, 10)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(275, 35)
+        Me.Label3.TabIndex = 12
+        Me.Label3.Text = "XXXXX"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label3.Visible = False
+        '
+        'PictureBox16
+        '
+        Me.PictureBox16.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnOK
+        Me.PictureBox16.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox16.Location = New System.Drawing.Point(84, 309)
+        Me.PictureBox16.Name = "PictureBox16"
+        Me.PictureBox16.Size = New System.Drawing.Size(145, 61)
+        Me.PictureBox16.TabIndex = 4656
+        Me.PictureBox16.TabStop = False
+        Me.PictureBox16.Visible = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.Label3)
+        Me.Panel2.Location = New System.Drawing.Point(6, 223)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(0, 0)
+        Me.Panel2.TabIndex = 4655
+        Me.Panel2.Visible = False
+        '
         'Finish_work
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SeaGreen
-        Me.ClientSize = New System.Drawing.Size(654, 497)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(310, 380)
         Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.PictureBox16)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.PictureBox6)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Button1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Finish_work"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Finish_work"
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -86,4 +147,8 @@ Partial Class Finish_work
     Friend WithEvents Label2 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents PictureBox6 As PictureBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents PictureBox16 As PictureBox
+    Friend WithEvents Panel2 As Panel
 End Class

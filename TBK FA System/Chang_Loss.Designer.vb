@@ -33,6 +33,10 @@ Partial Class Chang_Loss
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnDown = New System.Windows.Forms.PictureBox()
+        Me.btnUp = New System.Windows.Forms.PictureBox()
+        CType(Me.btnDown, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button3
@@ -144,6 +148,24 @@ Partial Class Chang_Loss
         'Timer1
         '
         '
+        'btnDown
+        '
+        Me.btnDown.BackColor = System.Drawing.Color.Transparent
+        Me.btnDown.Location = New System.Drawing.Point(706, 306)
+        Me.btnDown.Name = "btnDown"
+        Me.btnDown.Size = New System.Drawing.Size(87, 210)
+        Me.btnDown.TabIndex = 4638
+        Me.btnDown.TabStop = False
+        '
+        'btnUp
+        '
+        Me.btnUp.BackColor = System.Drawing.Color.Transparent
+        Me.btnUp.Location = New System.Drawing.Point(708, 99)
+        Me.btnUp.Name = "btnUp"
+        Me.btnUp.Size = New System.Drawing.Size(80, 203)
+        Me.btnUp.TabIndex = 4637
+        Me.btnUp.TabStop = False
+        '
         'Chang_Loss
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -151,6 +173,8 @@ Partial Class Chang_Loss
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(196, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.selectLoss2
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.btnDown)
+        Me.Controls.Add(Me.btnUp)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ListView2)
@@ -161,6 +185,8 @@ Partial Class Chang_Loss
         Me.Name = "Chang_Loss"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Loss"
+        CType(Me.btnDown, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnUp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -175,4 +201,6 @@ Partial Class Chang_Loss
     Friend WithEvents Label4 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents btnDown As PictureBox
+    Friend WithEvents btnUp As PictureBox
 End Class

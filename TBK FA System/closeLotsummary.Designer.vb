@@ -119,9 +119,9 @@ Partial Class closeLotsummary
         Me.lbNc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lbNc.Location = New System.Drawing.Point(534, 481)
         Me.lbNc.Name = "lbNc"
-        Me.lbNc.Size = New System.Drawing.Size(25, 34)
+        Me.lbNc.Size = New System.Drawing.Size(35, 34)
         Me.lbNc.TabIndex = 13
-        Me.lbNc.Text = "1"
+        Me.lbNc.Text = "0"
         Me.lbNc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbNg
@@ -132,9 +132,9 @@ Partial Class closeLotsummary
         Me.lbNg.ForeColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.lbNg.Location = New System.Drawing.Point(533, 525)
         Me.lbNg.Name = "lbNg"
-        Me.lbNg.Size = New System.Drawing.Size(25, 34)
+        Me.lbNg.Size = New System.Drawing.Size(35, 34)
         Me.lbNg.TabIndex = 14
-        Me.lbNg.Text = "1"
+        Me.lbNg.Text = "0"
         Me.lbNg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbLine

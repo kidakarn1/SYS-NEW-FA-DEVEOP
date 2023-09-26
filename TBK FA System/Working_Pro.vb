@@ -582,8 +582,6 @@ Public Class Working_Pro
         End Try
     End Sub
     Public Sub Start_Production()
-
-
         If check_network_frist = 0 Then
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
@@ -593,7 +591,6 @@ Public Class Working_Pro
 
             End Try
         End If
-
         If check_in_up_seq = 0 Then
             Dim date_st1 As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
             Dim date_end1 As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
@@ -2113,6 +2110,32 @@ Public Class Working_Pro
                 Dim prd_flg3 As String = "1"
                 Dim close_lot_flg3 As String = "1"
                 Dim avarage_act_prd_time3 As Double = Average
+
+
+
+                Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
+
+                sum_prg2 = sum_prg2 / cnt_btn
+                If sum_prg2 > 100 Then
+                    sum_prg2 = 100
+                ElseIf sum_prg2 < 0 Then
+                    sum_prg2 = 0
+                End If
+
+                If sum_prg2 <= 49 Then
+                    CircularProgressBar2.ProgressColor = Color.Red
+                    CircularProgressBar2.ForeColor = Color.Black
+                ElseIf sum_prg2 >= 50 And sum_prg2 <= 79 Then
+                    CircularProgressBar2.ProgressColor = Color.Chocolate
+                    CircularProgressBar2.ForeColor = Color.Black
+                ElseIf sum_prg2 >= 80 And sum_prg2 <= 100 Then
+                    CircularProgressBar2.ProgressColor = Color.Green
+                    CircularProgressBar2.ForeColor = Color.Black
+                End If
+                Dim avarage_eff As Double = Format(sum_prg2, "0.00")
+                lb_sum_prg.Text = avarage_eff
+                CircularProgressBar2.Text = sum_prg2 & "%"
+                CircularProgressBar2.Value = sum_prg2
                 'Try
                 'If My.Computer.Network.Ping("192.168.161.101") Then
                 'transfer_flg = "1"
@@ -2143,6 +2166,29 @@ Public Class Working_Pro
             Finish_work.Show() ' เกี่ยว
         End If
     End Function
+    Public Sub cal_eff()
+        Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
+        sum_prg2 = sum_prg2 / cnt_btn
+        If sum_prg2 > 100 Then
+            sum_prg2 = 100
+        ElseIf sum_prg2 < 0 Then
+            sum_prg2 = 0
+        End If
+        If sum_prg2 <= 49 Then
+            CircularProgressBar2.ProgressColor = Color.Red
+            CircularProgressBar2.ForeColor = Color.Black
+        ElseIf sum_prg2 >= 50 And sum_prg2 <= 79 Then
+            CircularProgressBar2.ProgressColor = Color.Chocolate
+            CircularProgressBar2.ForeColor = Color.Black
+        ElseIf sum_prg2 >= 80 And sum_prg2 <= 100 Then
+            CircularProgressBar2.ProgressColor = Color.Green
+            CircularProgressBar2.ForeColor = Color.Black
+        End If
+        Dim avarage_eff As Double = Format(sum_prg2, "0.00")
+        lb_sum_prg.Text = avarage_eff
+        CircularProgressBar2.Text = sum_prg2 & "%"
+        CircularProgressBar2.Value = sum_prg2
+    End Sub
     Public Function Cal_Use_Time_ins_qty_fn_manual(date_start_data As Date, date_end As Date)
         Dim total_ins_qty As Integer = DateDiff(DateInterval.Second, date_start_data, date_end)
         lb_use_time.Text = total_ins_qty

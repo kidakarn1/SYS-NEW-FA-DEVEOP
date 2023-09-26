@@ -1233,6 +1233,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\exitProgram.png" />
     <None Include="Resources\BLOCK.png" />
     <None Include="Resources\Untitled-4.png" />
     <None Include="Resources\breaktime3.png" />

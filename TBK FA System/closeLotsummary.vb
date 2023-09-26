@@ -28,8 +28,8 @@ Public Class closeLotsummary
     Public S_index As Integer = 0
     Private Sub closeLotsummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            setVariable()
             If My.Computer.Network.Ping("192.168.161.101") Then
-                setVariable()
                 getDefectdetailnc(sWi, sSeq, sLot)
             Else
                 load_show.Show()

@@ -2,6 +2,7 @@ Imports System.Net
 Imports System.IO
 Public Class List_Emp
     Public MaxManPower As Integer = 0
+    Public Shared S_index As Integer = 0
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim i = ListView1.Items.Count
         If i >= MaxManPower Then
@@ -124,7 +125,7 @@ Public Class List_Emp
                     MainFrm.PictureBox6.Image = Nothing
                     MainFrm.PictureBox7.Image = Nothing
                     Working_Pro.PictureBox2.Image = tImage
-                    Working_Pro.lb_emp1.Visible = True
+                    'Working_Pro.lb_emp1.Visible = True
                     Working_Pro.lb_emp1.Text = emp_cd
                     Working_Pro.lb_emp2.Text = ""
                     Working_Pro.lb_emp3.Text = ""
@@ -154,7 +155,7 @@ Public Class List_Emp
                     MainFrm.PictureBox6.Image = Nothing
                     MainFrm.PictureBox7.Image = Nothing
                     Working_Pro.PictureBox2.Image = tImage
-                    Working_Pro.lb_emp1.Visible = True
+                    'Working_Pro.lb_emp1.Visible = True
                     Working_Pro.lb_emp1.Text = emp_cd
                     Working_Pro.lb_emp2.Text = ""
                     Working_Pro.lb_emp3.Text = ""
@@ -180,7 +181,7 @@ Public Class List_Emp
                     MainFrm.lb_emp3.Text = ""
                     MainFrm.PictureBox4.Image = Nothing
                     Working_Pro.PictureBox3.Image = tImage
-                    Working_Pro.lb_emp2.Visible = True
+                    'Working_Pro.lb_emp2.Visible = True
                     Working_Pro.lb_emp2.Text = emp_cd
                     Working_Pro.lb_emp3.Text = ""
                     Working_Pro.PictureBox4.Image = Nothing
@@ -195,7 +196,7 @@ Public Class List_Emp
                     MainFrm.lb_emp3.Text = ""
                     MainFrm.PictureBox4.Image = Nothing
                     Working_Pro.PictureBox3.Image = tImage
-                    Working_Pro.lb_emp2.Visible = True
+                    'Working_Pro.lb_emp2.Visible = True
                     Working_Pro.lb_emp2.Text = emp_cd
                     Working_Pro.lb_emp3.Text = ""
                     Working_Pro.PictureBox4.Image = Nothing
@@ -212,7 +213,7 @@ Public Class List_Emp
                     MainFrm.lb_emp4.Text = ""
                     MainFrm.PictureBox5.Image = Nothing
                     Working_Pro.PictureBox4.Image = tImage
-                    Working_Pro.lb_emp3.Visible = True
+                    'Working_Pro.lb_emp3.Visible = True
                     Working_Pro.lb_emp3.Text = emp_cd
                     Working_Pro.lb_emp4.Text = ""
                     Working_Pro.PictureBox5.Image = Nothing
@@ -226,7 +227,7 @@ Public Class List_Emp
                     MainFrm.lb_emp4.Text = ""
                     MainFrm.PictureBox5.Image = Nothing
                     Working_Pro.PictureBox4.Image = tImage
-                    Working_Pro.lb_emp3.Visible = True
+                    ' Working_Pro.lb_emp3.Visible = True
                     Working_Pro.lb_emp3.Text = emp_cd
                     Working_Pro.lb_emp4.Text = ""
                     Working_Pro.PictureBox5.Image = Nothing
@@ -243,7 +244,7 @@ Public Class List_Emp
                     MainFrm.lb_emp5.Text = ""
                     MainFrm.PictureBox6.Image = Nothing
                     Working_Pro.PictureBox5.Image = tImage
-                    Working_Pro.lb_emp4.Visible = True
+                    'Working_Pro.lb_emp4.Visible = True
                     Working_Pro.lb_emp4.Text = emp_cd
                     Working_Pro.lb_emp5.Text = ""
                     Working_Pro.PictureBox6.Image = Nothing
@@ -258,7 +259,7 @@ Public Class List_Emp
                     MainFrm.lb_emp5.Text = ""
                     MainFrm.PictureBox6.Image = Nothing
                     Working_Pro.PictureBox5.Image = tImage
-                    Working_Pro.lb_emp4.Visible = True
+                    'Working_Pro.lb_emp4.Visible = True
                     Working_Pro.lb_emp4.Text = emp_cd
                     Working_Pro.lb_emp5.Text = ""
                     Working_Pro.PictureBox6.Image = Nothing
@@ -276,7 +277,7 @@ Public Class List_Emp
                     MainFrm.lb_emp6.Text = ""
                     MainFrm.PictureBox7.Image = Nothing
                     Working_Pro.PictureBox6.Image = tImage
-                    Working_Pro.lb_emp5.Visible = True
+                    ' Working_Pro.lb_emp5.Visible = True
                     Working_Pro.lb_emp5.Text = emp_cd
                     Working_Pro.lb_emp6.Text = ""
                     Working_Pro.PictureBox7.Image = Nothing
@@ -291,7 +292,7 @@ Public Class List_Emp
                     MainFrm.PictureBox7.Image = Nothing
 
                     Working_Pro.PictureBox6.Image = tImage
-                    Working_Pro.lb_emp5.Visible = True
+                    ' Working_Pro.lb_emp5.Visible = True
                     Working_Pro.lb_emp5.Text = emp_cd
 
                     Working_Pro.lb_emp6.Text = ""
@@ -308,14 +309,14 @@ Public Class List_Emp
                         MainFrm.lb_emp6.Text = emp_cd
                         Backoffice_model.img_user6 = tImage
                         Working_Pro.PictureBox7.Image = tImage
-                        Working_Pro.lb_emp6.Visible = True
+                        'Working_Pro.lb_emp6.Visible = True
                         Working_Pro.lb_emp6.Text = emp_cd
                     Catch ex As Exception
                         Dim emp_cd As String = ListView1.Items(i).Text
                         Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
                         Backoffice_model.img_user6 = tImage
                         MainFrm.PictureBox7.Image = tImage
-                        MainFrm.lb_emp6.Visible = True
+                        'MainFrm.lb_emp6.Visible = True
                         MainFrm.lb_emp6.Text = emp_cd
                     End Try
                 Else
@@ -327,7 +328,7 @@ Public Class List_Emp
                     MainFrm.lb_emp6.Text = emp_cd
                     Backoffice_model.img_user6 = tImage
                     Working_Pro.PictureBox7.Image = tImage
-                    Working_Pro.lb_emp6.Visible = True
+                    ' Working_Pro.lb_emp6.Visible = True
                     Working_Pro.lb_emp6.Text = emp_cd
                 End If
             End If
@@ -652,4 +653,52 @@ Public Class List_Emp
 
         Return False
     End Function
+
+    Private Sub pb_down_Click(sender As Object, e As EventArgs) Handles pb_down.Click
+        BTNDOWN1()
+    End Sub
+    Public Sub BTNUP1()
+        If S_index < 0 Then
+            S_index = 0
+        ElseIf S_index > CDbl(Val((ListView1.Items.Count - 1))) Then
+            S_index = CDbl(Val((ListView1.Items.Count - 1)))
+        End If
+        Try
+            ListView1.Items(S_index).Selected = False
+            S_index -= 1
+            If S_index < 0 Then
+                S_index = 0
+                'ElseIf lvDefectact.Items.Count > S_index Then
+                'S_index = CDbl(Val((lvDefectact.Items.Count - 1)))
+            End If
+            ListView1.Items(S_index).Selected = True
+            ListView1.Items(S_index).EnsureVisible()
+            ListView1.Select()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Sub BTNDOWN1()
+        If S_index < 0 Then
+            S_index = 0
+        ElseIf S_index > CDbl(Val((ListView1.Items.Count - 1))) Then
+            S_index = CDbl(Val((ListView1.Items.Count - 1)))
+        End If
+        Try
+            ListView1.Items(S_index).Selected = False
+            S_index += 1
+            If S_index < 0 Then
+                S_index = 0
+                'ElseIf S_index > lvDefectact.Items.Count Then
+                '  S_index = CDbl(Val((lvDefectact.Items.Count - 1)))
+            End If
+            ListView1.Items(S_index).Selected = True
+            ListView1.Items(S_index).EnsureVisible()
+            ListView1.Select()
+        Catch ex As Exception
+        End Try
+    End Sub
+    Private Sub pbUp_Click(sender As Object, e As EventArgs) Handles pbUp.Click
+        BTNUP1()
+    End Sub
 End Class

@@ -1,6 +1,7 @@
 Imports System.Web.Script.Serialization
 
 Public Class Change_Loss2
+    Public Shared S_index As Integer = 0
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Working_Pro.Enabled = True
         Me.Close()
@@ -98,5 +99,53 @@ Public Class Change_Loss2
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label1.Text = TimeOfDay.ToString("H:mm:ss")
         Label4.Text = DateTime.Now.ToString("D")
+    End Sub
+    Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
+        BTNUP1()
+    End Sub
+
+    Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
+        BTNDOWN1()
+    End Sub
+    Public Sub BTNUP1()
+        If S_index < 0 Then
+            S_index = 0
+        ElseIf S_index > CDbl(Val((ListView2.Items.Count - 1))) Then
+            S_index = CDbl(Val((ListView2.Items.Count - 1)))
+        End If
+        Try
+            ListView2.Items(S_index).Selected = False
+            S_index -= 1
+            If S_index < 0 Then
+                S_index = 0
+                'ElseIf lvDefectact.Items.Count > S_index Then
+                'S_index = CDbl(Val((lvDefectact.Items.Count - 1)))
+            End If
+            ListView2.Items(S_index).Selected = True
+            ListView2.Items(S_index).EnsureVisible()
+            ListView2.Select()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Sub BTNDOWN1()
+        If S_index < 0 Then
+            S_index = 0
+        ElseIf S_index > CDbl(Val((ListView2.Items.Count - 1))) Then
+            S_index = CDbl(Val((ListView2.Items.Count - 1)))
+        End If
+        Try
+            ListView2.Items(S_index).Selected = False
+            S_index += 1
+            If S_index < 0 Then
+                S_index = 0
+                'ElseIf S_index > lvDefectact.Items.Count Then
+                '  S_index = CDbl(Val((lvDefectact.Items.Count - 1)))
+            End If
+            ListView2.Items(S_index).Selected = True
+            ListView2.Items(S_index).EnsureVisible()
+            ListView2.Select()
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

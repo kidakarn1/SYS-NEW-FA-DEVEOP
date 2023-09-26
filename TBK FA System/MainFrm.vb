@@ -485,4 +485,8 @@ Public Class MainFrm
         PictureBox8.Enabled = True
         PictureBox1.Enabled = True
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

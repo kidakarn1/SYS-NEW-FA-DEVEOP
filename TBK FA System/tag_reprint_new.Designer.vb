@@ -50,10 +50,14 @@ Partial Class tag_reprint_new
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.pb_down = New System.Windows.Forms.PictureBox()
+        Me.pbUp = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_down, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbUp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox2
@@ -308,6 +312,24 @@ Partial Class tag_reprint_new
         Me.Label1.TabIndex = 4635
         Me.Label1.Text = "Label1"
         '
+        'pb_down
+        '
+        Me.pb_down.BackColor = System.Drawing.Color.Transparent
+        Me.pb_down.Location = New System.Drawing.Point(709, 308)
+        Me.pb_down.Name = "pb_down"
+        Me.pb_down.Size = New System.Drawing.Size(76, 201)
+        Me.pb_down.TabIndex = 4638
+        Me.pb_down.TabStop = False
+        '
+        'pbUp
+        '
+        Me.pbUp.BackColor = System.Drawing.Color.Transparent
+        Me.pbUp.Location = New System.Drawing.Point(710, 102)
+        Me.pbUp.Name = "pbUp"
+        Me.pbUp.Size = New System.Drawing.Size(75, 201)
+        Me.pbUp.TabIndex = 4637
+        Me.pbUp.TabStop = False
+        '
         'tag_reprint_new
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -315,6 +337,8 @@ Partial Class tag_reprint_new
         Me.BackColor = System.Drawing.Color.DarkSlateGray
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.reprintTag1
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.pb_down)
+        Me.Controls.Add(Me.pbUp)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LB_FONT_DATA)
@@ -341,6 +365,8 @@ Partial Class tag_reprint_new
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_down, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbUp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -372,4 +398,6 @@ Partial Class tag_reprint_new
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Label4 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents pb_down As PictureBox
+    Friend WithEvents pbUp As PictureBox
 End Class

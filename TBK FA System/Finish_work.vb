@@ -1,9 +1,9 @@
 Public Class Finish_work
 	Dim count_close_popup As Integer = 0
-	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-		click_popup()
-	End Sub
-	Public Sub click_popup()
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, PictureBox16.Click
+        click_popup()
+    End Sub
+    Public Sub click_popup()
 		Dim line_id As String = MainFrm.line_id.Text
 		Backoffice_model.line_status_upd(line_id)
         Try
