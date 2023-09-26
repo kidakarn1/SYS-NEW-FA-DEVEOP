@@ -10,7 +10,7 @@ Public Class Sc
         Me.Location = New Point(13, 95)
         myPort = IO.Ports.SerialPort.GetPortNames()
         Dim sc_type As String = MainFrm.lb_scanner_port.Text
-        If sc_type = "USB" Then
+        If sc_type = "USB" Or sc_type = "NO DEVICE" Then
             'MsgBox("Data")
         Else
             If MainFrm.lb_ctrl_sc_flg.Text = "emp" Then
@@ -26,24 +26,24 @@ Public Class Sc
                     Button1.Enabled = False
                     PictureBox3.Enabled = False
                     PictureBox1.Enabled = False
-                    Label1.Text = textlist
                     Label1.BringToFront()
                     Label1.Show()
                     PictureBox5.BringToFront()
                     PictureBox5.Show()
                     PictureBox4.Show()
                     PictureBox3.Focus()
+                    PictureBox4.Visible = True
+                    Panel1.Visible = True
+                    Label1.Visible = True
+                    Label1.Text = textlist
+                    Panel1.BringToFront()
+                    PictureBox5.Visible = True
                     'MsgBox("Please check the USB cable or contact administrator!")
                 End Try
 
             End If
-
         End If
-
-
-
     End Sub
-
     Private Sub SerialPort1_DataReceived(ByVal sender As Object, ByVal e As System.IO.Ports.SerialDataReceivedEventArgs) Handles SerialPort1.DataReceived
         If MainFrm.lb_ctrl_sc_flg.Text = "emp" Then
             ReceivedText(SerialPort1.ReadExisting())
@@ -229,6 +229,10 @@ recheck:
                                     Label1.Text = listdetail
                                     Label1.BringToFront()
                                     Label1.Show()
+                                    PictureBox4.Visible = True
+                                    PictureBox5.Visible = True
+                                    Panel1.Visible = True
+                                    Label1.Visible = True
                                     ' MsgBox("คุณไม่มีสิทธิ์ในการเดินไลน์การผลิต")
                                     TextBox2.Text = ""
                                 End If

@@ -153,6 +153,7 @@ Partial Class Sc
         Me.Label1.TabIndex = 12
         Me.Label1.Text = "XXXXX"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label1.Visible = False
         '
         'Panel1
         '
@@ -165,12 +166,13 @@ Partial Class Sc
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(298, 81)
         Me.Panel1.TabIndex = 13
+        Me.Panel1.Visible = False
         '
         'PictureBox6
         '
         Me.PictureBox6.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox6.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.sweetAlertSuccess
-        Me.PictureBox6.Location = New System.Drawing.Point(228, 23)
+        Me.PictureBox6.Location = New System.Drawing.Point(229, 23)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(310, 380)
         Me.PictureBox6.TabIndex = 14
@@ -184,9 +186,9 @@ Partial Class Sc
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(154, Byte), Integer), CType(CType(156, Byte), Integer))
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.scanEmpCard
         Me.ClientSize = New System.Drawing.Size(775, 477)
+        Me.Controls.Add(Me.PictureBox5)
         Me.Controls.Add(Me.PictureBox6)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.PictureBox5)
         Me.Controls.Add(Me.PictureBox4)
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.TextBox1)

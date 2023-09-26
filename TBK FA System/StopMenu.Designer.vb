@@ -161,7 +161,7 @@ Partial Class StopMenu
         Me.lock.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.lock.Font = New System.Drawing.Font("Arial Rounded MT Bold", 48.0!)
         Me.lock.ForeColor = System.Drawing.SystemColors.Control
-        Me.lock.Location = New System.Drawing.Point(466, 294)
+        Me.lock.Location = New System.Drawing.Point(466, 290)
         Me.lock.Name = "lock"
         Me.lock.Size = New System.Drawing.Size(319, 280)
         Me.lock.TabIndex = 15

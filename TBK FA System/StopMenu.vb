@@ -83,7 +83,6 @@
                     If btnBreakTime.Visible = True Then
                         If CDbl(Val(contDelay)) = CDbl(Val((Backoffice_model.CountDelay * 10))) Then
                             'MsgBox("ครบ 5 นาที")
-
                             btnContinue.BringToFront()
                             btnContinue.Visible = True
                             'btnContinue.BackColor = Color.FromArgb(63, 63, 63)

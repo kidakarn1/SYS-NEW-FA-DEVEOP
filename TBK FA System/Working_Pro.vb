@@ -182,6 +182,11 @@ Public Class Working_Pro
                 End If
             Next BitNo
             Call DioGetErrorString(Ret, szError)
+        ElseIf s_mecg_name = "NO DEVICE" Then
+            PictureBox10.Visible = False
+            Label2.Visible = False
+            PictureBox16.Visible = False
+            PictureBox15.Visible = False
         Else
             If CheckOs() Then
                 Dim rs = counterNewDIO.count_NIMAX()

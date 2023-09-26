@@ -349,6 +349,10 @@ Public Class Line_conf
         'btn_start.Enabled = False
         'btn_back.Enabled = False
         Dim listdetail = "Updated Success !"
+        PictureBox6.Visible = True
+        Panel2.Visible = True
+        Label2.Visible = True
+        PictureBox16.Visible = True
         PictureBox6.BringToFront()
         PictureBox6.Show()
         PictureBox16.BringToFront()
@@ -358,11 +362,7 @@ Public Class Line_conf
         Label2.Text = listdetail
         Label2.BringToFront()
         Label2.Show()
-
         'MsgBox("Update Success.")
-
-        MainFrm.Show()
-        Me.Hide()
     End Sub
     Private Sub menu3_Click(sender As Object, e As EventArgs)
         Me.Enabled = False
@@ -479,5 +479,14 @@ Public Class Line_conf
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub PictureBox16_Click(sender As Object, e As EventArgs) Handles PictureBox16.Click
+        PictureBox6.Visible = False
+        Panel2.Visible = False
+        Label2.Visible = False
+        PictureBox16.Visible = False
+        MainFrm.Show()
+        Me.Hide()
     End Sub
 End Class
