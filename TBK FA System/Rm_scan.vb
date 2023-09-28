@@ -141,4 +141,12 @@ Public Class Rm_scan
 	Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 		Me.Close()
 	End Sub
+
+    Private Sub Panel_scan_picking_Paint(sender As Object, e As PaintEventArgs) Handles Panel_scan_picking.Paint
+
+    End Sub
+
+    Private Sub scan_item_cd_TextChanged(sender As Object, e As EventArgs) Handles scan_item_cd.TextChanged
+
+    End Sub
 End Class

@@ -400,7 +400,7 @@ Partial Class ins_qty_special_time
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightBlue
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.addSpeNumpad
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.addSpeNumpad1
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Panel2)

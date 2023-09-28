@@ -108,9 +108,6 @@ Public Class Sc
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
     End Sub
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-
-    End Sub
     Public Sub checkEmp()
 recheck:
         Try
@@ -134,7 +131,8 @@ recheck:
                         Label1.Text = listdetail
                         Label1.BringToFront()
                         Label1.Show()
-
+                        PictureBox6.Visible = True
+                        PictureBox5.Visible = True
                         TextBox2.Text = ""
                         List_Emp.Enabled = True
                         'List_Emp.Show()
@@ -142,7 +140,7 @@ recheck:
                         If numPrd > 0 Then
                             List_Emp.Button2.Enabled = True
                         End If
-                        Me.Hide()
+                        'Me.Hide()
                     Else
                         TextBox2.Text = TextBox2.Text.ToUpper().Trim
                         If TextBox2.Text.Length = 5 Then

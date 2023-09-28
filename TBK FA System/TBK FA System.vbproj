@@ -1233,6 +1233,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\MainMenu4.png" />
+    <None Include="Resources\addSpeNumpad1.png" />
+    <None Include="Resources\addActualNumpad4.png" />
+    <None Include="Resources\scanMaterial.png" />
+    <None Include="Resources\manageEmp4.png" />
+    <None Include="Resources\MainMenu3.png" />
     <None Include="Resources\dwdd1.png" />
     <None Include="Resources\cf250687395151.5db728c7879d3.gif" />
     <None Include="Resources\dwdd.png" />

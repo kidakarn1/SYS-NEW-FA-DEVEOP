@@ -93,7 +93,6 @@
                             lbLossCode.Text = Backoffice_model.LossCodeAuto
                             lbStartCount.Text = Backoffice_model.TimeStartBreakTime
                             lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
-
                             btnBreakTime.Visible = False
                             PanelShowLoss.Visible = True
                         End If
@@ -146,4 +145,6 @@
         TimerLossBT.Enabled = True
         lbLineCode.Text = MainFrm.Label4.Text
     End Sub
+
+
 End Class

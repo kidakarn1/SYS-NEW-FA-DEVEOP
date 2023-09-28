@@ -583,7 +583,7 @@ Partial Class MainFrm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(14, Byte), Integer))
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.MainMenu2
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.MainMenu4
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
         Me.Controls.Add(Me.PictureBox11)

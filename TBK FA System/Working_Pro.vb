@@ -183,6 +183,10 @@ Public Class Working_Pro
                         End If
                     End If
                 Next BitNo
+                PictureBox10.Visible = False
+                Label2.Visible = False
+                Panel2.Visible = False
+                PictureBox16.Visible = False
                 Call DioGetErrorString(Ret, szError)
             Catch ex As Exception
                 Button1.Enabled = False
