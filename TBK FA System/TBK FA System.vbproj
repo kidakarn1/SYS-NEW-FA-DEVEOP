@@ -1233,6 +1233,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\dwdd1.png" />
+    <None Include="Resources\cf250687395151.5db728c7879d3.gif" />
+    <None Include="Resources\dwdd.png" />
+    <None Include="Resources\eadb74787dda41cc6333341e55293432.gif" />
+    <None Include="Resources\loading.png" />
     <None Include="Resources\exitProgram.png" />
     <None Include="Resources\BLOCK.png" />
     <None Include="Resources\Untitled-4.png" />

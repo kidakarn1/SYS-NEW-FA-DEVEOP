@@ -17,6 +17,7 @@ Imports BarcodeLib.Barcode
 Imports System.Net
 Imports System.Web.Script.Serialization
 Public Class Working_Pro
+    Public check_cal_eff As Integer = 0
     Public counterNewDIO
     Dim QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
     Dim start_flg As Integer = 0
@@ -129,15 +130,8 @@ Public Class Working_Pro
         Next
         Dim load_total As String = load_data_defeult_master_server(MainFrm.Label4.Text)
         If s_mecg_name = "DIO-3232LX-USB" Then
-            Dim szDeviceName As String
-            ' Get device name from screen
-            szDeviceName = Edit_DeviceName.Text
-            ' Execute initialization function and get ID
-            Ret = DioInit(szDeviceName, Id)
-            ' Error process
-            Call DioGetErrorString(Ret, szError)
-            If Ret = 10000 Then
-                Edit_DeviceName.Text = "DIO001"
+            Try
+                Dim szDeviceName As String
                 ' Get device name from screen
                 szDeviceName = Edit_DeviceName.Text
                 ' Execute initialization function and get ID
@@ -145,43 +139,68 @@ Public Class Working_Pro
                 ' Error process
                 Call DioGetErrorString(Ret, szError)
                 If Ret = 10000 Then
-                    Edit_DeviceName.Text = "DIO002"
+                    Edit_DeviceName.Text = "DIO001"
                     ' Get device name from screen
                     szDeviceName = Edit_DeviceName.Text
                     ' Execute initialization function and get ID
                     Ret = DioInit(szDeviceName, Id)
                     ' Error process
                     Call DioGetErrorString(Ret, szError)
-                End If
-            End If
-            'MsgBox(Ret)
-            'Edit_ReturnCode.Text = "Ret = " & Ret & ":" & szError.ToString()
-            Dim i As Short
-            Dim BitNo As Short
-            Dim Kind As Short
-            Dim Tim As Integer
-            For i = 0 To 1
-                UpCount(i) = 0
-                DownCount(i) = 0
-            Next i
-            Tim = 100
-            Kind = DIO_TRG_RISE
-            For BitNo = 0 To 1
-                If Check(BitNo).CheckState = 1 Then
-                    Ret = DioNotifyTrg(Id, BitNo, Kind, Tim, Me.Handle.ToInt32)
-                    If (Ret <> DIO_ERR_SUCCESS) Then
-                        'MsgBox("Connect success")
-                        Exit For
-                    End If
-                Else
-                    Ret = DioStopNotifyTrg(Id, BitNo)
-                    If (Ret <> DIO_ERR_SUCCESS) Then
-                        'MsgBox("Connect Failed")
-                        Exit For
+                    If Ret = 10000 Then
+                        Edit_DeviceName.Text = "DIO002"
+                        ' Get device name from screen
+                        szDeviceName = Edit_DeviceName.Text
+                        ' Execute initialization function and get ID
+                        Ret = DioInit(szDeviceName, Id)
+                        ' Error process
+                        Call DioGetErrorString(Ret, szError)
                     End If
                 End If
-            Next BitNo
-            Call DioGetErrorString(Ret, szError)
+                'MsgBox(Ret)
+                'Edit_ReturnCode.Text = "Ret = " & Ret & ":" & szError.ToString()
+                Dim i As Short
+                Dim BitNo As Short
+                Dim Kind As Short
+                Dim Tim As Integer
+                For i = 0 To 1
+                    UpCount(i) = 0
+                    DownCount(i) = 0
+                Next i
+                Tim = 100
+                Kind = DIO_TRG_RISE
+                For BitNo = 0 To 1
+                    If Check(BitNo).CheckState = 1 Then
+                        Ret = DioNotifyTrg(Id, BitNo, Kind, Tim, Me.Handle.ToInt32)
+                        If (Ret <> DIO_ERR_SUCCESS) Then
+                            'MsgBox("Connect success")
+                            Exit For
+                        End If
+                    Else
+                        Ret = DioStopNotifyTrg(Id, BitNo)
+                        If (Ret <> DIO_ERR_SUCCESS) Then
+                            'MsgBox("Connect Failed")
+                            Exit For
+                        End If
+                    End If
+                Next BitNo
+                Call DioGetErrorString(Ret, szError)
+            Catch ex As Exception
+                Button1.Enabled = False
+                btn_start.Enabled = False
+                btn_back.Enabled = False
+                PictureBox13.Enabled = False
+                PictureBox14.Enabled = False
+                Dim listdetail = "Please check DIO !"
+                PictureBox10.BringToFront()
+                PictureBox10.Show()
+                PictureBox16.BringToFront()
+                PictureBox16.Show()
+                Panel2.BringToFront()
+                Panel2.Show()
+                Label2.Text = listdetail
+                Label2.BringToFront()
+                Label2.Show()
+            End Try
         ElseIf s_mecg_name = "NO DEVICE" Then
             PictureBox10.Visible = False
             Label2.Visible = False
@@ -206,6 +225,11 @@ Public Class Working_Pro
                     Label2.Text = listdetail
                     Label2.BringToFront()
                     Label2.Show()
+                Else
+                    PictureBox10.Visible = False
+                    Label2.Visible = False
+                    Panel2.Visible = False
+                    PictureBox16.Visible = False
                 End If
             Else
                 'MsgBox("")
@@ -758,6 +782,7 @@ Public Class Working_Pro
         Else
             'Label32.Text = "0"
         End If
+        TIME_CAL_EFF.Start()
         Panel1.BackColor = Color.Green
         Label30.Text = "NORMAL"
         btn_start.Visible = False
@@ -2109,33 +2134,7 @@ Public Class Working_Pro
                 Dim del_flg3 As String = "0"
                 Dim prd_flg3 As String = "1"
                 Dim close_lot_flg3 As String = "1"
-                Dim avarage_act_prd_time3 As Double = Average
 
-
-
-                Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
-
-                sum_prg2 = sum_prg2 / cnt_btn
-                If sum_prg2 > 100 Then
-                    sum_prg2 = 100
-                ElseIf sum_prg2 < 0 Then
-                    sum_prg2 = 0
-                End If
-
-                If sum_prg2 <= 49 Then
-                    CircularProgressBar2.ProgressColor = Color.Red
-                    CircularProgressBar2.ForeColor = Color.Black
-                ElseIf sum_prg2 >= 50 And sum_prg2 <= 79 Then
-                    CircularProgressBar2.ProgressColor = Color.Chocolate
-                    CircularProgressBar2.ForeColor = Color.Black
-                ElseIf sum_prg2 >= 80 And sum_prg2 <= 100 Then
-                    CircularProgressBar2.ProgressColor = Color.Green
-                    CircularProgressBar2.ForeColor = Color.Black
-                End If
-                Dim avarage_eff As Double = Format(sum_prg2, "0.00")
-                lb_sum_prg.Text = avarage_eff
-                CircularProgressBar2.Text = sum_prg2 & "%"
-                CircularProgressBar2.Value = sum_prg2
                 'Try
                 'If My.Computer.Network.Ping("192.168.161.101") Then
                 'transfer_flg = "1"
@@ -2165,9 +2164,39 @@ Public Class Working_Pro
             End If
             Finish_work.Show() ' เกี่ยว
         End If
+        cal_eff()
     End Function
     Public Sub cal_eff()
-        Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
+        Dim cnt_btn As Integer = Integer.Parse(MainFrm.cavity.Text)
+        Dim Total As Double = 0
+        Dim dt11 As DateTime = DateTime.Now
+        Dim dt22 As DateTime = st_time.Text
+        Dim dtspan1 As TimeSpan = dt11 - dt22
+        For I = 0 To ListBox1.Items.Count - 1
+            Total += Val(ListBox1.Items(I))
+            count += 1
+        Next
+        Average = Total / count
+        Dim avarage_act_prd_time3 As Double = Average
+        Dim temppola As Double = ((dtspan1.Seconds / 60) + (dtspan1.Minutes + (dtspan1.Hours * 60)))
+        If temppola < 1 Then
+            temppola = 1
+        End If
+        Dim loss_sum As Integer
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                Dim LoadSQL = Backoffice_model.get_sum_loss(Trim(wi_no.Text))
+                While LoadSQL.Read()
+                    loss_sum = LoadSQL("sum_loss")
+                End While
+            Else
+                loss_sum = 0
+            End If
+        Catch ex As Exception
+            'load_show.Show()
+            'loss_sum = 0
+        End Try
+        Dim sum_prg2 As Integer = (((Label38.Text * CDbl(Val(LB_COUNTER_SHIP.Text))) / ((temppola * 60) - loss_sum)) * 100)
         sum_prg2 = sum_prg2 / cnt_btn
         If sum_prg2 > 100 Then
             sum_prg2 = 100
@@ -2821,7 +2850,6 @@ Public Class Working_Pro
                     End If
                 End If
             Catch ex As Exception
-
                 Button1.Enabled = False
                 btn_start.Enabled = False
                 btn_back.Enabled = False
@@ -2835,6 +2863,7 @@ Public Class Working_Pro
                 Label2.Text = listdetail
                 Label2.BringToFront()
                 Label2.Show()
+                Timer_new_dio.Stop()
             End Try
         End If
     End Sub
@@ -2971,4 +3000,14 @@ Public Class Working_Pro
         btn_start.Enabled = True
         btn_back.Enabled = True
     End Sub
+    Private Sub TIME_CAL_EFF_Tick(sender As Object, e As EventArgs) Handles TIME_CAL_EFF.Tick
+        If check_cal_eff = 10 Then
+            cal_eff()
+            check_cal_eff = 1
+        Else
+            check_cal_eff = check_cal_eff + 1
+        End If
+    End Sub
+
+
 End Class

@@ -102,20 +102,20 @@ re_load:
 									Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
 									Working_Pro.PictureBox2.Image = tImage
-									Working_Pro.lb_emp1.Visible = True
-									Working_Pro.lb_emp1.Text = emp_cd
+                                    'Working_Pro.lb_emp1.Visible = True
+                                    Working_Pro.lb_emp1.Text = emp_cd
 								Catch ex As Exception
 									Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
 									Working_Pro.PictureBox2.Image = tImage
-									Working_Pro.lb_emp1.Visible = True
-									Working_Pro.lb_emp1.Text = emp_cd
+                                    'Working_Pro.lb_emp1.Visible = True
+                                    Working_Pro.lb_emp1.Text = emp_cd
 								End Try
 							Else
 								Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 								Working_Pro.PictureBox2.Image = Backoffice_model.img_user1
-								Working_Pro.lb_emp1.Visible = True
-								Working_Pro.lb_emp1.Text = emp_cd
+                                'Working_Pro.lb_emp1.Visible = True
+                                Working_Pro.lb_emp1.Text = emp_cd
 							End If
 						ElseIf i = 1 Then
 							If status_check_ping = 1 Then
@@ -124,20 +124,20 @@ re_load:
 									Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
 									Working_Pro.PictureBox3.Image = tImage
-									Working_Pro.lb_emp2.Visible = True
-									Working_Pro.lb_emp2.Text = emp_cd
+                                    'Working_Pro.lb_emp2.Visible = True
+                                    Working_Pro.lb_emp2.Text = emp_cd
 								Catch ex As Exception
 									Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
 									Working_Pro.PictureBox3.Image = tImage
-									Working_Pro.lb_emp2.Visible = True
-									Working_Pro.lb_emp2.Text = emp_cd
+                                    'Working_Pro.lb_emp2.Visible = True
+                                    Working_Pro.lb_emp2.Text = emp_cd
 								End Try
 							Else
 								Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 								Working_Pro.PictureBox3.Image = Backoffice_model.img_user2
-								Working_Pro.lb_emp2.Visible = True
-								Working_Pro.lb_emp2.Text = emp_cd
+                                'Working_Pro.lb_emp2.Visible = True
+                                Working_Pro.lb_emp2.Text = emp_cd
 							End If
 						ElseIf i = 2 Then
 							If status_check_ping = 1 Then
@@ -146,20 +146,20 @@ re_load:
 									Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
 									Working_Pro.PictureBox4.Image = tImage
-									Working_Pro.lb_emp3.Visible = True
-									Working_Pro.lb_emp3.Text = emp_cd
+                                    'Working_Pro.lb_emp3.Visible = True
+                                    Working_Pro.lb_emp3.Text = emp_cd
 								Catch ex As Exception
 									Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
 									Working_Pro.PictureBox4.Image = tImage
-									Working_Pro.lb_emp3.Visible = True
-									Working_Pro.lb_emp3.Text = emp_cd
+                                    'Working_Pro.lb_emp3.Visible = True
+                                    Working_Pro.lb_emp3.Text = emp_cd
 								End Try
 							Else
 								Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 								Working_Pro.PictureBox4.Image = Backoffice_model.img_user3
-								Working_Pro.lb_emp3.Visible = True
-								Working_Pro.lb_emp3.Text = emp_cd
+                                'Working_Pro.lb_emp3.Visible = True
+                                Working_Pro.lb_emp3.Text = emp_cd
 							End If
 						ElseIf i = 3 Then
 							If status_check_ping = 1 Then
@@ -168,20 +168,20 @@ re_load:
 									Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
 									Working_Pro.PictureBox5.Image = tImage
-									Working_Pro.lb_emp4.Visible = True
-									Working_Pro.lb_emp4.Text = emp_cd
+                                    'Working_Pro.lb_emp4.Visible = True
+                                    Working_Pro.lb_emp4.Text = emp_cd
 								Catch ex As Exception
 									Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
 									Working_Pro.PictureBox5.Image = tImage
-									Working_Pro.lb_emp4.Visible = True
-									Working_Pro.lb_emp4.Text = emp_cd
+                                    'Working_Pro.lb_emp4.Visible = True
+                                    Working_Pro.lb_emp4.Text = emp_cd
 								End Try
 							Else
 								Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 								Working_Pro.PictureBox5.Image = Backoffice_model.img_user4
-								Working_Pro.lb_emp4.Visible = True
-								Working_Pro.lb_emp4.Text = emp_cd
+                                'Working_Pro.lb_emp4.Visible = True
+                                Working_Pro.lb_emp4.Text = emp_cd
 							End If
 						ElseIf i = 4 Then
 							If status_check_ping = 1 Then
@@ -190,14 +190,14 @@ re_load:
 									Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
 									Working_Pro.PictureBox6.Image = tImage
-									Working_Pro.lb_emp5.Visible = True
-									Working_Pro.lb_emp5.Text = emp_cd
+                                    'Working_Pro.lb_emp5.Visible = True
+                                    Working_Pro.lb_emp5.Text = emp_cd
 								Catch ex As Exception
 									Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
 									Working_Pro.PictureBox6.Image = tImage
-									Working_Pro.lb_emp5.Visible = True
-									Working_Pro.lb_emp5.Text = emp_cd
+                                    'Working_Pro.lb_emp5.Visible = True
+                                    Working_Pro.lb_emp5.Text = emp_cd
 								End Try
 							Else
 								Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
@@ -212,20 +212,20 @@ re_load:
 									Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
 									Working_Pro.PictureBox7.Image = tImage
-									Working_Pro.lb_emp6.Visible = True
-									Working_Pro.lb_emp6.Text = emp_cd
+                                    'Working_Pro.lb_emp6.Visible = True
+                                    Working_Pro.lb_emp6.Text = emp_cd
 								Catch ex As Exception
 									Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 									Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
 									Working_Pro.PictureBox7.Image = tImage
-									Working_Pro.lb_emp6.Visible = True
-									Working_Pro.lb_emp6.Text = emp_cd
+                                    'Working_Pro.lb_emp6.Visible = True
+                                    Working_Pro.lb_emp6.Text = emp_cd
 								End Try
 							Else
 								Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
 								Working_Pro.PictureBox7.Image = Backoffice_model.img_user6
-								Working_Pro.lb_emp6.Visible = True
-								Working_Pro.lb_emp6.Text = emp_cd
+                                'Working_Pro.lb_emp6.Visible = True
+                                Working_Pro.lb_emp6.Text = emp_cd
 							End If
 						End If
 					Next
@@ -360,8 +360,7 @@ re_load:
 			End If
 		End If
 	End Sub
+    Private Sub Timer_delay_Tick(sender As Object, e As EventArgs) Handles Timer_delay.Tick
 
-	Private Sub Timer_delay_Tick(sender As Object, e As EventArgs) Handles Timer_delay.Tick
-
-	End Sub
+    End Sub
 End Class

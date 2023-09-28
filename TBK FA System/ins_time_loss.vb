@@ -788,7 +788,7 @@ Public Class ins_time_loss
 	End Sub
 
     Private Sub ins_time_loss_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Lb_PartNo.Text = Working_Pro.Label3.Text
     End Sub
 
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click

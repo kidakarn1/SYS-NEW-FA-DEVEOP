@@ -311,12 +311,11 @@ Partial Class ins_qty
         Me.SPECIAL_MENU.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.SPECIAL_MENU.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SPECIAL_MENU.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SPECIAL_MENU.Location = New System.Drawing.Point(407, 511)
+        Me.SPECIAL_MENU.Location = New System.Drawing.Point(405, 511)
         Me.SPECIAL_MENU.Name = "SPECIAL_MENU"
-        Me.SPECIAL_MENU.Size = New System.Drawing.Size(181, 80)
+        Me.SPECIAL_MENU.Size = New System.Drawing.Size(185, 80)
         Me.SPECIAL_MENU.TabIndex = 40
         Me.SPECIAL_MENU.UseVisualStyleBackColor = False
-        Me.SPECIAL_MENU.Visible = False
         '
         'Start_input_data_spc
         '
@@ -457,6 +456,7 @@ Partial Class ins_qty
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.addActualNumpad3
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.SPECIAL_MENU)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.PictureBox10)
         Me.Controls.Add(Me.PictureBox3)
@@ -467,7 +467,6 @@ Partial Class ins_qty
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.End_input_data_spc)
         Me.Controls.Add(Me.Start_input_data_spc)
-        Me.Controls.Add(Me.SPECIAL_MENU)
         Me.Controls.Add(Me.pb_ok)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Button14)

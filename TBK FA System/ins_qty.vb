@@ -355,8 +355,8 @@ Public Class ins_qty
                     Label2.Show()
                     TextBox1.Text = ""
                 Else
-                    Wait_data.Label1.Text = "กรุณารอสักครู่ ระบบกำลังบันทึกข้อมูล"
-                    Wait_data.Label2.Text = "PLEASE WAIT SYSTEM SAVING DATA."
+                    ' Wait_data.Label1.Text = "กรุณารอสักครู่ ระบบกำลังบันทึกข้อมูล"
+                    ' Wait_data.Label2.Text = "PLEASE WAIT SYSTEM SAVING DATA."
                     Wait_data.Show()
                     Timer1.Enabled = True
                 End If
@@ -413,11 +413,11 @@ Public Class ins_qty
         Backoffice_model.start_check_date_paralell_line = ""
         Backoffice_model.end_check_date_paralell_line = ""
         TextBox1.Enabled = False
-        If Backoffice_model.S_chk_spec_line = 0 Then
-            SPECIAL_MENU.Visible = False
-        Else
-            SPECIAL_MENU.Visible = True
-        End If
+        ' If Backoffice_model.S_chk_spec_line = 0 Then
+        ' SPECIAL_MENU.Visible = False
+        ' Else
+        ' SPECIAL_MENU.Visible = True
+        ' End If
     End Sub
     Private Sub SPECIAL_MENU_Click(sender As Object, e As EventArgs) Handles SPECIAL_MENU.Click
         ins_qty_special_time.Show()

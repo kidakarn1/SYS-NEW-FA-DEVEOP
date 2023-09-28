@@ -43,6 +43,7 @@ Partial Class ins_time_loss
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.Lb_PartNo = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -351,6 +352,18 @@ Partial Class ins_time_loss
         Me.PictureBox2.TabStop = False
         Me.PictureBox2.Visible = False
         '
+        'Lb_PartNo
+        '
+        Me.Lb_PartNo.AutoSize = True
+        Me.Lb_PartNo.BackColor = System.Drawing.Color.Transparent
+        Me.Lb_PartNo.Font = New System.Drawing.Font("Catamaran", 29.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lb_PartNo.ForeColor = System.Drawing.Color.White
+        Me.Lb_PartNo.Location = New System.Drawing.Point(144, 11)
+        Me.Lb_PartNo.Name = "Lb_PartNo"
+        Me.Lb_PartNo.Size = New System.Drawing.Size(295, 43)
+        Me.Lb_PartNo.TabIndex = 4663
+        Me.Lb_PartNo.Text = "XXXXXXXXXXXX"
+        '
         'ins_time_loss
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -358,6 +371,7 @@ Partial Class ins_time_loss
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.addLossNumpad
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.Lb_PartNo)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.PictureBox10)
         Me.Controls.Add(Me.PictureBox2)
@@ -411,4 +425,5 @@ Partial Class ins_time_loss
     Friend WithEvents Label3 As Label
     Friend WithEvents PictureBox10 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents Lb_PartNo As Label
 End Class

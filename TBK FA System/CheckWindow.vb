@@ -14,21 +14,24 @@ Public Class CheckWindow
     Public Function count_NIMAX()
         Try
             If Working_Pro.rsWindow Then
-                digitalReadTask_new_dio.DIChannels.CreateChannel(
-              "Dev1/port0",
-              "port0",
-            ChannelLineGrouping.OneChannelForAllLines)
+                Try
+                    digitalReadTask_new_dio.DIChannels.CreateChannel(
+            "Dev1/port0",
+            "port0",
+          ChannelLineGrouping.OneChannelForAllLines)
+                Catch ex As Exception
+
+                End Try
                 reader_new_dio = New DigitalSingleChannelReader(digitalReadTask_new_dio.Stream)
                 Working_Pro.Timer_new_dio.Start()
             End If
             Return "OK"
         Catch ex As Exception
+            MsgBox(ex.Message)
             Return "Please Check USB DIO"
             ' MsgBox(" Please Check USB DIO")
         End Try
     End Function
 
-    Private Sub CheckWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 End Class

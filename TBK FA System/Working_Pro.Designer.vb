@@ -149,6 +149,7 @@ Partial Class Working_Pro
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
         Me.PictureBox15 = New System.Windows.Forms.PictureBox()
         Me.PictureBox16 = New System.Windows.Forms.PictureBox()
+        Me.TIME_CAL_EFF = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -1689,6 +1690,9 @@ Partial Class Working_Pro
         Me.PictureBox16.TabStop = False
         Me.PictureBox16.Visible = False
         '
+        'TIME_CAL_EFF
+        '
+        '
         'Working_Pro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1966,4 +1970,5 @@ Partial Class Working_Pro
     Friend WithEvents PictureBox10 As PictureBox
     Friend WithEvents PictureBox15 As PictureBox
     Friend WithEvents PictureBox16 As PictureBox
+    Friend WithEvents TIME_CAL_EFF As Timer
 End Class

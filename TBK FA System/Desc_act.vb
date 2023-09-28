@@ -296,8 +296,8 @@ break_loop:
                     If sum_prg > 100 Then
                         sum_prg = 100
                     End If
-                    Working_Pro.CircularProgressBar1.Text = sum_prg & "%"
-                    Working_Pro.CircularProgressBar1.Value = sum_prg
+                    ' Working_Pro.CircularProgressBar1.Text = sum_prg & "%"
+                    ' Working_Pro.CircularProgressBar1.Value = sum_prg
                     Dim start_time As Date = Working_Pro.st_count_ct.Text
                     Dim pd As String = MainFrm.Label6.Text
                     Dim line_cd As String = MainFrm.Label4.Text
@@ -332,6 +332,7 @@ break_loop:
                         tr_status = "0"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.pwi_id)
                     End Try
+                    Working_Pro.cal_eff()
                     Working_Pro.Enabled = True
                     Me.Close()
                 Else
