@@ -2200,7 +2200,12 @@ Public Class Working_Pro
             'load_show.Show()
             'loss_sum = 0
         End Try
-        Dim sum_prg2 As Integer = (((Label38.Text * CDbl(Val(LB_COUNTER_SHIP.Text))) / ((temppola * 60) - loss_sum)) * 100)
+        Dim sum_prg2 As Long = 1
+        Try
+            sum_prg2 = (((Label38.Text * CDbl(Val(LB_COUNTER_SHIP.Text))) / ((temppola * 60) - loss_sum)) * 100)
+        Catch ex As Exception
+            sum_prg2 = 1
+        End Try
         sum_prg2 = sum_prg2 / cnt_btn
         If sum_prg2 > 100 Then
             sum_prg2 = 100

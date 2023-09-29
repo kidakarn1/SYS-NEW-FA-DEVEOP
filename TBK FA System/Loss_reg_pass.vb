@@ -3,8 +3,9 @@ Public Class Loss_reg_pass
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         ins_time_loss.Button10.Enabled = False
         Me.Enabled = False
+        ins_time_loss.TextBox1.Text = ""
+        ins_time_loss.TextBox2.Text = ""
         ins_time_loss.Show()
-
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click

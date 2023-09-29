@@ -92,7 +92,11 @@ Public Class Change_Loss2
     End Sub
 
     Private Sub Change_Loss2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ListView2.Items(1).Selected = True
+        Try
+            ListView2.Items(1).Selected = True
+        Catch ex As Exception
+            MsgBox("Please Check Loss Master.")
+        End Try
         Timer1.Start()
     End Sub
 

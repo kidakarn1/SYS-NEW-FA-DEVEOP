@@ -1,6 +1,6 @@
 Public Class Finish_work
 	Dim count_close_popup As Integer = 0
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, PictureBox16.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles PictureBox16.Click
         click_popup()
     End Sub
     Public Sub click_popup()
