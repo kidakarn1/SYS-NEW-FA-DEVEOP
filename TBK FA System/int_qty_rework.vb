@@ -289,8 +289,8 @@ Public Class int_qty_rework
 
 		End Try
 	End Sub
-
-	Private Sub int_qty_rework_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		INP_QTY_REWORK.Enabled = False
-	End Sub
+    Private Sub int_qty_rework_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lbPartNo.Text = Working_Pro.Label3.Text
+        INP_QTY_REWORK.Enabled = False
+    End Sub
 End Class

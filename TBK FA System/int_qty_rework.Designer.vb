@@ -39,6 +39,7 @@ Partial Class int_qty_rework
         Me.INP_QTY_REWORK = New System.Windows.Forms.TextBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.lbPartNo = New System.Windows.Forms.Label()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -279,6 +280,18 @@ Partial Class int_qty_rework
         Me.PictureBox2.TabIndex = 52
         Me.PictureBox2.TabStop = False
         '
+        'lbPartNo
+        '
+        Me.lbPartNo.AutoSize = True
+        Me.lbPartNo.BackColor = System.Drawing.Color.Transparent
+        Me.lbPartNo.Font = New System.Drawing.Font("Catamaran", 29.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbPartNo.ForeColor = System.Drawing.Color.White
+        Me.lbPartNo.Location = New System.Drawing.Point(168, 11)
+        Me.lbPartNo.Name = "lbPartNo"
+        Me.lbPartNo.Size = New System.Drawing.Size(341, 43)
+        Me.lbPartNo.TabIndex = 54
+        Me.lbPartNo.Text = "XXXXXXXXXXXXXX"
+        '
         'int_qty_rework
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -286,6 +299,7 @@ Partial Class int_qty_rework
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(84, Byte), Integer), CType(CType(106, Byte), Integer))
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.addActualNumpad1
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.lbPartNo)
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Button14)
@@ -331,4 +345,5 @@ Partial Class int_qty_rework
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents INP_QTY_REWORK As TextBox
+    Friend WithEvents lbPartNo As Label
 End Class
