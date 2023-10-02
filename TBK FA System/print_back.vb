@@ -226,7 +226,7 @@ Public Class print_back
         e.Graphics.DrawString("Phase10", lb_font3.Font, Brushes.Black, 33, 250)
         e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
         Backoffice_model.Insert_tag_print_main(Working_Pro.wi_no.Text, qr_code, the_Label_bach, 1, plan_seq, Working_Pro.Label14.Text, check_tagprint_main(), Working_Pro.Label3.Text, Working_Pro.pwi_id)
-        Dim id_tag = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_code)
+        Dim id_tag = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_code)
         For K = 1 To 5 Step 1
             Backoffice_model.Insert_tag_print_sub(id_tag, MainFrm.Label4.Text, arr_qr_code_sub(K - 1), Working_Pro.wi_no.Text)
         Next

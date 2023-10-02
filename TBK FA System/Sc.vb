@@ -56,10 +56,7 @@ Public Class Sc
         Else
             Me.TextBox2.Text &= [text]
             If MainFrm.lb_ctrl_sc_flg.Text = "emp" Then
-                MsgBox(TextBox2.Text.Count)
-                MsgBox(Trim(TextBox2.Text.Count))
                 If MainFrm.lb_scanner_port.Text IsNot "USB" And Trim(TextBox2.Text.Count) = 6 Then
-                    MsgBox("Corrected")
                     BeginInvoke(Sub()
                                     TextBox2.Text = TextBox2.Text.Substring(0, 5)
                                     TextBox2.Text = TextBox2.Text.ToUpper()
@@ -101,11 +98,6 @@ Public Class Sc
     End Sub
 
     Private Sub PictureBox2_Click_1(sender As Object, e As EventArgs) Handles PictureBox2.Click
-
-    End Sub
-
-
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
     End Sub
     Public Sub checkEmp()

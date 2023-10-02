@@ -3573,7 +3573,6 @@ recheck:
             GoTo recheck
         End Try
     End Function
-
     Public Shared Function alert_loss(wi_plan, flg_control, pd, loss_id)
         Dim api = New api()
         Dim result_api_checkper = api.Load_data("http://" & svApi & "/linenotify_fa/Alert_loss_fa/notify_fa?wi=" & wi_plan & "&flg_control=" & flg_control & "&pd=" & pd & "&loss_id=" & loss_id)
