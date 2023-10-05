@@ -1403,7 +1403,7 @@ Partial Class Working_Pro
         Me.btn_stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_stop.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_stop.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_stop.Location = New System.Drawing.Point(552, 510)
+        Me.btn_stop.Location = New System.Drawing.Point(549, 511)
         Me.btn_stop.Name = "btn_stop"
         Me.btn_stop.Size = New System.Drawing.Size(244, 86)
         Me.btn_stop.TabIndex = 32
@@ -1482,9 +1482,11 @@ Partial Class Working_Pro
         '
         'TimerCountBT
         '
+        Me.TimerCountBT.Interval = 1000
         '
         'TimerLossBT
         '
+        Me.TimerLossBT.Interval = 1000
         '
         'Button1
         '
@@ -1692,6 +1694,7 @@ Partial Class Working_Pro
         '
         'TIME_CAL_EFF
         '
+        Me.TIME_CAL_EFF.Interval = 1000
         '
         'Working_Pro
         '

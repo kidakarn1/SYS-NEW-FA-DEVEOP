@@ -54,7 +54,6 @@ Partial Class ins_time_loss
         Me.TextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(8, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.TextBox1.Enabled = False
         Me.TextBox1.Font = New System.Drawing.Font("Catamaran", 38.75!, System.Drawing.FontStyle.Bold)
         Me.TextBox1.ForeColor = System.Drawing.Color.White
         Me.TextBox1.Location = New System.Drawing.Point(42, 73)
@@ -266,7 +265,6 @@ Partial Class ins_time_loss
         '
         Me.TextBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(8, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox2.Enabled = False
         Me.TextBox2.Font = New System.Drawing.Font("Catamaran", 38.75!, System.Drawing.FontStyle.Bold)
         Me.TextBox2.ForeColor = System.Drawing.Color.White
         Me.TextBox2.Location = New System.Drawing.Point(462, 69)

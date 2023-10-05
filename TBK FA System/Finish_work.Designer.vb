@@ -69,7 +69,6 @@ Partial Class Finish_work
         Me.PictureBox16.Size = New System.Drawing.Size(145, 61)
         Me.PictureBox16.TabIndex = 4656
         Me.PictureBox16.TabStop = False
-        Me.PictureBox16.Visible = False
         '
         'Panel2
         '

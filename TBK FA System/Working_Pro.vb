@@ -362,9 +362,8 @@ Public Class Working_Pro
         PictureBox11.Visible = True
         PictureBox13.BackColor = Color.FromArgb(63, 63, 63)
         'Panel3.Location = New Point(47, 209)
-        ' Label6.Location = New Point(38, 324)
+        'Label6.Location = New Point(38, 324)
         'Label10.Location = New Point(38, 439)
-
         Label24.BackColor = Color.FromArgb(63, 63, 63)
         Label17.BackColor = Color.FromArgb(63, 63, 63)
         Label1.BackColor = Color.FromArgb(63, 63, 63)
@@ -1260,8 +1259,8 @@ Public Class Working_Pro
                         'MsgBox(textp_result)
                         Dim sum_act_total As Integer = Label6.Text + cnt_btn
                         Label6.Text = sum_act_total
-                        LB_COUNTER_SHIP.Text += 1
-                        LB_COUNTER_SEQ.Text += 1
+                        LB_COUNTER_SHIP.Text += cnt_btn
+                        LB_COUNTER_SEQ.Text += cnt_btn
                         If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
                             lb_box_count.Text = lb_box_count.Text + 1
                             print_back.PrintDocument2.Print()
@@ -2614,8 +2613,8 @@ Public Class Working_Pro
             'MsgBox(textp_result)
             Dim sum_act_total As Integer = Label6.Text + cnt_btn
             Label6.Text = sum_act_total
-            LB_COUNTER_SHIP.Text += 1
-            LB_COUNTER_SEQ.Text += 1
+            LB_COUNTER_SHIP.Text += cnt_btn
+            LB_COUNTER_SEQ.Text += cnt_btn
             If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
                 lb_box_count.Text = lb_box_count.Text + 1
                 print_back.PrintDocument2.Print()

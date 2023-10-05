@@ -95,9 +95,6 @@ Partial Class Sc
         Me.TextBox2.TabIndex = 5
         Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Timer1
-        '
-        '
         'SerialPort1
         '
         '

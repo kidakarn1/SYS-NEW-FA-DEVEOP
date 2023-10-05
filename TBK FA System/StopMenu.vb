@@ -26,7 +26,6 @@
             Me.Close()
         End If
     End Sub
-
     Public Sub UpdateAutoLoss()
         Dim pd As String = MainFrm.Label6.Text
         Dim sel_combo As String = 0 'ComboBox1.SelectedIndex
@@ -81,7 +80,8 @@
             Else
                 If Backoffice_model.CountDelay <> "" Then
                     If btnBreakTime.Visible = True Then
-                        If CDbl(Val(contDelay)) = CDbl(Val((Backoffice_model.CountDelay * 10))) Then
+                        Console.WriteLine(contDelay)
+                        If CDbl(Val(contDelay)) = CDbl(Val((Backoffice_model.CountDelay))) Then
                             'MsgBox("ครบ 5 นาที")
                             btnContinue.BringToFront()
                             btnContinue.Visible = True

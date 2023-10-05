@@ -7,6 +7,7 @@ Public Class Sc
     Dim myPort As Array
     Delegate Sub SetTextCallback(ByVal [text] As String)
     Private Sub Sc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Enabled = True
         Me.Location = New Point(13, 95)
         myPort = IO.Ports.SerialPort.GetPortNames()
         Dim sc_type As String = MainFrm.lb_scanner_port.Text
@@ -323,7 +324,8 @@ recheck:
     End Function
 
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
-        Keyboard.Show()
+        Me.Enabled = False
+        Keyboards.Show()
     End Sub
 
     Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click

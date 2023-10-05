@@ -95,7 +95,7 @@ Partial Class MainFrm
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(169, 19)
         Me.Label9.TabIndex = 23
-        Me.Label9.Text = "FA SYSTEM V 1.7.6"
+        Me.Label9.Text = "FA SYSTEM V 1.7.8"
         '
         'Panel1
         '

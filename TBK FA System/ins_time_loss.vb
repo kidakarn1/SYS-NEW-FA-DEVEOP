@@ -469,15 +469,11 @@ Public Class ins_time_loss
                             End If
                         End If
                     End If
-
                     Dim start_time As String = date1.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                     Dim end_time As String = date2.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                     Dim date_cerrunt As Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                     Dim time_cerrunt As Date = DateTime.Now.ToString("HH:mm:ss")
-
-
                     Dim result_date_click_start = Backoffice_model.date_time_click_start.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-
                     '     MsgBox("start_time = " & start_time)
                     '     MsgBox("result_date_click_start = " & result_date_click_start)
                     '    MsgBox("end_time = " & end_time)

@@ -70,6 +70,7 @@ Partial Class StopMenu
         '
         'TimerLossBT
         '
+        Me.TimerLossBT.Interval = 1000
         '
         'test_time_loss_time
         '

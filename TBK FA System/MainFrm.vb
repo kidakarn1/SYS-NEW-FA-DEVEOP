@@ -239,7 +239,8 @@ Public Class MainFrm
         End Try
     End Sub
     Private Sub menu1_Click_1(sender As Object, e As EventArgs) Handles menu1.Click
-		check_lot()
+        Backoffice_model.Check_detail_actual_insert_act() 'กรณีเครื่องดับ'
+        check_lot()
         'Prd_detail.Label2.Text = ListView1.Items.Count
         Working_Pro.Label24.Text = Label4.Text
         Dim i = List_Emp.ListView1.Items.Count
@@ -252,7 +253,7 @@ Public Class MainFrm
             load_page()
         End If
     End Sub
-	Public Sub load_page()
+    Public Sub load_page()
 		Working_Pro.lb_nc_qty.Text = "0"
 		Working_Pro.lb_ng_qty.Text = "0"
         'MsgBox(line_id.Text)

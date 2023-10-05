@@ -615,10 +615,10 @@
     <Compile Include="int_qty_rework.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Keyboard.Designer.vb">
-      <DependentUpon>Keyboard.vb</DependentUpon>
+    <Compile Include="Keyboards.Designer.vb">
+      <DependentUpon>Keyboards.vb</DependentUpon>
     </Compile>
-    <Compile Include="Keyboard.vb">
+    <Compile Include="Keyboards.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Line_conf.Designer.vb">
@@ -1083,8 +1083,8 @@
     <EmbeddedResource Include="int_qty_rework.resx">
       <DependentUpon>int_qty_rework.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Keyboard.resx">
-      <DependentUpon>Keyboard.vb</DependentUpon>
+    <EmbeddedResource Include="Keyboards.resx">
+      <DependentUpon>Keyboards.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Line_conf.resx">
       <DependentUpon>Line_conf.vb</DependentUpon>

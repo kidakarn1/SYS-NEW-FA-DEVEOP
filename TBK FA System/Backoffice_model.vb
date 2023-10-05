@@ -2353,7 +2353,6 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "SELECT wi,seq_no,SUM(loss_time) AS sum_loss FROM loss_actual WHERE wi = '" & wi & "' GROUP BY wi,seq_no"
             reader = SQLCmd.ExecuteReader()
             Return reader
@@ -2440,28 +2439,22 @@ recheck:
             SQLCmd.CommandText = "Select sw.WI,sw.ITEM_CD,sw.ITEM_NAME,sw.QTY,sw.qty - SUM (ISNULL(pa.act_qty, 0 )) as 'remain_qty',ISNULL(pa.prd_flg , 0 ) as 'prd_flg',sw.WORK_ODR_DLV_DATE AS 'DLV_DATE', sw.LOCATION_PART,sw.PS_UNIT_NUMERATOR,sw.CT,COUNT(pa.seq_no) AS seq_count,sw.MODEL , sw.PRODUCT_TYP  from sup_work_plan_supply_dev as sw full outer JOIN production_actual as pa on sw.WI = pa.wi WHERE sw.LINE_CD = '" & line_cd & "' and sw.LVL = '1' and (pa.comp_flg <> '1' or pa.comp_flg is NULL) AND sw.wi = '" & wi_cd & "' GROUP BY sw.wi,sw.ITEM_CD,sw.ITEM_NAME,sw.QTY,pa.prd_flg,sw.WORK_ODR_DLV_DATE, sw.LOCATION_PART,sw.PS_UNIT_NUMERATOR,sw.CT,sw.MODEL,sw.PRODUCT_TYP"
             'SQLCmd.CommandText = "select * from sup_work_plan_supply_dev where LINE_CD = '" & line_cd & "' AND LVL = '1'"
             reader = SQLCmd.ExecuteReader()
-
             'MsgBox("tet efsdf")
             'MsgBox(reader.Read)
-
             'SQLCmd.CommandText = "select * from production_actual where wi = '5100131123'"
             'reader = SQLCmd.ExecuteReader()
             'MsgBox(reader.Read)
             'MsgBox(reader("wi").ToString())
-
             'While reader.Read()
             'SQLCmd.CommandText = "select * from production_actual where wi = '" & reader("wi").ToString() & "'"
             'reader2 = SQLCmd.ExecuteReader()
             'MsgBox(reader2.Read)
-
             'If reader2.Read = False Then
             'MsgBox("dai naa")
             'End If
-
             'MsgBox(reader("wi").ToString())
             'List_Emp.ListBox1.Items.Add(LoadSQLskill("sk_id").ToString())
             'End While
-
             'MsgBox(reader)
             Return reader
         Catch ex As Exception

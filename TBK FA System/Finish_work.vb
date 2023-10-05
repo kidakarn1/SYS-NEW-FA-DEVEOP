@@ -22,14 +22,21 @@ Public Class Finish_work
         Me.Close()
 	End Sub
 	Private Sub Finish_work_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		Working_Pro.btn_start.Enabled = False
-		Working_Pro.btn_closelot.Enabled = False
+        Working_Pro.stop_working()
+        Working_Pro.btn_start.Enabled = False
+        Working_Pro.btn_closelot.Enabled = False
 		Working_Pro.btn_setup.Enabled = False
 		Working_Pro.btn_defect.Enabled = False
 		Working_Pro.btn_ins_act.Enabled = False
-		Working_Pro.btn_desc_act.Enabled = False
-		Timer1.Enabled = True
-	End Sub
+        Working_Pro.btn_desc_act.Enabled = False
+        Me.Enabled = True
+        PictureBox16.Enabled = True
+        Label2.Enabled = True
+        Me.Visible = True
+        PictureBox16.Visible = True
+        Label2.Visible = True
+        'Timer1.Enabled = True
+    End Sub
 	Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 		count_close_popup += 1
 		If count_close_popup = 30 Then

@@ -241,7 +241,6 @@ Public Class ins_qty
         Dim text_now As String = TextBox1.Text
         Dim sum_str As Integer = text_now & "0"
         Dim rem_qty As Integer = Working_Pro.Label10.Text.Substring(1)
-
         If sum_str > rem_qty Then
             Button10.Enabled = False
             Button11.Enabled = False
@@ -412,7 +411,7 @@ Public Class ins_qty
         lbpartNo.Text = Working_Pro.Label3.Text
         Backoffice_model.start_check_date_paralell_line = ""
         Backoffice_model.end_check_date_paralell_line = ""
-        TextBox1.Enabled = False
+        'TextBox1.Enabled = False
         ' If Backoffice_model.S_chk_spec_line = 0 Then
         ' SPECIAL_MENU.Visible = False
         ' Else

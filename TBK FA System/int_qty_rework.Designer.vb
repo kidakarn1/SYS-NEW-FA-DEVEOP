@@ -255,6 +255,7 @@ Partial Class int_qty_rework
         Me.INP_QTY_REWORK.BackColor = System.Drawing.Color.FromArgb(CType(CType(8, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.INP_QTY_REWORK.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.INP_QTY_REWORK.Font = New System.Drawing.Font("Catamaran", 30.0!, System.Drawing.FontStyle.Bold)
+        Me.INP_QTY_REWORK.ForeColor = System.Drawing.Color.White
         Me.INP_QTY_REWORK.Location = New System.Drawing.Point(43, 82)
         Me.INP_QTY_REWORK.Name = "INP_QTY_REWORK"
         Me.INP_QTY_REWORK.Size = New System.Drawing.Size(405, 43)

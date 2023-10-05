@@ -145,6 +145,13 @@ Public Class closeLotsummary
         seqQty = Working_Pro.LB_COUNTER_SEQ.Text
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Working_Pro.Enabled = True
+        Working_Pro.btn_start.Enabled = True
+        Working_Pro.btn_closelot.Enabled = True
+        Working_Pro.btn_setup.Enabled = True
+        Working_Pro.btn_defect.Enabled = True
+        Working_Pro.btn_ins_act.Enabled = True
+        Working_Pro.btn_desc_act.Enabled = True
         If statusPage.Text = "MAN" Then
             Sel_prd_setup.Enabled = True
             Me.Close()
