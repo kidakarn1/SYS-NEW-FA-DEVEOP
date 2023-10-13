@@ -30,10 +30,17 @@ Partial Class Adm_manage
         Me.Button2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.lbLine = New System.Windows.Forms.Label()
+        Me.Panel_configLine = New System.Windows.Forms.Panel()
+        Me.pbOK = New System.Windows.Forms.PictureBox()
+        Me.pb_back = New System.Windows.Forms.PictureBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Button2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel_configLine.SuspendLayout()
+        CType(Me.pbOK, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_back, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label2
@@ -62,7 +69,7 @@ Partial Class Adm_manage
         'PictureBox2
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Location = New System.Drawing.Point(8, 494)
+        Me.PictureBox2.Location = New System.Drawing.Point(23, 486)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(201, 100)
         Me.PictureBox2.TabIndex = 46
@@ -73,7 +80,7 @@ Partial Class Adm_manage
         Me.PictureBox3.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox3.Location = New System.Drawing.Point(8, 213)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(254, 204)
+        Me.PictureBox3.Size = New System.Drawing.Size(254, 212)
         Me.PictureBox3.TabIndex = 47
         Me.PictureBox3.TabStop = False
         '
@@ -82,18 +89,20 @@ Partial Class Adm_manage
         Me.Button2.BackColor = System.Drawing.Color.Transparent
         Me.Button2.Location = New System.Drawing.Point(539, 210)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(255, 204)
+        Me.Button2.Size = New System.Drawing.Size(255, 215)
         Me.Button2.TabIndex = 48
         Me.Button2.TabStop = False
         '
         'PictureBox4
         '
         Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox4.Enabled = False
         Me.PictureBox4.Location = New System.Drawing.Point(273, 211)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(255, 204)
+        Me.PictureBox4.Size = New System.Drawing.Size(255, 214)
         Me.PictureBox4.TabIndex = 49
         Me.PictureBox4.TabStop = False
+        Me.PictureBox4.Visible = False
         '
         'lbLine
         '
@@ -107,13 +116,56 @@ Partial Class Adm_manage
         Me.lbLine.TabIndex = 50
         Me.lbLine.Text = "Label1"
         '
+        'Panel_configLine
+        '
+        Me.Panel_configLine.BackgroundImage = CType(resources.GetObject("Panel_configLine.BackgroundImage"), System.Drawing.Image)
+        Me.Panel_configLine.Controls.Add(Me.pbOK)
+        Me.Panel_configLine.Controls.Add(Me.pb_back)
+        Me.Panel_configLine.Controls.Add(Me.ComboBox1)
+        Me.Panel_configLine.Enabled = False
+        Me.Panel_configLine.Location = New System.Drawing.Point(153, 170)
+        Me.Panel_configLine.Name = "Panel_configLine"
+        Me.Panel_configLine.Size = New System.Drawing.Size(510, 318)
+        Me.Panel_configLine.TabIndex = 52
+        Me.Panel_configLine.Visible = False
+        '
+        'pbOK
+        '
+        Me.pbOK.BackColor = System.Drawing.Color.Transparent
+        Me.pbOK.Location = New System.Drawing.Point(274, 224)
+        Me.pbOK.Name = "pbOK"
+        Me.pbOK.Size = New System.Drawing.Size(177, 71)
+        Me.pbOK.TabIndex = 58
+        Me.pbOK.TabStop = False
+        '
+        'pb_back
+        '
+        Me.pb_back.BackColor = System.Drawing.Color.Transparent
+        Me.pb_back.Location = New System.Drawing.Point(71, 225)
+        Me.pb_back.Name = "pb_back"
+        Me.pb_back.Size = New System.Drawing.Size(177, 71)
+        Me.pb_back.TabIndex = 57
+        Me.pb_back.TabStop = False
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Enabled = False
+        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 32.0!)
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(58, 127)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(398, 59)
+        Me.ComboBox1.TabIndex = 53
+        Me.ComboBox1.Visible = False
+        '
         'Adm_manage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightBlue
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.menuLogin
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.Panel_configLine)
         Me.Controls.Add(Me.lbLine)
         Me.Controls.Add(Me.PictureBox4)
         Me.Controls.Add(Me.Button2)
@@ -124,11 +176,13 @@ Partial Class Adm_manage
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Adm_manage"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = resources.GetString("$this.Text")
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Button2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel_configLine.ResumeLayout(False)
+        CType(Me.pbOK, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_back, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -140,4 +194,8 @@ Partial Class Adm_manage
 	Friend WithEvents Button2 As PictureBox
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents lbLine As Label
+    Friend WithEvents Panel_configLine As Panel
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents pbOK As PictureBox
+    Friend WithEvents pb_back As PictureBox
 End Class

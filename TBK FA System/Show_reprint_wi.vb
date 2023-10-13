@@ -28,18 +28,18 @@ Public Class Show_reprint_wi
 			MsgBox("NO DATA REPRINT")
 		End Try
 	End Sub
-	Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
-		Adm_manage.Show()
-		Me.Close()
-	End Sub
-	Private Sub Show_reprint_wi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		hide_wi_select.Visible = False
-		load_wi()
-	End Sub
-	Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-		load_data_show_of()
-	End Sub
-	Public Sub load_data_show_of()
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles pcBack.Click
+        Adm_manage.Show()
+        Me.Close()
+    End Sub
+    Private Sub Show_reprint_wi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        hide_wi_select.Visible = False
+        load_wi()
+    End Sub
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles pcOK.Click
+        load_data_show_of()
+    End Sub
+    Public Sub load_data_show_of()
 		tag_reprint_new.ListView1.Items.Clear()
 		tag_reprint_new.ListBox2.Items.Clear()
 		Dim num As Integer = 0

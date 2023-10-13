@@ -35,7 +35,7 @@ Public Class Finish_work
         Me.Visible = True
         PictureBox16.Visible = True
         Label2.Visible = True
-        'Timer1.Enabled = True
+        Timer1.Enabled = True
     End Sub
 	Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 		count_close_popup += 1

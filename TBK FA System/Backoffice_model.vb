@@ -42,6 +42,7 @@ Public Class Backoffice_model
     Public Shared CountDelay As String = ""
     Public Shared svApi As String = ""
     Public Shared svDatabase As String = ""
+    Public Shared user_pd As String = ""
     Public Shared Function GetTimeAutoBreakTime(lineCd As String)
         Dim result As String = ""
         Try
@@ -85,6 +86,16 @@ Public Class Backoffice_model
             sqliteConn.Close()
         End Try
     End Sub
+    Public Shared Function checkTransection(pwi_id As String, number_qty As String, DateTime As String)
+        Dim api = New api()
+        Dim rs = api.Load_data("http://" & svApi & "/API_NEW_FA/GET_DATA_NEW_FA/CheckTrancetion?pwi_id=" & pwi_id & "&number_qty=" & number_qty & "&st_time=" & DateTime)
+        Return rs
+    End Function
+    Public Shared Function Get_PD_CONFIG(line As String)
+        Dim api = New api()
+        Dim rs = api.Load_data("http://" & svApi & "/API_NEW_FA/GET_DATA_NEW_FA/Get_PD_CONFIG?line_cd=" & line)
+        Return rs
+    End Function
     Public Shared Function ILogLossBreakTime(lineCd As String, wi As String, seq As String)
         Dim api = New api()
         Dim GetData = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/InsertLogLoss?lineCd=" & MainFrm.Label4.Text & "&wi=" & wi & "&seq=" & seq)
@@ -761,7 +772,7 @@ re_insert_rework_act:
     Public Shared Sub Check_detail_actual_insert_act()
         updated_data_to_dbsvr()
         Dim api = New api()
-        Dim result_update_count_pro = api.Load_data("http://" & svApi & "/API_NEW_FA/TESTAPITRANFER/Get_detail_act?line_cd=" & GET_LINE_PRODUCTION())
+        Dim result_update_count_pro = api.Load_data("http://" & svApi & "/API_NEW_FA/TESTAPITRANFER/Get_detail_act?line_cd=" & MainFrm.Label4.Text)
     End Sub
     Public Shared Sub Check_detail_actual_insert_act_no_api()
         updated_data_to_dbsvr()
@@ -2606,7 +2617,6 @@ recheck:
         Catch ex As Exception
             sqliteConn.Close()
             sqliteConn = New SQLiteConnection(sqliteConnect)
-            MsgBox("CATCH")
             sqliteConn.Open()
         End Try
         Try
@@ -2621,11 +2631,30 @@ recheck:
             MsgBox("SQLite Database connect failed. Please contact PC System [Function saveLineConfig] = " & ex.Message)
             sqliteConn.Close()
         End Try
-
-
-
     End Function
-
+    Public Shared Function UpdateLineConfig(line_cd As String)
+        Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd")
+        Dim sqliteConn As New SQLiteConnection(sqliteConnect)
+        Try
+            sqliteConn.Open()
+        Catch ex As Exception
+            sqliteConn.Close()
+            sqliteConn = New SQLiteConnection(sqliteConnect)
+            sqliteConn.Open()
+        End Try
+        Try
+            Dim cmd As New SQLiteCommand
+            cmd.Connection = sqliteConn
+            cmd.CommandText = "UPDATE line_detail SET line_cd = '" & line_cd & "', updated_date = '" & currdated & "' WHERE id = 1 "
+            Dim LoadSQL As SQLiteDataReader = cmd.ExecuteReader()
+            LoadSQL.Close()
+            'MsgBox(LoadSQL)
+            Return LoadSQL
+        Catch ex As Exception
+            MsgBox("SQLite Database connect failed. Please contact PC System [Function UpdateLineConfig] = " & ex.Message)
+            sqliteConn.Close()
+        End Try
+    End Function
     Public Shared Function insPrdDetail_sqlite(pd As String, line_cd As String, wi_plan As String, item_cd As String, item_name As String, staff_no As Integer, seq_no As Integer, qty As Integer, number_qty As Integer, st_time As String, end_time As String, use_time As Double, tr_status As String, pwi_id As String)
 re_insert_data:
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd")
@@ -2645,7 +2674,6 @@ re_insert_data:
             'cmd.CommandText = "INSERT INTO act_ins (pd,line_cd,wi_plan,item_cd,item_name,tr_status) VALUES ('pd123','line123','wi123','item123','nm123','1');"
             cmd1.CommandText = "INSERT INTO act_ins(pd,line_cd,wi_plan,item_cd,item_name,staff_no,seq_no,qty,number_qty,st_time,end_time,use_time,tr_status,updated_date,pwi_id) VALUES ('" & pd & "','" & line_cd & "','" & wi_plan & "','" & item_cd & "','" & item_name & "','" & staff_no & "','" & seq_no & "','" & qty & "','" & number_qty & "','" & st_time & "','" & end_time & "','" & use_time & "','" & tr_status & "','" & currdated & "' , '" & pwi_id & "')"
             'cmd1.CommandText = "select * from act_ins"
-            'MsgBox(cmd1.CommandText)
             Dim LoadSQL As SQLiteDataReader = cmd1.ExecuteReader()
             'MsgBox(LoadSQL)
             'Return LoadSQL
@@ -2765,8 +2793,12 @@ re_insert_data:
             Dim pwi_id As Integer = LoadSQL("pwi_id").ToString()
             Dim status_sqlite = "0"
             Check_connect_sqlite()
+            '  Dim check_rs = checkTransection(pwi_id, number_qty, st_time) ' ตรวจสอบว่าเข้า DB ไปรึยัง
+            ' MsgBox(check_rs)
+            '  If check_rs = "1" Then
             Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, qty, st_time, end_time, use_time, number_qty, pwi_id, status_sqlite)
-            arr_list_id.Add(id)
+                arr_list_id.Add(id)
+            'End If
         End While
         'End If
         Check_connect_sqlite()

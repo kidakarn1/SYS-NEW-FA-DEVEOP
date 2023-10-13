@@ -303,50 +303,48 @@ Public Class ins_qty_special_time
 
     End Sub
 
-	Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
-		Dim text_to2 As String = TextBox2.Text
-		Dim text_to1 As String = TextBox1.Text
-		If text_to2.Length > 0 Then
-			'MsgBox(text_to2.Length)
-			If text_to2.Length = 1 Then
-				Dim result_str As String = text_to2.Substring(1)
-				TextBox2.Text = result_str
-			ElseIf text_to2.Length = 2 Then
-				Dim result_str As String = text_to2.Substring(0, 1)
-				TextBox2.Text = result_str
-			ElseIf text_to2.Length = 4 Then
-				Dim result_str As String = text_to2.Substring(0, 2)
-				TextBox2.Text = result_str
-			ElseIf text_to2.Length = 5 Then
-				Dim result_str As String = text_to2.Substring(0, 4)
-				TextBox2.Text = result_str
-			End If
-		End If
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        Dim text_to2 As String = TextBox2.Text
+        Dim text_to1 As String = TextBox1.Text
+        If text_to2.Length > 0 Then
+            'MsgBox(text_to2.Length)
+            If text_to2.Length = 1 Then
+                Dim result_str As String = text_to2.Substring(1)
+                TextBox2.Text = result_str
+            ElseIf text_to2.Length = 2 Then
+                Dim result_str As String = text_to2.Substring(0, 1)
+                TextBox2.Text = result_str
+            ElseIf text_to2.Length = 4 Then
+                Dim result_str As String = text_to2.Substring(0, 2)
+                TextBox2.Text = result_str
+            ElseIf text_to2.Length = 5 Then
+                Dim result_str As String = text_to2.Substring(0, 4)
+                TextBox2.Text = result_str
+            End If
+        End If
+        If text_to2.Length = 0 Then
+            If text_to1.Length > 0 Then
+                'MsgBox(text_to2.Length)
+                If text_to1.Length = 1 Then
+                    Dim result_str As String = text_to1.Substring(1)
+                    TextBox1.Text = result_str
+                ElseIf text_to1.Length = 2 Then
+                    Dim result_str As String = text_to1.Substring(0, 1)
+                    TextBox1.Text = result_str
+                ElseIf text_to1.Length = 4 Then
+                    Dim result_str As String = text_to1.Substring(0, 2)
+                    TextBox1.Text = result_str
+                ElseIf text_to1.Length = 5 Then
+                    Dim result_str As String = text_to1.Substring(0, 4)
+                    TextBox1.Text = result_str
+                End If
+            End If
+        End If
 
-		If text_to2.Length = 0 Then
-			If text_to1.Length > 0 Then
-				'MsgBox(text_to2.Length)
-				If text_to1.Length = 1 Then
-					Dim result_str As String = text_to1.Substring(1)
-					TextBox1.Text = result_str
-				ElseIf text_to1.Length = 2 Then
-					Dim result_str As String = text_to1.Substring(0, 1)
-					TextBox1.Text = result_str
-				ElseIf text_to1.Length = 4 Then
-					Dim result_str As String = text_to1.Substring(0, 2)
-					TextBox1.Text = result_str
-				ElseIf text_to1.Length = 5 Then
-					Dim result_str As String = text_to1.Substring(0, 4)
-					TextBox1.Text = result_str
-				End If
-			End If
-		End If
-
-		'text_to2 = TextBox2.Text
-		'MsgBox(TextBox2.Text.Length)
-		chk_ins()
-	End Sub
-
+        'text_to2 = TextBox2.Text
+        'MsgBox(TextBox2.Text.Length)
+        chk_ins()
+    End Sub
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
         TextBox1.Clear()
         TextBox2.Clear()
@@ -357,10 +355,18 @@ Public Class ins_qty_special_time
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Try
+                    Dim timeclickStart As Date
+                    Dim DatetimeclickStart
+                    'MsgBox("Backoffice_model.S_chk_spec_line===>" & Backoffice_model.S_chk_spec_line)
+                    If Backoffice_model.S_chk_spec_line = 0 Then
+                        timeclickStart = DateTime.Now.ToString()
+                        DatetimeclickStart = Backoffice_model.date_time_click_start.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+                    Else
+                        timeclickStart = DateTime.Now.ToString()
+                    DatetimeclickStart = Backoffice_model.date_time_start_master_shift.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+                    End If
                     'Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift เอาเวลา ของ Shift ตั้งต้นขึ้นมา
                     '''' เป็นการเอาเวลาของการ กด ปุ่ม STarts มาแทน 
-                    Dim timeclickStart As Date = DateTime.Now.ToString()
-                    Dim DatetimeclickStart = Backoffice_model.date_time_click_start.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                     'DatetimeclickStart = DatetimeclickStart & " " & show_time_add_qty.Text & ":00"
                     ''''end เป็นการเอาเวลาของการ กด ปุ่ม STarts มาแทน 
                     Dim date_start_shift As Date = DatetimeclickStart
@@ -738,13 +744,14 @@ Public Class ins_qty_special_time
     Private Sub ins_qty_special_time_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
         Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift
-        'show_time_add_qty.Text = date_start_shift.ToString("HH:mm", CultureInfo.InvariantCulture)
-        Dim timestart As Date = Working_Pro.Label16.Text
-        show_time_add_qty.Text = timestart.ToString("HH:mm", CultureInfo.InvariantCulture)
+        If Backoffice_model.S_chk_spec_line = 0 Then
+            Dim timestart As Date = Working_Pro.Label16.Text
+            show_time_add_qty.Text = timestart.ToString("HH:mm", CultureInfo.InvariantCulture)
+        Else
+            show_time_add_qty.Text = Backoffice_model.date_time_start_master_shift.ToString("HH:mm", CultureInfo.InvariantCulture)
+        End If
         chk_ins()
-
     End Sub
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label1.Text = TimeOfDay.ToString("H:mm:ss")
     End Sub

@@ -146,10 +146,12 @@ Partial Class Line_conf
         '
         'combo_cavity
         '
+        Me.combo_cavity.DropDownHeight = 110
         Me.combo_cavity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.combo_cavity.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.combo_cavity.Font = New System.Drawing.Font("Catamaran", 22.0!, System.Drawing.FontStyle.Bold)
         Me.combo_cavity.FormattingEnabled = True
+        Me.combo_cavity.IntegralHeight = False
         Me.combo_cavity.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"})
         Me.combo_cavity.Location = New System.Drawing.Point(183, 341)
         Me.combo_cavity.Name = "combo_cavity"
@@ -171,11 +173,13 @@ Partial Class Line_conf
         '
         'ComboBox2
         '
+        Me.ComboBox2.DropDownHeight = 320
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBox2.Font = New System.Drawing.Font("Catamaran", 22.0!, System.Drawing.FontStyle.Bold)
         Me.ComboBox2.ForeColor = System.Drawing.Color.Black
         Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.IntegralHeight = False
         Me.ComboBox2.Location = New System.Drawing.Point(182, 184)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(180, 40)

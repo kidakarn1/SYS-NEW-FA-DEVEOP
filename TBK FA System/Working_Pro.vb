@@ -20,8 +20,8 @@ Public Class Working_Pro
     Public check_cal_eff As Integer = 0
     Public counterNewDIO
     Dim QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
-    Dim start_flg As Integer = 0
-    Dim comp_flg As Integer = 0
+    Public Shared start_flg As Integer = 0
+    Public Shared comp_flg As Integer = 0
     Dim start_year As Integer = 0
     Dim start_month As Integer = 0
     Dim start_days As Integer = 0
@@ -35,7 +35,7 @@ Public Class Working_Pro
     Dim Edit_Up(1) As TextBox
     Dim Edit_Down(7) As TextBox
     Dim delay_btn As Integer = 0
-    Dim check_bull As Integer = 0
+    Public Shared  check_bull As Integer = 0
     Public check_in_up_seq As Integer = 0
     Dim value_next_process As String = ""
     Public check_format_tag As String = Backoffice_model.B_check_format_tag()
@@ -582,7 +582,6 @@ Public Class Working_Pro
         btn_stop.Visible = True
         Prd_detail.Timer3.Enabled = False
     End Sub
-
     Private Sub btn_start_Click(sender As Object, e As EventArgs) Handles btn_start.Click
         Start_Production()
     End Sub
@@ -673,7 +672,7 @@ Public Class Working_Pro
                             end_loss_codex = item("End_Loss").ToString()
                             Loss_Time_codex = item("Loss_Time").ToString()
                             If CDbl(Val(Loss_Time_codex)) > 0 Then
-                                ins_loss_code(MainFrm.Label6.Text, Label24.Text, Prd_detail.lb_wi.Text, Label3.Text, CDbl(Val(Label22.Text)), Label14.Text, start_loss_codex, end_loss_codex, Loss_Time_codex, loss_type, "36", "0", pwi_id)
+                                ins_loss_code(MainFrm.Label6.Text, Label24.Text, wi_no.Text, Label3.Text, CDbl(Val(Label22.Text)), Label14.Text, start_loss_codex, end_loss_codex, Loss_Time_codex, loss_type, "36", "0", pwi_id)
                             End If
                         Next
                     Catch ex As Exception
@@ -1258,251 +1257,218 @@ Public Class Working_Pro
                         textp_result = Math.Abs(textp_result) - 1
                         'MsgBox(textp_result)
                         Dim sum_act_total As Integer = Label6.Text + cnt_btn
-                        Label6.Text = sum_act_total
-                        LB_COUNTER_SHIP.Text += cnt_btn
-                        LB_COUNTER_SEQ.Text += cnt_btn
-                        If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
-                            lb_box_count.Text = lb_box_count.Text + 1
-                            print_back.PrintDocument2.Print()
-                            If result_mod = "0" Then
-                                Label_bach.Text += 1
-                                tag_print()
+                        Dim start_time As Date = st_count_ct.Text
+                        Dim end_time As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                        Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+                        Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+                        Dim checkTransection As String
+                        Try
+                            If My.Computer.Network.Ping("192.168.161.101") Then
+                                checkTransection = Backoffice_model.checkTransection(pwi_id, CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text), start_time2)
+                                ' MsgBox("pwi_id==>" & pwi_id)
+                                ' MsgBox("Label6==>" & CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text))
+                                ' MsgBox("start_time2==>" & start_time2)
+                            Else
+                                checkTransection = "1"
                             End If
-                        Else
-                            If result_mod = 0 And textp_result <> 0 Then
-                                If V_check_line_reprint = "0" Then
-                                    lb_box_count.Text = lb_box_count.Text + 1
-                                    Label_bach.Text = Label_bach.Text + 1
+                        Catch ex As Exception
+                            checkTransection = "1"
+                        End Try
+                        If checkTransection = "1" Then
+                            Label6.Text = sum_act_total
+                            LB_COUNTER_SHIP.Text += cnt_btn
+                            LB_COUNTER_SEQ.Text += cnt_btn
+                            If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
+                                lb_box_count.Text = lb_box_count.Text + 1
+                                print_back.PrintDocument2.Print()
+                                If result_mod = "0" Then
+                                    Label_bach.Text += 1
                                     tag_print()
+                                End If
+                            Else
+                                If result_mod = 0 And textp_result <> 0 Then
+                                    If V_check_line_reprint = "0" Then
+                                        lb_box_count.Text = lb_box_count.Text + 1
+                                        Label_bach.Text = Label_bach.Text + 1
+                                        tag_print()
+                                    Else
+                                        If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
+                                        Else
+                                            lb_box_count.Text = lb_box_count.Text + 1
+                                            Label_bach.Text = Label_bach.Text + 1
+                                            tag_print()
+                                        End If
+                                    End If
+                                End If
+                            End If
+
+
+                            Dim sum_prg As Integer = (Label6.Text * 100) / Label8.Text
+                            'MsgBox(sum_prg)
+
+                            If sum_prg > 100 Then
+                                sum_prg = 100
+                            ElseIf sum_prg < 0 Then
+                                sum_prg = 0
+                            End If
+
+                            CircularProgressBar1.Text = sum_prg & "%"
+                            CircularProgressBar1.Value = sum_prg
+
+
+                            Dim use_time As Integer = Label34.Text
+
+
+                            Dim dt1 As DateTime = DateTime.Now
+                            Dim dt2 As DateTime = st_count_ct.Text
+                            Dim dtspan As TimeSpan = dt1 - dt2
+                            'MsgBox(("Second: " & dtspan.Seconds))
+                            'use_time = 1
+                            'MsgBox(dtspan)
+                            'MsgBox(dtspan.Minutes)
+
+                            Dim actCT_jing As Double = Format((dtspan.Seconds / _Edit_Up_0.Text) + (dtspan.Minutes * 60), "0.00")
+                            'Label37.Text = actCT_jing
+
+                            ListBox1.Items.Add((dtspan.Seconds) + (dtspan.Minutes * 60) + (dtspan.Hours * 3600))
+
+                            Dim Total As Double = 0
+                            Dim Count As Double = 0
+                            Dim Average As Double = 0
+                            Dim I As Integer
+
+                            For I = 0 To ListBox1.Items.Count - 1
+                                Total += Val(ListBox1.Items(I))
+                                Count += 1
+                            Next
+                            Average = Total / Count
+                            'MsgBox(Count)
+                            If Count = 1 Then
+                                'MsgBox(lb_ref_scan.Text)
+                                Try
+                                    Backoffice_model.Tag_seq_rec_sqlite(lb_ref_scan.Text.Substring(0, 10), lb_ref_scan.Text.Substring(10, 3), lb_ref_scan.Text.Substring(13, (lb_ref_scan.Text.Length - 13)), RTrim(lb_ref_scan.Text))
+                                Catch ex As Exception
+
+                                End Try
+                            End If
+                            Label37.Text = Format(Average, "0.0")
+                            st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                            Dim dt11 As DateTime = DateTime.Now
+                            Dim dt22 As DateTime = st_time.Text
+                            Dim dtspan1 As TimeSpan = dt11 - dt22
+                            'MsgBox(dtspan1.Minutes)
+                            If (dtspan1.Minutes + (dtspan1.Hours * 60)) >= use_time Then
+                                Label20.ForeColor = Color.Red
+                            End If
+
+                            Dim temppola As Double = ((dtspan1.Seconds / 60) + (dtspan1.Minutes + (dtspan1.Hours * 60)))
+                            'MsgBox("Minute diff : " & dtspan1.Minutes)
+                            'MsgBox("Hour diff : " & (dtspan1.Hours * 60))
+                            If temppola < 1 Then
+                                temppola = 1
+                            End If
+                            Dim loss_sum As Integer
+                            Try
+                                If My.Computer.Network.Ping("192.168.161.101") Then
+                                    Dim LoadSQL = Backoffice_model.get_sum_loss(Trim(wi_no.Text))
+                                    While LoadSQL.Read()
+                                        loss_sum = LoadSQL("sum_loss")
+                                    End While
                                 Else
-                                    If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
+                                    loss_sum = 0
+                                End If
+                            Catch ex As Exception
+                                'load_show.Show()
+                                'loss_sum = 0
+                            End Try
+                            Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
+
+                            sum_prg2 = sum_prg2 / cnt_btn
+
+                            If sum_prg2 > 100 Then
+                                sum_prg2 = 100
+                            ElseIf sum_prg2 < 0 Then
+                                sum_prg2 = 0
+                            End If
+                            If sum_prg2 <= 49 Then
+                                CircularProgressBar2.ProgressColor = Color.Red
+                                CircularProgressBar2.ForeColor = Color.Black
+                            ElseIf sum_prg2 >= 50 And sum_prg2 <= 79 Then
+                                CircularProgressBar2.ProgressColor = Color.Chocolate
+                                CircularProgressBar2.ForeColor = Color.Black
+                            ElseIf sum_prg2 >= 80 And sum_prg2 <= 100 Then
+                                CircularProgressBar2.ProgressColor = Color.Green
+                                CircularProgressBar2.ForeColor = Color.Black
+                            End If
+                            Dim avarage_eff As Double = Format(sum_prg2, "0.00")
+                            lb_sum_prg.Text = avarage_eff
+                            CircularProgressBar2.Text = sum_prg2 & "%"
+                            CircularProgressBar2.Value = sum_prg2
+                            Dim actCT_jingna As Double = Format(dtspan.Seconds + (dtspan.Minutes * 60), "0.00")
+                            Dim pd As String = MainFrm.Label6.Text
+                            Dim line_cd As String = MainFrm.Label4.Text
+                            Dim wi_plan As String = wi_no.Text
+                            Dim item_cd As String = Label3.Text
+                            Dim item_name As String = Label12.Text
+                            Dim staff_no As String = Label29.Text
+                            Dim seq_no As String = Label22.Text
+                            Dim prd_qty As Integer = cnt_btn
+                            Dim use_timee As Double = actCT_jingna
+                            Dim tr_status As String = "0"
+                            Dim number_qty As Integer = Label6.Text
+                            Try
+                                If My.Computer.Network.Ping("192.168.161.101") Then
+                                    tr_status = "1"
+                                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, tr_status)
+                                    'MsgBox("Ping completed")
+                                Else
+                                    tr_status = "0"
+                                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                                    'MsgBox("Ping incompleted")
+                                End If
+                            Catch ex As Exception
+                                tr_status = "0"
+                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                            End Try
+                            Dim sum_diff As Integer = Label8.Text - Label6.Text
+                            Label10.Text = "-" & sum_diff
+                            If sum_diff = 0 Then
+                                Me.Enabled = False
+                                comp_flg = 1
+                                Finish_work.Show() ' เกี่ยว
+                            End If
+                            If sum_diff < 1 Then
+                                If sum_diff = 0 Then
+                                    If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
+                                        lb_box_count.Text = lb_box_count.Text + 1
+                                        print_back.PrintDocument2.Print()
+                                        If result_mod = "0" Then
+                                            Label_bach.Text += 1
+                                            tag_print()
+                                        End If
                                     Else
                                         lb_box_count.Text = lb_box_count.Text + 1
                                         Label_bach.Text = Label_bach.Text + 1
                                         tag_print()
                                     End If
-                                End If
-                            End If
-                        End If
-
-
-                        Dim sum_prg As Integer = (Label6.Text * 100) / Label8.Text
-                        'MsgBox(sum_prg)
-
-                        If sum_prg > 100 Then
-                            sum_prg = 100
-                        ElseIf sum_prg < 0 Then
-                            sum_prg = 0
-                        End If
-
-                        CircularProgressBar1.Text = sum_prg & "%"
-                        CircularProgressBar1.Value = sum_prg
-
-
-                        Dim use_time As Integer = Label34.Text
-
-
-                        Dim dt1 As DateTime = DateTime.Now
-                        Dim dt2 As DateTime = st_count_ct.Text
-                        Dim dtspan As TimeSpan = dt1 - dt2
-                        'MsgBox(("Second: " & dtspan.Seconds))
-                        'use_time = 1
-                        'MsgBox(dtspan)
-                        'MsgBox(dtspan.Minutes)
-
-                        Dim actCT_jing As Double = Format((dtspan.Seconds / _Edit_Up_0.Text) + (dtspan.Minutes * 60), "0.00")
-                        'Label37.Text = actCT_jing
-
-                        ListBox1.Items.Add((dtspan.Seconds) + (dtspan.Minutes * 60) + (dtspan.Hours * 3600))
-
-                        Dim Total As Double = 0
-                        Dim Count As Double = 0
-                        Dim Average As Double = 0
-                        Dim I As Integer
-
-                        For I = 0 To ListBox1.Items.Count - 1
-                            Total += Val(ListBox1.Items(I))
-                            Count += 1
-                        Next
-                        Average = Total / Count
-                        'MsgBox(Count)
-
-                        If Count = 1 Then
-                            'MsgBox(lb_ref_scan.Text)
-
-                            Try
-                                Backoffice_model.Tag_seq_rec_sqlite(lb_ref_scan.Text.Substring(0, 10), lb_ref_scan.Text.Substring(10, 3), lb_ref_scan.Text.Substring(13, (lb_ref_scan.Text.Length - 13)), RTrim(lb_ref_scan.Text))
-                            Catch ex As Exception
-
-                            End Try
-                        End If
-                        Label37.Text = Format(Average, "0.0")
-                        Dim start_time As Date = st_count_ct.Text
-                        st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-
-                        Dim dt11 As DateTime = DateTime.Now
-                        Dim dt22 As DateTime = st_time.Text
-                        Dim dtspan1 As TimeSpan = dt11 - dt22
-
-                        'MsgBox(dtspan1.Minutes)
-
-                        If (dtspan1.Minutes + (dtspan1.Hours * 60)) >= use_time Then
-                            Label20.ForeColor = Color.Red
-                        End If
-
-                        Dim temppola As Double = ((dtspan1.Seconds / 60) + (dtspan1.Minutes + (dtspan1.Hours * 60)))
-                        'MsgBox("Minute diff : " & dtspan1.Minutes)
-                        'MsgBox("Hour diff : " & (dtspan1.Hours * 60))
-                        If temppola < 1 Then
-                            temppola = 1
-                        End If
-                        Dim loss_sum As Integer
-                        Try
-                            If My.Computer.Network.Ping("192.168.161.101") Then
-                                Dim LoadSQL = Backoffice_model.get_sum_loss(Trim(wi_no.Text))
-                                While LoadSQL.Read()
-                                    loss_sum = LoadSQL("sum_loss")
-                                End While
-                            Else
-                                loss_sum = 0
-                            End If
-                        Catch ex As Exception
-                            'load_show.Show()
-                            'loss_sum = 0
-                        End Try
-                        Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
-                        'Dim sum_prg2 As Integer = (((CycleTime.Text * _Edit_Up_0.Text) / temppola) * 100)
-                        'MsgBox("((" & CycleTime.Text & "*" & _Edit_Up_0.Text & ") /" & temppola & ") * 100")
-                        'MsgBox(sum_prg2 / cnt_btn)
-
-                        sum_prg2 = sum_prg2 / cnt_btn
-                        'MsgBox(sum_prg2)
-
-                        If sum_prg2 > 100 Then
-                            sum_prg2 = 100
-                        ElseIf sum_prg2 < 0 Then
-                            sum_prg2 = 0
-                        End If
-                        'MsgBox(sum_prg2)
-                        If sum_prg2 <= 49 Then
-                            CircularProgressBar2.ProgressColor = Color.Red
-                            CircularProgressBar2.ForeColor = Color.Black
-                        ElseIf sum_prg2 >= 50 And sum_prg2 <= 79 Then
-                            CircularProgressBar2.ProgressColor = Color.Chocolate
-                            CircularProgressBar2.ForeColor = Color.Black
-                        ElseIf sum_prg2 >= 80 And sum_prg2 <= 100 Then
-                            CircularProgressBar2.ProgressColor = Color.Green
-                            CircularProgressBar2.ForeColor = Color.Black
-                        End If
-                        Dim avarage_eff As Double = Format(sum_prg2, "0.00")
-                        lb_sum_prg.Text = avarage_eff
-                        CircularProgressBar2.Text = sum_prg2 & "%"
-                        CircularProgressBar2.Value = sum_prg2
-                        Dim actCT_jingna As Double = Format(dtspan.Seconds + (dtspan.Minutes * 60), "0.00")
-                        Dim pd As String = MainFrm.Label6.Text
-                        Dim line_cd As String = MainFrm.Label4.Text
-                        Dim wi_plan As String = wi_no.Text
-                        Dim item_cd As String = Label3.Text
-                        Dim item_name As String = Label12.Text
-                        Dim staff_no As String = Label29.Text
-                        Dim seq_no As String = Label22.Text
-                        Dim prd_qty As Integer = cnt_btn
-                        Dim end_time As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-                        Dim use_timee As Double = actCT_jingna
-                        Dim tr_status As String = "0"
-                        Dim number_qty As Integer = Label6.Text
-                        'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, tr_status)
-                        Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-                        Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-
-                        Try
-                            If My.Computer.Network.Ping("192.168.161.101") Then
-                                tr_status = "1"
-                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                                Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, tr_status)
-                                'MsgBox("Ping completed")
-                            Else
-                                tr_status = "0"
-                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                                'MsgBox("Ping incompleted")
-                            End If
-                        Catch ex As Exception
-                            tr_status = "0"
-                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                        End Try
-                        'Label16.Text.ToString("H : mm") - Now.ToString("H : mm")
-
-                        Dim sum_diff As Integer = Label8.Text - Label6.Text
-                        Label10.Text = "-" & sum_diff
-                        If sum_diff = 0 Then
-                            Me.Enabled = False
-                            comp_flg = 1
-                            'If result_mod <> "0" Then ' New
-                            'tag_print()
-                            'End If
-                            Finish_work.Show() ' เกี่ยว
-                        End If
-                        'MsgBox(sum_diff)
-                        If sum_diff < 1 Then
-                            If sum_diff = 0 Then
-                                If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
-                                    lb_box_count.Text = lb_box_count.Text + 1
-                                    print_back.PrintDocument2.Print()
-                                    If result_mod = "0" Then
-                                        Label_bach.Text += 1
-                                        tag_print()
-                                    End If
                                 Else
-                                    lb_box_count.Text = lb_box_count.Text + 1
-                                    'If Backoffice_model.check_line_reprint() = "0" Then
-                                    Label_bach.Text = Label_bach.Text + 1
-                                    tag_print()
-                                    'End If
                                 End If
-                            Else
+                                Me.Enabled = False
+                                comp_flg = 1
+                                Finish_work.Show() ' เกี่ยว
+                                Dim plan_qty As Integer = Label8.Text
+                                Dim shift_prd As String = Label14.Text
+                                Dim prd_st_datetime As Date = st_time.Text
+                                Dim prd_end_datetime As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                                Dim lot_no As String = Label18.Text
+                                Dim comp_flg2 As String = "1"
+                                Dim transfer_flg As String = "1"
+                                Dim del_flg As String = "0"
+                                Dim prd_flg As String = "1"
+                                Dim close_lot_flg As String = "1"
+                                Dim avarage_act_prd_time As Double = Average
                             End If
-                            Me.Enabled = False
-                            comp_flg = 1
-                            Finish_work.Show() ' เกี่ยว
-                            Dim plan_qty As Integer = Label8.Text
-                            'Dim act_qty As Integer = _Edit_Up_0.Text
-                            Dim shift_prd As String = Label14.Text
-                            Dim prd_st_datetime As Date = st_time.Text
-                            Dim prd_end_datetime As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-                            Dim lot_no As String = Label18.Text
-                            Dim comp_flg2 As String = "1"
-                            Dim transfer_flg As String = "1"
-                            Dim del_flg As String = "0"
-                            Dim prd_flg As String = "1"
-                            Dim close_lot_flg As String = "1"
-                            Dim avarage_act_prd_time As Double = Average
-                            '  Try
-                            'act_qty = LB_COUNTER_SEQ.Text
-                            'LB_COUNTER_SHIP.Text = 0
-                            'LB_COUNTER_SEQ.Text = 0
-                            'Catch ex As Exception
-                            'act_qty = 0
-                            'End Try
-                            'Try
-                            'If My.Computer.Network.Ping("192.168.161.101") Then
-                            'transfer_flg = "1"
-                            'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                            'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                            'Backoffice_model.work_complete(wi_plan)
-                            'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                            'Dim emp_cd As String
-                            'For I = 0 To temp_co_emp - 1
-                            'emp_cd = List_Emp.ListView1.Items(I).Text
-                            'Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                            'Next
-                            'Else
-                            '    transfer_flg = "0"
-                            '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                            'End If
-                            '    Catch ex As Exception
-                            '    transfer_flg = "0"
-                            '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                            '    End Try
                         End If
                     End If
                     '--------------------------------------
@@ -2604,243 +2570,256 @@ Public Class Working_Pro
             Act = Label6.Text
             action_plus = 1
         End If
-        If comp_flg = 0 Then
-            'Dim result_mod As Double = Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
-            Dim result_mod As Double = Integer.Parse(Act + action_plus) Mod Integer.Parse(Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
-            lb_qty_for_box.Text = lb_qty_for_box.Text + cnt_btn
-            Dim textp_result As Integer = Label10.Text
-            textp_result = Math.Abs(textp_result) - 1
-            'MsgBox(textp_result)
-            Dim sum_act_total As Integer = Label6.Text + cnt_btn
-            Label6.Text = sum_act_total
-            LB_COUNTER_SHIP.Text += cnt_btn
-            LB_COUNTER_SEQ.Text += cnt_btn
-            If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
-                lb_box_count.Text = lb_box_count.Text + 1
-                print_back.PrintDocument2.Print()
-                If result_mod = "0" Then
-                    Label_bach.Text += 1
-                    tag_print()
-                End If
+        Dim start_time As Date = st_count_ct.Text
+        Dim end_time As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+        Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+        Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+        Dim checkTransection As String
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                checkTransection = Backoffice_model.checkTransection(pwi_id, CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text), start_time2)
             Else
-                If result_mod = 0 And textp_result <> 0 Then
-                    If V_check_line_reprint = "0" Then
-                        lb_box_count.Text = lb_box_count.Text + 1
-                        Label_bach.Text = Label_bach.Text + 1
+                checkTransection = "1"
+            End If
+        Catch ex As Exception
+            checkTransection = "1"
+        End Try
+        If checkTransection = "1" Then
+            If comp_flg = 0 Then
+                'Dim result_mod As Double = Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+                Dim result_mod As Double = Integer.Parse(Act + action_plus) Mod Integer.Parse(Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+                lb_qty_for_box.Text = lb_qty_for_box.Text + cnt_btn
+                Dim textp_result As Integer = Label10.Text
+                textp_result = Math.Abs(textp_result) - 1
+                'MsgBox(textp_result)
+                Dim sum_act_total As Integer = Label6.Text + cnt_btn
+                Label6.Text = sum_act_total
+                LB_COUNTER_SHIP.Text += cnt_btn
+                LB_COUNTER_SEQ.Text += cnt_btn
+                If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
+                    lb_box_count.Text = lb_box_count.Text + 1
+                    print_back.PrintDocument2.Print()
+                    If result_mod = "0" Then
+                        Label_bach.Text += 1
                         tag_print()
-                    Else
-                        If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
-                        Else
+                    End If
+                Else
+                    If result_mod = 0 And textp_result <> 0 Then
+                        If V_check_line_reprint = "0" Then
                             lb_box_count.Text = lb_box_count.Text + 1
                             Label_bach.Text = Label_bach.Text + 1
                             tag_print()
+                        Else
+                            If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
+                            Else
+                                lb_box_count.Text = lb_box_count.Text + 1
+                                Label_bach.Text = Label_bach.Text + 1
+                                tag_print()
+                            End If
                         End If
                     End If
                 End If
-            End If
 
 
-            Dim sum_prg As Integer = (Label6.Text * 100) / Label8.Text
-            'MsgBox(sum_prg)
+                Dim sum_prg As Integer = (Label6.Text * 100) / Label8.Text
+                'MsgBox(sum_prg)
 
-            If sum_prg > 100 Then
-                sum_prg = 100
-            ElseIf sum_prg < 0 Then
-                sum_prg = 0
-            End If
-
-            CircularProgressBar1.Text = sum_prg & "%"
-            CircularProgressBar1.Value = sum_prg
-
-
-            Dim use_time As Integer = Label34.Text
-
-
-            Dim dt1 As DateTime = DateTime.Now
-            Dim dt2 As DateTime = st_count_ct.Text
-            Dim dtspan As TimeSpan = dt1 - dt2
-            Dim actCT_jing As Double = Format((dtspan.Seconds / _Edit_Up_0.Text) + (dtspan.Minutes * 60), "0.00")
-            ListBox1.Items.Add((dtspan.Seconds) + (dtspan.Minutes * 60) + (dtspan.Hours * 3600))
-            Dim Total As Double = 0
-            Dim Count As Double = 0
-            Dim Average As Double = 0
-            Dim I As Integer
-            For I = 0 To ListBox1.Items.Count - 1
-                Total += Val(ListBox1.Items(I))
-                Count += 1
-            Next
-            Average = Total / Count
-            If Count = 1 Then
-                Try
-                    Backoffice_model.Tag_seq_rec_sqlite(lb_ref_scan.Text.Substring(0, 10), lb_ref_scan.Text.Substring(10, 3), lb_ref_scan.Text.Substring(13, (lb_ref_scan.Text.Length - 13)), RTrim(lb_ref_scan.Text))
-                Catch ex As Exception
-
-                End Try
-            End If
-            Label37.Text = Format(Average, "0.0")
-            Dim start_time As Date = st_count_ct.Text
-            st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-
-            Dim dt11 As DateTime = DateTime.Now
-            Dim dt22 As DateTime = st_time.Text
-            Dim dtspan1 As TimeSpan = dt11 - dt22
-
-            'MsgBox(dtspan1.Minutes)
-
-            If (dtspan1.Minutes + (dtspan1.Hours * 60)) >= use_time Then
-                Label20.ForeColor = Color.Red
-            End If
-
-            Dim temppola As Double = ((dtspan1.Seconds / 60) + (dtspan1.Minutes + (dtspan1.Hours * 60)))
-            If temppola < 1 Then
-                temppola = 1
-            End If
-            Dim loss_sum As Integer
-            Try
-                If My.Computer.Network.Ping("192.168.161.101") Then
-                    Dim LoadSQL = Backoffice_model.get_sum_loss(Trim(wi_no.Text))
-                    While LoadSQL.Read()
-                        loss_sum = LoadSQL("sum_loss")
-                    End While
-                Else
-                    loss_sum = 0
+                If sum_prg > 100 Then
+                    sum_prg = 100
+                ElseIf sum_prg < 0 Then
+                    sum_prg = 0
                 End If
-            Catch ex As Exception
-                'load_show.Show()
-                'loss_sum = 0
-            End Try
-            Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
-            'Dim sum_prg2 As Integer = (((CycleTime.Text * _Edit_Up_0.Text) / temppola) * 100)
-            'MsgBox("((" & CycleTime.Text & "*" & _Edit_Up_0.Text & ") /" & temppola & ") * 100")
-            'MsgBox(sum_prg2 / cnt_btn)
 
-            sum_prg2 = sum_prg2 / cnt_btn
-            'MsgBox(sum_prg2)
+                CircularProgressBar1.Text = sum_prg & "%"
+                CircularProgressBar1.Value = sum_prg
 
-            If sum_prg2 > 100 Then
-                sum_prg2 = 100
-            ElseIf sum_prg2 < 0 Then
-                sum_prg2 = 0
-            End If
-            'MsgBox(sum_prg2)
-            If sum_prg2 <= 49 Then
-                CircularProgressBar2.ProgressColor = Color.Red
-                CircularProgressBar2.ForeColor = Color.Black
-            ElseIf sum_prg2 >= 50 And sum_prg2 <= 79 Then
-                CircularProgressBar2.ProgressColor = Color.Chocolate
-                CircularProgressBar2.ForeColor = Color.Black
-            ElseIf sum_prg2 >= 80 And sum_prg2 <= 100 Then
-                CircularProgressBar2.ProgressColor = Color.Green
-                CircularProgressBar2.ForeColor = Color.Black
-            End If
-            Dim avarage_eff As Double = Format(sum_prg2, "0.00")
-            lb_sum_prg.Text = avarage_eff
-            CircularProgressBar2.Text = sum_prg2 & "%"
-            CircularProgressBar2.Value = sum_prg2
-            Dim actCT_jingna As Double = Format(dtspan.Seconds + (dtspan.Minutes * 60), "0.00")
-            Dim pd As String = MainFrm.Label6.Text
-            Dim line_cd As String = MainFrm.Label4.Text
-            Dim wi_plan As String = wi_no.Text
-            Dim item_cd As String = Label3.Text
-            Dim item_name As String = Label12.Text
-            Dim staff_no As String = Label29.Text
-            Dim seq_no As String = Label22.Text
-            Dim prd_qty As Integer = cnt_btn
-            Dim end_time As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-            Dim use_timee As Double = actCT_jingna
-            Dim tr_status As String = "0"
-            Dim number_qty As Integer = Label6.Text
-            'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, tr_status)
-            Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-            Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
 
-            Try
-                If My.Computer.Network.Ping("192.168.161.101") Then
-                    tr_status = "1"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, tr_status)
-                    'MsgBox("Ping completed")
-                Else
+                Dim use_time As Integer = Label34.Text
+
+
+                Dim dt1 As DateTime = DateTime.Now
+                Dim dt2 As DateTime = st_count_ct.Text
+                Dim dtspan As TimeSpan = dt1 - dt2
+                Dim actCT_jing As Double = Format((dtspan.Seconds / _Edit_Up_0.Text) + (dtspan.Minutes * 60), "0.00")
+                ListBox1.Items.Add((dtspan.Seconds) + (dtspan.Minutes * 60) + (dtspan.Hours * 3600))
+                Dim Total As Double = 0
+                Dim Count As Double = 0
+                Dim Average As Double = 0
+                Dim I As Integer
+                For I = 0 To ListBox1.Items.Count - 1
+                    Total += Val(ListBox1.Items(I))
+                    Count += 1
+                Next
+                Average = Total / Count
+                If Count = 1 Then
+                    Try
+                        Backoffice_model.Tag_seq_rec_sqlite(lb_ref_scan.Text.Substring(0, 10), lb_ref_scan.Text.Substring(10, 3), lb_ref_scan.Text.Substring(13, (lb_ref_scan.Text.Length - 13)), RTrim(lb_ref_scan.Text))
+                    Catch ex As Exception
+
+                    End Try
+                End If
+                Label37.Text = Format(Average, "0.0")
+
+                st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+
+                Dim dt11 As DateTime = DateTime.Now
+                Dim dt22 As DateTime = st_time.Text
+                Dim dtspan1 As TimeSpan = dt11 - dt22
+
+                'MsgBox(dtspan1.Minutes)
+
+                If (dtspan1.Minutes + (dtspan1.Hours * 60)) >= use_time Then
+                    Label20.ForeColor = Color.Red
+                End If
+
+                Dim temppola As Double = ((dtspan1.Seconds / 60) + (dtspan1.Minutes + (dtspan1.Hours * 60)))
+                If temppola < 1 Then
+                    temppola = 1
+                End If
+                Dim loss_sum As Integer
+                Try
+                    If My.Computer.Network.Ping("192.168.161.101") Then
+                        Dim LoadSQL = Backoffice_model.get_sum_loss(Trim(wi_no.Text))
+                        While LoadSQL.Read()
+                            loss_sum = LoadSQL("sum_loss")
+                        End While
+                    Else
+                        loss_sum = 0
+                    End If
+                Catch ex As Exception
+                    'load_show.Show()
+                    'loss_sum = 0
+                End Try
+                Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
+                'Dim sum_prg2 As Integer = (((CycleTime.Text * _Edit_Up_0.Text) / temppola) * 100)
+                'MsgBox("((" & CycleTime.Text & "*" & _Edit_Up_0.Text & ") /" & temppola & ") * 100")
+                'MsgBox(sum_prg2 / cnt_btn)
+
+                sum_prg2 = sum_prg2 / cnt_btn
+                'MsgBox(sum_prg2)
+
+                If sum_prg2 > 100 Then
+                    sum_prg2 = 100
+                ElseIf sum_prg2 < 0 Then
+                    sum_prg2 = 0
+                End If
+                'MsgBox(sum_prg2)
+                If sum_prg2 <= 49 Then
+                    CircularProgressBar2.ProgressColor = Color.Red
+                    CircularProgressBar2.ForeColor = Color.Black
+                ElseIf sum_prg2 >= 50 And sum_prg2 <= 79 Then
+                    CircularProgressBar2.ProgressColor = Color.Chocolate
+                    CircularProgressBar2.ForeColor = Color.Black
+                ElseIf sum_prg2 >= 80 And sum_prg2 <= 100 Then
+                    CircularProgressBar2.ProgressColor = Color.Green
+                    CircularProgressBar2.ForeColor = Color.Black
+                End If
+                Dim avarage_eff As Double = Format(sum_prg2, "0.00")
+                lb_sum_prg.Text = avarage_eff
+                CircularProgressBar2.Text = sum_prg2 & "%"
+                CircularProgressBar2.Value = sum_prg2
+                Dim actCT_jingna As Double = Format(dtspan.Seconds + (dtspan.Minutes * 60), "0.00")
+                Dim pd As String = MainFrm.Label6.Text
+                Dim line_cd As String = MainFrm.Label4.Text
+                Dim wi_plan As String = wi_no.Text
+                Dim item_cd As String = Label3.Text
+                Dim item_name As String = Label12.Text
+                Dim staff_no As String = Label29.Text
+                Dim seq_no As String = Label22.Text
+                Dim prd_qty As Integer = cnt_btn
+                Dim use_timee As Double = actCT_jingna
+                Dim tr_status As String = "0"
+                Dim number_qty As Integer = Label6.Text
+                'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, tr_status)
+
+                Try
+                    If My.Computer.Network.Ping("192.168.161.101") Then
+                        tr_status = "1"
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty, pwi_id, tr_status)
+                        'MsgBox("Ping completed")
+                    Else
+                        tr_status = "0"
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                        'MsgBox("Ping incompleted")
+                    End If
+                Catch ex As Exception
                     tr_status = "0"
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    'MsgBox("Ping incompleted")
-                End If
-            Catch ex As Exception
-                tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-            End Try
-            'Label16.Text.ToString("H : mm") - Now.ToString("H : mm")
+                End Try
+                'Label16.Text.ToString("H : mm") - Now.ToString("H : mm")
 
-            Dim sum_diff As Integer = Label8.Text - Label6.Text
-            Label10.Text = "-" & sum_diff
-            If sum_diff = 0 Then
-                Me.Enabled = False
-                comp_flg = 1
-                'If result_mod <> "0" Then ' New
-                'tag_print()
-                'End If
-                Finish_work.Show() ' เกี่ยว
-            End If
-            'MsgBox(sum_diff)
-            If sum_diff < 1 Then
+                Dim sum_diff As Integer = Label8.Text - Label6.Text
+                Label10.Text = "-" & sum_diff
                 If sum_diff = 0 Then
-                    If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
-                        lb_box_count.Text = lb_box_count.Text + 1
-                        print_back.PrintDocument2.Print()
-                        If result_mod = "0" Then
-                            Label_bach.Text += 1
+                    Me.Enabled = False
+                    comp_flg = 1
+                    'If result_mod <> "0" Then ' New
+                    'tag_print()
+                    'End If
+                    Finish_work.Show() ' เกี่ยว
+                End If
+                'MsgBox(sum_diff)
+                If sum_diff < 1 Then
+                    If sum_diff = 0 Then
+                        If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
+                            lb_box_count.Text = lb_box_count.Text + 1
+                            print_back.PrintDocument2.Print()
+                            If result_mod = "0" Then
+                                Label_bach.Text += 1
+                                tag_print()
+                            End If
+                        Else
+                            lb_box_count.Text = lb_box_count.Text + 1
+                            'If Backoffice_model.check_line_reprint() = "0" Then
+                            Label_bach.Text = Label_bach.Text + 1
                             tag_print()
+                            'End If
                         End If
                     Else
-                        lb_box_count.Text = lb_box_count.Text + 1
-                        'If Backoffice_model.check_line_reprint() = "0" Then
-                        Label_bach.Text = Label_bach.Text + 1
-                        tag_print()
-                        'End If
                     End If
-                Else
+                    Me.Enabled = False
+                    comp_flg = 1
+                    Finish_work.Show() ' เกี่ยว
+                    Dim plan_qty As Integer = Label8.Text
+                    Dim shift_prd As String = Label14.Text
+                    Dim prd_st_datetime As Date = st_time.Text
+                    Dim prd_end_datetime As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                    Dim lot_no As String = Label18.Text
+                    Dim comp_flg2 As String = "1"
+                    Dim transfer_flg As String = "1"
+                    Dim del_flg As String = "0"
+                    Dim prd_flg As String = "1"
+                    Dim close_lot_flg As String = "1"
+                    Dim avarage_act_prd_time As Double = Average
+                    ' Try
+                    ' act_qty = LB_COUNTER_SEQ.Text
+                    ' LB_COUNTER_SHIP.Text = 0
+                    ' LB_COUNTER_SEQ.Text = 0
+                    ' Catch ex As Exception
+                    ' act_qty = 0
+                    ' End Try
+                    'Try
+                    'If My.Computer.Network.Ping("192.168.161.101") Then
+                    'transfer_flg = "1"
+                    'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                    'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                    'Backoffice_model.work_complete(wi_plan)
+                    'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
+                    'Dim emp_cd As String
+                    'For I = 0 To temp_co_emp - 1
+                    'emp_cd = List_Emp.ListView1.Items(I).Text
+                    'Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
+                    'Next
+                    'Else
+                    '    transfer_flg = "0"
+                    '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                    'End If
+                    '    Catch ex As Exception
+                    '    transfer_flg = "0"
+                    '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                    '    End Try
                 End If
-                Me.Enabled = False
-                comp_flg = 1
-                Finish_work.Show() ' เกี่ยว
-                Dim plan_qty As Integer = Label8.Text
-                Dim shift_prd As String = Label14.Text
-                Dim prd_st_datetime As Date = st_time.Text
-                Dim prd_end_datetime As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-                Dim lot_no As String = Label18.Text
-                Dim comp_flg2 As String = "1"
-                Dim transfer_flg As String = "1"
-                Dim del_flg As String = "0"
-                Dim prd_flg As String = "1"
-                Dim close_lot_flg As String = "1"
-                Dim avarage_act_prd_time As Double = Average
-                ' Try
-                ' act_qty = LB_COUNTER_SEQ.Text
-                ' LB_COUNTER_SHIP.Text = 0
-                ' LB_COUNTER_SEQ.Text = 0
-                ' Catch ex As Exception
-                ' act_qty = 0
-                ' End Try
-                'Try
-                'If My.Computer.Network.Ping("192.168.161.101") Then
-                'transfer_flg = "1"
-                'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                'Backoffice_model.work_complete(wi_plan)
-                'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                'Dim emp_cd As String
-                'For I = 0 To temp_co_emp - 1
-                'emp_cd = List_Emp.ListView1.Items(I).Text
-                'Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                'Next
-                'Else
-                '    transfer_flg = "0"
-                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                'End If
-                '    Catch ex As Exception
-                '    transfer_flg = "0"
-                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                '    End Try
             End If
         End If
     End Sub

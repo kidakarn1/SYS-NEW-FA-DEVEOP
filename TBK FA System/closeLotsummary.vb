@@ -29,6 +29,7 @@ Public Class closeLotsummary
     Private Sub closeLotsummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             setVariable()
+            Finish_work.Close()
             If My.Computer.Network.Ping("192.168.161.101") Then
                 getDefectdetailnc(sWi, sSeq, sLot)
             Else
@@ -200,11 +201,7 @@ Public Class closeLotsummary
                 If cFlg = 1 Then
                     Backoffice_model.work_complete(sWi)
                 End If
-                Try
-                    Working_Pro.LB_COUNTER_SEQ.Text = 0
-                Catch ex As Exception
-                    Working_Pro.LB_COUNTER_SEQ.Text = 0
-                End Try
+
                 checkPrintnormal()
                 checkPrintdefect(sWi, sSeq, sLot)
                 If statusPage.Text = "MAN" Then
@@ -343,26 +340,37 @@ Public Class closeLotsummary
     Public Sub checkPrintnormal()
         Dim result_mod As Double = Working_Pro.Label6.Text Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
         Dim result_total As Double = Working_Pro.LB_COUNTER_SEQ.Text Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
-        If result_mod = "0" Then
-            If Backoffice_model.check_line_reprint() = "1" Then
-                If Working_Pro.LB_COUNTER_SEQ.Text > 0 Then
-                    If CDbl(Val(Working_Pro.Label27.Text)) = 1 Or CDbl(Val(Working_Pro.Label27.Text)) = 999999 Then
-                        Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
-                        Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
-                        Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
-                        Working_Pro.tag_print()
-                    Else
-                    End If
-                End If
+        'If result_mod = "0" Then
+        'If Backoffice_model.check_line_reprint() = "1" Then
+        'If Working_Pro.LB_COUNTER_SEQ.Text > 0 Then
+        'If CDbl(Val(Working_Pro.Label27.Text)) = 1 Or CDbl(Val(Working_Pro.Label27.Text)) = 999999 Then
+        'MsgBox("A1")
+        'Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
+        'Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
+        'Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
+        'Working_Pro.tag_print()
+        'Else
+        'End If
+        'End If
+        'End If
+        '  Else
+        If Backoffice_model.check_line_reprint() = "1" Then
+            If result_total = "0" Then
+                result_total = "1"
             End If
-        Else
-            If Working_Pro.LB_COUNTER_SEQ.Text > 0 And result_total > "0" Then
-                Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
-                Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
+        End If
+        If Working_Pro.LB_COUNTER_SEQ.Text > 0 And result_total > "0" And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
+            Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
+            Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
                 Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
                 Working_Pro.tag_print()
             End If
-        End If
+            Try
+                Working_Pro.LB_COUNTER_SEQ.Text = 0
+            Catch ex As Exception
+                Working_Pro.LB_COUNTER_SEQ.Text = 0
+            End Try
+        ' End If
     End Sub
     Public Sub insertProductionactual(wi_plan As String, line_cd As String, item_cd As String, plan_qty As String, act_qty As String, seq_no As String, shift_prd As String, staff_no As String, prd_st_datetime As String, prd_end_datetime As String, lot_no As String, comp_flg2 As String, transfer_flg As String, del_flg As String, prd_flg As String, close_lot_flg As String, avarage_eff As String, avarage_act_prd_time As String)
         Try
@@ -514,5 +522,9 @@ Public Class closeLotsummary
     End Sub
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         BTNDOWNFG()
+    End Sub
+
+    Private Sub lbNg_Click(sender As Object, e As EventArgs) Handles lbNg.Click
+
     End Sub
 End Class

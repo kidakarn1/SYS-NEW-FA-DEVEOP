@@ -28,25 +28,26 @@ Partial Class Show_reprint_wi
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.DATE_TIME_PROD = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.hide_wi_select = New System.Windows.Forms.Label()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pcBack = New System.Windows.Forms.PictureBox()
+        Me.pcOK = New System.Windows.Forms.PictureBox()
+        CType(Me.pcBack, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pcOK, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.Label1.Enabled = False
         Me.Label1.Font = New System.Drawing.Font("Arial Black", 25.0!)
         Me.Label1.ForeColor = System.Drawing.Color.Aqua
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Location = New System.Drawing.Point(530, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(238, 48)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "SELECT  WI"
+        Me.Label1.Visible = False
         '
         'ListView_WI
         '
@@ -61,9 +62,9 @@ Partial Class Show_reprint_wi
         Me.ListView_WI.ForeColor = System.Drawing.Color.White
         Me.ListView_WI.FullRowSelect = True
         Me.ListView_WI.HideSelection = False
-        Me.ListView_WI.Location = New System.Drawing.Point(12, 60)
+        Me.ListView_WI.Location = New System.Drawing.Point(32, 100)
         Me.ListView_WI.Name = "ListView_WI"
-        Me.ListView_WI.Size = New System.Drawing.Size(746, 428)
+        Me.ListView_WI.Size = New System.Drawing.Size(734, 372)
         Me.ListView_WI.TabIndex = 35
         Me.ListView_WI.UseCompatibleStateImageBehavior = False
         Me.ListView_WI.View = System.Windows.Forms.View.Details
@@ -71,53 +72,17 @@ Partial Class Show_reprint_wi
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "No."
-        Me.ColumnHeader1.Width = 100
+        Me.ColumnHeader1.Width = 195
         '
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "WI"
-        Me.ColumnHeader2.Width = 212
+        Me.ColumnHeader2.Width = 257
         '
         'DATE_TIME_PROD
         '
         Me.DATE_TIME_PROD.Text = "PLAN DATE"
         Me.DATE_TIME_PROD.Width = 430
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Arial Black", 25.0!)
-        Me.Label2.ForeColor = System.Drawing.Color.Aqua
-        Me.Label2.Location = New System.Drawing.Point(12, 11)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(279, 48)
-        Me.Label2.TabIndex = 38
-        Me.Label2.Text = "SELECT DATE"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(648, 496)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(110, 64)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 37
-        Me.PictureBox1.TabStop = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(12, 496)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(110, 64)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 36
-        Me.PictureBox2.TabStop = False
         '
         'hide_wi_select
         '
@@ -130,18 +95,36 @@ Partial Class Show_reprint_wi
         Me.hide_wi_select.TabIndex = 39
         Me.hide_wi_select.Text = "HIDE_WI"
         '
+        'pcBack
+        '
+        Me.pcBack.BackColor = System.Drawing.Color.Transparent
+        Me.pcBack.Location = New System.Drawing.Point(25, 496)
+        Me.pcBack.Name = "pcBack"
+        Me.pcBack.Size = New System.Drawing.Size(183, 83)
+        Me.pcBack.TabIndex = 40
+        Me.pcBack.TabStop = False
+        '
+        'pcOK
+        '
+        Me.pcOK.BackColor = System.Drawing.Color.Transparent
+        Me.pcOK.Location = New System.Drawing.Point(585, 496)
+        Me.pcOK.Name = "pcOK"
+        Me.pcOK.Size = New System.Drawing.Size(183, 83)
+        Me.pcOK.TabIndex = 41
+        Me.pcOK.TabStop = False
+        '
         'Show_reprint_wi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange
         Me.BackColor = System.Drawing.Color.DarkSlateGray
-        Me.ClientSize = New System.Drawing.Size(770, 570)
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.ClientSize = New System.Drawing.Size(770, 577)
         Me.ControlBox = False
+        Me.Controls.Add(Me.pcOK)
+        Me.Controls.Add(Me.pcBack)
         Me.Controls.Add(Me.hide_wi_select)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.ListView_WI)
         Me.Controls.Add(Me.Label1)
         Me.Cursor = System.Windows.Forms.Cursors.Default
@@ -149,8 +132,8 @@ Partial Class Show_reprint_wi
         Me.Name = "Show_reprint_wi"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Show_reprint_wi"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pcBack, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pcOK, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -160,9 +143,10 @@ Partial Class Show_reprint_wi
     Friend WithEvents ListView_WI As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents ColumnHeader2 As ColumnHeader
-    Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents hide_wi_select As Label
     Friend WithEvents DATE_TIME_PROD As ColumnHeader
+    Friend WithEvents pcBack As PictureBox
+    Friend WithEvents pcOK As PictureBox
 End Class

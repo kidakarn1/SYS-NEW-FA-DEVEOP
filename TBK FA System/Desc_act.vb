@@ -61,16 +61,16 @@ Public Class Desc_act
 
 		End Try
 	End Sub
-	Public Sub cal_qty()
-		Dim want_del As Integer = CDbl(Val(TextBox1.Text))
-		Dim qty As Integer = 0
-		Dim seq As Integer = CDbl(Val(Working_Pro.Label22.Text))
-		Dim App_qty_seq As Integer = Working_Pro.LB_COUNTER_SEQ.Text
-		Dim App_qty_ship As Integer = Working_Pro.LB_COUNTER_SHIP.Text
-		Dim qty_update As Integer = 0
-		Dim tmp_qty_update As Integer = 0
-		Dim check_qty_frith = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
-		Dim tmp_del3 As Integer = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text))
+    Public Sub cal_qty()
+        Dim want_del As Integer = CDbl(Val(TextBox1.Text))
+        Dim qty As Integer = 0
+        Dim seq As Integer = CDbl(Val(Working_Pro.Label22.Text))
+        Dim App_qty_seq As Integer = Working_Pro.LB_COUNTER_SEQ.Text
+        Dim App_qty_ship As Integer = Working_Pro.LB_COUNTER_SHIP.Text
+        Dim qty_update As Integer = 0
+        Dim tmp_qty_update As Integer = 0
+        Dim check_qty_frith = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) - want_del
+        Dim tmp_del3 As Integer = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text))
         If CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) = 0 Then
             seq = CDbl(Val(Working_Pro.Label22.Text)) - 1
         Else
@@ -78,7 +78,7 @@ Public Class Desc_act
         End If
         For number_seq As Integer = seq To 1 Step -1
             Try
-                If My.Computer.Network.Ping("192.168.161.101") Then
+                If My.Computer.Network.Ping("Then192.168.161.101") Then
                     reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
                 Else
                     reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
@@ -118,7 +118,7 @@ Public Class Desc_act
                     '    MsgBox("want_del = " & want_del)
                     '   MsgBox("App_qty_seq = " & App_qty_seq)
                     If qty_update > 0 Then
-                        '  MsgBox("IF TOP")
+                        '  MsgBox("If TOP")
                         If want_del > 0 Then
                             tmp_qty_update = 0
                         End If
@@ -137,7 +137,7 @@ Public Class Desc_act
                         End Try
                     End If
                     If qty_update <= 0 Then
-                        ' MsgBox("IF DOWN")
+                        ' MsgBox("If DOWN")
                         Try
                             If My.Computer.Network.Ping("192.168.161.101") Then
                                 tr_status = "1"
@@ -177,7 +177,7 @@ Public Class Desc_act
                     reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq - 1)
                 End Try
                 While reader.read()
-                    ' MsgBox("SEQ = " & number_seq - 1 & " : LOAD_QTY = " & reader("QTY_ACTUAL").ToString())
+                    ' MsgBox("SEQ = " & number_seq - 1 & "  LOAD_QTY = " & reader("QTY_ACTUAL").ToString())
                     qty = reader("QTY_ACTUAL").ToString()
                 End While
                 reader.close()
@@ -190,7 +190,7 @@ Public Class Desc_act
                     tmp_qty_update = qty_update
                     want_del = qty_update
                     If qty_update > 0 Then
-                        ' MsgBox("IF TOP3 ")
+                        ' MsgBox("If TOP3 ")
                         If tmp_del3 > 0 Then
                             tmp_qty_update = 0
                         End If
@@ -207,7 +207,7 @@ Public Class Desc_act
                         End Try
                     End If
                     If qty_update <= 0 Then
-                        ' MsgBox("IF DOWN3 ")
+                        ' MsgBox("If DOWN3 ")
                         Try
                             If My.Computer.Network.Ping("192.168.161.101") Then
                                 tr_status = "1"
@@ -227,11 +227,12 @@ Public Class Desc_act
             End If
         Next
 break_loop:
-	End Sub
-	Public Function set_data_del()
+    End Sub
+    Public Function set_data_del()
 		Dim prd_qty As Integer = Convert.ToInt32(Label1.Text)
 		Dim inp_qty As Integer
-		Dim result As Integer = 0
+        Dim result As Integer = 0
+        '    MsgBox("M0")
         Dim md As New modelDefect()
         Working_Pro._Edit_Up_0.Text = "0"
         Try
@@ -241,6 +242,7 @@ break_loop:
         End Try
         Dim totalDefect As Integer = (CDbl(Val(Working_Pro.lb_nc_qty.Text)) + CDbl(Val(Working_Pro.lb_ng_qty.Text))) 'CDbl(Val(md.mGetDefect(Working_Pro.wi_no.Text, Working_Pro.Label18.Text, Working_Pro.Label14.Text) + (CDbl(Val(Working_Pro.lb_nc_qty.Text)) + CDbl(Val(Working_Pro.lb_ng_qty.Text)))))
         'If inp_qty > (prd_qty - totalDefect) Then
+        ' MsgBox("M6")
         If inp_qty > (CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text) - totalDefect)) Then
             PictureBox3.Enabled = False
             PictureBox2.Enabled = False
@@ -262,6 +264,7 @@ break_loop:
                 If CDbl(Val(TextBox1.Text)) <= CDbl(Val(Label1.Text)) Then
                     cal_qty()
                     Working_Pro.LB_COUNTER_SHIP.Text -= inp_qty
+                    ' MsgBox("M1")
                     Working_Pro.LB_COUNTER_SEQ.Text -= inp_qty
                     Dim yearNow As Integer = DateTime.Now.ToString("yyyy")
                     Dim monthNow As Integer = DateTime.Now.ToString("MM")
@@ -269,6 +272,7 @@ break_loop:
                     Dim hourNow As Integer = DateTime.Now.ToString("HH")
                     Dim minNow As Integer = DateTime.Now.ToString("mm")
                     Dim secNow As Integer = DateTime.Now.ToString("ss")
+                    ' MsgBox("M2")
                     Dim yearSt As Integer = Working_Pro.st_time.Text.Substring(0, 4)
                     Dim monthSt As Integer = Working_Pro.st_time.Text.Substring(5, 2)
                     Dim daySt As Integer = Working_Pro.st_time.Text.Substring(8, 2)
@@ -277,16 +281,25 @@ break_loop:
                     Dim secSt As Integer = Working_Pro.st_time.Text.Substring(17, 2)
                     Dim firstDate As New System.DateTime(yearSt, monthSt, daySt, hourSt, minSt, secSt)
                     Dim secondDate As New System.DateTime(yearNow, monthNow, dayNow, hourNow, minNow, secNow)
+                    ' MsgBox("M3")
                     Dim diff As System.TimeSpan = secondDate.Subtract(firstDate)
                     Dim diff1 As System.TimeSpan = secondDate - firstDate
                     Dim diff2 As String = (secondDate - firstDate).TotalSeconds.ToString()
                     Dim actCT As Double = Format(diff2 / 60, "0.00")
                     Dim cnt_btn As Integer = Integer.Parse(MainFrm.cavity.Text)
                     Dim snp As Integer = Integer.Parse(Working_Pro.Label27.Text)
+                    '  MsgBox("M4")
                     Working_Pro._Edit_Up_0.Text = Integer.Parse(Working_Pro._Edit_Up_0.Text) - inp_qty
                     Working_Pro.Label6.Text = Integer.Parse(Working_Pro.Label6.Text) - inp_qty
-                    Working_Pro.Label10.Text = Integer.Parse(Working_Pro.Label10.Text.Substring(1)) + inp_qty
+                    Try
+                        Working_Pro.Label10.Text = Integer.Parse(Working_Pro.Label10.Text.Substring(1)) + inp_qty
+                    Catch ex As Exception
+                        Working_Pro.Label10.Text = Integer.Parse(Working_Pro.Label10.Text) + inp_qty
+                        ' Working_Pro.start_flg = 1
+                        ' Working_Pro.comp_flg = 0
+                    End Try
                     Working_Pro.Label10.Text = "-" + Working_Pro.Label10.Text
+                    '   MsgBox("M5")
                     Working_Pro.count = Working_Pro.count - inp_qty
                     Working_Pro.lb_qty_for_box.Text = Integer.Parse(Working_Pro.lb_qty_for_box.Text) - inp_qty
                     If Working_Pro.lb_qty_for_box.Text < 0 Then
@@ -320,15 +333,18 @@ break_loop:
                         End If
                         If My.Computer.Network.Ping("192.168.161.101") Then
                             tr_status = "1"
+                            'MsgBox("M6")
                             Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.pwi_id)
                             Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, start_time, end_time, use_timee, number_qty, Working_Pro.pwi_id, tr_status)
-                            'MsgBox("Ping completed")
+                            ' MsgBox("Ping completed")
                         Else
+                            'MsgBox("M7")
                             tr_status = "0"
                             Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.pwi_id)
                             'MsgBox("Ping incompleted")
                         End If
                     Catch ex As Exception
+                        ' MsgBox("M8")
                         tr_status = "0"
                         Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty2, number_qty, start_time2, end_time2, use_timee, tr_status, Working_Pro.pwi_id)
                     End Try
@@ -354,7 +370,7 @@ break_loop:
                 PictureBox3.Enabled = False
                 PictureBox2.Enabled = False
                 Dim listdetail = "Can't input the Qty. over : " + Label1.Text
-                PictureBox10.BringToFront()
+                            PictureBox10.BringToFront()
                 PictureBox10.Show()
                 PictureBox1.BringToFront()
                 PictureBox1.Show()
@@ -369,12 +385,13 @@ break_loop:
 		End If
 	End Function
 	Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
-		'Try
-		If My.Computer.Network.Ping("192.168.161.101") Then
-				'Backoffice_model.updated_data_to_dbsvr()
-				set_data_del()
-			Else
-				load_show.Show()
+        'Try
+        If My.Computer.Network.Ping("192.168.161.101") Then
+            'Backoffice_model.updated_data_to_dbsvr()
+            set_data_del()
+        Else
+            ' MsgBox("ASD")
+            load_show.Show()
 			End If
 			'Catch ex As Exception
 		'MsgBox(ex.Message)
@@ -463,7 +480,7 @@ break_loop:
 	End Sub
     Private Sub Desc_act_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lbpartNo.Text = Working_Pro.Label3.Text
-        TextBox1.Enabled = False
+        'TextBox1.Enabled = False
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs)

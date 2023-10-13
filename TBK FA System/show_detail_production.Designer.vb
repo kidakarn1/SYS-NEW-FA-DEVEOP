@@ -36,6 +36,7 @@ Partial Class show_detail_production
         Me.LB_WORKER = New System.Windows.Forms.Label()
         Me.LB_WI = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Lbversion = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LB_PARTNO
@@ -207,6 +208,17 @@ Partial Class show_detail_production
         Me.Button1.TabIndex = 13
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'Lbversion
+        '
+        Me.Lbversion.AutoSize = True
+        Me.Lbversion.BackColor = System.Drawing.Color.Transparent
+        Me.Lbversion.Font = New System.Drawing.Font("Catamaran", 22.0!)
+        Me.Lbversion.Location = New System.Drawing.Point(488, 24)
+        Me.Lbversion.Name = "Lbversion"
+        Me.Lbversion.Size = New System.Drawing.Size(267, 33)
+        Me.Lbversion.TabIndex = 15
+        Me.Lbversion.Text = "XXXXXXXXXXXXXX"
+        '
         'show_detail_production
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -214,6 +226,7 @@ Partial Class show_detail_production
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionListDetail2
         Me.ClientSize = New System.Drawing.Size(785, 515)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Lbversion)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.LB_WI)
         Me.Controls.Add(Me.LB_WORKER)
@@ -251,4 +264,5 @@ Partial Class show_detail_production
     Friend WithEvents LB_WORKER As Label
     Friend WithEvents LB_WI As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents Lbversion As Label
 End Class
