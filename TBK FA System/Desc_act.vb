@@ -78,7 +78,7 @@ Public Class Desc_act
         End If
         For number_seq As Integer = seq To 1 Step -1
             Try
-                If My.Computer.Network.Ping("Then192.168.161.101") Then
+                If My.Computer.Network.Ping("192.168.161.101") Then
                     reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)
                 Else
                     reader = Backoffice_model.GET_QTY_SEQ_ACTUAL_DESC_SQLITE(Working_Pro.wi_no.Text, Working_Pro.Label14.Text, number_seq)

@@ -20,8 +20,8 @@ Public Class Working_Pro
     Public check_cal_eff As Integer = 0
     Public counterNewDIO
     Dim QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
-    Public Shared start_flg As Integer = 0
-    Public Shared comp_flg As Integer = 0
+    Dim start_flg As Integer = 0
+    Dim comp_flg As Integer = 0
     Dim start_year As Integer = 0
     Dim start_month As Integer = 0
     Dim start_days As Integer = 0
@@ -35,7 +35,7 @@ Public Class Working_Pro
     Dim Edit_Up(1) As TextBox
     Dim Edit_Down(7) As TextBox
     Dim delay_btn As Integer = 0
-    Public Shared  check_bull As Integer = 0
+    Dim check_bull As Integer = 0
     Public check_in_up_seq As Integer = 0
     Dim value_next_process As String = ""
     Public check_format_tag As String = Backoffice_model.B_check_format_tag()
@@ -1262,20 +1262,20 @@ Public Class Working_Pro
                         Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                         Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                         Dim checkTransection As String
-                        Try
-                            If My.Computer.Network.Ping("192.168.161.101") Then
-                                checkTransection = Backoffice_model.checkTransection(pwi_id, CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text), start_time2)
-                                ' MsgBox("pwi_id==>" & pwi_id)
-                                ' MsgBox("Label6==>" & CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text))
-                                ' MsgBox("start_time2==>" & start_time2)
-                            Else
-                                checkTransection = "1"
-                            End If
-                        Catch ex As Exception
-                            checkTransection = "1"
-                        End Try
-                        If checkTransection = "1" Then
-                            Label6.Text = sum_act_total
+                        'Try
+                        'If My.Computer.Network.Ping("192.168.161.101") Then
+                        'checkTransection = Backoffice_model.checkTransection(pwi_id, CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text), start_time2)
+                        ' MsgBox("pwi_id==>" & pwi_id)
+                        ' MsgBox("Label6==>" & CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text))
+                        ' MsgBox("start_time2==>" & start_time2)
+                        'Else
+                        '    checkTransection = "1"
+                        'End If
+                        '    Catch ex As Exception
+                        '    checkTransection = "1"
+                        '    End Try
+                        ' If checkTransection = "1" Then
+                        Label6.Text = sum_act_total
                             LB_COUNTER_SHIP.Text += cnt_btn
                             LB_COUNTER_SEQ.Text += cnt_btn
                             If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
@@ -1301,11 +1301,8 @@ Public Class Working_Pro
                                     End If
                                 End If
                             End If
-
-
                             Dim sum_prg As Integer = (Label6.Text * 100) / Label8.Text
                             'MsgBox(sum_prg)
-
                             If sum_prg > 100 Then
                                 sum_prg = 100
                             ElseIf sum_prg < 0 Then
@@ -1469,8 +1466,8 @@ Public Class Working_Pro
                                 Dim close_lot_flg As String = "1"
                                 Dim avarage_act_prd_time As Double = Average
                             End If
+                            ' End If
                         End If
-                    End If
                     '--------------------------------------
                     ' Expression
                     '--------------------------------------
@@ -2575,17 +2572,17 @@ Public Class Working_Pro
         Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
         Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
         Dim checkTransection As String
-        Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
-                checkTransection = Backoffice_model.checkTransection(pwi_id, CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text), start_time2)
-            Else
-                checkTransection = "1"
-            End If
-        Catch ex As Exception
-            checkTransection = "1"
-        End Try
-        If checkTransection = "1" Then
-            If comp_flg = 0 Then
+        'Try
+        'If My.Computer.Network.Ping("192.168.161.101") Then
+        'checkTransection = Backoffice_model.checkTransection(pwi_id, CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text), start_time2)
+        'Else
+        'checkTransection = "1"
+        'End If
+        'Catch ex As Exception
+        'checkTransection = "1"
+        'End Try
+        ' If checkTransection = "1" Then
+        If comp_flg = 0 Then
                 'Dim result_mod As Double = Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
                 Dim result_mod As Double = Integer.Parse(Act + action_plus) Mod Integer.Parse(Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
                 lb_qty_for_box.Text = lb_qty_for_box.Text + cnt_btn
@@ -2821,7 +2818,7 @@ Public Class Working_Pro
                     '    End Try
                 End If
             End If
-        End If
+        'End If
     End Sub
     Private Sub Tiemr_new_dio_Tick(sender As Object, e As EventArgs) Handles Timer_new_dio.Tick
         If rsWindow Then

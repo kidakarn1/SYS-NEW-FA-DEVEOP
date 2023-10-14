@@ -2661,6 +2661,7 @@ re_insert_data:
         'st_time = Date.st_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
         Dim sqliteConn As New SQLiteConnection(sqliteConnect)
         'MsgBox(st_time)
+        Check_connect_sqlite()
         Try
             sqliteConn.Open()
         Catch ex As Exception
@@ -2681,7 +2682,7 @@ re_insert_data:
             sqliteConn.Close()
             ' sqliteConn = Nothing
         Catch ex As Exception
-            'MsgBox("SQLite Insert Reccord failed. Please contact PC System [Function insPrdDetail_sqlite]" & ex.Message)
+            MsgBox("SQLite Insert Reccord failed. Please contact PC System [Function insPrdDetail_sqlite]" & ex.Message)
             sqliteConn.Close()
             GoTo re_insert_data
         End Try
