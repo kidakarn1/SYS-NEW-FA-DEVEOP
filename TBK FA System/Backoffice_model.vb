@@ -1661,13 +1661,32 @@ recheck:
             Application.Exit()
         End Try
     End Function
-
+    Public Shared Function work_complete_offline(wi As String)
+        Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
+        Dim reader As SqlDataReader
+        Dim SQLConn As New SqlConnection() 'The SQL Connection
+        Dim SQLCmd As New SqlCommand()
+        Try
+            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            SQLConn.Open()
+            SQLCmd.Connection = SQLConn
+            SQLCmd.CommandText = "UPDATE sup_work_plan_supply_dev SET PRD_COMP_FLG = '0', PRD_COMP_DATE = '" & currdated & "' WHERE WI = '" & wi & "'"
+            reader = SQLCmd.ExecuteReader()
+            Return reader
+            SQLConn.Dispose()
+            SQLConn.Close()
+            SQLConn = Nothing
+        Catch ex As Exception
+            MsgBox("MSSQL Database connect failed. Please contact PC System [Function work_complete_offline]")
+            SQLConn.Close()
+            Application.Exit()
+        End Try
+    End Function
     Public Shared Function edit_skill(sk_id As Integer, sk_des As String, emp_cd As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
-
         Try
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
@@ -1885,6 +1904,10 @@ recheck:
         Return reusult_data
     End Function
 
+    Public Shared Sub UpdateWorking(wi)
+        Dim api = New api()
+        Dim reusult_data = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/Update_supply_dev_Working?wi=" & wi)
+    End Sub
 
     Public Shared Function get_tag_reprint_detail(wi As String)
         Dim reader As SqlDataReader
@@ -3316,13 +3339,10 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "INSERT INTO production_emp_detail (wi_plan,staff_cd,prd_seq_no,updated_date) VALUES ('" & wi_plan & "','" & staff_cd & "','" & prd_seq & "','" & currdated & "')"
-
             reader = SQLCmd.ExecuteReader()
             'Console.WriteLine("INSERT INTO production_emp_detail (wi_plan,staff_cd,prd_seq_no,updated_date) VALUES ('" & wi_plan & "','" & staff_cd & "','" & prd_seq & "','" & currdated & "')")
             'MsgBox("INSERT INTO production_emp_detail (wi_plan,staff_cd,prd_seq_no,updated_date) VALUES ('" & wi_plan & "','" & staff_cd & "','" & prd_seq & "','" & currdated & "')")
-
             Return reader
             SQLConn.Dispose()
             SQLConn.Close()

@@ -24,15 +24,16 @@ Public Class Prd_detail
 	End Function
 	Private Sub Prd_detail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		Dim i = List_Emp.ListView1.Items.Count
-		Label2.Text = i
-		QTY_NG.Visible = False
+        Label2.Text = i
+        ' Backoffice_model.UpdateWorking(lb_wi.Text)
+        QTY_NG.Visible = False
 		QTY_NC.Visible = False
 		Timer1.Start()
 		Timer2.Start()
-		Timer3.Enabled = True
-		'sc_wi_plan.SerialPort1.Close()
-		'If sc_wi_plan.SerialPort1.IsOpen Then sc_wi_plan.SerialPort1.Close()
-	End Sub
+        Timer3.Enabled = True
+        'sc_wi_plan.SerialPort1.Close()
+        'If sc_wi_plan.SerialPort1.IsOpen Then sc_wi_plan.SerialPort1.Close()
+    End Sub
 	Private Sub Label13_Click(sender As Object, e As EventArgs)
 		List_Emp.Show()
 		Chang_sh.Close()
@@ -49,9 +50,10 @@ Public Class Prd_detail
 	End Sub
 	Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 		Dim line_id As String = MainFrm.line_id.Text
-		Backoffice_model.line_status_upd(line_id)
-		'List_Emp.Show()
-		sc_wi_plan.TextBox1.Clear()
+        Backoffice_model.line_status_upd(line_id)
+        Backoffice_model.work_complete_offline(lb_wi.Text)
+        'List_Emp.Show()
+        sc_wi_plan.TextBox1.Clear()
 		MainFrm.Enabled = True
 		MainFrm.Show()
 		Me.Close()
