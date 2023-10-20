@@ -200,9 +200,8 @@ Public Class closeLotsummary
                 insertProductionactual(sWi, sLine, sPart, pQty, seqQty, sSeq, sShift, staffNo, stDatetime, eDatetime, sLot, cFlg, trFlg, dFlg, prdFlg, clFlg, avarage_eff, avarage_act_prd_time)
                 If cFlg = 1 Then
                     Backoffice_model.work_complete(sWi)
-                Else
-                    Backoffice_model.work_complete_offline(sWi)
                 End If
+
                 checkPrintnormal()
                 checkPrintdefect(sWi, sSeq, sLot)
                 If statusPage.Text = "MAN" Then
