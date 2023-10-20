@@ -84,6 +84,7 @@ Public Class Working_Pro
             counterNewDIO = New CheckWindow
             counterNewDIO.Per_CheckCounter()
         End If
+
         Label7.Text = OEE.OEE_GET_TARGET(Label14.Text, Prd_detail.lb_wi.Text, Label6.Text)
         PictureBox12.Visible = False
         PictureBox10.Visible = True
@@ -105,7 +106,7 @@ Public Class Working_Pro
         load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & Prd_detail.lb_wi.Text)
         BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text)
         lbNextTime.Text = BreakTime
-        TimerLossBT.Start()
+        ' TimerLossBT.Start()
         V_check_line_reprint = Backoffice_model.check_line_reprint()
         Dim next_process = Backoffice_model.GET_NEXT_PROCESS()
         Backoffice_model.S_chk_spec_line = Backoffice_model.chk_spec_line()
@@ -622,10 +623,11 @@ Public Class Working_Pro
             Dim date_end1 As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
             Backoffice_model.date_time_click_start = DateTime.Now.ToString("yyyy-MM-dd HH:mm") & ":00"
             Dim rsTime As Integer = calTimeBreakTime(Backoffice_model.date_time_click_start, lbNextTime.Text)
-            TimerCountBT.Interval = rsTime * 1000
+                    Main()
+            'TimerCountBT.Interval = rsTime * 1000
             If rsTime <> 0 Then
-                TimerCountBT.Enabled = True
-                TimerCountBT.Start()
+                '   TimerCountBT.Enabled = True
+                '  TimerCountBT.Start()
             End If
             Dim rsInsertData = Backoffice_model.INSERT_production_working_info(LB_IND_ROW.Text, Label18.Text, Label22.Text, Label14.Text)
             Dim GET_SEQ = Backoffice_model.GET_SEQ_PLAN_current(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1)
@@ -2262,7 +2264,6 @@ Public Class Working_Pro
                 Dim textp_result As Integer = Label10.Text
                 textp_result = Math.Abs(textp_result) - 1
                 'MsgBox(textp_result)
-
                 Dim sum_act_total As Integer = Label6.Text + cnt_btn
                 Label6.Text = sum_act_total
                 If result_mod = 0 And textp_result <> 0 Then
@@ -2316,8 +2317,6 @@ Public Class Working_Pro
                 If temppola < 1 Then
                     temppola = 1
                 End If
-
-
                 Dim loss_sum As Integer
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
@@ -2330,17 +2329,13 @@ Public Class Working_Pro
                     End If
                 Catch ex As Exception
                 End Try
-
-
                 Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
-
                 sum_prg2 = sum_prg2 / cnt_btn
                 If sum_prg2 > 100 Then
                     sum_prg2 = 100
                 ElseIf sum_prg2 < 0 Then
                     sum_prg2 = 0
                 End If
-
                 If sum_prg2 <= 49 Then
                     CircularProgressBar2.ProgressColor = Color.Red
                     CircularProgressBar2.ForeColor = Color.Black
@@ -2851,7 +2846,35 @@ Public Class Working_Pro
             End Try
         End If
     End Sub
-
+    Sub Main()
+        Console.WriteLine("Main program started")
+        ' Delay for 2 seconds using Task.Delay
+        Dim dateTimeStart = Backoffice_model.date_time_click_start.ToString("yyyy-MM-dd HH:mm" & ":00", CultureInfo.InvariantCulture)
+        Dim timeNow = DateTime.Now.ToString("HH:mm:ss")
+        Dim dateTimeBreak As Date = DateTime.Now.ToString("yyyy-MM-dd" & " " & lbNextTime.Text)
+        Dim dateNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm" & ":00")
+        Dim total_loss As Integer = 1
+        If lbNextTime.Text >= "00:00:00" And lbNextTime.Text <= "07:59:59" Then
+            total_loss = DateDiff(DateInterval.Second, DateTime.Parse(dateNow), DateTime.Parse(dateTimeBreak))
+        Else
+            total_loss = DateDiff(DateInterval.Second, DateTime.Parse(dateTimeStart), DateTime.Parse(dateTimeBreak))
+        End If
+        Dim Delays As Integer = total_loss * 1000
+        Task.Delay(Delays).ContinueWith(Sub(task)
+                                            ' Bring the button to the front using Invoke
+                                            check_network_frist = 1
+                                            Me.Invoke(Sub()
+                                                          stop_working()
+                                                          Backoffice_model.TimeStartBreakTime = DateTime.Now.ToString("HH:mm:ss")
+                                                          StopMenu.Show()
+                                                          Me.Enabled = False
+                                                      End Sub)
+                                        End Sub, TaskScheduler.FromCurrentSynchronizationContext())
+        ' Create a delayed task using Task.Delay
+        ' Wait for user input to prevent the console from closing immediately
+        Console.WriteLine("Press Enter to exit...")
+        Console.ReadLine()
+    End Sub
     Private Sub TimerCountBT_Tick(sender As Object, e As EventArgs) Handles TimerCountBT.Tick
         Try
             If Application.OpenForms().OfType(Of Loss_reg).Any Or Application.OpenForms().OfType(Of Loss_reg_pass).Any Then

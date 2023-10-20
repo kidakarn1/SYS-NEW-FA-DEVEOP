@@ -1,5 +1,6 @@
 ﻿Public Class StopMenu
     Dim contDelay As Integer = 0
+    Dim flg_check As Integer = 0
     Public date_start_data = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
     Private Sub btnContinue_Click(sender As Object, e As EventArgs) Handles btnContinue.Click
         If PanelShowLoss.Visible Then
@@ -13,7 +14,6 @@
             'Working_Pro.TimerCountBT.Interval = Working_Pro.calTimeBreakTime(Backoffice_model.date_time_click_start, BreakTime) * 1000 'add'
             'Working_Pro.TimerCountBT.Enabled = True 'add'
             Me.Close()
-
         Else
             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
             Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, Working_Pro.wi_no.Text, Working_Pro.Label22.Text)
@@ -73,40 +73,49 @@
         btnBreakTime.Visible = False
         PanelShowLoss.Visible = False
     End Sub
+    Sub main()
+        Dim delays As Integer = CDbl(Val(Backoffice_model.CountDelay)) * 1000
+        Task.Delay(delays).ContinueWith(Sub(task)
+                                            ' Bring the button to the front using Invoke
+                                            Me.Invoke(Sub()
+                                                          flg_check = 1
+                                                          manageAutoLoss()
+                                                      End Sub)
+                                        End Sub, TaskScheduler.FromCurrentSynchronizationContext())
+    End Sub
+    Public Sub manageAutoLoss()
+        If Application.OpenForms().OfType(Of Loss_reg).Any Or Application.OpenForms().OfType(Of Loss_reg_pass).Any Then
+        Else
+            If Backoffice_model.CountDelay <> "" Then
+                If btnBreakTime.Visible = True Then
+                    Console.WriteLine(contDelay)
+                    btnContinue.BringToFront()
+                    btnContinue.Visible = True
+                    insLoss()
+                    lock.Visible = True
+                    btnBreakTime.Visible = False
+                    lbLossCode.Text = Backoffice_model.LossCodeAuto
+                    lbStartCount.Text = Backoffice_model.TimeStartBreakTime
+                    ' lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
+                    btnBreakTime.Visible = False
+                    PanelShowLoss.Visible = True
+                End If
+                Dim date_end_data As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
+                Dim date_end As Date = date_end_data
+                Dim total_loss As Integer = DateDiff(DateInterval.Minute, date_start_data, date_end)
+                test_time_loss_time.Text = total_loss
+                If total_loss < 0 Then
+                    Minutes_total = Math.Abs(CDbl(Val(test_time_loss_time.Text)))
+                    test_time_loss_time.Text = Minutes_total
+                End If
+            End If
+        End If
+    End Sub
     Private Sub TimerLossBT_Tick(sender As Object, e As EventArgs) Handles TimerLossBT.Tick
         Try
-            contDelay += 1
-            If Application.OpenForms().OfType(Of Loss_reg).Any Or Application.OpenForms().OfType(Of Loss_reg_pass).Any Then
-            Else
-                If Backoffice_model.CountDelay <> "" Then
-                    If btnBreakTime.Visible = True Then
-                        Console.WriteLine(contDelay)
-                        If CDbl(Val(contDelay)) = CDbl(Val((Backoffice_model.CountDelay))) Then
-                            'MsgBox("ครบ 5 นาที")
-                            btnContinue.BringToFront()
-                            btnContinue.Visible = True
-                            'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
-                            'btnContinue.Size = New Size(312, 555)
-                            insLoss()
-                            lock.Visible = True
-                            btnBreakTime.Visible = False
-                            lbLossCode.Text = Backoffice_model.LossCodeAuto
-                            lbStartCount.Text = Backoffice_model.TimeStartBreakTime
-                            lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
-                            btnBreakTime.Visible = False
-                            PanelShowLoss.Visible = True
-                        End If
-                    End If
-                    lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
-                    Dim date_end_data As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
-                    Dim date_end As Date = date_end_data
-                    Dim total_loss As Integer = DateDiff(DateInterval.Minute, date_start_data, date_end)
-                    test_time_loss_time.Text = total_loss
-                    If total_loss < 0 Then
-                        Minutes_total = Math.Abs(CDbl(Val(test_time_loss_time.Text)))
-                        test_time_loss_time.Text = Minutes_total
-                    End If
-                End If
+            lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
+            If flg_check = 1 Then
+                manageAutoLoss()
             End If
         Catch ex As Exception
 
@@ -143,8 +152,7 @@
     End Sub
     Private Sub StopMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TimerLossBT.Enabled = True
+        main()
         lbLineCode.Text = MainFrm.Label4.Text
     End Sub
-
-
 End Class

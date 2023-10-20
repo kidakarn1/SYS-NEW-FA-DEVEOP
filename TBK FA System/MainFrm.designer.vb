@@ -93,9 +93,9 @@ Partial Class MainFrm
         Me.Label9.ForeColor = System.Drawing.Color.White
         Me.Label9.Location = New System.Drawing.Point(627, 137)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(169, 19)
+        Me.Label9.Size = New System.Drawing.Size(163, 19)
         Me.Label9.TabIndex = 23
-        Me.Label9.Text = "FA SYSTEM V 1.8.0"
+        Me.Label9.Text = "FA SYSTEM V 1.8.1"
         '
         'Panel1
         '
