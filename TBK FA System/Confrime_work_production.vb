@@ -305,11 +305,10 @@ re_load:
 		next_pae()
 		Me.Close()
 	End Sub
-	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-		Me.Close()
-	End Sub
-
-	Private Sub Confrime_work_production_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Me.Close()
+    End Sub
+    Private Sub Confrime_work_production_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		If TimeOfDay.ToString("HH:mm:ss") >= "07:58:00" And TimeOfDay.ToString("HH:mm:ss") <= "08:00:00" Then
 			Button2.Visible = False
 		End If

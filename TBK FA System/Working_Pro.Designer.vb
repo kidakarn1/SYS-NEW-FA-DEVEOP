@@ -130,8 +130,6 @@ Partial Class Working_Pro
         Me.lb_nc_child_part = New System.Windows.Forms.Label()
         Me.lb_ng_child_part = New System.Windows.Forms.Label()
         Me.lbNextTime = New System.Windows.Forms.Label()
-        Me.TimerCountBT = New System.Windows.Forms.Timer(Me.components)
-        Me.TimerLossBT = New System.Windows.Forms.Timer(Me.components)
         Me.Button1 = New System.Windows.Forms.Button()
         Me.lb_use_time = New System.Windows.Forms.Label()
         Me.LB_IND_ROW = New System.Windows.Forms.Label()
@@ -1480,14 +1478,6 @@ Partial Class Working_Pro
         Me.lbNextTime.TabIndex = 4638
         Me.lbNextTime.Text = "XX:XX:XX"
         '
-        'TimerCountBT
-        '
-        Me.TimerCountBT.Interval = 1000
-        '
-        'TimerLossBT
-        '
-        Me.TimerLossBT.Interval = 1000
-        '
         'Button1
         '
         Me.Button1.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.inst_qty2
@@ -1759,7 +1749,6 @@ Partial Class Working_Pro
         Me.Controls.Add(Me.PictureBox4)
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.Label41)
         Me.Controls.Add(Me.lb_qty_for_box)
         Me.Controls.Add(Me.lb_box_count)
         Me.Controls.Add(Me.lb_dlv_date)
@@ -1817,6 +1806,7 @@ Partial Class Working_Pro
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.PictureBox12)
+        Me.Controls.Add(Me.Label41)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Working_Pro"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1953,8 +1943,6 @@ Partial Class Working_Pro
     Friend WithEvents lb_nc_child_part As Label
     Friend WithEvents lb_ng_child_part As Label
     Friend WithEvents lbNextTime As Label
-    Friend WithEvents TimerCountBT As Timer
-    Friend WithEvents TimerLossBT As Timer
     Friend WithEvents Button1 As Button
     Friend WithEvents lb_use_time As Label
     Friend WithEvents LB_IND_ROW As Label

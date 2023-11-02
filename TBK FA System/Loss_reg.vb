@@ -117,28 +117,15 @@ Public Class Loss_reg
                         Backoffice_model.Update_flg_loss(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
                         Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
                         Backoffice_model.alert_loss(wi_plan, "1", pd, loss_cd_id)
-                        maintenance.updMaintenanceSqlite()
-                        maintenance.UpdateMaintenance(line_cd, ComboBox1.Text, shift_prd, test_time_loss_time.Text, DateTime.Now.ToString("yyyy/MM/dd H:m:s"), date_start_data)
-                        'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                        'Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, number_qty)
-                        'Backoffice_model.test_ins(pd, line_cd, wi_plan, item_cd, seq_no, transfer_flg)
-                        'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                        'Dim emp_cd As String
-                        'For i = 0 To temp_co_emp - 1
-                        '    emp_cd = List_Emp.ListView1.Items(i).Text
-                        '    Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                        'Next
+                        ' maintenance.updMaintenanceSqlite()
+                        ' maintenance.UpdateMaintenance(line_cd, ComboBox1.Text, shift_prd, test_time_loss_time.Text, DateTime.Now.ToString("yyyy/MM/dd H:m:s"), date_start_data)
                     Else
                         transfer_flg = "0"
                         Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                        'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time, end_time, use_timee, tr_status)
-                        'MsgBox("Ins incompleted1")
                     End If
                 Catch ex As Exception
-                    'MsgBox("Ins incompleted2")
                     transfer_flg = "0"
                     Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")            'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                    'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time, end_time, use_timee, tr_status)
                 End Try
                 Working_Pro.Enabled = True
                 Me.Close()

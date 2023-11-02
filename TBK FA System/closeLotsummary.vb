@@ -161,7 +161,6 @@ Public Class closeLotsummary
             Me.Close()
         End If
     End Sub
-
     Public Function calGoodqty(act As Integer, nc As Integer, ng As Integer)
         Dim result = act - (nc + ng)
         Return result
@@ -197,11 +196,24 @@ Public Class closeLotsummary
                 Dim dFlg As String = "0"
                 Dim prdFlg As String = "1"
                 Dim clFlg As String = "1"
+                If Backoffice_model.S_chk_spec_line = 1 Then
+                    Dim data = Backoffice_model.GET_START_END_PRODUCTION_DETAIL_SPECTAIL_TIME(Working_Pro.pwi_id)
+                    If data <> "0" Then
+                        Dim dFg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(data)
+                        For Each item As Object In dFg
+                            stDatetime = item("st_time").ToString()
+                            eDatetime = item("end_time").ToString()
+                            Console.WriteLine(stDatetime)
+                            Console.WriteLine(eDatetime)
+                        Next
+                    End If
+                End If
                 insertProductionactual(sWi, sLine, sPart, pQty, seqQty, sSeq, sShift, staffNo, stDatetime, eDatetime, sLot, cFlg, trFlg, dFlg, prdFlg, clFlg, avarage_eff, avarage_act_prd_time)
                 If cFlg = 1 Then
                     Backoffice_model.work_complete(sWi)
+                Else
+                    Backoffice_model.work_complete_offline(sWi)
                 End If
-
                 checkPrintnormal()
                 checkPrintdefect(sWi, sSeq, sLot)
                 If statusPage.Text = "MAN" Then

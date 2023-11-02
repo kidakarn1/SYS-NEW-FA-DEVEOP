@@ -177,19 +177,17 @@ Public Class ins_qty_special_time
 	End Sub
 	Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
 		Dim text_now As String = TextBox1.Text
-		If text_now.Length > 4 Then
-			Dim text_to2 As String = TextBox2.Text
-
-			If text_to2.Length = 2 Then
-				text_to2 = text_to2 & ":7"
-				TextBox2.Text = text_to2
-			Else
-				text_to2 = text_to2 & "7"
-				TextBox2.Text = text_to2
-			End If
-
-		Else
-			If text_now.Length = 2 Then
+        If text_now.Length > 4 Then
+            Dim text_to2 As String = TextBox2.Text
+            If text_to2.Length = 2 Then
+                text_to2 = text_to2 & ":7"
+                TextBox2.Text = text_to2
+            Else
+                text_to2 = text_to2 & "7"
+                TextBox2.Text = text_to2
+            End If
+        Else
+            If text_now.Length = 2 Then
 				text_now = text_now & ":7"
 				TextBox1.Text = text_now
 			Else
@@ -204,35 +202,34 @@ Public Class ins_qty_special_time
 
 		End If
 	End Sub
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim text_now As String = TextBox1.Text
+        If text_now.Length > 4 Then
+            Dim text_to2 As String = TextBox2.Text
 
-	Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-		Dim text_now As String = TextBox1.Text
-		If text_now.Length > 4 Then
-			Dim text_to2 As String = TextBox2.Text
-
-			If text_to2.Length = 2 Then
-				text_to2 = text_to2 & ":8"
-				TextBox2.Text = text_to2
-			Else
-				text_to2 = text_to2 & "8"
-				TextBox2.Text = text_to2
-			End If
-		Else
-			If text_now.Length = 2 Then
-				text_now = text_now & ":8"
-				TextBox1.Text = text_now
-			Else
-				text_now = text_now & "8"
-				TextBox1.Text = text_now
-			End If
-		End If
-		chk_ins()
-		Dim text_to2_now As String = TextBox2.Text
-		If text_to2_now.Length > 4 Then
-			alldis()
-		End If
-	End Sub
-	Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+            If text_to2.Length = 2 Then
+                text_to2 = text_to2 & ":8"
+                TextBox2.Text = text_to2
+            Else
+                text_to2 = text_to2 & "8"
+                TextBox2.Text = text_to2
+            End If
+        Else
+            If text_now.Length = 2 Then
+                text_now = text_now & ":8"
+                TextBox1.Text = text_now
+            Else
+                text_now = text_now & "8"
+                TextBox1.Text = text_now
+            End If
+        End If
+        chk_ins()
+        Dim text_to2_now As String = TextBox2.Text
+        If text_to2_now.Length > 4 Then
+            alldis()
+        End If
+    End Sub
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
 		Dim text_now As String = TextBox1.Text
 		If text_now.Length > 4 Then
 			Dim text_to2 As String = TextBox2.Text
@@ -258,37 +255,36 @@ Public Class ins_qty_special_time
 			alldis()
 		End If
 	End Sub
-	Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
-		Dim text_now As String = TextBox1.Text
-		If text_now.Length > 4 Then
-			Dim text_to2 As String = TextBox2.Text
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        Dim text_now As String = TextBox1.Text
+        If text_now.Length > 4 Then
+            Dim text_to2 As String = TextBox2.Text
 
-			If text_to2.Length = 2 Then
-				text_to2 = text_to2 & ":0"
-				TextBox2.Text = text_to2
-			Else
-				text_to2 = text_to2 & "0"
-				TextBox2.Text = text_to2
-			End If
-		Else
-			If text_now.Length = 2 Then
-				text_now = text_now & ":0"
-				TextBox1.Text = text_now
-			Else
-				text_now = text_now & "0"
-				TextBox1.Text = text_now
-			End If
-		End If
-		chk_ins()
-		Dim text_to2_now As String = TextBox2.Text
-		If text_to2_now.Length > 4 Then
-			alldis()
-		End If
-	End Sub
-
-	Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
-		TextBox1.Clear()
-		TextBox2.Clear()
+            If text_to2.Length = 2 Then
+                text_to2 = text_to2 & ":0"
+                TextBox2.Text = text_to2
+            Else
+                text_to2 = text_to2 & "0"
+                TextBox2.Text = text_to2
+            End If
+        Else
+            If text_now.Length = 2 Then
+                text_now = text_now & ":0"
+                TextBox1.Text = text_now
+            Else
+                text_now = text_now & "0"
+                TextBox1.Text = text_now
+            End If
+        End If
+        chk_ins()
+        Dim text_to2_now As String = TextBox2.Text
+        If text_to2_now.Length > 4 Then
+            alldis()
+        End If
+    End Sub
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        TextBox1.Clear()
+        TextBox2.Clear()
         ena012()
         'Button1.Enabled = True
         'Button2.Enabled = True
@@ -300,9 +296,7 @@ Public Class ins_qty_special_time
         'Button8.Enabled = True
         'Button9.Enabled = True
         'Button13.Enabled = True
-
     End Sub
-
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
         Dim text_to2 As String = TextBox2.Text
         Dim text_to1 As String = TextBox1.Text
@@ -340,7 +334,6 @@ Public Class ins_qty_special_time
                 End If
             End If
         End If
-
         'text_to2 = TextBox2.Text
         'MsgBox(TextBox2.Text.Length)
         chk_ins()
@@ -662,7 +655,6 @@ Public Class ins_qty_special_time
         '       MsgBox("Please check Time 4")
         '      'MsgBox("ex.message = " & ex.Message)
         '     End Try
-
     End Sub
     Private Sub ena012()
 		Button1.Enabled = True
@@ -700,47 +692,43 @@ Public Class ins_qty_special_time
 		Button9.Enabled = False
 		Button13.Enabled = True
 	End Sub
-	Private Sub alldis()
-		Button1.Enabled = False
-		Button2.Enabled = False
-		Button3.Enabled = False
-		Button4.Enabled = False
-		Button5.Enabled = False
-		Button6.Enabled = False
-		Button7.Enabled = False
-		Button8.Enabled = False
-		Button9.Enabled = False
-		Button13.Enabled = False
-
-		Button10.Enabled = True
-	End Sub
-
-	Private Sub allena()
-		Button1.Enabled = True
-		Button2.Enabled = True
-		Button3.Enabled = True
-		Button4.Enabled = True
-		Button5.Enabled = True
-		Button6.Enabled = True
-		Button7.Enabled = True
-		Button8.Enabled = True
-		Button9.Enabled = True
-		Button13.Enabled = True
-	End Sub
-
-	Private Sub chk_ins()
-		Button1.Enabled = True
-		Button2.Enabled = True
-		Button3.Enabled = True
-		Button4.Enabled = True
-		Button5.Enabled = True
-		Button6.Enabled = True
-		Button7.Enabled = True
-		Button8.Enabled = True
-		Button9.Enabled = True
-		Button13.Enabled = True
-	End Sub
-
+    Private Sub alldis()
+        Button1.Enabled = False
+        Button2.Enabled = False
+        Button3.Enabled = False
+        Button4.Enabled = False
+        Button5.Enabled = False
+        Button6.Enabled = False
+        Button7.Enabled = False
+        Button8.Enabled = False
+        Button9.Enabled = False
+        Button13.Enabled = False
+        Button10.Enabled = True
+    End Sub
+    Private Sub allena()
+        Button1.Enabled = True
+        Button2.Enabled = True
+        Button3.Enabled = True
+        Button4.Enabled = True
+        Button5.Enabled = True
+        Button6.Enabled = True
+        Button7.Enabled = True
+        Button8.Enabled = True
+        Button9.Enabled = True
+        Button13.Enabled = True
+    End Sub
+    Private Sub chk_ins()
+        Button1.Enabled = True
+        Button2.Enabled = True
+        Button3.Enabled = True
+        Button4.Enabled = True
+        Button5.Enabled = True
+        Button6.Enabled = True
+        Button7.Enabled = True
+        Button8.Enabled = True
+        Button9.Enabled = True
+        Button13.Enabled = True
+    End Sub
     Private Sub ins_qty_special_time_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
         Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift
@@ -755,7 +743,6 @@ Public Class ins_qty_special_time
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label1.Text = TimeOfDay.ToString("H:mm:ss")
     End Sub
-
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         Button10.Enabled = True
         Button11.Enabled = True

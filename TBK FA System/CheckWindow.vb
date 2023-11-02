@@ -33,5 +33,4 @@ Public Class CheckWindow
         End Try
     End Function
 
-
 End Class

@@ -238,7 +238,22 @@ break_loop:
         Try
             inp_qty = Convert.ToInt32(TextBox1.Text)
         Catch ex As Exception
-            inp_qty = 0
+            ' inp_qty = 0
+            PictureBox3.Enabled = False
+            PictureBox2.Enabled = False
+            Dim listdetail = "Please Input QTY."
+            PictureBox10.BringToFront()
+            PictureBox10.Show()
+            PictureBox1.BringToFront()
+            PictureBox1.Show()
+            Panel2.BringToFront()
+            Panel2.Show()
+            Label2.Text = listdetail
+            Label2.BringToFront()
+            Label2.Show()
+            'MsgBox("Can't input the Qty. over : " + Label1.Text)
+            TextBox1.Clear()
+            Return 0
         End Try
         Dim totalDefect As Integer = (CDbl(Val(Working_Pro.lb_nc_qty.Text)) + CDbl(Val(Working_Pro.lb_ng_qty.Text))) 'CDbl(Val(md.mGetDefect(Working_Pro.wi_no.Text, Working_Pro.Label18.Text, Working_Pro.Label14.Text) + (CDbl(Val(Working_Pro.lb_nc_qty.Text)) + CDbl(Val(Working_Pro.lb_ng_qty.Text)))))
         'If inp_qty > (prd_qty - totalDefect) Then

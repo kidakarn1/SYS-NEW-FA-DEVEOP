@@ -66,6 +66,11 @@ Public Class Backoffice_model
         End Try
     End Function
 
+    Public Shared Function GET_START_END_PRODUCTION_DETAIL_SPECTAIL_TIME(pwi_id As String)
+        Dim api = New api()
+        Dim rs = api.Load_data("http://" & svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_START_END_PRODUCTION_DETAIL_SPECTAIL_TIME?pwi_id=" & pwi_id)
+        Return rs
+    End Function
     Public Shared Sub GetLocalServerAPI()
         Dim sqliteConn As New SQLiteConnection(sqliteConnect)
         Check_connect_sqlite()
@@ -99,6 +104,7 @@ Public Class Backoffice_model
     Public Shared Function ILogLossBreakTime(lineCd As String, wi As String, seq As String)
         Dim api = New api()
         Dim GetData = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/InsertLogLoss?lineCd=" & MainFrm.Label4.Text & "&wi=" & wi & "&seq=" & seq)
+        Return GetData
     End Function
     Public Shared Function B_master_device()
         Dim sqliteConn As New SQLiteConnection(sqliteConnect)
@@ -489,6 +495,35 @@ Public Class Backoffice_model
             Application.Exit()
         End Try
     End Function
+
+    Public Shared Function CHECK_TRANSCETION_PRODUCTION_DETAIL(line_cd As String, date_start As String, date_end As String)
+        Dim reader As SqlDataReader
+        Dim SQLConn As New SqlConnection() 'The SQL Connection
+        Dim SQLCmd As New SqlCommand()
+        Try
+            SQLConn.ConnectionString = sqlConnect 'Set the Connection String  
+            SQLConn.Open()
+            SQLCmd.Connection = SQLConn
+            SQLCmd.CommandText = "EXEC [dbo].[CHECK_TRANSCETION_PRODUCTION_DETAIL] @line_cd = '" & line_cd & "' , @date_start = '" & date_start & "' , @date_end = '" & date_end & "'"
+            Console.WriteLine(SQLCmd.CommandText)
+            reader = SQLCmd.ExecuteReader()
+            Dim id As String = ""
+            While reader.Read()
+                id = reader("id").ToString()
+            End While
+            reader.Close()
+            If id = "" Then
+                id = 0
+            End If
+            Console.WriteLine(id)
+            Return id
+        Catch ex As Exception
+            MsgBox("MSSQL Database connect failed. Please contact PC System [Function CHECK_TRANSCETION_PRODUCTION_DETAIL]")
+            SQLConn.Close()
+            Application.Exit()
+        End Try
+    End Function
+
     Public Shared Function INSERT_DATA_RM_SCAN()
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -1150,7 +1185,31 @@ recheck:
             GoTo recheck
         End Try
     End Function
-
+    Public Shared Function work_complete_offline(wi As String)
+        Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
+        Dim reader As SqlDataReader
+        Dim SQLConn As New SqlConnection() 'The SQL Connection
+        Dim SQLCmd As New SqlCommand()
+        Try
+            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            SQLConn.Open()
+            SQLCmd.Connection = SQLConn
+            SQLCmd.CommandText = "UPDATE sup_work_plan_supply_dev SET PRD_COMP_FLG = '0', PRD_COMP_DATE = '" & currdated & "' WHERE WI = '" & wi & "'"
+            reader = SQLCmd.ExecuteReader()
+            Return reader
+            SQLConn.Dispose()
+            SQLConn.Close()
+            SQLConn = Nothing
+        Catch ex As Exception
+            MsgBox("MSSQL Database connect failed. Please contact PC System [Function work_complete_offline]")
+            SQLConn.Close()
+            Application.Exit()
+        End Try
+    End Function
+    Public Shared Sub UpdateWorking(wi)
+        Dim api = New api()
+        Dim reusult_data = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/Update_supply_dev_Working?wi=" & wi)
+    End Sub
     Public Shared Function Insert_prd_detail_defact(pd As String, line_cd As String, wi_plan As String, item_cd As String, item_name As String, staff_no As Integer, seq_no As Integer, qty As Integer, st_time As DateTime, end_time As DateTime, use_time As Double, number_qty As Integer, tr_status As String, flg_defact As String, defact_id As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
@@ -2798,7 +2857,7 @@ re_insert_data:
             ' MsgBox(check_rs)
             '  If check_rs = "1" Then
             Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, qty, st_time, end_time, use_time, number_qty, pwi_id, status_sqlite)
-                arr_list_id.Add(id)
+            arr_list_id.Add(id)
             'End If
         End While
         'End If

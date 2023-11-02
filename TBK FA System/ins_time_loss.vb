@@ -510,11 +510,32 @@ Public Class ins_time_loss
                                     Dim check_double_loss As Integer = 0
                                     Dim count_check_double As String = ""
                                     count_check_double = GET_CHECK_LOSS_reuslt
-                                    If CDbl(Val(count_check_double)) > 0 Then
-                                        ' MsgBox("Loss double please check start loss and end loss")
+                                    If CDbl(Val(Backoffice_model.CHECK_TRANSCETION_PRODUCTION_DETAIL(MainFrm.Label4.Text, start_time, end_time))) = 0 Then
+                                        If CDbl(Val(count_check_double)) > 0 Then
+                                            ' MsgBox("Loss double please check start loss and end loss")
+                                            Button10.Enabled = False
+                                            Button11.Enabled = False
+                                            Dim listdetail = "Loss double please check start loss and end loss"
+                                            PictureBox10.BringToFront()
+                                            PictureBox10.Show()
+                                            PictureBox2.BringToFront()
+                                            PictureBox2.Show()
+                                            Panel2.BringToFront()
+                                            Panel2.Show()
+                                            Label3.Text = listdetail
+                                            Label3.BringToFront()
+                                            Label3.Show()
+                                        Else
+                                            Loss_reg_pass.Label8.Text = TextBox1.Text
+                                            Loss_reg_pass.Label9.Text = TextBox2.Text
+                                            Loss_reg_pass.Enabled = True
+                                            Loss_reg_pass.Button1.Visible = True
+                                            Me.Hide()
+                                        End If
+                                    Else
                                         Button10.Enabled = False
                                         Button11.Enabled = False
-                                        Dim listdetail = "Loss double please check start loss and end loss"
+                                        Dim listdetail = "Have Data In Production Actual Detail Please Check."
                                         PictureBox10.BringToFront()
                                         PictureBox10.Show()
                                         PictureBox2.BringToFront()
@@ -524,17 +545,10 @@ Public Class ins_time_loss
                                         Label3.Text = listdetail
                                         Label3.BringToFront()
                                         Label3.Show()
-                                    Else
-
-                                        Loss_reg_pass.Label8.Text = TextBox1.Text
-                                        Loss_reg_pass.Label9.Text = TextBox2.Text
-                                        Loss_reg_pass.Enabled = True
-                                        Loss_reg_pass.Button1.Visible = True
-                                        Me.Hide()
                                     End If
                                     'MsgBox("OK READY CAL")
                                 Else
-                                    Button10.Enabled = False
+                                        Button10.Enabled = False
                                     Button11.Enabled = False
                                     Dim listdetail = "Please Check Time."
                                     PictureBox10.BringToFront()
