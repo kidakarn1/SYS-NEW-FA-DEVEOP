@@ -56,11 +56,13 @@ Partial Class select_int_qty
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Enabled = False
         Me.PictureBox1.Location = New System.Drawing.Point(418, 174)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(250, 259)
         Me.PictureBox1.TabIndex = 38
         Me.PictureBox1.TabStop = False
+        Me.PictureBox1.Visible = False
         '
         'select_int_qty
         '

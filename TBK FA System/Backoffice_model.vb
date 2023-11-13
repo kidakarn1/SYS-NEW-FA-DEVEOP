@@ -240,9 +240,10 @@ Public Class Backoffice_model
             End While
             reader.Close()
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_close_lot_time]" & ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_close_lot_time]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -268,9 +269,10 @@ Public Class Backoffice_model
             reader.Close()
             Return result
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function check_time]" & ex.Message)
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function check_time]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function sqlite_conn_dbsv()
@@ -315,9 +317,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_new_information]" & ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_new_information]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function insert_lot_print_defact(wi_plan, item_cd, tag_defact_lot_no, tag_defact_seq, tag_defact_created_date, tag_defact_created_by, tag_defact_qr, tag_defact_status, tag_defact_line_cd)
@@ -341,9 +344,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function INSERT_LOG_PRINT_DEFACT_NC]" & ex.Message)
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function INSERT_LOG_PRINT_DEFACT_NC]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function load_qty_defact(item_cd As String, lot_no As String, seq As String, date_now As String)
@@ -364,9 +368,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function LOAD_QTY_DEFACT]" & ex.Message)
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function LOAD_QTY_DEFACT]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -387,9 +392,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_QTY_DEFACT_NC]" & ex.Message)
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_QTY_DEFACT_NC]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -409,9 +415,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_data_wi_reprint]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_data_wi_reprint]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function get_data_item(WI)
@@ -426,9 +433,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_data_wi_reprint]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_data_wi_reprint]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function get_list_rm_scan(WI)
@@ -443,9 +451,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_list_rm_scan]" & ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_list_rm_scan]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -473,9 +482,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             reader.Close()
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_Rm_Scan]" & ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_Rm_Scan]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function GET_QTY_SEQ(WI, SEQ_NO)
@@ -490,9 +500,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_QTY_SEQ]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_QTY_SEQ]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -518,9 +529,10 @@ Public Class Backoffice_model
             Console.WriteLine(id)
             Return id
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function CHECK_TRANSCETION_PRODUCTION_DETAIL]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function CHECK_TRANSCETION_PRODUCTION_DETAIL]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -536,9 +548,10 @@ Public Class Backoffice_model
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function INSERT_DATA_RM_SCAN]" & ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function INSERT_DATA_RM_SCAN]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -565,9 +578,10 @@ Public Class Backoffice_model
             Return tmp_result
             'Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_CHECK_LOSS]" & ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_CHECK_LOSS]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function INSERT_REWORK_ACTUAL(RAW_PART_NO, RAW_QTY, RAW_SHIFT, RWA_CREATED_DATE_TIME, RWA_WI, RWA_PART_NAME, RWA_MODEL)
@@ -584,9 +598,10 @@ Public Class Backoffice_model
             reader.Close()
             SQLConn.Close()
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function INSERT_REWORK_ACTUAL]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function INSERT_REWORK_ACTUAL]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
 
@@ -647,9 +662,10 @@ re_insert_rework_act:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function INSERT_tmp_planseq]" & ex.Message)
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function INSERT_tmp_planseq]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function GET_DATA_PRODUCTION_WORKING_INFO(ind_row, pwi_lot_no, pwi_seq_no)
@@ -707,9 +723,10 @@ re_insert_rework_act:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_SEQ_PLAN_current]" & ex.Message)
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_SEQ_PLAN_current]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -764,9 +781,10 @@ re_insert_rework_act:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_SEQ_PLAN_current]" & ex.Message)
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_SEQ_PLAN_current]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function GET_QTY_SHIFT(LINE_CD, WI, SHIFT, DATE_NOW, date_end, time_st, time_end, lot_no)
@@ -781,9 +799,10 @@ re_insert_rework_act:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_QTY_SHIFT_NO_WI]" & ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_QTY_SHIFT_NO_WI]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function Insert_production_emp_detail_realtime(wi_plan, staff_cd, prd_seq_no, pwi_id)
@@ -799,9 +818,10 @@ re_insert_rework_act:
             reader = SQLCmd.ExecuteReader()
             reader.Close()
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_production_emp_detail_realtime]" & ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_production_emp_detail_realtime]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Sub Check_detail_actual_insert_act()
@@ -826,8 +846,9 @@ recheck:
             'Return reader
             reader.Close()
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function update_qty_seq]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function update_qty_seq]")
             SQLConn.Close()
+            load_show.Show()
             GoTo recheck
             'Application.Exit()
         End Try
@@ -890,9 +911,10 @@ re_up_date_data:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_QTY_SEQ_ACTUAL_DESC]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function GET_QTY_SEQ_ACTUAL_DESC]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
     Public Shared Function GET_QTY_SEQ_ACTUAL_DESC_SQLITE(WI, ship, SEQ)
@@ -938,10 +960,10 @@ where
             SQLConn.Open()
             'MsgBox("Database connect successfully")
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function ConnectDB]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function ConnectDB]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
     Public Shared Function GetLine_mst()
@@ -957,10 +979,10 @@ where
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GetLine_mst]")
+            '  MsgBox("MSSQL Database connect failed. Please contact PC System [Function GetLine_mst]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -992,9 +1014,10 @@ where
             End If
             ins_log_print(MainFrm.Label4.Text, table_created, id)
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function GetLine_mst]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function GetLine_mst]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function get_information()
@@ -1009,9 +1032,10 @@ where
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_information]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_information]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
     Public Shared Function inf_update(inf_text As String, staff_cd As String)
@@ -1031,9 +1055,10 @@ where
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function inf_update]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function inf_update]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     'Public Shared Function Get_User_Line_detail(usernm As String, passwd As String)
@@ -1051,9 +1076,10 @@ where
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_User_Line_detail]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_User_Line_detail]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -1129,9 +1155,10 @@ where
             '			'MsgBox(reader)
             Return result_api_checkper
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_prd_plan_new]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_prd_plan_new]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -1201,9 +1228,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function work_complete_offline]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function work_complete_offline]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Sub UpdateWorking(wi)
@@ -1258,9 +1286,10 @@ recheck:
             'MsgBox(reader)
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function line_status_ins]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function line_status_ins]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
     Public Shared Function line_status_ins_sqlite(line_id As String, st_time As DateTime, end_time As DateTime, st_type As String, comp_flg As String, loss_id As String, efficiancy As String, wi_plan As String)
@@ -1329,6 +1358,17 @@ recheck:
         End Try
     End Function
 
+    Public Shared Function GetDefectMenu(line_cd As String)
+        Dim api = New api()
+        Dim rs = api.Load_data("http://" & svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GetDefectMenu?line_cd=" & line_cd)
+        Return rs
+    End Function
+
+    Public Shared Function GET_STATUS_DELAY_BY_LINE(line_cd As String)
+        Dim api = New api()
+        Dim rs = api.Load_data("http://" & svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_STATUS_DELAY_BY_LINE?line_cd=" & line_cd)
+        Return rs
+    End Function
     Public Shared Function Get_Last_part(line_cd As String)
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -1362,10 +1402,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_Last_part]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_Last_part]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
 
@@ -1389,10 +1429,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_Line_id]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_Line_id]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            '  Application.Exit()
         End Try
     End Function
 
@@ -1417,10 +1457,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_Line_skill_id]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_Line_skill_id]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function chk_user_skill_line(emp_cd As String, line_cd As String)
@@ -1457,10 +1497,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_all_skill]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_all_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            '  Application.Exit()
         End Try
     End Function
     Public Shared Function get_department()
@@ -1477,10 +1517,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_department]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_department]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function update_tagprint(wi As String)
@@ -1642,9 +1682,10 @@ recheck:
             reader = SQLCmd.ExecuteReader()
             'Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_user]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_user]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
 
@@ -1664,10 +1705,10 @@ recheck:
 
             'Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_skill]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
 
@@ -1690,10 +1731,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_skill]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function work_complete(wi As String)
@@ -1714,10 +1755,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_skill]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -1740,10 +1781,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_skill]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
 
@@ -1761,10 +1802,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_last_id]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_last_id]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
 
@@ -1784,10 +1825,10 @@ recheck:
 
             'Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_user_skill]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_user_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -1808,10 +1849,10 @@ recheck:
 
             'Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_line_skill]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_line_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -1830,10 +1871,11 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_all_line]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_all_line]")
             SQLConn.Close()
+            load_show.Show()
 
-            Application.Exit()
+            'Application.Exit()
         End Try
     End Function
 
@@ -1857,10 +1899,11 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_line]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_line]")
             SQLConn.Close()
+            load_show.Show()
 
-            Application.Exit()
+            'Application.Exit()
         End Try
     End Function
 
@@ -1879,10 +1922,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_all_user]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_all_user]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
     Public Shared Function get_tag_reprint_spaceial(wi As String)
@@ -1903,11 +1946,11 @@ recheck:
             'reader.Close()
             Return result
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_spaceial]")
-            MsgBox(ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_spaceial]")
+            'MsgBox(ex.Message)
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
     Public Shared Function get_tag_reprint_sum_detail(wi As String, lot As String)
@@ -1927,10 +1970,10 @@ recheck:
             reader.Close()
             Return result
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_sum_detail]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_sum_detail]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function check_line_reprint()
@@ -1964,9 +2007,8 @@ recheck:
             Return reader
             'End If
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_detail]")
-            SQLConn.Close()
-            Application.Exit()
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_detail]")
+            load_show.Show()
         End Try
     End Function
     Public Shared Function get_tag_reprint_batch(wi As String)
@@ -1993,10 +2035,11 @@ recheck:
             Return result
             'End If
         Catch ex As Exception
-            MsgBox(ex.Message)
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_batch]")
+            'MsgBox(ex.Message)
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_batch]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function update_data_new_qr_detail(qr_code As String)
@@ -2111,9 +2154,10 @@ recheck:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_detail_genarate]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_detail_genarate]")
             SQLConn.Close()
-            Application.Exit()
+            'Application.Exit()
+            load_show.Show()
         End Try
     End Function
     Public Shared Function get_sec_user(sec_name As String)
@@ -2130,9 +2174,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_sec_user]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_sec_user]")
             SQLConn.Close()
-            Application.Exit()
+            'Application.Exit()
+            load_show.Show()
         End Try
     End Function
 
@@ -2160,10 +2205,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_user]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_user]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2186,10 +2231,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_user]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_user]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2212,10 +2257,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_user_skill_old]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_user_skill_old]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2240,8 +2285,8 @@ recheck:
         Catch ex As Exception
             MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_line_skill_old]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2260,10 +2305,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_detail]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_detail]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
 
@@ -2281,10 +2326,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_line_skill]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_line_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2303,10 +2348,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_skill]")
+           ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_skill]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2331,10 +2376,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function chk_adm_login]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function chk_adm_login]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2371,10 +2416,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
 
@@ -2408,10 +2453,10 @@ recheck:
 
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2430,9 +2475,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_sum_loss]" & ex.Message)
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_sum_loss]" & ex.Message)
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2489,10 +2535,10 @@ recheck:
             SQLConn.Close()
 
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2528,10 +2574,10 @@ recheck:
             'MsgBox(reader)
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2552,10 +2598,10 @@ recheck:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_loss_mst]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_loss_mst]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2573,9 +2619,10 @@ recheck:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_defect_mst]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_defect_mst]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
 
@@ -2793,10 +2840,10 @@ re_insert_data:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function chkLogin]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function chkLogin]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
 
     End Function
@@ -2821,10 +2868,10 @@ re_insert_data:
             reader.Close()
             Return data
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function chkLogin]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function chkLogin]")
             SQLConn.Close()
-
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function updated_data_to_dbsvr()
@@ -3112,9 +3159,10 @@ recheck:
                 Return 0
             End Try
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function chkLogin]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function chkLogin]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            ' Application.Exit()
         End Try
     End Function
     Public Shared Function check_completed_plan(wi, plan_qty)
@@ -3387,9 +3435,10 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_emp_cd]")
+            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_emp_cd]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function get_loss_op_mst(lind_cd As String)
@@ -3463,9 +3512,10 @@ re_insert_rework_act:
             Loss_reg.date_time_commit_data.Text = st_datetime2
             'SQLConn = Nothing
         Catch ex As Exception
-            MsgBox("MSSQL Database connect failed. Please contact PC System [Function ins_loss_act]")
+            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function ins_loss_act]")
             SQLConn.Close()
-            Application.Exit()
+            load_show.Show()
+            'Application.Exit()
         End Try
     End Function
     Public Shared Function Check_loss_and_update_flg_loss()

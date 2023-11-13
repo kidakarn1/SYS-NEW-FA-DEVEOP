@@ -56,6 +56,8 @@ Public Class Working_Pro
     Public Shared model As String = ""
     Public Shared pwi_id As String = ""
     Public Shared rsWindow
+    Public Shared status_conter As String = ""
+    Public Shared statusDefect As String = ""
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         'Label44.Text = TimeOfDay.ToString("H:mm:ss")
         Label17.Text = TimeOfDay.ToString("H:mm:ss")
@@ -75,7 +77,12 @@ Public Class Working_Pro
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
                 s_mecg_name = item("mecg_name").ToString()
-                ' s_delay = item("me_sig_del").ToString()
+                If Backoffice_model.GET_STATUS_DELAY_BY_LINE(MainFrm.Label4.Text) = 0 Then
+                    status_conter = 0
+                    s_delay = item("me_sig_del").ToString()
+                Else
+                    status_conter = 1
+                End If
             Next
         End If
     End Function
@@ -130,7 +137,12 @@ Public Class Working_Pro
         Next
         connect_counter_qty()
         Console.WriteLine("result lb_ct ====> " & Prd_detail.lb_ct.Text)
-        s_delay = (Prd_detail.lb_ct.Text * 60) / 2
+        If Backoffice_model.GET_STATUS_DELAY_BY_LINE(MainFrm.Label4.Text) = 1 Then
+            s_delay = (Prd_detail.lb_ct.Text * 60) / 2
+            status_conter = 1
+        Else
+            status_conter = 0
+        End If
         Console.WriteLine("--->" & s_delay)
         Dim date_now As String = DateTime.Now.ToString("dd-MM-yyyy")
         Dim date_now_date As Date = DateTime.Now.ToString("dd-MM-yyyy")
@@ -441,8 +453,7 @@ Public Class Working_Pro
         btn_closelot.Visible = True
         btn_stop.Visible = False
         btn_start.Visible = True
-        btn_defect.Enabled = False
-
+        CheckMenu()
     End Sub
     Private Sub btn_stop_Click(sender As Object, e As EventArgs) Handles btn_stop.Click
         check_network_frist = 1
@@ -1483,12 +1494,27 @@ Public Class Working_Pro
         check_bull = 1
         Await counter_contect_DIO()
         'Timer3.Enabled = True
-        Await Task.Delay(s_delay * 1000).ContinueWith(Sub(task)
-                                                          Me.Invoke(Sub()
-                                                                        check_bull = 0
-                                                                        Console.WriteLine("Asynchronous operation completed.")
-                                                                    End Sub)
-                                                      End Sub, TaskScheduler.FromCurrentSynchronizationContext())
+        Dim delay_setting As Integer = 0
+        Console.WriteLine("G1")
+        Console.WriteLine("status_conter====>" & status_conter)
+        If status_conter = "0" Then
+            delay_setting = s_delay * 100
+            Console.WriteLine("AF1")
+        Else
+            delay_setting = s_delay * 1000
+            Console.WriteLine("AF2")
+        End If
+        Console.WriteLine("DELAY SETTTTTING=====>" & delay_setting)
+        Try
+            Await Task.Delay(delay_setting).ContinueWith(Sub(task)
+                                                             Me.Invoke(Sub()
+                                                                           check_bull = 0
+                                                                           Console.WriteLine("Asynchronous operation completed.")
+                                                                       End Sub)
+                                                         End Sub, TaskScheduler.FromCurrentSynchronizationContext())
+        Catch ex As Exception
+            Console.WriteLine("err===>" & ex.Message)
+        End Try
         ' End If
     End Function
     Private Async Function Manage_counter_NI_MAX() As Task
@@ -1498,23 +1524,29 @@ Public Class Working_Pro
             check_bull = 1
             Await counter_data_new_dio()
             'Timer3.Enabled = True
-            Await Task.Delay(s_delay * 1000).ContinueWith(Sub(task)
-                                                              Try
-                                                                  Me.Invoke(Sub()
-                                                                                check_bull = 0
-                                                                                Console.WriteLine("Asynchronous operation completed.")
-                                                                            End Sub)
-                                                              Catch ex As Exception
-
-                                                              End Try
-                                                          End Sub, TaskScheduler.FromCurrentSynchronizationContext())
+            Dim delay_setting As Integer = 0
+            If status_conter = "0" Then
+                delay_setting = s_delay * 100
+                Console.WriteLine("F1")
+            Else
+                delay_setting = s_delay * 1000
+                Console.WriteLine("F2")
+            End If
+            Console.WriteLine("delay_setting========<><><>>>>>>" & delay_setting)
+            Await Task.Delay(delay_setting).ContinueWith(Sub(task)
+                                                             Me.Invoke(Sub()
+                                                                           check_bull = 0
+                                                                           Console.WriteLine("Asynchronous operation completed.")
+                                                                       End Sub)
+                                                         End Sub, TaskScheduler.FromCurrentSynchronizationContext())
             ' End If
         Catch ex As Exception
-            check_bull = 0
+            'check_bull = 0
             Console.WriteLine(ex.Message)
         End Try
     End Function
     Protected Overrides Sub WndProc(ByRef m As Message)
+
         If check_bull = 0 Then
             Dim BitNo As Short
             Dim Id As Short
@@ -1527,22 +1559,35 @@ Public Class Working_Pro
             check_bull = 0
             delay_btn = 0
             '--------------------------------------
+            Console.WriteLine("N1")
             If start_flg = 1 Then
+                Console.WriteLine("HF1")
                 If m.Msg = DIOM_TRIGGER Then
                     Console.WriteLine("READY")
                     Dim result = Manage_counter_contect_DIO()
                     ' Timer3.Enabled = True
-                    Console.WriteLine("STOP")
+                    Console.WriteLine("STOP JAAAA")
                 End If
             End If
         Else
 
         End If
+
+        ' Console.WriteLine("BOOT")
         MyBase.WndProc(m)
     End Sub
     Private Sub Label37_Click(sender As Object, e As EventArgs) Handles Label37.Click
 
     End Sub
+    Public Sub CheckMenu()
+        statusDefect = Backoffice_model.GetDefectMenu(MainFrm.Label4.Text)
+        If statusDefect = "0" Then
+            btn_defect.Enabled = False
+        Else
+            btn_defect.Enabled = True
+        End If
+    End Sub
+
     Private Sub btn_closelot_Click(sender As Object, e As EventArgs) Handles btn_closelot.Click
         'MsgBox("Please confirm")
         Me.Enabled = False
@@ -2942,28 +2987,43 @@ Public Class Working_Pro
                     End If
                     Console.WriteLine(total_loss)
                     'Dim Delays As Integer = total_loss * 1000
-                    Task.Delay(total_loss * 1000).ContinueWith(Sub(task)
-                                                                   Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"))
-                                                                   ' Bring the button to the front using Invoke
-                                                                   check_network_frist = 1
-                                                                   Me.Invoke(Sub()
-                                                                                 If Application.OpenForms().OfType(Of closeLotsummary).Any Then
-                                                                                     Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
-                                                                                     Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
-                                                                                     lbNextTime.Text = BreakTime
-                                                                                     Main()
-                                                                                 Else
-                                                                                     stop_working()
-                                                                                     Backoffice_model.TimeStartBreakTime = DateTime.Now.ToString("HH:mm:ss")
-                                                                                     StopMenu.Show()
-                                                                                     Me.Enabled = False
-                                                                                 End If
-                                                                             End Sub)
-                                                               End Sub, TaskScheduler.FromCurrentSynchronizationContext())
+                    Try
+                        Console.WriteLine("C1")
+                        Task.Delay(total_loss * 1000).ContinueWith(Sub(task)
+                                                                       Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"))
+                                                                       ' Bring the button to the front using Invoke
+                                                                       check_network_frist = 1
+                                                                       Me.Invoke(Sub()
+                                                                                     Try
+                                                                                         If Application.OpenForms().OfType(Of closeLotsummary).Any Then
+                                                                                             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+                                                                                             Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
+                                                                                             lbNextTime.Text = BreakTime
+                                                                                             Main()
+                                                                                         ElseIf Application.OpenForms().OfType(Of Loss_reg).Any Or Application.OpenForms().OfType(Of Loss_reg_pass).Any Then
+                                                                                             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+                                                                                             Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
+                                                                                             lbNextTime.Text = BreakTime
+                                                                                             Main()
+                                                                                         Else
+                                                                                             stop_working()
+                                                                                             Backoffice_model.TimeStartBreakTime = DateTime.Now.ToString("HH:mm:ss")
+                                                                                             StopMenu.Show()
+                                                                                             Me.Enabled = False
+                                                                                         End If
+                                                                                     Catch ex As Exception
+
+                                                                                     End Try
+                                                                                 End Sub)
+                                                                   End Sub, TaskScheduler.FromCurrentSynchronizationContext())
+                    Catch ex As Exception
+
+                    End Try
+                    Console.WriteLine("C2")
                     ' Create a delayed task using Task.Delay
                     ' Wait for user input to prevent the console from closing immediately
-                    Console.WriteLine("Press Enter to exit...")
-                    Console.ReadLine()
+                    'Console.WriteLine("Press Enter to exit...")
+                    'Console.ReadLine()
                 End If
             End If
         Catch

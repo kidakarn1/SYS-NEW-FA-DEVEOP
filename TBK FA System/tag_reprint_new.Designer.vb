@@ -134,9 +134,9 @@ Partial Class tag_reprint_new
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(440, 12)
+        Me.ListBox1.Location = New System.Drawing.Point(44, 16)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(47, 30)
+        Me.ListBox1.Size = New System.Drawing.Size(110, 43)
         Me.ListBox1.TabIndex = 36
         Me.ListBox1.Visible = False
         '
@@ -156,7 +156,7 @@ Partial Class tag_reprint_new
         '
         Me.PictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox4.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox4.Location = New System.Drawing.Point(415, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(667, 16)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(77, 64)
         Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage

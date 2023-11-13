@@ -289,6 +289,8 @@ recheck:
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 If e.KeyCode = Keys.Enter Then
+                    Dim back = New Backoffice_model
+                    List_Emp.MaxManPower = back.Get_MaxManPower(MainFrm.Label4.Text)
                     checkEmp()
                 End If
             End If

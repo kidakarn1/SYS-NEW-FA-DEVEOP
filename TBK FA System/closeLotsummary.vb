@@ -150,7 +150,7 @@ Public Class closeLotsummary
         Working_Pro.btn_start.Enabled = True
         Working_Pro.btn_closelot.Enabled = True
         Working_Pro.btn_setup.Enabled = True
-        Working_Pro.btn_defect.Enabled = True
+        Working_Pro.CheckMenu()
         Working_Pro.btn_ins_act.Enabled = True
         Working_Pro.btn_desc_act.Enabled = True
         If statusPage.Text = "MAN" Then
@@ -371,6 +371,9 @@ Public Class closeLotsummary
                 result_total = "1"
             End If
         End If
+        Console.WriteLine("Working_Pro.LB_COUNTER_SEQ.Text===>" & Working_Pro.LB_COUNTER_SEQ.Text)
+        Console.WriteLine("result_total===>" & result_total)
+        Console.WriteLine("Working_Pro.Label10.Text===>" & Working_Pro.Label10.Text)
         If Working_Pro.LB_COUNTER_SEQ.Text > 0 And result_total > "0" And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
             Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
             Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1

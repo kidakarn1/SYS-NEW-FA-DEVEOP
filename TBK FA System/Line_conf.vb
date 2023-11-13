@@ -362,6 +362,9 @@ Public Class Line_conf
         Label2.Text = listdetail
         Label2.BringToFront()
         Label2.Show()
+        MainFrm.LB_Number_worker.Text = 0
+        List_Emp.ListView1.Items.Clear()
+        List_Emp.ListBox2.Items.Clear()
         'MsgBox("Update Success.")
     End Sub
     Private Sub menu3_Click(sender As Object, e As EventArgs)

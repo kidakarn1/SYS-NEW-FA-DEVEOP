@@ -53,21 +53,33 @@
         End Try
     End Sub
     Private Sub btnBreakTime_Click(sender As Object, e As EventArgs) Handles btnBreakTime.Click
-        'btnContinue.Size = New Drawing.Size(312, 553)
-        'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
-        'btnContinue.BackgroundImage = System.Drawing.Image.FromFile("btnstartbreaktime.png")
-        'BtConfirm.Location = New Point(15, 15)
-        ' btnContinue.Size = New Size(312, 555)
-        lock.Visible = True
-        btnContinue.Visible = True
-        'btnContinue.BringToFront()
-        'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
+        If Backoffice_model.CountDelay <> "" Then
 
-        lbLossCode.Text = Backoffice_model.LossCodeAuto
-        lbStartCount.Text = Backoffice_model.TimeStartBreakTime
+            Console.WriteLine(contDelay)
+                'MsgBox("ครบ 5 นาที")
+                btnContinue.BringToFront()
+                btnContinue.Visible = True
+                'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
+                'btnContinue.Size = New Size(312, 555)
+                insLoss()
+                lock.Visible = True
+                btnBreakTime.Visible = False
+                lbLossCode.Text = Backoffice_model.LossCodeAuto
+                lbStartCount.Text = Backoffice_model.TimeStartBreakTime
+                lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
+                btnBreakTime.Visible = False
+                PanelShowLoss.Visible = True
+            lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
+            Dim date_end_data As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
+            Dim date_end As Date = date_end_data
+            Dim total_loss As Integer = DateDiff(DateInterval.Minute, date_start_data, date_end)
+            test_time_loss_time.Text = total_loss
+            If total_loss < 0 Then
+                Minutes_total = Math.Abs(CDbl(Val(test_time_loss_time.Text)))
+                test_time_loss_time.Text = Minutes_total
+            End If
+        End If
         lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
-        btnBreakTime.Visible = False
-        PanelShowLoss.Visible = False
     End Sub
     Private Sub TimerLossBT_Tick(sender As Object, e As EventArgs) Handles TimerLossBT.Tick
         Try
@@ -138,6 +150,7 @@
         End Try
     End Sub
     Private Sub StopMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TimerLossBT.Start()
         TimerLossBT.Enabled = True
         lbLineCode.Text = MainFrm.Label4.Text
     End Sub

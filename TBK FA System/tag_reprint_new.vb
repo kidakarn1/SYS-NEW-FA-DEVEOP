@@ -412,7 +412,7 @@ Public Class tag_reprint_new
                     Dim box_no_new As String = qr_detailss.Substring(100, 3)
                     e.Graphics.DrawString("PRO SEQ", lb_font5.Font, Brushes.Black, 585, 98)
                     e.Graphics.DrawString(plan_seq_new, lb_font4_B.Font, Brushes.Black, 610, 115)
-                    Dim load_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & WI)
+                    Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & WI)
                     Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(load_data)
                     Dim plan_date As String = ""
                     For Each item As Object In dict
@@ -468,8 +468,8 @@ Public Class tag_reprint_new
                     Else
                         iden_cd = "GB"
                     End If
-                    Dim part_no_res1 As String
-                    Dim part_no_res As String
+                    Dim part_no_res1 As String = ""
+                    Dim part_no_res As String = ""
                     Dim part_numm As Integer = 0
                     Dim act_date As String
                     Dim actdateConv As Date = DateTime.Now.ToString("dd/MM/yyyy")
@@ -500,7 +500,7 @@ Public Class tag_reprint_new
                         factory_cd = "Phase10"
                         plan_cd = "51"
                     End If
-                    Dim id_tag = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_detailss)
+                    Dim id_tag = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_detailss)
                     Dim qr_sub = Backoffice_model.get_qr_detail_sub(id_tag)
                     'For j = 1 To 5 Step 1
                     Dim j As Integer = 1
@@ -516,9 +516,14 @@ Public Class tag_reprint_new
                         j = j + 1
                     End While
                     qr_sub.close()
-                    'Next
+                    For part_numm = Working_Pro.Label3.Text.Length To 24
+                        part_no_res = part_no_res & " "
+                    Next part_numm
                     part_no_res1 = Working_Pro.Label3.Text & part_no_res
-                    Dim qr_code As String = iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no
+                    Dim numOfindex2 As Integer = ListView1.SelectedIndices(0)
+                    Dim qr_code2 As String = ListBox1.Items(numOfindex2)
+                    Console.WriteLine(qr_code2)
+                    Dim qr_code As String = qr_code2 'iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no_new
                     bitmap_qr_box = QR_Generator.Encode(qr_code)
                     e.Graphics.DrawImage(bitmap_qr_box, 15, 120, 90, 90) 'left
                     e.Graphics.DrawImage(bitmap_qr_box, 615, 15, 45, 45) 'Right top
@@ -629,7 +634,7 @@ Public Class tag_reprint_new
                     Dim box_no_new As String = qr_detailss.Substring(100, 3)
                     e.Graphics.DrawString("PRO SEQ", lb_font5.Font, Brushes.Black, 585, 98)
                     e.Graphics.DrawString(plan_seq_new, lb_font4_B.Font, Brushes.Black, 610, 115)
-                    Dim load_data = api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & WI)
+                    Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & WI)
                     Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(load_data)
                     Dim plan_date As String = ""
                     For Each item As Object In dict
@@ -722,8 +727,11 @@ Public Class tag_reprint_new
                     Dim j As Integer = 1
 
                     'Next
+                    For part_numm = Working_Pro.Label3.Text.Length To 24
+                        part_no_res = part_no_res & " "
+                    Next part_numm
                     part_no_res1 = Working_Pro.Label3.Text & part_no_res
-                    Dim qr_code As String = iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no
+                    Dim qr_code As String = iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no_new
                     bitmap_qr_box = QR_Generator.Encode(qr_code)
                     e.Graphics.DrawImage(bitmap_qr_box, 15, 120, 90, 90) 'left
                     e.Graphics.DrawImage(bitmap_qr_box, 615, 15, 45, 45) 'Right top

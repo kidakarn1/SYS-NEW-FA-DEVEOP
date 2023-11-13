@@ -101,7 +101,7 @@ Public Class Sel_prd_setup
                 load_show.Show()
             End If
         Catch ex As Exception
-            MsgBox("error==>" & ex.Message)
+            'MsgBox("error==>" & ex.Message)
             load_show.Show()
         End Try
     End Sub
