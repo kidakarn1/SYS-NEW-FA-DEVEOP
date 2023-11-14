@@ -377,9 +377,9 @@ Public Class closeLotsummary
         If Working_Pro.LB_COUNTER_SEQ.Text > 0 And result_total > "0" And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
             Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
             Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
-                Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
-                Working_Pro.tag_print()
-            End If
+            ' Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
+            Working_Pro.tag_print()
+        End If
             Try
                 Working_Pro.LB_COUNTER_SEQ.Text = 0
             Catch ex As Exception

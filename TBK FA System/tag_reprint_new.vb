@@ -520,8 +520,8 @@ Public Class tag_reprint_new
                         part_no_res = part_no_res & " "
                     Next part_numm
                     part_no_res1 = Working_Pro.Label3.Text & part_no_res
-                    Dim numOfindex2 As Integer = ListView1.SelectedIndices(0)
-                    Dim qr_code2 As String = ListBox1.Items(numOfindex2)
+                    ' Dim numOfindex2 As Integer = ListView1.SelectedIndices(0)
+                    Dim qr_code2 As String = ListBox1.Items(numOfindex)
                     Console.WriteLine(qr_code2)
                     Dim qr_code As String = qr_code2 'iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no_new
                     bitmap_qr_box = QR_Generator.Encode(qr_code)
@@ -530,7 +530,7 @@ Public Class tag_reprint_new
                     e.Graphics.DrawString("FACTORY", lb_font3.Font, Brushes.Black, 15, 230)
                     e.Graphics.DrawString("Phase10", lb_font3.Font, Brushes.Black, 33, 250)
                     e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
-                    Backoffice_model.update_data_new_qr_detail_main(qr_detailss)
+                    Backoffice_model.update_data_new_qr_detail_main(qr_code2)
                 Catch ex As Exception
                     MsgBox("error data2 =  " & ex.Message)
                 End Try

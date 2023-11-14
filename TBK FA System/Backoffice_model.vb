@@ -986,7 +986,7 @@ where
         End Try
     End Function
 
-    Public Shared Function update_print_count(wi, seq_plan, seq_box)
+    Public Shared Function update_print_count(wi, seq_plan, seq_box, qty)
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
@@ -995,7 +995,8 @@ where
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "SELECT * FROM tag_print_detail WHERE wi = '" & wi & "' and seq_no = '" & seq_plan & "' and box_no = '" & seq_box1 & "'"
+            SQLCmd.CommandText = "SELECT * FROM tag_print_detail WHERE wi = '" & wi & "' and seq_no = '" & seq_plan & "' and box_no = '" & seq_box1 & "' AND TRIM(SUBSTRING(qr_detail, 53, 6)) = '" & qty & "'"
+            ' Console.WriteLine("update===>" & SQLCmd.CommandText)
             reader = SQLCmd.ExecuteReader()
             Dim print_count As Integer = 0
             Dim id As Integer = 0
@@ -2051,6 +2052,7 @@ recheck:
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
             SQLCmd.CommandText = "select count(id) as c_id from tag_print_detail where qr_detail = '" & qr_code & "'"
+            Console.WriteLine("SQLCmd.CommandText===>" & SQLCmd.CommandText)
             Dim LoadSQL As SqlDataReader = SQLCmd.ExecuteReader()
             Dim check_status As Integer = 0
             While LoadSQL.Read()
@@ -2086,6 +2088,7 @@ recheck:
                 Dim seq_plan3 As String = "NO_DATA"
                 Dim shift3 As String = "NO_DATA"
                 Dim seq_box3 As String = "NO_DATA"
+                Dim qty As String = "NODATA"
                 SQLCmd.CommandText = "select * from tag_print_detail_genarate where new_qr_detail = '" & qr_code & "'"
                 Dim LoadSQL3 As SqlDataReader = SQLCmd.ExecuteReader()
                 While LoadSQL3.Read()
@@ -2093,6 +2096,9 @@ recheck:
                     seq_box3 = LoadSQL3("box_no").ToString()
                     qr_detailss3 = LoadSQL3("new_qr_detail").ToString()
                     seq_plan3 = qr_detailss3.Substring(95, 3)
+                    ' MsgBox("B")
+                    MsgBox(Trim(seq_plan3.Substring(52, 6)))
+                    qty = Trim(seq_plan3.Substring(52, 6))
                 End While
                 LoadSQL3.Close()
                 If wi3 = "NO_DATA" Then
@@ -2102,16 +2108,21 @@ recheck:
                     Dim box_no4 As String = "NODATA"
                     Dim qr_detail4 As String = "NODATA"
                     Dim seq_plan4 As String = "NODATA"
+                    Dim qtys As String = "NODATA"
                     While LoadSQL1.Read()
                         wi4 = LoadSQL1("wi").ToString()
                         box_no4 = LoadSQL1("box_no").ToString()
                         qr_detail4 = LoadSQL1("qr_detail").ToString()
                         seq_plan4 = qr_detail4.Substring(95, 3)
+                        '   MsgBox("C")
+                        qtys = Trim(qr_detail4.Substring(52, 6))
                     End While
                     LoadSQL1.Close()
-                    update_print_count(wi4, seq_plan4, box_no4)
+                    ' MsgBox(qtys)
+                    update_print_count(wi4, seq_plan4, box_no4, qtys)
                 Else
-                    update_print_count(wi3, seq_plan3, seq_box3)
+                    ' MsgBox(qty)
+                    update_print_count(wi3, seq_plan3, seq_box3, qty)
                 End If
             End If
         Catch

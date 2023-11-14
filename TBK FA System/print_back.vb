@@ -151,7 +151,7 @@ Public Class print_back
         Dim qr_by_model_left = 118
         Dim iden_cd As String
         'If MainFrm.Label6.Text = "K1PD01" Then
-        iden_cd = "GA"
+        iden_cd = "GB"
         ' Else
         'iden_cd = "GB"
         ' End If
@@ -377,7 +377,7 @@ Public Class print_back
         Dim qr_by_model_left = 118
         Dim iden_cd As String
         '  If MainFrm.Label6.Text = "K1PD01" Then
-        iden_cd = "GA"
+        iden_cd = "GB"
         ' Else
         ' iden_cd = "GB"
         '  End If

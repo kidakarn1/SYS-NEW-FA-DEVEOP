@@ -1559,9 +1559,9 @@ Public Class Working_Pro
             check_bull = 0
             delay_btn = 0
             '--------------------------------------
-            Console.WriteLine("N1")
+            'Console.WriteLine("N1")
             If start_flg = 1 Then
-                Console.WriteLine("HF1")
+                'Console.WriteLine("HF1")
                 If m.Msg = DIOM_TRIGGER Then
                     Console.WriteLine("READY")
                     Dim result = Manage_counter_contect_DIO()
@@ -1917,9 +1917,19 @@ Public Class Working_Pro
         Dim qr_detailss As String = ""
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
+                If check_tag_type = "2" Then
+                    Dim the_Label_bach As String
+                    If Trim(Len(Label_bach.Text)) = 1 Then
+                        the_Label_bach = "00" & Label_bach.Text
+                    ElseIf Trim(Len(Label_bach.Text)) = 2 Then
+                        the_Label_bach = "0" & Label_bach.Text
+                    Else
+                        the_Label_bach = Label_bach.Text
+                    End If
+                    box_no = the_Label_bach
+                End If
                 Dim qr_detailsss = iden_cd & Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no
                 Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailsss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id)
-            Else
             End If
         Catch ex As Exception
         End Try
@@ -2076,7 +2086,6 @@ Public Class Working_Pro
             Dim result_mod As Integer = index_check_print Mod CDbl(Val(Label27.Text))
             'หาเศษ
             'If result_mod = 0 And textp_result <> 0 Then
-
             If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
                 lb_box_count.Text = lb_box_count.Text + 1
                 print_back.PrintDocument2.Print()
