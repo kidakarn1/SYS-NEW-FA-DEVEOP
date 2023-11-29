@@ -181,27 +181,27 @@ Partial Class closeLotsummary
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "PART NO"
-        Me.ColumnHeader2.Width = 177
+        Me.ColumnHeader2.Width = 205
         '
         'TYPE
         '
         Me.TYPE.Text = "TYPE"
-        Me.TYPE.Width = 69
+        Me.TYPE.Width = 80
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "CODE"
-        Me.ColumnHeader3.Width = 73
+        Me.ColumnHeader3.Width = 80
         '
         'ColumnHeader4
         '
         Me.ColumnHeader4.Text = "DETAIL"
-        Me.ColumnHeader4.Width = 97
+        Me.ColumnHeader4.Width = 200
         '
         'ColumnHeader5
         '
         Me.ColumnHeader5.Text = "QTY"
-        Me.ColumnHeader5.Width = 56
+        Me.ColumnHeader5.Width = 80
         '
         'Label11
         '
@@ -229,9 +229,9 @@ Partial Class closeLotsummary
         Me.lbGood.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lbGood.Location = New System.Drawing.Point(351, 526)
         Me.lbGood.Name = "lbGood"
-        Me.lbGood.Size = New System.Drawing.Size(55, 34)
+        Me.lbGood.Size = New System.Drawing.Size(35, 34)
         Me.lbGood.TabIndex = 48
-        Me.lbGood.Text = "98"
+        Me.lbGood.Text = "0"
         Me.lbGood.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbAct
@@ -242,9 +242,9 @@ Partial Class closeLotsummary
         Me.lbAct.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.lbAct.Location = New System.Drawing.Point(349, 481)
         Me.lbAct.Name = "lbAct"
-        Me.lbAct.Size = New System.Drawing.Size(65, 34)
+        Me.lbAct.Size = New System.Drawing.Size(35, 34)
         Me.lbAct.TabIndex = 47
-        Me.lbAct.Text = "100"
+        Me.lbAct.Text = "0"
         Me.lbAct.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label15
@@ -297,27 +297,27 @@ Partial Class closeLotsummary
         'ColumnHeader7
         '
         Me.ColumnHeader7.Text = "PART NO"
-        Me.ColumnHeader7.Width = 180
+        Me.ColumnHeader7.Width = 205
         '
         'ColumnHeader8
         '
         Me.ColumnHeader8.Text = "TYPE"
-        Me.ColumnHeader8.Width = 68
+        Me.ColumnHeader8.Width = 80
         '
         'ColumnHeader9
         '
         Me.ColumnHeader9.Text = "CODE"
-        Me.ColumnHeader9.Width = 74
+        Me.ColumnHeader9.Width = 80
         '
         'ColumnHeader10
         '
         Me.ColumnHeader10.Text = "DETAIL"
-        Me.ColumnHeader10.Width = 188
+        Me.ColumnHeader10.Width = 200
         '
         'ColumnHeader11
         '
         Me.ColumnHeader11.Text = "QTY"
-        Me.ColumnHeader11.Width = 58
+        Me.ColumnHeader11.Width = 80
         '
         'Button1
         '

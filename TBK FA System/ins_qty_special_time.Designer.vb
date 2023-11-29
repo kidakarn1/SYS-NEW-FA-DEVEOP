@@ -13,7 +13,6 @@ Partial Class ins_qty_special_time
             MyBase.Dispose(disposing)
         End Try
     End Sub
-
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
 
@@ -428,7 +427,7 @@ Partial Class ins_qty_special_time
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "ins_qty_special_time"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "ins_qty_special"
+        Me.Text = " "
         Me.Panel2.ResumeLayout(False)
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

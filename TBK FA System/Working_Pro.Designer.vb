@@ -1112,7 +1112,7 @@ Partial Class Working_Pro
         'lb_nc_qty
         '
         Me.lb_nc_qty.BackColor = System.Drawing.Color.Transparent
-        Me.lb_nc_qty.Font = New System.Drawing.Font("Catamaran", 35.0!, System.Drawing.FontStyle.Bold)
+        Me.lb_nc_qty.Font = New System.Drawing.Font("Catamaran", 27.75!)
         Me.lb_nc_qty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lb_nc_qty.Location = New System.Drawing.Point(9, -5)
         Me.lb_nc_qty.Name = "lb_nc_qty"
@@ -1127,7 +1127,7 @@ Partial Class Working_Pro
         '
         Me.Panel7.BackColor = System.Drawing.Color.Transparent
         Me.Panel7.Controls.Add(Me.lb_nc_qty)
-        Me.Panel7.Location = New System.Drawing.Point(326, 411)
+        Me.Panel7.Location = New System.Drawing.Point(328, 411)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(90, 42)
         Me.Panel7.TabIndex = 4629
@@ -1135,7 +1135,7 @@ Partial Class Working_Pro
         'lb_ng_qty
         '
         Me.lb_ng_qty.BackColor = System.Drawing.Color.Transparent
-        Me.lb_ng_qty.Font = New System.Drawing.Font("Catamaran", 35.0!, System.Drawing.FontStyle.Bold)
+        Me.lb_ng_qty.Font = New System.Drawing.Font("Catamaran", 27.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lb_ng_qty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(97, Byte), Integer))
         Me.lb_ng_qty.Location = New System.Drawing.Point(450, 403)
         Me.lb_ng_qty.Name = "lb_ng_qty"
@@ -1631,7 +1631,7 @@ Partial Class Working_Pro
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Location = New System.Drawing.Point(253, 350)
+        Me.Panel2.Location = New System.Drawing.Point(243, 349)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(298, 81)
         Me.Panel2.TabIndex = 4650
@@ -1641,7 +1641,7 @@ Partial Class Working_Pro
         '
         Me.Label2.BackColor = System.Drawing.Color.White
         Me.Label2.Font = New System.Drawing.Font("Catamaran", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(11, 10)
+        Me.Label2.Location = New System.Drawing.Point(21, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(275, 35)
         Me.Label2.TabIndex = 12
@@ -1653,7 +1653,7 @@ Partial Class Working_Pro
         '
         Me.PictureBox10.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox10.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.sweetAlertWarningUnseccess
-        Me.PictureBox10.Location = New System.Drawing.Point(247, 125)
+        Me.PictureBox10.Location = New System.Drawing.Point(237, 124)
         Me.PictureBox10.Name = "PictureBox10"
         Me.PictureBox10.Size = New System.Drawing.Size(310, 380)
         Me.PictureBox10.TabIndex = 4648
@@ -1664,7 +1664,7 @@ Partial Class Working_Pro
         '
         Me.PictureBox15.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnOK
         Me.PictureBox15.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox15.Location = New System.Drawing.Point(335, 434)
+        Me.PictureBox15.Location = New System.Drawing.Point(319, 435)
         Me.PictureBox15.Name = "PictureBox15"
         Me.PictureBox15.Size = New System.Drawing.Size(145, 61)
         Me.PictureBox15.TabIndex = 4649
@@ -1675,7 +1675,7 @@ Partial Class Working_Pro
         '
         Me.PictureBox16.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnOK
         Me.PictureBox16.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox16.Location = New System.Drawing.Point(329, 436)
+        Me.PictureBox16.Location = New System.Drawing.Point(319, 435)
         Me.PictureBox16.Name = "PictureBox16"
         Me.PictureBox16.Size = New System.Drawing.Size(145, 61)
         Me.PictureBox16.TabIndex = 4651

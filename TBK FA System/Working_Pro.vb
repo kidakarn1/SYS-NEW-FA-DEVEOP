@@ -58,6 +58,7 @@ Public Class Working_Pro
     Public Shared rsWindow
     Public Shared status_conter As String = ""
     Public Shared statusDefect As String = ""
+    Public Shared tag_group_no As String = ""
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         'Label44.Text = TimeOfDay.ToString("H:mm:ss")
         Label17.Text = TimeOfDay.ToString("H:mm:ss")
@@ -91,6 +92,7 @@ Public Class Working_Pro
             counterNewDIO = New CheckWindow
             counterNewDIO.Per_CheckCounter()
         End If
+        tag_group_no = Backoffice_model.Get_tag_group_no()
         Label7.Text = OEE.OEE_GET_TARGET(Label14.Text, Prd_detail.lb_wi.Text, Label6.Text)
         PictureBox12.Visible = False
         PictureBox10.Visible = True
@@ -136,14 +138,12 @@ Public Class Working_Pro
             Check(iii).Checked = True
         Next
         connect_counter_qty()
-        Console.WriteLine("result lb_ct ====> " & Prd_detail.lb_ct.Text)
         If Backoffice_model.GET_STATUS_DELAY_BY_LINE(MainFrm.Label4.Text) = 1 Then
             s_delay = (Prd_detail.lb_ct.Text * 60) / 2
             status_conter = 1
         Else
             status_conter = 0
         End If
-        Console.WriteLine("--->" & s_delay)
         Dim date_now As String = DateTime.Now.ToString("dd-MM-yyyy")
         Dim date_now_date As Date = DateTime.Now.ToString("dd-MM-yyyy")
         Dim time As Date = DateTime.Now.ToString("H:m:s")
@@ -205,6 +205,7 @@ Public Class Working_Pro
                 LB_COUNTER_SEQ.Text = 0
             End If
         End While
+        Main()
         Backoffice_model.Get_close_lot_time(Label14.Text)
         Timer2.Start()
     End Sub
@@ -1929,7 +1930,7 @@ Public Class Working_Pro
                     box_no = the_Label_bach
                 End If
                 Dim qr_detailsss = iden_cd & Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no
-                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailsss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id)
+                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailsss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id, tag_group_no)
             End If
         Catch ex As Exception
         End Try
@@ -2056,7 +2057,7 @@ Public Class Working_Pro
         e.Graphics.DrawString("Use @ TBKK(Thailand) Co., Ltd.", lb_font1.Font, Brushes.Black, 525, 282)
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
-                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id)
+                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id, Working_Pro.tag_group_no)
                 'MsgBox("Ping completed")
             Else
                 'MsgBox("Ping incompleted")
@@ -2150,6 +2151,7 @@ Public Class Working_Pro
         Dim start_time As Date = st_count_ct.Text
         st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
         Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+
         Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
         If Backoffice_model.start_check_date_paralell_line <> "" Then
             start_time2 = Backoffice_model.start_check_date_paralell_line
@@ -2168,6 +2170,8 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
+                    Console.WriteLine("Before Start Time ====>" & start_time2)
+                    Console.WriteLine("Before End Time ====>" & end_time2)
                     Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
                     Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, tr_status)
                 Else
@@ -2997,33 +3001,37 @@ Public Class Working_Pro
                     Console.WriteLine(total_loss)
                     'Dim Delays As Integer = total_loss * 1000
                     Try
-                        Console.WriteLine("C1")
+                        Console.WriteLine("C1 2 3 ")
                         Task.Delay(total_loss * 1000).ContinueWith(Sub(task)
-                                                                       Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"))
-                                                                       ' Bring the button to the front using Invoke
-                                                                       check_network_frist = 1
-                                                                       Me.Invoke(Sub()
-                                                                                     Try
-                                                                                         If Application.OpenForms().OfType(Of closeLotsummary).Any Then
-                                                                                             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
-                                                                                             Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
-                                                                                             lbNextTime.Text = BreakTime
-                                                                                             Main()
-                                                                                         ElseIf Application.OpenForms().OfType(Of Loss_reg).Any Or Application.OpenForms().OfType(Of Loss_reg_pass).Any Then
-                                                                                             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
-                                                                                             Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
-                                                                                             lbNextTime.Text = BreakTime
-                                                                                             Main()
-                                                                                         Else
-                                                                                             stop_working()
-                                                                                             Backoffice_model.TimeStartBreakTime = DateTime.Now.ToString("HH:mm:ss")
-                                                                                             StopMenu.Show()
-                                                                                             Me.Enabled = False
-                                                                                         End If
-                                                                                     Catch ex As Exception
+                                                                       Try
+                                                                           Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"))
+                                                                           ' Bring the button to the front using Invoke
+                                                                           check_network_frist = 1
+                                                                           Me.Invoke(Sub()
+                                                                                         Try
+                                                                                             If Application.OpenForms().OfType(Of closeLotsummary).Any Then
+                                                                                                 Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+                                                                                                 Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
+                                                                                                 lbNextTime.Text = BreakTime
+                                                                                                 Main()
+                                                                                             ElseIf Application.OpenForms().OfType(Of Loss_reg).Any Or Application.OpenForms().OfType(Of Loss_reg_pass).Any Then
+                                                                                                 Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+                                                                                                 Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, wi_no.Text, Label22.Text)
+                                                                                                 lbNextTime.Text = BreakTime
+                                                                                                 Main()
+                                                                                             Else
+                                                                                                 stop_working()
+                                                                                                 Backoffice_model.TimeStartBreakTime = DateTime.Now.ToString("HH:mm:ss")
+                                                                                                 StopMenu.Show()
+                                                                                                 Me.Enabled = False
+                                                                                             End If
+                                                                                         Catch ex As Exception
 
-                                                                                     End Try
-                                                                                 End Sub)
+                                                                                         End Try
+                                                                                     End Sub)
+                                                                       Catch ex As Exception
+
+                                                                       End Try
                                                                    End Sub, TaskScheduler.FromCurrentSynchronizationContext())
                     Catch ex As Exception
 
@@ -3152,19 +3160,6 @@ Public Class Working_Pro
         'Dim showD = New show_detail_production
         show_detail_production.Show()
     End Sub
-
-    Private Sub PictureBox12_Click(sender As Object, e As EventArgs) Handles PictureBox12.Click
-
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
-
-    Private Sub PictureBox11_Click(sender As Object, e As EventArgs) Handles PictureBox11.Click
-
-    End Sub
-
     Private Sub PictureBox16_Click(sender As Object, e As EventArgs) Handles PictureBox16.Click
         PictureBox10.Hide()
         PictureBox16.Hide()

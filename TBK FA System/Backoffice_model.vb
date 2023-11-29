@@ -1206,6 +1206,7 @@ recheck:
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
             SQLCmd.CommandText = "INSERT INTO production_actual_detail(pd,line_cd,wi_plan,item_cd,item_name,staff_no,seq_no,qty,st_time,end_time,use_time,updated_date,number_qty,pwi_id ,status_transfer_sqlite) VALUES ('" & pd & "','" & line_cd & "','" & wi_plan & "','" & item_cd & "','" & item_name & "','" & staff_no & "','" & seq_no & "','" & qty & "','" & st_time2 & "','" & end_time2 & "','" & use_time & "','" & currdated & "','" & number_qty & "','" & pwi_id & "','" & status_sqlite & "')"
+            'Console.WriteLine("result cmd  ====>" & SQLCmd.CommandText)
             reader = SQLCmd.ExecuteReader()
             reader.Close()
         Catch ex As Exception
@@ -1575,7 +1576,7 @@ recheck:
             SQLConn.Close()
         End Try
     End Function
-    Public Shared Function Insert_tag_print(wi As String, qr_detail As String, box_no As Integer, print_count As Integer, seq_no As String, shift As String, flg_control As Integer, item_cd As String, pwi_id As String)
+    Public Shared Function Insert_tag_print(wi As String, qr_detail As String, box_no As Integer, print_count As Integer, seq_no As String, shift As String, flg_control As Integer, item_cd As String, pwi_id As String, tag_group_no As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         update_tagprint(wi)
         Dim reader As SqlDataReader
@@ -1585,13 +1586,11 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "INSERT INTO tag_print_detail(wi,qr_detail,box_no,print_count,created_date,updated_date,seq_no,shift , next_proc ,  flg_control , pwi_id) VALUES ('" & wi & "','" & qr_detail & "','" & box_no & "','" & print_count & "','" & currdated & "','" & currdated & "','" & seq_no & "','" & shift & "','" & F_NEXT_PROCESS(item_cd) & "' ,'" & flg_control & "','" & pwi_id & "')"
+            SQLCmd.CommandText = "INSERT INTO tag_print_detail(wi,qr_detail,box_no,print_count,created_date,updated_date,seq_no,shift , next_proc ,  flg_control , pwi_id , tag_group_no) VALUES ('" & wi & "','" & qr_detail & "','" & box_no & "','" & print_count & "','" & currdated & "','" & currdated & "','" & seq_no & "','" & shift & "','" & F_NEXT_PROCESS(item_cd) & "' ,'" & flg_control & "','" & pwi_id & "','" & tag_group_no & "')"
             reader = SQLCmd.ExecuteReader()
-            'Return reader
         Catch ex As Exception
             MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_tag_print]")
             SQLConn.Close()
-            'Application.Exit()
         End Try
     End Function
 
@@ -1599,8 +1598,12 @@ recheck:
         Dim api = New api()
         Dim result = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_insert_log_reprint/ins_los_reprint_test_system?created_by=" & created_by & "&table_created=" & table_created & "&log_ref_tag_id=" & log_ref_tag_id)
     End Sub
-
-    Public Shared Function Insert_tag_print_main(wi As String, qr_detail As String, batch_no As Integer, print_count As Integer, seq_no As String, shift As String, flg_control As Integer, item_cd As String, pwi_id As String)
+    Public Shared Function Get_tag_group_no()
+        Dim api = New api()
+        Dim result = api.Load_data("http://" & svApi & "/API_NEW_FA/GET_DATA_NEW_FA/Get_tag_group_no")
+        Return result
+    End Function
+    Public Shared Function Insert_tag_print_main(wi As String, qr_detail As String, batch_no As Integer, print_count As Integer, seq_no As String, shift As String, flg_control As Integer, item_cd As String, pwi_id As String, tag_group_no As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         update_tagprint(wi)
         update_tagprint_main(wi)
@@ -1613,13 +1616,11 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "INSERT INTO tag_print_detail_main(tag_ref_str_id ,tag_ref_end_id , line_cd , tag_qr_detail , tag_batch_no , tag_next_proc , flg_control , created_date , updated_date , tag_wi_no , pwi_id) VALUES ('" & start_id & "','" & end_id & "','" & MainFrm.Label4.Text & "','" & qr_detail & "' ,'" & batch_no & "' ,'" & F_NEXT_PROCESS(item_cd) & "','" & flg_control & "','" & currdated & "','" & currdated & "','" & wi & "','" & pwi_id & "')"
+            SQLCmd.CommandText = "INSERT INTO tag_print_detail_main(tag_ref_str_id ,tag_ref_end_id , line_cd , tag_qr_detail , tag_batch_no , tag_next_proc , flg_control , created_date , updated_date , tag_wi_no , pwi_id , tag_group_no) VALUES ('" & start_id & "','" & end_id & "','" & MainFrm.Label4.Text & "','" & qr_detail & "' ,'" & batch_no & "' ,'" & F_NEXT_PROCESS(item_cd) & "','" & flg_control & "','" & currdated & "','" & currdated & "','" & wi & "','" & pwi_id & "' ,'" & tag_group_no & "')"
             reader = SQLCmd.ExecuteReader()
-            'Return reader
         Catch ex As Exception
             MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_tag_print_main]")
             SQLConn.Close()
-            'Application.Exit()
         End Try
     End Function
     Public Shared Function Get_ref_start_id(wi As String, seq_no As String, lot_no As String)
@@ -1635,10 +1636,10 @@ recheck:
     Public Shared Function get_qr_detail_sub(ref_id)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
+        Dim SQLConn As New SqlConnection()
         Dim SQLCmd As New SqlCommand()
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            SQLConn.ConnectionString = sqlConnect
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
             SQLCmd.CommandText = "EXEC [dbo].[GET_DATA_SUB] @REF_ID = '" & ref_id & "'"
@@ -1647,10 +1648,9 @@ recheck:
         Catch ex As Exception
             MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_qr_detail_sub]")
             SQLConn.Close()
-            'Application.Exit()
         End Try
     End Function
-    Public Shared Function Insert_tag_print_sub(ref_id As String, line As String, qr_code As String, wi As String)
+    Public Shared Function Insert_tag_print_sub(ref_id As String, line As String, qr_code As String, wi As String, tag_group_no As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -1660,13 +1660,11 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "INSERT INTO tag_print_detail_sub(tag_ref_id , line_cd , tag_qr_detail , flg_control , created_date , updated_date , tag_wi_no) VALUES ('" & ref_id & "','" & line & "','" & qr_code & "' ,'" & print_back.check_tagprint_main() & "' , '" & currdated & "' , '" & currdated & "' , '" & wi & "')"
+            SQLCmd.CommandText = "INSERT INTO tag_print_detail_sub(tag_ref_id , line_cd , tag_qr_detail , flg_control , created_date , updated_date , tag_wi_no , tag_group_no) VALUES ('" & ref_id & "','" & line & "','" & qr_code & "' ,'" & print_back.check_tagprint_main() & "' , '" & currdated & "' , '" & currdated & "' , '" & wi & "' , '" & tag_group_no & "')"
             reader = SQLCmd.ExecuteReader()
-            'Return reader
         Catch ex As Exception
             MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_tag_print_sub]")
             SQLConn.Close()
-            'Application.Exit()
         End Try
     End Function
 
@@ -1681,12 +1679,9 @@ recheck:
             SQLCmd.Connection = SQLConn
             SQLCmd.CommandText = "INSERT INTO sys_user(emp_id,passwd,fname,lname,department_id,enable,created_date,created_by,updated_date,updated_by,sug_id) VALUES ('" & emp_cd & "','Sysadmin!','" & fname & "','" & lname & "','" & dep_id & "','1','" & currdated & "','" & created_by & "','" & currdated & "','" & created_by & "','" & group_id & "')"
             reader = SQLCmd.ExecuteReader()
-            'Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_user]")
             SQLConn.Close()
             load_show.Show()
-            ' Application.Exit()
         End Try
     End Function
 
@@ -1700,16 +1695,11 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "INSERT INTO sys_skill_chart_mst(sk_name,sk_description,enable,created_date,created_by,updated_date,updated_by) VALUES ('" & sk_des & "','" & sk_des & "','1','" & currdated & "','" & emp_cd & "','" & currdated & "','" & emp_cd & "')"
             reader = SQLCmd.ExecuteReader()
-
-            'Return reader
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_skill]")
             SQLConn.Close()
             load_show.Show()
-            ' Application.Exit()
         End Try
     End Function
 
@@ -1732,19 +1722,17 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_skill]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
     Public Shared Function work_complete(wi As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
+        Dim SQLConn As New SqlConnection()
         Dim SQLCmd As New SqlCommand()
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            SQLConn.ConnectionString = sqlConnect
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
 
@@ -1756,57 +1744,46 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_skill]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
     Public Shared Function edit_skill(sk_id As Integer, sk_des As String, emp_cd As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
+        Dim SQLConn As New SqlConnection()
         Dim SQLCmd As New SqlCommand()
-
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            SQLConn.ConnectionString = sqlConnect
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "UPDATE sys_skill_chart_mst SET sk_name = '" & sk_des & "',sk_description = '" & sk_des & "',  updated_date = '" & currdated & "', updated_by = '" & emp_cd & "'  WHERE sk_id = '" & sk_id & "' "
             reader = SQLCmd.ExecuteReader()
-
             Return reader
             SQLConn.Dispose()
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_skill]")
             SQLConn.Close()
             load_show.Show()
-            ' Application.Exit()
         End Try
     End Function
 
     Public Shared Function get_user_last_id()
         Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
+        Dim SQLConn As New SqlConnection()
         Dim SQLCmd As New SqlCommand()
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            SQLConn.ConnectionString = sqlConnect
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "SELECT IDENT_CURRENT('sys_user') AS last_id"
             reader = SQLCmd.ExecuteReader()
-
             Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_last_id]")
             SQLConn.Close()
             load_show.Show()
-            ' Application.Exit()
         End Try
     End Function
 
@@ -1820,16 +1797,11 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "INSERT INTO sys_user_skill_detail(su_id,sk_id,enable,created_date,created_by,updated_date,updated_by) VALUES ('" & su_id & "','" & sk_id & "','1','" & currdated & "','" & created_by & "','" & currdated & "','" & created_by & "')"
             reader = SQLCmd.ExecuteReader()
-
-            'Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_user_skill]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -1844,16 +1816,11 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "INSERT INTO sys_skill_line_detail(line_id,sk_id,process_no,enable,created_date,created_by,updated_date,updated_by) VALUES ('" & line_id & "','" & sk_id & "','" & process_no & "','1','" & currdated & "','" & created_by & "','" & currdated & "','" & created_by & "')"
             reader = SQLCmd.ExecuteReader()
-
-            'Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Insert_line_skill]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -1866,49 +1833,34 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "Select * FROM sys_line_mst WHERE enable = '1' ORDER BY line_id ASC"
             reader = SQLCmd.ExecuteReader()
-
             Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_all_line]")
             SQLConn.Close()
             load_show.Show()
-
-            'Application.Exit()
         End Try
     End Function
-
-
     Public Shared Function del_line(line_id As String, emp_cd As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
-
         Try
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "UPDATE sys_line_mst SET enable = '0', updated_date = '" & currdated & "', updated_by = '" & emp_cd & "'  WHERE line_id = '" & line_id & "' "
             reader = SQLCmd.ExecuteReader()
-
             Return reader
             SQLConn.Dispose()
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_line]")
             SQLConn.Close()
             load_show.Show()
-
-            'Application.Exit()
         End Try
     End Function
-
-
     Public Shared Function get_all_user()
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -1917,16 +1869,12 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "Select su.*, sd.sec_name From sys_user As su Left Join sys_department AS sd On su.department_id=sd.dep_id WHERE su.enable = '1' AND su.sug_id <> '1' ORDER BY su.emp_id ASC"
             reader = SQLCmd.ExecuteReader()
-
             Return reader
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_all_user]")
             SQLConn.Close()
             load_show.Show()
-            ' Application.Exit()
         End Try
     End Function
     Public Shared Function get_tag_reprint_spaceial(wi As String)
@@ -1940,18 +1888,10 @@ recheck:
             SQLCmd.CommandText = "EXEC [dbo].[REPRINT_SPACEIAL] @WI = '" & wi & "'"
             reader = SQLCmd.ExecuteReader()
             Dim result = reader
-            'Dim result As Integer = 0
-            'While reader.Read()
-            'result = reader("c_id").ToString()
-            'End While
-            'reader.Close()
             Return result
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_spaceial]")
-            'MsgBox(ex.Message)
             SQLConn.Close()
             load_show.Show()
-            ' Application.Exit()
         End Try
     End Function
     Public Shared Function get_tag_reprint_sum_detail(wi As String, lot As String)
@@ -1971,10 +1911,8 @@ recheck:
             reader.Close()
             Return result
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_sum_detail]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
     Public Shared Function check_line_reprint()
@@ -1988,7 +1926,6 @@ recheck:
         Return reusult_data
     End Function
 
-
     Public Shared Function get_tag_reprint_detail(wi As String)
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -1997,18 +1934,10 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
-            'Dim check_flg_reprint_line_mst = check_line_reprint()
-            'If check_flg_reprint_line_mst = "0" Then
             SQLCmd.CommandText = "EXEC [dbo].[REPRINT_NORAML_BY_BOX] @WI = '" & wi & "'"
             reader = SQLCmd.ExecuteReader()
-            'Return reader
-            'Else
-            'Dim result = get_tag_reprint_sum_detail(wi)
             Return reader
-            'End If
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_detail]")
             load_show.Show()
         End Try
     End Function
@@ -2025,22 +1954,13 @@ recheck:
                 SQLConn.Open()
             End Try
             SQLCmd.Connection = SQLConn
-            'Dim check_flg_reprint_line_mst = check_line_reprint()
-            'If check_flg_reprint_line_mst = "0" Then
             SQLCmd.CommandText = "EXEC [dbo].[REPRINT_BATCH] @WI = '" & wi & "'"
             reader = SQLCmd.ExecuteReader()
             Dim result = reader
-            'Return reader
-            'Else
-            'Dim result = get_tag_reprint_sum_detail(wi)
             Return result
-            'End If
         Catch ex As Exception
-            'MsgBox(ex.Message)
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_batch]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
     Public Shared Function update_data_new_qr_detail(qr_code As String)
@@ -2077,7 +1997,7 @@ recheck:
                 LoadSQL2.Close()
                 Dim arr_item_cd = qr_detailss2.Substring(19).Split(" ")
                 Dim item_cd As String = arr_item_cd(0)
-                Insert_tag_print(wi2, qr_detailss2, box_no2, 1, plan_seq2, shift2, "", item_cd, pwi_id)
+                Insert_tag_print(wi2, qr_detailss2, box_no2, 1, plan_seq2, shift2, "", item_cd, pwi_id, "")
                 SQLCmd.CommandText = "update tag_print_detail_genarate set flg_print = '0' where new_qr_detail = '" & qr_code & "'"
                 reader = SQLCmd.ExecuteReader()
                 reader.Close()
@@ -2096,7 +2016,6 @@ recheck:
                     seq_box3 = LoadSQL3("box_no").ToString()
                     qr_detailss3 = LoadSQL3("new_qr_detail").ToString()
                     seq_plan3 = qr_detailss3.Substring(95, 3)
-                    ' MsgBox("B")
                     MsgBox(Trim(seq_plan3.Substring(52, 6)))
                     qty = Trim(seq_plan3.Substring(52, 6))
                 End While
@@ -2114,21 +2033,17 @@ recheck:
                         box_no4 = LoadSQL1("box_no").ToString()
                         qr_detail4 = LoadSQL1("qr_detail").ToString()
                         seq_plan4 = qr_detail4.Substring(95, 3)
-                        '   MsgBox("C")
                         qtys = Trim(qr_detail4.Substring(52, 6))
                     End While
                     LoadSQL1.Close()
-                    ' MsgBox(qtys)
                     update_print_count(wi4, seq_plan4, box_no4, qtys)
                 Else
-                    ' MsgBox(qty)
                     update_print_count(wi3, seq_plan3, seq_box3, qty)
                 End If
             End If
         Catch
         End Try
     End Function
-
     Public Shared Function update_data_new_qr_detail_main(qr_code As String)
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -2149,9 +2064,6 @@ recheck:
             MsgBox("error function update_data_new_qr_detail_main == ")
         End Try
     End Function
-
-
-
     Public Shared Function get_tag_reprint_detail_genarate(wi As String)
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -2165,9 +2077,7 @@ recheck:
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_tag_reprint_detail_genarate]")
             SQLConn.Close()
-            'Application.Exit()
             load_show.Show()
         End Try
     End Function
@@ -2179,15 +2089,11 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "Select su.*, sd.sec_name From sys_user As su Left Join sys_department AS sd On su.department_id=sd.dep_id WHERE su.enable = '1' AND su.sug_id <> '1' AND sd.sec_name = '" & sec_name & "' ORDER BY su.emp_id ASC"
             reader = SQLCmd.ExecuteReader()
-
             Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_sec_user]")
             SQLConn.Close()
-            'Application.Exit()
             load_show.Show()
         End Try
     End Function
@@ -2207,19 +2113,15 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "UPDATE sys_user SET enable = '0', updated_date = '" & currdated & "', updated_by = '" & emp_cd & "'  WHERE emp_id = '" & su_id & "' "
             reader = SQLCmd.ExecuteReader()
-
             Return reader
             SQLConn.Dispose()
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_user]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -2228,24 +2130,19 @@ recheck:
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
-
         Try
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "UPDATE sys_user SET emp_id = '" & emp_id & "',fname = '" & fname & "',lname = '" & lname & "',department_id = '" & dept_id & "',  updated_date = '" & currdated & "', updated_by = '" & emp_cd & "' , sug_id = '" & sug_id & "' WHERE su_id = '" & su_id & "' "
             reader = SQLCmd.ExecuteReader()
-
             Return reader
             SQLConn.Dispose()
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function edit_user]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -2254,24 +2151,19 @@ recheck:
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
-
         Try
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "UPDATE sys_user_skill_detail SET enable = '0', updated_date = '" & currdated & "', updated_by = '" & emp_cd & "'  WHERE su_id = '" & su_id & "' "
             reader = SQLCmd.ExecuteReader()
-
             Return reader
             SQLConn.Dispose()
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_user_skill_old]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -2280,15 +2172,12 @@ recheck:
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
-
         Try
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "UPDATE sys_skill_line_detail SET enable = '0', updated_date = '" & currdated & "', updated_by = '" & emp_cd & "'  WHERE line_id = '" & line_id & "' "
             reader = SQLCmd.ExecuteReader()
-
             Return reader
             SQLConn.Dispose()
             SQLConn.Close()
@@ -2297,7 +2186,6 @@ recheck:
             MsgBox("MSSQL Database connect failed. Please contact PC System [Function del_line_skill_old]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -2310,16 +2198,12 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "Select * From sys_user WHERE emp_id = '" & emp_id & "'"
             reader = SQLCmd.ExecuteReader()
-
             Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_detail]")
             SQLConn.Close()
             load_show.Show()
-            ' Application.Exit()
         End Try
     End Function
 
@@ -2331,16 +2215,12 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "SELECT skl.* FROM sys_skill_line_detail AS skl LEFT JOIN sys_line_mst AS sl ON skl.line_id = sl.line_id WHERE sl.line_cd = '" & line_cd & "' AND skl.enable = '1' AND sl.enable = '1' ORDER BY skl.process_no ASC"
             reader = SQLCmd.ExecuteReader()
-
             Return reader
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_line_skill]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -2353,20 +2233,14 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-
             SQLCmd.CommandText = "Select sk_id From sys_user_skill_detail WHERE su_id = '" & emp_id & "' AND enable = '1' ORDER BY sk_id ASC"
             reader = SQLCmd.ExecuteReader()
-
             Return reader
         Catch ex As Exception
-           ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_user_skill]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
-
-
     Public Shared Function chk_adm_login(emp_cd As String)
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -2375,22 +2249,12 @@ recheck:
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-            'SQLCmd.CommandText = "SELECT * FROM sys_user WHERE emp_id = '" & usernm & "' AND passwd = '" & passwd & "'"
-
-            'Dim line_cd As String = "K1A027"
-
             SQLCmd.CommandText = "Select * From sys_user WHERE emp_id = '" & emp_cd & "' And enable = '1'"
-
             reader = SQLCmd.ExecuteReader()
-
-            'MsgBox(reader)
-
             Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function chk_adm_login]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -2401,36 +2265,15 @@ recheck:
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
         Try
-            'line_cd = "K1A027"
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
             SQLCmd.CommandText = "Select sw.WI,sw.ITEM_CD,sw.ITEM_NAME,sw.QTY,sw.qty - SUM (ISNULL(pa.act_qty, 0 )) as 'remain_qty',ISNULL(pa.prd_flg , 0 ) as 'prd_flg',sw.WORK_ODR_DLV_DATE AS 'DLV_DATE', sw.LOCATION_PART,sw.PS_UNIT_NUMERATOR,sw.CT,COUNT(pa.seq_no) AS seq_count,sw.MODEL , sw.PRODUCT_TYP  from sup_work_plan_supply_dev as sw full outer JOIN production_actual as pa on sw.WI = pa.wi WHERE sw.LINE_CD = '" & line_cd & "' and sw.LVL = '1' and (pa.comp_flg <> '1' or pa.comp_flg is NULL) GROUP BY sw.wi,sw.ITEM_CD,sw.ITEM_NAME,sw.QTY,pa.prd_flg,sw.WORK_ODR_DLV_DATE, sw.LOCATION_PART,sw.PS_UNIT_NUMERATOR,sw.CT,sw.MODEL,sw.PRODUCT_TYP"
-            'SQLCmd.CommandText = "select * from sup_work_plan_supply_dev where LINE_CD = '" & line_cd & "' AND LVL = '1'"
             reader = SQLCmd.ExecuteReader()
-
-
-
-            'SQLCmd.CommandText = "select * from production_actual where wi = '5100131123'"
-            'reader = SQLCmd.ExecuteReader()
-
-
-            'While reader.Read()
-            'SQLCmd.CommandText = "select * from production_actual where wi = '" & reader("wi").ToString() & "'"
-            'reader2 = SQLCmd.ExecuteReader()
-
-            'If reader2.Read = False Then
-            'End If
-
-            'List_Emp.ListBox1.Items.Add(LoadSQLskill("sk_id").ToString())
-            'End While
-
             Return reader
         Catch ex As Exception
-            'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
             SQLConn.Close()
             load_show.Show()
-            ' Application.Exit()
         End Try
     End Function
 
@@ -2440,34 +2283,15 @@ recheck:
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
         Try
-            'line_cd = "K1A027"
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
             SQLCmd.CommandText = "Select sw.WI,sw.ITEM_CD,sw.ITEM_NAME,sw.QTY,sw.qty - SUM (ISNULL(pa.act_qty, 0 )) as 'remain_qty',ISNULL(pa.prd_flg , 0 ) as 'prd_flg',sw.WORK_ODR_DLV_DATE AS 'DLV_DATE', sw.LOCATION_PART,sw.PS_UNIT_NUMERATOR,sw.CT,COUNT(pa.seq_no) AS seq_count,sw.MODEL , sw.PRODUCT_TYP  from sup_work_plan_supply_dev as sw full outer JOIN production_actual as pa on sw.WI = pa.wi WHERE sw.LINE_CD = '" & line_cd & "' and sw.LVL = '1'  and (sw.PRD_COMP_FLG IS NULL OR sw.PRD_COMP_FLG <> '9') and (pa.comp_flg <> '1' or pa.comp_flg is NULL) GROUP BY sw.wi,sw.ITEM_CD,sw.ITEM_NAME,sw.QTY,pa.prd_flg,sw.WORK_ODR_DLV_DATE, sw.LOCATION_PART,sw.PS_UNIT_NUMERATOR,sw.CT,sw.MODEL,sw.PRODUCT_TYP"
-            'SQLCmd.CommandText = "select * from sup_work_plan_supply_dev where LINE_CD = '" & line_cd & "' AND LVL = '1'"
             reader = SQLCmd.ExecuteReader()
-
-
-            'SQLCmd.CommandText = "select * from production_actual where wi = '5100131123'"
-            'reader = SQLCmd.ExecuteReader()
-
-            'While reader.Read()
-            'SQLCmd.CommandText = "select * from production_actual where wi = '" & reader("wi").ToString() & "'"
-            'reader2 = SQLCmd.ExecuteReader()
-
-            'If reader2.Read = False Then
-            'End If
-
-            'List_Emp.ListBox1.Items.Add(LoadSQLskill("sk_id").ToString())
-            'End While
-
             Return reader
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -2486,10 +2310,8 @@ recheck:
             SQLConn.Close()
             SQLConn = Nothing
         Catch ex As Exception
-            ' MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_sum_loss]" & ex.Message)
             SQLConn.Close()
             load_show.Show()
-            'Application.Exit()
         End Try
     End Function
 
@@ -2539,12 +2361,8 @@ recheck:
 									sw.PRD_COMP_FLG"
             'SQLCmd.CommandText = "select * from sup_work_plan_supply_dev where LINE_CD = '" & line_cd & "' AND LVL = '1'"
             reader = SQLCmd.ExecuteReader()
-
-
             Return reader
-
             SQLConn.Close()
-
         Catch ex As Exception
             'MsgBox("MSSQL Database connect failed. Please contact PC System [Function get_prd_plan]")
             SQLConn.Close()
@@ -3514,7 +3332,12 @@ re_insert_rework_act:
             SQLConn.ConnectionString = sqlConnect
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "INSERT INTO loss_actual (wi,line_cd,item_cd,seq_no,shift_prd,start_loss,end_loss,loss_time,updated_date,loss_type,loss_cd_id,line_op_id,pd,transfer_flg , flg_control , pwi_id) VALUES ('" & wi_plan & "','" & line_cd & "','" & item_cd & "','" & seq_no & "','" & shift_prd & "','" & st_datetime2 & "','" & end_datetime2 & "','" & loss_time & "','" & currdated & "','" & loss_type & "','" & loss_id & "','" & op_id & "','" & pd & "','" & transfer_flg & "','" & flg_control & "','" & pwi_id & "')"
+            If Working_Pro.pwi_id = "0" Then
+                SQLCmd.CommandText = "INSERT INTO loss_actual (wi,line_cd,item_cd,seq_no,shift_prd,start_loss,end_loss,loss_time,updated_date,loss_type,loss_cd_id,line_op_id,pd,transfer_flg , flg_control , pwi_id) VALUES ('" & wi_plan & "','" & line_cd & "','" & item_cd & "','" & seq_no & "','" & shift_prd & "','" & st_datetime2 & "','" & end_datetime2 & "','" & loss_time & "','" & currdated & "','" & loss_type & "','" & loss_id & "','" & op_id & "','" & pd & "','" & transfer_flg & "','" & flg_control & "', '" & DBNull.Value & "')"
+            Else
+                SQLCmd.CommandText = "INSERT INTO loss_actual (wi,line_cd,item_cd,seq_no,shift_prd,start_loss,end_loss,loss_time,updated_date,loss_type,loss_cd_id,line_op_id,pd,transfer_flg , flg_control , pwi_id) VALUES ('" & wi_plan & "','" & line_cd & "','" & item_cd & "','" & seq_no & "','" & shift_prd & "','" & st_datetime2 & "','" & end_datetime2 & "','" & loss_time & "','" & currdated & "','" & loss_type & "','" & loss_id & "','" & op_id & "','" & pd & "','" & transfer_flg & "','" & flg_control & "','" & pwi_id & "')"
+            End If
+
             reader = SQLCmd.ExecuteReader()
             'SQLConn.Dispose()
             SQLConn.Close()
@@ -3559,7 +3382,12 @@ re_insert_rework_act:
             Dim SQLCmd As New SqlCommand()
             Dim st_datetime2 As String = st_time.ToString("yyyy/MM/dd H:mm:ss")
             Dim end_datetime2 As String = end_time.ToString("yyyy/MM/dd H:mm:ss")
-            cmd.CommandText = "INSERT INTO loss_actual (wi,line_cd,item_cd,seq_no,shift_prd,start_loss,end_loss,loss_time,updated_date,loss_type,loss_cd_id,line_op_id,pd,transfer_flg , flg_control , pwi_id) VALUES ('" & wi_plan & "','" & line_cd & "','" & item_cd & "','" & seq_no & "','" & shift_prd & "','" & st_datetime2 & "','" & end_datetime2 & "','" & loss_time & "','" & currdated & "','" & loss_type & "','" & loss_id & "','" & op_id & "','" & pd & "','" & transfer_flg & "','" & flg_control & "','" & pwi_id & "')"
+            If Working_Pro.pwi_id = "0" Then
+                cmd.CommandText = "INSERT INTO loss_actual (wi,line_cd,item_cd,seq_no,shift_prd,start_loss,end_loss,loss_time,updated_date,loss_type,loss_cd_id,line_op_id,pd,transfer_flg , flg_control , pwi_id) VALUES ('" & wi_plan & "','" & line_cd & "','" & item_cd & "','" & seq_no & "','" & shift_prd & "','" & st_datetime2 & "','" & end_datetime2 & "','" & loss_time & "','" & currdated & "','" & loss_type & "','" & loss_id & "','" & op_id & "','" & pd & "','" & transfer_flg & "','" & flg_control & "','" & DBNull.Value & "')"
+            Else
+                cmd.CommandText = "INSERT INTO loss_actual (wi,line_cd,item_cd,seq_no,shift_prd,start_loss,end_loss,loss_time,updated_date,loss_type,loss_cd_id,line_op_id,pd,transfer_flg , flg_control , pwi_id) VALUES ('" & wi_plan & "','" & line_cd & "','" & item_cd & "','" & seq_no & "','" & shift_prd & "','" & st_datetime2 & "','" & end_datetime2 & "','" & loss_time & "','" & currdated & "','" & loss_type & "','" & loss_id & "','" & op_id & "','" & pd & "','" & transfer_flg & "','" & flg_control & "','" & pwi_id & "')"
+            End If
+            Console.WriteLine("LOSSSS=>>>" & cmd.CommandText)
             Loss_reg.date_time_commit_data.Text = st_datetime2
             Dim LoadSQL As SQLiteDataReader = cmd.ExecuteReader()
             sqliteConn.Close()
