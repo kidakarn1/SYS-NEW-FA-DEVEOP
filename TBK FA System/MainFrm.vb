@@ -3,12 +3,13 @@ Imports System.Web.Script.Serialization
 Public Class MainFrm
 	Public dbClass As New Backoffice_model
 	Public dbClass2 As New Backoffice_model
-	Public check_status_date As Integer = 0
-	'Private Sub button1_click(sender As Object, e As EventArgs)
-	'    dbClass.ConnectDB()
-	'    dbClass.myConnection.Close()
-	'End Sub
-	Dim p() As Process
+    Public check_status_date As Integer = 0
+    Public Shared rsCheckCriticalFlg As String = ""
+    'Private Sub button1_click(sender As Object, e As EventArgs)
+    '    dbClass.ConnectDB()
+    '    dbClass.myConnection.Close()
+    'End Sub
+    Dim p() As Process
 	Public Declare Auto Function FindWindowNullClassName Lib "user32.dll" Alias "FindWindow" (ByVal ipClassname As Integer, ByVal IpWindownName As String) As Integer
 	Dim Counter As Integer = 0
 	Public Sub check_process()
@@ -60,6 +61,7 @@ Public Class MainFrm
             End If
             Insert_list.Label3.Text = Label4.Text
             Prd_detail.Label3.Text = Label4.Text
+
         Else
             Application.Exit()
         End If
@@ -238,6 +240,17 @@ Public Class MainFrm
             Me.Enabled = True
         End Try
     End Sub
+    Public Function Check_critical_flg() '
+        Dim rs = Backoffice_model.load_config_master_database()
+        Dim critical_flg As String = ""
+        If rs <> " " Then
+            Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
+            For Each item As Object In dict
+                critical_flg = item("critical_flg").ToString()
+            Next
+        End If
+        Return critical_flg
+    End Function
     Private Sub menu1_Click_1(sender As Object, e As EventArgs) Handles menu1.Click
         Backoffice_model.Check_detail_actual_insert_act() 'กรณีเครื่องดับ'
         check_lot()
@@ -250,67 +263,57 @@ Public Class MainFrm
             Insert_list.Label3.Text = Backoffice_model.GET_LINE_PRODUCTION()
             Prd_detail.Label3.Text = Backoffice_model.GET_LINE_PRODUCTION()
             'Sel_prod_start.Show()
+            rsCheckCriticalFlg = Check_critical_flg()
             load_page()
         End If
     End Sub
     Public Sub load_page()
-		Working_Pro.lb_nc_qty.Text = "0"
-		Working_Pro.lb_ng_qty.Text = "0"
+
+        Working_Pro.lb_nc_qty.Text = "0"
+        Working_Pro.lb_ng_qty.Text = "0"
         'MsgBox(line_id.Text)
         Try
             If My.Computer.Network.Ping(Backoffice_model.svDatabase) Then
                 Backoffice_model.updated_data_to_dbsvr()
-                Dim LoadSQL_prd_plan = Backoffice_model.Get_prd_plan_new(Label4.Text)
-                Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(LoadSQL_prd_plan)
-                If LoadSQL_prd_plan <> " " Then
-                    For Each item As Object In dict
-                        Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
-                        Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
-                        Prd_detail.lb_item_cd.Text = item("ITEM_CD").ToString()
-                        Prd_detail.lb_item_name.Text = CStr(item("ITEM_NAME").ToString())
-                        Prd_detail.lb_model.Text = item("MODEL").ToString()
-                        Prd_detail.lb_plan_qty.Text = item("QTY").ToString()
-                        Prd_detail.lb_remain_qty.Text = (item("QTY").ToString() - item("prd_qty_sum").ToString())
-                        Prd_detail.lb_wi.Text = item("WI").ToString()
-                        Prd_detail.LB_PLAN_DATE.Text = item("WORK_ODR_DLV_DATE").ToString().Substring(0, 10)
-                        Prd_detail.Show()
-                    Next
+                Dim LoadSQL_prd_plan As String = ""
+                If rsCheckCriticalFlg = "0" Then
+                    LoadSQL_prd_plan = Backoffice_model.Get_prd_plan_new(Label4.Text)
+                    Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(LoadSQL_prd_plan)
+                    If LoadSQL_prd_plan <> " " Then
+                        For Each item As Object In dict
+                            Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
+                            Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
+                            Prd_detail.lb_item_cd.Text = item("ITEM_CD").ToString()
+                            Prd_detail.lb_item_name.Text = CStr(item("ITEM_NAME").ToString())
+                            Prd_detail.lb_model.Text = item("MODEL").ToString()
+                            Prd_detail.lb_plan_qty.Text = item("QTY").ToString()
+                            Prd_detail.lb_remain_qty.Text = (item("QTY").ToString() - item("prd_qty_sum").ToString())
+                            Prd_detail.lb_wi.Text = item("WI").ToString()
+                            Prd_detail.LB_PLAN_DATE.Text = item("WORK_ODR_DLV_DATE").ToString().Substring(0, 10)
+                            Prd_detail.Show()
+                        Next
+                    Else
+                        menu1.Enabled = False
+                        menu4.Enabled = False
+                        menu2.Enabled = False
+                        menu3.Enabled = False
+                        PictureBox8.Enabled = False
+                        PictureBox1.Enabled = False
+                        Dim listdetail = "Not have production plan !"
+                        PictureBox9.BringToFront()
+                        PictureBox9.Show()
+                        PictureBox11.BringToFront()
+                        PictureBox11.Show()
+                        Panel3.BringToFront()
+                        Panel3.Show()
+                        Label5.Text = listdetail
+                        Label5.BringToFront()
+                        Label5.Show()
+                        Me.Enabled = True
+                    End If
                 Else
-                    menu1.Enabled = False
-                    menu4.Enabled = False
-                    menu2.Enabled = False
-                    menu3.Enabled = False
-                    PictureBox8.Enabled = False
-                    PictureBox1.Enabled = False
-                    Dim listdetail = "Not have production plan !"
-                    PictureBox9.BringToFront()
-                    PictureBox9.Show()
-                    PictureBox11.BringToFront()
-                    PictureBox11.Show()
-                    Panel3.BringToFront()
-                    Panel3.Show()
-                    Label5.Text = listdetail
-                    Label5.BringToFront()
-                    Label5.Show()
-                    'MsgBox("Not have production plan!")
-                    Me.Enabled = True
+                    ManagePlan.Show()
                 End If
-                'If LoadSQL_prd_plan.Read() Then
-                'Prd_detail.lb_item_cd.Text = LoadSQL_prd_plan("ITEM_CD").ToString()
-                'Prd_detail.lb_item_name.Text = LoadSQL_prd_plan("ITEM_NAME").ToString()
-                'Prd_detail.lb_model.Text = LoadSQL_prd_plan("MODEL").ToString()
-                'Prd_detail.lb_plan_qty.Text = LoadSQL_prd_plan("QTY").ToString()
-                'Prd_detail.lb_remain_qty.Text = (LoadSQL_prd_plan("QTY").ToString() - LoadSQL_prd_plan("prd_qty_sum").ToString())
-                'Prd_detail.lb_wi.Text = LoadSQL_prd_plan("WI").ToString()
-                'Prd_detail.Show()
-                'MainFrm.Enabled = True
-                'MainFrm.Hide()
-                'Me.Close()
-                'Else
-                'MsgBox("Not have production plan!")
-                'MainFrm.Enabled = True
-                'Me.Close()
-                'End If
                 Dim LoadSQLskill = Backoffice_model.Get_Line_skill_id(line_id.Text)
                 While LoadSQLskill.Read()
                     List_Emp.ListBox1.Items.Add(LoadSQLskill("sk_id").ToString())
@@ -321,8 +324,8 @@ Public Class MainFrm
             load_show.Show()
             Me.Enabled = True
         End Try
-	End Sub
-	Function GetLastDayOfMonth(ByVal CurrentDate As DateTime) As DateTime
+    End Sub
+    Function GetLastDayOfMonth(ByVal CurrentDate As DateTime) As DateTime
 		With CurrentDate
 			Return (New DateTime(.Year, .Month, Date.DaysInMonth(.Year, .Month)))
 		End With

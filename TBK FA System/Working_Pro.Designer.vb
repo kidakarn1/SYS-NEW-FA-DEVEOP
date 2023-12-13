@@ -1471,7 +1471,7 @@ Partial Class Working_Pro
         Me.lbNextTime.BackColor = System.Drawing.Color.Transparent
         Me.lbNextTime.Font = New System.Drawing.Font("Catamaran", 20.0!, System.Drawing.FontStyle.Bold)
         Me.lbNextTime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lbNextTime.Location = New System.Drawing.Point(393, 532)
+        Me.lbNextTime.Location = New System.Drawing.Point(392, 532)
         Me.lbNextTime.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lbNextTime.Name = "lbNextTime"
         Me.lbNextTime.Size = New System.Drawing.Size(133, 29)

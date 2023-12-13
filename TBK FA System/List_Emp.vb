@@ -530,6 +530,7 @@ Public Class List_Emp
                 Working_Pro.lb_nc_qty.Text = 0
                 Working_Pro.lb_ng_qty.Text = 0
                 Working_Pro.Label22.Text = seq_no
+                Working_Pro.seqNo = seq_no
                 Working_Pro.Label29.Text = Prd_detail.Label2.Text
                 Working_Pro.Label16.Text = TimeOfDay.ToString("H : mm")
                 Working_Pro.Label32.Text = "0"

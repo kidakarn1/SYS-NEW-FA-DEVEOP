@@ -294,7 +294,7 @@
             If dfHome.dtType = "NC" Then
                 wi = LdfDetailsnc.dtWino
                 lot = LdfDetailsnc.dtLotNo
-                seq = LdfDetailsnc.dtSeqno
+                seq = Working_Pro.seqNo
                 dfType = LdfDetailsnc.dtType
                 dtCode = LdfDetailsnc.dtCode
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
@@ -309,7 +309,7 @@
             ElseIf dfHome.dtType = "NG" Then
                 wi = LdfDetailsng.dtWino
                 lot = LdfDetailsng.dtLotNo
-                seq = LdfDetailsng.dtSeqno
+                seq = Working_Pro.seqNo
                 dfType = LdfDetailsng.dtType
                 dtCode = LdfDetailsng.dtCode
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
@@ -333,6 +333,7 @@
         Else
             manageNg()
         End If
+        Me.Close()
     End Sub
     Public Shared Function setValuenc(Act As String, nc As String, ng As String, sNc As String, ipQty As Integer)
         Dim total = (nc - sNc) + ipQty

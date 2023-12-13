@@ -10,7 +10,7 @@ Public Class defectDetailng
     Public Shared dtItemcd As String = ""
     Public Shared dtItemtype As String = defectSelecttype.type
     Public Shared dtLotNo As String = Working_Pro.Label18.Text
-    Public Shared dtSeqno As String = Working_Pro.Label22.Text
+    Public Shared dtSeqno As String = Working_Pro.seqNo
     Public Shared dtType As String = "1"
     Public Shared dtCode As String = ""
     Public Shared dtQty As String = ""
@@ -22,12 +22,13 @@ Public Class defectDetailng
     Public Shared types As String = ""
     Public Shared dtnameItemtype As String = ""
     Private Sub defectDetailng_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        seq = Working_Pro.seqNo
         Dim rs = getDefectdetailg(dtWino, dtSeqno, dtLotNo, dtType)
         lbType.Text = defectHome.dtType
     End Sub
     Public Function getDefectdetailg(wi As String, seq As String, lot As String, type As String)
         Dim md As New modelDefect()
-        seq = Working_Pro.Label22.Text
+        seq = Working_Pro.seqNo
         lot = Working_Pro.Label18.Text
         Dim rs = md.mGetdefectdetailnc(wi, seq, lot, type)
         cListview = 0
@@ -145,6 +146,5 @@ Public Class defectDetailng
         Catch ex As Exception
 
         End Try
-
     End Sub
 End Class

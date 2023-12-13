@@ -128,7 +128,7 @@ Public Class Backoffice_model
             sqliteConn = Nothing
         End Try
     End Function
-    Public Function load_config_master_database()
+    Public Shared Function load_config_master_database()
         Dim api = New api()
         Dim check_tag_type = api.Load_data("http://" & svApi & "/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & MainFrm.Label4.Text)
         Return check_tag_type
@@ -1085,79 +1085,13 @@ where
     End Function
 
     Public Shared Function Get_prd_plan_new(line_cd As String)
-        Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
-        Dim SQLCmd As New SqlCommand()
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String  
-            SQLConn.Open()
-            SQLCmd.Connection = SQLConn
             Dim api = New api()
-            Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production?line_cd=" & GET_LINE_PRODUCTION())
-            'Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_test_system?line_cd=" & GET_LINE_PRODUCTION())
-            'SQLCmd.CommandText = "SELECT DISTINCT
-            '                       cp.WI,
-            '                       cp.PD,
-            '                       cp.LINE_CD,
-            '                       cp.ITEM_CD,v  
-            '                       cp.ITEM_NAME,
-            '                       cp.MODEL,
-            '                       cp.PLAN_QTY AS PLAN_QTY,
-            '                       ISNULL(pa.prd_qty, 0) AS prd_qty_sum,
-            '                       cp.PLAN_DATE AS WORK_ODR_DLV_DATE,
-            '                       sup.WORK_ODR_DLV_DATE AS ORIGINAL_PLAN,
-            '                       sup.PS_UNIT_NUMERATOR,
-            '                       sup.CT,
-            '                       sup.WORK_ODR_DLV_DATE,
-            '                       sup.LOCATION_PART,
-            '                       sup.MODEL,
-            '                       sup.PRODUCT_TYP,
-            '                       ISNULL(ppap.seq_no, 0) AS seq_no,
-            '                       cp.PLAN_ORDER,
-            '                  (select SUM(abs(qty)) from production_defect_detail where flg_defact = '1' and wi_plan = sup.WI and line_cd = '" & line_cd & "') as QTY_NC,
-            '                 (select SUM(abs(qty)) from production_defect_detail where flg_defact = '2' and wi_plan = sup.WI and line_cd = '" & line_cd & "') as QTY_NG
-            '                 FROM
-            '                     confirm_production_plan AS cp
-            '                 LEFT JOIN (
-            'Select Case Case
-            '                           wi_plan,
-            '                          SUM (qty) AS prd_qty
-            '                      FROM
-            '                          production_actual_detail
-            '                      WHERE
-            '                          line_cd = '" & line_cd & "'
-            '                      AND updated_date > DATEADD(MONTH, - 1, GETDATE())
-            '                      GROUP BY
-            '                          wi_plan
-            '                  ) AS pa ON cp.WI = pa.wi_plan
-            '                 LEFT JOIN production_actual AS ppap ON cp.WI = ppap.WI
-            '                 LEFT JOIN sup_work_plan_supply_dev AS sup ON cp.WI = sup.WI
-            '                  LEFT JOIN production_defect_detail AS cd ON cd.wi_plan = sup.WI
-            '                  WHERE
-            '                      cp.LINE_CD = '" & line_cd & "'
-            '                 AND SUP.LVL = '1'
-            '                 AND (
-            '                     sup.PRD_COMP_FLG IS NULL
-            '                     OR sup.PRD_COMP_FLG = '0'
-            '                 )
-            '                 AND (
-            '                     ppap.del_flg IS NULL
-            '                     OR ppap.del_flg = '0'
-            '                 )
-            '                AND (
-            '                    ppap.comp_flg IS NULL
-            '                    OR ppap.comp_flg = '0'
-            '                ) -- AND CONVERT ( DATE, cp.PLAN_DATE ) = CONVERT ( DATE, GETDATE( ) )
-            '                AND CONVERT (DATE, cp.PLAN_DATE) BETWEEN (CONVERT(DATE, GETDATE() - 30))
-            '                AND (CONVERT(DATE, GETDATE()))
-            '	ORDER BY
-            '	cp.PLAN_ORDER ASC"
-            'reader = SQLCmd.ExecuteReader()
-            '			'MsgBox(reader)
+            Dim result_api_checkper As String = ""
+            result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production?line_cd=" & GET_LINE_PRODUCTION())
             Return result_api_checkper
         Catch ex As Exception
             'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_prd_plan_new]")
-            SQLConn.Close()
             load_show.Show()
             'Application.Exit()
         End Try
@@ -3575,7 +3509,24 @@ re_insert_rework_act:
             Dim st_datetime2 As String = st_time.ToString("yyyy/MM/dd H:mm:ss")
             Dim end_datetime2 As String = end_time.ToString("yyyy/MM/dd H:mm:ss")
             Dim date_now As String = end_time.ToString("dd/MM/yyyy")
-            SQLCmd.CommandText = "Update loss_actual 
+            Console.WriteLine("Update_flg_loss loss_id ====>" & loss_id)
+            If loss_id = "36" Then
+                SQLCmd.CommandText = "Update loss_actual 
+			set end_loss = '" & end_datetime2 & "',
+			loss_time = '" & loss_time & "' , 
+			updated_date = '" & currdated & "' , 
+			line_op_id = '" & op_id & "'  , 
+			transfer_flg = '" & transfer_flg & "' , 
+			flg_control ='" & flg_control & "' , 
+            loss_cd_id = '" & loss_id & "'
+			where wi='" & wi_plan & "' and 
+			line_cd = '" & line_cd & "' and 
+			item_cd = '" & item_cd & "' and 
+			seq_no = '" & seq_no & "' and 
+			shift_prd = '" & shift_prd & "' and 
+			start_loss = '" & st_datetime2 & "'"
+            Else
+                SQLCmd.CommandText = "Update loss_actual 
 			set end_loss = '" & end_datetime2 & "',
 			loss_time = '" & loss_time & "' , 
 			updated_date = '" & currdated & "' , 
@@ -3588,6 +3539,7 @@ re_insert_rework_act:
 			seq_no = '" & seq_no & "' and 
 			shift_prd = '" & shift_prd & "' and 
 			start_loss = '" & st_datetime2 & "'"
+            End If
             reader = SQLCmd.ExecuteReader()
             SQLConn.Close()
         Catch ex As Exception
@@ -3606,7 +3558,11 @@ re_insert_rework_act:
             Dim date_now As String = end_time.ToString("dd/MM/yyyy")
             Dim cmd As New SQLiteCommand
             cmd.Connection = sqliteConn
-            cmd.CommandText = "Update loss_actual set end_loss = '" & end_datetime2 & "',loss_time = '" & loss_time & "' , updated_date = '" & currdated & "' , line_op_id = '" & op_id & "'  , transfer_flg = '" & transfer_flg & "' , flg_control ='" & flg_control & "' where wi='" & wi_plan & "' and line_cd = '" & line_cd & "' and item_cd = '" & item_cd & "' and seq_no = '" & seq_no & "' and shift_prd = '" & shift_prd & "' and start_loss = '" & st_datetime2 & "'"
+            If loss_id = "36" Then
+                cmd.CommandText = "Update loss_actual set  loss_cd_id = '" & loss_id & "', end_loss = '" & end_datetime2 & "',loss_time = '" & loss_time & "' , updated_date = '" & currdated & "' , line_op_id = '" & op_id & "'  , transfer_flg = '" & transfer_flg & "' , flg_control ='" & flg_control & "' where wi='" & wi_plan & "' and line_cd = '" & line_cd & "' and item_cd = '" & item_cd & "' and seq_no = '" & seq_no & "' and shift_prd = '" & shift_prd & "' and start_loss = '" & st_datetime2 & "'"
+            Else
+                cmd.CommandText = "Update loss_actual set end_loss = '" & end_datetime2 & "',loss_time = '" & loss_time & "' , updated_date = '" & currdated & "' , line_op_id = '" & op_id & "'  , transfer_flg = '" & transfer_flg & "' , flg_control ='" & flg_control & "' where wi='" & wi_plan & "' and line_cd = '" & line_cd & "' and item_cd = '" & item_cd & "' and seq_no = '" & seq_no & "' and shift_prd = '" & shift_prd & "' and start_loss = '" & st_datetime2 & "'"
+            End If
             Dim LoadSQL As SQLiteDataReader = cmd.ExecuteReader()
             LoadSQL.Close()
             sqliteConn.Close()
@@ -3652,4 +3608,18 @@ re_insert_rework_act:
         End Try
         Return 0
     End Function
+    Public Shared Function Get_plan_production_critical()
+        Dim api = New api()
+        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical?line_cd=" & GET_LINE_PRODUCTION())
+        Return result_api_checkper
+    End Function
+    Public Shared Function GetDataPlanCritical(wi As String)
+        Dim api = New api()
+        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical/GetDataPlanCritical?wi=" & wi)
+        Return result_api_checkper
+    End Function
+    Public Shared Sub UpdateFlgZero(line_cd As String)
+        Dim api = New api()
+        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/TESTAPITRANFER/UpdateFlgZero?line_cd=" & line_cd)
+    End Sub
 End Class

@@ -24,6 +24,7 @@ Public Class Prd_detail
 	End Function
 	Private Sub Prd_detail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim i = List_Emp.ListView1.Items.Count
+        Backoffice_model.UpdateFlgZero(Label4.Text)
         Backoffice_model.UpdateWorking(lb_wi.Text)
         Label2.Text = i
         QTY_NG.Visible = False

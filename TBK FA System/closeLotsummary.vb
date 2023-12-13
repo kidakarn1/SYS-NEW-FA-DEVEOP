@@ -236,8 +236,11 @@ Public Class closeLotsummary
         End Try
     End Sub
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-        Try
+         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
+                If StopMenu.Visible Then
+                    StopMenu.SatrtWork()
+                End If
                 Manage_closelot()
             Else
                 load_show.Show()

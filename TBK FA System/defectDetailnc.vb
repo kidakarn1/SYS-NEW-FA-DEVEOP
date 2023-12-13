@@ -10,7 +10,7 @@ Friend Class defectDetailnc
     Public Shared dtItemcd As String = ""
     Public Shared dtItemtype As String = defectSelecttype.type
     Public Shared dtLotNo As String = Working_Pro.Label18.Text
-    Public Shared dtSeqno As String = Working_Pro.Label22.Text
+    Public Shared dtSeqno As String = Working_Pro.seqNo
     Public Shared dtType As String = "2"
     Public Shared dtCode As String = ""
     Public Shared dtQty As String = ""
@@ -23,13 +23,13 @@ Friend Class defectDetailnc
     Public Shared ChildPartNC As Integer = 0
     Public Shared ChildPartNG As Integer = 0
     Private Sub defectDetailnc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        dtSeqno = Working_Pro.seqNo
         Dim rs = getDefectdetailnc(dtWino, dtSeqno, dtLotNo, dtType)
-
         lbType.Text = defectHome.dtType
     End Sub
     Public Function getDefectdetailnc(wi As String, seq As String, lot As String, type As String)
         Dim md As New modelDefect()
-        seq = Working_Pro.Label22.Text
+        seq = Working_Pro.seqNo
         lot = Working_Pro.Label18.Text
         Dim rs = md.mGetdefectdetailnc(wi, seq, lot, type)
         cListview = 0

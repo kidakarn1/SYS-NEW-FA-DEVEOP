@@ -676,6 +676,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="maintenance.vb" />
+    <Compile Include="ManagePlan.Designer.vb">
+      <DependentUpon>ManagePlan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePlan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="manageVariable.vb" />
     <Compile Include="modelDefect.vb" />
     <Compile Include="Model_change_alert.Designer.vb">
@@ -747,6 +753,12 @@
       <DependentUpon>List_Emp.vb</DependentUpon>
     </Compile>
     <Compile Include="List_Emp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScanTagPlan.Designer.vb">
+      <DependentUpon>ScanTagPlan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ScanTagPlan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Scan_reprint.Designer.vb">
@@ -1113,6 +1125,9 @@
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManagePlan.resx">
+      <DependentUpon>ManagePlan.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model_change_alert.resx">
       <DependentUpon>Model_change_alert.vb</DependentUpon>
     </EmbeddedResource>
@@ -1145,6 +1160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="List_Emp.resx">
       <DependentUpon>List_Emp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScanTagPlan.resx">
+      <DependentUpon>ScanTagPlan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scan_reprint.resx">
       <DependentUpon>Scan_reprint.vb</DependentUpon>

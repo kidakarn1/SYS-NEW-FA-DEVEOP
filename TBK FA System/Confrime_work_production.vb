@@ -32,9 +32,15 @@ re_load:
 						Backoffice_model.NEXT_PROCESS = Backoffice_model.F_NEXT_PROCESS(Prd_detail.lb_item_cd.Text)
                         Insert_list.Label3.Text = MainFrm.Label4.Text
                         Insert_list.ListView1.View = View.Details
-						Dim line_cd As String = MainFrm.Label4.Text
-						Dim LoadSQL_prd_plan = Backoffice_model.Get_prd_plan_new(line_cd)
-						Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(LoadSQL_prd_plan)
+                        Dim line_cd As String = MainFrm.Label4.Text
+                        Dim LoadSQL_prd_plan As String = ""
+                        If MainFrm.rsCheckCriticalFlg = "0" Then
+                            LoadSQL_prd_plan = Backoffice_model.Get_prd_plan_new(line_cd)
+                        Else
+                            LoadSQL_prd_plan = Backoffice_model.GetDataPlanCritical(Prd_detail.lb_wi.Text)
+                        End If
+
+                        Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(LoadSQL_prd_plan)
                         For Each item As Object In dict
                             Working_Pro.LB_IND_ROW.Text = item("IND_ROW").ToString()
                             Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()

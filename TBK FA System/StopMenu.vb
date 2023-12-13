@@ -2,7 +2,7 @@
     Dim contDelay As Integer = 0
     Dim flg_check As Integer = 0
     Public date_start_data = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
-    Private Sub btnContinue_Click(sender As Object, e As EventArgs) Handles btnContinue.Click
+    Public Sub SatrtWork()
         If PanelShowLoss.Visible Then
             UpdateAutoLoss()
             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
@@ -22,6 +22,9 @@
             Me.Close()
         End If
     End Sub
+    Private Sub btnContinue_Click(sender As Object, e As EventArgs) Handles btnContinue.Click
+        SatrtWork()
+    End Sub
     Public Sub UpdateAutoLoss()
         Dim pd As String = MainFrm.Label6.Text
         Dim sel_combo As String = 0 'ComboBox1.SelectedIndex
@@ -37,9 +40,15 @@
         Dim total_loss As Integer = DateDiff(DateInterval.Minute, date1, date2)
         Dim loss_type As String = "0"  '0:Normally,1:Manual
         Dim op_id As String = "0"
+        Dim loss_cd_id As String = "35"
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 transfer_flg = "1"
+                If closeLotsummary.Visible Then
+                    loss_cd_id = "36"
+                Else
+                    loss_cd_id = "35"
+                End If
                 Backoffice_model.Update_flg_loss(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
                 Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
                 Backoffice_model.alert_loss(wi_plan, "1", pd, loss_cd_id)

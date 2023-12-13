@@ -1573,7 +1573,6 @@ Public Class Working_Pro
         Else
 
         End If
-
         ' Console.WriteLine("BOOT")
         MyBase.WndProc(m)
     End Sub

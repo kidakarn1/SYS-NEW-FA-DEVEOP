@@ -95,7 +95,7 @@ Partial Class MainFrm
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(169, 19)
         Me.Label9.TabIndex = 23
-        Me.Label9.Text = "FA SYSTEM V 1.8.2"
+        Me.Label9.Text = "FA SYSTEM V 1.8.3"
         '
         'Panel1
         '
@@ -345,7 +345,7 @@ Partial Class MainFrm
         Me.Label6.BackColor = System.Drawing.Color.Transparent
         Me.Label6.Font = New System.Drawing.Font("Catamaran", 23.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(223, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(236, 20)
+        Me.Label6.Location = New System.Drawing.Point(236, 19)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(60, 34)
         Me.Label6.TabIndex = 25
