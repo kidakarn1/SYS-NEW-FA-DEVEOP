@@ -184,7 +184,7 @@ Public Class Loss_reg
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        'maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, Working_Pro.wi_no.Text, Working_Pro.lb_model.Text)
-        'Shell("C:\Program Files (x86)\Default Company Name\MNs\FA-Adding User.exe")
+        maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, Working_Pro.wi_no.Text, Working_Pro.lb_model.Text)
+        Shell("C:\Program Files (x86)\Default Company Name\MNs\FA-Adding User.exe")
     End Sub
 End Class

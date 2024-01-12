@@ -29,6 +29,9 @@ Public Class defectAdminselectcodeng
                 lvDefectcode.Items.Add(datlvDefectcode)
                 i += 1
             Next
+        Else
+            btnDown.Enabled = False
+            btnDown.Visible = False
         End If
     End Sub
 

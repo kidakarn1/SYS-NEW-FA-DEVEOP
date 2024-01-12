@@ -3615,7 +3615,7 @@ re_insert_rework_act:
     End Function
     Public Shared Function GetDataPlanCritical(wi As String)
         Dim api = New api()
-        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical/GetDataPlanCritical?wi=" & wi)
+        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical/GetDataPlanCritical?wi=" & wi & "&line_cd=" & GET_LINE_PRODUCTION())
         Return result_api_checkper
     End Function
     Public Shared Sub UpdateFlgZero(line_cd As String)

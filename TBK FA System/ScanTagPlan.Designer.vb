@@ -39,6 +39,7 @@ Partial Class ScanTagPlan
         '
         Me.tbScanQr.BackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.tbScanQr.Font = New System.Drawing.Font("Microsoft Sans Serif", 35.0!)
+        Me.tbScanQr.ForeColor = System.Drawing.Color.White
         Me.tbScanQr.Location = New System.Drawing.Point(116, 248)
         Me.tbScanQr.Name = "tbScanQr"
         Me.tbScanQr.Size = New System.Drawing.Size(507, 60)

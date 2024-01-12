@@ -16,15 +16,33 @@
         Select Case e.KeyCode
             Case System.Windows.Forms.Keys.Enter
                 Try
-                    partsNo = tbScanQr.Text.Substring(2, 25).Trim()
-                    qty = tbScanQr.Text.Substring(26, 7).Trim()
-                    dates = tbScanQr.Text.Substring(33, 8).Trim()
-                    seq = tbScanQr.Text.Substring(41, 3).Trim()
-                    line = tbScanQr.Text.Substring(44, 6).Trim()
-                    keyInfo = tbScanQr.Text.Substring(58, 3).Trim()
-                    plantCode = tbScanQr.Text.Substring(61, 2).Trim()
-                    wi = tbScanQr.Text.Substring(63, 10).Trim()
-                    ManagePlan.SelectPlan(wi)
+                    If MainFrm.rsCheckCriticalFlg = "1" Then
+                        partsNo = tbScanQr.Text.Substring(2, 25).Trim()
+                        qty = tbScanQr.Text.Substring(26, 7).Trim()
+                        dates = tbScanQr.Text.Substring(33, 8).Trim()
+                        seq = tbScanQr.Text.Substring(41, 3).Trim()
+                        line = tbScanQr.Text.Substring(44, 6).Trim()
+                        keyInfo = tbScanQr.Text.Substring(58, 3).Trim()
+                        plantCode = tbScanQr.Text.Substring(61, 2).Trim()
+                        wi = tbScanQr.Text.Substring(63, 10).Trim()
+                        ManagePlan.SelectPlan(wi)
+                    ElseIf MainFrm.rsCheckCriticalFlg = "2" Then
+                        partsNo = tbScanQr.Text.Substring(0, 16).Trim()
+                        qty = tbScanQr.Text.Substring(16, 2).Trim()
+                        dates = tbScanQr.Text.Substring(18, 6).Trim()
+                        seq = tbScanQr.Text.Substring(24, 3).Trim()
+                        line = MainFrm.Label4.Text
+                        keyInfo = tbScanQr.Text.Substring(24, 3).Trim()
+                        plantCode = "51"
+                        wi = " - "
+                    End If
+                    '                    MsgBox("partsNo===>" & partsNo)
+                    '                    MsgBox("qty===>" & qty)
+                    '                    MsgBox("dates===>" & dates)
+                    '                    MsgBox("seq===>" & seq)
+                    '                    MsgBox("line===>" & line)
+                    '                    MsgBox("keyInfo===>" & keyInfo)
+
                 Catch ex As Exception
                     Me.PictureBox9.Show()
                     Me.Panel3.Show()

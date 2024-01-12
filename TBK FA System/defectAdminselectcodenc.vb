@@ -17,7 +17,6 @@ Public Class defectAdminselectcodenc
         getDefectcode()
     End Sub
     Public Sub getDefectcode()
-
         Dim md = New modelDefect()
         Dim rsData = md.mGetdefectcode(MainFrm.Label4.Text)
         If rsData <> "0" Then

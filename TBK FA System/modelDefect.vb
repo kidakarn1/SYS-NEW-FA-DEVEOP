@@ -57,7 +57,7 @@ Public Class modelDefect
             If rsData <> "0" Then
                 Return rsData
             Else
-                MsgBox("connect Api Faill Please check modelDefect in Function mGetdefectcode Data = 0 ")
+                MsgBox("Please Check Master Defect Code.")
                 Return 0
             End If
         Catch ex As Exception

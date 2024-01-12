@@ -571,6 +571,12 @@
     <Compile Include="Finish_work.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FunctionGobal.vb" />
     <Compile Include="IArchive.vb" />
     <Compile Include="Inf_manage.Designer.vb">
@@ -1073,6 +1079,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Finish_work.resx">
       <DependentUpon>Finish_work.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inf_manage.resx">
       <DependentUpon>Inf_manage.vb</DependentUpon>

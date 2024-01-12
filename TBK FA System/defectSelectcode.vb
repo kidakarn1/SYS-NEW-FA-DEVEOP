@@ -36,6 +36,9 @@ Friend Class defectSelectcode
                 i += 1
             Next
             lvDefectcode.Items(0).Selected = True
+        Else
+            Button1.Enabled = False
+            Button1.Visible = False
         End If
     End Sub
 
@@ -97,13 +100,17 @@ Friend Class defectSelectcode
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        For Each lvItem As ListViewItem In lvDefectcode.SelectedItems
-            Me.sDefectcode = lvDefectcode.Items(lvItem.Index).SubItems(0).Text
-            Me.sDefectdetail = lvDefectcode.Items(lvItem.Index).SubItems(1).Text
-        Next
-        Dim dfRegister = New defectRegister
-        dfRegister.Show()
-        Me.Hide()
+        Try
+            For Each lvItem As ListViewItem In lvDefectcode.SelectedItems
+                Me.sDefectcode = lvDefectcode.Items(lvItem.Index).SubItems(0).Text
+                Me.sDefectdetail = lvDefectcode.Items(lvItem.Index).SubItems(1).Text
+            Next
+            Dim dfRegister = New defectRegister
+            dfRegister.Show()
+            Me.Hide()
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click

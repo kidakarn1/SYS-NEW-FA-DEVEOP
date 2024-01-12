@@ -81,10 +81,14 @@
         Me.Close()
     End Sub
     Private Sub oK_Click(sender As Object, e As EventArgs) Handles oK.Click
-        If defectSelecttype.type = "1" Then
-            CalFG()
+        If tbQtydefectnc.Text <> "0" Then
+            If defectSelecttype.type = "1" Then
+                CalFG()
+            Else
+                CalChildPart()
+            End If
         Else
-            CalChildPart()
+            MsgBox("Please Check QTY.")
         End If
     End Sub
     Public Sub CalFG()

@@ -10,6 +10,11 @@ Public Class ManagePlan
     Public Shared Mwi As String = ""
     Private Sub ManagePlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ManagePlan()
+        If MainFrm.rsCheckCriticalFlg = "1" Then
+            pbQrCode.Visible = True
+        Else
+            pbQrCode.Visible = False
+        End If
     End Sub
     Public Sub ManagePlan()
         Dim rs = Backoffice_model.Get_plan_production_critical()

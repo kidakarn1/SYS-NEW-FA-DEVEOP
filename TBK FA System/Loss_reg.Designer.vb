@@ -196,7 +196,6 @@ Partial Class Loss_reg
         Me.Button4.TabIndex = 55
         Me.Button4.TabStop = False
         Me.Button4.UseVisualStyleBackColor = False
-        Me.Button4.Visible = False
         '
         'Loss_reg
         '
