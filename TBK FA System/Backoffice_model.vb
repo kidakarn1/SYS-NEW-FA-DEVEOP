@@ -146,21 +146,18 @@ Public Class Backoffice_model
     Public Shared Sub Clear_sqlite()
         '  Dim currdated As Date = DateTime.Now.ToString("yyyy/MM/dd")
         ' st_time = currdated.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-
         Dim currdated As String = DateTime.Now.ToString("yyyy-MM-dd")
         Dim today As Date = Date.Today
         Dim date_start As DateTime = today.AddDays(-200)
         Dim format_tommorow = "yyyy-MM-dd"
         Dim convert_date_start = date_start.ToString(format_tommorow)
-
         Dim currdated1 As String = DateTime.Now.ToString("yyyy/MM/dd")
         Dim today1 As Date = Date.Today
         Dim date_start1 As DateTime = today1.AddDays(-200)
         Dim format_tommorow1 = "yyyy/MM/dd"
         Dim convert_date_start1 = date_start1.ToString(format_tommorow1)
-
         Dim command_data() As String = {
-                "DELETE FROM act_ins where st_time BETWEEN '" & convert_date_start & "' AND '" & currdated & "' and tr_status = '1' ",
+                "DELETE FROM act_ins where st_time BETWEEN '" & convert_date_start & "'           AND '" & currdated & "' and tr_status = '1' ",
                 "DELETE FROM close_lot_act where prd_st_date BETWEEN '" & convert_date_start & "' AND '" & currdated & "' and transfer_flg = '1'",
                 "DELETE FROM loss_actual where start_loss BETWEEN '" & convert_date_start1 & "' AND '" & currdated1 & "' and transfer_flg = '1'",
                 "DELETE FROM maintenance where mn_create_date BETWEEN '" & convert_date_start1 & "' AND '" & currdated1 & "' and mn_status = '2'"
@@ -180,7 +177,6 @@ Public Class Backoffice_model
                 cmd.CommandText = command_data(i)
                 Dim LoadSQL As SQLiteDataReader = cmd.ExecuteReader()
                 sqliteConn.Close()
-
             Catch ex As Exception
                 MsgBox("SQLite Database connect failed. Please contact PC System [Function Clear_sqlite]" & ex.Message)
                 sqliteConn.Dispose()

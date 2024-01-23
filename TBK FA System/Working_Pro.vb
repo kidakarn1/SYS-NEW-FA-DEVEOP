@@ -16,6 +16,7 @@ Imports BarcodeLib.Barcode
 'Imports NationalInstruments.DAQmx
 Imports System.Net
 Imports System.Web.Script.Serialization
+
 Public Class Working_Pro
     Public check_cal_eff As Integer = 0
     Public counterNewDIO
@@ -1291,6 +1292,11 @@ Public Class Working_Pro
             Label6.Text = sum_act_total
             LB_COUNTER_SHIP.Text += cnt_btn
             LB_COUNTER_SEQ.Text += cnt_btn
+            If check_tag_type = "3" Then
+                Dim break = lbPosition1.Text & " " & lbPosition2.Text
+                Dim plb = New PrintLabelBreak
+                plb.loadData(Label3.Text, break, Label18.Text, Label22.Text, CDbl(Val(LB_COUNTER_SEQ.Text)))
+            End If
             If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
                 lb_box_count.Text = lb_box_count.Text + 1
                 print_back.PrintDocument2.Print()
@@ -1941,6 +1947,8 @@ Public Class Working_Pro
         ElseIf check_tag_type = "2" Then
             Backoffice_model.flg_cat_layout_line = "2"
             print_back.print()
+        ElseIf check_tag_type = "3" Then
+            Working_Pro.PrintDocument1.Print()
         End If
     End Function
 
@@ -2008,22 +2016,16 @@ Public Class Working_Pro
         Else
             plan_seq = Label22.Text
         End If
-
-
         Try
             PictureBox9.Image = QR_Generator.Encode(wi_no.Text & plan_seq & lb_qty_for_box.Text)
             e.Graphics.DrawImage(PictureBox9.Image, 320, 100, 95, 95)
 
             PictureBox8.Image = QR_Generator.Encode(wi_no.Text & plan_seq & lb_qty_for_box.Text)
             e.Graphics.DrawImage(PictureBox8.Image, 655, 2, 50, 50)
-
-
         Catch ex As Exception
 
         End Try
-
         e.Graphics.DrawLine(aPen, 418, 150, 702, 150)
-
         e.Graphics.DrawString("PART No.:" & Label3.Text, lb_font4.Font, Brushes.Black, 15, 152)
         e.Graphics.DrawString("PART NAME:" & Label12.Text, lb_font4.Font, Brushes.Black, 15, 172)
         e.Graphics.DrawString("MODEL:" & lb_model.Text, lb_font4.Font, Brushes.Black, 15, 192)
@@ -2111,12 +2113,11 @@ Public Class Working_Pro
                     End If
                 End If
             End If
-
             'End If
-
         Next
     End Sub
     Public Function ins_qty_fn_manual()
+
         Dim add_value_loop As Integer = 0
         Dim result_add As Integer = CDbl(Val(lb_ins_qty.Text)) + CDbl(Val(Label6.Text))
         Dim loop_check As Integer = result_add / CDbl(Val(Label27.Text))
@@ -2150,7 +2151,6 @@ Public Class Working_Pro
         Dim start_time As Date = st_count_ct.Text
         st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
         Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-
         Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
         If Backoffice_model.start_check_date_paralell_line <> "" Then
             start_time2 = Backoffice_model.start_check_date_paralell_line
@@ -2690,6 +2690,7 @@ Public Class Working_Pro
         'checkTransection = "1"
         'End Try
         ' If checkTransection = "1" Then
+
         If comp_flg = 0 Then
             'Dim result_mod As Double = Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
             Dim result_mod As Double = Integer.Parse(Act + action_plus) Mod Integer.Parse(Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
@@ -2701,6 +2702,11 @@ Public Class Working_Pro
             Label6.Text = sum_act_total
             LB_COUNTER_SHIP.Text += cnt_btn
             LB_COUNTER_SEQ.Text += cnt_btn
+            If check_tag_type = "3" Then
+                Dim break = lbPosition1.Text & " " & lbPosition2.Text
+                Dim plb = New PrintLabelBreak
+                plb.loadData(Label3.Text, break, Label18.Text, Label22.Text, CDbl(Val(LB_COUNTER_SEQ.Text)))
+            End If
             If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
                 lb_box_count.Text = lb_box_count.Text + 1
                 print_back.PrintDocument2.Print()
@@ -3154,7 +3160,6 @@ Public Class Working_Pro
             Return True
         End If
     End Function
-
     Private Sub PictureBox14_Click(sender As Object, e As EventArgs) Handles PictureBox14.Click
         'Dim showD = New show_detail_production
         show_detail_production.Show()
@@ -3181,4 +3186,5 @@ Public Class Working_Pro
     Private Sub Button4_Click(sender As Object, e As EventArgs) 
         Main()
     End Sub
+
 End Class

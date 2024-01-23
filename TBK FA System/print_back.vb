@@ -20,7 +20,6 @@ Public Class print_back
     Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
         Dim aPen = New Pen(Color.Black)
         aPen.Width = 2.0F
-        'MsgBox(Label10.Text)
         'vertical ตรง
         e.Graphics.DrawLine(aPen, 10, 10, 10, 290)
 
@@ -231,7 +230,7 @@ Public Class print_back
             Backoffice_model.Insert_tag_print_sub(id_tag, MainFrm.Label4.Text, arr_qr_code_sub(K - 1), Working_Pro.wi_no.Text, Working_Pro.tag_group_no)
         Next
     End Sub
-    Private Sub PrintDocument2_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument2.PrintPage
+    Public Sub oldM83_single(e)
         Dim aPen = New Pen(Color.Black)
         aPen.Width = 2.0F
         'MsgBox(Label10.Text)
@@ -431,6 +430,217 @@ Public Class print_back
         Dim qr_code As String = iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no
         bitmap_qr_box = QR_Generator.Encode(qr_code)
         e.Graphics.DrawImage(bitmap_qr_box, 15, 120, 90, 90) 'left
+        e.Graphics.DrawImage(bitmap_qr_box, 615, 15, 45, 45) 'Right top
+        e.Graphics.DrawString("FACTORY", lb_font3.Font, Brushes.Black, 15, 230)
+        e.Graphics.DrawString("Phase10", lb_font3.Font, Brushes.Black, 33, 250)
+        e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
+        Backoffice_model.Insert_tag_print(Working_Pro.wi_no.Text, qr_code, box_no, 1, plan_seq, Working_Pro.Label14.Text, Working_Pro.check_tagprint(), Working_Pro.Label3.Text, Working_Pro.pwi_id, Working_Pro.tag_group_no)
+    End Sub
+
+    Private Sub PrintDocument2_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument2.PrintPage
+        ' MsgBox("single")
+        ' oldM83_single(e)
+        newM83_single(e)
+    End Sub
+    Public Sub newM83_single(e)
+        Dim aPen = New Pen(Color.Black)
+        aPen.Width = 2.0F
+        'MsgBox(Label10.Text)
+        'vertical ตรง
+        e.Graphics.DrawLine(aPen, 10, 10, 10, 290)
+
+        e.Graphics.DrawLine(aPen, 130, 58, 130, 95)
+
+        e.Graphics.DrawLine(aPen, 460, 10, 460, 290)
+
+        e.Graphics.DrawLine(aPen, 580, 10, 580, 290) 'QTY
+
+
+        e.Graphics.DrawLine(aPen, 110, 10, 110, 290) 'QR right top
+
+
+        e.Graphics.DrawLine(aPen, 700, 10, 700, 290)
+        'Horizontal นอน
+
+        e.Graphics.DrawLine(aPen, 110, 58, 580, 58)
+
+        e.Graphics.DrawLine(aPen, 110, 95, 700, 95)
+
+
+        e.Graphics.DrawLine(aPen, 10, 11, 700, 11)
+        'e.Graphics.DrawLine(aPen, 10, 110, 110, 110)
+        e.Graphics.DrawLine(aPen, 10, 220, 110, 220)
+
+
+        e.Graphics.DrawLine(aPen, 580, 67, 700, 67)
+
+        e.Graphics.DrawLine(aPen, 460, 140, 700, 140)
+
+        e.Graphics.DrawLine(aPen, 460, 190, 700, 190)
+
+        e.Graphics.DrawLine(aPen, 460, 240, 580, 240)
+
+
+        e.Graphics.DrawLine(aPen, 10, 289, 700, 289)
+        'DATA
+        e.Graphics.DrawString("TBKK", lb_font1.Font, Brushes.Black, 19, 15)
+        e.Graphics.DrawString("(Thailand) Co.,Ltd. ", Label_wi_type.Font, Brushes.Black, 12, 50)
+        e.Graphics.DrawString("FA System", Label_wi_type.Font, Brushes.Black, 12, 78)
+        If Working_Pro.lb_prd_type.Text = "10" Then
+            prdtype = "PART TYPE : FG"
+        ElseIf Working_Pro.lb_prd_type.Text = "40" Then
+            prdtype = "PART TYPE : Parts"
+        Else
+            prdtype = "PART TYPE : FW"
+        End If
+        e.Graphics.DrawString(prdtype, Label_wi_type.Font, Brushes.Black, 12, 105)
+        e.Graphics.DrawString("Instr. Code", lb_font5.Font, Brushes.Black, 120, 15)
+        e.Graphics.DrawString(Working_Pro.Label12.Text, lb_font4_B.Font, Brushes.Black, 120, 35)
+        Dim result_snp As Integer = 1 'CDbl(Val(Working_Pro.Label6.Text)) Mod CDbl(Val(Working_Pro.Label27.Text))
+        'If Backoffice_model.check_line_reprint() = "0" Then
+        '	If result_snp = "0" Then
+        '	result_snp = Working_Pro.Label27.Text
+        '	End If
+        '	End If
+        e.Graphics.DrawString("QTY.", lb_font3.Font, Brushes.Black, 465, 15)
+        e.Graphics.DrawString(result_snp, LB_QTY.Font, Brushes.Black, 495, 28)
+        e.Graphics.DrawString("MODEL", lb_font5.Font, Brushes.Black, 120, 60)
+        e.Graphics.DrawString(Working_Pro.lb_model.Text, lb_font4_B.Font, Brushes.Black, 140, 75)
+        e.Graphics.DrawString("NEXT PROCESS", lb_font5.Font, Brushes.Black, 340, 60)
+        e.Graphics.DrawString("ISUZU", lb_font4_B.Font, Brushes.Black, 360, 75)
+        e.Graphics.DrawString("LOCATION", lb_font5.Font, Brushes.Black, 465, 60)
+        e.Graphics.DrawString("D4U10A1", lb_font4_B.Font, Brushes.Black, 485, 75)
+        Dim num_box_seq As Integer
+        num_box_seq = Working_Pro.lb_box_count.Text.Length
+        Dim plan_seq As String
+        Dim num_char_seq As Integer
+        num_char_seq = Working_Pro.Label22.Text.Length
+        If num_char_seq = 1 Then
+            plan_seq = "00" & Working_Pro.Label22.Text
+        ElseIf num_char_seq = 2 Then
+            plan_seq = "0" & Working_Pro.Label22.Text
+        Else
+            plan_seq = Working_Pro.Label22.Text
+        End If
+        e.Graphics.DrawString("SHIFT", lb_font5.Font, Brushes.Black, 585, 69)
+        e.Graphics.DrawString(Working_Pro.Label14.Text, lb_font4_B.Font, Brushes.Black, 625, 75)
+        e.Graphics.DrawString("LINE", lb_font5.Font, Brushes.Black, 467, 98)
+        e.Graphics.DrawString(MainFrm.Label4.Text, lb_font4_B.Font, Brushes.Black, 470, 115)
+
+        e.Graphics.DrawString("PRO SEQ", lb_font5.Font, Brushes.Black, 585, 98)
+        e.Graphics.DrawString(plan_seq, lb_font4_B.Font, Brushes.Black, 610, 115)
+        Dim api = New api()
+        Dim load_data = Working_Pro.load_data
+        Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(load_data)
+        Dim plan_date As String = ""
+        For Each item As Object In dict
+            Dim da As Date = item("WORK_ODR_DLV_DATE").substring(0, 10)
+            Dim f As Date = Date.ParseExact(item("WORK_ODR_DLV_DATE").substring(0, 10), "yyyy-MM-dd", CultureInfo.InvariantCulture)
+            result_plan_date = f.ToString("dd/MM/yyyy")
+            plan_date = result_plan_date
+        Next
+        Dim the_box_seq As String
+        If num_box_seq = 1 Then
+            the_box_seq = "00" & Working_Pro.lb_box_count.Text
+        ElseIf num_box_seq = 2 Then
+            the_box_seq = "0" & Working_Pro.lb_box_count.Text
+        Else
+            the_box_seq = Working_Pro.lb_box_count.Text
+        End If
+        e.Graphics.DrawString("PLAN DATE", lb_font5.Font, Brushes.Black, 465, 145)
+        e.Graphics.DrawString(plan_date, lb_font4_B.Font, Brushes.Black, 470, 162)
+
+        e.Graphics.DrawString("BOX NO", lb_font5.Font, Brushes.Black, 585, 145)
+        e.Graphics.DrawString(the_box_seq, lb_font4_B.Font, Brushes.Black, 610, 162)
+
+        e.Graphics.DrawString("ACTUAL DATE", lb_font5.Font, Brushes.Black, 465, 195)
+        e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy"), lb_font4_B.Font, Brushes.Black, 470, 215)
+
+        e.Graphics.DrawString("LOT NO", lb_font5.Font, Brushes.Black, 465, 245)
+        e.Graphics.DrawString(Working_Pro.Label18.Text, lb_font4_B.Font, Brushes.Black, 485, 265)
+
+        e.Graphics.DrawString("NO.", lb_font5.Font, Brushes.Black, 120, 105)
+        e.Graphics.DrawString("Part No.", lb_font5.Font, Brushes.Black, 160, 105)
+        e.Graphics.DrawString("Part Name.", lb_font5.Font, Brushes.Black, 250, 105)
+        e.Graphics.DrawString("QTY", lb_font5.Font, Brushes.Black, 420, 105)
+
+        e.Graphics.DrawLine(aPen, 110, 123, 460, 123)
+        'e.Graphics.DrawLine(aPen, 110, 210, 460, 210)
+        Dim margin_left_no = 125
+        Dim margin_top_no = 140
+        Dim margin_left_item_cd = 160
+        Dim margin_left_part_name = 250
+        Dim margin_left_QTY = 425
+        Dim arr_item_cd() As String = {"898244-6240", "898244-6250", "898244-6260", "898244-6270", "898244-6280"}
+        Dim arr_qr_code_sub() As String = {"01", "02", "03", "04", "05"}
+        For i = 1 To 5 Step 1
+            e.Graphics.DrawString(i, LB_FONT_DATA.Font, Brushes.Black, margin_left_no, margin_top_no)
+            e.Graphics.DrawString(arr_item_cd(i - 1), LB_FONT_DATA.Font, Brushes.Black, margin_left_item_cd, margin_top_no)
+            e.Graphics.DrawString("BRACKET ASM;CAM NO" & i, LB_FONT_DATA.Font, Brushes.Black, margin_left_part_name, margin_top_no)
+            e.Graphics.DrawString(result_snp.ToString(), LB_FONT_DATA.Font, Brushes.Black, margin_left_QTY, margin_top_no)
+            margin_top_no += 30
+        Next
+        Dim qrcode As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
+        qrcode.QRCodeScale = 10
+        Dim bitmap_qr_box As Bitmap = qrcode.Encode("TEST")
+        Dim qr_by_model = 120
+        Dim qr_by_model_left = 118
+        Dim iden_cd As String
+        '  If MainFrm.Label6.Text = "K1PD01" Then
+        iden_cd = "GB"
+        ' Else
+        ' iden_cd = "GB"
+        '  End If
+        Dim part_no_res1 As String
+        Dim part_no_res As String
+        Dim part_numm As Integer = 0
+        Dim act_date As String
+        Dim actdateConv As Date = DateTime.Now.ToString("dd/MM/yyyy")
+        act_date = Format(actdateConv, "yyyyMMdd")
+        Dim qty_num As String
+        Dim num_char_qty As Integer
+        num_char_qty = Len(Trim(result_snp)) 'Label27.Text.Length 'lb_qty_for_box.Text.Length
+        If num_char_qty = 1 Then
+            qty_num = "     " & result_snp 'lb_qty_for_box.Text
+        ElseIf num_char_qty = 2 Then
+            qty_num = "    " & result_snp 'lb_qty_for_box.Text
+        ElseIf num_char_qty = 3 Then
+            qty_num = "   " & result_snp 'lb_qty_for_box.Text
+        ElseIf num_char_qty = 4 Then
+            qty_num = "  " & result_snp 'lb_qty_for_box.Text
+        ElseIf num_char_qty = 5 Then
+            qty_num = " " & result_snp 'lb_qty_for_box.Text
+        Else
+            qty_num = result_snp 'lb_qty_for_box.Text
+        End If
+        Dim cus_part_no As String = "                         "
+        Dim plan_cd As String
+        Dim factory_cd As String
+        If MainFrm.Label6.Text = "K2PD06" Then
+            factory_cd = "Phase8"
+            plan_cd = "52"
+        Else
+            factory_cd = "Phase10"
+            plan_cd = "51"
+        End If
+        Dim box_no As String
+        Dim num_char_box As Integer
+        num_char_box = Working_Pro.lb_box_count.Text.Length
+        If num_char_box = 1 Then
+            box_no = "00" & Working_Pro.lb_box_count.Text
+        ElseIf num_char_box = 2 Then
+            box_no = "0" & Working_Pro.lb_box_count.Text
+        Else
+            box_no = Working_Pro.lb_box_count.Text
+        End If
+        For part_numm = Working_Pro.Label3.Text.Length To 24
+            part_no_res = part_no_res & " "
+        Next part_numm
+        plan_date = plan_date.Substring(6, 4) & plan_date.Substring(3, 2) & plan_date.Substring(0, 2)
+        part_no_res1 = Working_Pro.Label3.Text & part_no_res
+        Dim qr_code As String = iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no
+        bitmap_qr_box = QR_Generator.Encode(qr_code)
+        'e.Graphics.DrawImage(bitmap_qr_box, 15, 120, 90, 90) 'left
         e.Graphics.DrawImage(bitmap_qr_box, 615, 15, 45, 45) 'Right top
         e.Graphics.DrawString("FACTORY", lb_font3.Font, Brushes.Black, 15, 230)
         e.Graphics.DrawString("Phase10", lb_font3.Font, Brushes.Black, 33, 250)

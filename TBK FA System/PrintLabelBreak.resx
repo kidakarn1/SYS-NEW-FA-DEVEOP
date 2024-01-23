@@ -120,23 +120,8 @@
   <metadata name="PrintDocument31.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="PrintDocument32.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="logoLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk3OAQAAAAAAAD4AAAAoAAAAQAAAADIAAAABAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAA////
-        /////////////////h/////////AAP///////gAAH//////4A/AH/////+A//wH/////wf//4P////+D
-        ///wf////w////w////+H////h////w/////D///+H////+H///w/////8P///H/////4///4f//////
-        ///jADw8OCHB/8MAHBwYYMP/xwAMHBhgw//HAA4eEHCD/48GDh4AcAP/jwcOHgDwB/+PAA4eAPAH/4+A
-        Hg4B8A//j4AeDgHwD/+PgAcOAPAH/4+DBw8AeAP/j4ODDwh4Q/+PgAMPCDhB/4/AAw8MGGD/j8AHBwYY
-        MP+PwAcHBwg4f4///4f/////x///h//////HgAAAAAAAP8OAAAAAAAA/44AAAAAAAB/hgAAAAAAAD/Hf
-        //////9/8P/////////4f////4f///w/////D////h////4f////D////D////+D///wf////8H//+D/
-        ////4D//Af/////4A/AH//////4AAB///////8AA/////////h//////
-</value>
-  </data>
-  <data name="picBarcode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk3OAQAAAAAAAD4AAAAoAAAAQAAAADIAAAABAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAA////
         /////////////////h/////////AAP///////gAAH//////4A/AH/////+A//wH/////wf//4P////+D

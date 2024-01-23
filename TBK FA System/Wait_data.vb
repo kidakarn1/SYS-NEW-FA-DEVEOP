@@ -22,5 +22,4 @@ Public Class Wait_data
 
     End Sub
 
-
 End Class

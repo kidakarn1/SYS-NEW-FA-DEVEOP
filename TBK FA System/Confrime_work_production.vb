@@ -23,7 +23,7 @@ Public Class Confrime_work_production
 					If Prd_detail.check_network() = 1 Then
 						Backoffice_model.line_status_ins(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
 re_load:
-						If count_reload = 200 Then
+                        If count_reload = 200 Then
 							Backoffice_model.Check_detail_actual_insert_act() 'กรณีเครื่องดับ'
 						Else
 							count_reload += 1
@@ -42,6 +42,10 @@ re_load:
 
                         Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(LoadSQL_prd_plan)
                         For Each item As Object In dict
+                            If MainFrm.rsCheckCriticalFlg <> "0" Then
+                                Working_Pro.lbPosition1.Text = item("SPOSITION1").ToString()
+                                Working_Pro.lbPosition2.Text = item("SPOSITION2").ToString()
+                            End If
                             Working_Pro.LB_IND_ROW.Text = item("IND_ROW").ToString()
                             Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
                             '		Prd_detail.lb_snp.Text = LoadSQL("PS_UNIT_NUMERATOR")

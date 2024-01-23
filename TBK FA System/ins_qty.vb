@@ -1,4 +1,4 @@
-
+Imports System.Threading
 Public Class ins_qty
     Public count_time As Integer = 0
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
@@ -367,6 +367,15 @@ Public Class ins_qty
             Dim ins_qtyy As Integer = TextBox1.Text
             Dim max_val As String = Working_Pro.Label10.Text
             max_val = max_val.Substring(1, max_val.Length - 1)
+            If Working_Pro.check_tag_type = "3" Then
+                Dim delayInSeconds As Integer = 2 ' เวลารอระหว่างการปริ้น (วินาที)
+                For i As Integer = 1 To CDbl(Val(TextBox1.Text))
+                    Dim break = Working_Pro.lbPosition1.Text & " " & Working_Pro.lbPosition2.Text
+                    Dim plb = New PrintLabelBreak
+                    plb.loadData(Working_Pro.Label3.Text, break, Working_Pro.Label18.Text, Working_Pro.Label22.Text, CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) + i)
+                    'Thread.Sleep(delayInSeconds * 1000) ' รอเป็นมิลลิวินาที
+                Next i
+            End If
             Working_Pro.LB_COUNTER_SHIP.Text = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) + CDbl(Val(TextBox1.Text))
             Working_Pro.LB_COUNTER_SEQ.Text = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) + CDbl(Val(TextBox1.Text))
             Dim max_val_int As Integer = Convert.ToInt32(max_val)

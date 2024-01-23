@@ -42,7 +42,6 @@ Partial Class Working_Pro
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lb_emp1 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
-        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.lb_loss_status = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -59,7 +58,6 @@ Partial Class Working_Pro
         Me._Edit_Up_0 = New System.Windows.Forms.TextBox()
         Me._Check_0 = New System.Windows.Forms.CheckBox()
         Me._Check_1 = New System.Windows.Forms.CheckBox()
-        Me.Label33 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.CycleTime = New System.Windows.Forms.Label()
         Me.st_time = New System.Windows.Forms.Label()
@@ -77,9 +75,6 @@ Partial Class Working_Pro
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.lb_font_tag_line = New System.Windows.Forms.Label()
         Me.lb_font6 = New System.Windows.Forms.Label()
-        Me.lb_font5 = New System.Windows.Forms.Label()
-        Me.lb_font4 = New System.Windows.Forms.Label()
-        Me.lb_font3 = New System.Windows.Forms.Label()
         Me.lb_font2 = New System.Windows.Forms.Label()
         Me.lb_font1 = New System.Windows.Forms.Label()
         Me.lb_model = New System.Windows.Forms.Label()
@@ -131,7 +126,6 @@ Partial Class Working_Pro
         Me.lb_ng_child_part = New System.Windows.Forms.Label()
         Me.lbNextTime = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.lb_use_time = New System.Windows.Forms.Label()
         Me.LB_IND_ROW = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -148,8 +142,15 @@ Partial Class Working_Pro
         Me.PictureBox15 = New System.Windows.Forms.PictureBox()
         Me.PictureBox16 = New System.Windows.Forms.PictureBox()
         Me.TIME_CAL_EFF = New System.Windows.Forms.Timer(Me.components)
+        Me.lb_font3 = New System.Windows.Forms.Label()
+        Me.lb_use_time = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.lb_font4 = New System.Windows.Forms.Label()
+        Me.lb_font5 = New System.Windows.Forms.Label()
+        Me.lbPosition1 = New System.Windows.Forms.Label()
+        Me.lbPosition2 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
-        Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -168,6 +169,7 @@ Partial Class Working_Pro
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel6.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label4
@@ -401,16 +403,6 @@ Partial Class Working_Pro
         Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.Label30.Visible = False
         '
-        'Panel6
-        '
-        Me.Panel6.BackColor = System.Drawing.Color.SteelBlue
-        Me.Panel6.Controls.Add(Me.lb_loss_status)
-        Me.Panel6.Location = New System.Drawing.Point(78, 10)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(322, 30)
-        Me.Panel6.TabIndex = 4622
-        Me.Panel6.Visible = False
-        '
         'lb_loss_status
         '
         Me.lb_loss_status.AutoSize = True
@@ -632,16 +624,6 @@ Partial Class Working_Pro
         Me._Check_1.UseVisualStyleBackColor = True
         Me._Check_1.Visible = False
         '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(307, 14)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(45, 13)
-        Me.Label33.TabIndex = 4570
-        Me.Label33.Text = "Label33"
-        Me.Label33.Visible = False
-        '
         'Label34
         '
         Me.Label34.AutoSize = True
@@ -827,39 +809,6 @@ Partial Class Working_Pro
         Me.lb_font6.TabIndex = 4593
         Me.lb_font6.Text = "Label7"
         Me.lb_font6.Visible = False
-        '
-        'lb_font5
-        '
-        Me.lb_font5.AutoSize = True
-        Me.lb_font5.Font = New System.Drawing.Font("Arial Narrow", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lb_font5.Location = New System.Drawing.Point(359, 39)
-        Me.lb_font5.Name = "lb_font5"
-        Me.lb_font5.Size = New System.Drawing.Size(69, 25)
-        Me.lb_font5.TabIndex = 4592
-        Me.lb_font5.Text = "Label7"
-        Me.lb_font5.Visible = False
-        '
-        'lb_font4
-        '
-        Me.lb_font4.AutoSize = True
-        Me.lb_font4.Font = New System.Drawing.Font("Consolas", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lb_font4.Location = New System.Drawing.Point(303, 50)
-        Me.lb_font4.Name = "lb_font4"
-        Me.lb_font4.Size = New System.Drawing.Size(70, 22)
-        Me.lb_font4.TabIndex = 4591
-        Me.lb_font4.Text = "Label7"
-        Me.lb_font4.Visible = False
-        '
-        'lb_font3
-        '
-        Me.lb_font3.AutoSize = True
-        Me.lb_font3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lb_font3.Location = New System.Drawing.Point(351, 23)
-        Me.lb_font3.Name = "lb_font3"
-        Me.lb_font3.Size = New System.Drawing.Size(55, 16)
-        Me.lb_font3.TabIndex = 4590
-        Me.lb_font3.Text = "Label7"
-        Me.lb_font3.Visible = False
         '
         'lb_font2
         '
@@ -1494,16 +1443,6 @@ Partial Class Working_Pro
         Me.Button1.UseVisualStyleBackColor = False
         Me.Button1.Visible = False
         '
-        'lb_use_time
-        '
-        Me.lb_use_time.AutoSize = True
-        Me.lb_use_time.Location = New System.Drawing.Point(363, 22)
-        Me.lb_use_time.Name = "lb_use_time"
-        Me.lb_use_time.Size = New System.Drawing.Size(13, 13)
-        Me.lb_use_time.TabIndex = 4639
-        Me.lb_use_time.Text = "1"
-        Me.lb_use_time.Visible = False
-        '
         'LB_IND_ROW
         '
         Me.LB_IND_ROW.AutoSize = True
@@ -1686,6 +1625,89 @@ Partial Class Working_Pro
         '
         Me.TIME_CAL_EFF.Interval = 1000
         '
+        'lb_font3
+        '
+        Me.lb_font3.AutoSize = True
+        Me.lb_font3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lb_font3.Location = New System.Drawing.Point(351, 23)
+        Me.lb_font3.Name = "lb_font3"
+        Me.lb_font3.Size = New System.Drawing.Size(55, 16)
+        Me.lb_font3.TabIndex = 4590
+        Me.lb_font3.Text = "Label7"
+        Me.lb_font3.Visible = False
+        '
+        'lb_use_time
+        '
+        Me.lb_use_time.AutoSize = True
+        Me.lb_use_time.Location = New System.Drawing.Point(363, 22)
+        Me.lb_use_time.Name = "lb_use_time"
+        Me.lb_use_time.Size = New System.Drawing.Size(13, 13)
+        Me.lb_use_time.TabIndex = 4639
+        Me.lb_use_time.Text = "1"
+        Me.lb_use_time.Visible = False
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(307, 14)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(45, 13)
+        Me.Label33.TabIndex = 4570
+        Me.Label33.Text = "Label33"
+        Me.Label33.Visible = False
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.SteelBlue
+        Me.Panel6.Controls.Add(Me.lb_loss_status)
+        Me.Panel6.Location = New System.Drawing.Point(78, 10)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(322, 30)
+        Me.Panel6.TabIndex = 4622
+        Me.Panel6.Visible = False
+        '
+        'lb_font4
+        '
+        Me.lb_font4.AutoSize = True
+        Me.lb_font4.Font = New System.Drawing.Font("Consolas", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_font4.Location = New System.Drawing.Point(303, 50)
+        Me.lb_font4.Name = "lb_font4"
+        Me.lb_font4.Size = New System.Drawing.Size(70, 22)
+        Me.lb_font4.TabIndex = 4591
+        Me.lb_font4.Text = "Label7"
+        Me.lb_font4.Visible = False
+        '
+        'lb_font5
+        '
+        Me.lb_font5.AutoSize = True
+        Me.lb_font5.Font = New System.Drawing.Font("Arial Narrow", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_font5.Location = New System.Drawing.Point(359, 39)
+        Me.lb_font5.Name = "lb_font5"
+        Me.lb_font5.Size = New System.Drawing.Size(69, 25)
+        Me.lb_font5.TabIndex = 4592
+        Me.lb_font5.Text = "Label7"
+        Me.lb_font5.Visible = False
+        '
+        'lbPosition1
+        '
+        Me.lbPosition1.AutoSize = True
+        Me.lbPosition1.Location = New System.Drawing.Point(409, 39)
+        Me.lbPosition1.Name = "lbPosition1"
+        Me.lbPosition1.Size = New System.Drawing.Size(58, 13)
+        Me.lbPosition1.TabIndex = 4652
+        Me.lbPosition1.Text = "lbPosition1"
+        Me.lbPosition1.Visible = False
+        '
+        'lbPosition2
+        '
+        Me.lbPosition2.AutoSize = True
+        Me.lbPosition2.Location = New System.Drawing.Point(407, 64)
+        Me.lbPosition2.Name = "lbPosition2"
+        Me.lbPosition2.Size = New System.Drawing.Size(58, 13)
+        Me.lbPosition2.TabIndex = 4653
+        Me.lbPosition2.Text = "lbPosition2"
+        Me.lbPosition2.Visible = False
+        '
         'Working_Pro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1693,6 +1715,8 @@ Partial Class Working_Pro
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStarttarget
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.lbPosition2)
+        Me.Controls.Add(Me.lbPosition1)
         Me.Controls.Add(Me.PictureBox13)
         Me.Controls.Add(Me.PictureBox16)
         Me.Controls.Add(Me.Panel2)
@@ -1813,8 +1837,6 @@ Partial Class Working_Pro
         Me.Text = " "
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel6.ResumeLayout(False)
-        Me.Panel6.PerformLayout()
         Me.Panel7.ResumeLayout(False)
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1833,6 +1855,8 @@ Partial Class Working_Pro
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel6.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1874,7 +1898,6 @@ Partial Class Working_Pro
     Friend WithEvents _Edit_Up_0 As TextBox
     Friend WithEvents _Check_0 As CheckBox
     Friend WithEvents _Check_1 As CheckBox
-    Friend WithEvents Label33 As Label
     Friend WithEvents Label34 As Label
     Friend WithEvents CycleTime As Label
     Friend WithEvents st_time As Label
@@ -1893,9 +1916,6 @@ Partial Class Working_Pro
     Friend WithEvents lb_font_tag_line As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lb_font6 As Label
-    Friend WithEvents lb_font5 As Label
-    Friend WithEvents lb_font4 As Label
-    Friend WithEvents lb_font3 As Label
     Friend WithEvents lb_font2 As Label
     Friend WithEvents lb_font1 As Label
     Friend WithEvents lb_model As Label
@@ -1921,7 +1941,6 @@ Partial Class Working_Pro
     Friend WithEvents lb_temp As Label
     Friend WithEvents lb_ch_man_flg As Label
     Friend WithEvents lb_loss_status As Label
-    Friend WithEvents Panel6 As Panel
     Friend WithEvents PrintDocument2 As Printing.PrintDocument
     Friend WithEvents PictureBox9 As PictureBox
     Friend WithEvents btn_ins_act As Button
@@ -1944,7 +1963,6 @@ Partial Class Working_Pro
     Friend WithEvents lb_ng_child_part As Label
     Friend WithEvents lbNextTime As Label
     Friend WithEvents Button1 As Button
-    Friend WithEvents lb_use_time As Label
     Friend WithEvents LB_IND_ROW As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label17 As Label
@@ -1962,4 +1980,12 @@ Partial Class Working_Pro
     Friend WithEvents PictureBox15 As PictureBox
     Friend WithEvents PictureBox16 As PictureBox
     Friend WithEvents TIME_CAL_EFF As Timer
+    Friend WithEvents lb_font3 As Label
+    Friend WithEvents lb_use_time As Label
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents lb_font4 As Label
+    Friend WithEvents lb_font5 As Label
+    Friend WithEvents lbPosition1 As Label
+    Friend WithEvents lbPosition2 As Label
 End Class

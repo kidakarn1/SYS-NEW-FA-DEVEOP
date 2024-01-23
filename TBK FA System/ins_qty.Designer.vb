@@ -288,7 +288,6 @@ Partial Class ins_qty
         Me.pb_ok.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pb_ok.TabIndex = 35
         Me.pb_ok.TabStop = False
-        Me.pb_ok.Visible = False
         '
         'PictureBox2
         '

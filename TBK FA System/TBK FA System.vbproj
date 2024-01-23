@@ -207,6 +207,12 @@
     <Reference Include="WinFormAnimation, Version=1.6.0.4, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
       <HintPath>..\packages\WinFormAnimation.1.6.0.4\lib\net40\WinFormAnimation.dll</HintPath>
     </Reference>
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net461\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net461\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="cdio.net" />
@@ -731,6 +737,12 @@
     <Compile Include="printDefect.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PrintLabelBreak.Designer.vb">
+      <DependentUpon>PrintLabelBreak.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PrintLabelBreak.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="print_back.Designer.vb">
       <DependentUpon>print_back.vb</DependentUpon>
     </Compile>
@@ -873,9 +885,7 @@
     <Compile Include="Test_scrobar.Designer.vb">
       <DependentUpon>Test_scrobar.vb</DependentUpon>
     </Compile>
-    <Compile Include="Test_scrobar.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Test_scrobar.vb" />
     <Compile Include="Time_Loss.Designer.vb">
       <DependentUpon>Time_Loss.vb</DependentUpon>
     </Compile>
@@ -1155,6 +1165,9 @@
     <EmbeddedResource Include="printDefect.resx">
       <DependentUpon>printDefect.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintLabelBreak.resx">
+      <DependentUpon>PrintLabelBreak.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="print_back.resx">
       <DependentUpon>print_back.vb</DependentUpon>
     </EmbeddedResource>
@@ -1260,6 +1273,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <None Include="Resources\logoTBKK.jpeg" />
     <None Include="Resources\MainMenu4.png" />
     <None Include="Resources\addSpeNumpad1.png" />
     <None Include="Resources\addActualNumpad4.png" />
