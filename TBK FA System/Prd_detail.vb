@@ -33,11 +33,23 @@ Public Class Prd_detail
         Else
             picSpecial.Visible = False
         End If
-        Dim i = List_Emp.ListView1.Items.Count
-        Backoffice_model.UpdateFlgZero(Label4.Text)
-        Backoffice_model.UpdateWorking(lb_wi.Text)
-        Label2.Text = i
-        QTY_NG.Visible = False
+		Dim i = List_Emp.ListView1.Items.Count
+		If MainFrm.Label4.Text = "K1M083" Then
+			'For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+			Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
+			Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
+			Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
+			Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
+			Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
+			Backoffice_model.UpdateFlgZeroSpecial(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi)
+			Backoffice_model.UpdateWorkingSpecial(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi)
+			'Next
+		Else
+			Backoffice_model.UpdateFlgZero(Label4.Text)
+			Backoffice_model.UpdateWorking(lb_wi.Text)
+		End If
+		Label2.Text = i
+		QTY_NG.Visible = False
         QTY_NC.Visible = False
         Timer1.Start()
         Timer2.Start()
@@ -62,10 +74,17 @@ Public Class Prd_detail
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim line_id As String = MainFrm.line_id.Text
         Backoffice_model.line_status_upd(line_id)
-        'List_Emp.Show()
-        Backoffice_model.work_complete_offline(lb_wi.Text)
-        sc_wi_plan.TextBox1.Clear()
-        MainFrm.Enabled = True
+		'List_Emp.Show()
+		If MainFrm.Label4.Text = "K1M083" Then
+			For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+				Dim special_wi As String = itemPlanData.wi
+				Backoffice_model.work_complete_offline(special_wi)
+			Next
+		Else
+			Backoffice_model.work_complete_offline(lb_wi.Text)
+		End If
+		sc_wi_plan.TextBox1.Clear()
+		MainFrm.Enabled = True
 		MainFrm.Show()
 		Me.Close()
 	End Sub

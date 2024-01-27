@@ -240,7 +240,7 @@ Public Class print_back
 
         e.Graphics.DrawLine(aPen, 460, 10, 460, 58) ' line qr
         e.Graphics.DrawLine(aPen, 420, 58, 420, 116) ' nextprocess
-
+        e.Graphics.DrawLine(aPen, 490, 116, 490, 214) ' QTY Title
 
         e.Graphics.DrawLine(aPen, 310, 10, 310, 58) 'QTY
         e.Graphics.DrawLine(aPen, 595, 10, 595, 213) 'shift
@@ -255,8 +255,8 @@ Public Class print_back
         ' e.Graphics.DrawLine(aPen, 110, 95, 700, 95)
         e.Graphics.DrawLine(aPen, 10, 11, 700, 11)
         '  e.Graphics.DrawLine(aPen, 10, 220, 110, 220) 'factory
-        e.Graphics.DrawLine(aPen, 595, 142, 700, 142) 'line
-        e.Graphics.DrawLine(aPen, 595, 183, 700, 183) 'plan
+        'e.Graphics.DrawLine(aPen, 595, 142, 700, 142) 'line
+        e.Graphics.DrawLine(aPen, 490, 166, 700, 166) 'line ยาว
         '  e.Graphics.DrawLine(aPen, 595, 235, 700, 235) 'actual
         e.Graphics.DrawLine(aPen, 10, 289, 700, 289)
         'DATA
@@ -282,11 +282,11 @@ Public Class print_back
         e.Graphics.DrawString("QTY.", lb_font3.Font, Brushes.Black, 316, 15)
         e.Graphics.DrawString(result_snp, LB_QTY.Font, Brushes.Black, 363, 30)
         e.Graphics.DrawString("MODEL", lb_font5.Font, Brushes.Black, 120, 60)
-        e.Graphics.DrawString("EJ40", lb_font4_B.Font, Brushes.Black, 140, 75)
+        e.Graphics.DrawString("EJ40", batchModel.Font, Brushes.Black, 140, 75)
         e.Graphics.DrawString("NEXT PROCESS", lb_font5.Font, Brushes.Black, 282, 60)
-        e.Graphics.DrawString("ISUZU", lb_font4_B.Font, Brushes.Black, 320, 75)
+        e.Graphics.DrawString("ISUZU", batchModel.Font, Brushes.Black, 305, 75)
         e.Graphics.DrawString("LOCATION", lb_font5.Font, Brushes.Black, 430, 60)
-        e.Graphics.DrawString("D4U10A1", lb_font4_B.Font, Brushes.Black, 460, 75)
+        e.Graphics.DrawString("D4U10A1", batchModel.Font, Brushes.Black, 445, 75)
         Dim num_box_seq As Integer
         num_box_seq = Working_Pro.lb_box_count.Text.Length
         Dim plan_seq As String
@@ -301,10 +301,10 @@ Public Class print_back
         End If
         e.Graphics.DrawString("SHIFT", lb_font3.Font, Brushes.Black, 460, 15)
         e.Graphics.DrawString(Working_Pro.Label14.Text, LB_QTY.Font, Brushes.Black, 520, 30)
-        e.Graphics.DrawString("LINE", lb_font5.Font, Brushes.Black, 600, 98)
-        e.Graphics.DrawString(MainFrm.Label4.Text, lb_font4_B.Font, Brushes.Black, 620, 115)
+        e.Graphics.DrawString("LINE", lb_font5.Font, Brushes.Black, 495, 124)
+        e.Graphics.DrawString(MainFrm.Label4.Text, lb_font4_B.Font, Brushes.Black, 517, 140)
         e.Graphics.DrawString("PRO SEQ", lb_font5.Font, Brushes.Black, 600, 60)
-        e.Graphics.DrawString(plan_seq, lb_font4_B.Font, Brushes.Black, 640, 75)
+        e.Graphics.DrawString(plan_seq, batchModel.Font, Brushes.Black, 620, 75)
         e.Graphics.DrawString("LOT NO", lb_font3.Font, Brushes.Black, 596, 15)
         e.Graphics.DrawString(Working_Pro.Label18.Text, LB_QTY.Font, Brushes.Black, 622, 30)
         Dim api = New api()
@@ -324,12 +324,12 @@ Public Class print_back
         Else
             the_Label_bach = Working_Pro.Label_bach.Text
         End If
-        e.Graphics.DrawString("PLAN DATE", lb_font5.Font, Brushes.Black, 600, 187)
-        e.Graphics.DrawString(plan_date, lb_font4_B.Font, Brushes.Black, 605, 205)
-        e.Graphics.DrawString("BATCH NO", lb_font5.Font, Brushes.Black, 600, 148)
-        e.Graphics.DrawString(the_Label_bach, lb_font4_B.Font, Brushes.Black, 640, 159)
-        e.Graphics.DrawString("ACTUAL DATE", lb_font5.Font, Brushes.Black, 600, 243)
-        e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy"), lb_font4_B.Font, Brushes.Black, 605, 258)
+        e.Graphics.DrawString("PLAN DATE", lb_font5.Font, Brushes.Black, 495, 170)
+        e.Graphics.DrawString(plan_date, lb_font4_B.Font, Brushes.Black, 500, 188)
+        e.Graphics.DrawString("BATCH NO", lb_font5.Font, Brushes.Black, 605, 124)
+        e.Graphics.DrawString(the_Label_bach, lb_font4_B.Font, Brushes.Black, 630, 140)
+        e.Graphics.DrawString("ACTUAL DATE", lb_font5.Font, Brushes.Black, 605, 170)
+        e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy"), lb_font4_B.Font, Brushes.Black, 606, 188)
         e.Graphics.DrawString("NO.", lb_font5.Font, Brushes.Black, 15, 119)
         e.Graphics.DrawString("WI No.", lb_font5.Font, Brushes.Black, 85, 119)
         e.Graphics.DrawString("Part No.", lb_font5.Font, Brushes.Black, 180, 119)
@@ -348,18 +348,23 @@ Public Class print_back
         Dim margin_left_QTY = 435
         Dim arr_item_cd() As String = {"898244-6240", "898244-6250", "898244-6260", "898244-6270", "898244-6280"}
         Dim arr_qr_code_sub() As String = {"01", "02", "03", "04", "05"}
-        For i = 1 To 5 Step 1
+        Dim i As Integer = 1
+        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+            Dim special_wi As String = itemPlanData.wi
+            Dim special_item_cd As String = itemPlanData.item_cd
+            Dim special_item_name As String = itemPlanData.item_name
             e.Graphics.DrawString(i, lb_font5.Font, Brushes.Black, margin_left_no, margin_top_no)
-            e.Graphics.DrawString(arr_item_cd(i - 1), lb_font5.Font, Brushes.Black, margin_left_wi, margin_top_no)
-            e.Graphics.DrawString(arr_item_cd(i - 1), lb_font5.Font, Brushes.Black, margin_left_item_cd, margin_top_no)
-            e.Graphics.DrawString("BRACKET ASM;CAM NO" & i, lb_font5.Font, Brushes.Black, margin_left_part_name, margin_top_no)
+            e.Graphics.DrawString(special_wi, lb_font5.Font, Brushes.Black, margin_left_wi, margin_top_no)
+            e.Graphics.DrawString(special_item_cd, lb_font5.Font, Brushes.Black, margin_left_item_cd, margin_top_no)
+            e.Graphics.DrawString(special_item_name, lb_font5.Font, Brushes.Black, margin_left_part_name, margin_top_no)
             e.Graphics.DrawString(result_snp.ToString(), lb_font5.Font, Brushes.Black, margin_left_QTY, margin_top_no)
             margin_top_no += 15
+            i = i + 1
         Next
         Dim qrcode As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
         qrcode.QRCodeScale = 10
         Dim bitmap_qr_box As Bitmap = qrcode.Encode("TEST")
-        Dim qr_by_model = 120
+        Dim qr_by_model = 158
         Dim qr_by_model_left = 118
         Dim iden_cd As String
         'If MainFrm.Label6.Text = "K1PD01" Then
@@ -418,11 +423,11 @@ Public Class print_back
             Next part_numm
             part_no_res1 = arr_item_cd(j - 1) & part_no_res
             bitmap_qr_box = QR_Generator.Encode(iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & the_Label_bach)
-            e.Graphics.DrawString("QR No ." & j, lb_font5.Font, Brushes.Black, qr_by_model_left, 215)
-            e.Graphics.DrawImage(bitmap_qr_box, qr_by_model, 233, 50, 50) 'Right top
-            qr_by_model += 70
+            e.Graphics.DrawString("QR No ." & j, BTitle.Font, Brushes.Black, qr_by_model_left, 215)
+            e.Graphics.DrawImage(bitmap_qr_box, qr_by_model, 226, 68, 60) 'Right top
+            qr_by_model += 116
             margin_top_no += 15
-            qr_by_model_left += 70
+            qr_by_model_left += 114
             arr_qr_code_sub(j - 1) = iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & the_Label_bach
         Next
         part_no_res = ""

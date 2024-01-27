@@ -1103,7 +1103,6 @@ where
         Dim sqliteConn As New SQLiteConnection(sqliteConnect)
         Try
             sqliteConn.Open()
-
             Dim cmd As New SQLiteCommand
             cmd.Connection = sqliteConn
             cmd.CommandText = "INSERT INTO sc_inc_tag(wi,seq_no,qty,created_date,ref_key) VALUES ('" & wi_plan & "','" & seq_no & "','" & qty & "','" & currdated & "','" & ref_key & "')"
@@ -1111,9 +1110,6 @@ where
             Dim LoadSQL As SQLiteDataReader = cmd.ExecuteReader()
             'MsgBox(LoadSQL)
             Return LoadSQL
-
-
-
         Catch ex As Exception
             MsgBox("SQLite Database connect failed. Please contact PC System [Function Tag_seq_rec_sqlite]")
             sqliteConn.Close()
@@ -1136,7 +1132,7 @@ recheck:
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
             SQLCmd.CommandText = "INSERT INTO production_actual_detail(pd,line_cd,wi_plan,item_cd,item_name,staff_no,seq_no,qty,st_time,end_time,use_time,updated_date,number_qty,pwi_id ,status_transfer_sqlite) VALUES ('" & pd & "','" & line_cd & "','" & wi_plan & "','" & item_cd & "','" & item_name & "','" & staff_no & "','" & seq_no & "','" & qty & "','" & st_time2 & "','" & end_time2 & "','" & use_time & "','" & currdated & "','" & number_qty & "','" & pwi_id & "','" & status_sqlite & "')"
-            'Console.WriteLine("result cmd  ====>" & SQLCmd.CommandText)
+            Console.WriteLine("result cmd  ====>" & SQLCmd.CommandText)
             reader = SQLCmd.ExecuteReader()
             reader.Close()
         Catch ex As Exception
@@ -1146,22 +1142,24 @@ recheck:
     End Function
     Public Shared Function work_complete_offline(wi As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
-        Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
-        Dim SQLCmd As New SqlCommand()
+        '  Dim reader As SqlDataReader
+        '  Dim SQLConn As New SqlConnection() 'The SQL Connection
+        '  Dim SQLCmd As New SqlCommand()
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
-            SQLConn.Open()
-            SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "UPDATE sup_work_plan_supply_dev SET PRD_COMP_FLG = '0', PRD_COMP_DATE = '" & currdated & "' WHERE WI = '" & wi & "'"
-            reader = SQLCmd.ExecuteReader()
-            Return reader
-            SQLConn.Dispose()
-            SQLConn.Close()
-            SQLConn = Nothing
+            ' SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            'SQLConn.Open()
+            Dim api = New api()
+            Dim reusult_data = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/work_complete_offline?wi=" & wi & "&currdated=" & currdated)
+            'SQLCmd.Connection = SQLConn
+            'SQLCmd.CommandText = "UPDATE sup_work_plan_supply_dev SET PRD_COMP_FLG = '0', PRD_COMP_DATE = '" & currdated & "' WHERE WI = '" & wi & "'"
+            'reader = SQLCmd.ExecuteReader()
+            'Return reader
+            'SQLConn.Dispose()
+            'SQLConn.Close()
+            'SQLConn = Nothing
         Catch ex As Exception
             'MsgBox("MSSQL Database connect failed. Please contact PC System [Function work_complete_offline]")
-            SQLConn.Close()
+            '  SQLConn.Close()
             load_show.Show()
             'Application.Exit()
         End Try
@@ -3249,7 +3247,12 @@ re_insert_rework_act:
     End Function
 
     Public Shared Function ins_loss_act(pd As String, line_cd As String, wi_plan As String, item_cd As String, seq_no As String, shift_prd As String, st_time As DateTime, end_time As DateTime, loss_time As Integer, loss_type As String, loss_id As String, op_id As String, transfer_flg As String, flg_control As String, pwi_id As String)
-        Check_loss_and_update_flg_loss()
+        If MainFrm.Label4.Text = "K1M083" Then
+            '
+        Else
+            Check_loss_and_update_flg_loss()
+        End If
+
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
@@ -3616,6 +3619,14 @@ re_insert_rework_act:
     End Function
     Public Shared Sub UpdateFlgZero(line_cd As String)
         Dim api = New api()
-        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/TESTAPITRANFER/UpdateFlgZero?line_cd=" & line_cd)
+        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/UpdateFlgZero?line_cd=" & line_cd)
+    End Sub
+    Public Shared Sub UpdateFlgZeroSpecial(wi1 As String, wi2 As String, wi3 As String, wi4 As String, wi5 As String)
+        Dim api = New api()
+        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/UpdateFlgZeroSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
+    End Sub
+    Public Shared Sub UpdateWorkingSpecial(wi1 As String, wi2 As String, wi3 As String, wi4 As String, wi5 As String)
+        Dim api = New api()
+        Dim reusult_data = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/Update_supply_dev_WorkingSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
     End Sub
 End Class

@@ -19,6 +19,8 @@ Imports System.Web.Script.Serialization
 Public Class Working_Pro
     ' Public Shared ArrayDataSpecial As New List(Of DataPlan)
     Public check_cal_eff As Integer = 0
+    Public Gdate_now_date As Date
+    Public Gtime As Date
     Public counterNewDIO
     Dim QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
     Dim start_flg As Integer = 0
@@ -148,6 +150,7 @@ Public Class Working_Pro
         End If
         Dim date_now As String = DateTime.Now.ToString("dd-MM-yyyy")
         Dim date_now_date As Date = DateTime.Now.ToString("dd-MM-yyyy")
+        Gdate_now_date = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim time As Date = DateTime.Now.ToString("H:m:s")
         Dim date_st = DateTime.Now.ToString("dd-MM-yyyy")
         Dim date_end = DateTime.Now.ToString("dd-MM-yyyy")
@@ -3262,6 +3265,9 @@ Public Class Working_Pro
                                                                                              Else
                                                                                                  stop_working()
                                                                                                  Backoffice_model.TimeStartBreakTime = DateTime.Now.ToString("HH:mm:ss")
+                                                                                                 If check_in_up_seq = 0 Then
+                                                                                                     Backoffice_model.IDLossCodeAuto = "36"
+                                                                                                 End If
                                                                                                  StopMenu.Show()
                                                                                                  Me.Enabled = False
                                                                                              End If

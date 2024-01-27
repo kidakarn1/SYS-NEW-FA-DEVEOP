@@ -301,18 +301,18 @@ Public Class Loss_reg
 
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If MainFrm.Label4.Text = "K1M083" Then
-            Dim j As Integer = 0
-            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
-                Dim special_wi As String = itemPlanData.wi
-                Dim special_item_cd As String = itemPlanData.item_cd
-                Dim special_item_name As String = itemPlanData.item_name
-                Dim special_model As String = itemPlanData.MODEL
-                maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, special_wi, special_model)
-            Next
-        Else
-            maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, Working_Pro.wi_no.Text, Working_Pro.lb_model.Text)
-        End If
-        Shell("C:\Program Files (x86)\Default Company Name\TicketMaintenances\MaintenanceSystem.exe")
+        'If MainFrm.Label4.Text = "K1M083" Then
+        ' Dim j As Integer = 0
+        ' For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+        ' Dim special_wi As String = itemPlanData.wi
+        ' Dim special_item_cd As String = itemPlanData.item_cd
+        ' Dim special_item_name As String = itemPlanData.item_name
+        ' Dim special_model As String = itemPlanData.MODEL
+        ' maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, special_wi, special_model)
+        ' Next
+        ' Else
+        ' maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, Working_Pro.wi_no.Text, Working_Pro.lb_model.Text)
+        ' End If
+        ' Shell("C:\Program Files (x86)\Default Company Name\TicketMaintenances\MaintenanceSystem.exe")
     End Sub
 End Class

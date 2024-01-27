@@ -222,8 +222,14 @@
                         Dim special_wi As String = itemPlanData.wi
                         Dim special_item_cd As String = itemPlanData.item_cd
                         Dim special_item_name As String = itemPlanData.item_name
-                        Backoffice_model.ins_loss_act(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, Backoffice_model.IDLossCodeAuto, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j))
-                        Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, Backoffice_model.IDLossCodeAuto, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j))
+                        Dim localPwis As String = ""
+                        Try
+                            localPwis = Working_Pro.Spwi_id(j)
+                        Catch ex As Exception
+                            localPwis = ""
+                        End Try
+                        Backoffice_model.ins_loss_act(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, Backoffice_model.IDLossCodeAuto, op_id, transfer_flg, "0", localPwis)
+                        Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, Backoffice_model.IDLossCodeAuto, op_id, transfer_flg, "0", localPwis)
                         j = j + 1
                     Next
                 Else
@@ -241,7 +247,13 @@
                         Dim special_wi As String = itemPlanData.wi
                         Dim special_item_cd As String = itemPlanData.item_cd
                         Dim special_item_name As String = itemPlanData.item_name
-                        Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, Backoffice_model.IDLossCodeAuto, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j))
+                        Dim localPwis As String = ""
+                        Try
+                            localPwis = Working_Pro.Spwi_id(j)
+                        Catch ex As Exception
+                            localPwis = ""
+                        End Try
+                        Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, Backoffice_model.IDLossCodeAuto, op_id, transfer_flg, "0", localPwis)
                         j = j + 1
                     Next
                 Else
@@ -257,10 +269,16 @@
                 Dim j As Integer = 0
                 For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                     Iseq += 1
+                    Dim localPwis As String = ""
+                    Try
+                        localPwis = Working_Pro.Spwi_id(j)
+                    Catch ex1 As Exception
+                        localPwis = ""
+                    End Try
                     Dim special_wi As String = itemPlanData.wi
                     Dim special_item_cd As String = itemPlanData.item_cd
                     Dim special_item_name As String = itemPlanData.item_name
-                    Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iserq, shift_prd, start_loss, end_loss, total_loss, loss_type, Backoffice_model.IDLossCodeAuto, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j))
+                    Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, Backoffice_model.IDLossCodeAuto, op_id, transfer_flg, "0", localPwis)
                     j = j + 1
                 Next
             Else
@@ -269,6 +287,10 @@
         End Try
     End Sub
     Private Sub StopMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Console.WriteLine("date_start_data ===>" & date_start_data) ' ไม่ต้องลบ 
+        If Working_Pro.check_in_up_seq = 0 Then
+            date_start_data = Working_Pro.Gdate_now_date
+        End If
         TimerLossBT.Start()
         TimerLossBT.Enabled = True
         lbLineCode.Text = MainFrm.Label4.Text

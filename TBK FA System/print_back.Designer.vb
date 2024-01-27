@@ -35,6 +35,7 @@ Partial Class print_back
         Me.lb_font_qty = New System.Windows.Forms.Label()
         Me.LB_FONT_DATA = New System.Windows.Forms.Label()
         Me.BTitle = New System.Windows.Forms.Label()
+        Me.batchModel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'PrintDocument1
@@ -153,11 +154,22 @@ Partial Class print_back
         Me.BTitle.TabIndex = 10
         Me.BTitle.Text = "BTitle"
         '
+        'batchModel
+        '
+        Me.batchModel.AutoSize = True
+        Me.batchModel.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
+        Me.batchModel.Location = New System.Drawing.Point(137, 160)
+        Me.batchModel.Name = "batchModel"
+        Me.batchModel.Size = New System.Drawing.Size(170, 36)
+        Me.batchModel.TabIndex = 11
+        Me.batchModel.Text = "batchModel"
+        '
         'print_back
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.batchModel)
         Me.Controls.Add(Me.BTitle)
         Me.Controls.Add(Me.LB_FONT_DATA)
         Me.Controls.Add(Me.lb_font_qty)
@@ -189,4 +201,5 @@ Partial Class print_back
     Friend WithEvents lb_font_qty As Label
     Friend WithEvents LB_FONT_DATA As Label
     Friend WithEvents BTitle As Label
+    Friend WithEvents batchModel As Label
 End Class
