@@ -384,6 +384,7 @@
     <Compile Include="Conf_login.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DataPlan.vb" />
     <Compile Include="defecAdmintnumpadregister.Designer.vb">
       <DependentUpon>defecAdmintnumpadregister.vb</DependentUpon>
     </Compile>
@@ -577,10 +578,16 @@
     <Compile Include="Finish_work.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="TestForm.Designer.vb">
+      <DependentUpon>TestForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="TestForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TEST_PRINTLABEL.Designer.vb">
+      <DependentUpon>TEST_PRINTLABEL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TEST_PRINTLABEL.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FunctionGobal.vb" />
@@ -1090,8 +1097,11 @@
     <EmbeddedResource Include="Finish_work.resx">
       <DependentUpon>Finish_work.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TEST_PRINTLABEL.resx">
+      <DependentUpon>TEST_PRINTLABEL.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inf_manage.resx">
       <DependentUpon>Inf_manage.vb</DependentUpon>

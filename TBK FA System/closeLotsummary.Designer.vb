@@ -22,6 +22,7 @@ Partial Class closeLotsummary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(closeLotsummary))
         Me.lbWi = New System.Windows.Forms.Label()
         Me.lbModel = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -61,12 +62,19 @@ Partial Class closeLotsummary
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.pbSpecialSummary = New System.Windows.Forms.PictureBox()
+        Me.ListView2 = New System.Windows.Forms.ListView()
+        Me.NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.PART_NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ACTUAL = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.Button1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnOk, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbSpecialSummary, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbWi
@@ -438,20 +446,79 @@ Partial Class closeLotsummary
         Me.Panel4.Size = New System.Drawing.Size(113, 36)
         Me.Panel4.TabIndex = 61
         '
+        'pbSpecialSummary
+        '
+        Me.pbSpecialSummary.BackgroundImage = CType(resources.GetObject("pbSpecialSummary.BackgroundImage"), System.Drawing.Image)
+        Me.pbSpecialSummary.Location = New System.Drawing.Point(1, 1)
+        Me.pbSpecialSummary.Name = "pbSpecialSummary"
+        Me.pbSpecialSummary.Size = New System.Drawing.Size(798, 596)
+        Me.pbSpecialSummary.TabIndex = 62
+        Me.pbSpecialSummary.TabStop = False
+        Me.pbSpecialSummary.Visible = False
+        '
+        'ListView2
+        '
+        Me.ListView2.AllowColumnReorder = True
+        Me.ListView2.AllowDrop = True
+        Me.ListView2.AutoArrange = False
+        Me.ListView2.BackColor = System.Drawing.Color.White
+        Me.ListView2.BackgroundImageTiled = True
+        Me.ListView2.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.WI, Me.PART_NO, Me.ACTUAL})
+        Me.ListView2.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ListView2.Font = New System.Drawing.Font("Catamaran", 25.0!, System.Drawing.FontStyle.Bold)
+        Me.ListView2.ForeColor = System.Drawing.Color.Black
+        Me.ListView2.FullRowSelect = True
+        Me.ListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.ListView2.HideSelection = False
+        Me.ListView2.HoverSelection = True
+        Me.ListView2.Location = New System.Drawing.Point(28, 233)
+        Me.ListView2.MultiSelect = False
+        Me.ListView2.Name = "ListView2"
+        Me.ListView2.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ListView2.ShowGroups = False
+        Me.ListView2.Size = New System.Drawing.Size(750, 259)
+        Me.ListView2.TabIndex = 63
+        Me.ListView2.UseCompatibleStateImageBehavior = False
+        Me.ListView2.View = System.Windows.Forms.View.Details
+        '
+        'NO
+        '
+        Me.NO.Text = "N"
+        Me.NO.Width = 70
+        '
+        'WI
+        '
+        Me.WI.Text = "WI"
+        Me.WI.Width = 268
+        '
+        'PART_NO
+        '
+        Me.PART_NO.Text = "PART_NO"
+        Me.PART_NO.Width = 261
+        '
+        'ACTUAL
+        '
+        Me.ACTUAL.Text = "ACTUAL"
+        Me.ACTUAL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ACTUAL.Width = 150
+        '
         'closeLotsummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.closeLotsummary1
         Me.ClientSize = New System.Drawing.Size(801, 600)
+        Me.Controls.Add(Me.ListView2)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnOk)
+        Me.Controls.Add(Me.pbSpecialSummary)
         Me.Controls.Add(Me.statusPage)
         Me.Controls.Add(Me.lbPart)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.btnDown)
         Me.Controls.Add(Me.btnUp)
-        Me.Controls.Add(Me.btnOk)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lvSumarychild)
         Me.Controls.Add(Me.lvSumaryfg)
         Me.Controls.Add(Me.Label11)
@@ -481,6 +548,7 @@ Partial Class closeLotsummary
         CType(Me.btnDown, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbSpecialSummary, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -524,4 +592,10 @@ Partial Class closeLotsummary
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents pbSpecialSummary As PictureBox
+    Friend WithEvents ListView2 As ListView
+    Friend WithEvents NO As ColumnHeader
+    Friend WithEvents WI As ColumnHeader
+    Friend WithEvents PART_NO As ColumnHeader
+    Friend WithEvents ACTUAL As ColumnHeader
 End Class

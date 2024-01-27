@@ -34,6 +34,7 @@ Partial Class print_back
         Me.PrintDocument2 = New System.Drawing.Printing.PrintDocument()
         Me.lb_font_qty = New System.Windows.Forms.Label()
         Me.LB_FONT_DATA = New System.Windows.Forms.Label()
+        Me.BTitle = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'PrintDocument1
@@ -142,11 +143,22 @@ Partial Class print_back
         Me.LB_FONT_DATA.TabIndex = 9
         Me.LB_FONT_DATA.Text = "LB_FONT_DATA"
         '
+        'BTitle
+        '
+        Me.BTitle.AutoSize = True
+        Me.BTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.BTitle.Location = New System.Drawing.Point(192, 88)
+        Me.BTitle.Name = "BTitle"
+        Me.BTitle.Size = New System.Drawing.Size(32, 13)
+        Me.BTitle.TabIndex = 10
+        Me.BTitle.Text = "BTitle"
+        '
         'print_back
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.BTitle)
         Me.Controls.Add(Me.LB_FONT_DATA)
         Me.Controls.Add(Me.lb_font_qty)
         Me.Controls.Add(Me.Label_wi_type)
@@ -176,4 +188,5 @@ Partial Class print_back
     Friend WithEvents PrintDocument2 As Printing.PrintDocument
     Friend WithEvents lb_font_qty As Label
     Friend WithEvents LB_FONT_DATA As Label
+    Friend WithEvents BTitle As Label
 End Class

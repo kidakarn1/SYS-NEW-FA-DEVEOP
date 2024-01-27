@@ -16,8 +16,8 @@ Imports BarcodeLib.Barcode
 'Imports NationalInstruments.DAQmx
 Imports System.Net
 Imports System.Web.Script.Serialization
-
 Public Class Working_Pro
+    ' Public Shared ArrayDataSpecial As New List(Of DataPlan)
     Public check_cal_eff As Integer = 0
     Public counterNewDIO
     Dim QR_Generator As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
@@ -30,6 +30,7 @@ Public Class Working_Pro
     Dim Ret As Integer                          ' Return Code
     Dim szError As New StringBuilder("", 256)   ' Error String
     Dim szText As New String("", 100)
+    Public Spwi_id As New List(Of String)
     Dim UpCount(2) As Short                     'zr Up Counter
     Dim DownCount(2) As Short                   ' Down Counter
     Dim Check(7) As CheckBox
@@ -197,6 +198,10 @@ Public Class Working_Pro
         End While
         If LB_COUNTER_SHIP.Text = "" Then
             LB_COUNTER_SHIP.Text = 0
+        Else
+            If MainFrm.Label4.Text = "K1M083" Then
+                LB_COUNTER_SHIP.Text = CDbl(Val(LB_COUNTER_SHIP.Text)) / Confrime_work_production.ArrayDataPlan.Count
+            End If
         End If
         Dim reader_seq = Backoffice_model.GET_QTY_SEQ(wi_no.Text, CDbl(Val(Label22.Text))) '
         While reader_seq.read()
@@ -209,6 +214,7 @@ Public Class Working_Pro
         Main()
         Backoffice_model.Get_close_lot_time(Label14.Text)
         Timer2.Start()
+
     End Sub
     Public Sub check_seq_data()
         If CDbl(Val(LB_COUNTER_SEQ.Text)) <> "0" Then
@@ -649,31 +655,69 @@ Public Class Working_Pro
             '  TimerCountBT.Enabled = True
             '  TimerCountBT.Start()
             'End If
-            Dim rsInsertData = Backoffice_model.INSERT_production_working_info(LB_IND_ROW.Text, Label18.Text, Label22.Text, Label14.Text)
-            Dim GET_SEQ = Backoffice_model.GET_SEQ_PLAN_current(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1)
+            Dim rsInsertData As String = ""
+            Dim GET_SEQ
+
+            If MainFrm.Label4.Text = "K1M083" Then
+                Dim GenSEQ As Integer = Label22.Text - 5
+                Dim Iseq = GenSEQ
+                For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                    Iseq += 1
+                    Dim indRow As String = itemPlanData.IND_ROW
+                    Dim pwi_shift As String = itemPlanData.IND_ROW
+                    rsInsertData = Backoffice_model.INSERT_production_working_info(indRow, Label18.Text, Iseq, Label14.Text)
+                    GET_SEQ = Backoffice_model.GET_SEQ_PLAN_current(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1)
+                Next
+            Else
+                rsInsertData = Backoffice_model.INSERT_production_working_info(LB_IND_ROW.Text, Label18.Text, Label22.Text, Label14.Text)
+                GET_SEQ = Backoffice_model.GET_SEQ_PLAN_current(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1)
+            End If
             Try
                 If GET_SEQ.Read() Then
                     Dim C_seq_no As Integer = CDbl(Val(GET_SEQ("seq_no")))
                     If C_seq_no > 0 Then
                         Dim seq_no_naja = GET_SEQ("seq_no")
-                        Dim update_data = Backoffice_model.Update_seqplan(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, CDbl(Val(Prd_detail.lb_seq.Text)) + 1)
+                        If MainFrm.Label4.Text = "K1M083" Then
+                            Dim update_data = Backoffice_model.Update_seqplan(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, CDbl(Val(Prd_detail.lb_seq.Text)) + 5)
+                        Else
+                            Dim update_data = Backoffice_model.Update_seqplan(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, CDbl(Val(Prd_detail.lb_seq.Text)) + 1)
+                        End If
                     Else
-                        Dim insert_data = Backoffice_model.INSERT_tmp_planseq(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1)
+                        Dim insert_data = Backoffice_model.INSERT_tmp_planseq(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, Label22.Text)
                         Dim seq_no_naja = 0
                     End If
                 End If
             Catch ex As Exception
-                Dim insert_data = Backoffice_model.INSERT_tmp_planseq(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1)
+                Dim insert_data = Backoffice_model.INSERT_tmp_planseq(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, Label22.Text)
                 Dim seq_no_naja = 0
             End Try
             GET_SEQ.close()
             Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-            pwi_id = Backoffice_model.GET_DATA_PRODUCTION_WORKING_INFO(LB_IND_ROW.Text, Label18.Text, Label22.Text)
-            For i = 0 To temp_co_emp - 1
-                emp_cd = List_Emp.ListView1.Items(i).Text
-                Backoffice_model.Insert_production_emp_detail_realtime(wi_no.Text, emp_cd, Label22.Text, pwi_id)
-                'MsgBox(List_Emp.ListView1.Items(i).Text)
-            Next
+            If MainFrm.Label4.Text = "K1M083" Then
+                Dim GenSEQ As Integer = Label22.Text - 5
+                Dim Iseq = GenSEQ
+                Spwi_id = New List(Of String)
+                For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                    Iseq += 1
+                    Dim indRow As String = itemPlanData.IND_ROW
+                    Dim pwi_shift As String = itemPlanData.IND_ROW
+                    Dim wi As String = itemPlanData.wi
+                    pwi_id = Backoffice_model.GET_DATA_PRODUCTION_WORKING_INFO(indRow, Label18.Text, Iseq)
+                    Spwi_id.Add(pwi_id)
+                    ' ArrayDataSpecial.Add(New GSpwi_id With {.Spwi_id = pwi_id})
+                    For i = 0 To temp_co_emp - 1
+                        emp_cd = List_Emp.ListView1.Items(i).Text
+                        Backoffice_model.Insert_production_emp_detail_realtime(wi, emp_cd, Iseq, pwi_id)
+                    Next
+                Next
+            Else
+                pwi_id = Backoffice_model.GET_DATA_PRODUCTION_WORKING_INFO(LB_IND_ROW.Text, Label18.Text, Label22.Text)
+                For i = 0 To temp_co_emp - 1
+                    emp_cd = List_Emp.ListView1.Items(i).Text
+                    Backoffice_model.Insert_production_emp_detail_realtime(wi_no.Text, emp_cd, Label22.Text, pwi_id)
+                    'MsgBox(List_Emp.ListView1.Items(i).Text)
+                Next
+            End If
             check_in_up_seq += 1
         End If
         Main()
@@ -695,7 +739,21 @@ Public Class Working_Pro
                             end_loss_codex = item("End_Loss").ToString()
                             Loss_Time_codex = item("Loss_Time").ToString()
                             If CDbl(Val(Loss_Time_codex)) > 0 Then
-                                ins_loss_code(MainFrm.Label6.Text, Label24.Text, wi_no.Text, Label3.Text, CDbl(Val(Label22.Text)), Label14.Text, start_loss_codex, end_loss_codex, Loss_Time_codex, loss_type, "36", "0", pwi_id)
+                                If MainFrm.Label4.Text = "K1M083" Then
+                                    Dim GenSEQ As Integer = Label22.Text - 5
+                                    Dim Iseq = GenSEQ
+                                    Dim j As Integer = 0
+                                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                        Iseq += 1
+                                        Dim indRow As String = itemPlanData.IND_ROW
+                                        Dim wi As String = itemPlanData.wi
+                                        Dim item_cd As String = itemPlanData.item_cd
+                                        ins_loss_code(MainFrm.Label6.Text, Label24.Text, wi, item_cd, Iseq, Label14.Text, start_loss_codex, end_loss_codex, Loss_Time_codex, loss_type, "36", "0", Spwi_id(j))
+                                        j = j + 1
+                                    Next
+                                Else
+                                    ins_loss_code(MainFrm.Label6.Text, Label24.Text, wi_no.Text, Label3.Text, CDbl(Val(Label22.Text)), Label14.Text, start_loss_codex, end_loss_codex, Loss_Time_codex, loss_type, "36", "0", pwi_id)
+                                End If
                             End If
                         Next
                     Catch ex As Exception
@@ -719,16 +777,36 @@ Public Class Working_Pro
         End Try
         Dim date_st As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
-        Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
-                Backoffice_model.line_status_ins(line_id, date_st, date_end, "2", "0", 0, "0", Prd_detail.lb_wi.Text)
+        If MainFrm.Label4.Text = "K1M083" Then
+            Dim GenSEQ As Integer = Label22.Text - 5
+            Dim Iseq = GenSEQ
+            Dim j As Integer = 0
+            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                Iseq += 1
+                Dim wi As String = itemPlanData.wi
+                Try
+                    If My.Computer.Network.Ping("192.168.161.101") Then
+                        Backoffice_model.line_status_ins(line_id, date_st, date_end, "2", "0", 0, "0", wi)
+                        Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "2", "0", 0, "0", wi)
+                    Else
+                        Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "2", "0", 0, "0", wi)
+                    End If
+                Catch ex As Exception
+                    Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "2", "0", 0, "0", wi)
+                End Try
+            Next
+        Else
+            Try
+                If My.Computer.Network.Ping("192.168.161.101") Then
+                    Backoffice_model.line_status_ins(line_id, date_st, date_end, "2", "0", 0, "0", Prd_detail.lb_wi.Text)
+                    Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "2", "0", 0, "0", Prd_detail.lb_wi.Text)
+                Else
+                    Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "2", "0", 0, "0", Prd_detail.lb_wi.Text)
+                End If
+            Catch ex As Exception
                 Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "2", "0", 0, "0", Prd_detail.lb_wi.Text)
-            Else
-                Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "2", "0", 0, "0", Prd_detail.lb_wi.Text)
-            End If
-        Catch ex As Exception
-            Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "2", "0", 0, "0", Prd_detail.lb_wi.Text)
-        End Try
+            End Try
+        End If
         Dim c_type As String = MainFrm.count_type.Text
         If c_type = "TOUCH" Then
             Button1.Visible = True
@@ -768,21 +846,63 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id, tr_status)
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, start_time, end_time, use_time, number_qty, Spwi_id(j), tr_status)
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_time, number_qty, pwi_id, tr_status)
+                    End If
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi, special_item_cd, special_item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    End If
                     'MsgBox("Ping incompleted")
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, Label18.Text)
+                If MainFrm.Label4.Text = "K1M083" Then
+                    Dim GenSEQ As Integer = Label22.Text - 5
+                    Dim Iseq = GenSEQ
+                    Dim j As Integer = 0
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Iseq += 1
+                        Dim wi As String = itemPlanData.wi
+                        Dim special_item_cd As String = itemPlanData.item_cd
+                        Dim special_item_name As String = itemPlanData.item_name
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                        j = j + 1
+                    Next
+                Else
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, use_time, tr_status, Label18.Text)
+                End If
             End Try
             st_time.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
             st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-
             'Starting
             btn_setup.Enabled = True
             btn_ins_act.Enabled = True
@@ -794,7 +914,6 @@ Public Class Working_Pro
             'End
 
             'End
-
             'Dim temppo As Double = Label34.Text
             CircularProgressBar2.Text = 0 & "%"
             CircularProgressBar2.Value = 0
@@ -819,7 +938,6 @@ Public Class Working_Pro
         btn_closelot.Visible = False
         btn_stop.Visible = True
         Prd_detail.Timer3.Enabled = False
-
 
         btn_start.Visible = False
         PictureBox11.Visible = False
@@ -1436,17 +1554,58 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, result_use_time, number_qty, pwi_id, tr_status)
-                    'MsgBox("Ping completed")
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, start_time, end_time, result_use_time, number_qty, Spwi_id(j), tr_status)
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, result_use_time, number_qty, pwi_id, tr_status)
+                    End If
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
-                    'MsgBox("Ping incompleted")
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                    End If
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                If MainFrm.Label4.Text = "K1M083" Then
+                    Dim GenSEQ As Integer = Label22.Text - 5
+                    Dim Iseq = GenSEQ
+                    Dim j As Integer = 0
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Iseq += 1
+                        Dim special_wi As String = itemPlanData.wi
+                        Dim special_item_cd As String = itemPlanData.item_cd
+                        Dim special_item_name As String = itemPlanData.item_name
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                        j = j + 1
+                    Next
+                Else
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                End If
             End Try
             Dim sum_diff As Integer = Label8.Text - Label6.Text
             Label10.Text = "-" & sum_diff
@@ -2117,7 +2276,6 @@ Public Class Working_Pro
         Next
     End Sub
     Public Function ins_qty_fn_manual()
-
         Dim add_value_loop As Integer = 0
         Dim result_add As Integer = CDbl(Val(lb_ins_qty.Text)) + CDbl(Val(Label6.Text))
         Dim loop_check As Integer = result_add / CDbl(Val(Label27.Text))
@@ -2169,17 +2327,58 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Console.WriteLine("Before Start Time ====>" & start_time2)
-                    Console.WriteLine("Before End Time ====>" & end_time2)
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, tr_status)
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, Spwi_id(j), tr_status)
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, tr_status)
+                    End If
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    End If
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                If MainFrm.Label4.Text = "K1M083" Then
+                    Dim GenSEQ As Integer = Label22.Text - 5
+                    Dim Iseq = GenSEQ
+                    Dim j As Integer = 0
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Iseq += 1
+                        Dim special_wi As String = itemPlanData.wi
+                        Dim special_item_cd As String = itemPlanData.item_cd
+                        Dim special_item_name As String = itemPlanData.item_name
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                        j = j + 1
+                    Next
+                Else
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                End If
             End Try
         End If
         If CDbl(Val(Label8.Text)) = CDbl(Val(Label6.Text)) Then
@@ -2196,15 +2395,58 @@ Public Class Working_Pro
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         tr_status = "1"
-                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
-                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, tr_status)
+                        If MainFrm.Label4.Text = "K1M083" Then
+                            Dim GenSEQ As Integer = Label22.Text - 5
+                            Dim Iseq = GenSEQ
+                            Dim j As Integer = 0
+                            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                Iseq += 1
+                                Dim special_wi As String = itemPlanData.wi
+                                Dim special_item_cd As String = itemPlanData.item_cd
+                                Dim special_item_name As String = itemPlanData.item_name
+                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                                Backoffice_model.Insert_prd_detail(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, Spwi_id(j), tr_status)
+                                j = j + 1
+                            Next
+                        Else
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, start_time2, end_time2, use_time, number_qty, pwi_id, tr_status)
+                        End If
                     Else
                         tr_status = "0"
-                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                        If MainFrm.Label4.Text = "K1M083" Then
+                            Dim GenSEQ As Integer = Label22.Text - 5
+                            Dim Iseq = GenSEQ
+                            Dim j As Integer = 0
+                            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                Iseq += 1
+                                Dim special_wi As String = itemPlanData.wi
+                                Dim special_item_cd As String = itemPlanData.item_cd
+                                Dim special_item_name As String = itemPlanData.item_name
+                                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                                j = j + 1
+                            Next
+                        Else
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                        End If
                     End If
                 Catch ex As Exception
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, Spwi_id(j))
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, lb_ins_qty.Text, number_qty, start_time2, end_time2, use_time, tr_status, pwi_id)
+                    End If
                 End Try
                 Dim shift_prd3 As String = Label14.Text
                 Dim prd_st_datetime3 As Date = st_time.Text
@@ -2215,27 +2457,6 @@ Public Class Working_Pro
                 Dim del_flg3 As String = "0"
                 Dim prd_flg3 As String = "1"
                 Dim close_lot_flg3 As String = "1"
-
-                'Try
-                'If My.Computer.Network.Ping("192.168.161.101") Then
-                'transfer_flg = "1"
-                'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
-                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
-                'Backoffice_model.work_complete(wi_plan)
-                'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                'Dim emp_cd As String
-                'For I = 0 To temp_co_emp - 1
-                'emp_cd = List_Emp.ListView1.Items(I).Text
-                'Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                'Next
-                'Else
-                '    transfer_flg = "0"
-                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
-                'End If
-                '    Catch ex As Exception
-                '    transfer_flg = "0"
-                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, Label8.Text, LB_COUNTER_SEQ.Text, seq_no, shift_prd3, staff_no, prd_st_datetime3, prd_end_datetime3, lot_no3, comp_flg3, transfer_flg3, del_flg3, prd_flg3, close_lot_flg3, 0, avarage_act_prd_time3)
-                '    End Try
             End If
             Me.Enabled = False
             Dim result_mod As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
@@ -2846,20 +3067,62 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
-                    Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, result_use_time, number_qty, pwi_id, tr_status)
-                    'MsgBox("Ping completed")
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim indRow As String = itemPlanData.IND_ROW
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, start_time, end_time, result_use_time, number_qty, Spwi_id(j), tr_status)
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, result_use_time, number_qty, pwi_id, tr_status)
+                    End If
                 Else
                     tr_status = "0"
-                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
-                    'MsgBox("Ping incompleted")
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim indRow As String = itemPlanData.IND_ROW
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                    End If
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                If MainFrm.Label4.Text = "K1M083" Then
+                    Dim GenSEQ As Integer = Label22.Text - 5
+                    Dim Iseq = GenSEQ
+                    Dim j As Integer = 0
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Iseq += 1
+                        Dim indRow As String = itemPlanData.IND_ROW
+                        Dim special_wi As String = itemPlanData.wi
+                        Dim special_item_cd As String = itemPlanData.item_cd
+                        Dim special_item_name As String = itemPlanData.item_name
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                        j = j + 1
+                    Next
+                Else
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                End If
             End Try
-            'Label16.Text.ToString("H : mm") - Now.ToString("H : mm")
-
             Dim sum_diff As Integer = Label8.Text - Label6.Text
             Label10.Text = "-" & sum_diff
             If sum_diff = 0 Then
@@ -2903,36 +3166,8 @@ Public Class Working_Pro
                 Dim prd_flg As String = "1"
                 Dim close_lot_flg As String = "1"
                 Dim avarage_act_prd_time As Double = Average
-                ' Try
-                ' act_qty = LB_COUNTER_SEQ.Text
-                ' LB_COUNTER_SHIP.Text = 0
-                ' LB_COUNTER_SEQ.Text = 0
-                ' Catch ex As Exception
-                ' act_qty = 0
-                ' End Try
-                'Try
-                'If My.Computer.Network.Ping("192.168.161.101") Then
-                'transfer_flg = "1"
-                'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                'Backoffice_model.work_complete(wi_plan)
-                'Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                'Dim emp_cd As String
-                'For I = 0 To temp_co_emp - 1
-                'emp_cd = List_Emp.ListView1.Items(I).Text
-                'Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                'Next
-                'Else
-                '    transfer_flg = "0"
-                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                'End If
-                '    Catch ex As Exception
-                '    transfer_flg = "0"
-                '    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                '    End Try
             End If
         End If
-        'End If
     End Function
     Private Async Sub Tiemr_new_dio_Tick(sender As Object, e As EventArgs) Handles Timer_new_dio.Tick
         If rsWindow Then
@@ -3183,8 +3418,7 @@ Public Class Working_Pro
         End If
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) 
+    Private Sub Button4_Click(sender As Object, e As EventArgs)
         Main()
     End Sub
-
 End Class

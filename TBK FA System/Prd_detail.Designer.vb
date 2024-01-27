@@ -23,6 +23,7 @@ Partial Class Prd_detail
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Prd_detail))
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.lb_remain_qty = New System.Windows.Forms.Label()
         Me.lb_plan_qty = New System.Windows.Forms.Label()
@@ -55,8 +56,10 @@ Partial Class Prd_detail
         Me.Label4 = New System.Windows.Forms.Label()
         Me.LB_PLAN_DATE = New System.Windows.Forms.Label()
         Me.LB_ShowWorker = New System.Windows.Forms.PictureBox()
+        Me.picSpecial = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LB_ShowWorker, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picSpecial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
@@ -111,11 +114,11 @@ Partial Class Prd_detail
         '
         Me.lb_model.AutoSize = True
         Me.lb_model.BackColor = System.Drawing.Color.Transparent
-        Me.lb_model.Font = New System.Drawing.Font("Catamaran", 20.0!, System.Drawing.FontStyle.Bold)
+        Me.lb_model.Font = New System.Drawing.Font("Catamaran", 19.0!, System.Drawing.FontStyle.Bold)
         Me.lb_model.ForeColor = System.Drawing.Color.White
         Me.lb_model.Location = New System.Drawing.Point(44, 333)
         Me.lb_model.Name = "lb_model"
-        Me.lb_model.Size = New System.Drawing.Size(81, 29)
+        Me.lb_model.Size = New System.Drawing.Size(76, 28)
         Me.lb_model.TabIndex = 35
         Me.lb_model.Text = "XXXX"
         '
@@ -364,7 +367,7 @@ Partial Class Prd_detail
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Location = New System.Drawing.Point(408, 448)
+        Me.PictureBox1.Location = New System.Drawing.Point(408, 451)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(139, 131)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -428,9 +431,19 @@ Partial Class Prd_detail
         Me.LB_ShowWorker.BackColor = System.Drawing.Color.Transparent
         Me.LB_ShowWorker.Location = New System.Drawing.Point(475, 12)
         Me.LB_ShowWorker.Name = "LB_ShowWorker"
-        Me.LB_ShowWorker.Size = New System.Drawing.Size(89, 62)
+        Me.LB_ShowWorker.Size = New System.Drawing.Size(88, 62)
         Me.LB_ShowWorker.TabIndex = 4634
         Me.LB_ShowWorker.TabStop = False
+        '
+        'picSpecial
+        '
+        Me.picSpecial.BackgroundImage = CType(resources.GetObject("picSpecial.BackgroundImage"), System.Drawing.Image)
+        Me.picSpecial.Location = New System.Drawing.Point(0, 0)
+        Me.picSpecial.Name = "picSpecial"
+        Me.picSpecial.Size = New System.Drawing.Size(800, 600)
+        Me.picSpecial.TabIndex = 4635
+        Me.picSpecial.TabStop = False
+        Me.picSpecial.Visible = False
         '
         'Prd_detail
         '
@@ -440,24 +453,26 @@ Partial Class Prd_detail
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionDetail
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.LB_ShowWorker)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.lb_model)
+        Me.Controls.Add(Me.lb_remain_qty)
+        Me.Controls.Add(Me.lb_plan_qty)
+        Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.LB_PLAN_DATE)
+        Me.Controls.Add(Me.picSpecial)
         Me.Controls.Add(Me.lb_item_name)
         Me.Controls.Add(Me.lb_wi)
         Me.Controls.Add(Me.lb_item_cd)
-        Me.Controls.Add(Me.lb_plan_qty)
-        Me.Controls.Add(Me.lb_model)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.lb_remain_qty)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lb_temp_txt)
         Me.Controls.Add(Me.QTY_NG)
-        Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.QTY_NC)
         Me.Controls.Add(Me.lb_prd_type)
@@ -466,7 +481,6 @@ Partial Class Prd_detail
         Me.Controls.Add(Me.lb_seq)
         Me.Controls.Add(Me.lb_ct)
         Me.Controls.Add(Me.lb_snp)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lb_temp_line)
         Me.Controls.Add(Me.Label22)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -475,6 +489,7 @@ Partial Class Prd_detail
         Me.Text = "Prd_detail"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LB_ShowWorker, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picSpecial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -511,4 +526,5 @@ Partial Class Prd_detail
     Friend WithEvents Label4 As Label
     Friend WithEvents LB_PLAN_DATE As Label
     Friend WithEvents LB_ShowWorker As PictureBox
+    Friend WithEvents picSpecial As PictureBox
 End Class

@@ -1,6 +1,7 @@
 ﻿Imports System.Web.Script.Serialization
 Public Class closeLotsummary
     Shared datlvDefectsumary As ListViewItem
+    Shared listviewSpecial As ListViewItem
     Shared rs
     Shared rsFg
     Shared sPart As String = ""
@@ -31,6 +32,12 @@ Public Class closeLotsummary
             setVariable()
             Finish_work.Close()
             If My.Computer.Network.Ping("192.168.161.101") Then
+                If MainFrm.Label4.Text = "K1M083" Then
+                    pbSpecialSummary.Visible = True
+                    setDataSpecial()
+                Else
+                    pbSpecialSummary.Visible = False
+                End If
                 getDefectdetailnc(sWi, sSeq, sLot)
             Else
                 load_show.Show()
@@ -38,6 +45,19 @@ Public Class closeLotsummary
         Catch ex As Exception
             load_show.Show()
         End Try
+    End Sub
+    Public Sub setDataSpecial()
+        Dim i As Integer = 0
+        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+            i += 1
+            Dim special_wi As String = itemPlanData.wi
+            Dim special_item_cd As String = itemPlanData.item_cd
+            listviewSpecial = New ListViewItem(i)
+            listviewSpecial.SubItems.Add(special_wi)
+            listviewSpecial.SubItems.Add(special_item_cd)
+            listviewSpecial.SubItems.Add(Working_Pro.LB_COUNTER_SEQ.Text)
+            ListView2.Items.Add(listviewSpecial)
+        Next
     End Sub
     Public Function getDefectdetailnc(wi As String, seq As String, lot As String)
         Try
@@ -394,22 +414,68 @@ Public Class closeLotsummary
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 transfer_flg = "1"
-                Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
-                Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-                Dim emp_cd As String
-                For i = 0 To temp_co_emp - 1
-                    emp_cd = List_Emp.ListView1.Items(i).Text
-                    Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
-                Next
+                If MainFrm.Label4.Text = "K1M083" Then
+                    Dim GenSEQ As Integer = seq_no - 5
+                    Dim Iseq = GenSEQ
+                    Dim j As Integer = 0
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Iseq += 1
+                        Dim special_wi As String = itemPlanData.wi
+                        Dim special_item_cd As String = itemPlanData.item_cd
+                        Dim special_item_name As String = itemPlanData.item_name
+                        Backoffice_model.Insert_prd_close_lot(special_wi, line_cd, special_item_cd, plan_qty, act_qty, Iseq, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                        Backoffice_model.Insert_prd_close_lot_sqlite(special_wi, line_cd, special_item_cd, plan_qty, act_qty, Iseq, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                        Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
+                        Dim emp_cd As String
+                        For i = 0 To temp_co_emp - 1
+                            emp_cd = List_Emp.ListView1.Items(i).Text
+                            Backoffice_model.Insert_emp_cd(special_wi, emp_cd, Iseq)
+                        Next
+                    Next
+                Else
+                    Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                    Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
+                    Dim emp_cd As String
+                    For i = 0 To temp_co_emp - 1
+                        emp_cd = List_Emp.ListView1.Items(i).Text
+                        Backoffice_model.Insert_emp_cd(wi_plan, emp_cd, seq_no)
+                    Next
+                End If
             Else
                 transfer_flg = "0"
-                Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                If MainFrm.Label4.Text = "K1M083" Then
+                    Dim GenSEQ As Integer = seq_no - 5
+                    Dim Iseq = GenSEQ
+                    Dim j As Integer = 0
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Iseq += 1
+                        Dim special_wi As String = itemPlanData.wi
+                        Dim special_item_cd As String = itemPlanData.item_cd
+                        Dim special_item_name As String = itemPlanData.item_name
+                        Backoffice_model.Insert_prd_close_lot_sqlite(special_wi, line_cd, special_item_cd, plan_qty, act_qty, Iseq, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                    Next
+                Else
+                    Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                End If
             End If
         Catch ex As Exception
             transfer_flg = "0"
             MsgBox("error = > " & ex.Message)
-            Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+            If MainFrm.Label4.Text = "K1M083" Then
+                Dim GenSEQ As Integer = seq_no - 5
+                Dim Iseq = GenSEQ
+                Dim j As Integer = 0
+                For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                    Iseq += 1
+                    Dim special_wi As String = itemPlanData.wi
+                    Dim special_item_cd As String = itemPlanData.item_cd
+                    Dim special_item_name As String = itemPlanData.item_name
+                    Backoffice_model.Insert_prd_close_lot_sqlite(special_wi, line_cd, special_item_cd, plan_qty, act_qty, Iseq, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                Next
+            Else
+                Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+            End If
         End Try
     End Sub
     Public Sub ClickOk(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtActualdate As String)
@@ -536,12 +602,10 @@ Public Class closeLotsummary
         Catch ex As Exception
 
         End Try
-
     End Sub
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         BTNDOWNFG()
     End Sub
-
     Private Sub lbNg_Click(sender As Object, e As EventArgs) Handles lbNg.Click
 
     End Sub

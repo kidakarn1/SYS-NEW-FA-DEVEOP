@@ -33,16 +33,57 @@ Public Class Loss_reg
                     Try
                         If My.Computer.Network.Ping("192.168.161.101") Then
                             transfer_flg = 1
-                            Backoffice_model.Update_flg_loss(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
-                            Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
-                            Backoffice_model.alert_loss(wi_plan, "2", pd, loss_cd_id)
+                            If MainFrm.Label4.Text = "K1M083" Then
+                                Dim GenSEQ As Integer = seq_no - 5
+                                Dim Iseq = GenSEQ
+                                Dim j As Integer = 0
+                                For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                    Iseq += 1
+                                    Dim special_wi As String = itemPlanData.wi
+                                    Dim special_item_cd As String = itemPlanData.item_cd
+                                    Dim special_item_name As String = itemPlanData.item_name
+                                    Backoffice_model.Update_flg_loss(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                                    Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                                    Backoffice_model.alert_loss(special_wi, "2", pd, loss_cd_id)
+                                Next
+                            Else
+                                Backoffice_model.Update_flg_loss(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                                Backoffice_model.alert_loss(wi_plan, "2", pd, loss_cd_id)
+                            End If
                         Else
                             transfer_flg = 0
-                            Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                            If MainFrm.Label4.Text = "K1M083" Then
+                                Dim GenSEQ As Integer = seq_no - 5
+                                Dim Iseq = GenSEQ
+                                Dim j As Integer = 0
+                                For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                    Iseq += 1
+                                    Dim special_wi As String = itemPlanData.wi
+                                    Dim special_item_cd As String = itemPlanData.item_cd
+                                    Dim special_item_name As String = itemPlanData.item_name
+                                    Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                                Next
+                            Else
+                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                            End If
                         End If
                     Catch ex As Exception
                         transfer_flg = 0
-                        Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                        If MainFrm.Label4.Text = "K1M083" Then
+                            Dim GenSEQ As Integer = seq_no - 5
+                            Dim Iseq = GenSEQ
+                            Dim j As Integer = 0
+                            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                Iseq += 1
+                                Dim special_wi As String = itemPlanData.wi
+                                Dim special_item_cd As String = itemPlanData.item_cd
+                                Dim special_item_name As String = itemPlanData.item_name
+                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                            Next
+                        Else
+                            Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                        End If
                     End Try
                     Dim LoadSQL = Backoffice_model.get_loss_mst()
                     While LoadSQL.Read()
@@ -78,13 +119,35 @@ Public Class Loss_reg
                 Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
-                        Backoffice_model.line_status_ins(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
-                        Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
+                        If MainFrm.Label4.Text = "K1M083" Then
+                            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                Dim special_wi As String = itemPlanData.wi
+                                Backoffice_model.line_status_ins(line_id, date_st, date_end, "1", "0", "24", "0", special_wi)
+                                Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", special_wi)
+                            Next
+                        Else
+                            Backoffice_model.line_status_ins(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
+                            Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
+                        End If
+                    Else
+                        If MainFrm.Label4.Text = "K1M083" Then
+                            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                Dim special_wi As String = itemPlanData.wi
+                                Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", special_wi)
+                            Next
+                        Else
+                            Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
+                        End If
+                    End If
+                Catch ex As Exception
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Dim special_wi As String = itemPlanData.wi
+                            Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", special_wi)
+                        Next
                     Else
                         Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
                     End If
-                Catch ex As Exception
-                    Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
                 End Try
                 Dim sel_combo As String = ComboBox1.SelectedIndex
                 Dim wi_plan As String = Working_Pro.wi_no.Text
@@ -114,18 +177,60 @@ Public Class Loss_reg
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         transfer_flg = "1"
-                        Backoffice_model.Update_flg_loss(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
-                        Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
-                        Backoffice_model.alert_loss(wi_plan, "1", pd, loss_cd_id)
+                        If MainFrm.Label4.Text = "K1M083" Then
+                            Dim GenSEQ As Integer = seq_no - 5
+                            Dim Iseq = GenSEQ
+                            Dim j As Integer = 0
+                            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                Iseq += 1
+                                Dim special_wi As String = itemPlanData.wi
+                                Dim special_item_cd As String = itemPlanData.item_cd
+                                Dim special_item_name As String = itemPlanData.item_name
+                                Backoffice_model.Update_flg_loss(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
+                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
+                                Backoffice_model.alert_loss(special_wi, "1", pd, loss_cd_id)
+                            Next
+                        Else
+                            Backoffice_model.Update_flg_loss(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
+                            Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")
+                            Backoffice_model.alert_loss(wi_plan, "1", pd, loss_cd_id)
+                        End If
                         ' maintenance.updMaintenanceSqlite()
                         ' maintenance.UpdateMaintenance(line_cd, ComboBox1.Text, shift_prd, test_time_loss_time.Text, DateTime.Now.ToString("yyyy/MM/dd H:m:s"), date_start_data)
                     Else
                         transfer_flg = "0"
-                        Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                        If MainFrm.Label4.Text = "K1M083" Then
+                            Dim GenSEQ As Integer = seq_no - 5
+                            Dim Iseq = GenSEQ
+                            Dim j As Integer = 0
+                            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                                Iseq += 1
+                                Dim special_wi As String = itemPlanData.wi
+                                Dim special_item_cd As String = itemPlanData.item_cd
+                                Dim special_item_name As String = itemPlanData.item_name
+                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                            Next
+                        Else
+                            Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")                'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                        End If
                     End If
                 Catch ex As Exception
                     transfer_flg = "0"
-                    Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")            'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = seq_no - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")            'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                        Next
+                    Else
+                        Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")            'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
+                    End If
                 End Try
                 Working_Pro.Enabled = True
                 Me.Close()
@@ -138,7 +243,20 @@ Public Class Loss_reg
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
-        Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, Working_Pro.wi_no.Text, Working_Pro.Label22.Text)
+        If MainFrm.Label4.Text = "K1M083" Then
+            Dim GenSEQ As Integer = CDbl(Val(Working_Pro.Label22.Text)) - 5
+            Dim Iseq = GenSEQ
+            Dim j As Integer = 0
+            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                Iseq += 1
+                Dim special_wi As String = itemPlanData.wi
+                Dim special_item_cd As String = itemPlanData.item_cd
+                Dim special_item_name As String = itemPlanData.item_name
+                Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, special_wi, Iseq)
+            Next
+        Else
+            Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, Working_Pro.wi_no.Text, Working_Pro.Label22.Text)
+        End If
         Working_Pro.lbNextTime.Text = BreakTime
         Working_Pro.Enabled = True
         Submit_loss()
@@ -182,10 +300,19 @@ Public Class Loss_reg
     Private Sub Label1_Click(sender As Object, e As EventArgs)
 
     End Sub
-
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, Working_Pro.wi_no.Text, Working_Pro.lb_model.Text)
-        '  Shell("C:\Program Files (x86)\Default Company Name\MNs\FA-Adding User.exe")
+        If MainFrm.Label4.Text = "K1M083" Then
+            Dim j As Integer = 0
+            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                Dim special_wi As String = itemPlanData.wi
+                Dim special_item_cd As String = itemPlanData.item_cd
+                Dim special_item_name As String = itemPlanData.item_name
+                Dim special_model As String = itemPlanData.MODEL
+                maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, special_wi, special_model)
+            Next
+        Else
+            maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, Working_Pro.wi_no.Text, Working_Pro.lb_model.Text)
+        End If
         Shell("C:\Program Files (x86)\Default Company Name\TicketMaintenances\MaintenanceSystem.exe")
     End Sub
 End Class

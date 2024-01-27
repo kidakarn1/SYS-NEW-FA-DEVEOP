@@ -11,16 +11,18 @@ Public Class MainFrm
     'End Sub
     Dim p() As Process
 	Public Declare Auto Function FindWindowNullClassName Lib "user32.dll" Alias "FindWindow" (ByVal ipClassname As Integer, ByVal IpWindownName As String) As Integer
-	Dim Counter As Integer = 0
-	Public Sub check_process()
-		Dim hWnd As Integer = FindWindowNullClassName(0, "TBK FA System.exe")
-		If hWnd = 0 Then
-			'MsgBox("No process found!")
-		Else
-			'MsgBox(" process found!")
-		End If
-	End Sub
-	Public Function CheckIfRunning()
+    Dim Counter As Integer = 0
+    Dim dataPlan As String = ""
+    Public Shared ArrayDataPlan As New List(Of DataPlan)
+    Public Sub check_process()
+        Dim hWnd As Integer = FindWindowNullClassName(0, "TBK FA System.exe")
+        If hWnd = 0 Then
+            'MsgBox("No process found!")
+        Else
+            'MsgBox(" process found!")
+        End If
+    End Sub
+    Public Function CheckIfRunning()
 		p = Process.GetProcessesByName("TBK FA System")
 		If p.Count > 1 Then
 			Application.Exit()
@@ -273,14 +275,17 @@ Public Class MainFrm
         Working_Pro.lb_ng_qty.Text = "0"
         'MsgBox(line_id.Text)
         Try
+            ArrayDataPlan = New List(Of DataPlan)
             If My.Computer.Network.Ping(Backoffice_model.svDatabase) Then
                 Backoffice_model.updated_data_to_dbsvr()
                 Dim LoadSQL_prd_plan As String = ""
                 If rsCheckCriticalFlg = "0" Then
                     LoadSQL_prd_plan = Backoffice_model.Get_prd_plan_new(Label4.Text)
+                    dataPlan = LoadSQL_prd_plan
                     Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(LoadSQL_prd_plan)
                     If LoadSQL_prd_plan <> " " Then
                         For Each item As Object In dict
+                            ArrayDataPlan.Add(New DataPlan With {.IND_ROW = item("IND_ROW").ToString(), .PS_UNIT_NUMERATOR = "PS_UNIT_NUMERATOR", .CT = item("CT").ToString(), .seq_no = item("seq_no").ToString(), .WORK_ODR_DLV_DATE = item("WORK_ODR_DLV_DATE").ToString(), .LOCATION_PART = item("LOCATION_PART").ToString(), .MODEL = item("MODEL").ToString(), .PRODUCT_TYP = item("PRODUCT_TYP").ToString(), .wi = item("WI").ToString(), .item_cd = item("ITEM_CD").ToString(), .item_name = item("ITEM_NAME").ToString()})
                             Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
                             Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
                             Prd_detail.lb_item_cd.Text = item("ITEM_CD").ToString()
@@ -290,9 +295,10 @@ Public Class MainFrm
                             Prd_detail.lb_remain_qty.Text = (item("QTY").ToString() - item("prd_qty_sum").ToString())
                             Prd_detail.lb_wi.Text = item("WI").ToString()
                             Prd_detail.LB_PLAN_DATE.Text = item("WORK_ODR_DLV_DATE").ToString().Substring(0, 10)
-                            Prd_detail.Show()
                         Next
+                        Prd_detail.Show()
                     Else
+                        dataPlan = ""
                         menu1.Enabled = False
                         menu4.Enabled = False
                         menu2.Enabled = False
@@ -495,6 +501,6 @@ Public Class MainFrm
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        Form1.Show()
+        TEST_PRINTLABEL.Show()
     End Sub
 End Class

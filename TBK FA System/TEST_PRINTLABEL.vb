@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing.Printing
 Imports System.Drawing.Text
 Imports ZXing
-Public Class Form1
+Public Class TEST_PRINTLABEL
     Private WithEvents printDocument1 As New PrintDocument()
     Private WithEvents printDocument2 As New PrintDocument()
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load

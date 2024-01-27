@@ -636,7 +636,7 @@ re_insert_rework_act:
         Dim result_update_count_pro = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_check_data/chk_spec_line?line_cd=" & GET_LINE_PRODUCTION())
         Return result_update_count_pro
     End Function
-    Public Shared Function INSERT_tmp_planseq(wi, line_cd, date_start, date_end)
+    Public Shared Function INSERT_tmp_planseq(wi, line_cd, date_start, date_end, seq)
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
@@ -649,7 +649,7 @@ re_insert_rework_act:
 			values(
 					'" & line_cd & "',
 					'" & date_start & "',
-					'1',
+					'" & seq & "',
 					'" & date_start & "',
 					'SYSTEM',
 					'" & date_start & "',

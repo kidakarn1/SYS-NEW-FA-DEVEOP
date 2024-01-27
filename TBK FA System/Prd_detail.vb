@@ -1,8 +1,13 @@
 Imports System.Net
 Imports System.IO
 Public Class Prd_detail
-	Public Shared status_check_ping = 0
-	Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    Public Shared status_check_ping = 0
+    Dim part1Color As Color = Color.FromArgb(44, 88, 131)
+    Dim part2Color As Color = Color.FromArgb(44, 85, 131)
+    Dim part3Color As Color = Color.FromArgb(44, 83, 131)
+    Dim part4Color As Color = Color.FromArgb(44, 80, 131)
+    Dim part5Color As Color = Color.FromArgb(44, 78, 131)
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 		set_shift()
 		'Label2.Text = TimeOfDay.ToString("H:mm:ss")
 		'Label1.Text = DateTime.Now.ToString("yyyy/MM/dd")
@@ -22,7 +27,12 @@ Public Class Prd_detail
 		End Try
 		Return status_check_ping
 	End Function
-	Private Sub Prd_detail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Prd_detail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If MainFrm.Label4.Text = "K1M083" Then
+            setDataSpecial()
+        Else
+            picSpecial.Visible = False
+        End If
         Dim i = List_Emp.ListView1.Items.Count
         Backoffice_model.UpdateFlgZero(Label4.Text)
         Backoffice_model.UpdateWorking(lb_wi.Text)
@@ -202,9 +212,63 @@ Public Class Prd_detail
 		Label4.Text = DateTime.Now.ToString("D")
 		Label22.Text = DateTime.Now.ToString("yyyy/MM/dd")
 	End Sub
-	Private Sub Label22_Click(sender As Object, e As EventArgs) Handles Label22.Click
+    Private Sub Label22_Click(sender As Object, e As EventArgs) Handles Label22.Click
 
-	End Sub
+    End Sub
+    Public Sub setDataSpecial()
+        picSpecial.Visible = True
+        Dim widthP = 70
+        Dim heightP = 120
+        Dim widthW = 320
+        Dim heightW = 120
+        Dim i As Integer = 0
+        Dim colorsArray() As Color = {part1Color, part2Color, part3Color, part4Color, part5Color}
+        For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+            Dim newLabelP As New Label()
+            Dim newLabelW As New Label()
+            Dim special_wi As String = itemPlanData.wi
+            Dim special_item_cd As String = itemPlanData.item_cd
+            newLabelP.Text = special_item_cd
+            newLabelP.Location = New Point(widthP, heightP) ' Set the position of the label
+            newLabelP.Font = New Font("Catamaran", 19) ' Change "Arial" to the desired font and 12 to the desired font size
+            newLabelP.AutoSize = True ' Adjust the size of the label based on its content
+            newLabelP.BackColor = Color.Transparent ' Change LightBlue to the desired color
+            newLabelP.ForeColor = Color.White
+            heightP += 37.5
+            Me.Controls.Add(newLabelP)
+            newLabelW.Text = special_wi
+            newLabelW.Location = New Point(widthW, heightW) ' Set the position of the label
+            newLabelW.Font = New Font("Catamaran", 19) ' Change "Arial" to the desired font and 12 to the desired font size
+            newLabelW.AutoSize = True ' Adjust the size of the label based on its content
+            ' newLabelW.BackColor = Color.Transparent ' Change LightBlue to the desired color
+            newLabelW.ForeColor = Color.White
+            heightW += 37.5
+            Me.Controls.Add(newLabelW)
+            ' Label20.BackColor = Color.FromArgb(44, 82, 131)
+            newLabelP.BringToFront()
+            newLabelW.BringToFront()
+            newLabelP.BackColor = colorsArray(i)
+            newLabelW.BackColor = colorsArray(i)
+            i += 1
+        Next
+        Button4.BringToFront()
+        Button3.BringToFront()
+        Label6.BackColor = Color.FromArgb(44, 85, 130)
+        Label6.Location = New Point(584, 159)
+        Label6.BringToFront()
+        LB_PLAN_DATE.BackColor = Color.FromArgb(44, 77, 131)
+        LB_PLAN_DATE.Location = New Point(542, 270)
+        LB_PLAN_DATE.BringToFront()
+        lb_remain_qty.Location = New Point(628, 371)
+        lb_remain_qty.BringToFront()
+        lb_plan_qty.Location = New Point(426, 372)
+        lb_plan_qty.BringToFront()
+        Label12.Location = New Point(57, 442)
+        Label12.BringToFront()
+        lb_model.BackColor = Color.FromArgb(44, 72, 132)
+        lb_model.Location = New Point(40, 355)
+        lb_model.BringToFront()
+    End Sub
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim shift = Trim(Label12.Text.Substring(0, 1))
         Try
@@ -283,4 +347,5 @@ Public Class Prd_detail
         Dim showWork = New Show_Worker
         showWork.show
     End Sub
+
 End Class
