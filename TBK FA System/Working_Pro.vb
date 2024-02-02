@@ -1824,7 +1824,20 @@ Public Class Working_Pro
         End If
         e.Graphics.DrawString(result_snp, lb_font2.Font, Brushes.Black, 505, 25)
         e.Graphics.DrawString("PART NAME", lb_font1.Font, Brushes.Black, 152, 67)
-        e.Graphics.DrawString(Label12.Text, lb_font2.Font, Brushes.Black, 152, 79)
+        Dim PART_NAME As String = ""
+        If Len(Label12.Text) > 36 Then
+            PART_NAME = Label12.Text.Replace(vbCrLf, "") '
+            Dim pastNameLine1 = Label12.Text.Substring(0, 30)
+            Dim pastNameLine2 = Label12.Text.Substring(30)
+            e.Graphics.DrawString(pastNameLine1, Label9_fontModel.Font, Brushes.Black, 152, 79)
+            e.Graphics.DrawString(pastNameLine2, Label9_fontModel.Font, Brushes.Black, 152, 98)
+        Else
+            PART_NAME = Label12.Text.Replace(vbCrLf, "")
+            e.Graphics.DrawString(PART_NAME, lb_font2.Font, Brushes.Black, 152, 79)
+        End If
+
+        'e.Graphics.DrawString(Label12.Text, lb_font2.Font, Brushes.Black, 152, 79)
+
         e.Graphics.DrawString("MODEL", lb_font1.Font, Brushes.Black, 152, 123)
         e.Graphics.DrawString(lb_model.Text, lb_font4.Font, Brushes.Black, 152, 141)
         e.Graphics.DrawString("NEXT PROCESS", lb_font1.Font, Brushes.Black, 412, 123)

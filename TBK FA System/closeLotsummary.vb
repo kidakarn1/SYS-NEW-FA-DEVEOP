@@ -33,7 +33,11 @@ Public Class closeLotsummary
             Finish_work.Close()
             If My.Computer.Network.Ping("192.168.161.101") Then
                 If MainFrm.Label4.Text = "K1M083" Then
+                    lbLine.BackColor = Color.FromArgb(44, 88, 130)
+                    lbLine.Location = New Point(166, 113)
+                    lbLine.Font = New Font(lbLine.Font.FontFamily, 23)
                     pbSpecialSummary.Visible = True
+                    ListView2.Visible = True
                     setDataSpecial()
                 Else
                     pbSpecialSummary.Visible = False
@@ -62,7 +66,6 @@ Public Class closeLotsummary
     Public Function getDefectdetailnc(wi As String, seq As String, lot As String)
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
-                aDefectcode.Clear()
                 aDefectcode.Clear()
                 Dim md As New modelDefect()
                 rs = md.mGetdatachildpartsummarychild(wi, seq, lot)
@@ -229,10 +232,21 @@ Public Class closeLotsummary
                     End If
                 End If
                 insertProductionactual(sWi, sLine, sPart, pQty, seqQty, sSeq, sShift, staffNo, stDatetime, eDatetime, sLot, cFlg, trFlg, dFlg, prdFlg, clFlg, avarage_eff, avarage_act_prd_time)
-                If cFlg = 1 Then
-                    Backoffice_model.work_complete(sWi)
+                If MainFrm.Label4.Text = "K1M083" Then
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Dim special_wi As String = itemPlanData.wi
+                        If cFlg = 1 Then
+                            Backoffice_model.work_complete(special_wi)
+                        Else
+                            Backoffice_model.work_complete_offline(special_wi)
+                        End If
+                    Next
                 Else
-                    Backoffice_model.work_complete_offline(sWi)
+                    If cFlg = 1 Then
+                        Backoffice_model.work_complete(sWi)
+                    Else
+                        Backoffice_model.work_complete_offline(sWi)
+                    End If
                 End If
                 checkPrintnormal()
                 checkPrintdefect(sWi, sSeq, sLot)
@@ -400,10 +414,16 @@ Public Class closeLotsummary
         If Working_Pro.LB_COUNTER_SEQ.Text > 0 And result_total > "0" And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
             Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
             Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
+            If MainFrm.Label4.Text = "K1M083" Then
+                If result_mod <> 0 Then
+                    Working_Pro.tag_print()
+                End If
+            Else
+                Working_Pro.tag_print()
+            End If
             ' Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
-            Working_Pro.tag_print()
         End If
-            Try
+        Try
                 Working_Pro.LB_COUNTER_SEQ.Text = 0
             Catch ex As Exception
                 Working_Pro.LB_COUNTER_SEQ.Text = 0

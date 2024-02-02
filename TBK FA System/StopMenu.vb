@@ -196,6 +196,9 @@
         End Try
     End Sub
     Public Sub insLoss()
+        If Working_Pro.check_in_up_seq = 0 Then
+            date_start_data = Working_Pro.Gdate_now_date
+        End If
         Dim pd As String = MainFrm.Label6.Text
         Dim sel_combo As String = 0 'ComboBox1.SelectedIndex
         Dim wi_plan As String = Working_Pro.wi_no.Text
@@ -262,7 +265,6 @@
             End If
         Catch ex As Exception
             transfer_flg = "0"
-
             If MainFrm.Label4.Text = "K1M083" Then
                 Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
                 Dim Iseq = GenSEQ
@@ -290,6 +292,8 @@
         Console.WriteLine("date_start_data ===>" & date_start_data) ' ไม่ต้องลบ 
         If Working_Pro.check_in_up_seq = 0 Then
             date_start_data = Working_Pro.Gdate_now_date
+        Else
+            date_start_data = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         End If
         TimerLossBT.Start()
         TimerLossBT.Enabled = True

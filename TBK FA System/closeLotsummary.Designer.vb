@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class closeLotsummary
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class closeLotsummary
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(closeLotsummary))
         Me.lbWi = New System.Windows.Forms.Label()
@@ -481,6 +481,7 @@ Partial Class closeLotsummary
         Me.ListView2.TabIndex = 63
         Me.ListView2.UseCompatibleStateImageBehavior = False
         Me.ListView2.View = System.Windows.Forms.View.Details
+        Me.ListView2.Visible = False
         '
         'NO
         '
@@ -509,6 +510,7 @@ Partial Class closeLotsummary
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.closeLotsummary1
         Me.ClientSize = New System.Drawing.Size(801, 600)
+        Me.Controls.Add(Me.lbLine)
         Me.Controls.Add(Me.ListView2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnOk)
@@ -527,7 +529,6 @@ Partial Class closeLotsummary
         Me.Controls.Add(Me.lbAct)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.lbLine)
         Me.Controls.Add(Me.lbNg)
         Me.Controls.Add(Me.lbNc)
         Me.Controls.Add(Me.Label6)

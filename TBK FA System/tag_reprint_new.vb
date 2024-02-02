@@ -179,7 +179,16 @@ Public Class tag_reprint_new
                     e.Graphics.DrawString("QTY.", Working_Pro.lb_font1.Font, Brushes.Black, 492, 13)
                     e.Graphics.DrawString(Trim(qty), Working_Pro.lb_font2.Font, Brushes.Black, 505, 25)
                     e.Graphics.DrawString("PART NAME", Working_Pro.lb_font1.Font, Brushes.Black, 152, 67)
-                    e.Graphics.DrawString(part_name, Working_Pro.lb_font2.Font, Brushes.Black, 152, 79)
+                    If Len(part_name) > 36 Then
+                        part_name = part_name.Replace(vbCrLf, "")
+                        Dim pastNameLine1 = part_name.Substring(0, 30)
+                        Dim pastNameLine2 = part_name.Substring(30)
+                        e.Graphics.DrawString(pastNameLine1, Label9_fontModel.Font, Brushes.Black, 152, 79)
+                        e.Graphics.DrawString(pastNameLine2, Label9_fontModel.Font, Brushes.Black, 152, 98)
+                    Else
+                        part_name = part_name.Replace(vbCrLf, "")
+                        e.Graphics.DrawString(part_name, lb_font2.Font, Brushes.Black, 152, 79)
+                    End If
                     e.Graphics.DrawString("MODEL", Working_Pro.lb_font1.Font, Brushes.Black, 152, 123)
                     e.Graphics.DrawString(model, Working_Pro.lb_font4.Font, Brushes.Black, 152, 141)
                     e.Graphics.DrawString("NEXT PROCESS", Working_Pro.lb_font1.Font, Brushes.Black, 412, 123)

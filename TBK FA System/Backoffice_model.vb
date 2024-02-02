@@ -611,7 +611,7 @@ re_insert_rework_act:
             sqliteConn.Open()
             Dim cmd As New SQLiteCommand
             cmd.Connection = sqliteConn
-            cmd.CommandText = "INSERT INTO rework_actual (rwa_part_no,rwa_qty,rwa_ship,rwa_created_date_time,ref_wi ,rwa_part_name ,rwa_model,tr_status  )
+            cmd.CommandText = "INSERT INTO rework_actual (rwa_part_no,rwa_qty,rwa_ship,rwa_created_date_time,ref_wi ,rwa_part_name ,rwa_model,tr_status)
 		VALUES(
 				'" & RAW_PART_NO & "', 
 				'" & RAW_QTY & "',
@@ -1079,7 +1079,6 @@ where
             'Application.Exit()
         End Try
     End Function
-
     Public Shared Function Get_prd_plan_new(line_cd As String)
         Try
             Dim api = New api()
@@ -3608,25 +3607,47 @@ re_insert_rework_act:
         Return 0
     End Function
     Public Shared Function Get_plan_production_critical()
-        Dim api = New api()
-        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical?line_cd=" & GET_LINE_PRODUCTION())
-        Return result_api_checkper
+        Try
+            Dim api = New api()
+            Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical?line_cd=" & GET_LINE_PRODUCTION())
+            Return result_api_checkper
+        Catch ex As Exception
+            MsgBox("Error Function Get_plan_production_critical In Backoffice_model")
+        End Try
     End Function
     Public Shared Function GetDataPlanCritical(wi As String)
-        Dim api = New api()
-        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical/GetDataPlanCritical?wi=" & wi & "&line_cd=" & GET_LINE_PRODUCTION())
-        Return result_api_checkper
+        Try
+            Dim api = New api()
+            Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical/GetDataPlanCritical?wi=" & wi & "&line_cd=" & GET_LINE_PRODUCTION())
+            Return result_api_checkper
+        Catch ex As Exception
+            MsgBox("Error Function GetDataPlanCritical In Backoffice_model")
+        End Try
     End Function
     Public Shared Sub UpdateFlgZero(line_cd As String)
-        Dim api = New api()
-        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/UpdateFlgZero?line_cd=" & line_cd)
+        Try
+            Dim api = New api()
+            Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/UpdateFlgZero?line_cd=" & line_cd)
+        Catch ex As Exception
+            MsgBox("Error Function UpdateFlgZeroSpecial In Backoffice_model")
+        End Try
+
     End Sub
     Public Shared Sub UpdateFlgZeroSpecial(wi1 As String, wi2 As String, wi3 As String, wi4 As String, wi5 As String)
-        Dim api = New api()
-        Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/UpdateFlgZeroSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
+        Try
+            Dim api = New api()
+            Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/UpdateFlgZeroSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
+        Catch ex As Exception
+            MsgBox("Error Function UpdateFlgZeroSpecial In Backoffice_model")
+        End Try
     End Sub
     Public Shared Sub UpdateWorkingSpecial(wi1 As String, wi2 As String, wi3 As String, wi4 As String, wi5 As String)
-        Dim api = New api()
-        Dim reusult_data = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/Update_supply_dev_WorkingSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
+        Try
+            Dim api = New api()
+            Dim reusult_data = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/Update_supply_dev_WorkingSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
+        Catch ex As Exception
+            MsgBox("Error Function UpdateWorkingSpecial In Backoffice_model")
+        End Try
+
     End Sub
 End Class

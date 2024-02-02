@@ -273,12 +273,12 @@ Public Class print_back
         e.Graphics.DrawString(prdtype, Label_wi_type.Font, Brushes.Black, 12, 99)
         e.Graphics.DrawString("Instr. Code", lb_font5.Font, Brushes.Black, 120, 15)
         e.Graphics.DrawString("BRACKET CAM ASSY ", lb_font4_B.Font, Brushes.Black, 120, 35)
-        Dim result_snp As Integer = 1 'CDbl(Val(Working_Pro.Label6.Text)) Mod CDbl(Val(Working_Pro.Label27.Text))
-        'If Backoffice_model.check_line_reprint() = "0" Then
-        '	If result_snp = "0" Then
-        '	result_snp = Working_Pro.Label27.Text
-        '	End If
-        '	End If
+        Dim result_snp As Integer = CDbl(Val(Working_Pro.Label6.Text)) Mod CDbl(Val(Working_Pro.Label27.Text))
+        If Backoffice_model.check_line_reprint() = "0" Then
+            If result_snp = "0" Then
+                result_snp = Working_Pro.Label27.Text
+            End If
+        End If
         e.Graphics.DrawString("QTY.", lb_font3.Font, Brushes.Black, 316, 15)
         e.Graphics.DrawString(result_snp, LB_QTY.Font, Brushes.Black, 363, 30)
         e.Graphics.DrawString("MODEL", lb_font5.Font, Brushes.Black, 120, 60)
@@ -367,11 +367,11 @@ Public Class print_back
         Dim qr_by_model = 158
         Dim qr_by_model_left = 118
         Dim iden_cd As String
-        'If MainFrm.Label6.Text = "K1PD01" Then
-        iden_cd = "GB"
-        ' Else
-        'iden_cd = "GB"
-        ' End If
+        If MainFrm.Label6.Text = "K1PD01" Then
+            iden_cd = "GB"
+        Else
+            iden_cd = "GB"
+        End If
         Dim part_no_res1 As String
         Dim part_no_res As String
         Dim part_numm As Integer = 0

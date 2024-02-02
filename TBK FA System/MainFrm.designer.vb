@@ -65,7 +65,6 @@ Partial Class MainFrm
         Me.PictureBox9 = New System.Windows.Forms.PictureBox()
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,7 +95,7 @@ Partial Class MainFrm
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(169, 19)
         Me.Label9.TabIndex = 23
-        Me.Label9.Text = "FA SYSTEM V 1.8.4"
+        Me.Label9.Text = "FA SYSTEM V 1.8.2"
         '
         'Panel1
         '
@@ -578,15 +577,6 @@ Partial Class MainFrm
         Me.PictureBox11.TabStop = False
         Me.PictureBox11.Visible = False
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(553, 17)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 4638
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'MainFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -596,7 +586,6 @@ Partial Class MainFrm
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.MainMenu4
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.PictureBox11)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.PictureBox9)
@@ -683,5 +672,4 @@ Partial Class MainFrm
     Friend WithEvents PictureBox9 As PictureBox
     Friend WithEvents PictureBox10 As PictureBox
     Friend WithEvents PictureBox11 As PictureBox
-    Friend WithEvents Button1 As Button
 End Class

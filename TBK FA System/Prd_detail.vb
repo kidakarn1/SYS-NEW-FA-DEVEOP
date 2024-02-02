@@ -366,5 +366,4 @@ Public Class Prd_detail
         Dim showWork = New Show_Worker
         showWork.show
     End Sub
-
 End Class

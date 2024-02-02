@@ -16,6 +16,7 @@ Public Class Chang_Loss
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         Dim sel_cd As Integer = ListView2.SelectedIndices(0)
         Dim line_id As String = MainFrm.line_id.Text
+        Dim status_loss As Integer = 0
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Try
@@ -89,6 +90,7 @@ Public Class Chang_Loss
                             load_show.Show()
                         End If
                     Catch ex As Exception
+                        status_loss = 1
                         MsgBox(ex.Message)
                         load_show.Show()
                     End Try
@@ -171,8 +173,10 @@ Public Class Chang_Loss
                         Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id)
                     End If
                 End Try
-                Loss_reg.Show()
-                Me.Close()
+                If status_loss = 0 Then
+                    Loss_reg.Show()
+                    Me.Close()
+                End If
             End If
         Catch ex As Exception
             load_show.Show()

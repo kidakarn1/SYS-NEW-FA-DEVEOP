@@ -52,6 +52,7 @@ Partial Class tag_reprint_new
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pb_down = New System.Windows.Forms.PictureBox()
         Me.pbUp = New System.Windows.Forms.PictureBox()
+        Me.Label9_fontModel = New System.Windows.Forms.Label()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -330,6 +331,17 @@ Partial Class tag_reprint_new
         Me.pbUp.TabIndex = 4637
         Me.pbUp.TabStop = False
         '
+        'Label9_fontModel
+        '
+        Me.Label9_fontModel.AutoSize = True
+        Me.Label9_fontModel.Font = New System.Drawing.Font("Consolas", 15.0!, System.Drawing.FontStyle.Bold)
+        Me.Label9_fontModel.Location = New System.Drawing.Point(183, 57)
+        Me.Label9_fontModel.Name = "Label9_fontModel"
+        Me.Label9_fontModel.Size = New System.Drawing.Size(186, 23)
+        Me.Label9_fontModel.TabIndex = 4655
+        Me.Label9_fontModel.Text = "Label9_fontModel"
+        Me.Label9_fontModel.Visible = False
+        '
         'tag_reprint_new
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -337,6 +349,7 @@ Partial Class tag_reprint_new
         Me.BackColor = System.Drawing.Color.DarkSlateGray
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.reprintTag1
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.Label9_fontModel)
         Me.Controls.Add(Me.pb_down)
         Me.Controls.Add(Me.pbUp)
         Me.Controls.Add(Me.Label4)
@@ -400,4 +413,5 @@ Partial Class tag_reprint_new
     Friend WithEvents Label1 As Label
     Friend WithEvents pb_down As PictureBox
     Friend WithEvents pbUp As PictureBox
+    Friend WithEvents Label9_fontModel As Label
 End Class

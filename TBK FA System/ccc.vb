@@ -15,15 +15,21 @@ Public Class Sel_prd_setup
                 Loss_reg.Label2.Text = MainFrm.Label4.Text
                 Dim LoadSQL = Backoffice_model.get_loss_mst()
                 Dim i As Integer = 1
+                Dim checkRs As Integer = 0
                 While LoadSQL.Read()
                     Chang_Loss.ListView2.ForeColor = Color.Blue
                     Chang_Loss.ListView2.Items.Add(LoadSQL("id_mst").ToString()).SubItems.AddRange(New String() {LoadSQL("loss_cd").ToString(), LoadSQL("description_th").ToString()})
                     Chang_Loss.ListBox1.Items.Add(LoadSQL("loss_type").ToString())
                     i += 1
+                    checkRs = 1
                 End While
                 LoadSQL.close
-                Chang_Loss.Show()
-                Me.Hide()
+                If checkRs = 1 Then
+                    Chang_Loss.Show()
+                    Me.Hide()
+                Else
+                    MsgBox("Please Check Master Loss.")
+                End If
             End If
         Catch ex As Exception
             load_show.Show()
@@ -33,16 +39,22 @@ Public Class Sel_prd_setup
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Change_Loss2.ListView2.View = View.Details
+                Dim checkRs As Integer = 0
                 Loss_reg_pass.Label2.Text = MainFrm.Label4.Text
                 Dim LoadSQL = Backoffice_model.get_loss_mst()
                 While LoadSQL.Read()
                     Change_Loss2.ListView2.ForeColor = Color.Blue
                     Change_Loss2.ListView2.Items.Add(LoadSQL("id_mst").ToString()).SubItems.AddRange(New String() {LoadSQL("loss_cd").ToString(), LoadSQL("description_th").ToString()})
                     Change_Loss2.ListBox1.Items.Add(LoadSQL("loss_type").ToString())
+                    checkRs = 1
                 End While
-                LoadSQL.close()
-                Change_Loss2.Show()
-                Me.Hide()
+                If checkRs = 1 Then
+                    LoadSQL.close()
+                    Change_Loss2.Show()
+                    Me.Hide()
+                Else
+                    MsgBox("Please Check Master Loss.")
+                End If
             Else
                 load_show.Show()
             End If

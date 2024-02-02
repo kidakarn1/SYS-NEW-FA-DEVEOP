@@ -16,9 +16,7 @@ Public Class List_Emp
             End If
             Sc.TextBox2.Select()
             Me.Enabled = False
-
             Sc.Show()
-
         End If
     End Sub
     Public Function set_data_Month(lotSubstMonth)
@@ -465,6 +463,8 @@ Public Class List_Emp
                 If MainFrm.Label4.Text = "K1M083" Then
                     Dim GenSEQ As Integer = seq_no - 5
                     Dim Iseq = GenSEQ
+                    Working_Pro.Spwi_id = New List(Of String)
+                    Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                         Iseq += 1
                         Dim indRow As String = itemPlanData.IND_ROW
@@ -474,10 +474,12 @@ Public Class List_Emp
                         Dim temp_co_emp_realtime As Integer = ListView1.Items.Count
                         Dim emp_cd_realtime As String
                         Dim wi As String = itemPlanData.wi
+                        Working_Pro.Spwi_id.Add(Working_Pro.pwi_id)
                         For i = 0 To temp_co_emp_realtime - 1
                             emp_cd_realtime = ListView1.Items(i).Text
-                            Backoffice_model.Insert_production_emp_detail_realtime(wi, emp_cd_realtime, Iseq, Working_Pro.pwi_id)
+                            Backoffice_model.Insert_production_emp_detail_realtime(wi, emp_cd_realtime, Iseq, Working_Pro.Spwi_id(j))
                         Next
+                        j = j + 1
                     Next
                 Else
                     rsInsertData = Backoffice_model.INSERT_production_working_info(Working_Pro.LB_IND_ROW.Text, Working_Pro.Label18.Text, seq_no, Working_Pro.Label14.Text)

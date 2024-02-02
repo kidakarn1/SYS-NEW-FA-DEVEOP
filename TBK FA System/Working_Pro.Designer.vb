@@ -150,6 +150,7 @@ Partial Class Working_Pro
         Me.lb_font5 = New System.Windows.Forms.Label()
         Me.lbPosition1 = New System.Windows.Forms.Label()
         Me.lbPosition2 = New System.Windows.Forms.Label()
+        Me.Label9_fontModel = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -813,10 +814,10 @@ Partial Class Working_Pro
         'lb_font2
         '
         Me.lb_font2.AutoSize = True
-        Me.lb_font2.Font = New System.Drawing.Font("Consolas", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_font2.Font = New System.Drawing.Font("Consolas", 19.0!, System.Drawing.FontStyle.Bold)
         Me.lb_font2.Location = New System.Drawing.Point(269, 24)
         Me.lb_font2.Name = "lb_font2"
-        Me.lb_font2.Size = New System.Drawing.Size(111, 34)
+        Me.lb_font2.Size = New System.Drawing.Size(98, 31)
         Me.lb_font2.TabIndex = 4589
         Me.lb_font2.Text = "Label7"
         Me.lb_font2.Visible = False
@@ -1708,6 +1709,17 @@ Partial Class Working_Pro
         Me.lbPosition2.Text = "lbPosition2"
         Me.lbPosition2.Visible = False
         '
+        'Label9_fontModel
+        '
+        Me.Label9_fontModel.AutoSize = True
+        Me.Label9_fontModel.Font = New System.Drawing.Font("Consolas", 15.0!, System.Drawing.FontStyle.Bold)
+        Me.Label9_fontModel.Location = New System.Drawing.Point(654, 26)
+        Me.Label9_fontModel.Name = "Label9_fontModel"
+        Me.Label9_fontModel.Size = New System.Drawing.Size(186, 23)
+        Me.Label9_fontModel.TabIndex = 4654
+        Me.Label9_fontModel.Text = "Label9_fontModel"
+        Me.Label9_fontModel.Visible = False
+        '
         'Working_Pro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1715,6 +1727,7 @@ Partial Class Working_Pro
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStarttarget
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.Label9_fontModel)
         Me.Controls.Add(Me.lbPosition2)
         Me.Controls.Add(Me.lbPosition1)
         Me.Controls.Add(Me.PictureBox13)
@@ -1988,4 +2001,5 @@ Partial Class Working_Pro
     Friend WithEvents lb_font5 As Label
     Friend WithEvents lbPosition1 As Label
     Friend WithEvents lbPosition2 As Label
+    Friend WithEvents Label9_fontModel As Label
 End Class
