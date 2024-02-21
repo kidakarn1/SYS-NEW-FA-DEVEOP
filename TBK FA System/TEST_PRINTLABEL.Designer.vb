@@ -75,6 +75,8 @@ Partial Class TEST_PRINTLABEL
         Me.HeightBarcode2 = New System.Windows.Forms.TextBox()
         Me.HC = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         CType(Me.logoLabel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picBarcode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -560,11 +562,33 @@ Partial Class TEST_PRINTLABEL
         Me.Panel1.Size = New System.Drawing.Size(485, 185)
         Me.Panel1.TabIndex = 4633
         '
-        'Form1
+        'ComboBox1
+        '
+        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"B", "R"})
+        Me.ComboBox1.Location = New System.Drawing.Point(67, 242)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(71, 41)
+        Me.ComboBox1.TabIndex = 4634
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"B", "R"})
+        Me.ComboBox2.Location = New System.Drawing.Point(337, 519)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(71, 41)
+        Me.ComboBox2.TabIndex = 4635
+        '
+        'TEST_PRINTLABEL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(891, 582)
+        Me.Controls.Add(Me.ComboBox2)
+        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.WidthBarcode2)
         Me.Controls.Add(Me.WC)
         Me.Controls.Add(Me.HeightBarcode2)
@@ -614,7 +638,7 @@ Partial Class TEST_PRINTLABEL
         Me.Controls.Add(Me.HeightPart)
         Me.Controls.Add(Me.WidthPart)
         Me.Controls.Add(Me.RichTextBoxPart)
-        Me.Name = "Form1"
+        Me.Name = "TEST_PRINTLABEL"
         Me.Text = "Form1"
         CType(Me.logoLabel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picBarcode, System.ComponentModel.ISupportInitialize).EndInit()
@@ -676,4 +700,6 @@ Partial Class TEST_PRINTLABEL
     Friend WithEvents HeightBarcode2 As TextBox
     Friend WithEvents HC As Label
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ComboBox2 As ComboBox
 End Class

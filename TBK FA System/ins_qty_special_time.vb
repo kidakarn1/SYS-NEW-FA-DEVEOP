@@ -356,7 +356,7 @@ Public Class ins_qty_special_time
                         DatetimeclickStart = Backoffice_model.date_time_click_start.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                     Else
                         timeclickStart = DateTime.Now.ToString()
-                    DatetimeclickStart = Backoffice_model.date_time_start_master_shift.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+                        DatetimeclickStart = Backoffice_model.date_time_start_master_shift.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
                     End If
                     'Dim date_start_shift As Date = Backoffice_model.date_time_start_master_shift เอาเวลา ของ Shift ตั้งต้นขึ้นมา
                     '''' เป็นการเอาเวลาของการ กด ปุ่ม STarts มาแทน 
@@ -442,7 +442,26 @@ Public Class ins_qty_special_time
                     ' MsgBox("DatetimeclickStart ===>" & DatetimeclickStart)
                     ' MsgBox("start_time ===>" & start_time)
                     ' MsgBox("end time===>" & end_time)
-                    If start_time >= DatetimeclickStart Then
+                    Dim result As Boolean
+                    If Backoffice_model.S_chk_spec_line = 1 Then
+                        If Trim(Prd_detail.Label12.Text.Substring(0, 1)) = "B" Or Trim(Prd_detail.Label12.Text.Substring(0, 1)) = "Q" Or Trim(Prd_detail.Label12.Text.Substring(0, 1)) = "S" Then
+                            result = True
+                        Else
+                            If start_time >= DatetimeclickStart Then
+                                result = True
+                            Else
+                                result = False
+                            End If
+                        End If
+                    Else
+                        If start_time >= DatetimeclickStart Then
+                            result = True
+                        Else
+                            result = False
+                        End If
+                    End If
+
+                    If result Then
                         If date_cerrunt1 >= start_time And date_cerrunt1 >= end_time Then ' check ตอน clisk  start
                             ' MsgBox("start_time====>" & start_time & " >= " & convert_date_start_time & " AND " & start_time & " <= " & convert_date_end_time)
                             If start_time >= convert_date_start_time And start_time <= convert_date_end_time Then ' Check Time Start or check shift
@@ -541,7 +560,7 @@ Public Class ins_qty_special_time
                             'MsgBox("Please Check time")
                             Button10.Enabled = False
                             Button11.Enabled = False
-                            Dim listdetail = "Please Check time ."
+                            Dim listdetail = "Please Check time."
                             PictureBox10.BringToFront()
                             PictureBox10.Show()
                             PictureBox2.BringToFront()
@@ -555,7 +574,7 @@ Public Class ins_qty_special_time
                     Else
                         Button10.Enabled = False
                         Button11.Enabled = False
-                        Dim listdetail = "Please Check time  ."
+                        Dim listdetail = "Please Check time."
                         PictureBox10.BringToFront()
                         PictureBox10.Show()
                         PictureBox2.BringToFront()
@@ -570,7 +589,7 @@ Public Class ins_qty_special_time
                     'MsgBox("Please check time")
                     Button10.Enabled = False
                     Button11.Enabled = False
-                    Dim listdetail = "Please Check STart Time  ."
+                    Dim listdetail = "Please Check STart Time."
                     PictureBox10.BringToFront()
                     PictureBox10.Show()
                     PictureBox2.BringToFront()

@@ -1,6 +1,5 @@
 ﻿Imports System.Drawing.Printing
 Imports ZXing
-
 Public Class PrintLabelBreak
     Private WithEvents printDocument1 As New PrintDocument()
     Private WithEvents printDocument2 As New PrintDocument()
@@ -60,14 +59,14 @@ Public Class PrintLabelBreak
             Dim barcodeBitmap As Bitmap = barcodeWriter.Write(G_partNumber & "    ") ' Set your barcode data here
             picBarcode.Image = barcodeBitmap
             ' Draw the image on the page
-            e.Graphics.DrawImage(picBarcode.Image, 15, 50, 260, 45)
+            e.Graphics.DrawImage(picBarcode.Image, 15, 50, 245, 45)
             e.Graphics.DrawImage(logoLabel.Image, x, y, width, height)
             e.Graphics.DrawString(G_partNumber, lbPartNumber.Font, Brushes.Black, 24, 20)
             e.Graphics.DrawString(G_breakName, lbPartMmodelBreak.Font, Brushes.Black, 190, 20)
             e.Graphics.DrawString("TBKK Co.,Ltd.", lbButton.Font, Brushes.Black, 35, 105)
-            e.Graphics.DrawString(G_lotNo, lbButton.Font, Brushes.Black, 161, 105)
-            e.Graphics.DrawString(G_seq, lbButton.Font, Brushes.Black, 205, 105)
-            e.Graphics.DrawString(G_countqty, lbButton.Font, Brushes.Black, 238, 105)
+            e.Graphics.DrawString(G_lotNo, lbButton.Font, Brushes.Black, 156, 105)
+            e.Graphics.DrawString(G_seq, lbButton.Font, Brushes.Black, 199, 105)
+            e.Graphics.DrawString(G_countqty, lbButton.Font, Brushes.Black, 232, 105)
             Me.Close()
         Catch ex As Exception
             MsgBox("error ===>" & ex.Message)

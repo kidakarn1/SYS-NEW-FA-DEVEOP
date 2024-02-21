@@ -275,9 +275,12 @@ Public Class closeLotsummary
                 If StopMenu.Visible Then
                     StopMenu.SatrtWork()
                 End If
+                If Working_Pro.s_mecg_name = "RS232" Then '
+                    Working_Pro.serialPort.Close()
+                End If
                 Manage_closelot()
             Else
-                load_show.Show()
+                    load_show.Show()
             End If
         Catch ex As Exception
             load_show.Show()
@@ -501,7 +504,7 @@ Public Class closeLotsummary
     Public Sub ClickOk(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtActualdate As String)
         Dim md As New modelDefect()
         Dim cFlg As Integer = comPleteflg(sAct, pQty)
-        Dim rs = md.mInsertdefectactual(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate)
+        Dim rs = md.mInsertdefectactual(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate )
     End Sub
     Public Function comPleteflg(Act As Integer, Plan As Integer)
         Dim cFlg As Integer = 0

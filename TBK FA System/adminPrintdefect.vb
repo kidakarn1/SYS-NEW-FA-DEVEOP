@@ -229,6 +229,6 @@ outloop:
         e.Graphics.DrawImage(PictureBox1.Image, 20, 125, 85, 85) 'bottom left'
         Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
         Dim dti_status_flg = "" 'FG = 1 , 2 = CP
-        Dim rsInserttagdefect = md.mInserttagdefect(lwi, lLine, lPartno, lItemtype, lLot, lSeq, sDefect, CDbl(Val(lQtydefect)), TypeMenu, bNo, qrDefectinfo, qrDefectcodedetails, lItemtype, date_now, lLine, date_now, lLine)
+        Dim rsInserttagdefect = md.mInserttagdefect(lwi, lLine, lPartno, lItemtype, lLot, lSeq, sDefect, CDbl(Val(lQtydefect)), TypeMenu, bNo, qrDefectinfo, qrDefectcodedetails, lItemtype, date_now, lLine, date_now, lLine, Working_Pro.pwi_id)
     End Sub
 End Class

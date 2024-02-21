@@ -47,6 +47,7 @@ Public Class Working_Pro
     Public Shared check_tag_type = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
     Public Shared load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & Prd_detail.lb_wi.Text)
     Public Shared V_check_line_reprint As String = Backoffice_model.check_line_reprint()
+    Public WithEvents serialPort As New SerialPort
     'Dim digitalReadTask_new_dio As New Task()
     'Dim reader_new_dio As DigitalSingleChannelReader
     'Dim data_new_dio As UInt32
@@ -63,6 +64,10 @@ Public Class Working_Pro
     Public Shared status_conter As String = ""
     Public Shared statusDefect As String = ""
     Public Shared tag_group_no As String = ""
+
+    Public Shared mec_name As String = ""
+    Public Shared carvity As Integer = MainFrm.cavity.Text
+    Delegate Sub SetTextCallback(ByVal [text] As String)
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         'Label44.Text = TimeOfDay.ToString("H:mm:ss")
         Label17.Text = TimeOfDay.ToString("H:mm:ss")
@@ -82,6 +87,7 @@ Public Class Working_Pro
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
                 s_mecg_name = item("mecg_name").ToString()
+                mec_name = item("mec_name").ToString()
                 If Backoffice_model.GET_STATUS_DELAY_BY_LINE(MainFrm.Label4.Text) = 0 Then
                     status_conter = 0
                     s_delay = item("me_sig_del").ToString()
@@ -306,6 +312,42 @@ Public Class Working_Pro
                 Label2.BringToFront()
                 Label2.Show()
             End Try
+        ElseIf s_mecg_name = "RS232" Then
+            Try
+                serialPort = Backoffice_model.OpenRS232(mec_name)
+                If serialPort.IsOpen Then
+                Else
+                    serialPort.PortName = mec_name
+                    serialPort.BaudRate = 9600
+                    serialPort.Parity = IO.Ports.Parity.None
+                    serialPort.StopBits = IO.Ports.StopBits.One
+                    serialPort.DataBits = 8
+                    serialPort.Open()
+                    serialPort.RtsEnable = True
+                End If
+                'serialPort = serialPort(mec_name, 9600, Parity.None, 8, StopBits.One)
+
+                PictureBox10.Visible = False
+                Label2.Visible = False
+                Panel2.Visible = False
+                PictureBox16.Visible = False
+            Catch ex As Exception
+                Button1.Enabled = False
+                btn_start.Enabled = False
+                btn_back.Enabled = False
+                PictureBox13.Enabled = False
+                PictureBox14.Enabled = False
+                Dim listdetail = "Port Not Found Please Check Port. " & mec_name & "."
+                PictureBox10.BringToFront()
+                PictureBox10.Show()
+                PictureBox16.BringToFront()
+                PictureBox16.Show()
+                Panel2.BringToFront()
+                Panel2.Show()
+                Label2.Text = listdetail
+                Label2.BringToFront()
+                Label2.Show()
+            End Try
         ElseIf s_mecg_name = "NO DEVICE" Then
             PictureBox10.Visible = False
             Label2.Visible = False
@@ -468,6 +510,14 @@ Public Class Working_Pro
     End Sub
     Private Sub btn_stop_Click(sender As Object, e As EventArgs) Handles btn_stop.Click
         check_network_frist = 1
+        Try
+            If s_mecg_name = "RS232" Then '
+                serialPort.Close()
+            End If
+            serialPort.Close()
+        Catch ex As Exception
+
+        End Try
         stop_working()
     End Sub
 
@@ -1382,6 +1432,7 @@ Public Class Working_Pro
             Act = Label6.Text
             action_plus = 1
         End If
+        Console.WriteLine("TESTTTTTTT INNNNN")
         If comp_flg = 0 Then
             'MsgBox("G")
             Console.WriteLine("delays")
@@ -1414,6 +1465,7 @@ Public Class Working_Pro
             LB_COUNTER_SHIP.Text += cnt_btn
             LB_COUNTER_SEQ.Text += cnt_btn
             If check_tag_type = "3" Then
+                ' for line break
                 Dim break = lbPosition1.Text & " " & lbPosition2.Text
                 Dim plb = New PrintLabelBreak
                 plb.loadData(Label3.Text, break, Label18.Text, Label22.Text, CDbl(Val(LB_COUNTER_SEQ.Text)))
@@ -1656,12 +1708,335 @@ Public Class Working_Pro
         'Edit_Up(BitNo).Text = CStr(UpCount(BitNo))
         'Edit_Down(BitNo).Text = CStr(DownCount(BitNo))
     End Function
+    Public Async Function counter_contect_DIO_RS232() As Task
+        Console.WriteLine("READY NI MAX")
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                Backoffice_model.updated_data_to_dbsvr()
+            End If
+        Catch ex As Exception
+
+        End Try
+        Dim yearNow As Integer = DateTime.Now.ToString("yyyy")
+        Dim monthNow As Integer = DateTime.Now.ToString("MM")
+        Dim dayNow As Integer = DateTime.Now.ToString("dd")
+        Dim hourNow As Integer = DateTime.Now.ToString("HH")
+        Dim minNow As Integer = DateTime.Now.ToString("mm")
+        Dim secNow As Integer = DateTime.Now.ToString("ss")
+        'MsgBox(yearNow & monthNow & dayNow & hourNow & minNow & secNow)
+        Dim yearSt As Integer = st_time.Text.Substring(0, 4)
+        Dim monthSt As Integer = st_time.Text.Substring(5, 2)
+        Dim daySt As Integer = st_time.Text.Substring(8, 2)
+        Dim hourSt As Integer = st_time.Text.Substring(11, 2)
+        Dim minSt As Integer = st_time.Text.Substring(14, 2)
+        Dim secSt As Integer = st_time.Text.Substring(17, 2)
+        'MsgBox(yearSt & minthSt & daySt & hourSt & minSt & secSt)
+        Dim firstDate As New System.DateTime(yearSt, monthSt, daySt, hourSt, minSt, secSt)
+        Dim secondDate As New System.DateTime(yearNow, monthNow, dayNow, hourNow, minNow, secNow)
+        Dim diff As System.TimeSpan = secondDate.Subtract(firstDate)
+        Dim diff1 As System.TimeSpan = secondDate - firstDate
+        Dim diff2 As String = (secondDate - firstDate).TotalSeconds.ToString()
+        'MsgBox(diff2)
+        'MsgBox(diff2 / 60)
+        Dim actCT As Double = Format(diff2 / 60, "0.00")
+        'Format(ListBox2.Items(numOfindex), "0.00")
+        'st_time.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+        'Counter
+        Dim cnt_btn As Integer = Integer.Parse(MainFrm.cavity.Text)
+        'Counter
+        count = count + cnt_btn
+        _Edit_Up_0.Text = count
+        Dim Act As Integer = 0
+        Dim action_plus As Integer = 0
+        If Label6.Text <= 0 Then ' condition  
+            Act = 1
+            action_plus = 0
+        Else
+            Act = Label6.Text
+            action_plus = 1
+        End If
+        Dim start_time As Date = st_count_ct.Text
+        Dim end_time As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+        Dim start_time2 As String = start_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+        Dim end_time2 As String = end_time.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+        Dim checkTransection As String
+        'Try
+        'If My.Computer.Network.Ping("192.168.161.101") Then
+        'checkTransection = Backoffice_model.checkTransection(pwi_id, CDbl(Val(Label6.Text)) + Integer.Parse(MainFrm.cavity.Text), start_time2)
+        'Else
+        'checkTransection = "1"
+        'End If
+        'Catch ex As Exception
+        'checkTransection = "1"
+        'End Try
+        ' If checkTransection = "1" Then
+
+        If comp_flg = 0 Then
+            'Dim result_mod As Double = Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+            Dim result_mod As Double = Integer.Parse(Act + action_plus) Mod Integer.Parse(Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+            lb_qty_for_box.Text = lb_qty_for_box.Text + cnt_btn
+            Dim textp_result As Integer = Label10.Text
+            textp_result = Math.Abs(textp_result) - 1
+            'MsgBox(textp_result)
+            Dim sum_act_total As Integer = Label6.Text + cnt_btn
+            Label6.Text = sum_act_total
+            LB_COUNTER_SHIP.Text += cnt_btn
+            LB_COUNTER_SEQ.Text += cnt_btn
+            If check_tag_type = "3" Then
+                Dim break = lbPosition1.Text & " " & lbPosition2.Text
+                Dim plb = New PrintLabelBreak
+                plb.loadData(Label3.Text, break, Label18.Text, Label22.Text, CDbl(Val(LB_COUNTER_SEQ.Text)))
+            End If
+            If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
+                lb_box_count.Text = lb_box_count.Text + 1
+                print_back.PrintDocument2.Print()
+                If result_mod = "0" Then
+                    Label_bach.Text += 1
+                    tag_print()
+                End If
+            Else
+                If result_mod = 0 And textp_result <> 0 Then
+                    If V_check_line_reprint = "0" Then
+                        lb_box_count.Text = lb_box_count.Text + 1
+                        Label_bach.Text = Label_bach.Text + 1
+                        tag_print()
+                    Else
+                        If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
+                        Else
+                            lb_box_count.Text = lb_box_count.Text + 1
+                            Label_bach.Text = Label_bach.Text + 1
+                            tag_print()
+                        End If
+                    End If
+                End If
+            End If
+
+
+            Dim sum_prg As Integer = (Label6.Text * 100) / Label8.Text
+            'MsgBox(sum_prg)
+
+            If sum_prg > 100 Then
+                sum_prg = 100
+            ElseIf sum_prg < 0 Then
+                sum_prg = 0
+            End If
+
+            CircularProgressBar1.Text = sum_prg & "%"
+            CircularProgressBar1.Value = sum_prg
+
+
+            Dim use_time As Integer = Label34.Text
+
+
+            Dim dt1 As DateTime = DateTime.Now
+            Dim dt2 As DateTime = st_count_ct.Text
+            Dim dtspan As TimeSpan = dt1 - dt2
+            Dim actCT_jing As Double = Format((dtspan.Seconds / _Edit_Up_0.Text) + (dtspan.Minutes * 60), "0.00")
+            ListBox1.Items.Add((dtspan.Seconds) + (dtspan.Minutes * 60) + (dtspan.Hours * 3600))
+            Dim Total As Double = 0
+            Dim Count As Double = 0
+            Dim Average As Double = 0
+            Dim I As Integer
+            For I = 0 To ListBox1.Items.Count - 1
+                Total += Val(ListBox1.Items(I))
+                Count += 1
+            Next
+            Average = Total / Count
+            If Count = 1 Then
+                Try
+                    Backoffice_model.Tag_seq_rec_sqlite(lb_ref_scan.Text.Substring(0, 10), lb_ref_scan.Text.Substring(10, 3), lb_ref_scan.Text.Substring(13, (lb_ref_scan.Text.Length - 13)), RTrim(lb_ref_scan.Text))
+                Catch ex As Exception
+
+                End Try
+            End If
+            Label37.Text = Format(Average, "0.0")
+
+            st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+
+            Dim dt11 As DateTime = DateTime.Now
+            Dim dt22 As DateTime = st_time.Text
+            Dim dtspan1 As TimeSpan = dt11 - dt22
+
+            'MsgBox(dtspan1.Minutes)
+
+            If (dtspan1.Minutes + (dtspan1.Hours * 60)) >= use_time Then
+                Label20.ForeColor = Color.Red
+            End If
+
+            Dim temppola As Double = ((dtspan1.Seconds / 60) + (dtspan1.Minutes + (dtspan1.Hours * 60)))
+            If temppola < 1 Then
+                temppola = 1
+            End If
+            Dim loss_sum As Integer
+            Try
+                If My.Computer.Network.Ping("192.168.161.101") Then
+                    Dim LoadSQL = Backoffice_model.get_sum_loss(Trim(wi_no.Text))
+                    While LoadSQL.Read()
+                        loss_sum = LoadSQL("sum_loss")
+                    End While
+                Else
+                    loss_sum = 0
+                End If
+            Catch ex As Exception
+                'load_show.Show()
+                'loss_sum = 0
+            End Try
+            Dim sum_prg2 As Integer = (((Label38.Text * _Edit_Up_0.Text) / ((temppola * 60) - loss_sum)) * 100)
+            'Dim sum_prg2 As Integer = (((CycleTime.Text * _Edit_Up_0.Text) / temppola) * 100)
+            'MsgBox("((" & CycleTime.Text & "*" & _Edit_Up_0.Text & ") /" & temppola & ") * 100")
+            'MsgBox(sum_prg2 / cnt_btn)
+
+            sum_prg2 = sum_prg2 / cnt_btn
+            'MsgBox(sum_prg2)
+
+            If sum_prg2 > 100 Then
+                sum_prg2 = 100
+            ElseIf sum_prg2 < 0 Then
+                sum_prg2 = 0
+            End If
+            'MsgBox(sum_prg2)
+            If sum_prg2 <= 49 Then
+                CircularProgressBar2.ProgressColor = Color.Red
+                CircularProgressBar2.ForeColor = Color.Black
+            ElseIf sum_prg2 >= 50 And sum_prg2 <= 79 Then
+                CircularProgressBar2.ProgressColor = Color.Chocolate
+                CircularProgressBar2.ForeColor = Color.Black
+            ElseIf sum_prg2 >= 80 And sum_prg2 <= 100 Then
+                CircularProgressBar2.ProgressColor = Color.Green
+                CircularProgressBar2.ForeColor = Color.Black
+            End If
+            Dim avarage_eff As Double = Format(sum_prg2, "0.00")
+            lb_sum_prg.Text = avarage_eff
+            CircularProgressBar2.Text = sum_prg2 & "%"
+            CircularProgressBar2.Value = sum_prg2
+            Dim actCT_jingna As Double = Format(dtspan.Seconds + (dtspan.Minutes * 60), "0.00")
+            Dim pd As String = MainFrm.Label6.Text
+            Dim line_cd As String = MainFrm.Label4.Text
+            Dim wi_plan As String = wi_no.Text
+            Dim item_cd As String = Label3.Text
+            Dim item_name As String = Label12.Text
+            Dim staff_no As String = Label29.Text
+            Dim seq_no As String = Label22.Text
+            Dim prd_qty As Integer = cnt_btn
+            Dim use_timee As Double = actCT_jingna
+            Dim tr_status As String = "0"
+            Dim number_qty As Integer = Label6.Text
+            'Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, use_timee, tr_status)
+            Dim result_use_time As Double = Cal_Use_Time_ins_qty_fn_manual(start_time2, end_time2)
+            Try
+                If My.Computer.Network.Ping("192.168.161.101") Then
+                    tr_status = "1"
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim indRow As String = itemPlanData.IND_ROW
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                            Backoffice_model.Insert_prd_detail(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, start_time, end_time, result_use_time, number_qty, Spwi_id(j), tr_status)
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                        Backoffice_model.Insert_prd_detail(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, start_time, end_time, result_use_time, number_qty, pwi_id, tr_status)
+                    End If
+                Else
+                    tr_status = "0"
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim GenSEQ As Integer = Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim j As Integer = 0
+                        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                            Iseq += 1
+                            Dim indRow As String = itemPlanData.IND_ROW
+                            Dim special_wi As String = itemPlanData.wi
+                            Dim special_item_cd As String = itemPlanData.item_cd
+                            Dim special_item_name As String = itemPlanData.item_name
+                            Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                            j = j + 1
+                        Next
+                    Else
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                    End If
+                End If
+            Catch ex As Exception
+                tr_status = "0"
+                If MainFrm.Label4.Text = "K1M083" Then
+                    Dim GenSEQ As Integer = Label22.Text - 5
+                    Dim Iseq = GenSEQ
+                    Dim j As Integer = 0
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Iseq += 1
+                        Dim indRow As String = itemPlanData.IND_ROW
+                        Dim special_wi As String = itemPlanData.wi
+                        Dim special_item_cd As String = itemPlanData.item_cd
+                        Dim special_item_name As String = itemPlanData.item_name
+                        Backoffice_model.insPrdDetail_sqlite(pd, line_cd, special_wi, special_item_cd, special_item_name, staff_no, Iseq, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, Spwi_id(j))
+                        j = j + 1
+                    Next
+                Else
+                    Backoffice_model.insPrdDetail_sqlite(pd, line_cd, wi_plan, item_cd, item_name, staff_no, seq_no, prd_qty, number_qty, start_time2, end_time2, result_use_time, tr_status, pwi_id)
+                End If
+            End Try
+            Dim sum_diff As Integer = Label8.Text - Label6.Text
+            Label10.Text = "-" & sum_diff
+            If sum_diff = 0 Then
+                Me.Enabled = False
+                comp_flg = 1
+                'If result_mod <> "0" Then ' New
+                'tag_print()
+                'End If
+                Finish_work.Show() ' เกี่ยว
+            End If
+            'MsgBox(sum_diff)
+            If sum_diff < 1 Then
+                If sum_diff = 0 Then
+                    If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
+                        lb_box_count.Text = lb_box_count.Text + 1
+                        print_back.PrintDocument2.Print()
+                        If result_mod = "0" Then
+                            Label_bach.Text += 1
+                            tag_print()
+                        End If
+                    Else
+                        lb_box_count.Text = lb_box_count.Text + 1
+                        'If Backoffice_model.check_line_reprint() = "0" Then
+                        Label_bach.Text = Label_bach.Text + 1
+                        tag_print()
+                        'End If
+                    End If
+                Else
+                End If
+                Me.Enabled = False
+                comp_flg = 1
+                Finish_work.Show() ' เกี่ยว
+                Dim plan_qty As Integer = Label8.Text
+                Dim shift_prd As String = Label14.Text
+                Dim prd_st_datetime As Date = st_time.Text
+                Dim prd_end_datetime As Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                Dim lot_no As String = Label18.Text
+                Dim comp_flg2 As String = "1"
+                Dim transfer_flg As String = "1"
+                Dim del_flg As String = "0"
+                Dim prd_flg As String = "1"
+                Dim close_lot_flg As String = "1"
+                Dim avarage_act_prd_time As Double = Average
+            End If
+        End If
+
+    End Function
     '_Edit_Up_0.Text = 0
     Private Async Function Manage_counter_contect_DIO() As Task
         ' Simulate an asynchronous operation
         ' If check_bull = 0 Then
         check_bull = 1
+        Console.WriteLine("IN FUNCTION")
         Await counter_contect_DIO()
+        Console.WriteLine("OUT FUNCTION")
         'Timer3.Enabled = True
         Dim delay_setting As Integer = 0
         Console.WriteLine("G1")
@@ -1684,6 +2059,44 @@ Public Class Working_Pro
         Catch ex As Exception
             Console.WriteLine("err===>" & ex.Message)
         End Try
+        ' End If
+    End Function
+
+
+
+    Private Async Function Manage_counter_contect_DIO_RS232() As Task
+        ' Simulate an asynchronous operation
+        ' If check_bull = 0 Then
+        check_bull = 1
+        Console.WriteLine("IN FUNCTION")
+          Await counter_contect_DIO_RS232()
+        Console.WriteLine("OUT FUNCTION")
+                      'Timer3.Enabled = True
+                      Dim delay_setting As Integer = 0
+                      Console.WriteLine("G1")
+                      Console.WriteLine("status_conter====>" & status_conter)
+                      If status_conter = "0" Then
+                          delay_setting = s_delay * 100
+                          Console.WriteLine("AF1")
+                      Else
+                          delay_setting = s_delay * 1000
+                          Console.WriteLine("AF2")
+                      End If
+                      Console.WriteLine("DELAY SETTTTTING=====>" & delay_setting)
+                      Try
+            Await Task.Delay(delay_setting).ContinueWith(Sub(task)
+                                                             Try
+                                                                 Me.Invoke(Sub()
+                                                                               check_bull = 0
+                                                                               Console.WriteLine("Asynchronous operation completed.")
+                                                                           End Sub)
+                                                             Catch ex As Exception
+                                                                 check_bull = 0
+                                                             End Try
+                                                         End Sub, TaskScheduler.FromCurrentSynchronizationContext())
+        Catch ex As Exception
+                          Console.WriteLine("err===>" & ex.Message)
+                      End Try
         ' End If
     End Function
     Private Async Function Manage_counter_NI_MAX() As Task
@@ -3439,5 +3852,45 @@ Public Class Working_Pro
 
     Private Sub Button4_Click(sender As Object, e As EventArgs)
         Main()
+    End Sub
+
+    Private Sub ReceivedText(ByVal [text] As String)
+        If Me.InvokeRequired Then
+            Dim x As New SetTextCallback(AddressOf ReceivedText)
+            Me.Invoke(x, New Object() {(text)})
+        Else
+            BeginInvoke(Sub()
+                            Console.WriteLine("RES check_bull===>", check_bull)
+                            If check_bull = 0 Then
+                                Manage_counter_contect_DIO_RS232()
+                            End If
+                        End Sub)
+        End If
+        Console.WriteLine("Read Data Success")
+    End Sub
+    Private Sub serialPort_DataReceived(sender As Object, e As SerialDataReceivedEventArgs) Handles serialPort.DataReceived
+        ' ทำอะไรกับข้อมูลที่ได้รับ RS232 อ่านค่า
+        ReceivedText(serialPort.ReadExisting())
+        Console.WriteLine("READ OK")
+        '    Dim data As String = serialPort.ReadExisting()
+    End Sub
+
+
+
+    Private Sub serialPort_PinChanged(sender As Object, e As SerialPinChangedEventArgs) Handles serialPort.PinChanged
+        ' การตรวจสอบการเปลี่ยนแปลงของ CTS หรือ DSR
+        If e.EventType = SerialPinChange.CtsChanged Then
+            If serialPort.CtsHolding Then
+                Console.WriteLine("1 High OK")
+            Else
+                Console.WriteLine("1 LOW")
+            End If
+        ElseIf e.EventType = SerialPinChange.DsrChanged Then
+            If serialPort.DsrHolding Then
+                '   Console.WriteLine("2 High OK")
+            Else
+                '  Console.WriteLine("2 LOW")
+            End If
+        End If
     End Sub
 End Class

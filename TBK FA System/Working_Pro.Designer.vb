@@ -177,11 +177,11 @@ Partial Class Working_Pro
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.SteelBlue
-        Me.Label4.Font = New System.Drawing.Font("Arial Black", 15.25!)
+        Me.Label4.Font = New System.Drawing.Font("Arial Black", 15.0!)
         Me.Label4.ForeColor = System.Drawing.Color.White
         Me.Label4.Location = New System.Drawing.Point(343, 72)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(94, 30)
+        Me.Label4.Size = New System.Drawing.Size(89, 28)
         Me.Label4.TabIndex = 39
         Me.Label4.Text = "Name :"
         Me.Label4.Visible = False
@@ -1670,10 +1670,10 @@ Partial Class Working_Pro
         'lb_font4
         '
         Me.lb_font4.AutoSize = True
-        Me.lb_font4.Font = New System.Drawing.Font("Consolas", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_font4.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold)
         Me.lb_font4.Location = New System.Drawing.Point(303, 50)
         Me.lb_font4.Name = "lb_font4"
-        Me.lb_font4.Size = New System.Drawing.Size(70, 22)
+        Me.lb_font4.Size = New System.Drawing.Size(63, 19)
         Me.lb_font4.TabIndex = 4591
         Me.lb_font4.Text = "Label7"
         Me.lb_font4.Visible = False

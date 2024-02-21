@@ -39,20 +39,20 @@ Partial Class PrintLabelBreak
         'lbButton
         '
         Me.lbButton.AutoSize = True
-        Me.lbButton.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.lbButton.Font = New System.Drawing.Font("Consolas", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbButton.Location = New System.Drawing.Point(427, 260)
         Me.lbButton.Name = "lbButton"
-        Me.lbButton.Size = New System.Drawing.Size(36, 19)
+        Me.lbButton.Size = New System.Drawing.Size(32, 18)
         Me.lbButton.TabIndex = 30
         Me.lbButton.Text = "001"
         '
         'lbPartNumber
         '
         Me.lbPartNumber.AutoSize = True
-        Me.lbPartNumber.Font = New System.Drawing.Font("HGSGothicE", 19.0!)
+        Me.lbPartNumber.Font = New System.Drawing.Font("HGPGothicE", 18.75!)
         Me.lbPartNumber.Location = New System.Drawing.Point(178, 340)
         Me.lbPartNumber.Name = "lbPartNumber"
-        Me.lbPartNumber.Size = New System.Drawing.Size(292, 26)
+        Me.lbPartNumber.Size = New System.Drawing.Size(281, 25)
         Me.lbPartNumber.TabIndex = 31
         Me.lbPartNumber.Text = "755190-1280       Rr RH"
         '
@@ -90,10 +90,10 @@ Partial Class PrintLabelBreak
         'lbPartMmodelBreak
         '
         Me.lbPartMmodelBreak.AutoSize = True
-        Me.lbPartMmodelBreak.Font = New System.Drawing.Font("HGPGothicE", 19.0!)
+        Me.lbPartMmodelBreak.Font = New System.Drawing.Font("HGPGothicE", 18.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.lbPartMmodelBreak.Location = New System.Drawing.Point(459, 88)
         Me.lbPartMmodelBreak.Name = "lbPartMmodelBreak"
-        Me.lbPartMmodelBreak.Size = New System.Drawing.Size(227, 26)
+        Me.lbPartMmodelBreak.Size = New System.Drawing.Size(222, 25)
         Me.lbPartMmodelBreak.TabIndex = 4594
         Me.lbPartMmodelBreak.Text = "lbPartMmodelBreak"
         '

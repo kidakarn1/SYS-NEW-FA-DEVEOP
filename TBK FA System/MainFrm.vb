@@ -63,7 +63,7 @@ Public Class MainFrm
             End If
             Insert_list.Label3.Text = Label4.Text
             Prd_detail.Label3.Text = Label4.Text
-
+            'RobotApppSuport.loadMain()
         Else
             Application.Exit()
         End If
@@ -499,8 +499,11 @@ Public Class MainFrm
     Private Sub Button1_Click(sender As Object, e As EventArgs)
 
     End Sub
-
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) 
+    Private Sub Button1_Click_2(sender As Object, e As EventArgs) 
         TEST_PRINTLABEL.Show()
+    End Sub
+
+    Private Sub PictureBox12_Click(sender As Object, e As EventArgs) Handles PictureBox12.Click
+
     End Sub
 End Class

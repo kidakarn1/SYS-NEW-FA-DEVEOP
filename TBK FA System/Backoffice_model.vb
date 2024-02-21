@@ -3,6 +3,7 @@ Imports System.Data.SQLite
 Imports System.Globalization
 Imports System.Data
 Imports System.Web.Script.Serialization
+Imports System.IO.Ports
 Public Class Backoffice_model
     Public Shared total_nc As Integer = 0
     Public Shared flg_cat_layout_line As Integer = 0
@@ -43,6 +44,19 @@ Public Class Backoffice_model
     Public Shared svApi As String = ""
     Public Shared svDatabase As String = ""
     Public Shared user_pd As String = ""
+    Public Shared WithEvents serialPort As New SerialPort
+    Public Shared Function OpenRS232(mec_name)
+        If serialPort.IsOpen Then
+            CloseRS232()
+        End If
+        serialPort = New SerialPort(mec_name, 9600, Parity.None, 8, StopBits.One)
+        serialPort.Open()
+        serialPort.RtsEnable = True
+        Return serialPort
+    End Function
+    Public Shared Sub CloseRS232()
+        serialPort.Close()
+    End Sub
     Public Shared Function GetTimeAutoBreakTime(lineCd As String)
         Dim result As String = ""
         Try
@@ -3619,6 +3633,7 @@ re_insert_rework_act:
         Try
             Dim api = New api()
             Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical/GetDataPlanCritical?wi=" & wi & "&line_cd=" & GET_LINE_PRODUCTION())
+            Console.WriteLine("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production_critical/GetDataPlanCritical?wi=" & wi & "&line_cd=" & GET_LINE_PRODUCTION())
             Return result_api_checkper
         Catch ex As Exception
             MsgBox("Error Function GetDataPlanCritical In Backoffice_model")
