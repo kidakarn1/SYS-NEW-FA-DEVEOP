@@ -396,8 +396,8 @@ Public Class MainFrm
 		Return lotFirstDigit
 	End Function
 	Private Sub menu4_Click_1(sender As Object, e As EventArgs) Handles menu4.Click
-		'Application.Exit()
-		Confrm_end.Show()
+        'Application.Exit()
+        Confrm_end.Show()
 	End Sub
 
 	Private Sub menu3_Click_1(sender As Object, e As EventArgs)

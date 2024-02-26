@@ -31,7 +31,7 @@ Public Class defectAlertsuredefect
         Dim dFlg As String = "0"
         Dim prdFlg As String = "1"
         Dim clFlg As String = "1"
-        Dim rsDataupdate = defectAdminAdjustnumpadadjust.updateAddjustqty(defectAdminAdjustnumpadadjust.dtWino, defectAdminAdjustnumpadadjust.dtLotNo, defectAdminAdjustnumpadadjust.dtSeqno, dfType, defectAdminAdjustnumpadadjust.dtCode, defectAdminAdjustnumpadadjust.lbPart.Text)
+        Dim rsDataupdate = defectAdminAdjustnumpadadjust.updateAddjustqty(defectAdminAdjustnumpadadjust.dtWino, defectAdminAdjustnumpadadjust.dtLotNo, defectAdminAdjustnumpadadjust.dtSeqno, dfType, defectAdminAdjustnumpadadjust.dtCode, defectAdminAdjustnumpadadjust.lbPart.Text, defectAdminselectdetailncadjust.Apwi_id)
         defectAdminAdjustnumpadadjust.Close()
         defectAdminAdjustdetail.loadData()
         'Dim objDefect As New defectAdminAdjustdetailnc()
@@ -50,13 +50,16 @@ Public Class defectAlertsuredefect
         If defectAdminregister.lbQtydefect.Text = "" Then
             defectAdminregister.lbQtydefect.Text = 0
         End If
+        Dim Apiw_id As String = ""
         If dfAdminHome.dfType = "NC" Then
             dfType = "2"
+            Apiw_id = defectAdmindetailnc.Apwi_id
         ElseIf dfAdminHome.dfType = "NG" Then
             dfType = "1"
+            Apiw_id = defectAdmindetailng.Apwi_id
         End If
         Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-        Dim rs = defectAdminregister.insertDefectregister(defectAdminregister.dtWino, defectAdminregister.dtLineno, defectAdminregister.dtItemcd, defectAdminregister.dtItemtype, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, dfType, defectAdminregister.dtCode, defectAdminregister.lbQtydefect.Text, "2", dtActualdate)
+        Dim rs = defectAdminregister.insertDefectregister(defectAdminregister.dtWino, defectAdminregister.dtLineno, defectAdminregister.dtItemcd, defectAdminregister.dtItemtype, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, dfType, defectAdminregister.dtCode, defectAdminregister.lbQtydefect.Text, "2", dtActualdate, Apiw_id)
         If rs Then
             Dim clSumarry As New closeLotsummary()
             Dim trFlg As String = "1"
@@ -91,8 +94,8 @@ Public Class defectAlertsuredefect
             End If
             dtQty = oldQtyofPartNo + CDbl(Val(defectAdminregister.tbQty))
             Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-            Dim rsDatainsert = md.mInsertdefectactual(defectAdminregister.dtWino, defectAdminregister.dtLineno, defectAdminregister.dtItemcd, defectAdminregister.dtItemtype, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, dtType, defectAdminregister.dtCode, dtQty, "2", dtActualdate)
-            Dim rsApi = md.mGetdatepartdetail(defectAdminregister.dtItemcd, "2")
+            Dim rsDatainsert = md.mInsertdefectactual(defectAdminregister.dtWino, defectAdminregister.dtLineno, defectAdminregister.dtItemcd, defectAdminregister.dtItemtype, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, dtType, defectAdminregister.dtCode, dtQty, "2", dtActualdate, defectAdmindetailnc.Apwi_id)
+            Dim rsApi = md.mGetdatepartdetail(defectAdminregister.dtItemcd, defectAdminselecttypenc.type)
             Dim dChild As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsApi)
             Dim factory_cd As String = "NO DATA"
             Dim plan_cd As String = "NO_DATA"
@@ -193,6 +196,7 @@ Public Class defectAlertsuredefect
     End Sub
     Public Sub manageNg(rsDataupdate As Boolean, oldQtyofPartNo As String)
         If rsDataupdate Then
+            Dim Apwi_id As String = ""
             Dim md As New modelDefect()
             Dim pDefect As New adminPrintdefect()
             Dim dfAdmindetailng As New defectAdmindetailng()
@@ -200,8 +204,13 @@ Public Class defectAlertsuredefect
             dtQty = oldQtyofPartNo + CDbl(Val(defectAdminregister.tbQty))
             Dim dfType = "1"
             Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-            Dim rsDatainsert = md.mInsertdefectactual(defectAdminregister.dtWino, defectAdminregister.dtLineno, defectAdminregister.dtItemcd, defectAdminregister.dtItemtype, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, dfType, defectAdminregister.dtCode, dtQty, "2", dtActualdate)
-            Dim rsApi = md.mGetdatepartdetail(defectAdminregister.dtItemcd, "2")
+            If dfAdminHome.dfType = "NC" Then
+                Apiw_id = defectAdmindetailnc.Apwi_id
+            ElseIf dfAdminHome.dfType = "NG" Then
+                Apiw_id = defectAdmindetailng.Apwi_id
+            End If
+            Dim rsDatainsert = md.mInsertdefectactual(defectAdminregister.dtWino, defectAdminregister.dtLineno, defectAdminregister.dtItemcd, defectAdminregister.dtItemtype, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, dfType, defectAdminregister.dtCode, dtQty, "2", dtActualdate, Apiw_id)
+            Dim rsApi = md.mGetdatepartdetail(defectAdminregister.dtItemcd, defectAdminselecttypeng.type)
             Dim dChild As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsApi)
             Dim factory_cd As String = "NO DATA"
             Dim plan_cd As String = "NO_DATA"

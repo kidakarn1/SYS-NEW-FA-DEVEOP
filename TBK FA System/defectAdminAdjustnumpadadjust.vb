@@ -175,7 +175,7 @@ Public Class defectAdminAdjustnumpadadjust
     End Sub
 
 
-    Public Function updateAddjustqty(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String, dtItemCd As String)
+    Public Function updateAddjustqty(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String, dtItemCd As String, pwi_id As String)
         Dim md As New modelDefect()
         Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, dtItemtype, dtItemCd)
         If rs Then
@@ -183,8 +183,8 @@ Public Class defectAdminAdjustnumpadadjust
             Dim rsActualDefect = md.mUpdatedefectactualAdmin(dtWino, dtLotNo, dtSeqno, dtType, dtCode, dtItemtype, objDefectdetailnc.SPART)
             If rsActualDefect Then
                 Dim dfRegister As New defectAdminregister()
-                dfRegister.insertDefectregister(dtWino, dtLineno, objDefectdetailnc.SPART, dtItemtype, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate)
-                Dim rsInsertActual = md.mInsertdefectactual(dtWino, dtLineno, objDefectdetailnc.SPART, dtItemtype, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, "2", dtActualdate)
+                dfRegister.insertDefectregister(dtWino, dtLineno, objDefectdetailnc.SPART, dtItemtype, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate, pwi_id)
+                Dim rsInsertActual = md.mInsertdefectactual(dtWino, dtLineno, objDefectdetailnc.SPART, dtItemtype, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, "2", dtActualdate, pwi_id)
             Else
                 MsgBox("Update Status Fiall Function mUpdatedefectactual in defectNumpadadjust.vb")
             End If

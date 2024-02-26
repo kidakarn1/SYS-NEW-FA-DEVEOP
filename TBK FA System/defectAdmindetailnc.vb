@@ -12,6 +12,7 @@ Public Class defectAdmindetailnc
     Public Shared sAct As Integer = 0
     Public Shared sNc As Integer = 0
     Public Shared sNg As Integer = 0
+    Public Shared Apwi_id As String = 0
     Public Shared S_index As Integer = 0
 
     Private Sub defectAdmindetailnc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -48,6 +49,7 @@ Public Class defectAdmindetailnc
                     datlvDefectsumary.SubItems.Add("")
                 End Try
                 datlvDefectsumary.SubItems.Add(item("TOTAL_DEFECT").ToString())
+                datlvDefectsumary.SubItems.Add(item("PWI_ID").ToString())
                 lvDefectact.Items.Add(datlvDefectsumary)
                 i += 1
             Next
@@ -67,6 +69,7 @@ Public Class defectAdmindetailnc
             sAct = lvDefectact.Items(lvItem.Index).SubItems(5).Text
             ' sNc = lvDefectact.Items(lvItem.Index).SubItems(7).Text
             sNc = lvDefectact.Items(lvItem.Index).SubItems(8).Text
+            Apwi_id = lvDefectact.Items(lvItem.Index).SubItems(9).Text
             sNg = 0
         Next
         Dim dfAdminselecttype As New defectAdminselecttypenc()

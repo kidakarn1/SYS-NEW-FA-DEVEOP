@@ -289,7 +289,6 @@ Public Class Backoffice_model
         Dim sqliteConn As New SQLiteConnection(sqliteConnect)
         Check_connect_sqlite()
         Clear_sqlite()
-
         Try
             sqliteConn.Open()
             Dim temp_stre As String = ""
@@ -3343,7 +3342,6 @@ re_insert_rework_act:
             GoTo re_insert_rework_act
         End Try
     End Function
-
     Public Shared Function check_loss_actual()
         Dim sqliteConn As New SQLiteConnection(sqliteConnect)
         Try

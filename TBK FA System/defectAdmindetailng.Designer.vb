@@ -38,6 +38,7 @@ Partial Class defectAdmindetailng
         Me.GOOD = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.DEFECT = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TOTAL = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.btnOk, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnBack, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -100,7 +101,7 @@ Partial Class defectAdmindetailng
         Me.lvDefectact.AutoArrange = False
         Me.lvDefectact.BackColor = System.Drawing.Color.IndianRed
         Me.lvDefectact.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.lvDefectact.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.PART_NO, Me.WI, Me.SHIFT, Me.SEQ, Me.LOT, Me.QTY, Me.GOOD, Me.DEFECT, Me.TOTAL})
+        Me.lvDefectact.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.PART_NO, Me.WI, Me.SHIFT, Me.SEQ, Me.LOT, Me.QTY, Me.GOOD, Me.DEFECT, Me.TOTAL, Me.pwi_id})
         Me.lvDefectact.Cursor = System.Windows.Forms.Cursors.Default
         Me.lvDefectact.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Bold)
         Me.lvDefectact.ForeColor = System.Drawing.Color.White
@@ -164,6 +165,10 @@ Partial Class defectAdmindetailng
         Me.TOTAL.Text = "TOTAL"
         Me.TOTAL.Width = 65
         '
+        'pwi_id
+        '
+        Me.pwi_id.Width = 0
+        '
         'defectAdmindetailng
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -202,4 +207,5 @@ Partial Class defectAdmindetailng
 	Friend WithEvents GOOD As ColumnHeader
 	Friend WithEvents DEFECT As ColumnHeader
 	Friend WithEvents TOTAL As ColumnHeader
+    Friend WithEvents pwi_id As ColumnHeader
 End Class

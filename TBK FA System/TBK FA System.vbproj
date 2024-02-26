@@ -609,6 +609,12 @@
     <Compile Include="Finish_work.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ProgressBar_Form.Designer.vb">
+      <DependentUpon>ProgressBar_Form.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProgressBar_Form.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RobotApppSuport.Designer.vb">
       <DependentUpon>RobotApppSuport.vb</DependentUpon>
     </Compile>
@@ -619,12 +625,6 @@
       <DependentUpon>TestForm.vb</DependentUpon>
     </Compile>
     <Compile Include="TestForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TestProgressbar.Designer.vb">
-      <DependentUpon>TestProgressbar.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TestProgressbar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TEST_PRINTLABEL.Designer.vb">
@@ -1140,14 +1140,14 @@
     <EmbeddedResource Include="Finish_work.resx">
       <DependentUpon>Finish_work.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProgressBar_Form.resx">
+      <DependentUpon>ProgressBar_Form.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RobotApppSuport.resx">
       <DependentUpon>RobotApppSuport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForm.resx">
       <DependentUpon>TestForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TestProgressbar.resx">
-      <DependentUpon>TestProgressbar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TEST_PRINTLABEL.resx">
       <DependentUpon>TEST_PRINTLABEL.vb</DependentUpon>

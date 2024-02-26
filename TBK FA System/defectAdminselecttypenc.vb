@@ -11,6 +11,7 @@ Public Class defectAdminselecttypenc
     Public Shared actTotal As Integer = defectAdmindetailnc.sAct
     Public Shared ncTotal As Integer = defectAdmindetailnc.sNc
     Public Shared ngTotal As Integer = defectAdmindetailnc.sNg
+    Public Shared Apwi_id As Integer = defectAdmindetailnc.Apwi_id
     Public Shared mv = New manageVariable()
     Public S_index As Integer = 0
     Public Shared Sub setVariable()

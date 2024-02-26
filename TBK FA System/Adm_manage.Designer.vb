@@ -96,13 +96,11 @@ Partial Class Adm_manage
         'PictureBox4
         '
         Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox4.Enabled = False
         Me.PictureBox4.Location = New System.Drawing.Point(273, 211)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(255, 214)
         Me.PictureBox4.TabIndex = 49
         Me.PictureBox4.TabStop = False
-        Me.PictureBox4.Visible = False
         '
         'lbLine
         '
@@ -123,7 +121,7 @@ Partial Class Adm_manage
         Me.Panel_configLine.Controls.Add(Me.pb_back)
         Me.Panel_configLine.Controls.Add(Me.ComboBox1)
         Me.Panel_configLine.Enabled = False
-        Me.Panel_configLine.Location = New System.Drawing.Point(153, 170)
+        Me.Panel_configLine.Location = New System.Drawing.Point(147, 176)
         Me.Panel_configLine.Name = "Panel_configLine"
         Me.Panel_configLine.Size = New System.Drawing.Size(510, 318)
         Me.Panel_configLine.TabIndex = 52

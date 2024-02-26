@@ -55,8 +55,4 @@ Public Class RobotApppSuport
                                            End Try
                                        End Sub, TaskScheduler.FromCurrentSynchronizationContext())
     End Function
-
-    Private Sub RobotApppSuport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class

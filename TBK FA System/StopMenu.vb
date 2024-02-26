@@ -207,7 +207,7 @@
         Dim seq_no As Integer = Working_Pro.Label22.Text
         Dim shift_prd As String = Working_Pro.Label14.Text
         Dim start_loss As Date = date_start_data 'Date.Parse(TimeOfDay.ToString("H:mm:ss"))
-        Dim end_loss As Date = Date.Parse(TimeOfDay.ToString("H:mm:ss"))
+        Dim end_loss As Date = Date.Parse(TimeOfDay.ToString("H:mm:ss")) ' back night result 12:00:00 AM
         Dim date1 As Date = Date.Parse(TimeOfDay.ToString("H:mm:ss"))
         Dim date2 As Date = Date.Parse(TimeOfDay.ToString("H:mm:ss"))
         Dim total_loss As Integer = DateDiff(DateInterval.Minute, date1, date2)

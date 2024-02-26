@@ -33,9 +33,11 @@ Public Class defectAdminAdjustdetail
             SDEFECT_CODE = lvDefectact.Items(lvItem.Index).SubItems(2).Text
             SPART = lvDefectact.Items(lvItem.Index).SubItems(1).Text
         Next
+
         defectAdminAdjustnumpadadjust.Show()
     End Sub
     Public Sub loadData()
+        btnOk.Visible = False
         Dim objDefectHome As defectAdminhome
         Dim dfType As String = ""
         If objDefectHome.dfType = "NG" Then
@@ -55,6 +57,7 @@ Public Class defectAdminAdjustdetail
         If rs <> "0" Then
             Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
             Dim i As Integer = 1
+
             For Each item As Object In dcResultdata
                 If item("da_qty").ToString() <> "0" Then
                     cListview += 1
@@ -70,6 +73,7 @@ Public Class defectAdminAdjustdetail
                     lvDefectact.Items.Add(datlvDefectsumary)
                     i += 1
                 End If
+                btnOk.Visible = True
             Next
             Try
                 lvDefectact.Items(0).Selected = True

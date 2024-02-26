@@ -202,7 +202,7 @@ Public Class closeLotsummary
                     Dim i As Integer = 1
                     For Each itemchild As Object In dcResultdatafg
                         Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-                        ClickOk(sWi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, sSeq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now)
+                        ClickOk(sWi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, sSeq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now, Working_Pro.pwi_id)
                     Next
                 End If
                 rs = md.mGetdatachildpartsummarychild(sWi, sSeq, sLot)
@@ -211,7 +211,7 @@ Public Class closeLotsummary
                     Dim i As Integer = 1
                     For Each itemfg As Object In dcResultdata
                         Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-                        ClickOk(sWi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, sSeq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now)
+                        ClickOk(sWi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, sSeq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now, Working_Pro.pwi_id)
                     Next
                 End If
                 Dim cFlg = comPleteflg(sAct, pQty)
@@ -501,10 +501,10 @@ Public Class closeLotsummary
             End If
         End Try
     End Sub
-    Public Sub ClickOk(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtActualdate As String)
+    Public Sub ClickOk(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtActualdate As String, pwi_id As String)
         Dim md As New modelDefect()
         Dim cFlg As Integer = comPleteflg(sAct, pQty)
-        Dim rs = md.mInsertdefectactual(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate )
+        Dim rs = md.mInsertdefectactual(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate, pwi_id)
     End Sub
     Public Function comPleteflg(Act As Integer, Plan As Integer)
         Dim cFlg As Integer = 0

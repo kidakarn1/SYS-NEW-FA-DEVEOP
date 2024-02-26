@@ -34,6 +34,7 @@ Partial Class defectAdminselectdetailncadjust
         Me.btnUp = New System.Windows.Forms.PictureBox()
         Me.btnDown = New System.Windows.Forms.PictureBox()
         Me.backgroundNg = New System.Windows.Forms.PictureBox()
+        Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.btnBack, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Button1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,7 +50,7 @@ Partial Class defectAdminselectdetailncadjust
         Me.lvAction.AutoArrange = False
         Me.lvAction.BackColor = System.Drawing.Color.Peru
         Me.lvAction.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.lvAction.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.PART_NO, Me.WI, Me.SEQ, Me.LOT_NO})
+        Me.lvAction.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.PART_NO, Me.WI, Me.SEQ, Me.LOT_NO, Me.pwi_id})
         Me.lvAction.Cursor = System.Windows.Forms.Cursors.Default
         Me.lvAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lvAction.ForeColor = System.Drawing.Color.Black
@@ -143,6 +144,10 @@ Partial Class defectAdminselectdetailncadjust
         Me.backgroundNg.TabIndex = 56
         Me.backgroundNg.TabStop = False
         '
+        'pwi_id
+        '
+        Me.pwi_id.Width = 0
+        '
         'defectAdminselectdetailncadjust
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -179,4 +184,5 @@ Partial Class defectAdminselectdetailncadjust
 	Friend WithEvents btnUp As PictureBox
     Friend WithEvents btnDown As PictureBox
     Friend WithEvents backgroundNg As PictureBox
+    Friend WithEvents pwi_id As ColumnHeader
 End Class

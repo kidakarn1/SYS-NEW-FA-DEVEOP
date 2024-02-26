@@ -38,6 +38,7 @@ Public Class modelDefect
         Try
             Dim api = New api()
             Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor/getDatadefect/getDataplan?itemCd=" & pNo & "&flg=" & flg)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor/getDatadefect/getDataplan?itemCd=" & pNo & "&flg=" & flg)
             If rsData <> "0" Then
                 Return rsData
             Else
@@ -70,6 +71,7 @@ Public Class modelDefect
         Try
             Dim api = New api()
             Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor/getDatadefect/getDatadefectcodeprint?wi=" & wi & "&lot=" & lot & "&seqNo=" & seqNo & "&itemCd=" & itemCd & "&dfType=" & dfType)
+            Console.WriteLine("data result ====> " & "http://" & Backoffice_model.svApi & "/apiShopfloor/getDatadefect/getDatadefectcodeprint?wi=" & wi & "&lot=" & lot & "&seqNo=" & seqNo & "&itemCd=" & itemCd & "&dfType=" & dfType)
             If rsData <> "0" Then
                 Return rsData
             Else
@@ -102,6 +104,7 @@ Public Class modelDefect
         Try
             Dim api = New api()
             Dim rsData As Boolean = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor/insertDatadefect/insertDefectregister?dtWino=" & dtWino & "&dtLineno=" & dtLineno & "&dtItemcd=" & dtItemcd & "&dtItemtype=" & dtItemtype & "&dtLotNo=" & dtLotno & "&dtSeqno=" & dtSeqno & "&dtType=" & dtType & "&dtCode=" & dtCode & "&dtQty=" & dtQty & "&dtMenu=" & dtMenu & "&dtActualdate=" & dtActualdate & "&pwi_id=" & pwi_id)
+            Console.WriteLine( "http://" & Backoffice_model.svApi & "/apiShopfloor/insertDatadefect/insertDefectregister?dtWino=" & dtWino & "&dtLineno=" & dtLineno & "&dtItemcd=" & dtItemcd & "&dtItemtype=" & dtItemtype & "&dtLotNo=" & dtLotno & "&dtSeqno=" & dtSeqno & "&dtType=" & dtType & "&dtCode=" & dtCode & "&dtQty=" & dtQty & "&dtMenu=" & dtMenu & "&dtActualdate=" & dtActualdate & "&pwi_id=" & pwi_id)
             Return rsData
         Catch ex As Exception
             MsgBox("connect Api Faill Please check modelDefect in Function mInsertdefectregister = " & ex.Message)
@@ -109,10 +112,10 @@ Public Class modelDefect
         End Try
     End Function
 
-    Public Shared Function mInsertdefectactual(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtMenu As String, dtActualdate As String)
+    Public Shared Function mInsertdefectactual(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtMenu As String, dtActualdate As String, pwi_id As String)
         Try
             Dim api = New api()
-            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor/insertDatadefect/insertDefectactual?dtWino=" & dtWino & "&dtLineno=" & dtLineno & "&dtItemcd=" & dtItemcd & "&dtItemtype=" & dtItemtype & "&dtLotNo=" & dtLotno & "&dtSeqno=" & dtSeqno & "&dtType=" & dtType & "&dtCode=" & dtCode & "&dtQty=" & dtQty & "&dtMenu=" & dtMenu & "&dtActualdate=" & dtActualdate)
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor/insertDatadefect/insertDefectactual?dtWino=" & dtWino & "&dtLineno=" & dtLineno & "&dtItemcd=" & dtItemcd & "&dtItemtype=" & dtItemtype & "&dtLotNo=" & dtLotno & "&dtSeqno=" & dtSeqno & "&dtType=" & dtType & "&dtCode=" & dtCode & "&dtQty=" & dtQty & "&dtMenu=" & dtMenu & "&dtActualdate=" & dtActualdate & "&pwi_id=" & pwi_id)
             Return rsData
         Catch ex As Exception
             MsgBox("connect Api Faill Please check modelDefect in Function mInsertdefectactual = " & ex.Message)
@@ -284,6 +287,7 @@ Public Class modelDefect
         Try
             Dim api = New api()
             Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor/getDatadefect/getDefectadmindetailncFG?LineCd=" & LineCd & "&sDate=" & sDate & "&eDate=" & eDate)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor/getDatadefect/getDefectadmindetailncFG?LineCd=" & LineCd & "&sDate=" & sDate & "&eDate=" & eDate)
             If rsData <> "0" Then
                 Return rsData
             Else
@@ -351,6 +355,7 @@ Public Class modelDefect
         Try
             Dim api = New api()
             Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor/getDatadefect/getDefectadmindetailngFG?LineCd=" & LineCd & "&sDate=" & sDate & "&eDate=" & eDate)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor/getDatadefect/getDefectadmindetailngFG?LineCd=" & LineCd & "&sDate=" & sDate & "&eDate=" & eDate)
             If rsData <> "0" Then
                 Return rsData
             Else

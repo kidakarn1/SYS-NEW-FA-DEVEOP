@@ -333,7 +333,7 @@
         Else
             manageNg()
         End If
-        Me.Close()
+        '  Me.Close()
     End Sub
     Public Shared Function setValuenc(Act As String, nc As String, ng As String, sNc As String, ipQty As Integer)
         Dim total = (nc - sNc) + ipQty

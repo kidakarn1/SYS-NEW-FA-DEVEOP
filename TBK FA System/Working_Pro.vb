@@ -64,7 +64,6 @@ Public Class Working_Pro
     Public Shared status_conter As String = ""
     Public Shared statusDefect As String = ""
     Public Shared tag_group_no As String = ""
-
     Public Shared mec_name As String = ""
     Public Shared carvity As Integer = MainFrm.cavity.Text
     Delegate Sub SetTextCallback(ByVal [text] As String)
@@ -223,7 +222,6 @@ Public Class Working_Pro
         Main()
         Backoffice_model.Get_close_lot_time(Label14.Text)
         Timer2.Start()
-
     End Sub
     Public Sub check_seq_data()
         If CDbl(Val(LB_COUNTER_SEQ.Text)) <> "0" Then
@@ -963,9 +961,7 @@ Public Class Working_Pro
             btn_defect.Enabled = True
             btn_closelot.Enabled = True
             'Starting
-
             'End
-
             'End
             'Dim temppo As Double = Label34.Text
             CircularProgressBar2.Text = 0 & "%"

@@ -5,6 +5,8 @@ Public Class defectAdminselectdetailncadjust
     Public Shared sLot As String = ""
     Public Shared sPart As String = ""
     Public Shared S_index As Integer = 0
+    Public Shared Apwi_id As String = ""
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If lvAction.SelectedItems.Count > 0 Then
             For Each lvItem As ListViewItem In lvAction.SelectedItems
@@ -12,6 +14,8 @@ Public Class defectAdminselectdetailncadjust
                 sWi = lvAction.Items(lvItem.Index).SubItems(1).Text
                 sSEQ = lvAction.Items(lvItem.Index).SubItems(2).Text
                 sLot = lvAction.Items(lvItem.Index).SubItems(3).Text
+                sLot = lvAction.Items(lvItem.Index).SubItems(3).Text
+                Apwi_id = lvAction.Items(lvItem.Index).SubItems(4).Text
             Next
             ' Dim obj As New defectAdminAdjustdetailnc
             If defectAdminhome.dfType = "NC" Then
@@ -55,6 +59,7 @@ Public Class defectAdminselectdetailncadjust
                 datlvDefectsumary.SubItems.Add(item("da_wi_no").ToString())
                 datlvDefectsumary.SubItems.Add(item("da_seq_no").ToString())
                 datlvDefectsumary.SubItems.Add(item("da_lot_no").ToString())
+                datlvDefectsumary.SubItems.Add(item("pwi_id").ToString())
                 'datlvDefectsumary.SubItems.Add(item("SEQ_NO").ToString())
                 lvAction.Items.Add(datlvDefectsumary)
             Next
