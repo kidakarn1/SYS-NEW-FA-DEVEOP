@@ -68,6 +68,7 @@ Partial Class closeLotsummary
         Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PART_NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ACTUAL = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         CType(Me.Button1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnOk, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,6 +76,7 @@ Partial Class closeLotsummary
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbSpecialSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbWi
@@ -504,12 +506,24 @@ Partial Class closeLotsummary
         Me.ACTUAL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ACTUAL.Width = 150
         '
+        'PictureBox3
+        '
+        Me.PictureBox3.BackgroundImage = CType(resources.GetObject("PictureBox3.BackgroundImage"), System.Drawing.Image)
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Location = New System.Drawing.Point(675, 48)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(103, 93)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox3.TabIndex = 64
+        Me.PictureBox3.TabStop = False
+        '
         'closeLotsummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.closeLotsummary1
         Me.ClientSize = New System.Drawing.Size(801, 600)
+        Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.lbLine)
         Me.Controls.Add(Me.ListView2)
         Me.Controls.Add(Me.Button1)
@@ -550,6 +564,7 @@ Partial Class closeLotsummary
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbSpecialSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -599,4 +614,5 @@ Partial Class closeLotsummary
     Friend WithEvents WI As ColumnHeader
     Friend WithEvents PART_NO As ColumnHeader
     Friend WithEvents ACTUAL As ColumnHeader
+    Friend WithEvents PictureBox3 As PictureBox
 End Class

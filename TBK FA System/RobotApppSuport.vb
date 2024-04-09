@@ -1,9 +1,11 @@
 ﻿Imports System.Speech.Synthesis
 Imports System.Globalization
 Imports System.Web.Script.Serialization
+Imports System.Speech.Recognition
 
 Public Class RobotApppSuport
     Private synth As New SpeechSynthesizer()
+    Private recognizer As New SpeechRecognitionEngine()
     Public Sub loadMain()
         ' ตั้งค่าการใช้งาน SpeechSynthesizer
         synth.Volume = 100 ' ระดับเสียง (0-100)
@@ -22,7 +24,27 @@ Public Class RobotApppSuport
         ' Speak a Thai phrase
         synth.SpeakAsync("ยินดีต้อนรับ สู่ระบบ เอฟ เอ")
         synth.SpeakAsync("หากมีอะไรให้ชั้นช่วยเหลือ โปรด บอกชั้นได้")
-        realTimeRequest()
+        ' realTimeRequest()
+        'กำหนด grammar ให้ Recognizer
+        Dim grammar As New DictationGrammar()
+        recognizer.LoadGrammar(grammar)
+        ' เรียกใช้ Event เมื่อมีการรับฟังเสียง
+        AddHandler recognizer.SpeechRecognized, AddressOf Recognizer_SpeechRecognized
+        ' เริ่มการรับฟังเสียง
+        recognizer.SetInputToDefaultAudioDevice()
+        recognizer.RecognizeAsync(RecognizeMode.Multiple)
+    End Sub
+    Private Sub Recognizer_SpeechRecognized(sender As Object, e As SpeechRecognizedEventArgs)
+        ' แสดงผลลัพธ์ที่ถูกแปลง
+        ' richTextBox1.AppendText("ผู้ใช้พูด: " & e.Result.Text & vbCrLf)
+        If Not String.IsNullOrEmpty(e.Result.Text) Or e.Result.Text.Trim() <> "F" Then
+            synth.SpeakAsync(e.Result.Text)
+            Console.WriteLine(e.Result.Text)
+            If e.Result.Text.ToString() = "e" Or e.Result.Text.ToString() = "E" Then
+                Application.Exit()
+            End If
+        End If
+        ' Console.WriteLine("SUCCESS")
     End Sub
     Public Async Function realTimeRequest() As Task
         Task.Delay(10000).ContinueWith(Sub(task)
@@ -55,4 +77,8 @@ Public Class RobotApppSuport
                                            End Try
                                        End Sub, TaskScheduler.FromCurrentSynchronizationContext())
     End Function
+
+    Private Sub RobotApppSuport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        loadMain()
+    End Sub
 End Class

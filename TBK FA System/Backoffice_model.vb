@@ -1097,6 +1097,7 @@ where
             Dim api = New api()
             Dim result_api_checkper As String = ""
             result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production?line_cd=" & GET_LINE_PRODUCTION())
+            Console.WriteLine("http://" & svApi & "/API_NEW_FA/Api_Get_plan_production?line_cd=" & GET_LINE_PRODUCTION())
             Return result_api_checkper
         Catch ex As Exception
             'MsgBox("MSSQL Database connect failed. Please contact PC System [Function Get_prd_plan_new]")
@@ -2310,7 +2311,6 @@ recheck:
             'Application.Exit()
         End Try
     End Function
-
     Public Shared Function get_prd_plan_fromsc(line_cd As String, wi_cd As String)
         Dim reader As SqlDataReader
         Dim reader2 As SqlDataReader

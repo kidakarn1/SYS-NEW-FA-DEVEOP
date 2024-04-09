@@ -19,8 +19,8 @@ Public Class defectAdmindetailng
 		getDatadefect(sLinecd, sDate, eDate)
 	End Sub
 	Public Sub setVariable()
-		sLinecd = MainFrm.Label4.Text
-		lbLine.Text = sLinecd
+        sLinecd = MainFrm.Label4.Text
+        lbLine.Text = sLinecd
 	End Sub
 	Public Sub getDatadefect(sLinecd As String, sDate As String, eDate As String)
 		Dim md As New modelDefect()

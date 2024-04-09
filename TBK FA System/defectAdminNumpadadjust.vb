@@ -161,7 +161,8 @@
                 dtCode = dfDetailsng.dtCode
                 setValueng(actQty, nc, ng, sNg, tbAddjust.Text)
             End If
-            updateAddjustqty(wi, lot, seq, dfType, dtCode)
+            Dim pwi_id = ""
+            updateAddjustqty(wi, lot, seq, dfType, dtCode, pwi_id)
             Working_Pro.Enabled = True
             Me.Close()
         Else
@@ -176,12 +177,12 @@
         Dim total = (ng - sNg) + ipQty
         Working_Pro.lb_ng_qty.Text = total
     End Function
-    Public Function updateAddjustqty(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String)
+    Public Function updateAddjustqty(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String, pwi_id As String)
         Dim md As New modelDefect()
         Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, dtItemtype, dtItemcd)
         If rs Then
             Dim dfRegister As New defectRegister()
-            dfRegister.insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate)
+            dfRegister.insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate, pwi_id)
         Else
             MsgBox("Update Status Fiall Function updateAddjustqty in defectNumpadadjust.vb")
         End If

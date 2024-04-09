@@ -14,6 +14,8 @@ Friend Class defectSelecttype
     Public Shared ngTotal As Integer = Working_Pro.lb_ng_qty.Text
     Public Shared mv = New manageVariable()
     Public Shared S_index As Integer = 0
+    Dim SelectSpcSeq = "NO DATA"
+    Dim SelectSpcPWI_ID = "NO DATA"
     Public Shared Sub setVariable()
         actTotal = Working_Pro.LB_COUNTER_SEQ.Text
         ncTotal = Working_Pro.lb_nc_qty.Text
@@ -24,7 +26,6 @@ Friend Class defectSelecttype
         pFG = pd.pFg
         wi = pd.wiNo '"5100287204"
         sPart = ""
-
     End Sub
     Private Sub defectSelecttype_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim dfHpme As New defectHome()
@@ -37,19 +38,45 @@ Friend Class defectSelecttype
         setVariable()
         Dim dfHome As New defectHome
         lbType.Text = dfHome.dtType
-        btnPartfg.Text = pFG
+        If MainFrm.Label4.Text = "K1M083" Then
+            btnPartfg.Text = "SELECT FG"
+        Else
+            btnPartfg.Text = pFG
+        End If
+
         Dim reData = getChildpart(wi)
     End Sub
-
     Public Function getChildpart(wi)
         Dim md = New modelDefect()
-        Dim rsData = md.mGetchildpart(wi)
+        Dim rsData
+        If MainFrm.Label4.Text = "K1M083" Then
+            Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
+            Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
+            Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
+            Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
+            Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
+            rsData = md.mGetchildpartSpc(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi)
+        Else
+            rsData = md.mGetchildpart(wi)
+        End If
         If rsData <> "0" Then
             Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsData)
             Dim i As Integer = 1
+            Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+            Dim Iseq = GenSEQ
             For Each item As Object In dcResultdata
                 datlvChildpart = New ListViewItem(i)
                 datlvChildpart.SubItems.Add(item("ITEM_CD").ToString())
+                datlvChildpart.SubItems.Add(item("ITEM_NAME").ToString())
+                datlvChildpart.SubItems.Add(item("WI").ToString())
+                If MainFrm.Label4.Text = "K1M083" Then
+                    Iseq += 1
+                    datlvChildpart.SubItems.Add(Iseq)
+                    datlvChildpart.SubItems.Add(Working_Pro.Spwi_id(i - 1))
+                Else
+                    datlvChildpart.SubItems.Add(Working_Pro.seqNo)
+                    datlvChildpart.SubItems.Add(Working_Pro.pwi_id)
+                End If
                 lvChildpart.Items.Add(datlvChildpart)
                 i += 1
             Next
@@ -111,9 +138,13 @@ Friend Class defectSelecttype
         End Try
 
     End Sub
+
     Private Sub lvChildpart_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvChildpart.SelectedIndexChanged
         For Each lvItem As ListViewItem In lvChildpart.SelectedItems
             Me.sPart = lvChildpart.Items(lvItem.Index).SubItems(1).Text
+            SelectSpcSeq = lvChildpart.Items(lvItem.Index).SubItems(4).Text
+            SelectSpcPWI_ID = lvChildpart.Items(lvItem.Index).SubItems(5).Text
+            wi = lvChildpart.Items(lvItem.Index).SubItems(3).Text
         Next
         dt_menu = "1"
         If type = "NG" Then
@@ -134,10 +165,17 @@ Friend Class defectSelecttype
         End If
         type = "1"
         dt_menu = "1"
-        Dim sDefectcode As New defectSelectcode()
-        Me.sPart = btnPartfg.Text
-        sDefectcode.Show()
-        Me.Hide()
+        If MainFrm.Label4.Text = "K1M083" Then
+            Dim dfSS As New defectSpecialSelectFG()
+            ' Me.dfSS = btnPartfg.Text
+            dfSS.Show()
+            Me.Hide()
+        Else
+            Dim sDefectcode As New defectSelectcode()
+            Me.sPart = btnPartfg.Text
+            sDefectcode.Show()
+            Me.Hide()
+        End If
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs)
@@ -170,17 +208,17 @@ Friend Class defectSelecttype
     End Sub
     Private Sub lbType_Click(sender As Object, e As EventArgs)
     End Sub
-
     Private Sub Label4_Click(sender As Object, e As EventArgs)
 
     End Sub
-
     Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
         tbnDown()
     End Sub
-
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Dim sDefectcode As New defectSelectcode()
+        sDefectcode.sSeqSpc = SelectSpcSeq
+        sDefectcode.sPwiSpc = SelectSpcPWI_ID
+        sDefectcode.swi = wi
         sDefectcode.Show()
         Me.Hide()
     End Sub

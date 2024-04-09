@@ -270,7 +270,7 @@ Public Class closeLotsummary
         End Try
     End Sub
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-         Try
+        Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 If StopMenu.Visible Then
                     StopMenu.SatrtWork()
@@ -280,7 +280,7 @@ Public Class closeLotsummary
                 End If
                 Manage_closelot()
             Else
-                    load_show.Show()
+                load_show.Show()
             End If
         Catch ex As Exception
             load_show.Show()
@@ -414,23 +414,27 @@ Public Class closeLotsummary
         Console.WriteLine("Working_Pro.LB_COUNTER_SEQ.Text===>" & Working_Pro.LB_COUNTER_SEQ.Text)
         Console.WriteLine("result_total===>" & result_total)
         Console.WriteLine("Working_Pro.Label10.Text===>" & Working_Pro.Label10.Text)
+
         If Working_Pro.LB_COUNTER_SEQ.Text > 0 And result_total > "0" And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
             Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
             Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
             If MainFrm.Label4.Text = "K1M083" Then
                 If result_mod <> 0 Then
+                    Working_Pro.GoodQty = lbGood.Text
                     Working_Pro.tag_print()
                 End If
             Else
+                Working_Pro.GoodQty = lbGood.Text
+                MsgBox(Working_Pro.GoodQty)
                 Working_Pro.tag_print()
             End If
             ' Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
         End If
         Try
-                Working_Pro.LB_COUNTER_SEQ.Text = 0
-            Catch ex As Exception
-                Working_Pro.LB_COUNTER_SEQ.Text = 0
-            End Try
+            Working_Pro.LB_COUNTER_SEQ.Text = 0
+        Catch ex As Exception
+            Working_Pro.LB_COUNTER_SEQ.Text = 0
+        End Try
         ' End If
     End Sub
     Public Sub insertProductionactual(wi_plan As String, line_cd As String, item_cd As String, plan_qty As String, act_qty As String, seq_no As String, shift_prd As String, staff_no As String, prd_st_datetime As String, prd_end_datetime As String, lot_no As String, comp_flg2 As String, transfer_flg As String, del_flg As String, prd_flg As String, close_lot_flg As String, avarage_eff As String, avarage_act_prd_time As String)
@@ -631,5 +635,9 @@ Public Class closeLotsummary
     End Sub
     Private Sub lbNg_Click(sender As Object, e As EventArgs) Handles lbNg.Click
 
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        ShowSpcDetailDefect.Show()
     End Sub
 End Class

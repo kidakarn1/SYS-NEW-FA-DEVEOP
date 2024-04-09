@@ -31,6 +31,9 @@ Partial Class defectDetailnc
         Me.CODE = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.DETAIL = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.QTY = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.SEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnUp = New System.Windows.Forms.PictureBox()
         Me.btnDown = New System.Windows.Forms.PictureBox()
         Me.btnBack = New System.Windows.Forms.PictureBox()
@@ -61,7 +64,7 @@ Partial Class defectDetailnc
         Me.lvDefectdetails.AutoArrange = False
         Me.lvDefectdetails.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
         Me.lvDefectdetails.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.lvDefectdetails.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.PARTNO, Me.TYPE, Me.CODE, Me.DETAIL, Me.QTY})
+        Me.lvDefectdetails.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.PARTNO, Me.TYPE, Me.CODE, Me.DETAIL, Me.QTY, Me.WI, Me.SEQ, Me.pwi_id})
         Me.lvDefectdetails.Cursor = System.Windows.Forms.Cursors.Default
         Me.lvDefectdetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lvDefectdetails.ForeColor = System.Drawing.Color.White
@@ -106,6 +109,14 @@ Partial Class defectDetailnc
         '
         Me.QTY.Text = "QTY"
         Me.QTY.Width = 74
+        '
+        'SEQ
+        '
+        Me.SEQ.Width = 0
+        '
+        'pwi_id
+        '
+        Me.pwi_id.Width = 0
         '
         'btnUp
         '
@@ -179,4 +190,7 @@ Partial Class defectDetailnc
 	Friend WithEvents btnDown As PictureBox
 	Friend WithEvents btnBack As PictureBox
 	Friend WithEvents btnOk As PictureBox
+    Friend WithEvents WI As ColumnHeader
+    Friend WithEvents SEQ As ColumnHeader
+    Friend WithEvents pwi_id As ColumnHeader
 End Class

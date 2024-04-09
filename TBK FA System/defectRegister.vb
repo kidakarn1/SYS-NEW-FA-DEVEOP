@@ -10,13 +10,17 @@
     Public dtItemtype = dSelecttype.type '"1" 'dSelecttype.type
     Public dtLotno = pd.lotNo '"BJ28" 'pd.Label18.Text
     Public dtSeqno = pd.seqNo '"001" 'pd.Label22.Text
+    Public dtpwi_id = pd.pwi_id '"001" 'pd.Label22.Text
     Public dtType = dSelecttype.dtType '"2" 'dSelecttype.dtType.Text
     Public dtCode = dSelectcode.sDefectcode '"009" 'dSelectcode.sDefectcode
     Public dtQty As Integer = 0
     Public actTotal = dSelecttype.actTotal
     Public ncTotal = dSelecttype.ncTotal
     Public ngTotal = dSelecttype.ngTotal
+    Public Shared SeqSpc = "NO DATA"
+    Public Shared PwiSpc
     Public Shared sPart
+    Public Shared swi As String = "NO DATA"
     Private Sub defectRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         setVariable()
     End Sub
@@ -27,6 +31,11 @@
         sPart = lbPart.Text
         lbDefectcode.Text = dSelectcode.sDefectcode
         lbDefectdetail.Text = dSelectcode.sDefectdetail
+        If MainFrm.Label4.Text = "K1M083" Then
+            dtWino = swi
+            dtSeqno = SeqSpc
+            dtpwi_id = PwiSpc
+        End If
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         defectSelectcode.Show()
@@ -100,7 +109,13 @@
         End If
         dtQty = tbQtydefectnc.Text
         Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-        Dim rs = insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate)
+        Dim pwi_id As String = ""
+        If MainFrm.Label4.Text = "K1M083" Then
+            pwi_id = PwiSpc
+        Else
+            pwi_id = Working_Pro.pwi_id
+        End If
+        Dim rs = insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate, pwi_id)
         If rs Then
             If dtType = "1" Then
                 Dim dataQty = calQtytotalncregisterNG(tbQtydefectnc.Text, actTotal, ncTotal, ngTotal)
@@ -122,7 +137,12 @@
         End If
         dtQty = tbQtydefectnc.Text
         Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-        Dim rs = insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate)
+        If MainFrm.Label4.Text = "K1M083" Then
+            pwi_id = PwiSpc
+        Else
+            pwi_id = Working_Pro.pwi_id
+        End If
+        Dim rs = insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate, pwi_id)
         If rs Then
             If dtType = "1" Then
                 Dim dataQty = calQtytotalncregisterNGChildPart(tbQtydefectnc.Text, actTotal, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text)
@@ -152,10 +172,10 @@
         Dim setNg = ngTotal + tbQtydefectnc
         Return setNg
     End Function
-    Public Function insertDefectregister(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtMenu As String, dtActualdate As String)
+    Public Function insertDefectregister(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtMenu As String, dtActualdate As String, pwi_id As String)
         Try
             Dim mdDefect = New modelDefect()
-            Dim rsData = mdDefect.mInsertdefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, dtMenu, dtActualdate, Working_Pro.pwi_id)
+            Dim rsData = mdDefect.mInsertdefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, dtMenu, dtActualdate, pwi_id)
             If rsData Then
                 Return True
             Else

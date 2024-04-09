@@ -23,6 +23,7 @@ Partial Class Loss_reg
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Loss_reg))
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -184,25 +185,27 @@ Partial Class Loss_reg
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.Color.Transparent
+        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
         Me.Button4.FlatAppearance.BorderSize = 0
         Me.Button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Button4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button4.Location = New System.Drawing.Point(380, 501)
+        Me.Button4.Location = New System.Drawing.Point(384, 492)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(199, 79)
+        Me.Button4.Size = New System.Drawing.Size(204, 90)
         Me.Button4.TabIndex = 55
         Me.Button4.TabStop = False
         Me.Button4.UseVisualStyleBackColor = False
+        Me.Button4.Visible = False
         '
         'Loss_reg
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Firebrick
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.autoLoss
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.test_time_loss_time)

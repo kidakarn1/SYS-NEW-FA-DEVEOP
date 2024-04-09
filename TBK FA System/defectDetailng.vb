@@ -21,8 +21,9 @@ Public Class defectDetailng
     Public Shared S_index As Integer = 0
     Public Shared types As String = ""
     Public Shared dtnameItemtype As String = ""
+    Public Shared dtpwi_id As String = ""
     Private Sub defectDetailng_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        seq = Working_Pro.seqNo
+        'SEQ = Working_Pro.seqNo
         Dim rs = getDefectdetailg(dtWino, dtSeqno, dtLotNo, dtType)
         lbType.Text = defectHome.dtType
     End Sub
@@ -30,7 +31,24 @@ Public Class defectDetailng
         Dim md As New modelDefect()
         seq = Working_Pro.seqNo
         lot = Working_Pro.Label18.Text
-        Dim rs = md.mGetdefectdetailnc(wi, seq, lot, type)
+        Dim rs
+        If MainFrm.Label4.Text = "K1M083" Then
+            Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
+            Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
+            Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
+            Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
+            Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
+            Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+            Dim Iseq = GenSEQ
+            Dim Seq1 = Iseq + 1
+            Dim Seq2 = Iseq + 2
+            Dim Seq3 = Iseq + 3
+            Dim Seq4 = Iseq + 4
+            Dim Seq5 = Iseq + 5
+            rs = md.mGetdefectdetailncSpc(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi, Seq1, Seq2, Seq3, Seq4, Seq5, lot, type)
+        Else
+            rs = md.mGetdefectdetailnc(wi, seq, lot, type)
+        End If
         cListview = 0
         If rs <> "0" Then
             Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
@@ -50,6 +68,11 @@ Public Class defectDetailng
                     datlvDefectdetails.SubItems.Add(item("dt_code").ToString())
                     datlvDefectdetails.SubItems.Add(item("defect_name").ToString())
                     datlvDefectdetails.SubItems.Add(item("total_nc").ToString())
+                    datlvDefectdetails.SubItems.Add(item("dt_wi_no").ToString())
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        datlvDefectdetails.SubItems.Add(item("dt_seq_no").ToString()) 'seq
+                        datlvDefectdetails.SubItems.Add(item("pwi_id").ToString())
+                    End If
                     lvDefectdetails.Items.Add(datlvDefectdetails)
                     i += 1
                 End If
@@ -77,6 +100,11 @@ Public Class defectDetailng
                     Me.sDefectdetail = lvDefectdetails.Items(lvItem.Index).SubItems(1).Text
                     Me.sNg = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
                     Me.dtQty = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        dtWino = lvDefectdetails.Items(lvItem.Index).SubItems(6).Text
+                        dtSeqno = lvDefectdetails.Items(lvItem.Index).SubItems(7).Text
+                        dtpwi_id = lvDefectdetails.Items(lvItem.Index).SubItems(8).Text
+                    End If
                 Next
                 Dim dfNumpadafjust = New defectNumpadadjust
                 dfNumpadafjust.Show()

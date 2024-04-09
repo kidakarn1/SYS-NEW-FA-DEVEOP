@@ -1,6 +1,8 @@
-Imports System.Globalization
+﻿Imports System.Globalization
+Imports System.IO
+Imports System.IO.Pipes
 Public Class Loss_reg
-	Public date_start_data As Date
+    Public date_start_data As Date
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
@@ -9,7 +11,6 @@ Public Class Loss_reg
                     'Chang_Loss.ListView2.Scrollable = Size()
                     'List_Emp.ListBox2.Items.Add(Trim(TextBox2.Text))
                     Dim sel_combo As String = ComboBox1.SelectedIndex
-                    Dim wi_plan As String = Working_Pro.wi_no.Text
                     Dim line_cd As String = Label2.Text
                     Dim item_cd As String = Working_Pro.Label3.Text
                     Dim seq_no As Integer = Working_Pro.Label22.Text
@@ -87,6 +88,11 @@ Public Class Loss_reg
                     End Try
                     Dim LoadSQL = Backoffice_model.get_loss_mst()
                     While LoadSQL.Read()
+                        If LoadSQL("loss_type").ToString() = "1" Then
+                            Button4.Visible = True
+                        Else
+                            Button4.Visible = False
+                        End If
                         Chang_Loss.ListView2.ForeColor = Color.Blue
                         Chang_Loss.ListView2.Items.Add(LoadSQL("id_mst").ToString()).SubItems.AddRange(New String() {LoadSQL("loss_cd").ToString(), LoadSQL("description_th").ToString()})
                         Chang_Loss.ListBox1.Items.Add(LoadSQL("loss_type").ToString())
@@ -275,11 +281,11 @@ Public Class Loss_reg
     End Sub
 
     Private Sub Loss_reg_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		Timer1.Start()
-		date_time_commit_data.Visible = False
-		test_time_loss_time.Visible = False
-		Label2.Text = MainFrm.Label4.Text
-	End Sub
+        Timer1.Start()
+        date_time_commit_data.Visible = False
+        test_time_loss_time.Visible = False
+        Label2.Text = MainFrm.Label4.Text
+    End Sub
 
     Private Sub Label6_Click(sender As Object, e As EventArgs)
 
@@ -300,19 +306,79 @@ Public Class Loss_reg
     Private Sub Label1_Click(sender As Object, e As EventArgs)
 
     End Sub
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        'If MainFrm.Label4.Text = "K1M083" Then
-        ' Dim j As Integer = 0
-        ' For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
-        ' Dim special_wi As String = itemPlanData.wi
-        ' Dim special_item_cd As String = itemPlanData.item_cd
-        ' Dim special_item_name As String = itemPlanData.item_name
-        ' Dim special_model As String = itemPlanData.MODEL
-        ' maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, special_wi, special_model)
-        ' Next
-        ' Else
-        ' maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, Working_Pro.wi_no.Text, Working_Pro.lb_model.Text)
-        ' End If
-        ' Shell("C:\Program Files (x86)\Default Company Name\TicketMaintenances\MaintenanceSystem.exe")
+    Private Async Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If MainFrm.Label4.Text = "K1M083" Then
+            Dim j As Integer = 0
+            For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                Dim special_wi As String = itemPlanData.wi
+                Dim special_item_cd As String = itemPlanData.item_cd
+                Dim special_item_name As String = itemPlanData.item_name
+                Dim special_model As String = itemPlanData.MODEL
+                maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, special_wi, special_model)
+            Next
+        Else
+            maintenance.insMaintenance(MainFrm.Label4.Text, ComboBox1.Text, Working_Pro.Label14.Text, date_start_data, Working_Pro.wi_no.Text, Working_Pro.lb_model.Text)
+        End If
+        Try
+            Shell("C:\TicketMaintenances\TicketMaintenances\MaintenanceSystem.exe")
+            Await AnotherAsyncMethod()
+        Catch ex As Exception
+            MsgBox("Maintenance System Open.")
+        End Try
     End Sub
+    Public Sub Wait_DATA()
+        Console.WriteLine("OK Connect MS SYS")
+    End Sub
+    Public Async Function AnotherAsyncMethod() As Task
+        ' Call the Main() method asynchronously
+        Await ConnectMaintenanceSys()
+    End Function
+
+    Public Async Function ConnectMaintenanceSys() As Task
+        ' สร้าง PipeServer
+        Dim pipeServer As New NamedPipeServerStream("mypipe", PipeDirection.In)
+        Console.WriteLine("Waiting for connection...")
+        ' รอการเชื่อมต่อจาก Client
+        Await pipeServer.WaitForConnectionAsync()
+        Console.WriteLine("Client connected.")
+        ' อ่านคำสั่งจาก Client
+        Dim reader As New StreamReader(pipeServer)
+        Dim command As String = Await reader.ReadLineAsync()
+        Console.WriteLine("Received command from client: " & command)
+        ' ตรวจสอบคำสั่ง
+        If command = "click button" Then
+            ' ทำงานเมื่อได้รับคำสั่ง "click button"
+            ' เช่น คลิกปุ่ม
+            Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+            If MainFrm.Label4.Text = "K1M083" Then
+                Dim GenSEQ As Integer = CDbl(Val(Working_Pro.Label22.Text)) - 5
+                Dim Iseq = GenSEQ
+                Dim j As Integer = 0
+                For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                    Iseq += 1
+                    Dim special_wi As String = itemPlanData.wi
+                    Dim special_item_cd As String = itemPlanData.item_cd
+                    Dim special_item_name As String = itemPlanData.item_name
+                    Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, special_wi, Iseq)
+                Next
+            Else
+                Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, Working_Pro.wi_no.Text, Working_Pro.Label22.Text)
+            End If
+            Working_Pro.lbNextTime.Text = BreakTime
+            Working_Pro.Enabled = True
+            Submit_loss()
+            reader.Close()
+            pipeServer.Close()
+        ElseIf command = "Wait_DATA" Then
+            Console.WriteLine("Wait_DATA")
+        End If
+        Try
+            reader.Close()
+            'pipeServer.Close()
+        Catch ex As Exception
+
+        End Try
+        ' ปิดการเชื่อมต่อ
+        Console.WriteLine("close Connection main")
+    End Function
 End Class

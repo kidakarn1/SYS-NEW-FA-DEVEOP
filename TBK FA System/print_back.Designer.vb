@@ -182,7 +182,7 @@ Partial Class print_back
         Me.Controls.Add(Me.lb_font2)
         Me.Controls.Add(Me.lb_font1)
         Me.Name = "print_back"
-        Me.Text = "print_back"
+        Me.Text = " "
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

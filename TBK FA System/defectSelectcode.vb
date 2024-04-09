@@ -6,9 +6,13 @@ Friend Class defectSelectcode
     Shared datlvDefectcode As ListViewItem
     Shared mv = New manageVariable()
     Public Shared sPart As String = ""
+    Public Shared swi As String = ""
     Public Shared sDefectcode As String = ""
+    Public Shared sSeqSpc = "NO DATA"
+    Public Shared sPwiSpc = "NO DATA"
     Public Shared sDefectdetail As String = ""
     Public Shared dSelecttype As New defectSelecttype()
+    Public Shared dSelecttypeSpc As New defectSpecialSelectFG()
     Public Shared S_index As Integer = 0
     Public Sub defectSelectcode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim dfHome As New defectHome
@@ -17,11 +21,27 @@ Friend Class defectSelectcode
         ElseIf dfHome.dtType = "NG" Then
             lvDefectcode.BackColor = Color.Tomato
         End If
-        lbPartfg.Text = dfHome.dtType
-        sPart = dSelecttype.sPart
-        lbPartfg.Text = sPart
-        lbType.Text = dfHome.dtType
-        getDefectcode()
+        If MainFrm.Label4.Text = "K1M083" Then
+            If dSelecttype.type = "1" Then
+                sPart = dSelecttypeSpc.dtItemcd
+                lbPartfg.Text = sPart
+                dSelecttype.sPart = dSelecttypeSpc.dtItemcd
+            Else
+                sPart = dSelecttype.sPart
+                lbPartfg.Text = sPart
+                dSelecttype.sPart = sPart
+            End If
+            lbPartfg.Text = dfHome.dtType
+            lbType.Text = dfHome.dtType
+            lbPartfg.Text = sPart
+            getDefectcode()
+        Else
+                lbPartfg.Text = dfHome.dtType
+            sPart = dSelecttype.sPart
+            lbPartfg.Text = sPart
+            lbType.Text = dfHome.dtType
+            getDefectcode()
+        End If
     End Sub
     Public Sub getDefectcode()
         Dim md = New modelDefect()
@@ -86,13 +106,25 @@ Friend Class defectSelectcode
         Catch ex As Exception
 
         End Try
-
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Dim objdSelecttype As New defectSelecttype()
-        objdSelecttype.Show()
-        Me.Close()
+        If MainFrm.Label4.Text = "K1M083" Then
+            If dSelecttype.type = "1" Then
+                Dim objdSelectFGSPC As New defectSpecialSelectFG()
+                objdSelectFGSPC.Show()
+                Me.Close()
+            Else
+                Dim objdSelecttype As New defectSelecttype()
+                objdSelecttype.Show()
+                Me.Close()
+            End If
+        Else
+            Dim objdSelecttype As New defectSelecttype()
+            objdSelecttype.Show()
+            Me.Close()
+        End If
+
     End Sub
 
     Private Sub lvDefectcode_SelectedIndexChanged(sender As Object, e As EventArgs)
@@ -106,6 +138,9 @@ Friend Class defectSelectcode
                 Me.sDefectdetail = lvDefectcode.Items(lvItem.Index).SubItems(1).Text
             Next
             Dim dfRegister = New defectRegister
+            dfRegister.swi = swi
+            dfRegister.SeqSpc = sSeqSpc
+            dfRegister.PwiSpc = sPwiSpc
             dfRegister.Show()
             Me.Hide()
         Catch ex As Exception

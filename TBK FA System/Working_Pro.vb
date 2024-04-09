@@ -65,6 +65,7 @@ Public Class Working_Pro
     Public Shared statusDefect As String = ""
     Public Shared tag_group_no As String = ""
     Public Shared mec_name As String = ""
+    Public Shared GoodQty As Double = 0.0
     Public Shared carvity As Integer = MainFrm.cavity.Text
     Delegate Sub SetTextCallback(ByVal [text] As String)
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -227,6 +228,7 @@ Public Class Working_Pro
         If CDbl(Val(LB_COUNTER_SEQ.Text)) <> "0" Then
             lb_box_count.Text = lb_box_count.Text + 1
             Label_bach.Text += 1
+            GoodQty = Label6.Text
             tag_print()
             lb_box_count.Text = 0
             Label_bach.Text = 0
@@ -1094,12 +1096,14 @@ Public Class Working_Pro
                 If V_check_line_reprint = "0" Then
                     lb_box_count.Text = lb_box_count.Text + 1
                     Label_bach.Text = Label_bach.Text + 1
+                    GoodQty = Label6.Text
                     tag_print()
                 Else
                     If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
                     Else
                         lb_box_count.Text = lb_box_count.Text + 1
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                     End If
                 End If
@@ -1248,6 +1252,7 @@ Public Class Working_Pro
                     lb_box_count.Text = lb_box_count.Text + 1
                     'If Backoffice_model.check_line_reprint() = "0" Then
                     Label_bach.Text = Label_bach.Text + 1
+                    GoodQty = Label6.Text
                     tag_print()
                     'End If
                 Else
@@ -1471,6 +1476,7 @@ Public Class Working_Pro
                 print_back.PrintDocument2.Print()
                 If result_mod = "0" Then
                     Label_bach.Text += 1
+                    GoodQty = Label6.Text
                     tag_print()
                 End If
             Else
@@ -1478,12 +1484,14 @@ Public Class Working_Pro
                     If V_check_line_reprint = "0" Then
                         lb_box_count.Text = lb_box_count.Text + 1
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                     Else
                         If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
                         Else
                             lb_box_count.Text = lb_box_count.Text + 1
                             Label_bach.Text = Label_bach.Text + 1
+                            GoodQty = Label6.Text
                             tag_print()
                         End If
                     End If
@@ -1672,11 +1680,13 @@ Public Class Working_Pro
                         print_back.PrintDocument2.Print()
                         If result_mod = "0" Then
                             Label_bach.Text += 1
+                            GoodQty = Label6.Text
                             tag_print()
                         End If
                     Else
                         lb_box_count.Text = lb_box_count.Text + 1
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                     End If
                 Else
@@ -1788,6 +1798,7 @@ Public Class Working_Pro
                 print_back.PrintDocument2.Print()
                 If result_mod = "0" Then
                     Label_bach.Text += 1
+                    GoodQty = Label6.Text
                     tag_print()
                 End If
             Else
@@ -1795,12 +1806,14 @@ Public Class Working_Pro
                     If V_check_line_reprint = "0" Then
                         lb_box_count.Text = lb_box_count.Text + 1
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                     Else
                         If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
                         Else
                             lb_box_count.Text = lb_box_count.Text + 1
                             Label_bach.Text = Label_bach.Text + 1
+                            GoodQty = Label6.Text
                             tag_print()
                         End If
                     End If
@@ -1996,12 +2009,14 @@ Public Class Working_Pro
                         print_back.PrintDocument2.Print()
                         If result_mod = "0" Then
                             Label_bach.Text += 1
+                            GoodQty = Label6.Text
                             tag_print()
                         End If
                     Else
                         lb_box_count.Text = lb_box_count.Text + 1
                         'If Backoffice_model.check_line_reprint() = "0" Then
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                         'End If
                     End If
@@ -2210,8 +2225,10 @@ Public Class Working_Pro
         e.Graphics.DrawString("PART NO.", lb_font1.Font, Brushes.Black, 152, 13)
         e.Graphics.DrawString(Label3.Text, lb_font2.Font, Brushes.Black, 152, 25)
         e.Graphics.DrawString("QTY.", lb_font1.Font, Brushes.Black, 492, 13)
-        Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
-        Dim status_tag As String = "[ Incomplete Tag ]"
+        'Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) ' Check From Actual
+        Dim result_snp As Integer = CDbl(Val(GoodQty)) Mod CDbl(Val(Label27.Text)) ' Check From Good
+        MsgBox("result_snp ==-=>" & result_snp)
+        Dim status_tag As String = "[ Incomplete Tag]"
         If V_check_line_reprint = "0" Then
             If result_snp = "0" Then
                 result_snp = Label27.Text
@@ -2226,7 +2243,7 @@ Public Class Working_Pro
                     result_snp = Label27.Text
                     status_tag = " "
                 Else
-                    result_snp = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
+                    result_snp = CDbl(Val(GoodQty)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
                     status_tag = "[ Incomplete Tag ]"
                 End If
             End If
@@ -2244,9 +2261,7 @@ Public Class Working_Pro
             PART_NAME = Label12.Text.Replace(vbCrLf, "")
             e.Graphics.DrawString(PART_NAME, lb_font2.Font, Brushes.Black, 152, 79)
         End If
-
         'e.Graphics.DrawString(Label12.Text, lb_font2.Font, Brushes.Black, 152, 79)
-
         e.Graphics.DrawString("MODEL", lb_font1.Font, Brushes.Black, 152, 123)
         e.Graphics.DrawString(lb_model.Text, lb_font4.Font, Brushes.Black, 152, 141)
         e.Graphics.DrawString("NEXT PROCESS", lb_font1.Font, Brushes.Black, 412, 123)
@@ -2677,6 +2692,7 @@ Public Class Working_Pro
                 print_back.PrintDocument2.Print()
                 If result_mod = "0" Then
                     Label_bach.Text += 1
+                    GoodQty = Label6.Text
                     tag_print()
                 End If
             Else
@@ -2684,6 +2700,7 @@ Public Class Working_Pro
                     If result_mod = "0" Then
                         Label_bach.Text += 1
                         lb_box_count.Text = lb_box_count.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                     End If
                 Else
@@ -2692,6 +2709,7 @@ Public Class Working_Pro
                         If result_mod = "0" Then
                             Label_bach.Text = Label_bach.Text + 1
                             lb_box_count.Text = lb_box_count.Text + 1
+                            GoodQty = Label6.Text
                             tag_print()
                         End If
                     End If
@@ -2710,6 +2728,7 @@ Public Class Working_Pro
                     Label6.Text = result_add
                     lb_box_count.Text = lb_box_count.Text + 1
                     Label_bach.Text = Label_bach.Text + 1
+                    GoodQty = Label6.Text
                     tag_print()
                 Else
                     Label6.Text = result_add
@@ -2887,6 +2906,7 @@ Public Class Working_Pro
             Dim result_mod As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
             If result_mod <> "0" Then
                 lb_box_count.Text = lb_box_count.Text + 1
+                GoodQty = Label6.Text
                 tag_print()
             End If
             Finish_work.Show() ' เกี่ยว
@@ -3030,12 +3050,14 @@ Public Class Working_Pro
                     If V_check_line_reprint = "0" Then
                         lb_box_count.Text = lb_box_count.Text + 1
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                     Else
                         If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
                         Else
                             lb_box_count.Text = lb_box_count.Text + 1
                             Label_bach.Text = Label_bach.Text + 1
+                            GoodQty = Label6.Text
                             tag_print()
                         End If
                     End If
@@ -3151,6 +3173,7 @@ Public Class Working_Pro
                     If sum_diff = 0 Then
                         lb_box_count.Text = lb_box_count.Text + 1
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                     Else
                     End If
@@ -3336,7 +3359,6 @@ Public Class Working_Pro
         'checkTransection = "1"
         'End Try
         ' If checkTransection = "1" Then
-
         If comp_flg = 0 Then
             'Dim result_mod As Double = Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
             Dim result_mod As Double = Integer.Parse(Act + action_plus) Mod Integer.Parse(Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
@@ -3358,6 +3380,7 @@ Public Class Working_Pro
                 print_back.PrintDocument2.Print()
                 If result_mod = "0" Then
                     Label_bach.Text += 1
+                    GoodQty = Label6.Text
                     tag_print()
                 End If
             Else
@@ -3365,35 +3388,29 @@ Public Class Working_Pro
                     If V_check_line_reprint = "0" Then
                         lb_box_count.Text = lb_box_count.Text + 1
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                     Else
                         If CDbl(Val(Label27.Text)) = 1 Or CDbl(Val(Label27.Text)) = 999999 Then
                         Else
                             lb_box_count.Text = lb_box_count.Text + 1
                             Label_bach.Text = Label_bach.Text + 1
+                            GoodQty = Label6.Text
                             tag_print()
                         End If
                     End If
                 End If
             End If
-
-
             Dim sum_prg As Integer = (Label6.Text * 100) / Label8.Text
             'MsgBox(sum_prg)
-
             If sum_prg > 100 Then
                 sum_prg = 100
             ElseIf sum_prg < 0 Then
                 sum_prg = 0
             End If
-
             CircularProgressBar1.Text = sum_prg & "%"
             CircularProgressBar1.Value = sum_prg
-
-
             Dim use_time As Integer = Label34.Text
-
-
             Dim dt1 As DateTime = DateTime.Now
             Dim dt2 As DateTime = st_count_ct.Text
             Dim dtspan As TimeSpan = dt1 - dt2
@@ -3416,19 +3433,14 @@ Public Class Working_Pro
                 End Try
             End If
             Label37.Text = Format(Average, "0.0")
-
             st_count_ct.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-
             Dim dt11 As DateTime = DateTime.Now
             Dim dt22 As DateTime = st_time.Text
             Dim dtspan1 As TimeSpan = dt11 - dt22
-
             'MsgBox(dtspan1.Minutes)
-
             If (dtspan1.Minutes + (dtspan1.Hours * 60)) >= use_time Then
                 Label20.ForeColor = Color.Red
             End If
-
             Dim temppola As Double = ((dtspan1.Seconds / 60) + (dtspan1.Minutes + (dtspan1.Hours * 60)))
             If temppola < 1 Then
                 temppola = 1
@@ -3566,12 +3578,14 @@ Public Class Working_Pro
                         print_back.PrintDocument2.Print()
                         If result_mod = "0" Then
                             Label_bach.Text += 1
+                            GoodQty = Label6.Text
                             tag_print()
                         End If
                     Else
                         lb_box_count.Text = lb_box_count.Text + 1
                         'If Backoffice_model.check_line_reprint() = "0" Then
                         Label_bach.Text = Label_bach.Text + 1
+                        GoodQty = Label6.Text
                         tag_print()
                         'End If
                     End If

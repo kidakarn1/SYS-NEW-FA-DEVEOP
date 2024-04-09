@@ -4,8 +4,7 @@
     Shared maxQty As Integer = 0
     Shared sPart As String = ""
     Shared actQty As Integer = 0
-    Shared dtWino
-    Shared dtLineno
+    Public Shared dtWino
     Shared dtItemcd
     Shared dtItemtype
     Shared dtLotNo
@@ -20,6 +19,7 @@
     Shared ng As Integer = Working_Pro.lb_ng_qty.Text
     Shared sNc
     Shared sNg
+    Shared dtpwi_id_spc
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnNumber1.Click
         tbAddjust.Text = tbAddjust.Text + "1"
     End Sub
@@ -79,7 +79,11 @@
             Dim objDefectdetailnc As New defectDetailnc
             sPart = dfDetailsnc.dtItemcd '"J107-11820-RM" 'pd.pFg
             dtWino = objDefectdetailnc.dtWino
-            dtLineno = objDefectdetailnc.dtLineno
+            If MainFrm.Label4.Text = "K1M083" Then
+                dtLineno = MainFrm.Label4.Text
+            Else
+                dtLineno = objDefectdetailnc.dtLineno
+            End If
             dtItemcd = objDefectdetailnc.dtItemcd
             dtItemtype = objDefectdetailnc.dtItemtype
             dtLotNo = objDefectdetailnc.dtLotNo
@@ -99,7 +103,11 @@
             Dim objDefectdetailng As New defectDetailng
             sPart = dfDetailsng.dtItemcd '"J107-11820-RM" 'pd.pFg
             dtWino = objDefectdetailng.dtWino
-            dtLineno = objDefectdetailng.dtLineno
+            If MainFrm.Label4.Text = "K1M083" Then
+                dtLineno = MainFrm.Label4.Text
+            Else
+                dtLineno = objDefectdetailng.dtLineno
+            End If
             dtItemcd = objDefectdetailng.dtItemcd
             If objDefectdetailng.dtnameItemtype = "FG" Then
                 dtItemtype = "1"
@@ -136,7 +144,25 @@
                     lbMax.Text = calNumpadadjustNc(actQty, nc, ng, sNc)
                 Else
                     Dim md = New modelDefect
-                    Dim UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "2", lbPart.Text)
+                    Dim UseQty = ""
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
+                        Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
+                        Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
+                        Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
+                        Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
+                        Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim Seq1 = Iseq + 1
+                        Dim Seq2 = Iseq + 2
+                        Dim Seq3 = Iseq + 3
+                        Dim Seq4 = Iseq + 4
+                        Dim Seq5 = Iseq + 5
+                        UseQty = md.mGetdefectdetailncPartnoSpc(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi, Seq1, Seq2, Seq3, Seq4, Seq5, Working_Pro.Label18.Text, "2", lbPart.Text, dtWino, dtSeqno)
+                    Else
+                        UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "2", lbPart.Text)
+                    End If
+
                     Dim maxQty As Integer = (999 - Convert.ToInt32(UseQty)) + sNc
                     lbMax.Text = maxQty '"Unlimited"
                 End If
@@ -145,7 +171,24 @@
                     lbMax.Text = calNumpadadjustNg(actQty, nc, ng, sNg)
                 Else
                     Dim md = New modelDefect
-                    Dim UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "1", lbPart.Text)
+                    Dim UseQty
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
+                        Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
+                        Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
+                        Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
+                        Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
+                        Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+                        Dim Iseq = GenSEQ
+                        Dim Seq1 = Iseq + 1
+                        Dim Seq2 = Iseq + 2
+                        Dim Seq3 = Iseq + 3
+                        Dim Seq4 = Iseq + 4
+                        Dim Seq5 = Iseq + 5
+                        UseQty = md.mGetdefectdetailncPartnoSpc(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi, Seq1, Seq2, Seq3, Seq4, Seq5, Working_Pro.Label18.Text, "1", lbPart.Text, dtWino, dtSeqno)
+                    Else
+                        UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "1", lbPart.Text)
+                    End If
                     Dim maxQty As Integer = (999 - Convert.ToInt32(UseQty)) + sNg
                     lbMax.Text = maxQty '"Unlimited"
                 End If
@@ -221,7 +264,7 @@
             ElseIf dfHome.dtType = "NG" Then
                 wi = LdfDetailsng.dtWino
                 lot = LdfDetailsng.dtLotNo
-                seq = LdfDetailsng.dtSeqno
+                seq = Working_Pro.seqNo
                 dfType = LdfDetailsng.dtType
                 dtCode = LdfDetailsng.dtCode
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
@@ -251,7 +294,11 @@
                 If dfHome.dtType = "NC" Then
                     wi = dfDetailsnc.dtWino
                     lot = dfDetailsnc.dtLotNo
-                    seq = dfDetailsnc.dtSeqno
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        seq = dtSeqno
+                    Else
+                        seq = Working_Pro.seqNo 'dfDetailsnc.dtSeqno
+                    End If
                     dfType = dfDetailsnc.dtType
                     dtCode = dfDetailsnc.dtCode
                     Dim rsCheck = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
@@ -267,7 +314,11 @@
                     Dim rsCheck = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
                     wi = dfDetailsng.dtWino
                     lot = dfDetailsng.dtLotNo
-                    seq = dfDetailsng.dtSeqno
+                    If MainFrm.Label4.Text = "K1M083" Then
+                        seq = dtSeqno
+                    Else
+                        seq = Working_Pro.seqNo 'dfDetailsnc.dtSeqno
+                    End If
                     dfType = dfDetailsng.dtType
                     dtCode = dfDetailsng.dtCode
                     If rsCheck Then
@@ -294,7 +345,11 @@
             If dfHome.dtType = "NC" Then
                 wi = LdfDetailsnc.dtWino
                 lot = LdfDetailsnc.dtLotNo
-                seq = Working_Pro.seqNo
+                If MainFrm.Label4.Text = "K1M083" Then
+                    seq = dtSeqno
+                Else
+                    seq = Working_Pro.seqNo 'dfDetailsnc.dtSeqno
+                End If
                 dfType = LdfDetailsnc.dtType
                 dtCode = LdfDetailsnc.dtCode
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
@@ -309,7 +364,11 @@
             ElseIf dfHome.dtType = "NG" Then
                 wi = LdfDetailsng.dtWino
                 lot = LdfDetailsng.dtLotNo
-                seq = Working_Pro.seqNo
+                If MainFrm.Label4.Text = "K1M083" Then
+                    seq = dtSeqno
+                Else
+                    seq = Working_Pro.seqNo 'dfDetailsnc.dtSeqno
+                End If
                 dfType = LdfDetailsng.dtType
                 dtCode = LdfDetailsng.dtCode
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
@@ -371,9 +430,19 @@
         Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, itemType, lbPart.Text)
         If rs Then
             Dim dfRegister As New defectRegister()
-            dfRegister.insertDefectregister(dtWino, dtLineno, dtItemcd, itemType, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate)
+            Dim pwi_id As String
+            If MainFrm.Label4.Text = "K1M083" Then
+                If defectHome.dtType = "NC" Then
+                    pwi_id = defectDetailnc.dtpwi_id
+                Else
+                    pwi_id = defectDetailng.dtpwi_id
+                End If
+            Else
+                pwi_id = Working_Pro.pwi_id
+            End If
+            dfRegister.insertDefectregister(dtWino, MainFrm.Label4.Text, dtItemcd, itemType, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate, pwi_id)
         Else
-            MsgBox("Update Status Fiall Function updateAddjustqty in defectNumpadadjust.vb")
+                MsgBox("Update Status Fiall Function updateAddjustqty in defectNumpadadjust.vb")
             MsgBox("mUpdateaddjust rs===>" & rs)
         End If
         Return 0

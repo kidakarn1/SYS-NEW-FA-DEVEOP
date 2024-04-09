@@ -22,6 +22,7 @@ Partial Class defectSelecttype
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(defectSelecttype))
         Me.btnPartfg = New System.Windows.Forms.Button()
         Me.btnUp = New System.Windows.Forms.PictureBox()
         Me.btnDown = New System.Windows.Forms.PictureBox()
@@ -29,8 +30,12 @@ Partial Class defectSelecttype
         Me.lvChildpart = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ITEMNAME = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.lbType = New System.Windows.Forms.Label()
+        Me.wis = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.seq = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnBack, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,7 +89,7 @@ Partial Class defectSelecttype
         '
         Me.lvChildpart.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.lvChildpart.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
-        Me.lvChildpart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lvChildpart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ITEMNAME, Me.wis, Me.seq, Me.pwi_id})
         Me.lvChildpart.Cursor = System.Windows.Forms.Cursors.Default
         Me.lvChildpart.Font = New System.Drawing.Font("Yu Gothic", 15.75!, System.Drawing.FontStyle.Bold)
         Me.lvChildpart.ForeColor = System.Drawing.Color.White
@@ -109,7 +114,11 @@ Partial Class defectSelecttype
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "PART NO"
-        Me.ColumnHeader2.Width = 506
+        Me.ColumnHeader2.Width = 165
+        '
+        'ITEMNAME
+        '
+        Me.ITEMNAME.Width = 275
         '
         'PictureBox4
         '
@@ -132,11 +141,23 @@ Partial Class defectSelecttype
         Me.lbType.TabIndex = 52
         Me.lbType.Text = "XX"
         '
+        'wis
+        '
+        Me.wis.Width = 140
+        '
+        'seq
+        '
+        Me.seq.Width = 1
+        '
+        'pwi_id
+        '
+        Me.pwi_id.Width = 1
+        '
         'defectSelecttype
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.defectSelecttype
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.lbType)
         Me.Controls.Add(Me.PictureBox4)
@@ -166,4 +187,8 @@ Partial Class defectSelecttype
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents lbType As Label
+    Friend WithEvents ITEMNAME As ColumnHeader
+    Friend WithEvents wis As ColumnHeader
+    Friend WithEvents seq As ColumnHeader
+    Friend WithEvents pwi_id As ColumnHeader
 End Class

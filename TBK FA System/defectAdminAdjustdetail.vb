@@ -1,5 +1,4 @@
 ﻿Imports System.Web.Script.Serialization
-
 Public Class defectAdminAdjustdetail
     Public Shared NC As Integer = 0
     Public Shared NG As Integer = 0

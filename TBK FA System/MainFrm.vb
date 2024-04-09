@@ -1,8 +1,12 @@
 Imports System.IO
+Imports System.IO.Pipes
 Imports System.Web.Script.Serialization
 Public Class MainFrm
-	Public dbClass As New Backoffice_model
-	Public dbClass2 As New Backoffice_model
+    Public Sub ClickButton()
+        Application.Exit()
+    End Sub
+    Public dbClass As New Backoffice_model
+    Public dbClass2 As New Backoffice_model
     Public check_status_date As Integer = 0
     Public Shared rsCheckCriticalFlg As String = ""
     'Private Sub button1_click(sender As Object, e As EventArgs)
@@ -10,7 +14,7 @@ Public Class MainFrm
     '    dbClass.myConnection.Close()
     'End Sub
     Dim p() As Process
-	Public Declare Auto Function FindWindowNullClassName Lib "user32.dll" Alias "FindWindow" (ByVal ipClassname As Integer, ByVal IpWindownName As String) As Integer
+    Public Declare Auto Function FindWindowNullClassName Lib "user32.dll" Alias "FindWindow" (ByVal ipClassname As Integer, ByVal IpWindownName As String) As Integer
     Dim Counter As Integer = 0
     Dim dataPlan As String = ""
     Public Shared ArrayDataPlan As New List(Of DataPlan)
@@ -23,23 +27,49 @@ Public Class MainFrm
         End If
     End Sub
     Public Function CheckIfRunning()
-		p = Process.GetProcessesByName("TBK FA System")
-		If p.Count > 1 Then
-			Application.Exit()
-			Return 1
-			' Process is running
-		Else
-			Return 0
-			' Process is not running
-		End If
-	End Function
-	Public Sub check_close_fa()
-		If Application.OpenForms().OfType(Of MainFrm).Any Then
-		Else
-			MsgBox("end program")
-		End If
-	End Sub
-	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        p = Process.GetProcessesByName("TBK FA System")
+        If p.Count > 1 Then
+            Application.Exit()
+            Return 1
+            ' Process is running
+        Else
+            Return 0
+            ' Process is not running
+        End If
+    End Function
+    Public Sub check_close_fa()
+        If Application.OpenForms().OfType(Of MainFrm).Any Then
+        Else
+            MsgBox("end program")
+        End If
+    End Sub
+    Public Async Function Main() As Task
+        ' Create PipeServer
+        Dim pipeServer As New NamedPipeServerStream("mypipe", PipeDirection.In)
+        Console.WriteLine("Waiting for connection...")
+
+        ' Wait asynchronously for a connection from the client
+        Await pipeServer.WaitForConnectionAsync()
+        Console.WriteLine("Client connected.")
+
+        ' Read command from the client
+        Dim reader As New StreamReader(pipeServer)
+        Dim command As String = Await reader.ReadLineAsync()
+        Console.WriteLine("Received command from client: " & command)
+
+        ' Check the command
+        If command = "click button" Then
+            reader.Close()
+            pipeServer.Close()
+        ElseIf command = "Wait_DATA" Then
+            Console.WriteLine("Wait_DATA")
+        End If
+
+        ' Close the connection
+        Console.WriteLine("close Connection main")
+    End Function
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         check_process()
         If CheckIfRunning() = 0 Then
             dbClass.GetLocalServerAPI()
@@ -63,30 +93,30 @@ Public Class MainFrm
             End If
             Insert_list.Label3.Text = Label4.Text
             Prd_detail.Label3.Text = Label4.Text
-            'RobotApppSuport.loadMain()
+            '  RobotApppSuport.loadMain()
         Else
             Application.Exit()
         End If
     End Sub
 
-	Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-		check_close_fa()
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        check_close_fa()
         Label2.Text = TimeOfDay.ToString("H:mm:ss")
         Label3.Text = DateTime.Now.ToString("D")
         Label1.Text = DateTime.Now.ToString("yyyy/MM/dd")
-	End Sub
-	Private Sub Label2_Click(sender As Object, e As EventArgs)
+    End Sub
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
 
-	End Sub
-	Private Sub menu3_Click(sender As Object, e As EventArgs)
-		MsgBox("New version")
-	End Sub
-	Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
+    End Sub
+    Private Sub menu3_Click(sender As Object, e As EventArgs)
+        MsgBox("New version")
+    End Sub
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
 
-	End Sub
-	Private Sub TextBox1_TextChanged_1(sender As Object, e As EventArgs)
+    End Sub
+    Private Sub TextBox1_TextChanged_1(sender As Object, e As EventArgs)
 
-	End Sub
+    End Sub
     Public Sub check_lot()
         Try
             If My.Computer.Network.Ping(Backoffice_model.svDatabase) Then
@@ -332,77 +362,77 @@ Public Class MainFrm
         End Try
     End Sub
     Function GetLastDayOfMonth(ByVal CurrentDate As DateTime) As DateTime
-		With CurrentDate
-			Return (New DateTime(.Year, .Month, Date.DaysInMonth(.Year, .Month)))
-		End With
-	End Function
-	Public Function set_data_Month(lotSubstMonth)
-		Dim d As Date = DateTime.Now.ToString("dd-MM-yyyy")
-		Dim GET_DATA As String = GetLastDayOfMonth(d)
-		Dim re = GET_DATA.Substring(3, 2)
-		Dim date_st As Integer = lotthirdDigit
-		If lotSubstMonth = "01" Then
-			lotSecondDigit = "A"
-		ElseIf lotSubstMonth = "02" Then
-			lotSecondDigit = "B"
-		ElseIf lotSubstMonth = "03" Then
-			lotSecondDigit = "C"
-		ElseIf lotSubstMonth = "04" Then
-			lotSecondDigit = "D"
-		ElseIf lotSubstMonth = "05" Then
-			lotSecondDigit = "E"
-		ElseIf lotSubstMonth = "06" Then
-			lotSecondDigit = "F"
-		ElseIf lotSubstMonth = "07" Then
-			lotSecondDigit = "G"
-		ElseIf lotSubstMonth = "08" Then
-			lotSecondDigit = "H"
-		ElseIf lotSubstMonth = "09" Then
-			lotSecondDigit = "I"
-		ElseIf lotSubstMonth = "10" Then
-			lotSecondDigit = "J"
-		ElseIf lotSubstMonth = "11" Then
-			lotSecondDigit = "K"
-		ElseIf lotSubstMonth = "12" Then
-			lotSecondDigit = "L"
-		End If
-		Return lotSecondDigit
-	End Function
-	Public Function set_data_Year(lotSubstYear)
-		'MsgBox("(((((999")
-		lotSubstYear = lotSubstYear.Substring(1, 1)
-		'lotSubstYear = lotSubstYear - 1
-		If lotSubstYear = "1" Then
-			lotFirstDigit = "A"
-		ElseIf lotSubstYear = "2" Then
-			lotFirstDigit = "B"
-		ElseIf lotSubstYear = "3" Then
-			lotFirstDigit = "C"
-		ElseIf lotSubstYear = "4" Then
-			lotFirstDigit = "D"
-		ElseIf lotSubstYear = "5" Then
-			lotFirstDigit = "E"
-		ElseIf lotSubstYear = "6" Then
-			lotFirstDigit = "F"
-		ElseIf lotSubstYear = "7" Then
-			lotFirstDigit = "G"
-		ElseIf lotSubstYear = "8" Then
-			lotFirstDigit = "H"
-		ElseIf lotSubstYear = "9" Then
-			lotFirstDigit = "I"
-		ElseIf lotSubstYear = "0" Then
-			lotFirstDigit = "J"
-		End If
-		Return lotFirstDigit
-	End Function
-	Private Sub menu4_Click_1(sender As Object, e As EventArgs) Handles menu4.Click
+        With CurrentDate
+            Return (New DateTime(.Year, .Month, Date.DaysInMonth(.Year, .Month)))
+        End With
+    End Function
+    Public Function set_data_Month(lotSubstMonth)
+        Dim d As Date = DateTime.Now.ToString("dd-MM-yyyy")
+        Dim GET_DATA As String = GetLastDayOfMonth(d)
+        Dim re = GET_DATA.Substring(3, 2)
+        Dim date_st As Integer = lotthirdDigit
+        If lotSubstMonth = "01" Then
+            lotSecondDigit = "A"
+        ElseIf lotSubstMonth = "02" Then
+            lotSecondDigit = "B"
+        ElseIf lotSubstMonth = "03" Then
+            lotSecondDigit = "C"
+        ElseIf lotSubstMonth = "04" Then
+            lotSecondDigit = "D"
+        ElseIf lotSubstMonth = "05" Then
+            lotSecondDigit = "E"
+        ElseIf lotSubstMonth = "06" Then
+            lotSecondDigit = "F"
+        ElseIf lotSubstMonth = "07" Then
+            lotSecondDigit = "G"
+        ElseIf lotSubstMonth = "08" Then
+            lotSecondDigit = "H"
+        ElseIf lotSubstMonth = "09" Then
+            lotSecondDigit = "I"
+        ElseIf lotSubstMonth = "10" Then
+            lotSecondDigit = "J"
+        ElseIf lotSubstMonth = "11" Then
+            lotSecondDigit = "K"
+        ElseIf lotSubstMonth = "12" Then
+            lotSecondDigit = "L"
+        End If
+        Return lotSecondDigit
+    End Function
+    Public Function set_data_Year(lotSubstYear)
+        'MsgBox("(((((999")
+        lotSubstYear = lotSubstYear.Substring(1, 1)
+        'lotSubstYear = lotSubstYear - 1
+        If lotSubstYear = "1" Then
+            lotFirstDigit = "A"
+        ElseIf lotSubstYear = "2" Then
+            lotFirstDigit = "B"
+        ElseIf lotSubstYear = "3" Then
+            lotFirstDigit = "C"
+        ElseIf lotSubstYear = "4" Then
+            lotFirstDigit = "D"
+        ElseIf lotSubstYear = "5" Then
+            lotFirstDigit = "E"
+        ElseIf lotSubstYear = "6" Then
+            lotFirstDigit = "F"
+        ElseIf lotSubstYear = "7" Then
+            lotFirstDigit = "G"
+        ElseIf lotSubstYear = "8" Then
+            lotFirstDigit = "H"
+        ElseIf lotSubstYear = "9" Then
+            lotFirstDigit = "I"
+        ElseIf lotSubstYear = "0" Then
+            lotFirstDigit = "J"
+        End If
+        Return lotFirstDigit
+    End Function
+    Private Sub menu4_Click_1(sender As Object, e As EventArgs) Handles menu4.Click
         'Application.Exit()
         Confrm_end.Show()
-	End Sub
+    End Sub
 
-	Private Sub menu3_Click_1(sender As Object, e As EventArgs)
+    Private Sub menu3_Click_1(sender As Object, e As EventArgs)
 
-	End Sub
+    End Sub
 
     Private Sub Label5_Click(sender As Object, e As EventArgs)
 
@@ -410,32 +440,32 @@ Public Class MainFrm
 
     Private Sub Label1_Click(sender As Object, e As EventArgs)
 
-	End Sub
+    End Sub
 
-	Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs)
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs)
 
-	End Sub
-	Private Sub menu2_Click(sender As Object, e As EventArgs) Handles menu2.Click
-		Conf_login.TextBox1.Select()
-		Conf_login.Show()
-		'List_Emp.Enabled = True
-		'Line_conf.Show()
-		Me.Enabled = False
+    End Sub
+    Private Sub menu2_Click(sender As Object, e As EventArgs) Handles menu2.Click
+        Conf_login.TextBox1.Select()
+        Conf_login.Show()
+        'List_Emp.Enabled = True
+        'Line_conf.Show()
+        Me.Enabled = False
 
-	End Sub
-	Private Sub Timer2_Elapsed(sender As Object, e As Timers.ElapsedEventArgs) Handles Timer2.Elapsed
-		Try
+    End Sub
+    Private Sub Timer2_Elapsed(sender As Object, e As Timers.ElapsedEventArgs) Handles Timer2.Elapsed
+        Try
             If My.Computer.Network.Ping(Backoffice_model.svDatabase) Then
                 dbClass.updated_data_to_dbsvr()
                 'MsgBox("Synchronous completed")
             Else
                 'MsgBox("Synchronous not completed")
             End If
-		Catch ex As Exception
+        Catch ex As Exception
 
-		End Try
-	End Sub
-	Private Sub menu3_Click_2(sender As Object, e As EventArgs) Handles menu3.Click
+        End Try
+    End Sub
+    Private Sub menu3_Click_2(sender As Object, e As EventArgs) Handles menu3.Click
         Dim LoadSQL = Backoffice_model.get_information()
         While LoadSQL.Read()
             Adm_page.TextBox1.Text = LoadSQL("inf_txt").ToString
@@ -444,18 +474,18 @@ Public Class MainFrm
         Adm_page.Show()
         Me.Hide()
     End Sub
-	Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
 
-	End Sub
-	Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-		Me.Hide()
-		List_Emp.lb_link.Text = "main"
-		List_Emp.Show()
-		List_Emp.Enabled = False
-		Me.Enabled = False
-		Sc.TextBox2.Select()
-		Sc.Show()
-	End Sub
+    End Sub
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        Me.Hide()
+        List_Emp.lb_link.Text = "main"
+        List_Emp.Show()
+        List_Emp.Enabled = False
+        Me.Enabled = False
+        Sc.TextBox2.Select()
+        Sc.Show()
+    End Sub
 
     Private Sub PictureBox7_Click(sender As Object, e As EventArgs) Handles PictureBox7.Click
         load_worker()
@@ -499,11 +529,19 @@ Public Class MainFrm
     Private Sub Button1_Click(sender As Object, e As EventArgs)
 
     End Sub
-    Private Sub Button1_Click_2(sender As Object, e As EventArgs) 
+    Private Sub Button1_Click_2(sender As Object, e As EventArgs)
         TEST_PRINTLABEL.Show()
     End Sub
 
     Private Sub PictureBox12_Click(sender As Object, e As EventArgs) Handles PictureBox12.Click
 
     End Sub
+
+    Private Async Sub Button1_Click_3(sender As Object, e As EventArgs) 
+        Await AnotherAsyncMethod()
+    End Sub
+    Public Async Function AnotherAsyncMethod() As Task
+        ' Call the Main() method asynchronously
+        Await Main()
+    End Function
 End Class
