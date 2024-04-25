@@ -6,9 +6,9 @@ Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports System.Web.Script.Serialization
 Imports System.Text
+Imports System.Data.SQLite
 
 Public Class api
-
     Public Function Load_data(ByVal _URL As String) As String
         Dim _tmpImage As Image = Nothing
         Dim re_data = "NO_DATA"
@@ -36,6 +36,28 @@ Public Class api
             Return Nothing
         End Try
         Return re_data
+    End Function
+    Public Function Load_dataSQLite(ByVal Sql As String) As String
+        Try
+            Using connection As New SQLiteConnection(Backoffice_model.sqliteConnect)
+                connection.Open()
+                Dim cmd As New SQLiteCommand
+                ' Using the cmd variable to execute the SQL command
+                cmd.Connection = connection
+                cmd.CommandText = Sql
+                Using reader As SQLiteDataReader = cmd.ExecuteReader()
+                    Dim dataTable As New DataTable()
+                    dataTable.Load(reader)
+                    ' Convert DataTable to JSON
+                    jsonData = JsonConvert.SerializeObject(dataTable)
+                End Using
+            End Using
+        Catch ex As Exception
+            ' Handle exceptions
+            Console.WriteLine("Error: " & ex.Message)
+            ' Optionally, throw the exception to propagate it to the calling code
+            Throw
+        End Try
     End Function
     Public Function DownloadImage(ByVal _URL As String) As Image
         Dim _tmpImage As Image = Nothing

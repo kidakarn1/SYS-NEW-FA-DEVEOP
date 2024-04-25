@@ -400,6 +400,7 @@
     End Function
     Public Function updateAddjustqty(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String)
         Dim md As New modelDefect()
+        Dim mdSqlite As New ModelSqliteDefect()
         Dim itemType As String = ""
         If defectHome.dtType = "NC" Then
             If defectDetailnc.Types = "FG" Then
@@ -416,7 +417,9 @@
         End If
         ' MsgBox("NG ITEM TYHPE ===>" & itemType)
         Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, itemType, lbPart.Text)
-        If rs Then
+        Dim rsSqlite = mdSqlite.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, itemType, lbPart.Text)
+        'If rs Then
+        If rsSqlite Then
             Dim dfRegister As New defectRegister()
             Dim pwi_id As String
             If MainFrm.chk_spec_line = "2" Then
@@ -430,7 +433,7 @@
             End If
             dfRegister.insertDefectregister(dtWino, MainFrm.Label4.Text, dtItemcd, itemType, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate, pwi_id)
         Else
-                MsgBox("Update Status Fiall Function updateAddjustqty in defectNumpadadjust.vb")
+            MsgBox("Update Status Fiall Function updateAddjustqty in defectNumpadadjust.vb")
             MsgBox("mUpdateaddjust rs===>" & rs)
         End If
         Return 0

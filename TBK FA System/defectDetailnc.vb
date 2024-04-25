@@ -30,6 +30,7 @@ Friend Class defectDetailnc
     End Sub
     Public Function getDefectdetailnc(wi As String, seq As String, lot As String, type As String)
         Dim md As New modelDefect()
+        Dim mdSQLite As New ModelSqliteDefect()
         seq = Working_Pro.seqNo
         lot = Working_Pro.Label18.Text
         Dim rs
@@ -41,16 +42,18 @@ Friend Class defectDetailnc
                 arrayWI.Add(itemPlanData.wi)
             Next
             rs = md.mGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
+            'rs = mdSQLite.mGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
         Else
-            rs = md.mGetdefectdetailnc(wi, seq, lot, type)
+            ' rs = md.mGetdefectdetailnc(wi, seq, lot, type)
+            rs = mdSQLite.mSqliteGetdefectdetailnc(wi, seq, lot, type)
         End If
-
         Console.WriteLine(rs)
         cListview = 0
         If rs <> "0" Then
             Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
             Dim i As Integer = 1
             For Each item As Object In dcResultdata
+                'Dim nameDef = md.mGetDatasys_exp_defect_mst(item("dt_code").ToString())
                 If item("total_nc").ToString() <> "0" Then
                     cListview += 1
                     Dim dt_item_type As String = ""
@@ -64,7 +67,7 @@ Friend Class defectDetailnc
                     datlvDefectdetails.SubItems.Add(item("dt_item_cd").ToString())
                     datlvDefectdetails.SubItems.Add(dt_item_type)
                     datlvDefectdetails.SubItems.Add(item("dt_code").ToString())
-                    datlvDefectdetails.SubItems.Add(item("defect_name").ToString())
+                    datlvDefectdetails.SubItems.Add(item("dt_name_en").ToString())
                     datlvDefectdetails.SubItems.Add(item("total_nc").ToString())
                     datlvDefectdetails.SubItems.Add(item("dt_wi_no").ToString())
                     If MainFrm.chk_spec_line = "2" Then
@@ -78,7 +81,6 @@ Friend Class defectDetailnc
             Try
                 lvDefectdetails.Items(cBuottndown).Selected = True
             Catch ex As Exception
-
             End Try
         Else
             lvDefectdetails.Clear()

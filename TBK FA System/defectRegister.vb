@@ -175,11 +175,15 @@
     Public Function insertDefectregister(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtMenu As String, dtActualdate As String, pwi_id As String)
         Try
             Dim mdDefect = New modelDefect()
-            Dim rsData = mdDefect.mInsertdefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, dtMenu, dtActualdate, pwi_id)
-            If rsData Then
+            Dim mdSQLiteDefect = New ModelSqliteDefect()
+            Dim rsDataSQLite = mdSQLiteDefect.mInsertDefectTransection(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, dtMenu, dtActualdate, pwi_id)
+            'Dim rsData = mdDefect.mInsertdefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, dtMenu, dtActualdate, pwi_id)
+            'If rsData Then
+            If rsDataSQLite Then
                 Return True
             Else
-                MsgBox("insertDefectregister FAILL Please Check rsData=" & rsData)
+                'MsgBox("insertDefectregister FAILL Please Check rsData=" & rsData)
+                MsgBox("insertDefectregister FAILL Please Check rsData=" & rsDataSQLite)
                 Return False
             End If
         Catch ex As Exception

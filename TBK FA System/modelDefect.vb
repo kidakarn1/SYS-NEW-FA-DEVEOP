@@ -182,7 +182,6 @@ Public Class modelDefect
             Return False
         End Try
     End Function
-
     Public Shared Function mGetdefectdetailnc(dtWino As String, dtSeq As String, dtLot As String, Type As String)
         Try
             Dim api = New api()
@@ -522,4 +521,16 @@ Public Class modelDefect
             Return False
         End Try
     End Function
+    Public Shared Function mGetDatasys_exp_defect_mst(def_cd As String)
+        Try
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetDatasys_exp_defect_mst?def_cd=" & def_cd)
+            Return rsData
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetDatasys_exp_defect_mst = " & ex.Message)
+            Return False
+        End Try
+    End Function
+
+
 End Class
