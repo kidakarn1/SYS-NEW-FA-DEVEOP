@@ -444,7 +444,7 @@ Public Class print_back
         '  e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
         Backoffice_model.Insert_tag_print_main(Working_Pro.wi_no.Text, qr_code, the_Label_bach, 1, plan_seq, Working_Pro.Label14.Text, check_tagprint_main(), Working_Pro.Label3.Text, Working_Pro.pwi_id, Working_Pro.tag_group_no)
         Dim id_tag = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_code)
-        For K = 1 To 5 Step 1
+        For K = 1 To MainFrm.ArrayDataPlan.ToArray.Length Step 1
             Backoffice_model.Insert_tag_print_sub(id_tag, MainFrm.Label4.Text, arr_qr_code_sub(K - 1), Working_Pro.wi_no.Text, Working_Pro.tag_group_no)
         Next
     End Sub
@@ -584,7 +584,7 @@ Public Class print_back
         Dim margin_left_QTY = 425
         Dim arr_item_cd() As String = {"898244-6240", "898244-6250", "898244-6260", "898244-6270", "898244-6280"}
         Dim arr_qr_code_sub() As String = {"01", "02", "03", "04", "05"}
-        For i = 1 To 5 Step 1
+        For i = 1 To MainFrm.ArrayDataPlan.ToArray.Length Step 1
             e.Graphics.DrawString(i, LB_FONT_DATA.Font, Brushes.Black, margin_left_no, margin_top_no)
             e.Graphics.DrawString(arr_item_cd(i - 1), LB_FONT_DATA.Font, Brushes.Black, margin_left_item_cd, margin_top_no)
             e.Graphics.DrawString("BRACKET ASM;CAM NO" & i, LB_FONT_DATA.Font, Brushes.Black, margin_left_part_name, margin_top_no)
@@ -656,7 +656,7 @@ Public Class print_back
         e.Graphics.DrawString("FACTORY", lb_font3.Font, Brushes.Black, 15, 230)
         e.Graphics.DrawString("Phase10", lb_font3.Font, Brushes.Black, 33, 250)
         e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
-        Backoffice_model.Insert_tag_print(Working_Pro.wi_no.Text, qr_code, box_no, 1, plan_seq, Working_Pro.Label14.Text, Working_Pro.check_tagprint(), Working_Pro.Label3.Text, Working_Pro.pwi_id, Working_Pro.tag_group_no)
+        Backoffice_model.Insert_tag_print(Working_Pro.wi_no.Text, qr_code, box_no, 1, plan_seq, Working_Pro.Label14.Text, Working_Pro.check_tagprint(), Working_Pro.Label3.Text, Working_Pro.pwi_id, Working_Pro.tag_group_no, Working_Pro.GoodQty)
     End Sub
 
     Private Sub PrintDocument2_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument2.PrintPage
@@ -871,6 +871,6 @@ Public Class print_back
         e.Graphics.DrawString("FACTORY", lb_font3.Font, Brushes.Black, 15, 230)
         e.Graphics.DrawString("Phase10", lb_font3.Font, Brushes.Black, 33, 250)
         '  e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
-        Backoffice_model.Insert_tag_print(Working_Pro.wi_no.Text, qr_code, box_no, 1, plan_seq, Working_Pro.Label14.Text, Working_Pro.check_tagprint(), Working_Pro.Label3.Text, Working_Pro.pwi_id, Working_Pro.tag_group_no)
+        Backoffice_model.Insert_tag_print(Working_Pro.wi_no.Text, qr_code, box_no, 1, plan_seq, Working_Pro.Label14.Text, Working_Pro.check_tagprint(), Working_Pro.Label3.Text, Working_Pro.pwi_id, Working_Pro.tag_group_no, Working_Pro.GoodQty)
     End Sub
 End Class

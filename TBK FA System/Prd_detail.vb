@@ -1,12 +1,16 @@
 Imports System.Net
 Imports System.IO
+Imports Newtonsoft.Json.Linq
+
 Public Class Prd_detail
+    Public Shared S_index As Integer = 0
+    Public Shared requestBody As New JObject()
     Public Shared status_check_ping = 0
-    Dim part1Color As Color = Color.FromArgb(44, 88, 131)
-    Dim part2Color As Color = Color.FromArgb(44, 85, 131)
-    Dim part3Color As Color = Color.FromArgb(44, 83, 131)
-    Dim part4Color As Color = Color.FromArgb(44, 80, 131)
-    Dim part5Color As Color = Color.FromArgb(44, 78, 131)
+    'Dim part1Color As Color = Color.FromArgb(44, 88, 131)
+    'Dim part2Color As Color = Color.FromArgb(44, 85, 131)
+    'Dim part3Color As Color = Color.FromArgb(44, 83, 131)
+    'Dim part4Color As Color = Color.FromArgb(44, 80, 131)
+    'Dim part5Color As Color = Color.FromArgb(44, 78, 131)
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         set_shift()
         'Label2.Text = TimeOfDay.ToString("H:mm:ss")
@@ -28,22 +32,31 @@ Public Class Prd_detail
         Return status_check_ping
     End Function
     Private Sub Prd_detail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
+            lvWISpc.Visible = True
+            lvWISpc.Enabled = True
+            btnUp.Visible = True
+            btnUp.Enabled = True
+            btnDown.Visible = True
+            btnDown.Enabled = True
             setDataSpecial()
         Else
+            lvWISpc.Visible = False
+            lvWISpc.Enabled = False
             picSpecial.Visible = False
+            btnUp.Visible = False
+            btnUp.Enabled = False
+            btnDown.Visible = False
+            btnDown.Enabled = False
         End If
         Dim i = List_Emp.ListView1.Items.Count
-        If MainFrm.Label4.Text = "K1M083" Then
-            'For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
-            Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
-            Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
-            Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
-            Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
-            Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
-            Backoffice_model.UpdateFlgZeroSpecial(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi)
-            Backoffice_model.UpdateWorkingSpecial(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi)
-            'Next
+        If MainFrm.chk_spec_line = "2" Then
+            Dim arrayWI As List(Of String) = New List(Of String)
+            For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+                arrayWI.Add(itemPlanData.wi)
+            Next
+            Backoffice_model.UpdateFlgZeroSpecial(arrayWI.ToArray)
+            Backoffice_model.UpdateWorkingSpecial(arrayWI.ToArray)
         Else
             Backoffice_model.UpdateFlgZero(Label4.Text)
             Backoffice_model.UpdateWorking(lb_wi.Text)
@@ -75,7 +88,7 @@ Public Class Prd_detail
         Dim line_id As String = MainFrm.line_id.Text
         Backoffice_model.line_status_upd(line_id)
         'List_Emp.Show()
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
                 Dim special_wi As String = itemPlanData.wi
                 Backoffice_model.work_complete_offline(special_wi)
@@ -93,10 +106,8 @@ Public Class Prd_detail
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Dim i = List_Emp.ListView1.Items.Count
                 If i > 0 Then
-
                     Dim lotSubstYear As String = DateTime.Now.ToString("yyyy").Substring(3, 1)
                     Dim lotFirstDigit As String = ""
-
                     If lotSubstYear = "1" Then
                         lotFirstDigit = "A"
                     ElseIf lotSubstYear = "2" Then
@@ -237,46 +248,61 @@ Public Class Prd_detail
     Public Sub setDataSpecial()
         picSpecial.Visible = True
         Dim widthP = 70
-        Dim heightP = 120
+        Dim heightP = 135
         Dim widthW = 320
         Dim heightW = 120
+        Dim widthN = 47
+        Dim heightN = 120
         Dim i As Integer = 0
-        Dim colorsArray() As Color = {part1Color, part2Color, part3Color, part4Color, part5Color}
+        'Dim colorsArray() As Color = {part1Color, part2Color, part3Color, part4Color, part5Color}
         For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+            Dim newLabelN As New Label()
             Dim newLabelP As New Label()
             Dim newLabelW As New Label()
+            Dim No As Integer = i + 1
             Dim special_wi As String = itemPlanData.wi
             Dim special_item_cd As String = itemPlanData.item_cd
-            newLabelP.Text = special_item_cd
-            newLabelP.Location = New Point(widthP, heightP) ' Set the position of the label
-            newLabelP.Font = New Font("Catamaran", 19) ' Change "Arial" to the desired font and 12 to the desired font size
-            newLabelP.AutoSize = True ' Adjust the size of the label based on its content
-            newLabelP.BackColor = Color.Transparent ' Change LightBlue to the desired color
-            newLabelP.ForeColor = Color.White
-            heightP += 37.5
-            Me.Controls.Add(newLabelP)
-            newLabelW.Text = special_wi
-            newLabelW.Location = New Point(widthW, heightW) ' Set the position of the label
-            newLabelW.Font = New Font("Catamaran", 19) ' Change "Arial" to the desired font and 12 to the desired font size
-            newLabelW.AutoSize = True ' Adjust the size of the label based on its content
-            ' newLabelW.BackColor = Color.Transparent ' Change LightBlue to the desired color
-            newLabelW.ForeColor = Color.White
-            heightW += 37.5
-            Me.Controls.Add(newLabelW)
-            ' Label20.BackColor = Color.FromArgb(44, 82, 131)
-            newLabelP.BringToFront()
-            newLabelW.BringToFront()
-            newLabelP.BackColor = colorsArray(i)
-            newLabelW.BackColor = colorsArray(i)
+            ' newLabelN.Text = No
+            ' newLabelN.Location = New Point(widthN, heightN) ' Set the position of the label
+            ' newLabelN.Font = New Font("Catamaran", 16) ' Change "Arial" to the desired font and 12 to the desired font size
+            ' newLabelN.AutoSize = True ' Adjust the size of the label based on its content
+            ' newLabelN.ForeColor = Color.White
+            'heightN += 37.5
+            'Me.Controls.Add(newLabelN)
+            'newLabelP.Text = special_item_cd
+            'newLabelP.Location = New Point(widthP, heightP) ' Set the position of the label
+            'newLabelP.Font = New Font("Catamaran", 19) ' Change "Arial" to the desired font and 12 to the desired font size
+            'newLabelP.AutoSize = True ' Adjust the size of the label based on its content
+            'newLabelP.BackColor = Color.Transparent ' Change LightBlue to the desired color
+            'newLabelP.ForeColor = Color.White
+            'heightP += 37.5
+            'Me.Controls.Add(newLabelP)
+            'newLabelW.Text = special_wi
+            'newLabelW.Location = New Point(widthW, heightW) ' Set the position of the label
+            'newLabelW.Font = New Font("Catamaran", 19) ' Change "Arial" to the desired font and 12 to the desired font size
+            'newLabelW.AutoSize = True ' Adjust the size of the label based on its content
+            'newLabelW.ForeColor = Color.White
+            'heightW += 37.5
+            'Me.Controls.Add(newLabelW)
+            datlvDefectsumary = New ListViewItem(No)
+            datlvDefectsumary.SubItems.Add(special_item_cd)
+            datlvDefectsumary.SubItems.Add(special_wi)
+            lvWISpc.Items.Add(datlvDefectsumary)
+            'newLabelN.BringToFront()
+            'newLabelP.BringToFront()
+            'newLabelW.BringToFront()
+            'newLabelN.BackColor = colorsArray(i)
+            'newLabelP.BackColor = colorsArray(i)
+            'newLabelW.BackColor = colorsArray(i)
             i += 1
-        Next
+        Next '
         Button4.BringToFront()
         Button3.BringToFront()
         Label6.BackColor = Color.FromArgb(44, 85, 130)
         Label6.Location = New Point(584, 159)
         Label6.BringToFront()
         LB_PLAN_DATE.BackColor = Color.FromArgb(44, 77, 131)
-        LB_PLAN_DATE.Location = New Point(542, 270)
+        LB_PLAN_DATE.Location = New Point(570, 270)
         LB_PLAN_DATE.BringToFront()
         lb_remain_qty.Location = New Point(628, 371)
         lb_remain_qty.BringToFront()
@@ -366,4 +392,56 @@ Public Class Prd_detail
         Dim showWork = New Show_Worker
         showWork.show
     End Sub
+
+    Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
+        tbnUp()
+    End Sub
+
+    Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
+        tbnDown()
+    End Sub
+    Public Sub tbnUp()
+        If S_index < 0 Then
+            S_index = 0
+        ElseIf S_index > CDbl(Val((lvWISpc.Items.Count - 1))) Then
+            S_index = CDbl(Val((lvWISpc.Items.Count - 1)))
+        End If
+        Try
+            lvWISpc.Items(S_index).Selected = False
+            S_index -= 1
+            If S_index < 0 Then
+                S_index = 0
+                ' ElseIf lvChildpart.Items.Count > S_index Then
+                '    S_index = CDbl(Val((lvChildpart.Items.Count - 1)))
+            End If
+            lvWISpc.Items(S_index).Selected = True
+            lvWISpc.Items(S_index).EnsureVisible()
+            lvWISpc.Select()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Sub tbnDown()
+        If S_index < 0 Then
+            S_index = 0
+        ElseIf S_index > CDbl(Val((lvWISpc.Items.Count - 1))) Then
+            S_index = CDbl(Val((lvWISpc.Items.Count - 1)))
+        End If
+        Try
+            lvWISpc.Items(S_index).Selected = False
+            S_index += 1
+            If S_index < 0 Then
+                S_index = 0
+                ' ElseIf lvChildpart.Items.Count > S_index Then
+                '    S_index = CDbl(Val((lvChildpart.Items.Count - 1)))
+            End If
+            lvWISpc.Items(S_index).Selected = True
+            lvWISpc.Items(S_index).EnsureVisible()
+            lvWISpc.Select()
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
 End Class

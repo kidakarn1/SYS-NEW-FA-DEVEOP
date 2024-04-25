@@ -5,10 +5,12 @@ Public Class MainFrm
     Public Sub ClickButton()
         Application.Exit()
     End Sub
+    Public Shared rsCheckCriticalFlg = ""
+    Public chk_spec_line As String = ""
     Public dbClass As New Backoffice_model
     Public dbClass2 As New Backoffice_model
     Public check_status_date As Integer = 0
-    Public Shared rsCheckCriticalFlg As String = ""
+    Public Shared c As String = ""
     'Private Sub button1_click(sender As Object, e As EventArgs)
     '    dbClass.ConnectDB()
     '    dbClass.myConnection.Close()
@@ -316,6 +318,7 @@ Public Class MainFrm
                     If LoadSQL_prd_plan <> " " Then
                         For Each item As Object In dict
                             ArrayDataPlan.Add(New DataPlan With {.IND_ROW = item("IND_ROW").ToString(), .PS_UNIT_NUMERATOR = "PS_UNIT_NUMERATOR", .CT = item("CT").ToString(), .seq_no = item("seq_no").ToString(), .WORK_ODR_DLV_DATE = item("WORK_ODR_DLV_DATE").ToString(), .LOCATION_PART = item("LOCATION_PART").ToString(), .MODEL = item("MODEL").ToString(), .PRODUCT_TYP = item("PRODUCT_TYP").ToString(), .wi = item("WI").ToString(), .item_cd = item("ITEM_CD").ToString(), .item_name = item("ITEM_NAME").ToString()})
+                            chk_spec_line = item("chk_spec_line").ToString()
                             Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
                             Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
                             Prd_detail.lb_item_cd.Text = item("ITEM_CD").ToString()

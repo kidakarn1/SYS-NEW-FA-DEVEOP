@@ -34,7 +34,7 @@ Public Class Loss_reg
                     Try
                         If My.Computer.Network.Ping("192.168.161.101") Then
                             transfer_flg = 1
-                            If MainFrm.Label4.Text = "K1M083" Then
+                            If MainFrm.chk_spec_line = "2" Then
                                 Dim GenSEQ As Integer = seq_no - 5
                                 Dim Iseq = GenSEQ
                                 Dim j As Integer = 0
@@ -54,7 +54,7 @@ Public Class Loss_reg
                             End If
                         Else
                             transfer_flg = 0
-                            If MainFrm.Label4.Text = "K1M083" Then
+                            If MainFrm.chk_spec_line = "2" Then
                                 Dim GenSEQ As Integer = seq_no - 5
                                 Dim Iseq = GenSEQ
                                 Dim j As Integer = 0
@@ -71,7 +71,7 @@ Public Class Loss_reg
                         End If
                     Catch ex As Exception
                         transfer_flg = 0
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             Dim GenSEQ As Integer = seq_no - 5
                             Dim Iseq = GenSEQ
                             Dim j As Integer = 0
@@ -125,7 +125,7 @@ Public Class Loss_reg
                 Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                                 Dim special_wi As String = itemPlanData.wi
                                 Backoffice_model.line_status_ins(line_id, date_st, date_end, "1", "0", "24", "0", special_wi)
@@ -136,7 +136,7 @@ Public Class Loss_reg
                             Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
                         End If
                     Else
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                                 Dim special_wi As String = itemPlanData.wi
                                 Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", special_wi)
@@ -146,7 +146,7 @@ Public Class Loss_reg
                         End If
                     End If
                 Catch ex As Exception
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                             Dim special_wi As String = itemPlanData.wi
                             Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", "24", "0", special_wi)
@@ -183,7 +183,7 @@ Public Class Loss_reg
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         transfer_flg = "1"
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             Dim GenSEQ As Integer = seq_no - 5
                             Dim Iseq = GenSEQ
                             Dim j As Integer = 0
@@ -205,7 +205,7 @@ Public Class Loss_reg
                         ' maintenance.UpdateMaintenance(line_cd, ComboBox1.Text, shift_prd, test_time_loss_time.Text, DateTime.Now.ToString("yyyy/MM/dd H:m:s"), date_start_data)
                     Else
                         transfer_flg = "0"
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             Dim GenSEQ As Integer = seq_no - 5
                             Dim Iseq = GenSEQ
                             Dim j As Integer = 0
@@ -223,7 +223,7 @@ Public Class Loss_reg
                 Catch ex As Exception
                     transfer_flg = "0"
 
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         Dim GenSEQ As Integer = seq_no - 5
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
@@ -249,7 +249,7 @@ Public Class Loss_reg
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             Dim GenSEQ As Integer = CDbl(Val(Working_Pro.Label22.Text)) - 5
             Dim Iseq = GenSEQ
             Dim j As Integer = 0
@@ -307,7 +307,7 @@ Public Class Loss_reg
 
     End Sub
     Private Async Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             Dim j As Integer = 0
             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                 Dim special_wi As String = itemPlanData.wi
@@ -350,7 +350,7 @@ Public Class Loss_reg
             ' ทำงานเมื่อได้รับคำสั่ง "click button"
             ' เช่น คลิกปุ่ม
             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
-            If MainFrm.Label4.Text = "K1M083" Then
+            If MainFrm.chk_spec_line = "2" Then
                 Dim GenSEQ As Integer = CDbl(Val(Working_Pro.Label22.Text)) - 5
                 Dim Iseq = GenSEQ
                 Dim j As Integer = 0

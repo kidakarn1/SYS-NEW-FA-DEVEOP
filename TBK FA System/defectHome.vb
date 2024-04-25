@@ -28,6 +28,4 @@ Public Class defectHome
         dfDetailng.show()
         Me.Close()
     End Sub
-
-
 End Class

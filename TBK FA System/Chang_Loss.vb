@@ -33,7 +33,7 @@ Public Class Chang_Loss
                 Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             Dim j As Integer = 0
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                                 Dim special_wi As String = itemPlanData.wi
@@ -45,7 +45,7 @@ Public Class Chang_Loss
                             Backoffice_model.line_status_ins_sqlite(line_id, date_st, date_end, "1", "0", ListView2.Items(sel_cd).SubItems(0).Text, "0", Prd_detail.lb_wi.Text)
                         End If
                     Else
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             Dim j As Integer = 0
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                                 Dim special_wi As String = itemPlanData.wi
@@ -56,7 +56,7 @@ Public Class Chang_Loss
                         End If
                     End If
                 Catch ex As Exception
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                             Dim special_wi As String = itemPlanData.wi
@@ -123,7 +123,7 @@ Public Class Chang_Loss
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         transfer_flg = "1"
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             Dim j As Integer = 0
                             Dim GenSEQ As Integer = seq_no - 5
                             Dim Iseq = GenSEQ
@@ -141,7 +141,7 @@ Public Class Chang_Loss
                         End If
                     Else
                         transfer_flg = "0"
-                        If MainFrm.Label4.Text = "K1M083" Then
+                        If MainFrm.chk_spec_line = "2" Then
                             Dim j As Integer = 0
                             Dim GenSEQ As Integer = seq_no - 5
                             Dim Iseq = GenSEQ
@@ -158,7 +158,7 @@ Public Class Chang_Loss
                     End If
                 Catch ex As Exception
                     transfer_flg = "0"
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         Dim j As Integer = 0
                         Dim GenSEQ As Integer = seq_no - 5
                         Dim Iseq = GenSEQ

@@ -208,7 +208,7 @@ Public Class Working_Pro
         If LB_COUNTER_SHIP.Text = "" Then
             LB_COUNTER_SHIP.Text = 0
         Else
-            If MainFrm.Label4.Text = "K1M083" Then
+            If MainFrm.chk_spec_line = "2" Then
                 LB_COUNTER_SHIP.Text = CDbl(Val(LB_COUNTER_SHIP.Text)) / Confrime_work_production.ArrayDataPlan.Count
             End If
         End If
@@ -710,9 +710,8 @@ Public Class Working_Pro
             'End If
             Dim rsInsertData As String = ""
             Dim GET_SEQ
-
-            If MainFrm.Label4.Text = "K1M083" Then
-                Dim GenSEQ As Integer = Label22.Text - 5
+            If MainFrm.chk_spec_line = "2" Then
+                Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                 Dim Iseq = GenSEQ
                 For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                     Iseq += 1
@@ -730,10 +729,10 @@ Public Class Working_Pro
                     Dim C_seq_no As Integer = CDbl(Val(GET_SEQ("seq_no")))
                     If C_seq_no > 0 Then
                         Dim seq_no_naja = GET_SEQ("seq_no")
-                        If MainFrm.Label4.Text = "K1M083" Then
-                            Dim update_data = Backoffice_model.Update_seqplan(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, CDbl(Val(Prd_detail.lb_seq.Text)) + 5)
+                        If MainFrm.chk_spec_line = "2" Then
+                            Dim update_data = Backoffice_model.Update_seqplan(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, CDbl(Val(Prd_detail.lb_seq.Text)) + CDbl(Val(MainFrm.ArrayDataPlan.ToArray().Length)))
                         Else
-                            Dim update_data = Backoffice_model.Update_seqplan(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, CDbl(Val(Prd_detail.lb_seq.Text)) + 1)
+                            Dim update_data = Backoffice_model.Update_seqplan(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, CDbl(Val(Prd_detail.lb_seq.Text)) + CDbl(Val(MainFrm.ArrayDataPlan.ToArray().Length)))
                         End If
                     Else
                         Dim insert_data = Backoffice_model.INSERT_tmp_planseq(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_st1, date_end1, Label22.Text)
@@ -746,8 +745,8 @@ Public Class Working_Pro
             End Try
             GET_SEQ.close()
             Dim temp_co_emp As Integer = List_Emp.ListView1.Items.Count
-            If MainFrm.Label4.Text = "K1M083" Then
-                Dim GenSEQ As Integer = Label22.Text - 5
+            If MainFrm.chk_spec_line = "2" Then
+                Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                 Dim Iseq = GenSEQ
                 Spwi_id = New List(Of String)
                 For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -792,8 +791,8 @@ Public Class Working_Pro
                             end_loss_codex = item("End_Loss").ToString()
                             Loss_Time_codex = item("Loss_Time").ToString()
                             If CDbl(Val(Loss_Time_codex)) > 0 Then
-                                If MainFrm.Label4.Text = "K1M083" Then
-                                    Dim GenSEQ As Integer = Label22.Text - 5
+                                If MainFrm.chk_spec_line = "2" Then
+                                    Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                                     Dim Iseq = GenSEQ
                                     Dim j As Integer = 0
                                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -830,8 +829,8 @@ Public Class Working_Pro
         End Try
         Dim date_st As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
         Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
-        If MainFrm.Label4.Text = "K1M083" Then
-            Dim GenSEQ As Integer = Label22.Text - 5
+        If MainFrm.chk_spec_line = "2" Then
+            Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
             Dim Iseq = GenSEQ
             Dim j As Integer = 0
             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -899,8 +898,8 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -919,8 +918,8 @@ Public Class Working_Pro
                     'MsgBox("Ping completed")
                 Else
                     tr_status = "0"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -938,8 +937,8 @@ Public Class Working_Pro
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -1613,8 +1612,8 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -1632,8 +1631,8 @@ Public Class Working_Pro
                     End If
                 Else
                     tr_status = "0"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -1650,8 +1649,8 @@ Public Class Working_Pro
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -1935,8 +1934,8 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -1955,8 +1954,8 @@ Public Class Working_Pro
                     End If
                 Else
                     tr_status = "0"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -1974,8 +1973,8 @@ Public Class Working_Pro
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -2080,21 +2079,21 @@ Public Class Working_Pro
         ' If check_bull = 0 Then
         check_bull = 1
         Console.WriteLine("IN FUNCTION")
-          Await counter_contect_DIO_RS232()
+        Await counter_contect_DIO_RS232()
         Console.WriteLine("OUT FUNCTION")
-                      'Timer3.Enabled = True
-                      Dim delay_setting As Integer = 0
-                      Console.WriteLine("G1")
-                      Console.WriteLine("status_conter====>" & status_conter)
-                      If status_conter = "0" Then
-                          delay_setting = s_delay * 100
-                          Console.WriteLine("AF1")
-                      Else
-                          delay_setting = s_delay * 1000
-                          Console.WriteLine("AF2")
-                      End If
-                      Console.WriteLine("DELAY SETTTTTING=====>" & delay_setting)
-                      Try
+        'Timer3.Enabled = True
+        Dim delay_setting As Integer = 0
+        Console.WriteLine("G1")
+        Console.WriteLine("status_conter====>" & status_conter)
+        If status_conter = "0" Then
+            delay_setting = s_delay * 100
+            Console.WriteLine("AF1")
+        Else
+            delay_setting = s_delay * 1000
+            Console.WriteLine("AF2")
+        End If
+        Console.WriteLine("DELAY SETTTTTING=====>" & delay_setting)
+        Try
             Await Task.Delay(delay_setting).ContinueWith(Sub(task)
                                                              Try
                                                                  Me.Invoke(Sub()
@@ -2106,8 +2105,8 @@ Public Class Working_Pro
                                                              End Try
                                                          End Sub, TaskScheduler.FromCurrentSynchronizationContext())
         Catch ex As Exception
-                          Console.WriteLine("err===>" & ex.Message)
-                      End Try
+            Console.WriteLine("err===>" & ex.Message)
+        End Try
         ' End If
     End Function
     Private Async Function Manage_counter_NI_MAX() As Task
@@ -2227,7 +2226,6 @@ Public Class Working_Pro
         e.Graphics.DrawString("QTY.", lb_font1.Font, Brushes.Black, 492, 13)
         'Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) ' Check From Actual
         Dim result_snp As Integer = CDbl(Val(GoodQty)) Mod CDbl(Val(Label27.Text)) ' Check From Good
-        MsgBox("result_snp ==-=>" & result_snp)
         Dim status_tag As String = "[ Incomplete Tag]"
         If V_check_line_reprint = "0" Then
             If result_snp = "0" Then
@@ -2409,7 +2407,7 @@ Public Class Working_Pro
         Dim L_Shift As String = ""
         Dim L_flg_control As String = ""
         Dim L_item_cd As String = ""
-        Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
+        Dim result_snp As Integer = CDbl(Val(GoodQty)) Mod CDbl(Val(Label27.Text))
         Dim status_tag As String = "[ Incomplete Tag ]"
         If V_check_line_reprint = "0" Then
             If result_snp = "0" Then
@@ -2425,7 +2423,7 @@ Public Class Working_Pro
                     result_snp = Label27.Text
                     status_tag = " "
                 Else
-                    result_snp = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
+                    result_snp = CDbl(Val(GoodQty)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
                     status_tag = "[ Incomplete Tag ]"
                 End If
             End If
@@ -2534,7 +2532,7 @@ Public Class Working_Pro
                     box_no = the_Label_bach
                 End If
                 Dim qr_detailsss = iden_cd & Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no
-                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailsss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id, tag_group_no)
+                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailsss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id, tag_group_no, GoodQty)
             End If
         Catch ex As Exception
         End Try
@@ -2657,7 +2655,7 @@ Public Class Working_Pro
         e.Graphics.DrawString("Use @ TBKK(Thailand) Co., Ltd.", lb_font1.Font, Brushes.Black, 525, 282)
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
-                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id, Working_Pro.tag_group_no)
+                Backoffice_model.Insert_tag_print(wi_no.Text, qr_detailss, box_no, 1, plan_seq, Label14.Text, check_tagprint(), Label3.Text, pwi_id, Working_Pro.tag_group_no, GoodQty)
                 'MsgBox("Ping completed")
             Else
                 'MsgBox("Ping incompleted")
@@ -2771,8 +2769,8 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -2790,8 +2788,8 @@ Public Class Working_Pro
                     End If
                 Else
                     tr_status = "0"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -2808,8 +2806,8 @@ Public Class Working_Pro
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -2839,8 +2837,8 @@ Public Class Working_Pro
                 Try
                     If My.Computer.Network.Ping("192.168.161.101") Then
                         tr_status = "1"
-                        If MainFrm.Label4.Text = "K1M083" Then
-                            Dim GenSEQ As Integer = Label22.Text - 5
+                        If MainFrm.chk_spec_line = "2" Then
+                            Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                             Dim Iseq = GenSEQ
                             Dim j As Integer = 0
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -2858,8 +2856,8 @@ Public Class Working_Pro
                         End If
                     Else
                         tr_status = "0"
-                        If MainFrm.Label4.Text = "K1M083" Then
-                            Dim GenSEQ As Integer = Label22.Text - 5
+                        If MainFrm.chk_spec_line = "2" Then
+                            Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                             Dim Iseq = GenSEQ
                             Dim j As Integer = 0
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -2876,8 +2874,8 @@ Public Class Working_Pro
                     End If
                 Catch ex As Exception
                     tr_status = "0"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -3504,8 +3502,8 @@ Public Class Working_Pro
             Try
                 If My.Computer.Network.Ping("192.168.161.101") Then
                     tr_status = "1"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -3524,8 +3522,8 @@ Public Class Working_Pro
                     End If
                 Else
                     tr_status = "0"
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim GenSEQ As Integer = Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                         Dim Iseq = GenSEQ
                         Dim j As Integer = 0
                         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -3543,8 +3541,8 @@ Public Class Working_Pro
                 End If
             Catch ex As Exception
                 tr_status = "0"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan

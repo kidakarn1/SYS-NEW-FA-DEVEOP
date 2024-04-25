@@ -618,6 +618,7 @@
     <Compile Include="Finish_work.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ModelSqliteDefect.vb" />
     <Compile Include="ProgressBar_Form.Designer.vb">
       <DependentUpon>ProgressBar_Form.vb</DependentUpon>
     </Compile>

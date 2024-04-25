@@ -40,7 +40,7 @@
         Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
         Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
         Dim i As Integer = 1
-        Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+        Dim GenSEQ As Integer = CDbl(Val(Working_Pro.Label22.Text)) - MainFrm.ArrayDataPlan.ToArray.Length
         Dim Iseq = GenSEQ
         Dim j As Integer = 0
         For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan

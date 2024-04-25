@@ -79,7 +79,7 @@
             Dim objDefectdetailnc As New defectDetailnc
             sPart = dfDetailsnc.dtItemcd '"J107-11820-RM" 'pd.pFg
             dtWino = objDefectdetailnc.dtWino
-            If MainFrm.Label4.Text = "K1M083" Then
+            If MainFrm.chk_spec_line = "2" Then
                 dtLineno = MainFrm.Label4.Text
             Else
                 dtLineno = objDefectdetailnc.dtLineno
@@ -103,7 +103,7 @@
             Dim objDefectdetailng As New defectDetailng
             sPart = dfDetailsng.dtItemcd '"J107-11820-RM" 'pd.pFg
             dtWino = objDefectdetailng.dtWino
-            If MainFrm.Label4.Text = "K1M083" Then
+            If MainFrm.chk_spec_line = "2" Then
                 dtLineno = MainFrm.Label4.Text
             Else
                 dtLineno = objDefectdetailng.dtLineno
@@ -145,20 +145,14 @@
                 Else
                     Dim md = New modelDefect
                     Dim UseQty = ""
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
-                        Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
-                        Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
-                        Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
-                        Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
-                        Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim arrayWI As List(Of String) = New List(Of String)
+                        For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+                            arrayWI.Add(itemPlanData.wi)
+                        Next
+                        Dim GenSEQ As Integer = Working_Pro.Label22.Text - MainFrm.ArrayDataPlan.ToArray.Length
                         Dim Iseq = GenSEQ
-                        Dim Seq1 = Iseq + 1
-                        Dim Seq2 = Iseq + 2
-                        Dim Seq3 = Iseq + 3
-                        Dim Seq4 = Iseq + 4
-                        Dim Seq5 = Iseq + 5
-                        UseQty = md.mGetdefectdetailncPartnoSpc(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi, Seq1, Seq2, Seq3, Seq4, Seq5, Working_Pro.Label18.Text, "2", lbPart.Text, dtWino, dtSeqno)
+                        UseQty = md.mGetdefectdetailncPartnoSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, "2", lbPart.Text, dtWino, dtSeqno)
                     Else
                         UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "2", lbPart.Text)
                     End If
@@ -172,20 +166,14 @@
                 Else
                     Dim md = New modelDefect
                     Dim UseQty
-                    If MainFrm.Label4.Text = "K1M083" Then
-                        Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
-                        Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
-                        Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
-                        Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
-                        Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
-                        Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+                    If MainFrm.chk_spec_line = "2" Then
+                        Dim arrayWI As List(Of String) = New List(Of String)
+                        For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+                            arrayWI.Add(itemPlanData.wi)
+                        Next
+                        Dim GenSEQ As Integer = Working_Pro.Label22.Text - MainFrm.ArrayDataPlan.ToArray.Length
                         Dim Iseq = GenSEQ
-                        Dim Seq1 = Iseq + 1
-                        Dim Seq2 = Iseq + 2
-                        Dim Seq3 = Iseq + 3
-                        Dim Seq4 = Iseq + 4
-                        Dim Seq5 = Iseq + 5
-                        UseQty = md.mGetdefectdetailncPartnoSpc(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi, Seq1, Seq2, Seq3, Seq4, Seq5, Working_Pro.Label18.Text, "1", lbPart.Text, dtWino, dtSeqno)
+                        UseQty = md.mGetdefectdetailncPartnoSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, "1", lbPart.Text, dtWino, dtSeqno)
                     Else
                         UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "1", lbPart.Text)
                     End If
@@ -294,7 +282,7 @@
                 If dfHome.dtType = "NC" Then
                     wi = dfDetailsnc.dtWino
                     lot = dfDetailsnc.dtLotNo
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         seq = dtSeqno
                     Else
                         seq = Working_Pro.seqNo 'dfDetailsnc.dtSeqno
@@ -314,7 +302,7 @@
                     Dim rsCheck = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
                     wi = dfDetailsng.dtWino
                     lot = dfDetailsng.dtLotNo
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         seq = dtSeqno
                     Else
                         seq = Working_Pro.seqNo 'dfDetailsnc.dtSeqno
@@ -345,7 +333,7 @@
             If dfHome.dtType = "NC" Then
                 wi = LdfDetailsnc.dtWino
                 lot = LdfDetailsnc.dtLotNo
-                If MainFrm.Label4.Text = "K1M083" Then
+                If MainFrm.chk_spec_line = "2" Then
                     seq = dtSeqno
                 Else
                     seq = Working_Pro.seqNo 'dfDetailsnc.dtSeqno
@@ -364,7 +352,7 @@
             ElseIf dfHome.dtType = "NG" Then
                 wi = LdfDetailsng.dtWino
                 lot = LdfDetailsng.dtLotNo
-                If MainFrm.Label4.Text = "K1M083" Then
+                If MainFrm.chk_spec_line = "2" Then
                     seq = dtSeqno
                 Else
                     seq = Working_Pro.seqNo 'dfDetailsnc.dtSeqno
@@ -431,7 +419,7 @@
         If rs Then
             Dim dfRegister As New defectRegister()
             Dim pwi_id As String
-            If MainFrm.Label4.Text = "K1M083" Then
+            If MainFrm.chk_spec_line = "2" Then
                 If defectHome.dtType = "NC" Then
                     pwi_id = defectDetailnc.dtpwi_id
                 Else

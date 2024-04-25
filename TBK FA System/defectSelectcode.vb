@@ -21,7 +21,7 @@ Friend Class defectSelectcode
         ElseIf dfHome.dtType = "NG" Then
             lvDefectcode.BackColor = Color.Tomato
         End If
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             If dSelecttype.type = "1" Then
                 sPart = dSelecttypeSpc.dtItemcd
                 lbPartfg.Text = sPart
@@ -36,7 +36,7 @@ Friend Class defectSelectcode
             lbPartfg.Text = sPart
             getDefectcode()
         Else
-                lbPartfg.Text = dfHome.dtType
+            lbPartfg.Text = dfHome.dtType
             sPart = dSelecttype.sPart
             lbPartfg.Text = sPart
             lbType.Text = dfHome.dtType
@@ -109,7 +109,7 @@ Friend Class defectSelectcode
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             If dSelecttype.type = "1" Then
                 Dim objdSelectFGSPC As New defectSpecialSelectFG()
                 objdSelectFGSPC.Show()
@@ -127,9 +127,7 @@ Friend Class defectSelectcode
 
     End Sub
 
-    Private Sub lvDefectcode_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try

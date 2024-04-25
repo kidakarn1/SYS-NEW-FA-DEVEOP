@@ -5,6 +5,8 @@ Imports System.Windows.Forms.Form
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports System.Web.Script.Serialization
+Imports System.Text
+
 Public Class api
 
     Public Function Load_data(ByVal _URL As String) As String
@@ -72,5 +74,31 @@ Public Class api
 
         Return _tmpImage
     End Function
+    Public Function Load_dataPOST(ByVal url As String, ByVal postData As JObject) As String
+        Dim rs As String = ""
 
+        ' สร้าง HttpWebRequest
+        Dim request As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
+
+        ' กำหนดเมธอดและตัวแปรที่จำเป็นต่อการส่งคำขอ
+        request.Method = "POST"
+        request.ContentType = "application/json"
+
+        ' แปลงข้อมูล POST เป็นไบต์และกำหนดขนาดความยาวของข้อมูล
+        Dim postDataBytes As Byte() = Encoding.UTF8.GetBytes(postData.ToString())
+        request.ContentLength = postDataBytes.Length
+        ' เขียนข้อมูล POST ลงใน Request Stream
+        Using requestStream As Stream = request.GetRequestStream()
+            requestStream.Write(postDataBytes, 0, postDataBytes.Length)
+        End Using
+        ' ส่งคำขอและรับตอบกลับ
+        Using response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
+            ' อ่านข้อมูลจากเนื้อหาของการตอบกลับ
+            Using streamReader As New StreamReader(response.GetResponseStream())
+                Dim responseData As String = streamReader.ReadToEnd()
+                rs = responseData
+            End Using
+        End Using
+        Return rs
+    End Function
 End Class

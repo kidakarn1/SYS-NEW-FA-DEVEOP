@@ -32,12 +32,14 @@ Public Class closeLotsummary
             setVariable()
             Finish_work.Close()
             If My.Computer.Network.Ping("192.168.161.101") Then
-                If MainFrm.Label4.Text = "K1M083" Then
+                If MainFrm.chk_spec_line = "2" Then
                     lbLine.BackColor = Color.FromArgb(44, 88, 130)
                     lbLine.Location = New Point(166, 113)
                     lbLine.Font = New Font(lbLine.Font.FontFamily, 23)
                     pbSpecialSummary.Visible = True
                     ListView2.Visible = True
+                    PictureBox3.Visible = True
+                    PictureBox3.Enabled = True
                     setDataSpecial()
                 Else
                     pbSpecialSummary.Visible = False
@@ -52,14 +54,33 @@ Public Class closeLotsummary
     End Sub
     Public Sub setDataSpecial()
         Dim i As Integer = 0
+        Dim arrayWI As List(Of String) = New List(Of String)
+        Dim GenSEQ As Integer = Working_Pro.Label22.Text - MainFrm.ArrayDataPlan.ToArray.Length
+        Dim Iseq = GenSEQ
+        Dim md As New modelDefect()
         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
             i += 1
+            Iseq += 1
             Dim special_wi As String = itemPlanData.wi
             Dim special_item_cd As String = itemPlanData.item_cd
+            arrayWI.Add(itemPlanData.wi)
+            rs = md.mgroupDataWiSpc(itemPlanData.wi, Iseq, Working_Pro.Label18.Text)
             listviewSpecial = New ListViewItem(i)
             listviewSpecial.SubItems.Add(special_wi)
             listviewSpecial.SubItems.Add(special_item_cd)
             listviewSpecial.SubItems.Add(Working_Pro.LB_COUNTER_SEQ.Text)
+            If rs <> "0" Then
+                Dim rsData As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
+                For Each item As Object In rsData
+                    listviewSpecial.SubItems.Add(calGoodqty(Working_Pro.LB_COUNTER_SEQ.Text, item("TotaldfNC").ToString(), item("TotaldfNG").ToString()))
+                    listviewSpecial.SubItems.Add(item("TotaldfNC").ToString())
+                    listviewSpecial.SubItems.Add(item("TotaldfNG").ToString())
+                Next
+            Else
+                listviewSpecial.SubItems.Add(calGoodqty(Working_Pro.LB_COUNTER_SEQ.Text, 0, 0))
+                listviewSpecial.SubItems.Add(0)
+                listviewSpecial.SubItems.Add(0)
+            End If
             ListView2.Items.Add(listviewSpecial)
         Next
     End Sub
@@ -195,44 +216,84 @@ Public Class closeLotsummary
                     Loss_reg.Submit_loss()
                 End If
                 Dim md As New modelDefect()
-                rsFg = md.mGetdatachildpartsummaryfg(sWi, sSeq, sLot)
-                Dim flg_print As String = ""
-                If rsFg <> "0" Then
-                    Dim dcResultdatafg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFg)
-                    Dim i As Integer = 1
-                    For Each itemchild As Object In dcResultdatafg
-                        Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-                        ClickOk(sWi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, sSeq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now, Working_Pro.pwi_id)
-                    Next
-                End If
-                rs = md.mGetdatachildpartsummarychild(sWi, sSeq, sLot)
-                If rs <> "0" Then
-                    Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
-                    Dim i As Integer = 1
-                    For Each itemfg As Object In dcResultdata
-                        Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-                        ClickOk(sWi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, sSeq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now, Working_Pro.pwi_id)
-                    Next
-                End If
                 Dim cFlg = comPleteflg(sAct, pQty)
                 Dim trFlg As String = "1"
                 Dim dFlg As String = "0"
                 Dim prdFlg As String = "1"
                 Dim clFlg As String = "1"
-                If Backoffice_model.S_chk_spec_line = 1 Then
-                    Dim data = Backoffice_model.GET_START_END_PRODUCTION_DETAIL_SPECTAIL_TIME(Working_Pro.pwi_id)
-                    If data <> "0" Then
-                        Dim dFg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(data)
-                        For Each item As Object In dFg
-                            stDatetime = item("st_time").ToString()
-                            eDatetime = item("end_time").ToString()
-                            Console.WriteLine(stDatetime)
-                            Console.WriteLine(eDatetime)
+                If MainFrm.chk_spec_line = "2" Then
+                    'Special
+                    Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
+                    Dim Iseq = GenSEQ
+                    For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+                        Iseq = Iseq + 1
+                        rsFg = md.mGetdatachildpartsummaryfg(itemPlanData.wi, Iseq, sLot)
+                        rs = md.mGetdatachildpartsummarychild(itemPlanData.wi, Iseq, sLot)
+                        If rsFg <> "0" Then
+                            Dim dcResultdatafg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFg)
+                            Dim i As Integer = 1
+                            For Each itemchild As Object In dcResultdatafg
+                                Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
+                                ClickOk(itemPlanData.wi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, Iseq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now, Working_Pro.pwi_id)
+                            Next
+                        End If
+                        If rs <> "0" Then
+                            Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
+                            Dim i As Integer = 1
+                            For Each itemfg As Object In dcResultdata
+                                Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
+                                ClickOk(itemPlanData.wi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, Iseq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now, Working_Pro.pwi_id)
+                            Next
+                        End If
+                        If Backoffice_model.S_chk_spec_line = 1 Then
+                            Dim data = Backoffice_model.GET_START_END_PRODUCTION_DETAIL_SPECTAIL_TIME(Working_Pro.pwi_id)
+                            If data <> "0" Then
+                                Dim dFg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(data)
+                                For Each item As Object In dFg
+                                    stDatetime = item("st_time").ToString()
+                                    eDatetime = item("end_time").ToString()
+                                    Console.WriteLine(stDatetime)
+                                    Console.WriteLine(eDatetime)
+                                Next
+                            End If
+                        End If
+                    Next
+                Else
+                    'Normal
+                    rsFg = md.mGetdatachildpartsummaryfg(sWi, sSeq, sLot)
+                    Dim flg_print As String = ""
+                    If rsFg <> "0" Then
+                        Dim dcResultdatafg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFg)
+                        Dim i As Integer = 1
+                        For Each itemchild As Object In dcResultdatafg
+                            Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
+                            ClickOk(sWi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, sSeq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now, Working_Pro.pwi_id)
                         Next
+                    End If
+                    rs = md.mGetdatachildpartsummarychild(sWi, sSeq, sLot)
+                    If rs <> "0" Then
+                        Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
+                        Dim i As Integer = 1
+                        For Each itemfg As Object In dcResultdata
+                            Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
+                            ClickOk(sWi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, sSeq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now, Working_Pro.pwi_id)
+                        Next
+                    End If
+                    If Backoffice_model.S_chk_spec_line = 1 Then
+                        Dim data = Backoffice_model.GET_START_END_PRODUCTION_DETAIL_SPECTAIL_TIME(Working_Pro.pwi_id)
+                        If data <> "0" Then
+                            Dim dFg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(data)
+                            For Each item As Object In dFg
+                                stDatetime = item("st_time").ToString()
+                                eDatetime = item("end_time").ToString()
+                                Console.WriteLine(stDatetime)
+                                Console.WriteLine(eDatetime)
+                            Next
+                        End If
                     End If
                 End If
                 insertProductionactual(sWi, sLine, sPart, pQty, seqQty, sSeq, sShift, staffNo, stDatetime, eDatetime, sLot, cFlg, trFlg, dFlg, prdFlg, clFlg, avarage_eff, avarage_act_prd_time)
-                If MainFrm.Label4.Text = "K1M083" Then
+                If MainFrm.chk_spec_line = "2" Then
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                         Dim special_wi As String = itemPlanData.wi
                         If cFlg = 1 Then
@@ -249,7 +310,18 @@ Public Class closeLotsummary
                     End If
                 End If
                 checkPrintnormal()
-                checkPrintdefect(sWi, sSeq, sLot)
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = sSeq - MainFrm.ArrayDataPlan.ToArray.Length
+                    Dim Iseq = GenSEQ
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        Iseq = Iseq + 1
+                        Dim special_wi As String = itemPlanData.wi
+                        checkPrintdefect(special_wi, Iseq, sLot)
+                    Next
+                Else
+                    checkPrintdefect(sWi, sSeq, sLot)
+                End If
+
                 If statusPage.Text = "MAN" Then
                     Sel_prd_setup.Close()
                     List_Emp.lb_link.Text = "working"
@@ -311,7 +383,7 @@ Public Class closeLotsummary
                 For Each detailItemfg As Object In dFg
                     Dim objTagprintdefect = New printDefect()
                     Dim menu = "1"
-                    objTagprintdefect.Set_parameter_print(itemdf("dt_item_cd").ToString(), detailItemfg("ITEM_NAME").ToString(), detailItemfg("MODEL").ToString(), sLine, stDatetime, detailItemfg("LOCATION_PART").ToString(), sShift, factory_cd, sLot, itemdf("total_nc"), sSeq, sWi, itemType, dfType, menu)
+                    objTagprintdefect.Set_parameter_print(itemdf("dt_item_cd").ToString(), detailItemfg("ITEM_NAME").ToString(), detailItemfg("MODEL").ToString(), sLine, stDatetime, detailItemfg("LOCATION_PART").ToString(), sShift, factory_cd, sLot, itemdf("total_nc"), seq, wi, itemType, dfType, menu)
                 Next
             Next
         End If
@@ -334,7 +406,7 @@ Public Class closeLotsummary
                 For Each detailItemchild As Object In dChild
                     Dim objTagprintdefect = New printDefect()
                     Dim menu = "1"
-                    objTagprintdefect.Set_parameter_print(itemd("dt_item_cd").ToString(), detailItemchild("ITEM_NAME").ToString(), detailItemchild("MODEL").ToString(), sLine, stDatetime, detailItemchild("LOCATION_PART").ToString(), sShift, factory_cd, sLot, itemd("total_nc"), sSeq, sWi, itemType, dfType, menu)
+                    objTagprintdefect.Set_parameter_print(itemd("dt_item_cd").ToString(), detailItemchild("ITEM_NAME").ToString(), detailItemchild("MODEL").ToString(), sLine, stDatetime, detailItemchild("LOCATION_PART").ToString(), sShift, factory_cd, sLot, itemd("total_nc"), seq, wi, itemType, dfType, menu)
                 Next
             Next
         End If
@@ -361,7 +433,7 @@ Public Class closeLotsummary
                 For Each detailItemfg As Object In dFg
                     Dim objTagprintdefect = New printDefect()
                     Dim menu = "1"
-                    objTagprintdefect.Set_parameter_print(itemdf("dt_item_cd").ToString(), detailItemfg("ITEM_NAME").ToString(), detailItemfg("MODEL").ToString(), sLine, stDatetime, detailItemfg("LOCATION_PART").ToString(), sShift, factory_cd, sLot, itemdf("total_nc"), sSeq, sWi, itemType, dfType, menu)
+                    objTagprintdefect.Set_parameter_print(itemdf("dt_item_cd").ToString(), detailItemfg("ITEM_NAME").ToString(), detailItemfg("MODEL").ToString(), sLine, stDatetime, detailItemfg("LOCATION_PART").ToString(), sShift, factory_cd, sLot, itemdf("total_nc"), seq, wi, itemType, dfType, menu)
                 Next
             Next
         End If
@@ -384,14 +456,17 @@ Public Class closeLotsummary
                 For Each detailItemchild As Object In dChild
                     Dim objTagprintdefect = New printDefect()
                     Dim menu = "1"
-                    objTagprintdefect.Set_parameter_print(itemd("dt_item_cd").ToString(), detailItemchild("ITEM_NAME").ToString(), detailItemchild("MODEL").ToString(), sLine, stDatetime, detailItemchild("LOCATION_PART").ToString(), sShift, factory_cd, sLot, itemd("total_nc"), sSeq, sWi, itemType, dfType, menu)
+                    objTagprintdefect.Set_parameter_print(itemd("dt_item_cd").ToString(), detailItemchild("ITEM_NAME").ToString(), detailItemchild("MODEL").ToString(), sLine, stDatetime, detailItemchild("LOCATION_PART").ToString(), sShift, factory_cd, sLot, itemd("total_nc"), seq, wi, itemType, dfType, menu)
                 Next
             Next
         End If
     End Sub
     Public Sub checkPrintnormal()
-        Dim result_mod As Double = Working_Pro.Label6.Text Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
-        Dim result_total As Double = Working_Pro.LB_COUNTER_SEQ.Text Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+        Dim result_mod As Double = Integer.Parse(lbGood.Text) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+        Dim result_total As Double = Integer.Parse(lbGood.Text) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+        Console.WriteLine("Working_Pro.LB_COUNTER_SEQ.Text===>" & Working_Pro.LB_COUNTER_SEQ.Text)
+        Console.WriteLine("result_total===>" & result_total)
+        Console.WriteLine("Working_Pro.Label10.Text===>" & Working_Pro.Label10.Text)
         'If result_mod = "0" Then
         'If Backoffice_model.check_line_reprint() = "1" Then
         'If Working_Pro.LB_COUNTER_SEQ.Text > 0 Then
@@ -411,22 +486,28 @@ Public Class closeLotsummary
                 result_total = "1"
             End If
         End If
-        Console.WriteLine("Working_Pro.LB_COUNTER_SEQ.Text===>" & Working_Pro.LB_COUNTER_SEQ.Text)
-        Console.WriteLine("result_total===>" & result_total)
-        Console.WriteLine("Working_Pro.Label10.Text===>" & Working_Pro.Label10.Text)
 
-        If Working_Pro.LB_COUNTER_SEQ.Text > 0 And result_total > "0" And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
+        If Integer.Parse(lbGood.Text) > 0 And result_total > "0" And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
             Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
             Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
-            If MainFrm.Label4.Text = "K1M083" Then
+            If MainFrm.chk_spec_line = "2" Then
                 If result_mod <> 0 Then
                     Working_Pro.GoodQty = lbGood.Text
                     Working_Pro.tag_print()
+                    Dim GenSEQ As Integer = sSeq - MainFrm.ArrayDataPlan.ToArray.Length
+                    Dim Iseq = GenSEQ
+                    Dim j As Integer = 0
+                    For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+                        'special
+                        Iseq += 1
+                        Backoffice_model.update_tagprintforDefect(itemPlanData.wi, "2", "1", Working_Pro.Spwi_id(j), (CDbl(Val(Working_Pro.lb_box_count.Text)) - 1))
+                        j += 1
+                    Next
                 End If
             Else
                 Working_Pro.GoodQty = lbGood.Text
-                MsgBox(Working_Pro.GoodQty)
                 Working_Pro.tag_print()
+                Backoffice_model.update_tagprintforDefect(sWi, "2", "1", Working_Pro.pwi_id, (CDbl(Val(Working_Pro.lb_box_count.Text)) - 1))
             End If
             ' Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
         End If
@@ -441,8 +522,8 @@ Public Class closeLotsummary
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 transfer_flg = "1"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = seq_no - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = seq_no - MainFrm.ArrayDataPlan.ToArray.Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -471,8 +552,8 @@ Public Class closeLotsummary
                 End If
             Else
                 transfer_flg = "0"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = seq_no - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = seq_no - MainFrm.ArrayDataPlan.ToArray.Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -489,8 +570,8 @@ Public Class closeLotsummary
         Catch ex As Exception
             transfer_flg = "0"
             MsgBox("error = > " & ex.Message)
-            If MainFrm.Label4.Text = "K1M083" Then
-                Dim GenSEQ As Integer = seq_no - 5
+            If MainFrm.chk_spec_line = "2" Then
+                Dim GenSEQ As Integer = seq_no - MainFrm.ArrayDataPlan.ToArray.Length
                 Dim Iseq = GenSEQ
                 Dim j As Integer = 0
                 For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan

@@ -2,6 +2,8 @@
 Imports System.Data.SQLite
 Imports System.Globalization
 Imports System.Data
+Imports Newtonsoft.Json.Linq
+
 Public Class modelDefect
     Public Shared bf = New Backoffice_model()
     Public Shared Function mGetchildpart(wi)
@@ -19,13 +21,18 @@ Public Class modelDefect
             Return 0
         End Try
     End Function
-    Public Shared Function mGetchildpartSpc(wi1 As String, wi2 As String, wi3 As String, wi4 As String, wi5 As String)
+    Public Shared Function mGetchildpartSpc(arrWi As Array)
         Try
             Dim api = New api()
-            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getChildpart?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
-            Console.WriteLine("RS DATA===>" & "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getChildpart?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
-            If rsData <> "0" Then
-                Return rsData
+            Dim requestFunction As New JObject()
+            Dim jArrayWI As New JArray(arrWi)
+            Console.WriteLine(jArrayWI)
+            requestFunction("arrWi") = jArrayWI
+            Dim url As String = "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getChildpart"
+            Dim result = api.Load_dataPOST(url, requestFunction)
+
+            If result <> "0" Then
+                Return result
             Else
                 MsgBox("connect Api Faill Please check modelDefect in Function mGetchildpartSpc Data = 0 ")
                 Return 0
@@ -87,7 +94,6 @@ Public Class modelDefect
         Try
             Dim api = New api()
             Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/getDatadefectcodeprint?wi=" & wi & "&lot=" & lot & "&seqNo=" & seqNo & "&itemCd=" & itemCd & "&dfType=" & dfType)
-            Console.WriteLine("data result ====> " & "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/getDatadefectcodeprint?wi=" & wi & "&lot=" & lot & "&seqNo=" & seqNo & "&itemCd=" & itemCd & "&dfType=" & dfType)
             If rsData <> "0" Then
                 Return rsData
             Else
@@ -192,11 +198,19 @@ Public Class modelDefect
             Return False
         End Try
     End Function
-    Public Shared Function mGetdefectdetailncSpc(dtWino1 As String, dtWino2 As String, dtWino3 As String, dtWino4 As String, dtWino5 As String, dtSeq1 As String, dtSeq2 As String, dtSeq3 As String, dtSeq4 As String, dtSeq5 As String, dtLot As String, Type As String)
+    Public Shared Function mGetdefectdetailncSpc(arrayWI As Array, lengthDataPlan As Integer, dtLot As String, Type As String, startSeq As Integer)
         Try
             Dim api = New api()
-            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getDefectnc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot & "&dfType=" & Type)
-            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getDefectnc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot & "&dfType=" & Type)
+            Dim requestFunction As New JObject()
+            Dim jArrayWI As New JArray(arrayWI)
+            requestFunction("arrWi") = jArrayWI
+            requestFunction("lengthDataPlan") = lengthDataPlan
+            requestFunction("startseq") = startSeq
+            requestFunction("dfLot") = dtLot
+            requestFunction("dfType") = Type
+            Dim url As String = "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getDefectnc"
+            Dim rsData = api.Load_dataPOST(url, requestFunction)
+            Console.WriteLine(rsData)
             If rsData <> "0" Then
                 Return rsData
             Else
@@ -221,11 +235,20 @@ Public Class modelDefect
             Return False
         End Try
     End Function
-    Public Shared Function mGetdefectdetailncPartnoSpc(dtWino1 As String, dtWino2 As String, dtWino3 As String, dtWino4 As String, dtWino5 As String, dtSeq1 As String, dtSeq2 As String, dtSeq3 As String, dtSeq4 As String, dtSeq5 As String, dtLot As String, Type As String, PartNo As String, dfWiSel As String, dfSeqSel As String)
+    Public Shared Function mGetdefectdetailncPartnoSpc(arrayWI As Array, lengthDataPlan As Integer, dtLot As String, Type As String, PartNo As String, dfWiSel As String, dfSeqSel As String)
         Try
             Dim api = New api()
-            Dim rsData As String = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getDefectncPartNo?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot & "&dfType=" & Type & "&PartNo=" & PartNo & "&dfWiSel=" & dfWiSel & "&dfSeqSel=" & dfSeqSel)
-            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getDefectncPartNo?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot & "&dfType=" & Type & "&PartNo=" & PartNo & "&dfWiSel=" & dfWiSel & "&dfSeqSel=" & dfSeqSel)
+            Dim requestFunction As New JObject()
+            Dim jArrayWI As New JArray(arrayWI)
+            requestFunction("arrWi") = jArrayWI
+            requestFunction("lengthDataPlan") = lengthDataPlan
+            requestFunction("dfLot") = dtLot
+            requestFunction("Type") = Type
+            requestFunction("PartNo") = PartNo
+            requestFunction("dfWiSel") = dfWiSel
+            requestFunction("dfSeqSel") = dfSeqSel
+            Dim url As String = "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/getDefectncPartNo"
+            Dim rsData = api.Load_dataPOST(url, requestFunction)
             If rsData <> "0" Then
                 Return rsData
             Else
@@ -251,13 +274,22 @@ Public Class modelDefect
         End Try
         Return "0"
     End Function
-    Public Shared Function mGetdatachildpartsummarychildSpc(dtWino1 As String, dtWino2 As String, dtWino3 As String, dtWino4 As String, dtWino5 As String, dtSeq1 As String, dtSeq2 As String, dtSeq3 As String, dtSeq4 As String, dtSeq5 As String, dtLot As String)
+    Public Shared Function mGetdatachildpartsummarychildSpc(arrayWI As Array, lengthDataPlan As Integer, dtLot As String, startseq As Integer)
         Try
             Dim api = New api()
-            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummarychildSpc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot)
-            Console.WriteLine("--->" & "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummarychildSpc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot)
-            If rsData <> "0" Then
-                Return rsData
+            Dim requestFunction As New JObject()
+            Dim jArrayWI As New JArray(arrayWI)
+            requestFunction("dfWi") = jArrayWI
+            requestFunction("lengthDataPlan") = lengthDataPlan
+            requestFunction("dfLot") = dtLot
+            requestFunction("startseq") = startseq
+
+            Dim url As String = "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummarychildSpc"
+            Dim result = api.Load_dataPOST(url, requestFunction)
+            MsgBox(result)
+            'Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummarychildSpc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot)
+            If result <> "0" Then
+                Return result
             Else
                 Return "0"
             End If
@@ -282,11 +314,18 @@ Public Class modelDefect
         End Try
         Return "0"
     End Function
-    Public Shared Function mGetdatachildpartsummaryfgSpc(dtWino1 As String, dtWino2 As String, dtWino3 As String, dtWino4 As String, dtWino5 As String, dtSeq1 As String, dtSeq2 As String, dtSeq3 As String, dtSeq4 As String, dtSeq5 As String, dtLot As String)
+    Public Shared Function mGetdatachildpartsummaryfgSpc(arrayWI As Array, lengthDataPlan As Integer, dtLot As String, startseq As Integer)
         Try
+            Dim requestFunction As New JObject()
             Dim api = New api()
-            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummaryfgSpc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot)
-            Console.WriteLine("---->>WWW" & "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummaryfgSpc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot)
+            Dim jArrayWI As New JArray(arrayWI)
+            requestFunction("dfWi") = jArrayWI
+            requestFunction("lengthDataPlan") = lengthDataPlan
+            requestFunction("dfLot") = dtLot
+            requestFunction("startseq") = startseq
+            Dim url As String = "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummaryfgSpc"
+            Dim rsData = api.Load_dataPOST(url, requestFunction)
+            '  Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummaryfgSpc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot)
             If rsData <> "0" Then
                 Return rsData
             Else
@@ -298,6 +337,24 @@ Public Class modelDefect
         End Try
         Return "0"
     End Function
+
+    Public Shared Function mgroupDataWiSpc(WI As String, seq As String, dtLot As String)
+        Try
+            Dim requestFunction As New JObject()
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/groupDataWiSpc?dfWi=" & WI & "&dfseq=" & seq & "&dfLot=" & dtLot)
+            If rsData <> "0" Then
+                Return rsData
+            Else
+                Return "0"
+            End If
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mgroupDataWiSpc = " & ex.Message)
+            Return "0"
+        End Try
+        Return "0"
+    End Function
+
     Public Shared Function Getdatachildpartsummaryfggrouppart(dtWino As String, dtSeq As String, dtLot As String, dfType As String)
         Try
             Dim api = New api()

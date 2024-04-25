@@ -6,8 +6,8 @@
         If PanelShowLoss.Visible Then
             UpdateAutoLoss()
             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
-            If MainFrm.Label4.Text = "K1M083" Then
-                Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+            If MainFrm.chk_spec_line = "2" Then
+                Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                 Dim Iseq = GenSEQ
                 Dim j As Integer = 0
                 For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -27,8 +27,8 @@
             Me.Close()
         Else
             Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
-            If MainFrm.Label4.Text = "K1M083" Then
-                Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+            If MainFrm.chk_spec_line = "2" Then
+                Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                 Dim Iseq = GenSEQ
                 Dim j As Integer = 0
                 For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -75,8 +75,8 @@
                 Else
                     loss_cd_id = "35"
                 End If
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -95,8 +95,8 @@
                 End If
             Else
                 transfer_flg = "0"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -112,8 +112,8 @@
             End If
         Catch ex As Exception
             transfer_flg = "0"
-            If MainFrm.Label4.Text = "K1M083" Then
-                Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+            If MainFrm.chk_spec_line = "2" Then
+                Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                 Dim Iseq = GenSEQ
                 Dim j As Integer = 0
                 For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -133,17 +133,17 @@
             Console.WriteLine(contDelay)
             'MsgBox("ครบ 5 นาที")
             btnContinue.BringToFront()
-                btnContinue.Visible = True
-                'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
-                'btnContinue.Size = New Size(312, 555)
-                insLoss()
-                lock.Visible = True
-                btnBreakTime.Visible = False
-                lbLossCode.Text = Backoffice_model.LossCodeAuto
-                lbStartCount.Text = Backoffice_model.TimeStartBreakTime
-                lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
-                btnBreakTime.Visible = False
-                PanelShowLoss.Visible = True
+            btnContinue.Visible = True
+            'btnContinue.BackColor = Color.FromArgb(63, 63, 63)
+            'btnContinue.Size = New Size(312, 555)
+            insLoss()
+            lock.Visible = True
+            btnBreakTime.Visible = False
+            lbLossCode.Text = Backoffice_model.LossCodeAuto
+            lbStartCount.Text = Backoffice_model.TimeStartBreakTime
+            lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
+            btnBreakTime.Visible = False
+            PanelShowLoss.Visible = True
             lbEndCount.Text = TimeOfDay.ToString("H:mm:ss")
             Dim date_end_data As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
             Dim date_end As Date = date_end_data
@@ -216,8 +216,8 @@
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 transfer_flg = "1"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -241,8 +241,8 @@
                 End If
             Else
                 transfer_flg = "0"
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+                If MainFrm.chk_spec_line = "2" Then
+                    Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                     Dim Iseq = GenSEQ
                     Dim j As Integer = 0
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -265,8 +265,8 @@
             End If
         Catch ex As Exception
             transfer_flg = "0"
-            If MainFrm.Label4.Text = "K1M083" Then
-                Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+            If MainFrm.chk_spec_line = "2" Then
+                Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
                 Dim Iseq = GenSEQ
                 Dim j As Integer = 0
                 For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan

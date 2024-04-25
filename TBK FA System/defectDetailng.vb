@@ -32,20 +32,14 @@ Public Class defectDetailng
         seq = Working_Pro.seqNo
         lot = Working_Pro.Label18.Text
         Dim rs
-        If MainFrm.Label4.Text = "K1M083" Then
-            Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
-            Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
-            Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
-            Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
-            Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
-            Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+        If MainFrm.chk_spec_line = "2" Then
+            Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
             Dim Iseq = GenSEQ
-            Dim Seq1 = Iseq + 1
-            Dim Seq2 = Iseq + 2
-            Dim Seq3 = Iseq + 3
-            Dim Seq4 = Iseq + 4
-            Dim Seq5 = Iseq + 5
-            rs = md.mGetdefectdetailncSpc(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi, Seq1, Seq2, Seq3, Seq4, Seq5, lot, type)
+            Dim arrayWI As List(Of String) = New List(Of String)
+            For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+                arrayWI.Add(itemPlanData.wi)
+            Next
+            rs = md.mGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
         Else
             rs = md.mGetdefectdetailnc(wi, seq, lot, type)
         End If
@@ -69,7 +63,7 @@ Public Class defectDetailng
                     datlvDefectdetails.SubItems.Add(item("defect_name").ToString())
                     datlvDefectdetails.SubItems.Add(item("total_nc").ToString())
                     datlvDefectdetails.SubItems.Add(item("dt_wi_no").ToString())
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         datlvDefectdetails.SubItems.Add(item("dt_seq_no").ToString()) 'seq
                         datlvDefectdetails.SubItems.Add(item("pwi_id").ToString())
                     End If
@@ -100,7 +94,7 @@ Public Class defectDetailng
                     Me.sDefectdetail = lvDefectdetails.Items(lvItem.Index).SubItems(1).Text
                     Me.sNg = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
                     Me.dtQty = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         dtWino = lvDefectdetails.Items(lvItem.Index).SubItems(6).Text
                         dtSeqno = lvDefectdetails.Items(lvItem.Index).SubItems(7).Text
                         dtpwi_id = lvDefectdetails.Items(lvItem.Index).SubItems(8).Text

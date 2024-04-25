@@ -443,8 +443,8 @@ Public Class List_Emp
                 Dim seq_no As String = ""
                 Try
                     If GET_SEQ.Read() Then
-                        If MainFrm.Label4.Text = "K1M083" Then
-                            seq_no = GET_SEQ("seq_no") + 5
+                        If MainFrm.chk_spec_line = "2" Then
+                            seq_no = GET_SEQ("seq_no") + MainFrm.ArrayDataPlan.ToArray.Length
                         Else
                             seq_no = GET_SEQ("seq_no") + 1
                         End If
@@ -452,7 +452,7 @@ Public Class List_Emp
                     End If
                 Catch ex As Exception
                     Dim insert_data = Backoffice_model.INSERT_tmp_planseq(Prd_detail.lb_wi.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_starts, date_starts, seq_no)
-                    If MainFrm.Label4.Text = "K1M083" Then
+                    If MainFrm.chk_spec_line = "2" Then
                         seq_no = 5
                     Else
                         seq_no = 1
@@ -460,7 +460,7 @@ Public Class List_Emp
                 End Try
                 GET_SEQ.close()
                 Dim rsInsertData
-                If MainFrm.Label4.Text = "K1M083" Then
+                If MainFrm.chk_spec_line = "2" Then
                     Dim GenSEQ As Integer = seq_no - 5
                     Dim Iseq = GenSEQ
                     Working_Pro.Spwi_id = New List(Of String)
@@ -491,7 +491,7 @@ Public Class List_Emp
                         Backoffice_model.Insert_production_emp_detail_realtime(wi_plan, emp_cd_realtime, seq_no, Working_Pro.pwi_id)
                     Next
                 End If
-                If MainFrm.Label4.Text = "K1M083" Then
+                If MainFrm.chk_spec_line = "2" Then
                     seq_no = seq_no - 5
                 Else
                     seq_no = seq_no - 1

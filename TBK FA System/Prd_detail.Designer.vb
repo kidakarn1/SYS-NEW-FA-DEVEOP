@@ -57,9 +57,17 @@ Partial Class Prd_detail
         Me.LB_PLAN_DATE = New System.Windows.Forms.Label()
         Me.LB_ShowWorker = New System.Windows.Forms.PictureBox()
         Me.picSpecial = New System.Windows.Forms.PictureBox()
+        Me.lvWISpc = New System.Windows.Forms.ListView()
+        Me.NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.PART_NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnUp = New System.Windows.Forms.PictureBox()
+        Me.btnDown = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LB_ShowWorker, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picSpecial, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnDown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
@@ -445,6 +453,66 @@ Partial Class Prd_detail
         Me.picSpecial.TabStop = False
         Me.picSpecial.Visible = False
         '
+        'lvWISpc
+        '
+        Me.lvWISpc.AllowColumnReorder = True
+        Me.lvWISpc.AllowDrop = True
+        Me.lvWISpc.AutoArrange = False
+        Me.lvWISpc.BackColor = System.Drawing.Color.White
+        Me.lvWISpc.BackgroundImageTiled = True
+        Me.lvWISpc.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lvWISpc.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.WI, Me.PART_NO})
+        Me.lvWISpc.Cursor = System.Windows.Forms.Cursors.Default
+        Me.lvWISpc.Font = New System.Drawing.Font("Catamaran", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvWISpc.ForeColor = System.Drawing.Color.Black
+        Me.lvWISpc.FullRowSelect = True
+        Me.lvWISpc.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lvWISpc.HideSelection = False
+        Me.lvWISpc.HoverSelection = True
+        Me.lvWISpc.Location = New System.Drawing.Point(37, 148)
+        Me.lvWISpc.MultiSelect = False
+        Me.lvWISpc.Name = "lvWISpc"
+        Me.lvWISpc.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.lvWISpc.ShowGroups = False
+        Me.lvWISpc.Size = New System.Drawing.Size(440, 148)
+        Me.lvWISpc.TabIndex = 4636
+        Me.lvWISpc.UseCompatibleStateImageBehavior = False
+        Me.lvWISpc.View = System.Windows.Forms.View.Details
+        Me.lvWISpc.Visible = False
+        '
+        'NO
+        '
+        Me.NO.Text = "N"
+        Me.NO.Width = 40
+        '
+        'WI
+        '
+        Me.WI.Text = "WI"
+        Me.WI.Width = 200
+        '
+        'PART_NO
+        '
+        Me.PART_NO.Text = "PART NO"
+        Me.PART_NO.Width = 180
+        '
+        'btnUp
+        '
+        Me.btnUp.BackgroundImage = CType(resources.GetObject("btnUp.BackgroundImage"), System.Drawing.Image)
+        Me.btnUp.Location = New System.Drawing.Point(492, 112)
+        Me.btnUp.Name = "btnUp"
+        Me.btnUp.Size = New System.Drawing.Size(71, 92)
+        Me.btnUp.TabIndex = 4637
+        Me.btnUp.TabStop = False
+        '
+        'btnDown
+        '
+        Me.btnDown.BackgroundImage = CType(resources.GetObject("btnDown.BackgroundImage"), System.Drawing.Image)
+        Me.btnDown.Location = New System.Drawing.Point(492, 210)
+        Me.btnDown.Name = "btnDown"
+        Me.btnDown.Size = New System.Drawing.Size(71, 92)
+        Me.btnDown.TabIndex = 4638
+        Me.btnDown.TabStop = False
+        '
         'Prd_detail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -453,6 +521,9 @@ Partial Class Prd_detail
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionDetail
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
+        Me.Controls.Add(Me.btnDown)
+        Me.Controls.Add(Me.btnUp)
+        Me.Controls.Add(Me.lvWISpc)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
@@ -490,6 +561,8 @@ Partial Class Prd_detail
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LB_ShowWorker, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picSpecial, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnUp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnDown, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -527,4 +600,10 @@ Partial Class Prd_detail
     Friend WithEvents LB_PLAN_DATE As Label
     Friend WithEvents LB_ShowWorker As PictureBox
     Friend WithEvents picSpecial As PictureBox
+    Friend WithEvents lvWISpc As ListView
+    Friend WithEvents NO As ColumnHeader
+    Friend WithEvents WI As ColumnHeader
+    Friend WithEvents PART_NO As ColumnHeader
+    Friend WithEvents btnUp As PictureBox
+    Friend WithEvents btnDown As PictureBox
 End Class

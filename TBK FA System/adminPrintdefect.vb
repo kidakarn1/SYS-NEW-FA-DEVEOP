@@ -109,34 +109,20 @@ Public Class adminPrintdefect
 
 
         e.Graphics.DrawLine(aPen, 320, 190, 320, 230) 'แก้ตำแหน่งที่ 1 , 3 เส้นปิด  NC/NG
-
-
         e.Graphics.DrawLine(aPen, 460, 190, 460, 230) 'แก้ตำแหน่งที่ 1 , 3 เส้นปิด  NC/NG
-
         e.Graphics.DrawLine(aPen, 585, 190, 585, 280) 'แก้ตำแหน่งที่ 1 , 3 เส้นปิด  NC/NG
-
         e.Graphics.DrawLine(aPen, 680, 5, 680, 280) 'แก้ตำแหน่งที่ 1 , 3 เส้นปิด  NC/NG
-
-
         'Horizontal แนวนอน
-
         e.Graphics.DrawLine(aPen, 8, 5, 681, 5) 'แก้ตำแหน่งที่ 2 , 4
-
         e.Graphics.DrawLine(aPen, 120, 55, 560, 55) 'แก้ตำแหน่งที่ 2 , 4 part no
-
         e.Graphics.DrawLine(aPen, 120, 100, 681, 100) 'แก้ตำแหน่งที่ 2 , 4 part name
-
         e.Graphics.DrawLine(aPen, 120, 145, 681, 145) 'แก้ตำแหน่งที่ 2 , 4 model
-
         e.Graphics.DrawLine(aPen, 120, 190, 681, 190) 'แก้ตำแหน่งที่ 2 , 4 Actual Date
-
-
         e.Graphics.FillRectangle(Brushes.Black, 10, 100, 110, 20) ' background back
         e.Graphics.DrawString("INFO.", IN_FO.Font, Brushes.White, 46, 101)
         e.Graphics.FillRectangle(Brushes.Black, 10, 210, 110, 20) ' background back
         e.Graphics.DrawString("DEFECT QR.", IN_FO.Font, Brushes.White, 16, 214)
         e.Graphics.DrawLine(aPen, 8, 230, 587, 230) 'แก้ตำแหน่งที่ 2 , 4
-
         If sDefect = "1" Then
             e.Graphics.FillRectangle(Brushes.Black, 560, 4, 121, 97) ' NG/NC BACKGROUD Black
             e.Graphics.DrawString("NG", Label14.Font, Brushes.White, 548, 1) ' left top

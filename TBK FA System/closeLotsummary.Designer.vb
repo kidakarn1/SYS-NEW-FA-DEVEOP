@@ -68,6 +68,9 @@ Partial Class closeLotsummary
         Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PART_NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ACTUAL = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.OK = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.NC = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.NG = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         CType(Me.Button1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnOk, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -341,9 +344,9 @@ Partial Class closeLotsummary
         'btnOk
         '
         Me.btnOk.BackColor = System.Drawing.Color.Transparent
-        Me.btnOk.Location = New System.Drawing.Point(608, 509)
+        Me.btnOk.Location = New System.Drawing.Point(600, 509)
         Me.btnOk.Name = "btnOk"
-        Me.btnOk.Size = New System.Drawing.Size(191, 88)
+        Me.btnOk.Size = New System.Drawing.Size(207, 88)
         Me.btnOk.TabIndex = 52
         Me.btnOk.TabStop = False
         '
@@ -466,9 +469,9 @@ Partial Class closeLotsummary
         Me.ListView2.BackColor = System.Drawing.Color.White
         Me.ListView2.BackgroundImageTiled = True
         Me.ListView2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.WI, Me.PART_NO, Me.ACTUAL})
+        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.WI, Me.PART_NO, Me.ACTUAL, Me.OK, Me.NC, Me.NG})
         Me.ListView2.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ListView2.Font = New System.Drawing.Font("Catamaran", 25.0!, System.Drawing.FontStyle.Bold)
+        Me.ListView2.Font = New System.Drawing.Font("Catamaran", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListView2.ForeColor = System.Drawing.Color.Black
         Me.ListView2.FullRowSelect = True
         Me.ListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -488,34 +491,51 @@ Partial Class closeLotsummary
         'NO
         '
         Me.NO.Text = "N"
-        Me.NO.Width = 70
+        Me.NO.Width = 35
         '
         'WI
         '
         Me.WI.Text = "WI"
-        Me.WI.Width = 268
+        Me.WI.Width = 180
         '
         'PART_NO
         '
         Me.PART_NO.Text = "PART_NO"
-        Me.PART_NO.Width = 261
+        Me.PART_NO.Width = 192
         '
         'ACTUAL
         '
         Me.ACTUAL.Text = "ACTUAL"
         Me.ACTUAL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ACTUAL.Width = 150
+        Me.ACTUAL.Width = 110
+        '
+        'OK
+        '
+        Me.OK.Text = "OK"
+        Me.OK.Width = 77
+        '
+        'NC
+        '
+        Me.NC.Text = "NC"
+        Me.NC.Width = 77
+        '
+        'NG
+        '
+        Me.NG.Text = "NG"
+        Me.NG.Width = 77
         '
         'PictureBox3
         '
         Me.PictureBox3.BackgroundImage = CType(resources.GetObject("PictureBox3.BackgroundImage"), System.Drawing.Image)
+        Me.PictureBox3.Enabled = False
         Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
-        Me.PictureBox3.Location = New System.Drawing.Point(675, 48)
+        Me.PictureBox3.Location = New System.Drawing.Point(676, 15)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(103, 93)
+        Me.PictureBox3.Size = New System.Drawing.Size(113, 104)
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox3.TabIndex = 64
         Me.PictureBox3.TabStop = False
+        Me.PictureBox3.Visible = False
         '
         'closeLotsummary
         '
@@ -615,4 +635,7 @@ Partial Class closeLotsummary
     Friend WithEvents PART_NO As ColumnHeader
     Friend WithEvents ACTUAL As ColumnHeader
     Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents OK As ColumnHeader
+    Friend WithEvents NC As ColumnHeader
+    Friend WithEvents NG As ColumnHeader
 End Class

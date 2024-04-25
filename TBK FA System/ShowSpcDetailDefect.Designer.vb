@@ -31,13 +31,20 @@ Partial Class ShowSpcDetailDefect
         Me.defectCode = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.qty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.wis = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.partNos = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.defectCodes = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.types = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.qtys = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnFGUp = New System.Windows.Forms.PictureBox()
+        Me.btnFGDown = New System.Windows.Forms.PictureBox()
+        Me.btnCPDOWN = New System.Windows.Forms.PictureBox()
+        Me.btnCPUP = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnFGUp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnFGDown, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnCPDOWN, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnCPUP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -51,12 +58,19 @@ Partial Class ShowSpcDetailDefect
         '
         'lvFG
         '
+        Me.lvFG.AllowColumnReorder = True
+        Me.lvFG.AllowDrop = True
+        Me.lvFG.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvFG.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        Me.lvFG.FullRowSelect = True
+        Me.lvFG.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvFG.HideSelection = False
         Me.lvFG.Location = New System.Drawing.Point(25, 166)
         Me.lvFG.Name = "lvFG"
-        Me.lvFG.Size = New System.Drawing.Size(679, 120)
+        Me.lvFG.Size = New System.Drawing.Size(679, 124)
         Me.lvFG.TabIndex = 1
         Me.lvFG.UseCompatibleStateImageBehavior = False
+        Me.lvFG.View = System.Windows.Forms.View.Details
         '
         'lvCp
         '
@@ -68,8 +82,8 @@ Partial Class ShowSpcDetailDefect
         Me.lvCp.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvCp.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.wi, Me.partNO, Me.defectCode, Me.type, Me.qty})
         Me.lvCp.Cursor = System.Windows.Forms.Cursors.Default
-        Me.lvCp.Font = New System.Drawing.Font("Catamaran", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lvCp.ForeColor = System.Drawing.Color.Black
+        Me.lvCp.Font = New System.Drawing.Font("Catamaran", 13.0!, System.Drawing.FontStyle.Bold)
+        Me.lvCp.ForeColor = System.Drawing.Color.White
         Me.lvCp.FullRowSelect = True
         Me.lvCp.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvCp.HideSelection = False
@@ -87,28 +101,81 @@ Partial Class ShowSpcDetailDefect
         'wi
         '
         Me.wi.Text = "wi"
-        Me.wi.Width = 83
+        Me.wi.Width = 125
         '
         'partNO
         '
         Me.partNO.Text = "CD"
-        Me.partNO.Width = 109
+        Me.partNO.Width = 185
         '
         'defectCode
         '
         Me.defectCode.Text = "Detail_TH"
-        Me.defectCode.Width = 495
+        Me.defectCode.Width = 200
         '
-        'ListView1
+        'type
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.wis, Me.partNos, Me.defectCodes, Me.types, Me.qtys})
-        Me.ListView1.HideSelection = False
-        Me.ListView1.Location = New System.Drawing.Point(25, 166)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(679, 120)
-        Me.ListView1.TabIndex = 66
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.type.Width = 108
+        '
+        'qty
+        '
+        Me.qty.Width = 55
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Width = 125
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Width = 185
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Width = 200
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Width = 108
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Width = 55
+        '
+        'btnFGUp
+        '
+        Me.btnFGUp.BackgroundImage = CType(resources.GetObject("btnFGUp.BackgroundImage"), System.Drawing.Image)
+        Me.btnFGUp.Location = New System.Drawing.Point(717, 118)
+        Me.btnFGUp.Name = "btnFGUp"
+        Me.btnFGUp.Size = New System.Drawing.Size(71, 92)
+        Me.btnFGUp.TabIndex = 4638
+        Me.btnFGUp.TabStop = False
+        '
+        'btnFGDown
+        '
+        Me.btnFGDown.BackgroundImage = CType(resources.GetObject("btnFGDown.BackgroundImage"), System.Drawing.Image)
+        Me.btnFGDown.Location = New System.Drawing.Point(717, 207)
+        Me.btnFGDown.Name = "btnFGDown"
+        Me.btnFGDown.Size = New System.Drawing.Size(71, 92)
+        Me.btnFGDown.TabIndex = 4639
+        Me.btnFGDown.TabStop = False
+        '
+        'btnCPDOWN
+        '
+        Me.btnCPDOWN.BackgroundImage = CType(resources.GetObject("btnCPDOWN.BackgroundImage"), System.Drawing.Image)
+        Me.btnCPDOWN.Location = New System.Drawing.Point(717, 415)
+        Me.btnCPDOWN.Name = "btnCPDOWN"
+        Me.btnCPDOWN.Size = New System.Drawing.Size(71, 92)
+        Me.btnCPDOWN.TabIndex = 4641
+        Me.btnCPDOWN.TabStop = False
+        '
+        'btnCPUP
+        '
+        Me.btnCPUP.BackgroundImage = CType(resources.GetObject("btnCPUP.BackgroundImage"), System.Drawing.Image)
+        Me.btnCPUP.Location = New System.Drawing.Point(717, 326)
+        Me.btnCPUP.Name = "btnCPUP"
+        Me.btnCPUP.Size = New System.Drawing.Size(71, 92)
+        Me.btnCPUP.TabIndex = 4640
+        Me.btnCPUP.TabStop = False
         '
         'ShowSpcDetailDefect
         '
@@ -116,7 +183,10 @@ Partial Class ShowSpcDetailDefect
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(800, 600)
-        Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.btnCPDOWN)
+        Me.Controls.Add(Me.btnCPUP)
+        Me.Controls.Add(Me.btnFGDown)
+        Me.Controls.Add(Me.btnFGUp)
         Me.Controls.Add(Me.lvCp)
         Me.Controls.Add(Me.lvFG)
         Me.Controls.Add(Me.PictureBox1)
@@ -125,6 +195,10 @@ Partial Class ShowSpcDetailDefect
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ShowSpcDetailDefect"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnFGUp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnFGDown, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnCPDOWN, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnCPUP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -137,10 +211,13 @@ Partial Class ShowSpcDetailDefect
     Friend WithEvents defectCode As ColumnHeader
     Friend WithEvents type As ColumnHeader
     Friend WithEvents qty As ColumnHeader
-    Friend WithEvents ListView1 As ListView
-    Friend WithEvents wis As ColumnHeader
-    Friend WithEvents partNos As ColumnHeader
-    Friend WithEvents defectCodes As ColumnHeader
-    Friend WithEvents types As ColumnHeader
-    Friend WithEvents qtys As ColumnHeader
+    Friend WithEvents ColumnHeader1 As ColumnHeader
+    Friend WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ColumnHeader4 As ColumnHeader
+    Friend WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents btnFGUp As PictureBox
+    Friend WithEvents btnFGDown As PictureBox
+    Friend WithEvents btnCPDOWN As PictureBox
+    Friend WithEvents btnCPUP As PictureBox
 End Class

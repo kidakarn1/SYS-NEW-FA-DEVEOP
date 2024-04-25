@@ -38,7 +38,7 @@ Friend Class defectSelecttype
         setVariable()
         Dim dfHome As New defectHome
         lbType.Text = dfHome.dtType
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             btnPartfg.Text = "SELECT FG"
         Else
             btnPartfg.Text = pFG
@@ -49,30 +49,43 @@ Friend Class defectSelecttype
     Public Function getChildpart(wi)
         Dim md = New modelDefect()
         Dim rsData
-        If MainFrm.Label4.Text = "K1M083" Then
-            Dim arrData0 As DataPlan = MainFrm.ArrayDataPlan(0)
-            Dim arrData1 As DataPlan = MainFrm.ArrayDataPlan(1)
-            Dim arrData2 As DataPlan = MainFrm.ArrayDataPlan(2)
-            Dim arrData3 As DataPlan = MainFrm.ArrayDataPlan(3)
-            Dim arrData4 As DataPlan = MainFrm.ArrayDataPlan(4)
-            rsData = md.mGetchildpartSpc(arrData0.wi, arrData1.wi, arrData2.wi, arrData3.wi, arrData4.wi)
+        If MainFrm.chk_spec_line = "2" Then
+            Dim arrayWI As List(Of String) = New List(Of String)
+            For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+                arrayWI.Add(itemPlanData.wi)
+            Next
+
+            rsData = md.mGetchildpartSpc(arrayWI.ToArray)
         Else
             rsData = md.mGetchildpart(wi)
         End If
         If rsData <> "0" Then
-            Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsData)
+            Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsData) 'error
             Dim i As Integer = 1
-            Dim GenSEQ As Integer = Working_Pro.Label22.Text - 5
+            Dim index As Integer = 0
+            Dim checkRs As Integer = 0
+            Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
             Dim Iseq = GenSEQ
+            Dim tmpWi = ""
             For Each item As Object In dcResultdata
                 datlvChildpart = New ListViewItem(i)
                 datlvChildpart.SubItems.Add(item("ITEM_CD").ToString())
                 datlvChildpart.SubItems.Add(item("ITEM_NAME").ToString())
                 datlvChildpart.SubItems.Add(item("WI").ToString())
-                If MainFrm.Label4.Text = "K1M083" Then
-                    Iseq += 1
+                If MainFrm.chk_spec_line = "2" Then
+                    If tmpWi <> item("WI").ToString() Then
+                        tmpWi = item("WI").ToString()
+                        Iseq += 1
+                        index += 1
+                    Else
+                        checkRs = 0
+                    End If
                     datlvChildpart.SubItems.Add(Iseq)
-                    datlvChildpart.SubItems.Add(Working_Pro.Spwi_id(i - 1))
+                    ' If checkRs = 1 Then
+                    '
+                    'MsgBox("index ===>" & index)
+                    'End If
+                    datlvChildpart.SubItems.Add(Working_Pro.Spwi_id(index - 1))
                 Else
                     datlvChildpart.SubItems.Add(Working_Pro.seqNo)
                     datlvChildpart.SubItems.Add(Working_Pro.pwi_id)
@@ -165,7 +178,7 @@ Friend Class defectSelecttype
         End If
         type = "1"
         dt_menu = "1"
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             Dim dfSS As New defectSpecialSelectFG()
             ' Me.dfSS = btnPartfg.Text
             dfSS.Show()

@@ -31,7 +31,7 @@
         sPart = lbPart.Text
         lbDefectcode.Text = dSelectcode.sDefectcode
         lbDefectdetail.Text = dSelectcode.sDefectdetail
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             dtWino = swi
             dtSeqno = SeqSpc
             dtpwi_id = PwiSpc
@@ -110,7 +110,7 @@
         dtQty = tbQtydefectnc.Text
         Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
         Dim pwi_id As String = ""
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             pwi_id = PwiSpc
         Else
             pwi_id = Working_Pro.pwi_id
@@ -137,7 +137,7 @@
         End If
         dtQty = tbQtydefectnc.Text
         Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             pwi_id = PwiSpc
         Else
             pwi_id = Working_Pro.pwi_id

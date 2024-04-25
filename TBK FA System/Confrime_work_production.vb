@@ -264,14 +264,14 @@ re_load:
                     'SEQ = ListBox3
                     If Convert.ToInt32(Prd_detail.lb_seq.Text) < 10 Then
                         'MsgBox("dfsdfg")
-                        If MainFrm.Label4.Text = "K1M083" Then
-                            Working_Pro.Label22.Text = "0" & Prd_detail.lb_seq.Text + 5
+                        If MainFrm.chk_spec_line = "2" Then
+                            Working_Pro.Label22.Text = "0" & Prd_detail.lb_seq.Text + MainFrm.ArrayDataPlan.ToArray.Length
                         Else
                             Working_Pro.Label22.Text = "0" & Prd_detail.lb_seq.Text + 1
                         End If
                     Else
-                        If MainFrm.Label4.Text = "K1M083" Then
-                            Working_Pro.Label22.Text = Prd_detail.lb_seq.Text + 5
+                        If MainFrm.chk_spec_line = "2" Then
+                            Working_Pro.Label22.Text = Prd_detail.lb_seq.Text + MainFrm.ArrayDataPlan.ToArray.Length
                         Else
                             Working_Pro.Label22.Text = Prd_detail.lb_seq.Text + 1
                         End If

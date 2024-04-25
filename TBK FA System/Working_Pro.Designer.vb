@@ -63,7 +63,6 @@ Partial Class Working_Pro
         Me.st_time = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
-        Me.Label38 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Label40 = New System.Windows.Forms.Label()
@@ -73,7 +72,6 @@ Partial Class Working_Pro
         Me.lb_average_num = New System.Windows.Forms.Label()
         Me.lb_sum_prg = New System.Windows.Forms.Label()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
-        Me.lb_font_tag_line = New System.Windows.Forms.Label()
         Me.lb_font6 = New System.Windows.Forms.Label()
         Me.lb_font2 = New System.Windows.Forms.Label()
         Me.lb_font1 = New System.Windows.Forms.Label()
@@ -89,7 +87,6 @@ Partial Class Working_Pro
         Me.lb_emp5 = New System.Windows.Forms.Label()
         Me.lb_emp6 = New System.Windows.Forms.Label()
         Me.lb_temp = New System.Windows.Forms.Label()
-        Me.lb_ch_man_flg = New System.Windows.Forms.Label()
         Me.LB_COUNTER_SHIP = New System.Windows.Forms.Label()
         Me.LB_COUNTER_SEQ = New System.Windows.Forms.Label()
         Me.PrintDocument2 = New System.Drawing.Printing.PrintDocument()
@@ -135,7 +132,6 @@ Partial Class Working_Pro
         Me.PictureBox13 = New System.Windows.Forms.PictureBox()
         Me.PictureBox14 = New System.Windows.Forms.PictureBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
@@ -146,11 +142,15 @@ Partial Class Working_Pro
         Me.lb_use_time = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.lb_font4 = New System.Windows.Forms.Label()
-        Me.lb_font5 = New System.Windows.Forms.Label()
         Me.lbPosition1 = New System.Windows.Forms.Label()
         Me.lbPosition2 = New System.Windows.Forms.Label()
         Me.Label9_fontModel = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.lb_font5 = New System.Windows.Forms.Label()
+        Me.lb_font4 = New System.Windows.Forms.Label()
+        Me.lb_ch_man_flg = New System.Windows.Forms.Label()
+        Me.lb_font_tag_line = New System.Windows.Forms.Label()
+        Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -165,12 +165,12 @@ Partial Class Working_Pro
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
+        CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label4
@@ -683,19 +683,6 @@ Partial Class Working_Pro
         Me.Label36.Text = "Act. CT"
         Me.Label36.Visible = False
         '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.BackColor = System.Drawing.Color.SteelBlue
-        Me.Label38.Font = New System.Drawing.Font("Arial Black", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.ForeColor = System.Drawing.Color.Cyan
-        Me.Label38.Location = New System.Drawing.Point(331, 55)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(70, 27)
-        Me.Label38.TabIndex = 4577
-        Me.Label38.Text = "535.2"
-        Me.Label38.Visible = False
-        '
         'Label37
         '
         Me.Label37.AutoSize = True
@@ -788,17 +775,6 @@ Partial Class Working_Pro
         '
         'PrintDocument1
         '
-        '
-        'lb_font_tag_line
-        '
-        Me.lb_font_tag_line.AutoSize = True
-        Me.lb_font_tag_line.Font = New System.Drawing.Font("Microsoft Sans Serif", 71.99999!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lb_font_tag_line.Location = New System.Drawing.Point(26, -7)
-        Me.lb_font_tag_line.Name = "lb_font_tag_line"
-        Me.lb_font_tag_line.Size = New System.Drawing.Size(391, 108)
-        Me.lb_font_tag_line.TabIndex = 4587
-        Me.lb_font_tag_line.Text = "Label41"
-        Me.lb_font_tag_line.Visible = False
         '
         'lb_font6
         '
@@ -982,17 +958,6 @@ Partial Class Working_Pro
         Me.lb_temp.TabIndex = 4618
         Me.lb_temp.Text = "lb_temp"
         Me.lb_temp.Visible = False
-        '
-        'lb_ch_man_flg
-        '
-        Me.lb_ch_man_flg.AutoSize = True
-        Me.lb_ch_man_flg.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lb_ch_man_flg.Location = New System.Drawing.Point(316, 62)
-        Me.lb_ch_man_flg.Name = "lb_ch_man_flg"
-        Me.lb_ch_man_flg.Size = New System.Drawing.Size(13, 13)
-        Me.lb_ch_man_flg.TabIndex = 4619
-        Me.lb_ch_man_flg.Text = "0"
-        Me.lb_ch_man_flg.Visible = False
         '
         'LB_COUNTER_SHIP
         '
@@ -1555,15 +1520,6 @@ Partial Class Working_Pro
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Label7.UseMnemonic = False
         '
-        'PictureBox11
-        '
-        Me.PictureBox11.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStoppedtarget
-        Me.PictureBox11.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox11.Name = "PictureBox11"
-        Me.PictureBox11.Size = New System.Drawing.Size(800, 600)
-        Me.PictureBox11.TabIndex = 4644
-        Me.PictureBox11.TabStop = False
-        '
         'Panel2
         '
         Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -1667,28 +1623,6 @@ Partial Class Working_Pro
         Me.Panel6.TabIndex = 4622
         Me.Panel6.Visible = False
         '
-        'lb_font4
-        '
-        Me.lb_font4.AutoSize = True
-        Me.lb_font4.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.lb_font4.Location = New System.Drawing.Point(303, 50)
-        Me.lb_font4.Name = "lb_font4"
-        Me.lb_font4.Size = New System.Drawing.Size(63, 19)
-        Me.lb_font4.TabIndex = 4591
-        Me.lb_font4.Text = "Label7"
-        Me.lb_font4.Visible = False
-        '
-        'lb_font5
-        '
-        Me.lb_font5.AutoSize = True
-        Me.lb_font5.Font = New System.Drawing.Font("Arial Narrow", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lb_font5.Location = New System.Drawing.Point(359, 39)
-        Me.lb_font5.Name = "lb_font5"
-        Me.lb_font5.Size = New System.Drawing.Size(69, 25)
-        Me.lb_font5.TabIndex = 4592
-        Me.lb_font5.Text = "Label7"
-        Me.lb_font5.Visible = False
-        '
         'lbPosition1
         '
         Me.lbPosition1.AutoSize = True
@@ -1719,6 +1653,72 @@ Partial Class Working_Pro
         Me.Label9_fontModel.TabIndex = 4654
         Me.Label9_fontModel.Text = "Label9_fontModel"
         Me.Label9_fontModel.Visible = False
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.BackColor = System.Drawing.Color.SteelBlue
+        Me.Label38.Font = New System.Drawing.Font("Arial Black", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.ForeColor = System.Drawing.Color.Cyan
+        Me.Label38.Location = New System.Drawing.Point(331, 55)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(70, 27)
+        Me.Label38.TabIndex = 4577
+        Me.Label38.Text = "535.2"
+        Me.Label38.Visible = False
+        '
+        'lb_font5
+        '
+        Me.lb_font5.AutoSize = True
+        Me.lb_font5.Font = New System.Drawing.Font("Arial Narrow", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_font5.Location = New System.Drawing.Point(359, 39)
+        Me.lb_font5.Name = "lb_font5"
+        Me.lb_font5.Size = New System.Drawing.Size(69, 25)
+        Me.lb_font5.TabIndex = 4592
+        Me.lb_font5.Text = "Label7"
+        Me.lb_font5.Visible = False
+        '
+        'lb_font4
+        '
+        Me.lb_font4.AutoSize = True
+        Me.lb_font4.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.lb_font4.Location = New System.Drawing.Point(303, 50)
+        Me.lb_font4.Name = "lb_font4"
+        Me.lb_font4.Size = New System.Drawing.Size(63, 19)
+        Me.lb_font4.TabIndex = 4591
+        Me.lb_font4.Text = "Label7"
+        Me.lb_font4.Visible = False
+        '
+        'lb_ch_man_flg
+        '
+        Me.lb_ch_man_flg.AutoSize = True
+        Me.lb_ch_man_flg.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lb_ch_man_flg.Location = New System.Drawing.Point(316, 62)
+        Me.lb_ch_man_flg.Name = "lb_ch_man_flg"
+        Me.lb_ch_man_flg.Size = New System.Drawing.Size(13, 13)
+        Me.lb_ch_man_flg.TabIndex = 4619
+        Me.lb_ch_man_flg.Text = "0"
+        Me.lb_ch_man_flg.Visible = False
+        '
+        'lb_font_tag_line
+        '
+        Me.lb_font_tag_line.AutoSize = True
+        Me.lb_font_tag_line.Font = New System.Drawing.Font("Microsoft Sans Serif", 71.99999!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_font_tag_line.Location = New System.Drawing.Point(26, -7)
+        Me.lb_font_tag_line.Name = "lb_font_tag_line"
+        Me.lb_font_tag_line.Size = New System.Drawing.Size(391, 108)
+        Me.lb_font_tag_line.TabIndex = 4587
+        Me.lb_font_tag_line.Text = "Label41"
+        Me.lb_font_tag_line.Visible = False
+        '
+        'PictureBox11
+        '
+        Me.PictureBox11.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStoppedtarget
+        Me.PictureBox11.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox11.Name = "PictureBox11"
+        Me.PictureBox11.Size = New System.Drawing.Size(800, 600)
+        Me.PictureBox11.TabIndex = 4644
+        Me.PictureBox11.TabStop = False
         '
         'Working_Pro
         '
@@ -1863,13 +1863,13 @@ Partial Class Working_Pro
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
+        CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1916,7 +1916,6 @@ Partial Class Working_Pro
     Friend WithEvents st_time As Label
     Friend WithEvents Label35 As Label
     Friend WithEvents Label36 As Label
-    Friend WithEvents Label38 As Label
     Friend WithEvents Label37 As Label
     Friend WithEvents Label39 As Label
     Friend WithEvents Label40 As Label
@@ -1926,7 +1925,6 @@ Partial Class Working_Pro
     Friend WithEvents lb_average_num As Label
     Friend WithEvents lb_sum_prg As Label
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
-    Friend WithEvents lb_font_tag_line As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lb_font6 As Label
     Friend WithEvents lb_font2 As Label
@@ -1952,7 +1950,6 @@ Partial Class Working_Pro
     Friend WithEvents lb_emp6 As Label
     Friend WithEvents PictureBox8 As PictureBox
     Friend WithEvents lb_temp As Label
-    Friend WithEvents lb_ch_man_flg As Label
     Friend WithEvents lb_loss_status As Label
     Friend WithEvents PrintDocument2 As Printing.PrintDocument
     Friend WithEvents PictureBox9 As PictureBox
@@ -1986,7 +1983,6 @@ Partial Class Working_Pro
     Friend WithEvents PictureBox13 As PictureBox
     Friend WithEvents PictureBox14 As PictureBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents PictureBox11 As PictureBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox10 As PictureBox
@@ -1997,9 +1993,13 @@ Partial Class Working_Pro
     Friend WithEvents lb_use_time As Label
     Friend WithEvents Label33 As Label
     Friend WithEvents Panel6 As Panel
-    Friend WithEvents lb_font4 As Label
-    Friend WithEvents lb_font5 As Label
     Friend WithEvents lbPosition1 As Label
     Friend WithEvents lbPosition2 As Label
     Friend WithEvents Label9_fontModel As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents lb_font5 As Label
+    Friend WithEvents lb_font4 As Label
+    Friend WithEvents lb_ch_man_flg As Label
+    Friend WithEvents lb_font_tag_line As Label
+    Friend WithEvents PictureBox11 As PictureBox
 End Class

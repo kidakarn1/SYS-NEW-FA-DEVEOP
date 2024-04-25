@@ -4,6 +4,7 @@ Imports System.Globalization
 Imports System.Data
 Imports System.Web.Script.Serialization
 Imports System.IO.Ports
+Imports Newtonsoft.Json.Linq
 Public Class Backoffice_model
     Public Shared total_nc As Integer = 0
     Public Shared flg_cat_layout_line As Integer = 0
@@ -45,6 +46,7 @@ Public Class Backoffice_model
     Public Shared svDatabase As String = ""
     Public Shared user_pd As String = ""
     Public Shared WithEvents serialPort As New SerialPort
+
     Public Shared Function OpenRS232(mec_name)
         If serialPort.IsOpen Then
             CloseRS232()
@@ -1466,60 +1468,93 @@ recheck:
             'Application.Exit()
         End Try
     End Function
-    Public Shared Function update_tagprint(wi As String)
-        Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
-        Dim SQLCmd As New SqlCommand()
+    Public Shared Function update_tagprint(wi As String, flgUpdate As String, conditionflg As String)
+        ' Dim reader As SqlDataReader
+        'Dim SQLConn As New SqlConnection() 'The SQL Connection
+        ' Dim SQLCmd As New SqlCommand()
 
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
-            SQLConn.Open()
-            SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "update tag_print_detail set flg_control = '2' where flg_control = '0' and  wi = '" & wi & "'"
-            reader = SQLCmd.ExecuteReader()
-            reader.Close()
+            '  SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            '  SQLConn.Open()
+            '  SQLCmd.Connection = SQLConn
+            '  SQLCmd.CommandText = "update tag_print_detail set flg_control = '2' where flg_control = '0' and  wi = '" & wi & "'"
+            '  reader = SQLCmd.ExecuteReader()
+            '  reader.Close()
             'Return reader
+            Dim api = New api()
+            Dim result = api.Load_data("http://" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_detail?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg)
+            Return result
         Catch ex As Exception
-            SQLConn.Close()
+            '  SQLConn.Close()
         End Try
     End Function
-    Public Shared Function update_tagprint_sub(wi As String)
-        Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
-        Dim SQLCmd As New SqlCommand()
+
+    Public Shared Function update_tagprintforDefect(wi As String, flgUpdate As String, conditionflg As String, pwi_id As String, BoxNo As Integer)
+        ' Dim reader As SqlDataReader
+        'Dim SQLConn As New SqlConnection() 'The SQL Connection
+        ' Dim SQLCmd As New SqlCommand()
 
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
-            SQLConn.Open()
-            SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "update tag_print_detail_sub set flg_control = '2' where flg_control = '0' and  wi = '" & wi & "'"
-            reader = SQLCmd.ExecuteReader()
-            reader.Close()
+            '  SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            '  SQLConn.Open()
+            '  SQLCmd.Connection = SQLConn
+            '  SQLCmd.CommandText = "update tag_print_detail set flg_control = '2' where flg_control = '0' and  wi = '" & wi & "'"
+            '  reader = SQLCmd.ExecuteReader()
+            '  reader.Close()
             'Return reader
+            Dim api = New api()
+            Dim result = api.Load_data("http://" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_detailforDefect?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg & "&pwi_id=" & pwi_id & "&BoxNo=" & BoxNo)
+            Console.WriteLine("http: //" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_detailforDefect?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg & "&pwi_id=" & pwi_id & "&BoxNo=" & BoxNo)
+            Return result
         Catch ex As Exception
-            SQLConn.Close()
+            '  SQLConn.Close()
         End Try
     End Function
-    Public Shared Function update_tagprint_main(wi As String)
-        Dim reader As SqlDataReader
-        Dim SQLConn As New SqlConnection() 'The SQL Connection
-        Dim SQLCmd As New SqlCommand()
+
+
+    Public Shared Function update_tagprint_sub(wi As String, flgUpdate As String, conditionflg As String)
+        ' Dim reader As SqlDataReader
+        ' Dim SQLConn As New SqlConnection() 'The SQL Connection
+        ' Dim SQLCmd As New SqlCommand()
 
         Try
-            SQLConn.ConnectionString = sqlConnect 'Set the Connection String
-            SQLConn.Open()
-            SQLCmd.Connection = SQLConn
-            SQLCmd.CommandText = "update tag_print_detail_main set flg_control = '2' where flg_control = '0' and  tag_wi_no = '" & wi & "'"
-            reader = SQLCmd.ExecuteReader()
-            reader.Close()
-            'Return reader
+            '  SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            '  SQLConn.Open()
+            '  SQLCmd.Connection = SQLConn
+            '  SQLCmd.CommandText = "update tag_print_detail_sub set flg_control = '2' where flg_control = '0' and  wi = '" & wi & "'"
+            '  reader = SQLCmd.ExecuteReader()
+            '  reader.Close()
+            Dim api = New api()
+            Dim result = api.Load_data("http://" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_sub?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg)
+            Return result
         Catch ex As Exception
-            SQLConn.Close()
+            '    SQLConn.Close()
         End Try
     End Function
-    Public Shared Function Insert_tag_print(wi As String, qr_detail As String, box_no As Integer, print_count As Integer, seq_no As String, shift As String, flg_control As Integer, item_cd As String, pwi_id As String, tag_group_no As String)
+    Public Shared Function update_tagprint_main(wi As String, flgUpdate As String, conditionflg As String)
+        'Dim reader As SqlDataReader
+        'Dim SQLConn As New SqlConnection() 'The SQL Connection
+        'Dim SQLCmd As New SqlCommand()
+
+        Try
+            '   SQLConn.ConnectionString = sqlConnect 'Set the Connection String
+            '   SQLConn.Open()
+            '   SQLCmd.Connection = SQLConn
+            '   SQLCmd.CommandText = "update tag_print_detail_main set flg_control = '2' where flg_control = '0' and  tag_wi_no = '" & wi & "'"
+            '   reader = SQLCmd.ExecuteReader()
+            '   reader.Close()
+            Dim api = New api()
+            Dim result = api.Load_data("http://" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_main?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg)
+            Return result
+
+            'Return reader
+        Catch ex As Exception
+            ' SQLConn.Close()
+        End Try
+    End Function
+    Public Shared Function Insert_tag_print(wi As String, qr_detail As String, box_no As Integer, print_count As Integer, seq_no As String, shift As String, flg_control As Integer, item_cd As String, pwi_id As String, tag_group_no As String, goodQty As Integer)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
-        update_tagprint(wi)
+        update_tagprint(wi, "2", "0")
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
@@ -1546,8 +1581,8 @@ recheck:
     End Function
     Public Shared Function Insert_tag_print_main(wi As String, qr_detail As String, batch_no As Integer, print_count As Integer, seq_no As String, shift As String, flg_control As Integer, item_cd As String, pwi_id As String, tag_group_no As String)
         Dim currdated As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
-        update_tagprint(wi)
-        update_tagprint_main(wi)
+        update_tagprint(wi, "2", "0")
+        update_tagprint_main(wi, "2", "0")
         Dim start_id As String = Get_ref_start_id(wi, seq_no, Working_Pro.Label18.Text)
         Dim end_id As String = Get_ref_end_id(wi, seq_no, Working_Pro.Label18.Text)
         Dim reader As SqlDataReader
@@ -1597,7 +1632,7 @@ recheck:
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
         Try
-            update_tagprint_sub(wi)
+            update_tagprint_sub(wi, "2", "0")
             SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
@@ -1938,7 +1973,7 @@ recheck:
                 LoadSQL2.Close()
                 Dim arr_item_cd = qr_detailss2.Substring(19).Split(" ")
                 Dim item_cd As String = arr_item_cd(0)
-                Insert_tag_print(wi2, qr_detailss2, box_no2, 1, plan_seq2, shift2, "", item_cd, pwi_id, "")
+                Insert_tag_print(wi2, qr_detailss2, box_no2, 1, plan_seq2, shift2, "", item_cd, pwi_id, "", 0)
                 SQLCmd.CommandText = "update tag_print_detail_genarate set flg_print = '0' where new_qr_detail = '" & qr_code & "'"
                 reader = SQLCmd.ExecuteReader()
                 reader.Close()
@@ -1957,7 +1992,6 @@ recheck:
                     seq_box3 = LoadSQL3("box_no").ToString()
                     qr_detailss3 = LoadSQL3("new_qr_detail").ToString()
                     seq_plan3 = qr_detailss3.Substring(95, 3)
-                    MsgBox(Trim(seq_plan3.Substring(52, 6)))
                     qty = Trim(seq_plan3.Substring(52, 6))
                 End While
                 LoadSQL3.Close()
@@ -3259,7 +3293,7 @@ re_insert_rework_act:
     End Function
 
     Public Shared Function ins_loss_act(pd As String, line_cd As String, wi_plan As String, item_cd As String, seq_no As String, shift_prd As String, st_time As DateTime, end_time As DateTime, loss_time As Integer, loss_type As String, loss_id As String, op_id As String, transfer_flg As String, flg_control As String, pwi_id As String)
-        If MainFrm.Label4.Text = "K1M083" Then
+        If MainFrm.chk_spec_line = "2" Then
             '
         Else
             Check_loss_and_update_flg_loss()
@@ -3646,21 +3680,29 @@ re_insert_rework_act:
         End Try
 
     End Sub
-    Public Shared Sub UpdateFlgZeroSpecial(wi1 As String, wi2 As String, wi3 As String, wi4 As String, wi5 As String)
+    Public Shared Sub UpdateFlgZeroSpecial(arrayWI As Array)
         Try
+            Dim requestFunction As New JObject()
             Dim api = New api()
-            Dim result_api_checkper = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/UpdateFlgZeroSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
+            Dim jArrayWI As New JArray(arrayWI)
+            requestFunction("wi") = jArrayWI
+            Dim url As String = "http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/UpdateFlgZeroSpecial"
+            Dim result = api.Load_dataPOST(url, requestFunction)
         Catch ex As Exception
             MsgBox("Error Function UpdateFlgZeroSpecial In Backoffice_model")
         End Try
     End Sub
-    Public Shared Sub UpdateWorkingSpecial(wi1 As String, wi2 As String, wi3 As String, wi4 As String, wi5 As String)
+    Public Shared Sub UpdateWorkingSpecial(arrayWI As Array)
         Try
             Dim api = New api()
-            Dim reusult_data = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/Update_supply_dev_WorkingSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
+            'Dim reusult_data = api.Load_data("http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/Update_supply_dev_WorkingSpecial?wi1=" & wi1 & "&wi2=" & wi2 & "&wi3=" & wi3 & "&wi4=" & wi4 & "&wi5=" & wi5)
+            Dim requestFunction As New JObject()
+            Dim jArrayWI As New JArray(arrayWI)
+            requestFunction("wi") = jArrayWI
+            Dim url As String = "http://" & svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/Update_supply_dev_WorkingSpecial"
+            Dim result = api.Load_dataPOST(url, requestFunction)
         Catch ex As Exception
             MsgBox("Error Function UpdateWorkingSpecial In Backoffice_model")
         End Try
-
     End Sub
 End Class
