@@ -30,14 +30,14 @@ Partial Class defectDetailng
         Me.CODE = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.DETAIL = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.QTY = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.SEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnOk = New System.Windows.Forms.PictureBox()
         Me.btnBack = New System.Windows.Forms.PictureBox()
         Me.btnDown = New System.Windows.Forms.PictureBox()
         Me.btnUp = New System.Windows.Forms.PictureBox()
         Me.lbType = New System.Windows.Forms.Label()
-        Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.SEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.btnOk, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnBack, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDown, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,7 +54,7 @@ Partial Class defectDetailng
         Me.lvDefectdetails.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvDefectdetails.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.PARTNO, Me.TYPE, Me.CODE, Me.DETAIL, Me.QTY, Me.WI, Me.SEQ, Me.pwi_id})
         Me.lvDefectdetails.Cursor = System.Windows.Forms.Cursors.Default
-        Me.lvDefectdetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lvDefectdetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Bold)
         Me.lvDefectdetails.ForeColor = System.Drawing.Color.White
         Me.lvDefectdetails.FullRowSelect = True
         Me.lvDefectdetails.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -71,32 +71,44 @@ Partial Class defectDetailng
         'NO
         '
         Me.NO.Text = "NO"
-        Me.NO.Width = 52
+        Me.NO.Width = 50
         '
         'PARTNO
         '
         Me.PARTNO.Text = "PART NO"
-        Me.PARTNO.Width = 162
+        Me.PARTNO.Width = 120
         '
         'TYPE
         '
         Me.TYPE.Text = "TYPE"
-        Me.TYPE.Width = 78
+        Me.TYPE.Width = 67
         '
         'CODE
         '
         Me.CODE.Text = "CODE"
-        Me.CODE.Width = 83
+        Me.CODE.Width = 65
         '
         'DETAIL
         '
         Me.DETAIL.Text = "DETAIL"
-        Me.DETAIL.Width = 191
+        Me.DETAIL.Width = 165
         '
         'QTY
         '
         Me.QTY.Text = "QTY"
-        Me.QTY.Width = 74
+        Me.QTY.Width = 58
+        '
+        'WI
+        '
+        Me.WI.Width = 115
+        '
+        'SEQ
+        '
+        Me.SEQ.Width = 0
+        '
+        'pwi_id
+        '
+        Me.pwi_id.Width = 0
         '
         'btnOk
         '
@@ -145,14 +157,6 @@ Partial Class defectDetailng
         Me.lbType.Size = New System.Drawing.Size(68, 45)
         Me.lbType.TabIndex = 50
         Me.lbType.Text = "XX"
-        '
-        'SEQ
-        '
-        Me.SEQ.Width = 0
-        '
-        'pwi_id
-        '
-        Me.pwi_id.Width = 0
         '
         'defectDetailng
         '

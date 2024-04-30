@@ -160,8 +160,6 @@ Public Class Backoffice_model
         End If
     End Function
     Public Shared Sub Clear_sqlite()
-        '  Dim currdated As Date = DateTime.Now.ToString("yyyy/MM/dd")
-        ' st_time = currdated.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
         Dim currdated As String = DateTime.Now.ToString("yyyy-MM-dd")
         Dim today As Date = Date.Today
         Dim date_start As DateTime = today.AddDays(-200)
@@ -172,11 +170,16 @@ Public Class Backoffice_model
         Dim date_start1 As DateTime = today1.AddDays(-200)
         Dim format_tommorow1 = "yyyy/MM/dd"
         Dim convert_date_start1 = date_start1.ToString(format_tommorow1)
+        Dim currdatedDefect As DateTime = DateTime.Today.AddMonths(-2)
+        Dim date_startDefect As DateTime = DateTime.Today.AddMonths(-6)
+        Dim convert_date_startDefect = date_startDefect.ToString("yyyy-MM-dd")
+        Dim ConvertcurrdatedDefect = currdatedDefect.ToString("yyyy-MM-dd")
         Dim command_data() As String = {
                 "DELETE FROM act_ins where st_time BETWEEN '" & convert_date_start & "'           AND '" & currdated & "' and tr_status = '1' ",
                 "DELETE FROM close_lot_act where prd_st_date BETWEEN '" & convert_date_start & "' AND '" & currdated & "' and transfer_flg = '1'",
                 "DELETE FROM loss_actual where start_loss BETWEEN '" & convert_date_start1 & "' AND '" & currdated1 & "' and transfer_flg = '1'",
-                "DELETE FROM maintenance where mn_create_date BETWEEN '" & convert_date_start1 & "' AND '" & currdated1 & "' and mn_status = '2'"
+                "DELETE FROM maintenance where mn_create_date BETWEEN '" & convert_date_start1 & "' AND '" & currdated1 & "' and mn_status = '2'",
+                "DELETE FROM defect_transactions where dt_created_date BETWEEN '" & convert_date_startDefect & "' and '" & ConvertcurrdatedDefect & "' and dt_status_close_lot = '1'"
             }
         For i = 0 To command_data.Length - 1
             Check_connect_sqlite()
@@ -238,7 +241,6 @@ Public Class Backoffice_model
                 coles_lot_start_shift = reader("coles_lot_start_time").ToString()
                 coles_lot_end_shift = reader("coles_lot_end_time").ToString()
                 start_master_shift = reader("master_start_shift").ToString()
-
                 date_time_start_master_shift = DateTime.Now.ToString("yyyy-MM-dd") & " " & start_master_shift
                 If Trim(Prd_detail.Label12.Text.Substring(0, 1)) = "B" Or Trim(Prd_detail.Label12.Text.Substring(0, 1)) = "Q" Or Trim(Prd_detail.Label12.Text.Substring(0, 1)) = "S" Then
                     date_time_end_check_date_paralell_linet = DateTime.Now.ToString("yyyy-MM-dd") & " " & coles_lot_end_shift

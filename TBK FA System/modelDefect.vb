@@ -94,6 +94,7 @@ Public Class modelDefect
         Try
             Dim api = New api()
             Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/getDatadefectcodeprint?wi=" & wi & "&lot=" & lot & "&seqNo=" & seqNo & "&itemCd=" & itemCd & "&dfType=" & dfType)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/getDatadefectcodeprint?wi=" & wi & "&lot=" & lot & "&seqNo=" & seqNo & "&itemCd=" & itemCd & "&dfType=" & dfType)
             If rsData <> "0" Then
                 Return rsData
             Else
@@ -282,10 +283,8 @@ Public Class modelDefect
             requestFunction("lengthDataPlan") = lengthDataPlan
             requestFunction("dfLot") = dtLot
             requestFunction("startseq") = startseq
-
             Dim url As String = "http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummarychildSpc"
             Dim result = api.Load_dataPOST(url, requestFunction)
-            MsgBox(result)
             'Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefectSpecial/GetdatachildpartsummarychildSpc?dfWi1=" & dtWino1 & "&dfWi2=" & dtWino2 & "&dfWi3=" & dtWino3 & "&dfWi4=" & dtWino4 & "&dfWi5=" & dtWino5 & "&dfSeq1=" & dtSeq1 & "&dfSeq2=" & dtSeq2 & "&dfSeq3=" & dtSeq3 & "&dfSeq4=" & dtSeq4 & "&dfSeq5=" & dtSeq5 & "&dfLot=" & dtLot)
             If result <> "0" Then
                 Return result
@@ -531,6 +530,4 @@ Public Class modelDefect
             Return False
         End Try
     End Function
-
-
 End Class
