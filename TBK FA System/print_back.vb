@@ -346,7 +346,7 @@ Public Class print_back
         Dim margin_left_item_cd = 162
         Dim margin_left_part_name = 275
         Dim margin_left_QTY = 435
-        ' Dim arr_item_cd() As String = {"898244-6240", "898244-6250", "898244-6260", "898244-6270", "898244-6280"}
+        Dim arr_item_cd() As String = {"898244-6240", "898244-6250", "898244-6260", "898244-6270", "898244-6280"}
         Dim arr_qr_code_sub() As String = {"01", "02", "03", "04", "05"}
         Dim i As Integer = 1
         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -415,14 +415,13 @@ Public Class print_back
             box_no = Working_Pro.lb_box_count.Text
         End If
         plan_date = plan_date.Substring(6, 4) & plan_date.Substring(3, 2) & plan_date.Substring(0, 2)
-        Dim j = 1
-        For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
+        For j = 1 To 5 Step 1
             part_no_res = ""
-            Dim part_no_sub As String = itemPlanData.item_cd
+            Dim part_no_sub As String = arr_item_cd(j - 1)
             For part_numm = part_no_sub.Length To 24
                 part_no_res = part_no_res & " "
             Next part_numm
-            part_no_res1 = itemPlanData.item_cd & part_no_res
+            part_no_res1 = arr_item_cd(j - 1) & part_no_res
             bitmap_qr_box = QR_Generator.Encode(iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & the_Label_bach)
             e.Graphics.DrawString("QR No ." & j, BTitle.Font, Brushes.Black, qr_by_model_left, 215)
             e.Graphics.DrawImage(bitmap_qr_box, qr_by_model, 226, 68, 60) 'Right top

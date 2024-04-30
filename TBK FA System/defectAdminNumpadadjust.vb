@@ -182,7 +182,7 @@
         Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, dtItemtype, dtItemcd)
         If rs Then
             Dim dfRegister As New defectRegister()
-            dfRegister.insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate, pwi_id, "name")
+            dfRegister.insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate, pwi_id)
         Else
             MsgBox("Update Status Fiall Function updateAddjustqty in defectNumpadadjust.vb")
         End If

@@ -45,20 +45,12 @@ Public Class api
                 ' Using the cmd variable to execute the SQL command
                 cmd.Connection = connection
                 cmd.CommandText = Sql
-                jsonData = "0"
                 Using reader As SQLiteDataReader = cmd.ExecuteReader()
                     Dim dataTable As New DataTable()
                     dataTable.Load(reader)
-                    ' Check if the DataTable is empty
-                    If dataTable.Rows.Count = 0 Then
-                        ' If DataTable is empty, set jsonData to "0" and return
-                        jsonData = "0"
-                    Else
-                        ' If DataTable is not empty, convert it to JSON
-                        jsonData = JsonConvert.SerializeObject(dataTable)
-                    End If
+                    ' Convert DataTable to JSON
+                    jsonData = JsonConvert.SerializeObject(dataTable)
                 End Using
-                Return jsonData
             End Using
         Catch ex As Exception
             ' Handle exceptions

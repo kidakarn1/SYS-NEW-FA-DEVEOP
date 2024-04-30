@@ -66,7 +66,7 @@ Partial Class defectDetailnc
         Me.lvDefectdetails.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvDefectdetails.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.PARTNO, Me.TYPE, Me.CODE, Me.DETAIL, Me.QTY, Me.WI, Me.SEQ, Me.pwi_id})
         Me.lvDefectdetails.Cursor = System.Windows.Forms.Cursors.Default
-        Me.lvDefectdetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Bold)
+        Me.lvDefectdetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lvDefectdetails.ForeColor = System.Drawing.Color.White
         Me.lvDefectdetails.FullRowSelect = True
         Me.lvDefectdetails.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -83,36 +83,32 @@ Partial Class defectDetailnc
         'NO
         '
         Me.NO.Text = "NO"
-        Me.NO.Width = 50
+        Me.NO.Width = 52
         '
         'PARTNO
         '
         Me.PARTNO.Text = "PART NO"
-        Me.PARTNO.Width = 120
+        Me.PARTNO.Width = 162
         '
         'TYPE
         '
         Me.TYPE.Text = "TYPE"
-        Me.TYPE.Width = 67
+        Me.TYPE.Width = 78
         '
         'CODE
         '
         Me.CODE.Text = "CODE"
-        Me.CODE.Width = 65
+        Me.CODE.Width = 83
         '
         'DETAIL
         '
         Me.DETAIL.Text = "DETAIL"
-        Me.DETAIL.Width = 165
+        Me.DETAIL.Width = 191
         '
         'QTY
         '
         Me.QTY.Text = "QTY"
-        Me.QTY.Width = 58
-        '
-        'WI
-        '
-        Me.WI.Width = 115
+        Me.QTY.Width = 74
         '
         'SEQ
         '
@@ -186,15 +182,15 @@ Partial Class defectDetailnc
 	Friend WithEvents lvDefectdetails As ListView
 	Friend WithEvents NO As ColumnHeader
 	Friend WithEvents PARTNO As ColumnHeader
-    Friend WithEvents CODE As ColumnHeader
-    Friend WithEvents DETAIL As ColumnHeader
-    Friend WithEvents QTY As ColumnHeader
-    Friend WithEvents btnUp As PictureBox
-    Friend WithEvents btnDown As PictureBox
-    Friend WithEvents btnBack As PictureBox
-    Friend WithEvents btnOk As PictureBox
+	Friend WithEvents TYPE As ColumnHeader
+	Friend WithEvents CODE As ColumnHeader
+	Friend WithEvents DETAIL As ColumnHeader
+	Friend WithEvents QTY As ColumnHeader
+	Friend WithEvents btnUp As PictureBox
+	Friend WithEvents btnDown As PictureBox
+	Friend WithEvents btnBack As PictureBox
+	Friend WithEvents btnOk As PictureBox
     Friend WithEvents WI As ColumnHeader
     Friend WithEvents SEQ As ColumnHeader
     Friend WithEvents pwi_id As ColumnHeader
-    Friend WithEvents TYPE As ColumnHeader
 End Class

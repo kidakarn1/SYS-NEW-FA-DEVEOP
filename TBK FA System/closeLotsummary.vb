@@ -31,8 +31,8 @@ Public Class closeLotsummary
         Try
             setVariable()
             Finish_work.Close()
-            'If My.Computer.Network.Ping("192.168.161.101") Then
-            If MainFrm.chk_spec_line = "2" Then
+            If My.Computer.Network.Ping("192.168.161.101") Then
+                If MainFrm.chk_spec_line = "2" Then
                     lbLine.BackColor = Color.FromArgb(44, 88, 130)
                     lbLine.Location = New Point(166, 113)
                     lbLine.Font = New Font(lbLine.Font.FontFamily, 23)
@@ -45,9 +45,9 @@ Public Class closeLotsummary
                     pbSpecialSummary.Visible = False
                 End If
                 getDefectdetailnc(sWi, sSeq, sLot)
-            'Else
-            'load_show.Show()
-            '    End If
+            Else
+                load_show.Show()
+            End If
         Catch ex As Exception
             load_show.Show()
         End Try
@@ -58,14 +58,13 @@ Public Class closeLotsummary
         Dim GenSEQ As Integer = Working_Pro.Label22.Text - MainFrm.ArrayDataPlan.ToArray.Length
         Dim Iseq = GenSEQ
         Dim md As New modelDefect()
-        Dim mdSqlite As New ModelSqliteDefect
         For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
             i += 1
             Iseq += 1
             Dim special_wi As String = itemPlanData.wi
             Dim special_item_cd As String = itemPlanData.item_cd
             arrayWI.Add(itemPlanData.wi)
-            rs = mdSqlite.mSqlitegroupDataWiSpc(itemPlanData.wi, Iseq, Working_Pro.Label18.Text)
+            rs = md.mgroupDataWiSpc(itemPlanData.wi, Iseq, Working_Pro.Label18.Text)
             listviewSpecial = New ListViewItem(i)
             listviewSpecial.SubItems.Add(special_wi)
             listviewSpecial.SubItems.Add(special_item_cd)
@@ -90,11 +89,8 @@ Public Class closeLotsummary
             If My.Computer.Network.Ping("192.168.161.101") Then
                 aDefectcode.Clear()
                 Dim md As New modelDefect()
-                Dim mdSqlite As New ModelSqliteDefect
-                '  rs = md.mGetdatachildpartsummarychild(wi, seq, lot)
-                rs = mdSqlite.mSqliteGetdatachildpartsummarychild(wi, seq, lot)
-                ' rsFg = md.mGetdatachildpartsummaryfg(wi, seq, lot)
-                rsFg = mdSqlite.mSqliteGetdatachildpartsummaryfg(wi, seq, lot)
+                rs = md.mGetdatachildpartsummarychild(wi, seq, lot)
+                rsFg = md.mGetdatachildpartsummaryfg(wi, seq, lot)
                 cListview = 0
                 If rs <> "0" Then
                     Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
@@ -214,8 +210,8 @@ Public Class closeLotsummary
         Return result
     End Function
     Public Sub Manage_closelot()
-        'Try
-        If My.Computer.Network.Ping("192.168.161.101") Then
+        Try
+            If My.Computer.Network.Ping("192.168.161.101") Then
                 If Loss_reg.Visible = True Then
                     Loss_reg.Submit_loss()
                 End If
@@ -224,34 +220,63 @@ Public Class closeLotsummary
                 Dim trFlg As String = "1"
                 Dim dFlg As String = "0"
                 Dim prdFlg As String = "1"
-            Dim clFlg As String = "1"
-            If MainFrm.chk_spec_line = "2" Then
-                'Special
-                Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
-                Dim Iseq = GenSEQ
-                Dim mdSqlite = New ModelSqliteDefect
-                For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
-                    Iseq = Iseq + 1
-                    ' rsFg = md.mGetdatachildpartsummaryfg(itemPlanData.wi, Iseq, sLot)
-                    rsFg = mdSqlite.mSqliteGetdatachildpartsummaryfg(itemPlanData.wi, Iseq, sLot)
-                    ' rs = md.mGetdatachildpartsummarychild(itemPlanData.wi, Iseq, sLot)
-                    rs = mdSqlite.mSqliteGetdatachildpartsummarychild(itemPlanData.wi, Iseq, sLot)
+                Dim clFlg As String = "1"
+                If MainFrm.chk_spec_line = "2" Then
+                    'Special
+                    Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
+                    Dim Iseq = GenSEQ
+                    For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
+                        Iseq = Iseq + 1
+                        rsFg = md.mGetdatachildpartsummaryfg(itemPlanData.wi, Iseq, sLot)
+                        rs = md.mGetdatachildpartsummarychild(itemPlanData.wi, Iseq, sLot)
+                        If rsFg <> "0" Then
+                            Dim dcResultdatafg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFg)
+                            Dim i As Integer = 1
+                            For Each itemchild As Object In dcResultdatafg
+                                Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
+                                ClickOk(itemPlanData.wi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, Iseq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now, Working_Pro.pwi_id)
+                            Next
+                        End If
+                        If rs <> "0" Then
+                            Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
+                            Dim i As Integer = 1
+                            For Each itemfg As Object In dcResultdata
+                                Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
+                                ClickOk(itemPlanData.wi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, Iseq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now, Working_Pro.pwi_id)
+                            Next
+                        End If
+                        If Backoffice_model.S_chk_spec_line = 1 Then
+                            Dim data = Backoffice_model.GET_START_END_PRODUCTION_DETAIL_SPECTAIL_TIME(Working_Pro.pwi_id)
+                            If data <> "0" Then
+                                Dim dFg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(data)
+                                For Each item As Object In dFg
+                                    stDatetime = item("st_time").ToString()
+                                    eDatetime = item("end_time").ToString()
+                                    Console.WriteLine(stDatetime)
+                                    Console.WriteLine(eDatetime)
+                                Next
+                            End If
+                        End If
+                    Next
+                Else
+                    'Normal
+                    rsFg = md.mGetdatachildpartsummaryfg(sWi, sSeq, sLot)
+                    Dim flg_print As String = ""
                     If rsFg <> "0" Then
                         Dim dcResultdatafg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFg)
                         Dim i As Integer = 1
                         For Each itemchild As Object In dcResultdatafg
                             Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-                            ClickOk(itemPlanData.wi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, Iseq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now, itemchild("pwi_id").ToString())
-                            mdSqlite.UpdateStatusCloselotSqlite("1", itemchild("pwi_id").ToString())
+                            ClickOk(sWi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, sSeq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now, Working_Pro.pwi_id)
                         Next
                     End If
+                    rs = md.mGetdatachildpartsummarychild(sWi, sSeq, sLot)
                     If rs <> "0" Then
                         Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
                         Dim i As Integer = 1
                         For Each itemfg As Object In dcResultdata
                             Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-                            ClickOk(itemPlanData.wi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, Iseq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now, itemfg("pwi_id").ToString())
-                            mdSqlite.UpdateStatusCloselotSqlite("1", itemfg("pwi_id").ToString())
+                            ClickOk(sWi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, sSeq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now, Working_Pro.pwi_id)
                         Next
                     End If
                     If Backoffice_model.S_chk_spec_line = 1 Then
@@ -266,47 +291,9 @@ Public Class closeLotsummary
                             Next
                         End If
                     End If
-                Next
-            Else
-                'Normal
-                'rsFg = md.mGetdatachildpartsummaryfg(sWi, sSeq, sLot)
-                Dim mdSqlite = New ModelSqliteDefect
-                rsFg = mdSqlite.mSqliteGetdatachildpartsummaryfg(sWi, sSeq, sLot)
-                Dim flg_print As String = ""
-                If rsFg <> "0" Then
-                    Dim dcResultdatafg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFg)
-                    Dim i As Integer = 1
-                    For Each itemchild As Object In dcResultdatafg
-                        Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-                        ClickOk(sWi, lbLine.Text, itemchild("dt_item_cd").ToString(), "1", sLot, sSeq, itemchild("dt_type").ToString(), itemchild("dt_code").ToString(), itemchild("total_nc").ToString(), date_now, Working_Pro.pwi_id)
-                    Next
                 End If
-                ' rs = md.mGetdatachildpartsummarychild(sWi, sSeq, sLot)
-                rs = mdSqlite.mSqliteGetdatachildpartsummarychild(sWi, sSeq, sLot)
-                If rs <> "0" Then
-                    Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
-                    Dim i As Integer = 1
-                    For Each itemfg As Object In dcResultdata
-                        Dim date_now = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-                        ClickOk(sWi, lbLine.Text, itemfg("dt_item_cd").ToString(), "2", sLot, sSeq, itemfg("dt_type").ToString(), itemfg("dt_code").ToString(), itemfg("total_nc").ToString(), date_now, Working_Pro.pwi_id)
-                    Next
-                End If
-                If Backoffice_model.S_chk_spec_line = 1 Then
-                    Dim data = Backoffice_model.GET_START_END_PRODUCTION_DETAIL_SPECTAIL_TIME(Working_Pro.pwi_id)
-                    If data <> "0" Then
-                        Dim dFg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(data)
-                        For Each item As Object In dFg
-                            stDatetime = item("st_time").ToString()
-                            eDatetime = item("end_time").ToString()
-                            Console.WriteLine(stDatetime)
-                            Console.WriteLine(eDatetime)
-                        Next
-                    End If
-                End If
-                mdSqlite.UpdateStatusCloselotSqlite("1", Working_Pro.pwi_id)
-            End If
-            insertProductionactual(sWi, sLine, sPart, pQty, seqQty, sSeq, sShift, staffNo, stDatetime, eDatetime, sLot, cFlg, trFlg, dFlg, prdFlg, clFlg, avarage_eff, avarage_act_prd_time)
-            If MainFrm.chk_spec_line = "2" Then
+                insertProductionactual(sWi, sLine, sPart, pQty, seqQty, sSeq, sShift, staffNo, stDatetime, eDatetime, sLot, cFlg, trFlg, dFlg, prdFlg, clFlg, avarage_eff, avarage_act_prd_time)
+                If MainFrm.chk_spec_line = "2" Then
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                         Dim special_wi As String = itemPlanData.wi
                         If cFlg = 1 Then
@@ -350,9 +337,9 @@ Public Class closeLotsummary
             Else
                 load_show.Show()
             End If
-        'Catch ex As Exception
-        'load_show.Show()
-        ' End Try
+        Catch ex As Exception
+            load_show.Show()
+        End Try
     End Sub
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         Try
@@ -373,12 +360,9 @@ Public Class closeLotsummary
     End Sub
     Public Sub checkPrintdefect(wi As String, seq As String, lot As String)
         Dim md = New modelDefect()
-        Dim mdSqlite = New ModelSqliteDefect()
         Dim dfType As String = "2" 'NC
-        'rsNc = md.mGetdatachildpartsummarychildgrouppart(wi, seq, lot, dfType) 'NC
-        'rsFgNc = md.Getdatachildpartsummaryfggrouppart(wi, seq, lot, dfType) 'NC
-        rsNc = mdSqlite.mSqliteGetdatachildpartsummarychildgrouppart(wi, seq, lot, dfType) 'NC
-        rsFgNc = mdSqlite.mSqliteGetdatachildpartsummaryfggrouppart(wi, seq, lot, dfType) 'NC
+        rsNc = md.mGetdatachildpartsummarychildgrouppart(wi, seq, lot, dfType) 'NC
+        rsFgNc = md.Getdatachildpartsummaryfggrouppart(wi, seq, lot, dfType) 'NC
         Dim itemType = "1"
         If rsFgNc <> "0" Then
             Dim dcResultdatafg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFgNc)
@@ -427,10 +411,8 @@ Public Class closeLotsummary
             Next
         End If
         dfType = "1" 'NG
-        ' rsNc = md.mGetdatachildpartsummarychildgrouppart(wi, seq, lot, dfType) 'NG
-        'rsFgNc = md.Getdatachildpartsummaryfggrouppart(wi, seq, lot, dfType) 'NG
-        rsNc = mdSqlite.mSqliteGetdatachildpartsummarychildgrouppart(wi, seq, lot, dfType) 'NC
-        rsFgNc = mdSqlite.mSqliteGetdatachildpartsummaryfggrouppart(wi, seq, lot, dfType) 'NC
+        rsNc = md.mGetdatachildpartsummarychildgrouppart(wi, seq, lot, dfType) 'NG
+        rsFgNc = md.Getdatachildpartsummaryfggrouppart(wi, seq, lot, dfType) 'NG
         itemType = "1"
         If rsFgNc <> "0" Then
             Dim dcResultdatafg As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFgNc)
