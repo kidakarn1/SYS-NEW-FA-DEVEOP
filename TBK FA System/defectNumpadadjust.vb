@@ -144,6 +144,7 @@
                     lbMax.Text = calNumpadadjustNc(actQty, nc, ng, sNc)
                 Else
                     Dim md = New modelDefect
+                    Dim mdSqlite = New ModelSqliteDefect
                     Dim UseQty = ""
                     If MainFrm.chk_spec_line = "2" Then
                         Dim arrayWI As List(Of String) = New List(Of String)
@@ -152,15 +153,17 @@
                         Next
                         Dim GenSEQ As Integer = Working_Pro.Label22.Text - MainFrm.ArrayDataPlan.ToArray.Length
                         Dim Iseq = GenSEQ
-                        UseQty = md.mGetdefectdetailncPartnoSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, "2", lbPart.Text, dtWino, dtSeqno)
+                        UseQty = mdSqlite.mSqliteGetdefectdetailncPartnoSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, "2", lbPart.Text, dtWino, dtSeqno) ' md.mGetdefectdetailncPartnoSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, "2", lbPart.Text, dtWino, dtSeqno)
                     Else
-                        UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "2", lbPart.Text)
+                        '  UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "2", lbPart.Text)
+                        UseQty = mdSqlite.mSqliteGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "2", lbPart.Text)
                     End If
 
                     Dim maxQty As Integer = (999 - Convert.ToInt32(UseQty)) + sNc
                     lbMax.Text = maxQty '"Unlimited"
                 End If
             ElseIf dfHome.dtType = "NG" Then
+                Dim mdSqlite = New ModelSqliteDefect
                 If defectDetailng.types = "FG" Then
                     lbMax.Text = calNumpadadjustNg(actQty, nc, ng, sNg)
                 Else
@@ -173,9 +176,10 @@
                         Next
                         Dim GenSEQ As Integer = Working_Pro.Label22.Text - MainFrm.ArrayDataPlan.ToArray.Length
                         Dim Iseq = GenSEQ
-                        UseQty = md.mGetdefectdetailncPartnoSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, "1", lbPart.Text, dtWino, dtSeqno)
+                        UseQty = mdSqlite.mSqliteGetdefectdetailncPartnoSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, "1", lbPart.Text, dtWino, dtSeqno)
                     Else
-                        UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "1", lbPart.Text)
+                        ' UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "1", lbPart.Text)
+                        UseQty = mdSqlite.mSqliteGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, "1", lbPart.Text)
                     End If
                     Dim maxQty As Integer = (999 - Convert.ToInt32(UseQty)) + sNg
                     lbMax.Text = maxQty '"Unlimited"
@@ -195,19 +199,23 @@
                 Dim seq
                 Dim dfType
                 Dim dtCode
+                Dim dfName
                 If dfHome.dtType = "NC" Then
                     wi = dfDetailsnc.dtWino
                     lot = dfDetailsnc.dtLotNo
                     seq = dfDetailsnc.dtSeqno
                     dfType = dfDetailsnc.dtType
                     dtCode = dfDetailsnc.dtCode
+                    dfName = dfDetailsnc.dtName
                     setValuenc(actQty, nc, ng, sNc, tbAddjust.Text)
+
                 ElseIf dfHome.dtType = "NG" Then
                     wi = dfDetailsng.dtWino
                     lot = dfDetailsng.dtLotNo
                     seq = dfDetailsng.dtSeqno
                     dfType = dfDetailsng.dtType
                     dtCode = dfDetailsng.dtCode
+                    dfName = dfDetailsng.dtName
                     setValueng(actQty, nc, ng, sNg, tbAddjust.Text)
                 End If
                 'MsgBox("wi = " & wi)
@@ -215,7 +223,7 @@
                 'MsgBox("seq = " & seq)
                 'MsgBox("dfType = " & dfType)
                 'MsgBox("dtCode = " & dtCode)
-                updateAddjustqty(wi, lot, seq, dfType, dtCode)
+                updateAddjustqty(wi, lot, seq, dfType, dtCode, dfName)
                 Working_Pro.Enabled = True
                 Me.Close()
             Else
@@ -230,16 +238,18 @@
             Dim seq
             Dim dfType
             Dim dtCode
+            Dim dfName
             If dfHome.dtType = "NC" Then
                 wi = LdfDetailsnc.dtWino
                 lot = LdfDetailsnc.dtLotNo
                 seq = LdfDetailsnc.dtSeqno
                 dfType = LdfDetailsnc.dtType
                 dtCode = LdfDetailsnc.dtCode
+                dfName = LdfDetailsnc.dtName
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
                 If rs Then
                     setValuenc(actQty, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text, sNc, tbAddjust.Text)
-                    updateAddjustqty(wi, lot, seq, dfType, dtCode)
+                    updateAddjustqty(wi, lot, seq, dfType, dtCode, dfName)
                     Working_Pro.Enabled = True
                     Me.Close()
                 Else
@@ -255,10 +265,11 @@
                 seq = Working_Pro.seqNo
                 dfType = LdfDetailsng.dtType
                 dtCode = LdfDetailsng.dtCode
+                dfName = LdfDetailsng.dtName
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
                 If rs Then
                     setValueng(actQty, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text, sNg, tbAddjust.Text)
-                    updateAddjustqty(wi, lot, seq, dfType, dtCode)
+                    updateAddjustqty(wi, lot, seq, dfType, dtCode, dfName)
                     Working_Pro.Enabled = True
                     Me.Close()
                 End If
@@ -279,6 +290,7 @@
                 Dim seq
                 Dim dfType
                 Dim dtCode
+                Dim dtName
                 If dfHome.dtType = "NC" Then
                     wi = dfDetailsnc.dtWino
                     lot = dfDetailsnc.dtLotNo
@@ -292,7 +304,7 @@
                     Dim rsCheck = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
                     If rsCheck Then
                         setValuenc(actQty, nc, ng, sNc, tbAddjust.Text)
-                        updateAddjustqty(wi, lot, seq, dfType, dtCode)
+                        updateAddjustqty(wi, lot, seq, dfType, dtCode, dfDetailsnc.dtName)
                         Working_Pro.Enabled = True
                         Me.Close()
                     Else
@@ -311,7 +323,7 @@
                     dtCode = dfDetailsng.dtCode
                     If rsCheck Then
                         setValueng(actQty, nc, ng, sNg, tbAddjust.Text)
-                        updateAddjustqty(wi, lot, seq, dfType, dtCode)
+                        updateAddjustqty(wi, lot, seq, dfType, dtCode, dfDetailsng.dtName)
                         Working_Pro.Enabled = True
                         Me.Close()
                     Else
@@ -330,6 +342,7 @@
             Dim seq
             Dim dfType
             Dim dtCode
+            Dim dtName
             If dfHome.dtType = "NC" Then
                 wi = LdfDetailsnc.dtWino
                 lot = LdfDetailsnc.dtLotNo
@@ -340,10 +353,11 @@
                 End If
                 dfType = LdfDetailsnc.dtType
                 dtCode = LdfDetailsnc.dtCode
+                dtName = LdfDetailsnc.dtName
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
                 If rs Then
                     setValuenc(actQty, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text, sNc, tbAddjust.Text)
-                    updateAddjustqty(wi, lot, seq, dfType, dtCode)
+                    updateAddjustqty(wi, lot, seq, dfType, dtCode, dtName)
                     Working_Pro.Enabled = True
                     Me.Close()
                 Else
@@ -359,10 +373,11 @@
                 End If
                 dfType = LdfDetailsng.dtType
                 dtCode = LdfDetailsng.dtCode
+                dtName = LdfDetailsng.dtName
                 Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
                 If rs Then
                     setValueng(actQty, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text, sNg, tbAddjust.Text)
-                    updateAddjustqty(wi, lot, seq, dfType, dtCode)
+                    updateAddjustqty(wi, lot, seq, dfType, dtCode, dtName)
                     Working_Pro.Enabled = True
                     Me.Close()
                 Else
@@ -398,7 +413,7 @@
             Working_Pro.lb_ng_child_part.Text = total
         End If
     End Function
-    Public Function updateAddjustqty(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String)
+    Public Function updateAddjustqty(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String, dfName As String)
         Dim md As New modelDefect()
         Dim mdSqlite As New ModelSqliteDefect()
         Dim itemType As String = ""
@@ -416,7 +431,7 @@
             End If
         End If
         ' MsgBox("NG ITEM TYHPE ===>" & itemType)
-        Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, itemType, lbPart.Text)
+        ' Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, itemType, lbPart.Text)
         Dim rsSqlite = mdSqlite.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, itemType, lbPart.Text)
         'If rs Then
         If rsSqlite Then
@@ -431,7 +446,7 @@
             Else
                 pwi_id = Working_Pro.pwi_id
             End If
-            dfRegister.insertDefectregister(dtWino, MainFrm.Label4.Text, dtItemcd, itemType, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate, pwi_id)
+            dfRegister.insertDefectregister(dtWino, MainFrm.Label4.Text, dtItemcd, itemType, dtLotNo, dtSeqno, dtType, dtCode, tbAddjust.Text, dtMenu, dtActualdate, pwi_id, dfName)
         Else
             MsgBox("Update Status Fiall Function updateAddjustqty in defectNumpadadjust.vb")
             MsgBox("mUpdateaddjust rs===>" & rs)

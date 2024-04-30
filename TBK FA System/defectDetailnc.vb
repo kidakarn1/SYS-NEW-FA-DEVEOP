@@ -15,6 +15,7 @@ Friend Class defectDetailnc
     Public Shared dtCode As String = ""
     Public Shared dtQty As String = ""
     Public Shared dtMenu As String = "1"
+    Public Shared dtName As String = ""
     Public Shared dtActualdate As String = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
     Public Shared S_index As Integer = 0
     Dim cBuottndown As Integer = 0
@@ -41,8 +42,8 @@ Friend Class defectDetailnc
             For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
                 arrayWI.Add(itemPlanData.wi)
             Next
-            rs = md.mGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
-            'rs = mdSQLite.mGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
+            ' rs = md.mGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
+            rs = mdSQLite.mSqliteGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
         Else
             ' rs = md.mGetdefectdetailnc(wi, seq, lot, type)
             rs = mdSQLite.mSqliteGetdefectdetailnc(wi, seq, lot, type)
@@ -99,6 +100,7 @@ Friend Class defectDetailnc
                     Me.sDefectdetail = lvDefectdetails.Items(lvItem.Index).SubItems(1).Text
                     Me.sNc = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
                     Me.dtQty = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
+                    Me.dtName = lvDefectdetails.Items(lvItem.Index).SubItems(4).Text
                     If MainFrm.chk_spec_line = "2" Then
                         dtWino = lvDefectdetails.Items(lvItem.Index).SubItems(6).Text
                         dtSeqno = lvDefectdetails.Items(lvItem.Index).SubItems(7).Text

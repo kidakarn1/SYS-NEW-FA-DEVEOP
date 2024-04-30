@@ -1,4 +1,4 @@
-Imports System.Web.Script.Serialization
+﻿Imports System.Web.Script.Serialization
 Public Class defectDetailng
     Shared datlvDefectdetails As ListViewItem
     Public Shared sDefectcode As String = ""
@@ -22,6 +22,7 @@ Public Class defectDetailng
     Public Shared types As String = ""
     Public Shared dtnameItemtype As String = ""
     Public Shared dtpwi_id As String = ""
+    Public Shared dtName As String = ""
     Private Sub defectDetailng_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'SEQ = Working_Pro.seqNo
         Dim rs = getDefectdetailg(dtWino, dtSeqno, dtLotNo, dtType)
@@ -40,8 +41,8 @@ Public Class defectDetailng
             For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
                 arrayWI.Add(itemPlanData.wi)
             Next
-            rs = md.mGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
-            '  rs = mdSQLite.mSqliteGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray(), lot, type, GenSEQ)
+            'rs = md.mGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
+            rs = mdSQLite.mSqliteGetdefectdetailncSpc(arrayWI.ToArray, MainFrm.ArrayDataPlan.ToArray().Length, lot, type, GenSEQ)
         Else
             rs = mdSQLite.mSqliteGetdefectdetailnc(wi, seq, lot, type)
             'rs = md.mGetdefectdetailnc(wi, seq, lot, type)
@@ -51,7 +52,7 @@ Public Class defectDetailng
             Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
             Dim i As Integer = 1
             For Each item As Object In dcResultdata
-                Dim nameDef = md.mGetDatasys_exp_defect_mst(item("dt_code").ToString())
+                'Dim nameDef = md.mGetDatasys_exp_defect_mst(item("dt_code").ToString())
                 If item("total_nc").ToString() <> "0" Then
                     cListview += 1
                     Dim dt_item_type As String = ""
@@ -64,9 +65,9 @@ Public Class defectDetailng
                     datlvDefectdetails.SubItems.Add(item("dt_item_cd").ToString())
                     datlvDefectdetails.SubItems.Add(dt_item_type)
                     datlvDefectdetails.SubItems.Add(item("dt_code").ToString())
-                    datlvDefectdetails.SubItems.Add(item("dt_code").ToString())
-                    datlvDefectdetails.SubItems.Add(item("total_nc").ToString())
                     datlvDefectdetails.SubItems.Add(item("dt_name_en").ToString())
+                    datlvDefectdetails.SubItems.Add(item("total_nc").ToString())
+                    datlvDefectdetails.SubItems.Add(item("dt_wi_no").ToString())
                     If MainFrm.chk_spec_line = "2" Then
                         datlvDefectdetails.SubItems.Add(item("dt_seq_no").ToString()) 'seq
                         datlvDefectdetails.SubItems.Add(item("pwi_id").ToString())
@@ -98,6 +99,7 @@ Public Class defectDetailng
                     Me.sDefectdetail = lvDefectdetails.Items(lvItem.Index).SubItems(1).Text
                     Me.sNg = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
                     Me.dtQty = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
+                    Me.dtName = lvDefectdetails.Items(lvItem.Index).SubItems(4).Text
                     If MainFrm.chk_spec_line = "2" Then
                         dtWino = lvDefectdetails.Items(lvItem.Index).SubItems(6).Text
                         dtSeqno = lvDefectdetails.Items(lvItem.Index).SubItems(7).Text

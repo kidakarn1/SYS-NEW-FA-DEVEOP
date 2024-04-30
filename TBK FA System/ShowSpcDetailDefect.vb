@@ -10,16 +10,19 @@ Public Class ShowSpcDetailDefect
     End Sub
     Public Function getDefectdetail()
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
-                Dim md As New modelDefect()
+            'If My.Computer.Network.Ping("192.168.161.101") Then
+            Dim md As New modelDefect()
+                Dim mdSqlite As New ModelSqliteDefect()
                 Dim arrayWI As List(Of String) = New List(Of String)
                 For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
                     arrayWI.Add(itemPlanData.wi)
                 Next
                 Dim GenSEQ As Integer = Working_Pro.Label22.Text - MainFrm.ArrayDataPlan.ToArray.Length
                 Dim Iseq = GenSEQ
-                rsFg = md.mGetdatachildpartsummaryfgSpc(arrayWI.ToArray(), MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, GenSEQ)
-                rs = md.mGetdatachildpartsummarychildSpc(arrayWI.ToArray(), MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, GenSEQ)
+                'rsFg = md.mGetdatachildpartsummaryfgSpc(arrayWI.ToArray(), MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, GenSEQ)
+                rsFg = mdSqlite.mSqliteGetdatachildpartsummaryfgSpc(arrayWI.ToArray(), MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, GenSEQ)
+                '  rs = md.mGetdatachildpartsummarychildSpc(arrayWI.ToArray(), MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, GenSEQ)
+                rs = mdSqlite.mSqliteGetdatachildpartsummarychildSpc(arrayWI.ToArray(), MainFrm.ArrayDataPlan.ToArray.Length, Working_Pro.Label18.Text, GenSEQ)
                 If rsFg <> "0" Then
                     Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsFg)
                     Dim i As Integer = 1
@@ -68,7 +71,7 @@ Public Class ShowSpcDetailDefect
                     tmplvcp.SubItems.Add("NO DATA")
                     lvCp.Items.Add(tmplvcp)
                 End If
-            End If
+            'End If
         Catch ex As Exception
             load_show.Show()
         End Try
