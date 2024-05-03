@@ -1,5 +1,14 @@
 ﻿Imports System.Web.Script.Serialization
 Public Class defectAlertsuredefect
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim dfAdminHome As New defectAdminhome
         Dim dfType As String = ""
@@ -54,6 +63,7 @@ Public Class defectAlertsuredefect
         If dfAdminHome.dfType = "NC" Then
             dfType = "2"
             Apiw_id = defectAdmindetailnc.Apwi_id
+            MsgBox("Apiw_id === > " & Apiw_id)
         ElseIf dfAdminHome.dfType = "NG" Then
             dfType = "1"
             Apiw_id = defectAdmindetailng.Apwi_id
@@ -110,6 +120,8 @@ Public Class defectAlertsuredefect
                 Dim menu As String = "2"
                 pDefect.Set_parameter_print(data("ITEM_CD").ToString(), data("ITEM_NAME").ToString(), data("MODEL").ToString(), defectAdminregister.dtLineno, Date.Now, data("LOCATION_PART").ToString(), getShift(), factory_cd, defectAdmindetailnc.sLot, defectAdminregister.tbQty, defectAdmindetailnc.dSeq, defectAdmindetailnc.sWi, defectAdminselecttypenc.type, defectAdminselectcodenc.sDefectcode, dfAdminHome.dfType, menu)
             Next
+            Dim objTagPrintNormal = New tag_print_normal
+            objTagPrintNormal.set_tag_print_normal(defectAdmindetailnc.sWi, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, defectAdminsearch.Pshift)
         End If
     End Sub
     Public Function getShift()
@@ -159,8 +171,10 @@ Public Class defectAlertsuredefect
                             Dim objTagprintdefect = New adminPrintdefect()
                             Dim menu As String = "2"
                             objTagprintdefect.Set_parameter_print(itemdf("dt_item_cd").ToString(), detailItemfg("ITEM_NAME").ToString(), detailItemfg("MODEL").ToString(), MainFrm.Label4.Text, start_date, detailItemfg("LOCATION_PART").ToString(), defectAdminsearch.Pshift, factory_cd, defectAdminselectdetailncadjust.sLot, itemdf("total_nc"), seq, wi, dfType, defectAdminAdjustnumpadadjust.dtCode, dfType, menu)
+
                         Next
                     End If
+
                 Next
             End If
         ElseIf obj.SItemType = "CP" Then
@@ -225,6 +239,8 @@ Public Class defectAlertsuredefect
                 Dim menu As String = "2"
                 pDefect.Set_parameter_print(data("ITEM_CD").ToString(), data("ITEM_NAME").ToString(), data("MODEL").ToString(), defectAdminregister.dtLineno, Date.Now, data("LOCATION_PART").ToString(), getShift(), factory_cd, defectAdmindetailng.sLot, defectAdminregister.tbQty, defectAdmindetailng.dSeq, defectAdmindetailng.sWi, defectAdminselecttypeng.type, defectAdminselectcodeng.sDefectcode, dfAdminHome.dfType, menu)
             Next
+            Dim objTagPrintNormal = New modelDefect
+            objTagPrintNormal.set_tag_print_normal(defectAdmindetailng.Apwi_id, defectAdmindetailng.sWi)
         End If
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

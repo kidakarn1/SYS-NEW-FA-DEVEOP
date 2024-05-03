@@ -49,7 +49,12 @@ Public Class defectAdmindetailnc
                     datlvDefectsumary.SubItems.Add("")
                 End Try
                 datlvDefectsumary.SubItems.Add(item("TOTAL_DEFECT").ToString())
-                datlvDefectsumary.SubItems.Add(item("PWI_ID").ToString())
+                If item("PWI_ID").ToString() <> "0" Then
+                    datlvDefectsumary.SubItems.Add(item("PWI_ID").ToString())
+                Else
+                    Dim getPwi_id = md.mGetPwi_id(item("WI").ToString(), item("LOT_NO").ToString(), item("SEQ_NO").ToString(), item("SHIFT").ToString())
+                    datlvDefectsumary.SubItems.Add(getPwi_id)
+                End If
                 lvDefectact.Items.Add(datlvDefectsumary)
                 i += 1
             Next

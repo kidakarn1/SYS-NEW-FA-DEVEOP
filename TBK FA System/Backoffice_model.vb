@@ -46,7 +46,6 @@ Public Class Backoffice_model
     Public Shared svDatabase As String = ""
     Public Shared user_pd As String = ""
     Public Shared WithEvents serialPort As New SerialPort
-
     Public Shared Function OpenRS232(mec_name)
         If serialPort.IsOpen Then
             CloseRS232()
@@ -172,15 +171,16 @@ Public Class Backoffice_model
         Dim convert_date_start1 = date_start1.ToString(format_tommorow1)
         Dim currdatedDefect As DateTime = DateTime.Today.AddMonths(-2)
         Dim date_startDefect As DateTime = DateTime.Today.AddMonths(-6)
-        Dim convert_date_startDefect = date_startDefect.ToString("yyyy-MM-dd")
+        Dim convert_date_startDefect = date_startDefect.ToString("yyyy-MM-dd") & " 00:00:00"
         Dim ConvertcurrdatedDefect = currdatedDefect.ToString("yyyy-MM-dd")
         Dim command_data() As String = {
                 "DELETE FROM act_ins where st_time BETWEEN '" & convert_date_start & "'           AND '" & currdated & "' and tr_status = '1' ",
                 "DELETE FROM close_lot_act where prd_st_date BETWEEN '" & convert_date_start & "' AND '" & currdated & "' and transfer_flg = '1'",
                 "DELETE FROM loss_actual where start_loss BETWEEN '" & convert_date_start1 & "' AND '" & currdated1 & "' and transfer_flg = '1'",
                 "DELETE FROM maintenance where mn_create_date BETWEEN '" & convert_date_start1 & "' AND '" & currdated1 & "' and mn_status = '2'",
-                "DELETE FROM defect_transactions where dt_created_date BETWEEN '" & convert_date_startDefect & "' and '" & ConvertcurrdatedDefect & "' and dt_status_close_lot = '1'"
+                "DELETE FROM defect_transactions where dt_created_date BETWEEN '" & convert_date_startDefect & "' and '" & currdated & " 23:59:59" & "' and dt_status_close_lot = '1'"
             }
+        Console.WriteLine(command_data(4))
         For i = 0 To command_data.Length - 1
             Check_connect_sqlite()
             Dim sqliteConn As New SQLiteConnection(sqliteConnect)

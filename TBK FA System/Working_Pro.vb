@@ -2225,7 +2225,8 @@ Public Class Working_Pro
         e.Graphics.DrawString(Label3.Text, lb_font2.Font, Brushes.Black, 152, 25)
         e.Graphics.DrawString("QTY.", lb_font1.Font, Brushes.Black, 492, 13)
         'Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) ' Check From Actual
-        Dim result_snp As Integer = CDbl(Val(GoodQty)) Mod CDbl(Val(Label27.Text)) ' Check From Good
+        Dim defectAll = CDbl(Val(lb_ng_qty.Text)) + CDbl(Val(lb_nc_qty.Text))
+        Dim result_snp As Integer = (CDbl(Val(Label6.Text)) - defectAll) Mod CDbl(Val(Label27.Text)) ' Check From Good
         Dim status_tag As String = "[ Incomplete Tag]"
         If V_check_line_reprint = "0" Then
             If result_snp = "0" Then
@@ -2241,7 +2242,7 @@ Public Class Working_Pro
                     result_snp = Label27.Text
                     status_tag = " "
                 Else
-                    result_snp = CDbl(Val(GoodQty)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
+                    result_snp = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
                     status_tag = "[ Incomplete Tag ]"
                 End If
             End If

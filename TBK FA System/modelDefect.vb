@@ -6,6 +6,38 @@ Imports Newtonsoft.Json.Linq
 
 Public Class modelDefect
     Public Shared bf = New Backoffice_model()
+    Public Shared Function mGetPwi_id(WI As String, LOT_NO As String, SEQ_NO As String, SHIFT As String)
+        Try
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/getPwi?WI=" & WI & "&LOT_NO=" & LOT_NO & "&SEQ_NO=" & SEQ_NO & "&SHIFT=" & SHIFT)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/getPwi?WI=" & WI & "&LOT_NO=" & LOT_NO & "&SEQ_NO=" & SEQ_NO & "&SHIFT=" & SHIFT)
+            If rsData <> "0" Then
+                Return rsData
+            Else
+                MsgBox("connect Api Faill Please check modelDefect in Function mGetPwi_id Data = 0 ")
+                Return 0
+            End If
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetPwi_id = " & ex.Message)
+            Return 0
+        End Try
+    End Function
+    Public Shared Function mGetTagprintDetail(wi As String, lot As String, seq As String, shift As String)
+        Try
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetTagprintDetail?wi=" & wi & "&lot=" & lot & "&seq=" & seq & "&shift=" & shift)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetTagprintDetail?wi=" & wi & "&lot=" & lot & "&seq=" & seq & "&shift=" & shift)
+            If rsData <> "0" Then
+                Return rsData
+            Else
+                MsgBox("connect Api Faill Please check modelDefect in Function mGetTagprintDetail Data = 0 ")
+                Return 0
+            End If
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetTagprintDetail = " & ex.Message)
+            Return 0
+        End Try
+    End Function
     Public Shared Function mGetchildpart(wi)
         Try
             Dim api = New api()
@@ -18,6 +50,21 @@ Public Class modelDefect
             End If
         Catch ex As Exception
             MsgBox("connect Api Faill Please check modelDefect in Function mGetchildpart = " & ex.Message)
+            Return 0
+        End Try
+    End Function
+    Public Shared Function mGetDatamsterLine(line As String)
+        Try
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetDataLine?line=" & line)
+            If rsData <> "0" Then
+                Return rsData
+            Else
+                MsgBox("connect Api Faill Please check modelDefect in Function mGetDatamsterLine Data = 0 ")
+                Return 0
+            End If
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetDatamsterLine = " & ex.Message)
             Return 0
         End Try
     End Function
@@ -414,7 +461,22 @@ Public Class modelDefect
         End Try
         Return "0"
     End Function
-
+    Public Shared Function mGetmasterDataDefect(def_cd As String)
+        Try
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/getmasterDataDefect?def_cd=" & def_cd)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/getmasterDataDefect?def_cd=" & def_cd)
+            If rsData <> "0" Then
+                Return rsData
+            Else
+                Return "0"
+            End If
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetmasterDataDefect = " & ex.Message)
+            Return "0"
+        End Try
+        Return "0"
+    End Function
     Public Shared Function mGetDefectadmindetailncFG(LineCd As String, sDate As String, eDate As String)
         Try
             Dim api = New api()

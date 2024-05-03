@@ -469,6 +469,15 @@ Public Class MainFrm
         End Try
     End Sub
     Private Sub menu3_Click_2(sender As Object, e As EventArgs) Handles menu3.Click
+        Dim mdD = New modelDefect
+        Backoffice_model.Check_detail_actual_insert_act() 'กรณีเครื่องดับ'
+        Dim data = mdD.mGetDatamsterLine(Label4.Text)
+        If data <> "0" Then
+            Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(data)
+            For Each item As Object In dict
+                chk_spec_line = item("chk_spec_line").ToString()
+            Next
+        End If
         Dim LoadSQL = Backoffice_model.get_information()
         While LoadSQL.Read()
             Adm_page.TextBox1.Text = LoadSQL("inf_txt").ToString

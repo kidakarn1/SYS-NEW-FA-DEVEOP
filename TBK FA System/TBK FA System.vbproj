@@ -637,6 +637,12 @@
     <Compile Include="ShowSpcDetailDefect.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="tag_print_normal.Designer.vb">
+      <DependentUpon>tag_print_normal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="tag_print_normal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TestForm.Designer.vb">
       <DependentUpon>TestForm.vb</DependentUpon>
     </Compile>
@@ -1167,6 +1173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ShowSpcDetailDefect.resx">
       <DependentUpon>ShowSpcDetailDefect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tag_print_normal.resx">
+      <DependentUpon>tag_print_normal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForm.resx">
       <DependentUpon>TestForm.vb</DependentUpon>

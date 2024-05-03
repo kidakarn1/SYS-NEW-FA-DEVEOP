@@ -480,8 +480,9 @@ Public Class closeLotsummary
         End If
     End Sub
     Public Sub checkPrintnormal()
-        Dim result_mod As Double = Integer.Parse(lbGood.Text) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
-        Dim result_total As Double = Integer.Parse(lbGood.Text) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+        Dim defectAll = CDbl(Val(Working_Pro.lb_ng_qty.Text)) + CDbl(Val(Working_Pro.lb_nc_qty.Text))
+        Dim result_mod As Double = (Integer.Parse(Working_Pro.Label6.Text) - defectAll) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+        Dim result_total As Double = (Integer.Parse(Working_Pro.LB_COUNTER_SEQ.Text) - defectAll) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
         Console.WriteLine("Working_Pro.LB_COUNTER_SEQ.Text===>" & Working_Pro.LB_COUNTER_SEQ.Text)
         Console.WriteLine("result_total===>" & result_total)
         Console.WriteLine("Working_Pro.Label10.Text===>" & Working_Pro.Label10.Text)
