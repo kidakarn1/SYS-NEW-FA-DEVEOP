@@ -8,6 +8,7 @@ Public Class Sel_prd_setup
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Try
+
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Chang_Loss.ListView2.View = View.Details
                 'Chang_Loss.ListView2.Scrollable = Size()
@@ -37,6 +38,7 @@ Public Class Sel_prd_setup
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Try
+
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Change_Loss2.ListView2.View = View.Details
                 Dim checkRs As Integer = 0

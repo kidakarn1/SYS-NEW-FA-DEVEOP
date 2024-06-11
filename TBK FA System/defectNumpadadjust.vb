@@ -223,7 +223,9 @@
                 'MsgBox("seq = " & seq)
                 'MsgBox("dfType = " & dfType)
                 'MsgBox("dtCode = " & dtCode)
+
                 updateAddjustqty(wi, lot, seq, dfType, dtCode, dfName)
+                Working_Pro.ResetRed()
                 Working_Pro.Enabled = True
                 Me.Close()
             Else
@@ -250,6 +252,7 @@
                 If rs Then
                     setValuenc(actQty, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text, sNc, tbAddjust.Text)
                     updateAddjustqty(wi, lot, seq, dfType, dtCode, dfName)
+                    Working_Pro.ResetRed()
                     Working_Pro.Enabled = True
                     Me.Close()
                 Else
@@ -270,6 +273,7 @@
                 If rs Then
                     setValueng(actQty, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text, sNg, tbAddjust.Text)
                     updateAddjustqty(wi, lot, seq, dfType, dtCode, dfName)
+                    Working_Pro.ResetRed()
                     Working_Pro.Enabled = True
                     Me.Close()
                 End If
@@ -305,7 +309,9 @@
                     If rsCheck Then
                         setValuenc(actQty, nc, ng, sNc, tbAddjust.Text)
                         updateAddjustqty(wi, lot, seq, dfType, dtCode, dfDetailsnc.dtName)
+                        Working_Pro.ResetRed()
                         Working_Pro.Enabled = True
+                        Working_Pro.ResetRed()
                         Me.Close()
                     Else
                         MsgBox("Please Check QTY.")
@@ -324,7 +330,9 @@
                     If rsCheck Then
                         setValueng(actQty, nc, ng, sNg, tbAddjust.Text)
                         updateAddjustqty(wi, lot, seq, dfType, dtCode, dfDetailsng.dtName)
+                        Working_Pro.ResetRed()
                         Working_Pro.Enabled = True
+                        Working_Pro.ResetRed()
                         Me.Close()
                     Else
                         MsgBox("Please Check QTY.")
@@ -358,6 +366,7 @@
                 If rs Then
                     setValuenc(actQty, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text, sNc, tbAddjust.Text)
                     updateAddjustqty(wi, lot, seq, dfType, dtCode, dtName)
+                    Working_Pro.ResetRed()
                     Working_Pro.Enabled = True
                     Me.Close()
                 Else
@@ -378,6 +387,7 @@
                 If rs Then
                     setValueng(actQty, Working_Pro.lb_nc_child_part.Text, Working_Pro.lb_ng_child_part.Text, sNg, tbAddjust.Text)
                     updateAddjustqty(wi, lot, seq, dfType, dtCode, dtName)
+                    Working_Pro.ResetRed()
                     Working_Pro.Enabled = True
                     Me.Close()
                 Else
@@ -401,6 +411,23 @@
         Dim total = (nc - sNc) + ipQty
         If defectDetailnc.Types = "FG" Then
             Working_Pro.lb_nc_qty.Text = total
+            ' MsgBox("CDbl(Val(sNc))===>" & CDbl(Val(sNc)))
+            ' MsgBox("CDbl(Val(ipQty))===>" & CDbl(Val(ipQty)))
+            Dim t
+            If ipQty >= CDbl(Val(sNc)) Then
+                Dim rs = ipQty - CDbl(Val(sNc))
+                t = (CDbl(Val(Working_Pro.lb_good.Text)) - rs)
+            Else
+                If ipQty = 0 Then
+                    ipQty = sNc
+                End If
+                Dim rs = sNc - ipQty
+                If rs = 0 Then
+                    rs = sNc
+                End If
+                t = (CDbl(Val(Working_Pro.lb_good.Text)) + rs)
+            End If
+            Working_Pro.lb_good.Text = t
         Else
             Working_Pro.lb_nc_child_part.Text = total
         End If
@@ -409,6 +436,21 @@
         Dim total = (ng - sNg) + ipQty
         If defectDetailng.types = "FG" Then
             Working_Pro.lb_ng_qty.Text = total
+            Dim t
+            If ipQty >= CDbl(Val(sNg)) Then
+                Dim rs = ipQty - CDbl(Val(sNg))
+                t = (CDbl(Val(Working_Pro.lb_good.Text)) - rs)
+            Else
+                If ipQty = 0 Then
+                    ipQty = sNg
+                End If
+                Dim rs = sNg - ipQty
+                If rs = 0 Then
+                    rs = sNg
+                End If
+                t = (CDbl(Val(Working_Pro.lb_good.Text)) + rs)
+            End If
+            Working_Pro.lb_good.Text = t
         Else
             Working_Pro.lb_ng_child_part.Text = total
         End If

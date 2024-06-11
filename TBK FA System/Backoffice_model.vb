@@ -434,7 +434,7 @@ Public Class Backoffice_model
             'Application.Exit()
         End Try
     End Function
-    Public Shared Function get_data_item(WI)
+    Public Shared Function get_data_item(WI As String)
         Dim reader As SqlDataReader
         Dim SQLConn As New SqlConnection() 'The SQL Connection
         Dim SQLCmd As New SqlCommand()
@@ -443,6 +443,7 @@ Public Class Backoffice_model
             SQLConn.Open()
             SQLCmd.Connection = SQLConn
             SQLCmd.CommandText = "EXEC [dbo].[GET_DATA_ABOUT_ITEM] @WI = '" & WI & "'"
+
             reader = SQLCmd.ExecuteReader()
             Return reader
         Catch ex As Exception
@@ -1470,7 +1471,7 @@ recheck:
             'Application.Exit()
         End Try
     End Function
-    Public Shared Function update_tagprint(wi As String, flgUpdate As String, conditionflg As String)
+    Public Shared Function update_tagprint(wi As String, flgUpdate As String, conditionflg As String)  '2 , 0
         ' Dim reader As SqlDataReader
         'Dim SQLConn As New SqlConnection() 'The SQL Connection
         ' Dim SQLCmd As New SqlCommand()
@@ -1495,7 +1496,7 @@ recheck:
         ' Dim reader As SqlDataReader
         'Dim SQLConn As New SqlConnection() 'The SQL Connection
         ' Dim SQLCmd As New SqlCommand()
-
+        '2 ,1 
         Try
             '  SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             '  SQLConn.Open()
@@ -1504,21 +1505,23 @@ recheck:
             '  reader = SQLCmd.ExecuteReader()
             '  reader.Close()
             'Return reader
-            Dim api = New api()
-            Dim result = api.Load_data("http://" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_detailforDefect?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg & "&pwi_id=" & pwi_id & "&BoxNo=" & BoxNo)
-            Console.WriteLine("http: //" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_detailforDefect?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg & "&pwi_id=" & pwi_id & "&BoxNo=" & BoxNo)
-            Return result
+            Dim mdDefect = New modelDefect
+            If mdDefect.mGetDataEnableFGPart(MainFrm.Label4.Text) = "1" Then
+                Dim api = New api()
+                Dim result = api.Load_data("http://" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_detailforDefect?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg & "&pwi_id=" & pwi_id & "&BoxNo=" & BoxNo)
+                Console.WriteLine("http: //" & svApi & "/apiShopfloor_test/updateDatadefect/update_tagprint_detailforDefect?wi=" & wi & "&flgUpdate=" & flgUpdate & "&conditionflg=" & conditionflg & "&pwi_id=" & pwi_id & "&BoxNo=" & BoxNo)
+                Return result
+            Else
+                Return 0
+            End If
         Catch ex As Exception
             '  SQLConn.Close()
         End Try
     End Function
-
-
     Public Shared Function update_tagprint_sub(wi As String, flgUpdate As String, conditionflg As String)
         ' Dim reader As SqlDataReader
         ' Dim SQLConn As New SqlConnection() 'The SQL Connection
         ' Dim SQLCmd As New SqlCommand()
-
         Try
             '  SQLConn.ConnectionString = sqlConnect 'Set the Connection String
             '  SQLConn.Open()

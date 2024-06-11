@@ -430,6 +430,7 @@ Public Class print_back
             margin_top_no += 15
             qr_by_model_left += 114
             arr_qr_code_sub(j - 1) = iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & the_Label_bach
+            j = j + 1
         Next
         part_no_res = ""
         For part_numm = Working_Pro.Label3.Text.Length To 24

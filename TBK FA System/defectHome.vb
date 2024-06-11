@@ -1,6 +1,7 @@
 Public Class defectHome
     Public Shared dtType As String = "NO DATA"
     Private Sub btn_back_Click(sender As Object, e As EventArgs) Handles btn_back.Click
+        Working_Pro.ResetRed()
         Working_Pro.Enabled = True
         Me.Hide()
     End Sub
@@ -27,5 +28,9 @@ Public Class defectHome
         Dim dfDetailng = New defectDetailng()
         dfDetailng.show()
         Me.Close()
+    End Sub
+
+    Private Sub defectHome_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Working_Pro.TowerLamp(8, 0)
     End Sub
 End Class

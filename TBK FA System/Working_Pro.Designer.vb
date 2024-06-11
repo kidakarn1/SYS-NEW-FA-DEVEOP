@@ -23,6 +23,7 @@ Partial Class Working_Pro
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Working_Pro))
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Label12 = New System.Windows.Forms.Label()
@@ -151,6 +152,8 @@ Partial Class Working_Pro
         Me.lb_ch_man_flg = New System.Windows.Forms.Label()
         Me.lb_font_tag_line = New System.Windows.Forms.Label()
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
+        Me.lb_good = New System.Windows.Forms.Label()
+        Me.SerialPortLamp = New System.IO.Ports.SerialPort(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -965,12 +968,12 @@ Partial Class Working_Pro
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LB_COUNTER_SHIP.BackColor = System.Drawing.Color.Transparent
-        Me.LB_COUNTER_SHIP.Font = New System.Drawing.Font("Catamaran", 35.0!, System.Drawing.FontStyle.Bold)
-        Me.LB_COUNTER_SHIP.ForeColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(22, Byte), Integer))
-        Me.LB_COUNTER_SHIP.Location = New System.Drawing.Point(330, 292)
+        Me.LB_COUNTER_SHIP.Font = New System.Drawing.Font("Catamaran", 32.0!, System.Drawing.FontStyle.Bold)
+        Me.LB_COUNTER_SHIP.ForeColor = System.Drawing.Color.White
+        Me.LB_COUNTER_SHIP.Location = New System.Drawing.Point(477, 301)
         Me.LB_COUNTER_SHIP.Name = "LB_COUNTER_SHIP"
         Me.LB_COUNTER_SHIP.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.LB_COUNTER_SHIP.Size = New System.Drawing.Size(201, 51)
+        Me.LB_COUNTER_SHIP.Size = New System.Drawing.Size(148, 51)
         Me.LB_COUNTER_SHIP.TabIndex = 4631
         Me.LB_COUNTER_SHIP.Text = "0"
         Me.LB_COUNTER_SHIP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -979,11 +982,11 @@ Partial Class Working_Pro
         'LB_COUNTER_SEQ
         '
         Me.LB_COUNTER_SEQ.BackColor = System.Drawing.Color.Transparent
-        Me.LB_COUNTER_SEQ.Font = New System.Drawing.Font("Catamaran", 35.0!, System.Drawing.FontStyle.Bold)
+        Me.LB_COUNTER_SEQ.Font = New System.Drawing.Font("Catamaran", 32.0!, System.Drawing.FontStyle.Bold)
         Me.LB_COUNTER_SEQ.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.LB_COUNTER_SEQ.Location = New System.Drawing.Point(567, 292)
+        Me.LB_COUNTER_SEQ.Location = New System.Drawing.Point(645, 301)
         Me.LB_COUNTER_SEQ.Name = "LB_COUNTER_SEQ"
-        Me.LB_COUNTER_SEQ.Size = New System.Drawing.Size(207, 45)
+        Me.LB_COUNTER_SEQ.Size = New System.Drawing.Size(137, 45)
         Me.LB_COUNTER_SEQ.TabIndex = 4633
         Me.LB_COUNTER_SEQ.Text = "0"
         Me.LB_COUNTER_SEQ.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1076,7 +1079,7 @@ Partial Class Working_Pro
         Me.btn_desc_act.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_desc_act.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_desc_act.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_desc_act.Location = New System.Drawing.Point(571, 92)
+        Me.btn_desc_act.Location = New System.Drawing.Point(581, 92)
         Me.btn_desc_act.Name = "btn_desc_act"
         Me.btn_desc_act.Size = New System.Drawing.Size(245, 78)
         Me.btn_desc_act.TabIndex = 4626
@@ -1096,7 +1099,7 @@ Partial Class Working_Pro
         Me.btn_ins_act.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_ins_act.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_ins_act.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_ins_act.Location = New System.Drawing.Point(571, 175)
+        Me.btn_ins_act.Location = New System.Drawing.Point(579, 175)
         Me.btn_ins_act.Name = "btn_ins_act"
         Me.btn_ins_act.Size = New System.Drawing.Size(245, 78)
         Me.btn_ins_act.TabIndex = 4624
@@ -1257,7 +1260,7 @@ Partial Class Working_Pro
         Me.btn_closelot.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_closelot.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.btn_closelot.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_closelot.Location = New System.Drawing.Point(549, 423)
+        Me.btn_closelot.Location = New System.Drawing.Point(562, 423)
         Me.btn_closelot.Name = "btn_closelot"
         Me.btn_closelot.Size = New System.Drawing.Size(248, 87)
         Me.btn_closelot.TabIndex = 4556
@@ -1277,7 +1280,7 @@ Partial Class Working_Pro
         Me.btn_defect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_defect.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_defect.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_defect.Location = New System.Drawing.Point(570, 339)
+        Me.btn_defect.Location = New System.Drawing.Point(574, 339)
         Me.btn_defect.Name = "btn_defect"
         Me.btn_defect.Size = New System.Drawing.Size(245, 78)
         Me.btn_defect.TabIndex = 4519
@@ -1297,7 +1300,7 @@ Partial Class Working_Pro
         Me.btn_setup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_setup.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_setup.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_setup.Location = New System.Drawing.Point(571, 256)
+        Me.btn_setup.Location = New System.Drawing.Point(577, 257)
         Me.btn_setup.Name = "btn_setup"
         Me.btn_setup.Size = New System.Drawing.Size(245, 78)
         Me.btn_setup.TabIndex = 4502
@@ -1316,7 +1319,7 @@ Partial Class Working_Pro
         Me.btn_stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_stop.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btn_stop.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btn_stop.Location = New System.Drawing.Point(549, 511)
+        Me.btn_stop.Location = New System.Drawing.Point(567, 514)
         Me.btn_stop.Name = "btn_stop"
         Me.btn_stop.Size = New System.Drawing.Size(244, 86)
         Me.btn_stop.TabIndex = 32
@@ -1478,7 +1481,7 @@ Partial Class Working_Pro
         'PictureBox12
         '
         Me.PictureBox12.BackColor = System.Drawing.Color.Black
-        Me.PictureBox12.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStartingtarget
+        Me.PictureBox12.BackgroundImage = CType(resources.GetObject("PictureBox12.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox12.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox12.Name = "PictureBox12"
         Me.PictureBox12.Size = New System.Drawing.Size(800, 600)
@@ -1527,7 +1530,7 @@ Partial Class Working_Pro
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Location = New System.Drawing.Point(243, 349)
+        Me.Panel2.Location = New System.Drawing.Point(238, 334)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(298, 81)
         Me.Panel2.TabIndex = 4650
@@ -1549,7 +1552,7 @@ Partial Class Working_Pro
         '
         Me.PictureBox10.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox10.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.sweetAlertWarningUnseccess
-        Me.PictureBox10.Location = New System.Drawing.Point(237, 124)
+        Me.PictureBox10.Location = New System.Drawing.Point(232, 121)
         Me.PictureBox10.Name = "PictureBox10"
         Me.PictureBox10.Size = New System.Drawing.Size(310, 380)
         Me.PictureBox10.TabIndex = 4648
@@ -1571,7 +1574,7 @@ Partial Class Working_Pro
         '
         Me.PictureBox16.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.btnOK
         Me.PictureBox16.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox16.Location = New System.Drawing.Point(319, 435)
+        Me.PictureBox16.Location = New System.Drawing.Point(311, 423)
         Me.PictureBox16.Name = "PictureBox16"
         Me.PictureBox16.Size = New System.Drawing.Size(145, 61)
         Me.PictureBox16.TabIndex = 4651
@@ -1713,27 +1716,45 @@ Partial Class Working_Pro
         '
         'PictureBox11
         '
-        Me.PictureBox11.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStoppedtarget
+        Me.PictureBox11.BackgroundImage = CType(resources.GetObject("PictureBox11.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox11.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox11.Name = "PictureBox11"
         Me.PictureBox11.Size = New System.Drawing.Size(800, 600)
         Me.PictureBox11.TabIndex = 4644
         Me.PictureBox11.TabStop = False
         '
+        'lb_good
+        '
+        Me.lb_good.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lb_good.BackColor = System.Drawing.Color.Transparent
+        Me.lb_good.Font = New System.Drawing.Font("Catamaran", 32.0!, System.Drawing.FontStyle.Bold)
+        Me.lb_good.ForeColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(22, Byte), Integer))
+        Me.lb_good.Location = New System.Drawing.Point(320, 301)
+        Me.lb_good.Name = "lb_good"
+        Me.lb_good.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.lb_good.Size = New System.Drawing.Size(148, 51)
+        Me.lb_good.TabIndex = 4655
+        Me.lb_good.Text = "0"
+        Me.lb_good.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lb_good.UseMnemonic = False
+        '
         'Working_Pro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.productionStarttarget
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(800, 600)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.PictureBox16)
+        Me.Controls.Add(Me.PictureBox10)
+        Me.Controls.Add(Me.lb_good)
         Me.Controls.Add(Me.Label9_fontModel)
         Me.Controls.Add(Me.lbPosition2)
         Me.Controls.Add(Me.lbPosition1)
         Me.Controls.Add(Me.PictureBox13)
-        Me.Controls.Add(Me.PictureBox16)
-        Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.PictureBox10)
         Me.Controls.Add(Me.PictureBox15)
         Me.Controls.Add(Me.btn_desc_act)
         Me.Controls.Add(Me.btn_closelot)
@@ -1984,7 +2005,6 @@ Partial Class Working_Pro
     Friend WithEvents PictureBox14 As PictureBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox10 As PictureBox
     Friend WithEvents PictureBox15 As PictureBox
     Friend WithEvents PictureBox16 As PictureBox
@@ -2002,4 +2022,7 @@ Partial Class Working_Pro
     Friend WithEvents lb_ch_man_flg As Label
     Friend WithEvents lb_font_tag_line As Label
     Friend WithEvents PictureBox11 As PictureBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents lb_good As Label
+    Friend WithEvents SerialPortLamp As IO.Ports.SerialPort
 End Class

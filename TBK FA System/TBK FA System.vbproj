@@ -363,6 +363,7 @@
     <Compile Include="Completed_rework.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="confixLamp.vb" />
     <Compile Include="Confrime_work_production.Designer.vb">
       <DependentUpon>Confrime_work_production.vb</DependentUpon>
     </Compile>
@@ -629,6 +630,12 @@
       <DependentUpon>RobotApppSuport.vb</DependentUpon>
     </Compile>
     <Compile Include="RobotApppSuport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settinglamp.Designer.vb">
+      <DependentUpon>Settinglamp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Settinglamp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ShowSpcDetailDefect.Designer.vb">
@@ -983,6 +990,12 @@
     <Compile Include="Wait_data.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Working_OEE.Designer.vb">
+      <DependentUpon>Working_OEE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Working_OEE.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Working_Pro.Designer.vb">
       <DependentUpon>Working_Pro.vb</DependentUpon>
     </Compile>
@@ -1008,6 +1021,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Adm_manage.resx">
       <DependentUpon>Adm_manage.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Adm_page.resx">
       <DependentUpon>Adm_page.vb</DependentUpon>
@@ -1170,6 +1184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RobotApppSuport.resx">
       <DependentUpon>RobotApppSuport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settinglamp.resx">
+      <DependentUpon>Settinglamp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowSpcDetailDefect.resx">
       <DependentUpon>ShowSpcDetailDefect.vb</DependentUpon>
@@ -1341,6 +1358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wait_data.resx">
       <DependentUpon>Wait_data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Working_OEE.resx">
+      <DependentUpon>Working_OEE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Working_Pro.resx">
       <DependentUpon>Working_Pro.vb</DependentUpon>

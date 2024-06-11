@@ -17,8 +17,11 @@
     Public actTotal = dfAdminselecttype.actTotal
     Public ncTotal = dfAdminselecttype.ncTotal
     Public ngTotal = dfAdminselecttype.ngTotal
+    Public Shared dtShift
     Public Shared sPart
+    Public Shared GmaxQty As Integer = 0
     Private Sub defectRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         setVariable()
         Dim dfType
     End Sub
@@ -26,6 +29,7 @@
         Dim dfAdminhome As New defectAdminhome
         If dfAdminhome.dfType = "NC" Then
             dtWino = dfAdmindetailnc.sWi
+            dtShift = dfAdmindetailnc.sshift
             dtLineno = MainFrm.Label4.Text
             dtItemcd = dfAdminselecttype.sPart
             dtItemtype = dfAdminselecttype.type
@@ -50,6 +54,7 @@
             dtWino = dfAdminng.sWi
             dtLineno = MainFrm.Label4.Text
             dtItemcd = dfAdminselecttypeng.sPart
+            dtShift = dfAdminng.sshift
             dtItemtype = dfAdminselecttypeng.type
             dtLotno = dfAdminng.sLot
             dtSeqno = dfAdminng.dSeq
@@ -105,20 +110,24 @@
         If dfAdminhome.dfType = "NC" Then
             If defectAdminselecttypenc.type = "1" Then
                 maxQty = dfNumpadregister.calMaxqtyregisternc(actTotal, ncTotal, ngTotal)
+                GmaxQty = maxQty
             Else
                 Dim md = New modelDefect
                 Dim UseQty = md.mGetdefectdetailncPartno(dtWino, dtSeqno, dtLotno, dtType, dtItemcd)
                 maxQty = (999 - Convert.ToInt32(UseQty))
                 maxQty = maxQty
+                GmaxQty = maxQty
             End If
         Else
             If defectAdminselecttypeng.type = "1" Then
                 maxQty = dfNumpadregister.calMaxqtyregisterng(actTotal, ncTotal, ngTotal)
+                GmaxQty = maxQty
             Else
                 Dim md = New modelDefect
                 Dim UseQty = md.mGetdefectdetailncPartno(dtWino, dtSeqno, dtLotno, dtType, dtItemcd)
                 maxQty = (999 - Convert.ToInt32(UseQty))
                 maxQty = maxQty
+                GmaxQty = maxQty
             End If
         End If
 
@@ -133,6 +142,7 @@
     Public Sub plusRegisterNg(number As Integer)
         Dim dfNumpadregister As New defecAdmintnumpadregister
         Dim maxQty As Integer = dfNumpadregister.calMaxqtyregisternc(actTotal, ncTotal, ngTotal)
+        GmaxQty = maxQty
         Dim rsCheck = dfNumpadregister.calNumpadregister((lbQtydefect.Text + 1), maxQty)
         If rsCheck Then
             lbQtydefect.Text = CDbl(Val(lbQtydefect.Text)) + number
@@ -169,12 +179,10 @@
         Dim setNc = ncTotal + tbQtydefect
         Return setNc
     End Function
-
     Public Shared Function calQtytotalncregisterng(tbQtydefect As Integer, actTotal As Integer, ncTotal As Integer, ngTotal As Integer)
         Dim setNc = ngTotal + tbQtydefect
         Return setNc
     End Function
-
     Public Function insertDefectregister(dtWino As String, dtLineno As String, dtItemcd As String, dtItemtype As String, dtLotno As String, dtSeqno As String, dtType As String, dtCode As String, dtQty As String, dtMenu As String, dtActualdate As String, Apwi_id As String)
         Try
             Dim mdDefect = New modelDefect()

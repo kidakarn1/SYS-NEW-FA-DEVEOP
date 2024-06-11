@@ -116,15 +116,20 @@
             pwi_id = Working_Pro.pwi_id
         End If
         Dim rs = insertDefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, "1", dtActualdate, pwi_id, dSelectcode.sDefectdetail)
+        Dim dataQty
         If rs Then
             If dtType = "1" Then
-                Dim dataQty = calQtytotalncregisterNG(tbQtydefectnc.Text, actTotal, ncTotal, ngTotal)
+                dataQty = calQtytotalncregisterNG(tbQtydefectnc.Text, actTotal, ncTotal, ngTotal)
                 Working_Pro.lb_ng_qty.Text = dataQty
             ElseIf dtType = "2" Then
-                Dim dataQty = calQtytotalncregister(tbQtydefectnc.Text, actTotal, ncTotal, ngTotal)
+                dataQty = calQtytotalncregister(tbQtydefectnc.Text, actTotal, ncTotal, ngTotal)
                 Working_Pro.lb_nc_qty.Text = dataQty
             End If
+            Dim dfAll = CDbl(Val(Working_Pro.lb_ng_qty.Text)) + CDbl(Val(Working_Pro.lb_nc_qty.Text))
+            Working_Pro.lb_good.Text = CDbl(Val(Working_Pro.lb_good.Text)) - CDbl(Val(tbQtydefectnc.Text))
             Working_Pro.Enabled = True
+
+            Working_Pro.ResetRed()
             Me.Close()
         End If
     End Sub
@@ -152,6 +157,7 @@
                 Working_Pro.lb_nc_child_part.Text = dataQty
             End If
             Working_Pro.Enabled = True
+            Working_Pro.ResetRed()
             Me.Close()
         End If
     End Sub

@@ -97,6 +97,7 @@ Public Class Loss_reg
                         Chang_Loss.ListView2.Items.Add(LoadSQL("id_mst").ToString()).SubItems.AddRange(New String() {LoadSQL("loss_cd").ToString(), LoadSQL("description_th").ToString()})
                         Chang_Loss.ListBox1.Items.Add(LoadSQL("loss_type").ToString())
                     End While
+                    Working_Pro.ResetRed()
                     Chang_Loss.Show()
                     Me.Close()
                 Catch ex As Exception
@@ -238,6 +239,7 @@ Public Class Loss_reg
                         Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, test_time_loss_time.Text, loss_type, loss_cd_id, op_id, transfer_flg, "1")            'Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
                     End If
                 End Try
+                Working_Pro.ResetRed()
                 Working_Pro.Enabled = True
                 Me.Close()
             Else
@@ -265,6 +267,7 @@ Public Class Loss_reg
         End If
         Working_Pro.lbNextTime.Text = BreakTime
         Working_Pro.Enabled = True
+        Working_Pro.ResetRed()
         Submit_loss()
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -285,6 +288,7 @@ Public Class Loss_reg
         date_time_commit_data.Visible = False
         test_time_loss_time.Visible = False
         Label2.Text = MainFrm.Label4.Text
+        Working_Pro.TowerLamp(6, 9800)
     End Sub
 
     Private Sub Label6_Click(sender As Object, e As EventArgs)
@@ -364,6 +368,7 @@ Public Class Loss_reg
             Else
                 Backoffice_model.ILogLossBreakTime(MainFrm.Label4.Text, Working_Pro.wi_no.Text, Working_Pro.Label22.Text)
             End If
+
             Working_Pro.lbNextTime.Text = BreakTime
             Working_Pro.Enabled = True
             Submit_loss()

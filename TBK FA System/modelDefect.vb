@@ -3,7 +3,6 @@ Imports System.Data.SQLite
 Imports System.Globalization
 Imports System.Data
 Imports Newtonsoft.Json.Linq
-
 Public Class modelDefect
     Public Shared bf = New Backoffice_model()
     Public Shared Function mGetPwi_id(WI As String, LOT_NO As String, SEQ_NO As String, SHIFT As String)
@@ -22,19 +21,57 @@ Public Class modelDefect
             Return 0
         End Try
     End Function
-    Public Shared Function mGetTagprintDetail(wi As String, lot As String, seq As String, shift As String)
+    Public Shared Function mGetTagprintDetailSpecial(wi As String, lot As String, seq As String, shift As String)
         Try
             Dim api = New api()
-            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetTagprintDetail?wi=" & wi & "&lot=" & lot & "&seq=" & seq & "&shift=" & shift)
-            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetTagprintDetail?wi=" & wi & "&lot=" & lot & "&seq=" & seq & "&shift=" & shift)
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetTagprintDetailSpecial?wi=" & wi & "&lot=" & lot & "&seq=" & seq & "&shift=" & shift)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetTagprintDetailSpecial?wi=" & wi & "&lot=" & lot & "&seq=" & seq & "&shift=" & shift)
             If rsData <> "0" Then
                 Return rsData
             Else
-                MsgBox("connect Api Faill Please check modelDefect in Function mGetTagprintDetail Data = 0 ")
+                MsgBox("connect Api Faill Please check modelDefect in Function mGetTagprintDetailSpecial Data = 0 ")
                 Return 0
             End If
         Catch ex As Exception
-            MsgBox("connect Api Faill Please check modelDefect in Function mGetTagprintDetail = " & ex.Message)
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetTagprintDetailSpecial = " & ex.Message)
+            Return 0
+        End Try
+    End Function
+    Public Shared Function mGetDataEnableFGPart(line_cd As String)
+        Try
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetDataEnableFGPart?line_cd=" & line_cd)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetDataEnableFGPart?line_cd=" & line_cd)
+            Return rsData
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetDataEnableFGPart = " & ex.Message)
+            Return 0
+        End Try
+    End Function
+    Public Shared Function mGetGoodWILot(wi As String, lot_no As String)
+        Try
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetGoodWILot?wi=" & wi & "&lot_no=" & lot_no)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetGoodWILot?wi=" & wi & "&lot_no=" & lot_no)
+            Return rsData
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetGoodWILot = " & ex.Message)
+            Return 0
+        End Try
+    End Function
+    Public Shared Function mGetTagprintDetailNormal(wi As String, lot As String, seq As String, shift As String)
+        Try
+            Dim api = New api()
+            Dim rsData = api.Load_data("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetTagprintDetailNormal?wi=" & wi & "&lot=" & lot & "&seq=" & seq & "&shift=" & shift)
+            Console.WriteLine("http://" & Backoffice_model.svApi & "/apiShopfloor_test/getDatadefect/GetTagprintDetailNormal?wi=" & wi & "&lot=" & lot & "&seq=" & seq & "&shift=" & shift)
+            If rsData <> "0" Then
+                Return rsData
+            Else
+                MsgBox("connect Api Faill Please check modelDefect in Function mGetTagprintDetailNormal Data = 0 ")
+                Return 0
+            End If
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelDefect in Function mGetTagprintDetailNormal = " & ex.Message)
             Return 0
         End Try
     End Function

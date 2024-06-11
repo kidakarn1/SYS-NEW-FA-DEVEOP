@@ -6,7 +6,7 @@ Public Class defectAdmindetailnc
     Shared eDate = DateTime.Now.ToString("yyyy-MM-dd")
     Public Shared sWi As String = ""
     Public Shared sPartno As String = ""
-    Public Shared sSEQ As String = ""
+    Public Shared sshift As String = ""
     Public Shared sLot As String = ""
     Public Shared dSeq As String = ""
     Public Shared sAct As Integer = 0
@@ -68,7 +68,7 @@ Public Class defectAdmindetailnc
         For Each lvItem As ListViewItem In lvDefectact.SelectedItems
             sPartno = lvDefectact.Items(lvItem.Index).SubItems(0).Text
             sWi = lvDefectact.Items(lvItem.Index).SubItems(1).Text
-            sSEQ = lvDefectact.Items(lvItem.Index).SubItems(2).Text
+            sshift = lvDefectact.Items(lvItem.Index).SubItems(2).Text
             dSeq = lvDefectact.Items(lvItem.Index).SubItems(3).Text
             sLot = lvDefectact.Items(lvItem.Index).SubItems(4).Text
             sAct = lvDefectact.Items(lvItem.Index).SubItems(5).Text

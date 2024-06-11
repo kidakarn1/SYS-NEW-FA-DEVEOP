@@ -432,6 +432,7 @@ break_loop:
                         cal_qty()
                     End If
                     Working_Pro.LB_COUNTER_SHIP.Text -= inp_qty
+                    Working_Pro.lb_good.Text -= inp_qty
                     ' MsgBox("M1")
                     Working_Pro.LB_COUNTER_SEQ.Text -= inp_qty
                     Dim yearNow As Integer = DateTime.Now.ToString("yyyy")

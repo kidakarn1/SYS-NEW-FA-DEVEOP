@@ -6,8 +6,8 @@ Public Class defectAdmindetailng
 	Shared eDate = DateTime.Now.ToString("yyyy-MM-dd")
 	Public Shared sWi As String = ""
 	Public Shared sPartno As String = ""
-	Public Shared sSEQ As String = ""
-	Public Shared sLot As String = ""
+    Public Shared sshift As String = ""
+    Public Shared sLot As String = ""
 	Public Shared dSeq As String = ""
 	Public Shared sAct As Integer = 0
 	Public Shared sNc As Integer = 0
@@ -64,11 +64,11 @@ Public Class defectAdmindetailng
         End If
 	End Sub
 
-	Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-		For Each lvItem As ListViewItem In lvDefectact.SelectedItems
+    Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
+        For Each lvItem As ListViewItem In lvDefectact.SelectedItems
             sPartno = lvDefectact.Items(lvItem.Index).SubItems(0).Text
             sWi = lvDefectact.Items(lvItem.Index).SubItems(1).Text
-            sSEQ = lvDefectact.Items(lvItem.Index).SubItems(2).Text
+            sshift = lvDefectact.Items(lvItem.Index).SubItems(2).Text
             dSeq = lvDefectact.Items(lvItem.Index).SubItems(3).Text
             sLot = lvDefectact.Items(lvItem.Index).SubItems(4).Text
             sAct = lvDefectact.Items(lvItem.Index).SubItems(5).Text
@@ -77,12 +77,16 @@ Public Class defectAdmindetailng
             sNg = lvDefectact.Items(lvItem.Index).SubItems(8).Text
             Apwi_id = lvDefectact.Items(lvItem.Index).SubItems(9).Text
         Next
-		Dim dfAdminselecttype As New defectAdminselecttypeng()
-		dfAdminselecttype.Show()
-		Me.Close()
-	End Sub
+        Try
+            Dim dfAdminselecttype2 As New defectAdminselecttypeng()
+            dfAdminselecttype2.Show()
+            Me.Close()
+        Catch ex As Exception
+            MsgBox("Please Click Back.")
+        End Try
+    End Sub
 
-	Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Dim dfAdminhome As New defectAdminhome
         defectAdminhome.Show()
         Me.Close()

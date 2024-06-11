@@ -225,6 +225,7 @@ Public Class closeLotsummary
                 Dim dFlg As String = "0"
                 Dim prdFlg As String = "1"
             Dim clFlg As String = "1"
+            btnOk.Visible = False
             If MainFrm.chk_spec_line = "2" Then
                 'Special
                 Dim GenSEQ As Integer = CInt(Working_Pro.Label22.Text) - MainFrm.ArrayDataPlan.ToArray().Length
@@ -481,8 +482,8 @@ Public Class closeLotsummary
     End Sub
     Public Sub checkPrintnormal()
         Dim defectAll = CDbl(Val(Working_Pro.lb_ng_qty.Text)) + CDbl(Val(Working_Pro.lb_nc_qty.Text))
-        Dim result_mod As Double = (Integer.Parse(Working_Pro.Label6.Text) - defectAll) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
-        Dim result_total As Double = (Integer.Parse(Working_Pro.LB_COUNTER_SEQ.Text) - defectAll) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+        Dim result_mod As Double = (Integer.Parse(Working_Pro.lb_good.Text)) Mod Integer.Parse(Working_Pro.Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+        Dim result_total As Double = (Integer.Parse(Working_Pro.LB_COUNTER_SEQ.Text) - defectAll) Mod Integer.Parse(Working_Pro.Label27.Text) '(Integer.Parse(Working_Pro.LB_COUNTER_SEQ.Text) - defectAll) Mod Integer.Parse(Working_Pro.Label27.Text)
         Console.WriteLine("Working_Pro.LB_COUNTER_SEQ.Text===>" & Working_Pro.LB_COUNTER_SEQ.Text)
         Console.WriteLine("result_total===>" & result_total)
         Console.WriteLine("Working_Pro.Label10.Text===>" & Working_Pro.Label10.Text)
@@ -505,8 +506,7 @@ Public Class closeLotsummary
                 result_total = "1"
             End If
         End If
-
-        If Integer.Parse(lbGood.Text) > 0 And result_total > "0" And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
+        If Integer.Parse(lbGood.Text) > 0 And result_mod > 0 And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
             Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
             Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
             If MainFrm.chk_spec_line = "2" Then
@@ -524,7 +524,7 @@ Public Class closeLotsummary
                     Next
                 End If
             Else
-                Working_Pro.GoodQty = lbGood.Text
+                Working_Pro.GoodQty = Working_Pro.lb_good.Text
                 Working_Pro.tag_print()
                 Backoffice_model.update_tagprintforDefect(sWi, "2", "1", Working_Pro.pwi_id, (CDbl(Val(Working_Pro.lb_box_count.Text)) - 1))
             End If
@@ -738,6 +738,8 @@ Public Class closeLotsummary
     End Sub
 
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        btnOk.Visible = True
         ShowSpcDetailDefect.Show()
     End Sub
+
 End Class

@@ -306,8 +306,8 @@ re_load:
                     Working_Pro.Label30.Text = "STOPPED"
                     Working_Pro.btn_start.Visible = True
                     Working_Pro.btn_stop.Visible = False
-                    Working_Pro.Show()
-                    'Insert_list.Show()
+                    loadData_Working_OEE()
+
                     Prd_detail.Hide()
                 Else
                     Prd_detail.Enabled = False
@@ -319,6 +319,15 @@ re_load:
             load_show.Show()
         End Try
     End Function
+    Public Shared Sub loadData_Working_OEE()
+        'Working_Pro.Show()
+        Working_OEE.lbLine.Text = MainFrm.Label4.Text
+        Working_OEE.lbPartNo.Text = Prd_detail.lb_item_cd.Text
+        Working_OEE.lbPartName.Text = Prd_detail.lb_item_name.Text
+
+        '  Working_OEE.lbPartNo.Text = Prd_detail.lb_item_name.Text
+        Working_OEE.Show()
+    End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         next_pae()
         Me.Close()

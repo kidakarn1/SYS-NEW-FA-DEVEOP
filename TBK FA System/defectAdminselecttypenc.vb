@@ -99,13 +99,16 @@ Public Class defectAdminselecttypenc
 
     End Sub
     Private Sub btnPartfg_Click(sender As Object, e As EventArgs) Handles btnPartfg.Click
-        type = "1"
-        dtType = "2"
-        dt_menu = "1"
-        Dim sDefectcode As New defectAdminselectcodenc()
-        Me.sPart = btnPartfg.Text
-        sDefectcode.Show()
-        Me.Hide()
+        Dim mdDefect = New modelDefect
+        If mdDefect.mGetDataEnableFGPart(MainFrm.Label4.Text) = "1" Then
+            type = "1"
+            dtType = "2"
+            dt_menu = "1"
+            Dim sDefectcode As New defectAdminselectcodenc()
+            Me.sPart = btnPartfg.Text
+            sDefectcode.Show()
+            Me.Hide()
+        End If
     End Sub
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs)
         'create two scroll bars

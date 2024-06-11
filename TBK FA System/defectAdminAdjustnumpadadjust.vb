@@ -21,6 +21,8 @@ Public Class defectAdminAdjustnumpadadjust
     Public Shared sNg As Integer = 0
     Public Shared NC As Integer = 0
     Public Shared NG As Integer = 0
+    Public Shared GmaxQty As Integer = 0
+    Public Shared GuseQty As Integer = 0
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnNumber1.Click
         tbAddjust.Text = tbAddjust.Text + "1"
     End Sub
@@ -156,13 +158,14 @@ Public Class defectAdminAdjustnumpadadjust
             End If
         End If
     End Sub
-
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         If tbAddjust.Text = "" Then
             tbAddjust.Text = 0
         End If
         Dim rs = ckInputqtyaddjust(tbAddjust.Text, lbMax.Text)
         If rs Then
+            GmaxQty = lbMax.Text
+            GuseQty = tbAddjust.Text
             Dim dfAlert As New defectAlertsuredefect
             dfAlert.Show()
             '  updateAddjustqty(dtWino, dtLotNo, dtSeqno, dtType, dtCode)
@@ -177,7 +180,9 @@ Public Class defectAdminAdjustnumpadadjust
 
     Public Function updateAddjustqty(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String, dtItemCd As String, pwi_id As String)
         Dim md As New modelDefect()
-        Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, dtItemtype, dtItemCd)
+        Dim mdSqlite As New ModelSqliteDefect()
+        'Dim rs = md.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, dtItemtype, dtItemCd)
+        Dim rs = mdSqlite.mUpdateaddjust(dtWino, dtLotNo, dtSeqno, dtType, dtCode, dtItemtype, dtItemCd)
         If rs Then
             Dim objDefectdetailnc As New defectAdminAdjustdetail
             Dim rsActualDefect = md.mUpdatedefectactualAdmin(dtWino, dtLotNo, dtSeqno, dtType, dtCode, dtItemtype, objDefectdetailnc.SPART)

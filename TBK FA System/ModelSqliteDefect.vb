@@ -632,4 +632,38 @@ SELECT
             Return False
         End Try
     End Function
+    Public Shared Function mSqliteGetdatachildpartsummarychildgrouppartAdminAdjust(dfWi As String, dfSeq As String, dfLot As String, dfType As String, ItemCd As String)
+        Try
+            Dim api = New api()
+            Dim sql = "SELECT
+						dt.dt_item_cd,
+						SUM ( dt.dt_qty ) AS total_nc,
+						dt.dt_item_type 
+					FROM
+						defect_transactions AS dt
+					WHERE
+						dt.dt_wi_no = '" & dfWi & "' 
+						AND dt.dt_seq_no = '" & dfSeq & "' 
+						AND dt.dt_lot_no = '" & dfLot & "' 
+						AND dt.dt_status_flg = '1' 
+						AND dt.dt_item_type = '2'
+						AND dt.dt_type = '" & dfType & "'
+						AND dt.dt_qty <> '0'
+						AND dt.dt_item_cd = '" & ItemCd & "' 
+					GROUP BY
+						dt.dt_item_cd,
+						dt.dt_item_type
+					ORDER BY
+						dt.dt_item_type ASC"
+            Dim jsonData As String = api.Load_dataSQLite(sql)
+            If jsonData <> "0" Then
+                Return jsonData
+            Else
+                Return "0"
+            End If
+        Catch ex As Exception
+            MsgBox("connect Api Faill Please check modelSqliteDefect in Function mSqliteGetdatachildpartsummarychildgrouppartAdminAdjust = " & ex.Message)
+            Return False
+        End Try
+    End Function
 End Class

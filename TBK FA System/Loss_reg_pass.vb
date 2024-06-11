@@ -22,6 +22,7 @@ Public Class Loss_reg_pass
                     Change_Loss2.ListView2.Items.Add(LoadSQL("id_mst").ToString()).SubItems.AddRange(New String() {LoadSQL("loss_cd").ToString(), LoadSQL("description_th").ToString()})
                     Change_Loss2.ListBox1.Items.Add(LoadSQL("loss_type").ToString())
                 End While
+                Working_Pro.ResetRed()
                 Change_Loss2.Show()
                 Me.Hide()
             Else
@@ -34,6 +35,7 @@ Public Class Loss_reg_pass
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim line_id As String = MainFrm.line_id.Text
+
         Try
             If My.Computer.Network.Ping("192.168.161.101") Then
                 Try
@@ -173,6 +175,7 @@ Public Class Loss_reg_pass
                         Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "1", Working_Pro.pwi_id)
                     End If
                 End Try
+                Working_Pro.ResetRed()
                 Working_Pro.Enabled = True
                 Me.Close()
             Else
@@ -183,6 +186,7 @@ Public Class Loss_reg_pass
         End Try
     End Sub
     Private Sub Loss_reg_pass_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Working_Pro.TowerLamp(6, 9800)
         Label2.Text = MainFrm.Label4.Text
     End Sub
 

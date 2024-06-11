@@ -124,11 +124,7 @@ Friend Class defectSelectcode
             objdSelecttype.Show()
             Me.Close()
         End If
-
     End Sub
-
-
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             For Each lvItem As ListViewItem In lvDefectcode.SelectedItems
@@ -145,7 +141,6 @@ Friend Class defectSelectcode
 
         End Try
     End Sub
-
     Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
         tbnDown()
     End Sub

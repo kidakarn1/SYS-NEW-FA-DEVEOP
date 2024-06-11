@@ -167,9 +167,7 @@ Friend Class defectSelecttype
         End If
         type = "2"
         ' mv.setSelectpartdefect("TEST OK")
-
     End Sub
-
     Private Sub btnPartfg_Click(sender As Object, e As EventArgs) Handles btnPartfg.Click
         If type = "NG" Then
             dtType = "1"
@@ -179,10 +177,13 @@ Friend Class defectSelecttype
         type = "1"
         dt_menu = "1"
         If MainFrm.chk_spec_line = "2" Then
-            Dim dfSS As New defectSpecialSelectFG()
-            ' Me.dfSS = btnPartfg.Text
-            dfSS.Show()
-            Me.Hide()
+            Dim mdDefect = New modelDefect
+            If mdDefect.mGetDataEnableFGPart(MainFrm.Label4.Text) = "1" Then
+                Dim dfSS As New defectSpecialSelectFG()
+                ' Me.dfSS = btnPartfg.Text
+                dfSS.Show()
+                Me.Hide()
+            End If
         Else
             Dim sDefectcode As New defectSelectcode()
             Me.sPart = btnPartfg.Text
@@ -190,7 +191,6 @@ Friend Class defectSelecttype
             Me.Hide()
         End If
     End Sub
-
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs)
         'create two scroll bars
         Dim hs As HScrollBar
@@ -228,11 +228,15 @@ Friend Class defectSelecttype
         tbnDown()
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
-        Dim sDefectcode As New defectSelectcode()
-        sDefectcode.sSeqSpc = SelectSpcSeq
-        sDefectcode.sPwiSpc = SelectSpcPWI_ID
-        sDefectcode.swi = wi
-        sDefectcode.Show()
-        Me.Hide()
+        If lvChildpart.SelectedItems.Count > 0 Then
+            Dim sDefectcode As New defectSelectcode()
+            sDefectcode.sSeqSpc = SelectSpcSeq
+            sDefectcode.sPwiSpc = SelectSpcPWI_ID
+            sDefectcode.swi = wi
+            sDefectcode.Show()
+            Me.Hide()
+        Else
+            MsgBox("PLEASE SELECT ROW. ")
+        End If
     End Sub
 End Class

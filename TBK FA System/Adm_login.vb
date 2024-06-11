@@ -57,8 +57,9 @@ Public Class Adm_login
         Else
             MsgBox("Can't to login! Please scan your employee card.")
             TextBox1.Text = ""
+            TextBox1.Focus()
             TextBox1.Select()
-            Me.Close()
+            ' Me.Close()
         End If
     End Sub
 

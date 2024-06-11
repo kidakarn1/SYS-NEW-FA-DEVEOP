@@ -378,6 +378,7 @@ Public Class ins_qty
             End If
             Working_Pro.LB_COUNTER_SHIP.Text = CDbl(Val(Working_Pro.LB_COUNTER_SHIP.Text)) + CDbl(Val(TextBox1.Text))
             Working_Pro.LB_COUNTER_SEQ.Text = CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) + CDbl(Val(TextBox1.Text))
+            Working_Pro.lb_good.Text = CDbl(Val(Working_Pro.lb_good.Text)) + CDbl(Val(TextBox1.Text))
             Dim max_val_int As Integer = Convert.ToInt32(max_val)
             Backoffice_model.qty_int = ins_qtyy
             If ins_qtyy > 0 And ins_qtyy <= max_val_int Then

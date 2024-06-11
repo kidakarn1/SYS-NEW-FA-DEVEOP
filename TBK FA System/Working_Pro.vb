@@ -17,6 +17,7 @@ Imports BarcodeLib.Barcode
 Imports System.Net
 Imports System.Web.Script.Serialization
 Public Class Working_Pro
+    Public Shared comportTowerLamp = "COM4"
     ' Public Shared ArrayDataSpecial As New List(Of DataPlan)
     Public check_cal_eff As Integer = 0
     Public Gdate_now_date As Date
@@ -67,6 +68,7 @@ Public Class Working_Pro
     Public Shared mec_name As String = ""
     Public Shared GoodQty As Double = 0.0
     Public Shared carvity As Integer = MainFrm.cavity.Text
+    Public Shared ResultPrint As Integer = 0
     Delegate Sub SetTextCallback(ByVal [text] As String)
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         'Label44.Text = TimeOfDay.ToString("H:mm:ss")
@@ -98,6 +100,7 @@ Public Class Working_Pro
         End If
     End Function
     Private Sub Working_Pro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If CheckOs() Then
             counterNewDIO = New CheckWindow
             counterNewDIO.Per_CheckCounter()
@@ -220,6 +223,8 @@ Public Class Working_Pro
                 LB_COUNTER_SEQ.Text = 0
             End If
         End While
+        Dim mdDf = New modelDefect
+        lb_good.Text = mdDf.mGetGoodWILot(wi_no.Text, Label18.Text)
         Main()
         Backoffice_model.Get_close_lot_time(Label14.Text)
         Timer2.Start()
@@ -431,6 +436,7 @@ Public Class Working_Pro
     End Sub
     Public Sub stop_working()
         btn_start.BringToFront()
+        LB_COUNTER_SHIP.Visible = False
         btn_start.Visible = True
         PictureBox11.Visible = True
         PictureBox13.BackColor = Color.FromArgb(63, 63, 63)
@@ -868,7 +874,6 @@ Public Class Working_Pro
         start_flg = 1
         'Button1.Visible = True
         Dim st_counter As String = Label32.Text
-
         If st_counter = "0" Then
             Label16.Text = TimeOfDay.ToString("H : mm")
             Label32.Text = "1"
@@ -977,6 +982,7 @@ Public Class Working_Pro
             'Label32.Text = "0"
         End If
         TIME_CAL_EFF.Start()
+        LB_COUNTER_SHIP.Visible = True
         Panel1.BackColor = Color.Green
         Label30.Text = "NORMAL"
         btn_start.Visible = False
@@ -1429,7 +1435,7 @@ Public Class Working_Pro
             Act = 1
             action_plus = 0
         Else
-            Act = Label6.Text
+            Act = lb_good.Text 'Label6.Text
             action_plus = 1
         End If
         Console.WriteLine("TESTTTTTTT INNNNN")
@@ -1464,6 +1470,7 @@ Public Class Working_Pro
             Label6.Text = sum_act_total
             LB_COUNTER_SHIP.Text += cnt_btn
             LB_COUNTER_SEQ.Text += cnt_btn
+            lb_good.Text += cnt_btn
             If check_tag_type = "3" Then
                 ' for line break
                 Dim break = lbPosition1.Text & " " & lbPosition2.Text
@@ -1757,7 +1764,7 @@ Public Class Working_Pro
             Act = 1
             action_plus = 0
         Else
-            Act = Label6.Text
+            Act = lb_good.Text 'Label6.Text
             action_plus = 1
         End If
         Dim start_time As Date = st_count_ct.Text
@@ -1787,6 +1794,7 @@ Public Class Working_Pro
             Label6.Text = sum_act_total
             LB_COUNTER_SHIP.Text += cnt_btn
             LB_COUNTER_SEQ.Text += cnt_btn
+            lb_good.Text += cnt_btn
             If check_tag_type = "3" Then
                 Dim break = lbPosition1.Text & " " & lbPosition2.Text
                 Dim plb = New PrintLabelBreak
@@ -2188,7 +2196,10 @@ Public Class Working_Pro
         'Close_lot_cfm.Show()
     End Sub
     Public Function check_tagprint()
-        Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
+        'Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text))
+        Dim defectAll = CDbl(Val(lb_ng_qty.Text)) + CDbl(Val(lb_nc_qty.Text))
+        ' Dim result_snp As Double = (Integer.Parse(Label6.Text) - defectAll) Mod Integer.Parse(Label27.Text) 'Integer.Parse(_Edit_Up_0.Text) Mod Integer.Parse(Label27.Text)
+        Dim result_snp As Double = (Integer.Parse(GoodQty)) Mod Integer.Parse(Label27.Text)
         Dim flg_control As Integer = 0
         If check_format_tag = "1" Then ' for tag_type = '2' and tag_issue_flg = '2'  OR K1M183
             flg_control = 1
@@ -2226,7 +2237,8 @@ Public Class Working_Pro
         e.Graphics.DrawString("QTY.", lb_font1.Font, Brushes.Black, 492, 13)
         'Dim result_snp As Integer = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) ' Check From Actual
         Dim defectAll = CDbl(Val(lb_ng_qty.Text)) + CDbl(Val(lb_nc_qty.Text))
-        Dim result_snp As Integer = (CDbl(Val(Label6.Text)) - defectAll) Mod CDbl(Val(Label27.Text)) ' Check From Good
+        '  Dim result_snp As Integer = (CDbl(Val(Label6.Text)) - defectAll) Mod CDbl(Val(Label27.Text)) ' Check From Good
+        Dim result_snp As Integer = (CDbl(Val(GoodQty))) Mod CDbl(Val(Label27.Text)) ' Check From Good
         Dim status_tag As String = "[ Incomplete Tag]"
         If V_check_line_reprint = "0" Then
             If result_snp = "0" Then
@@ -2242,7 +2254,8 @@ Public Class Working_Pro
                     result_snp = Label27.Text
                     status_tag = " "
                 Else
-                    result_snp = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text 
+                    'result_snp = CDbl(Val(Label6.Text)) Mod CDbl(Val(Label27.Text)) 'LB_COUNTER_SEQ.Text
+                    result_snp = CDbl(Val(lb_good.Text)) Mod CDbl(Val(Label27.Text))
                     status_tag = "[ Incomplete Tag ]"
                 End If
             End If
@@ -2567,6 +2580,7 @@ Public Class Working_Pro
         Dim aPen = New Pen(Color.Black)
         aPen.Width = 2.0F
         'e.Graphics.DrawString("TBKK", lb_font2.Font, Brushes.Black, 152, 50)
+        'e.Graphics.DrawString("TBKK", lb_font2.Font, Brushes.Black, 152, 50)
         'e.Graphics.DrawString("(Thailand) Co., Ltd.", lb_font1.Font, Brushes.Black, 152, 80)
 
         'e.Graphics.DrawString("Shopfloor System", lb_font1.Font, Brushes.Black, 152, 110)
@@ -2668,9 +2682,13 @@ Public Class Working_Pro
     End Sub
     Public Sub manage_print()
         Dim result_add As Integer = CDbl(Val(lb_ins_qty.Text)) + CDbl(Val(Label6.Text))
+        Dim rsGood As Integer = CDbl(Val(lb_good.Text))
         Dim loop_check As Integer = result_add / CDbl(Val(Label27.Text))
+        Dim loop_check_good As Integer = rsGood / CDbl(Val(Label27.Text))
         Dim D As Integer = 0
-        Dim value_label6 As Integer = Label6.Text
+        ' Dim value_label6 As Integer = Label6.Text
+        Dim value_label6 As Integer = rsGood - CDbl(Val(lb_ins_qty.Text))
+        Dim tmp_good As Integer = value_label6
         'For index_check_print As Integer = Label6.Text To result_add '10
         '	MsgBox("value= " & index_check_print)
         '		Next
@@ -2680,9 +2698,11 @@ Public Class Working_Pro
             value_label6 += 1
         End If
         Dim flg_reprint As String = V_check_line_reprint
-        For index_check_print As Integer = value_label6 To result_add   '10
-            Label6.Text = index_check_print
+        Label6.Text = result_add
+        Dim i As Integer = 1
+        For index_check_print As Integer = value_label6 To rsGood  'result_add   '10
             'For index_check As Integer = 1 To loop_check
+            tmp_good = tmp_good + i
             Dim result_mod As Integer = index_check_print Mod CDbl(Val(Label27.Text))
             'หาเศษ
             'If result_mod = 0 And textp_result <> 0 Then
@@ -2699,7 +2719,7 @@ Public Class Working_Pro
                     If result_mod = "0" Then
                         Label_bach.Text += 1
                         lb_box_count.Text = lb_box_count.Text + 1
-                        GoodQty = Label6.Text
+                        GoodQty = tmp_good 'lb_good.Text 'Label6.Text
                         tag_print()
                     End If
                 Else
@@ -2980,7 +3000,6 @@ Public Class Working_Pro
         End If
         Return lb_use_time.Text
     End Function
-
     Public Function ins_qty_fn()
         Dim yearNow As Integer = DateTime.Now.ToString("yyyy")
         Dim monthNow As Integer = DateTime.Now.ToString("MM")
@@ -3278,7 +3297,6 @@ Public Class Working_Pro
                 closeLotsummary.Show()
             End If
         End If
-
     End Sub
     Private Sub Panel5_Paint(sender As Object, e As PaintEventArgs)
 
@@ -3340,7 +3358,7 @@ Public Class Working_Pro
             Act = 1
             action_plus = 0
         Else
-            Act = Label6.Text
+            Act = lb_good.Text 'Label6.Text
             action_plus = 1
         End If
         Dim start_time As Date = st_count_ct.Text
@@ -3369,6 +3387,7 @@ Public Class Working_Pro
             Label6.Text = sum_act_total
             LB_COUNTER_SHIP.Text += cnt_btn
             LB_COUNTER_SEQ.Text += cnt_btn
+            lb_good.Text += cnt_btn
             If check_tag_type = "3" Then
                 Dim break = lbPosition1.Text & " " & lbPosition2.Text
                 Dim plb = New PrintLabelBreak
@@ -3901,5 +3920,49 @@ Public Class Working_Pro
                 '  Console.WriteLine("2 LOW")
             End If
         End If
+    End Sub
+    Public Sub TowerLamp(DataBits As Integer, WriteLine As Integer)
+        ' If SerialPortLamp.IsOpen() Then
+        ' SerialPortLamp.Close()
+        ' End If
+        ' Try
+        ' SerialPortLamp.PortName = comportTowerLamp
+        ' SerialPortLamp.BaudRate = 9600
+        ' SerialPortLamp.Parity = IO.Ports.Parity.None
+        ' SerialPortLamp.StopBits = IO.Ports.StopBits.One
+        ' SerialPortLamp.DataBits = DataBits
+        ' SerialPortLamp.Open()
+        ' SerialPortLamp.WriteLine(WriteLine)
+        ' Catch ex As Exception
+        ' MsgBox(ex.Message)
+        ' End Try
+    End Sub
+    Public Sub ResetRed()
+        '    If SerialPortLamp.IsOpen() Then
+        '    SerialPortLamp.Close()
+        '    End If
+        '    SerialPortLamp.PortName = comportTowerLamp
+        '    SerialPortLamp.BaudRate = 9600
+        '    SerialPortLamp.Parity = IO.Ports.Parity.None
+        '    SerialPortLamp.StopBits = IO.Ports.StopBits.One
+        '    SerialPortLamp.DataBits = 5
+        '    SerialPortLamp.Open()
+        '    SerialPortLamp.WriteLine(9999)
+        '    Console.ReadLine()
+        '
+        'If SerialPortLamp.IsOpen() Then
+        'SerialPortLamp.Close()
+        'End If
+        'SerialPortLamp.PortName = comportTowerLamp
+        'SerialPortLamp.BaudRate = 9600
+        ' SerialPortLamp.Parity = IO.Ports.Parity.None
+        ' SerialPortLamp.StopBits = IO.Ports.StopBits.One
+        ' SerialPortLamp.DataBits = 6
+        ' SerialPortLamp.Open()
+        'SerialPortLamp.WriteLine(11)
+        ' Console.ReadLine()
+    End Sub
+    Public Sub Load_Working_OEE()
+        Working_OEE.Show()
     End Sub
 End Class

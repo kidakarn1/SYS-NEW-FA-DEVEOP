@@ -32,5 +32,4 @@ Public Class CheckWindow
             ' MsgBox(" Please Check USB DIO")
         End Try
     End Function
-
 End Class
