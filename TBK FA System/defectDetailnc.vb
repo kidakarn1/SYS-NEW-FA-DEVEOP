@@ -26,6 +26,10 @@ Friend Class defectDetailnc
     Public Shared dtpwi_id As String = ""
     Private Sub defectDetailnc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dtSeqno = Working_Pro.seqNo
+        dtWino = Working_Pro.wi_no.Text
+        dtLineno = Working_Pro.Label24.Text
+        dtLotNo = Working_Pro.Label18.Text
+        dtSeqno = Working_Pro.seqNo
         Dim rs = getDefectdetailnc(dtWino, dtSeqno, dtLotNo, dtType)
         lbType.Text = defectHome.dtType
     End Sub

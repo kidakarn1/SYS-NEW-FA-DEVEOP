@@ -25,6 +25,10 @@ Public Class defectDetailng
     Public Shared dtName As String = ""
     Private Sub defectDetailng_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'SEQ = Working_Pro.seqNo
+        dtSeqno = Working_Pro.seqNo
+        dtWino = Working_Pro.wi_no.Text
+        dtLineno = Working_Pro.Label24.Text ' set value ใหม่ ไม่งั้น Bug
+        dtLotNo = Working_Pro.Label18.Text
         Dim rs = getDefectdetailg(dtWino, dtSeqno, dtLotNo, dtType)
         lbType.Text = defectHome.dtType
     End Sub

@@ -509,6 +509,13 @@ Public Class closeLotsummary
         If Integer.Parse(lbGood.Text) > 0 And result_mod > 0 And CDbl(Val(Working_Pro.Label10.Text)) < 0 Then
             Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
             Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
+            Dim cupprint
+            If CDbl(Val(lbNc.Text + lbNg.Text)) <= Working_Pro.Label27.Text Then
+                cupprint = 1
+            Else
+                cupprint = CDbl(Val(lbNc.Text + lbNg.Text)) / Working_Pro.Label27.Text
+            End If
+            MsgBox("cupprint===>" & cupprint)
             If MainFrm.chk_spec_line = "2" Then
                 If result_mod <> 0 Then
                     Working_Pro.GoodQty = lbGood.Text
@@ -519,14 +526,15 @@ Public Class closeLotsummary
                     For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                         'special
                         Iseq += 1
-                        Backoffice_model.update_tagprintforDefect(itemPlanData.wi, "2", "1", Working_Pro.Spwi_id(j), (CDbl(Val(Working_Pro.lb_box_count.Text)) - 1))
+
+                        Backoffice_model.update_tagprintforDefect(itemPlanData.wi, "2", "1", Working_Pro.Spwi_id(j), (CDbl(Val(Working_Pro.lb_box_count.Text)) - 1), Working_Pro.GoodQty, Math.Ceiling(cupprint))
                         j += 1
                     Next
                 End If
             Else
                 Working_Pro.GoodQty = Working_Pro.lb_good.Text
                 Working_Pro.tag_print()
-                Backoffice_model.update_tagprintforDefect(sWi, "2", "1", Working_Pro.pwi_id, (CDbl(Val(Working_Pro.lb_box_count.Text)) - 1))
+                Backoffice_model.update_tagprintforDefect(sWi, "2", "1", Working_Pro.pwi_id, (CDbl(Val(Working_Pro.lb_box_count.Text)) - 1), Working_Pro.GoodQty, Math.Ceiling(cupprint))
             End If
             ' Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
         End If

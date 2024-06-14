@@ -320,13 +320,11 @@ re_load:
         End Try
     End Function
     Public Shared Sub loadData_Working_OEE()
-        'Working_Pro.Show()
-        Working_OEE.lbLine.Text = MainFrm.Label4.Text
-        Working_OEE.lbPartNo.Text = Prd_detail.lb_item_cd.Text
-        Working_OEE.lbPartName.Text = Prd_detail.lb_item_name.Text
-
-        '  Working_OEE.lbPartNo.Text = Prd_detail.lb_item_name.Text
-        Working_OEE.Show()
+        Working_Pro.Show()
+        'Working_OEE.lbLine.Text = MainFrm.Label4.Text
+        'Working_OEE.lbPartNo.Text = Prd_detail.lb_item_cd.Text
+        'Working_OEE.lbPartName.Text = Prd_detail.lb_item_name.Text
+        'Working_OEE.Show()
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         next_pae()
