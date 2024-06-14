@@ -514,11 +514,11 @@ Public Class closeLotsummary
             If rs <= Working_Pro.Label27.Text Then
                 cupprint = 1
             Else
-                MsgBox("rs ===>" & rs)
-                MsgBox("CDbl(Val(Working_Pro.Label27.Text)) ===>" & CDbl(Val(Working_Pro.Label27.Text)))
+                '      MsgBox("rs ===>" & rs)
+                '       MsgBox("CDbl(Val(Working_Pro.Label27.Text)) ===>" & CDbl(Val(Working_Pro.Label27.Text)))
                 cupprint = rs / CDbl(Val(Working_Pro.Label27.Text))
             End If
-            MsgBox("cupprint===>" & cupprint)
+            '    MsgBox("cupprint===>" & cupprint)
             If MainFrm.chk_spec_line = "2" Then
                 If result_mod <> 0 Then
                     Working_Pro.GoodQty = lbGood.Text
