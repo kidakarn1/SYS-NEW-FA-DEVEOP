@@ -510,10 +510,13 @@ Public Class closeLotsummary
             Working_Pro.lb_box_count.Text = Working_Pro.lb_box_count.Text + 1
             Working_Pro.Label_bach.Text = Working_Pro.Label_bach.Text + 1
             Dim cupprint
-            If CDbl(Val(lbNc.Text + lbNg.Text)) <= Working_Pro.Label27.Text Then
+            Dim rs = (CDbl(Val(lbNc.Text)) + (CDbl(Val(lbNg.Text))))
+            If rs <= Working_Pro.Label27.Text Then
                 cupprint = 1
             Else
-                cupprint = CDbl(Val(lbNc.Text + lbNg.Text)) / Working_Pro.Label27.Text
+                MsgBox("rs ===>" & rs)
+                MsgBox("CDbl(Val(Working_Pro.Label27.Text)) ===>" & CDbl(Val(Working_Pro.Label27.Text)))
+                cupprint = rs / CDbl(Val(Working_Pro.Label27.Text))
             End If
             MsgBox("cupprint===>" & cupprint)
             If MainFrm.chk_spec_line = "2" Then
