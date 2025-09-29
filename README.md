@@ -146,7 +146,7 @@ _สำหรับ Admin / Engineer_
 - 🗄️ Database: SQL Server(main) / MySQL, SQLite (local)  
 - 🔧 Git  
 - 📊 DB Tool (recommended): [DB Browser for SQLite](https://sqlitebrowser.org/dl/)  
-
+- 👩‍💻 Visual Studio 2017 or Visual Studio 2022
 ---
 ### Steps
 1. Clone the repository
