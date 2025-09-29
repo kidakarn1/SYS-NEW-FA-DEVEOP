@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class defectHome
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,95 +20,114 @@ Partial Class defectHome
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(defectHome))
-        Me.btn_back = New System.Windows.Forms.PictureBox()
-        Me.btnAdjustnc = New System.Windows.Forms.PictureBox()
-        Me.btnRegisternc = New System.Windows.Forms.PictureBox()
-        Me.btnRegisterng = New System.Windows.Forms.PictureBox()
-        Me.btnAdjustng = New System.Windows.Forms.PictureBox()
-        CType(Me.btn_back, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnAdjustnc, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnRegisternc, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnRegisterng, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnAdjustng, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.btnRegisterngs = New System.Windows.Forms.PictureBox()
+        Me.btnAdjustngs = New System.Windows.Forms.PictureBox()
+        Me.btnRegisterncs = New System.Windows.Forms.PictureBox()
+        Me.btnAdjustncs = New System.Windows.Forms.PictureBox()
+        Me.btnBackDefectHome = New System.Windows.Forms.PictureBox()
+        Me.pbRefectData = New System.Windows.Forms.PictureBox()
+        CType(Me.btnRegisterngs, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnAdjustngs, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRegisterncs, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnAdjustncs, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnBackDefectHome, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbRefectData, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'btn_back
+        'btnRegisterngs
         '
-        Me.btn_back.BackColor = System.Drawing.Color.Transparent
-        Me.btn_back.Location = New System.Drawing.Point(12, 503)
-        Me.btn_back.Name = "btn_back"
-        Me.btn_back.Size = New System.Drawing.Size(198, 98)
-        Me.btn_back.TabIndex = 4565
-        Me.btn_back.TabStop = False
+        Me.btnRegisterngs.BackColor = System.Drawing.Color.Red
+        Me.btnRegisterngs.Location = New System.Drawing.Point(14, 64)
+        Me.btnRegisterngs.Name = "btnRegisterngs"
+        Me.btnRegisterngs.Size = New System.Drawing.Size(50, 33)
+        Me.btnRegisterngs.TabIndex = 1
+        Me.btnRegisterngs.TabStop = False
+        Me.btnRegisterngs.Visible = False
         '
-        'btnAdjustnc
+        'btnAdjustngs
         '
-        Me.btnAdjustnc.BackColor = System.Drawing.Color.Transparent
-        Me.btnAdjustnc.Location = New System.Drawing.Point(468, 200)
-        Me.btnAdjustnc.Name = "btnAdjustnc"
-        Me.btnAdjustnc.Size = New System.Drawing.Size(242, 126)
-        Me.btnAdjustnc.TabIndex = 4566
-        Me.btnAdjustnc.TabStop = False
+        Me.btnAdjustngs.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnAdjustngs.Location = New System.Drawing.Point(70, 64)
+        Me.btnAdjustngs.Name = "btnAdjustngs"
+        Me.btnAdjustngs.Size = New System.Drawing.Size(50, 28)
+        Me.btnAdjustngs.TabIndex = 2
+        Me.btnAdjustngs.TabStop = False
+        Me.btnAdjustngs.Visible = False
         '
-        'btnRegisternc
+        'btnRegisterncs
         '
-        Me.btnRegisternc.BackColor = System.Drawing.Color.Transparent
-        Me.btnRegisternc.Location = New System.Drawing.Point(88, 189)
-        Me.btnRegisternc.Name = "btnRegisternc"
-        Me.btnRegisternc.Size = New System.Drawing.Size(259, 149)
-        Me.btnRegisternc.TabIndex = 4567
-        Me.btnRegisternc.TabStop = False
+        Me.btnRegisterncs.BackColor = System.Drawing.Color.Yellow
+        Me.btnRegisterncs.Location = New System.Drawing.Point(12, 12)
+        Me.btnRegisterncs.Name = "btnRegisterncs"
+        Me.btnRegisterncs.Size = New System.Drawing.Size(52, 33)
+        Me.btnRegisterncs.TabIndex = 3
+        Me.btnRegisterncs.TabStop = False
+        Me.btnRegisterncs.Visible = False
         '
-        'btnRegisterng
+        'btnAdjustncs
         '
-        Me.btnRegisterng.BackColor = System.Drawing.Color.Transparent
-        Me.btnRegisterng.Location = New System.Drawing.Point(88, 344)
-        Me.btnRegisterng.Name = "btnRegisterng"
-        Me.btnRegisterng.Size = New System.Drawing.Size(259, 153)
-        Me.btnRegisterng.TabIndex = 4568
-        Me.btnRegisterng.TabStop = False
+        Me.btnAdjustncs.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnAdjustncs.Location = New System.Drawing.Point(70, 12)
+        Me.btnAdjustncs.Name = "btnAdjustncs"
+        Me.btnAdjustncs.Size = New System.Drawing.Size(36, 33)
+        Me.btnAdjustncs.TabIndex = 4
+        Me.btnAdjustncs.TabStop = False
+        Me.btnAdjustncs.Visible = False
         '
-        'btnAdjustng
+        'btnBackDefectHome
         '
-        Me.btnAdjustng.BackColor = System.Drawing.Color.Transparent
-        Me.btnAdjustng.Location = New System.Drawing.Point(468, 344)
-        Me.btnAdjustng.Name = "btnAdjustng"
-        Me.btnAdjustng.Size = New System.Drawing.Size(251, 137)
-        Me.btnAdjustng.TabIndex = 4569
-        Me.btnAdjustng.TabStop = False
+        Me.btnBackDefectHome.BackColor = System.Drawing.Color.Transparent
+        Me.btnBackDefectHome.Location = New System.Drawing.Point(11, 508)
+        Me.btnBackDefectHome.Name = "btnBackDefectHome"
+        Me.btnBackDefectHome.Size = New System.Drawing.Size(201, 92)
+        Me.btnBackDefectHome.TabIndex = 6
+        Me.btnBackDefectHome.TabStop = False
+        '
+        'pbRefectData
+        '
+        Me.pbRefectData.BackColor = System.Drawing.Color.Transparent
+        Me.pbRefectData.Location = New System.Drawing.Point(665, 27)
+        Me.pbRefectData.Name = "pbRefectData"
+        Me.pbRefectData.Size = New System.Drawing.Size(66, 83)
+        Me.pbRefectData.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbRefectData.TabIndex = 7
+        Me.pbRefectData.TabStop = False
         '
         'defectHome
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.CadetBlue
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(800, 600)
-        Me.ControlBox = False
-        Me.Controls.Add(Me.btnAdjustng)
-        Me.Controls.Add(Me.btnRegisterng)
-        Me.Controls.Add(Me.btnRegisternc)
-        Me.Controls.Add(Me.btnAdjustnc)
-        Me.Controls.Add(Me.btn_back)
+        Me.Controls.Add(Me.pbRefectData)
+        Me.Controls.Add(Me.btnBackDefectHome)
+        Me.Controls.Add(Me.btnAdjustncs)
+        Me.Controls.Add(Me.btnRegisterncs)
+        Me.Controls.Add(Me.btnAdjustngs)
+        Me.Controls.Add(Me.btnRegisterngs)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "defectHome"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "g"
-        CType(Me.btn_back, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnAdjustnc, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnRegisternc, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnRegisterng, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnAdjustng, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRegisterngs, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnAdjustngs, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRegisterncs, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnAdjustncs, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnBackDefectHome, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbRefectData, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents btn_back As PictureBox
-	Friend WithEvents btnAdjustnc As PictureBox
-	Friend WithEvents btnRegisternc As PictureBox
-	Friend WithEvents btnRegisterng As PictureBox
-	Friend WithEvents btnAdjustng As PictureBox
+    Friend WithEvents btnAdjustnc As PictureBox
+    Friend WithEvents btnRegisternc As PictureBox
+    Friend WithEvents btnRegisterng As PictureBox
+    Friend WithEvents btnAdjustng As PictureBox
+    Friend WithEvents btnRegisterngs As PictureBox
+    Friend WithEvents btnAdjustngs As PictureBox
+    Friend WithEvents btnRegisterncs As PictureBox
+    Friend WithEvents btnAdjustncs As PictureBox
+    Friend WithEvents btnBackDefectHome As PictureBox
+    Friend WithEvents pbRefectData As PictureBox
 End Class

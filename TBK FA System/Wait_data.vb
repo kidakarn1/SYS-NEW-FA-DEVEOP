@@ -13,13 +13,10 @@ Public Class Wait_data
         check_load_wit_data = "1"
     End Sub
 
-	Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
 
-	End Sub
-
-
+    End Sub
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
 
     End Sub
-
 End Class

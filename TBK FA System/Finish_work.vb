@@ -3,12 +3,12 @@ Public Class Finish_work
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles PictureBox16.Click
         click_popup()
     End Sub
-    Public Sub click_popup()
-		Dim line_id As String = MainFrm.line_id.Text
-		Backoffice_model.line_status_upd(line_id)
+    Public Async Sub click_popup()
+        Dim line_id As String = MainFrm.line_id.Text
+        Backoffice_model.line_status_upd(line_id)
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
-                Backoffice_model.updated_data_to_dbsvr()
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
+                Await Backoffice_model.updated_data_to_dbsvr(Me, "2")
             End If
         Catch ex As Exception
         End Try
@@ -20,8 +20,8 @@ Public Class Finish_work
         'MainFrm.Show()
         closeLotsummary.Show()
         Me.Close()
-	End Sub
-	Private Sub Finish_work_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    End Sub
+    Private Sub Finish_work_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Working_Pro.stop_working()
         Working_Pro.btn_start.Enabled = False
         Working_Pro.btn_closelot.Enabled = False

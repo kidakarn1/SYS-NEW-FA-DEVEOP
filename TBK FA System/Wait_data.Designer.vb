@@ -55,7 +55,7 @@ Partial Class Wait_data
         'PictureBox1
         '
         Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
-        Me.PictureBox1.Image = Global.TBK_FA_System.My.Resources.Resources.cf250687395151_5db728c7879d3
+        Me.PictureBox1.Image = Global.TBK_FA_System.My.Resources.Resources.insertQTY
         Me.PictureBox1.Location = New System.Drawing.Point(102, 12)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(605, 386)
@@ -65,7 +65,7 @@ Partial Class Wait_data
         '
         'PictureBox2
         '
-        Me.PictureBox2.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.dwdd1
+        ' Me.PictureBox2.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.dwdd1
         Me.PictureBox2.Location = New System.Drawing.Point(24, 352)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(750, 220)

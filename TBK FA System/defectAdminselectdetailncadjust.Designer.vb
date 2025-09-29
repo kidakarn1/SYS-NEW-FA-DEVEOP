@@ -28,13 +28,13 @@ Partial Class defectAdminselectdetailncadjust
         Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LOT_NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lbLine = New System.Windows.Forms.Label()
         Me.btnBack = New System.Windows.Forms.PictureBox()
         Me.Button1 = New System.Windows.Forms.PictureBox()
         Me.btnUp = New System.Windows.Forms.PictureBox()
         Me.btnDown = New System.Windows.Forms.PictureBox()
         Me.backgroundNg = New System.Windows.Forms.PictureBox()
-        Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.btnBack, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Button1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,6 +86,10 @@ Partial Class defectAdminselectdetailncadjust
         '
         Me.LOT_NO.Text = "LOT NO"
         Me.LOT_NO.Width = 107
+        '
+        'pwi_id
+        '
+        Me.pwi_id.Width = 0
         '
         'lbLine
         '
@@ -143,10 +147,6 @@ Partial Class defectAdminselectdetailncadjust
         Me.backgroundNg.Size = New System.Drawing.Size(800, 600)
         Me.backgroundNg.TabIndex = 56
         Me.backgroundNg.TabStop = False
-        '
-        'pwi_id
-        '
-        Me.pwi_id.Width = 0
         '
         'defectAdminselectdetailncadjust
         '

@@ -49,7 +49,7 @@
             SerialPort1.Open()
             SerialPort1.WriteLine(WriteLine)
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'msgBox(ex.Message)
         End Try
 
         ' SerialPort1.PortName = comportTowerLamp
@@ -113,5 +113,9 @@
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         ResetRed()
+    End Sub
+
+    Private Sub cbRun_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRun.SelectedIndexChanged
+
     End Sub
 End Class

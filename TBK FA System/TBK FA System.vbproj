@@ -18,6 +18,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,7 +33,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -69,7 +69,7 @@
     <OptionInfer>Off</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>fa_logo.ico</ApplicationIcon>
+    <ApplicationIcon>ICO_NEW_FA.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -90,7 +90,7 @@
     <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -117,6 +117,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
@@ -133,23 +136,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="GenCode128">
-      <HintPath>..\..\New folder\Barcode Generator DLL\GenCode128.dll</HintPath>
-    </Reference>
-    <Reference Include="IDAutomation.LinearBarCode">
-      <HintPath>..\..\New folder\Barcode Generator DLL\IDAutomation.LinearBarCode.dll</HintPath>
-    </Reference>
     <Reference Include="MessagingToolkit.QRCode, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MessagingToolkit.QRCode.1.3.0\lib\MessagingToolkit.QRCode.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1150.38, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1150.38\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1293.44, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1293.44\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1150.38, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1150.38\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1293.44, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1293.44\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1150.38, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1150.38\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1293.44, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1293.44\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="NationalInstruments.Common, Version=19.1.40.49152, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -161,8 +158,10 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SQLite.Designer">
-      <HintPath>..\..\FA System\SQLite.Designer.dll</HintPath>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.6.0\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.core, Version=2.0.5.1324, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.core.2.0.5-pre20210817120427\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
@@ -233,7 +232,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\PACKING_CONTROL\packages\System.Text.Json.5.0.2\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -246,6 +244,7 @@
     <Reference Include="WebApiContrib.Formatting.JavaScriptSerializer">
       <HintPath>..\WebApiContrib.Formatting.JavaScriptSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
     <Reference Include="WinFormAnimation, Version=1.6.0.4, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
       <HintPath>..\packages\WinFormAnimation.1.6.0.4\lib\net40\WinFormAnimation.dll</HintPath>
     </Reference>
@@ -289,6 +288,12 @@
     <Compile Include="Add_user.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AdmindefectSelectSupplier.Designer.vb">
+      <DependentUpon>AdmindefectSelectSupplier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AdmindefectSelectSupplier.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="adminPrintdefect.Designer.vb">
       <DependentUpon>adminPrintdefect.vb</DependentUpon>
     </Compile>
@@ -313,6 +318,15 @@
     <Compile Include="Adm_page.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Alert_scan_qr_product.Designer.vb">
+      <DependentUpon>Alert_scan_qr_product.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Alert_scan_qr_product.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Api_Scan_FA.vb" />
+    <Compile Include="AppGuard.vb" />
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="AssemblyInfo.vb" />
     <Compile Include="AutoUpdate.vb" />
     <Compile Include="Auto_close_lot.Designer.vb">
@@ -573,6 +587,12 @@
     <Compile Include="defectSelectcode.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="defectSelectSupplier.Designer.vb">
+      <DependentUpon>defectSelectSupplier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="defectSelectSupplier.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="defectSelecttype.Designer.vb">
       <DependentUpon>defectSelecttype.vb</DependentUpon>
     </Compile>
@@ -628,7 +648,113 @@
     <Compile Include="Finish_work.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KeyboardAdmin.Designer.vb">
+      <DependentUpon>KeyboardAdmin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KeyboardAdmin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="keyboardDefect.Designer.vb">
+      <DependentUpon>keyboardDefect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="keyboardDefect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="keyboardRm_Scan.Designer.vb">
+      <DependentUpon>keyboardRm_Scan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="keyboardRm_Scan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="keyboardScanMold.Designer.vb">
+      <DependentUpon>keyboardScanMold.vb</DependentUpon>
+    </Compile>
+    <Compile Include="keyboardScanMold.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LeaderConfirmDefect.Designer.vb">
+      <DependentUpon>LeaderConfirmDefect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LeaderConfirmDefect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loadData.Designer.vb">
+      <DependentUpon>loadData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="loadData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loadingFA.Designer.vb">
+      <DependentUpon>loadingFA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="loadingFA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loadingFrom.Designer.vb">
+      <DependentUpon>loadingFrom.vb</DependentUpon>
+    </Compile>
+    <Compile Include="loadingFrom.vb" />
+    <Compile Include="load_show_OEE.Designer.vb">
+      <DependentUpon>load_show_OEE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="load_show_OEE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagePrintDefectAdmin.Designer.vb">
+      <DependentUpon>ManagePrintDefectAdmin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePrintDefectAdmin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagePrintLable.Designer.vb">
+      <DependentUpon>ManagePrintLable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePrintLable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuReprint.Designer.vb">
+      <DependentUpon>MenuReprint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MenuReprint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modelMaintenance.vb" />
     <Compile Include="ModelSqliteDefect.vb" />
+    <Compile Include="model_api_sqlite.vb" />
+    <Compile Include="model_rm_scan.vb" />
+    <Compile Include="numPadSetQTY.Designer.vb">
+      <DependentUpon>numPadSetQTY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="numPadSetQTY.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="numPadSetStartTime.Designer.vb">
+      <DependentUpon>numPadSetStartTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="numPadSetStartTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OEE_NODE.vb" />
+    <Compile Include="OEE_SQLITE.vb" />
+    <Compile Include="PopUpLossDelayStart.Designer.vb">
+      <DependentUpon>PopUpLossDelayStart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PopUpLossDelayStart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDefectAdmin.Designer.vb">
+      <DependentUpon>PrintDefectAdmin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDefectAdmin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintQueue.vb" />
     <Compile Include="ProgressBar_Form.Designer.vb">
       <DependentUpon>ProgressBar_Form.vb</DependentUpon>
     </Compile>
@@ -639,6 +765,19 @@
       <DependentUpon>RobotApppSuport.vb</DependentUpon>
     </Compile>
     <Compile Include="RobotApppSuport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SafeFonts.vb" />
+    <Compile Include="ScanQRprod.Designer.vb">
+      <DependentUpon>ScanQRprod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ScanQRprod.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetStartTime.Designer.vb">
+      <DependentUpon>SetStartTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SetStartTime.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Settinglamp.Designer.vb">
@@ -653,6 +792,9 @@
     <Compile Include="ShowSpcDetailDefect.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="modelSpecialLine.vb" />
+    <Compile Include="TagPrintData.vb" />
+    <Compile Include="TagPrintModel.vb" />
     <Compile Include="tag_print_normal.Designer.vb">
       <DependentUpon>tag_print_normal.vb</DependentUpon>
     </Compile>
@@ -980,6 +1122,12 @@
     <Compile Include="Time_Loss.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TrasnferData.Designer.vb">
+      <DependentUpon>TrasnferData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TrasnferData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Unit_test.vb" />
     <Compile Include="Update_Patch.Designer.vb">
       <DependentUpon>Update_Patch.vb</DependentUpon>
@@ -1015,12 +1163,16 @@
   <ItemGroup>
     <EmbeddedResource Include="Add_skill.resx">
       <DependentUpon>Add_skill.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Add_success.resx">
       <DependentUpon>Add_success.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Add_user.resx">
       <DependentUpon>Add_user.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdmindefectSelectSupplier.resx">
+      <DependentUpon>AdmindefectSelectSupplier.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="adminPrintdefect.resx">
       <DependentUpon>adminPrintdefect.vb</DependentUpon>
@@ -1035,8 +1187,12 @@
     <EmbeddedResource Include="Adm_page.resx">
       <DependentUpon>Adm_page.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Alert_scan_qr_product.resx">
+      <DependentUpon>Alert_scan_qr_product.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Auto_close_lot.resx">
       <DependentUpon>Auto_close_lot.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Change_Loss2.resx">
       <DependentUpon>Change_Loss2.vb</DependentUpon>
@@ -1052,6 +1208,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="closeLotsummary.resx">
       <DependentUpon>closeLotsummary.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Close_lot.resx">
       <DependentUpon>Close_lot.vb</DependentUpon>
@@ -1064,6 +1221,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Confrime_work_production.resx">
       <DependentUpon>Confrime_work_production.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Confrm_end.resx">
       <DependentUpon>Confrm_end.vb</DependentUpon>
@@ -1094,6 +1252,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="defectAdminAdjustdetail.resx">
       <DependentUpon>defectAdminAdjustdetail.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="defectAdminAdjustnumpadadjust.resx">
       <DependentUpon>defectAdminAdjustnumpadadjust.vb</DependentUpon>
@@ -1161,6 +1320,9 @@
     <EmbeddedResource Include="defectSelectcode.resx">
       <DependentUpon>defectSelectcode.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="defectSelectSupplier.resx">
+      <DependentUpon>defectSelectSupplier.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="defectSelecttype.resx">
       <DependentUpon>defectSelecttype.vb</DependentUpon>
     </EmbeddedResource>
@@ -1188,11 +1350,68 @@
     <EmbeddedResource Include="Finish_work.resx">
       <DependentUpon>Finish_work.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyboardAdmin.resx">
+      <DependentUpon>KeyboardAdmin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="keyboardDefect.resx">
+      <DependentUpon>keyboardDefect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="keyboardRm_Scan.resx">
+      <DependentUpon>keyboardRm_Scan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="keyboardScanMold.resx">
+      <DependentUpon>keyboardScanMold.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeaderConfirmDefect.resx">
+      <DependentUpon>LeaderConfirmDefect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loadData.resx">
+      <DependentUpon>loadData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loadingFA.resx">
+      <DependentUpon>loadingFA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loadingFrom.resx">
+      <DependentUpon>loadingFrom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="load_show_OEE.resx">
+      <DependentUpon>load_show_OEE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagePrintDefectAdmin.resx">
+      <DependentUpon>ManagePrintDefectAdmin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagePrintLable.resx">
+      <DependentUpon>ManagePrintLable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuReprint.resx">
+      <DependentUpon>MenuReprint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="numPadSetQTY.resx">
+      <DependentUpon>numPadSetQTY.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="numPadSetStartTime.resx">
+      <DependentUpon>numPadSetStartTime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUpLossDelayStart.resx">
+      <DependentUpon>PopUpLossDelayStart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDefectAdmin.resx">
+      <DependentUpon>PrintDefectAdmin.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProgressBar_Form.resx">
       <DependentUpon>ProgressBar_Form.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RobotApppSuport.resx">
       <DependentUpon>RobotApppSuport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScanQRprod.resx">
+      <DependentUpon>ScanQRprod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetStartTime.resx">
+      <DependentUpon>SetStartTime.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settinglamp.resx">
       <DependentUpon>Settinglamp.vb</DependentUpon>
@@ -1256,12 +1475,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainFA.resx">
       <DependentUpon>MainFA.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainFrm.resx">
       <DependentUpon>MainFrm.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ManagePlan.resx">
       <DependentUpon>ManagePlan.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Model_change_alert.resx">
       <DependentUpon>Model_change_alert.vb</DependentUpon>
@@ -1359,6 +1581,9 @@
     <EmbeddedResource Include="Time_Loss.resx">
       <DependentUpon>Time_Loss.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TrasnferData.resx">
+      <DependentUpon>TrasnferData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Update_Patch.resx">
       <DependentUpon>Update_Patch.vb</DependentUpon>
     </EmbeddedResource>
@@ -1370,12 +1595,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Working_OEE.resx">
       <DependentUpon>Working_OEE.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Working_Pro.resx">
       <DependentUpon>Working_Pro.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -1388,11 +1617,89 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Standard Config Files\Synthesis.ControlPanel.IdentityServer.config.disabled" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fa_logo.ico" />
+    <Content Include="ICO_NEW_FA.ico" />
+    <None Include="Resources\JgIO.gif" />
+    <None Include="Resources\ingif.gif" />
+    <None Include="Resources\LossE1.png" />
+    <None Include="Resources\dis.gif" />
+    <None Include="Resources\waitingnetwork.png" />
+    <None Include="Resources\btnClose1.png" />
+    <None Include="Resources\logScanProduction.png" />
+    <None Include="Resources\btnClearRemainDMC.png" />
+    <None Include="Resources\ww2.PNG" />
+    <None Include="Resources\result221.PNG" />
+    <None Include="Resources\result22.PNG" />
+    <None Include="Resources\selectLoss4.png" />
+    <None Include="Resources\ErrorTImeOld1.png" />
+    <None Include="Resources\configLineGemba.png" />
+    <None Include="Resources\OEE WAIT DATA %281%291.png" />
+    <None Include="Resources\0s-200px-200px-unscreen.gif" />
+    <None Include="Resources\OEE WAIT DATA %281%29.png" />
+    <None Include="Resources\Loading_image1.png" />
+    <None Include="Resources\Loading_image.png" />
+    <None Include="Resources\ErrorTImeOld.png" />
+    <None Include="Resources\ErrorTime2.png" />
+    <None Include="Resources\NumSettingActual1.png" />
+    <None Include="Resources\NumSettingTime3.png" />
+    <None Include="Resources\NumSettingActual.png" />
+    <None Include="Resources\JU.PNG" />
+    <None Include="Resources\NumSettingTime2.png" />
+    <None Include="Resources\NumSettingTime1.png" />
+    <None Include="Resources\NumSettingTime.png" />
+    <None Include="Resources\giphy.gif" />
+    <None Include="Resources\ErrorTime1.png" />
+    <None Include="Resources\936b3a9a817fed848e7025c0430cbb-unscreen.gif" />
+    <None Include="Resources\ErrorTime.png" />
+    <None Include="Resources\defectDetailadjustNew231.png" />
+    <None Include="Resources\defectDetailadjustNew23.png" />
+    <None Include="Resources\productionListDetailNewNotext.png" />
+    <None Include="Resources\eadb74787dda41cc6333341e552934323.gif" />
+    <None Include="Resources\defectNumpadadjusttNew23.png" />
+    <None Include="Resources\closeLotsummaryNew23.png" />
+    <None Include="Resources\defectNumpadadjustNew23.png" />
+    <None Include="Resources\defectSelectcodeNew23.png" />
+    <None Include="Resources\defectHomeNew231.png" />
+    <None Include="Resources\defectHomeNew23.png" />
+    <None Include="Resources\eadb74787dda41cc6333341e552934322.gif" />
+    <None Include="Resources\eadb74787dda41cc6333341e552934321.gif" />
+    <None Include="Resources\startingProd1.png" />
+    <None Include="Resources\btnInfoNew.png" />
+    <None Include="Resources\btnSetUpNewnew.png" />
+    <None Include="Resources\btnStartNewnew.png" />
+    <None Include="Resources\btnSetUpNew.png" />
+    <None Include="Resources\btnCloseLotNew.png" />
+    <None Include="Resources\btnDefectNew.png" />
+    <None Include="Resources\btnIncNew.png" />
+    <None Include="Resources\btnDescNew.png" />
+    <None Include="Resources\btnbacknew1.png" />
+    <None Include="Resources\btnStartnew.png" />
+    <None Include="Resources\btnbacknew.png" />
+    <None Include="Resources\tabStopProd.png" />
+    <None Include="Resources\stopProd.png" />
+    <None Include="Resources\btnStart1.png" />
+    <None Include="Resources\btnBack.png" />
+    <None Include="Resources\tabStartProd.png" />
+    <None Include="Resources\tabStartProd1.png" />
+    <None Include="Resources\startingProd.png" />
+    <None Include="Resources\btnUser.png" />
+    <None Include="Resources\btnStopp.png" />
+    <None Include="Resources\btnStop1.png" />
+    <None Include="Resources\btnSetting11.png" />
+    <None Include="Resources\btnInfo.png" />
+    <None Include="Resources\btnDesc1.png" />
+    <None Include="Resources\btnInc1.png" />
+    <None Include="Resources\btnSetting1.png" />
+    <None Include="Resources\btnDefect1.png" />
+    <None Include="Resources\btnClose.png" />
+    <None Include="Resources\btnStarting.png" />
+    <None Include="Resources\red.png" />
     <None Include="Resources\logoTBKK.jpeg" />
     <None Include="Resources\MainMenu4.png" />
     <None Include="Resources\addSpeNumpad1.png" />
@@ -1572,11 +1879,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1293.44\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1293.44\build\Microsoft.Web.WebView2.targets'))" />
     <Error Condition="!Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1150.38\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1150.38\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1293.44\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1293.44\build\Microsoft.Web.WebView2.targets')" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
-  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1150.38\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1150.38\build\Microsoft.Web.WebView2.targets')" />
 </Project>

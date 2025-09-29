@@ -58,16 +58,16 @@ Partial Class defectNumpadadjust
         '
         'tbAddjust
         '
-        Me.tbAddjust.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.tbAddjust.BackColor = System.Drawing.Color.White
         Me.tbAddjust.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.tbAddjust.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.tbAddjust.Enabled = False
-        Me.tbAddjust.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.tbAddjust.ForeColor = System.Drawing.SystemColors.Window
+        Me.tbAddjust.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 35.75!, System.Drawing.FontStyle.Bold)
+        Me.tbAddjust.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.tbAddjust.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.tbAddjust.Location = New System.Drawing.Point(55, 80)
+        Me.tbAddjust.Location = New System.Drawing.Point(119, 73)
         Me.tbAddjust.Name = "tbAddjust"
-        Me.tbAddjust.Size = New System.Drawing.Size(333, 31)
+        Me.tbAddjust.Size = New System.Drawing.Size(333, 60)
         Me.tbAddjust.TabIndex = 0
         Me.tbAddjust.Text = "0"
         Me.tbAddjust.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -76,11 +76,11 @@ Partial Class defectNumpadadjust
         '
         Me.lbAct.AutoSize = True
         Me.lbAct.BackColor = System.Drawing.Color.Transparent
-        Me.lbAct.Font = New System.Drawing.Font("Yu Gothic", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.lbAct.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 17.75!, System.Drawing.FontStyle.Bold)
         Me.lbAct.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.lbAct.Location = New System.Drawing.Point(502, 93)
+        Me.lbAct.Location = New System.Drawing.Point(588, 82)
         Me.lbAct.Name = "lbAct"
-        Me.lbAct.Size = New System.Drawing.Size(58, 29)
+        Me.lbAct.Size = New System.Drawing.Size(62, 31)
         Me.lbAct.TabIndex = 3
         Me.lbAct.Text = "XXX"
         '
@@ -88,11 +88,11 @@ Partial Class defectNumpadadjust
         '
         Me.lbMax.AutoSize = True
         Me.lbMax.BackColor = System.Drawing.Color.Transparent
-        Me.lbMax.Font = New System.Drawing.Font("Yu Gothic", 19.0!, System.Drawing.FontStyle.Bold)
+        Me.lbMax.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbMax.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.lbMax.Location = New System.Drawing.Point(500, 60)
+        Me.lbMax.Location = New System.Drawing.Point(589, 112)
         Me.lbMax.Name = "lbMax"
-        Me.lbMax.Size = New System.Drawing.Size(105, 34)
+        Me.lbMax.Size = New System.Drawing.Size(112, 38)
         Me.lbMax.TabIndex = 5
         Me.lbMax.Text = "XXXXX"
         '
@@ -100,36 +100,36 @@ Partial Class defectNumpadadjust
         '
         Me.lbPart.AutoSize = True
         Me.lbPart.BackColor = System.Drawing.Color.Transparent
-        Me.lbPart.Font = New System.Drawing.Font("Yu Gothic", 17.0!, System.Drawing.FontStyle.Bold)
+        Me.lbPart.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbPart.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.lbPart.Location = New System.Drawing.Point(116, 22)
+        Me.lbPart.Location = New System.Drawing.Point(147, 21)
         Me.lbPart.Name = "lbPart"
-        Me.lbPart.Size = New System.Drawing.Size(125, 30)
+        Me.lbPart.Size = New System.Drawing.Size(141, 35)
         Me.lbPart.TabIndex = 7
         Me.lbPart.Text = "XXXXXXX"
         '
         'btnBack
         '
         Me.btnBack.BackColor = System.Drawing.Color.Transparent
-        Me.btnBack.Location = New System.Drawing.Point(0, 437)
+        Me.btnBack.Location = New System.Drawing.Point(25, 513)
         Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(116, 93)
+        Me.btnBack.Size = New System.Drawing.Size(189, 81)
         Me.btnBack.TabIndex = 79
         Me.btnBack.TabStop = False
         '
         'btnOk
         '
         Me.btnOk.BackColor = System.Drawing.Color.Transparent
-        Me.btnOk.Location = New System.Drawing.Point(586, 437)
+        Me.btnOk.Location = New System.Drawing.Point(586, 514)
         Me.btnOk.Name = "btnOk"
-        Me.btnOk.Size = New System.Drawing.Size(126, 93)
+        Me.btnOk.Size = New System.Drawing.Size(199, 79)
         Me.btnOk.TabIndex = 80
         Me.btnOk.TabStop = False
         '
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.Color.Transparent
-        Me.Button6.Location = New System.Drawing.Point(26, 360)
+        Me.Button6.Location = New System.Drawing.Point(44, 416)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(207, 70)
         Me.Button6.TabIndex = 81
@@ -138,7 +138,7 @@ Partial Class defectNumpadadjust
         'btnNumber0
         '
         Me.btnNumber0.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber0.Location = New System.Drawing.Point(238, 360)
+        Me.btnNumber0.Location = New System.Drawing.Point(287, 416)
         Me.btnNumber0.Name = "btnNumber0"
         Me.btnNumber0.Size = New System.Drawing.Size(240, 70)
         Me.btnNumber0.TabIndex = 82
@@ -147,7 +147,7 @@ Partial Class defectNumpadadjust
         'Button12
         '
         Me.Button12.BackColor = System.Drawing.Color.Transparent
-        Me.Button12.Location = New System.Drawing.Point(483, 360)
+        Me.Button12.Location = New System.Drawing.Point(561, 416)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(192, 70)
         Me.Button12.TabIndex = 83
@@ -156,7 +156,7 @@ Partial Class defectNumpadadjust
         'btnNumber7
         '
         Me.btnNumber7.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber7.Location = New System.Drawing.Point(26, 285)
+        Me.btnNumber7.Location = New System.Drawing.Point(44, 331)
         Me.btnNumber7.Name = "btnNumber7"
         Me.btnNumber7.Size = New System.Drawing.Size(207, 70)
         Me.btnNumber7.TabIndex = 84
@@ -165,7 +165,7 @@ Partial Class defectNumpadadjust
         'btnNumber4
         '
         Me.btnNumber4.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber4.Location = New System.Drawing.Point(26, 210)
+        Me.btnNumber4.Location = New System.Drawing.Point(44, 245)
         Me.btnNumber4.Name = "btnNumber4"
         Me.btnNumber4.Size = New System.Drawing.Size(207, 70)
         Me.btnNumber4.TabIndex = 85
@@ -174,7 +174,7 @@ Partial Class defectNumpadadjust
         'btnNumber1
         '
         Me.btnNumber1.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber1.Location = New System.Drawing.Point(26, 136)
+        Me.btnNumber1.Location = New System.Drawing.Point(44, 161)
         Me.btnNumber1.Name = "btnNumber1"
         Me.btnNumber1.Size = New System.Drawing.Size(207, 70)
         Me.btnNumber1.TabIndex = 86
@@ -183,7 +183,7 @@ Partial Class defectNumpadadjust
         'btnNumber9
         '
         Me.btnNumber9.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber9.Location = New System.Drawing.Point(483, 286)
+        Me.btnNumber9.Location = New System.Drawing.Point(561, 331)
         Me.btnNumber9.Name = "btnNumber9"
         Me.btnNumber9.Size = New System.Drawing.Size(192, 70)
         Me.btnNumber9.TabIndex = 87
@@ -192,7 +192,7 @@ Partial Class defectNumpadadjust
         'btnNumber6
         '
         Me.btnNumber6.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber6.Location = New System.Drawing.Point(483, 210)
+        Me.btnNumber6.Location = New System.Drawing.Point(561, 245)
         Me.btnNumber6.Name = "btnNumber6"
         Me.btnNumber6.Size = New System.Drawing.Size(192, 70)
         Me.btnNumber6.TabIndex = 88
@@ -201,7 +201,7 @@ Partial Class defectNumpadadjust
         'btnNumber3
         '
         Me.btnNumber3.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber3.Location = New System.Drawing.Point(483, 136)
+        Me.btnNumber3.Location = New System.Drawing.Point(561, 161)
         Me.btnNumber3.Name = "btnNumber3"
         Me.btnNumber3.Size = New System.Drawing.Size(192, 70)
         Me.btnNumber3.TabIndex = 89
@@ -210,7 +210,7 @@ Partial Class defectNumpadadjust
         'btnNumber8
         '
         Me.btnNumber8.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber8.Location = New System.Drawing.Point(238, 285)
+        Me.btnNumber8.Location = New System.Drawing.Point(287, 331)
         Me.btnNumber8.Name = "btnNumber8"
         Me.btnNumber8.Size = New System.Drawing.Size(240, 70)
         Me.btnNumber8.TabIndex = 90
@@ -219,7 +219,7 @@ Partial Class defectNumpadadjust
         'btnNumber5
         '
         Me.btnNumber5.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber5.Location = New System.Drawing.Point(238, 210)
+        Me.btnNumber5.Location = New System.Drawing.Point(287, 245)
         Me.btnNumber5.Name = "btnNumber5"
         Me.btnNumber5.Size = New System.Drawing.Size(240, 70)
         Me.btnNumber5.TabIndex = 91
@@ -228,7 +228,7 @@ Partial Class defectNumpadadjust
         'btnNumber2
         '
         Me.btnNumber2.BackColor = System.Drawing.Color.Transparent
-        Me.btnNumber2.Location = New System.Drawing.Point(238, 136)
+        Me.btnNumber2.Location = New System.Drawing.Point(287, 161)
         Me.btnNumber2.Name = "btnNumber2"
         Me.btnNumber2.Size = New System.Drawing.Size(240, 70)
         Me.btnNumber2.TabIndex = 92
@@ -238,8 +238,8 @@ Partial Class defectNumpadadjust
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.defectNumpadadjust
-        Me.ClientSize = New System.Drawing.Size(705, 525)
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.defectNumpadadjusttNew23
+        Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.btnNumber2)
         Me.Controls.Add(Me.btnNumber5)
         Me.Controls.Add(Me.btnNumber8)

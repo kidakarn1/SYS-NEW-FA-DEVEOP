@@ -1,6 +1,5 @@
 ﻿Imports System.Net
 Imports System.Web.Script.Serialization
-
 Friend Class defectSelecttype
     Public Shared type
     Shared pFG
@@ -15,6 +14,7 @@ Friend Class defectSelecttype
     Public Shared mv = New manageVariable()
     Public Shared S_index As Integer = 0
     Dim SelectSpcSeq = "NO DATA"
+    Public Shared maincp = "NO DATA"
     Dim SelectSpcPWI_ID = "NO DATA"
     Public Shared Sub setVariable()
         actTotal = Working_Pro.LB_COUNTER_SEQ.Text
@@ -28,6 +28,14 @@ Friend Class defectSelecttype
         sPart = ""
     End Sub
     Private Sub defectSelecttype_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim mdDefect = New modelDefect
+        If mdDefect.mGetDataEnableFGPart(MainFrm.Label4.Text) = "0" Then
+            btnPartfg.Enabled = False
+            ' btnPartfg.Visible = False
+        Else
+            btnPartfg.Enabled = True
+            'btnPartfg.Visible = True
+        End If
         Dim dfHpme As New defectHome()
         If dfHpme.dtType = "NC" Then
             'lvChildpart.BackColor = Color.Peru
@@ -54,7 +62,6 @@ Friend Class defectSelecttype
             For Each itemPlanData As DataPlan In MainFrm.ArrayDataPlan
                 arrayWI.Add(itemPlanData.wi)
             Next
-
             rsData = md.mGetchildpartSpc(arrayWI.ToArray)
         Else
             rsData = md.mGetchildpart(wi)
@@ -83,13 +90,15 @@ Friend Class defectSelecttype
                     datlvChildpart.SubItems.Add(Iseq)
                     ' If checkRs = 1 Then
                     '
-                    'MsgBox("index ===>" & index)
+                    ''msgBox("index ===>" & index)
                     'End If
                     datlvChildpart.SubItems.Add(Working_Pro.Spwi_id(index - 1))
                 Else
                     datlvChildpart.SubItems.Add(Working_Pro.seqNo)
                     datlvChildpart.SubItems.Add(Working_Pro.pwi_id)
                 End If
+                ' datlvChildpart.SubItems.Add(item("ODR_SEQ").ToString())
+                datlvChildpart.SubItems.Add("1")
                 lvChildpart.Items.Add(datlvChildpart)
                 i += 1
             Next
@@ -107,7 +116,6 @@ Friend Class defectSelecttype
         'dfHome.show()
         tbnUp()
     End Sub
-
     Public Sub tbnUp()
         If S_index < 0 Then
             S_index = 0
@@ -120,7 +128,7 @@ Friend Class defectSelecttype
             If S_index < 0 Then
                 S_index = 0
                 ' ElseIf lvChildpart.Items.Count > S_index Then
-                '    S_index = CDbl(Val((lvChildpart.Items.Count - 1)))
+                '    S_index = CDbl(Val((lvCvhildpart.Items.Count - 1)))
             End If
             lvChildpart.Items(S_index).Selected = True
             lvChildpart.Items(S_index).EnsureVisible()
@@ -149,15 +157,14 @@ Friend Class defectSelecttype
         Catch ex As Exception
 
         End Try
-
     End Sub
-
     Private Sub lvChildpart_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvChildpart.SelectedIndexChanged
         For Each lvItem As ListViewItem In lvChildpart.SelectedItems
             Me.sPart = lvChildpart.Items(lvItem.Index).SubItems(1).Text
             SelectSpcSeq = lvChildpart.Items(lvItem.Index).SubItems(4).Text
             SelectSpcPWI_ID = lvChildpart.Items(lvItem.Index).SubItems(5).Text
             wi = lvChildpart.Items(lvItem.Index).SubItems(3).Text
+            'maincp = lvChildpart.Items(lvItem.Index).SubItems(6).Text
         Next
         dt_menu = "1"
         If type = "NG" Then
@@ -183,6 +190,12 @@ Friend Class defectSelecttype
                 ' Me.dfSS = btnPartfg.Text
                 dfSS.Show()
                 Me.Hide()
+            Else
+                'msgBox("Please Enable Line Special.")
+                'Dim sDefectcode As New defectSelectcode()
+                'Me.sPart = btnPartfg.Text
+                'lvChildpart.Items(0).Selected = True
+                'lvChildpart.Select()
             End If
         Else
             Dim sDefectcode As New defectSelectcode()
@@ -219,24 +232,30 @@ Friend Class defectSelecttype
 
     Private Sub Label3_Click(sender As Object, e As EventArgs)
     End Sub
+
     Private Sub lbType_Click(sender As Object, e As EventArgs)
     End Sub
+
     Private Sub Label4_Click(sender As Object, e As EventArgs)
 
     End Sub
+
     Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
         tbnDown()
     End Sub
+
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         If lvChildpart.SelectedItems.Count > 0 Then
             Dim sDefectcode As New defectSelectcode()
             sDefectcode.sSeqSpc = SelectSpcSeq
             sDefectcode.sPwiSpc = SelectSpcPWI_ID
             sDefectcode.swi = wi
+            maincp = modelDefect.mGetCalPartOEE(MainFrm.Label4.Text, btnPartfg.Text, Me.sPart, type, MainFrm.chk_spec_line, MainFrm.Label6.Text)
+            sDefectcode.mainCp = maincp
             sDefectcode.Show()
             Me.Hide()
         Else
-            MsgBox("PLEASE SELECT ROW. ")
+            'msgBox("PLEASE SELECT ROW. ")
         End If
     End Sub
 End Class

@@ -17,12 +17,12 @@ recheck:
             Dim LoadSQL As SQLiteDataReader = cmd.ExecuteReader()
             LoadSQL.Close()
         Catch ex As Exception
-            MsgBox("SQLite Database connect failed. Please contact PC System [Function insMaintenance] In file maintenance" & ex.Message)
+            'msgBox("SQLite Database connect failed. Please contact PC System [Function insMaintenance] In file maintenance" & ex.Message)
             sqliteConn.Close()
             GoTo recheck
         End Try
-        '    Dim result_api_checkper = api.Load_data("http://192.168.161.207/API_NEW_FA/INSERT_DATA_NEW_FA/insDataLossByLine?LineCd=" & lineCd & "&op=" & op & "&shift=" & shift & "&brakTime_down=" & st_datetime2)
-        'MsgBox(result_api_checkper)
+        '    Dim result_api_checkper = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/INSERT_DATA_NEW_FA/insDataLossByLine?LineCd=" & lineCd & "&op=" & op & "&shift=" & shift & "&brakTime_down=" & st_datetime2)
+        ''msgBox(result_api_checkper)
     End Sub
 
     Public Shared Sub updMaintenanceSqlite()
@@ -39,7 +39,7 @@ recheck:
             Dim LoadSQL As SQLiteDataReader = cmd.ExecuteReader()
             LoadSQL.Close()
         Catch ex As Exception
-            MsgBox("SQLite Database connect failed. Please contact PC System [Function updMaintenance] In file maintenance" & ex.Message)
+            'msgBox("SQLite Database connect failed. Please contact PC System [Function updMaintenance] In file maintenance" & ex.Message)
             sqliteConn.Close()
             GoTo recheck
         End Try
@@ -47,6 +47,6 @@ recheck:
     Public Shared Sub UpdateMaintenance(lineCd As String, op As String, shift As String, breakdown_total As String, restart_time As String, breakdown_start As Date)
         Dim api = New api()
         Dim st_datetime As String = breakdown_start.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-        Dim result_api_checkper = api.Load_data("http://192.168.161.207/API_NEW_FA/UPDATE_DATA/UpdateMaintenance?breakdown_total=" & breakdown_total & "&restart_time=" & restart_time & "&lineCd=" & lineCd & "&op=" & op & "&breakdown_start=" & st_datetime)
+        Dim result_api_checkper = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/UPDATE_DATA/UpdateMaintenance?breakdown_total=" & breakdown_total & "&restart_time=" & restart_time & "&lineCd=" & lineCd & "&op=" & op & "&breakdown_start=" & st_datetime)
     End Sub
 End Class

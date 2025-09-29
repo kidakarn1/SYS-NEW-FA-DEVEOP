@@ -44,6 +44,7 @@ Partial Class ins_time_loss
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Lb_PartNo = New System.Windows.Forms.Label()
+        Me.lbDetailLoss = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -309,10 +310,11 @@ Partial Class ins_time_loss
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.lbDetailLoss)
         Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Location = New System.Drawing.Point(250, 333)
+        Me.Panel2.Location = New System.Drawing.Point(250, 323)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(298, 81)
+        Me.Panel2.Size = New System.Drawing.Size(298, 91)
         Me.Panel2.TabIndex = 4661
         Me.Panel2.Visible = False
         '
@@ -320,7 +322,7 @@ Partial Class ins_time_loss
         '
         Me.Label3.BackColor = System.Drawing.Color.White
         Me.Label3.Font = New System.Drawing.Font("Catamaran", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(12, 10)
+        Me.Label3.Location = New System.Drawing.Point(12, 3)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(275, 35)
         Me.Label3.TabIndex = 12
@@ -361,6 +363,19 @@ Partial Class ins_time_loss
         Me.Lb_PartNo.Size = New System.Drawing.Size(295, 43)
         Me.Lb_PartNo.TabIndex = 4663
         Me.Lb_PartNo.Text = "XXXXXXXXXXXX"
+        '
+        'lbDetailLoss
+        '
+        Me.lbDetailLoss.BackColor = System.Drawing.Color.White
+        Me.lbDetailLoss.Font = New System.Drawing.Font("Catamaran", 13.0!)
+        Me.lbDetailLoss.ForeColor = System.Drawing.Color.Red
+        Me.lbDetailLoss.Location = New System.Drawing.Point(12, 32)
+        Me.lbDetailLoss.Name = "lbDetailLoss"
+        Me.lbDetailLoss.Size = New System.Drawing.Size(275, 55)
+        Me.lbDetailLoss.TabIndex = 13
+        Me.lbDetailLoss.Text = "XXXXX"
+        Me.lbDetailLoss.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbDetailLoss.Visible = False
         '
         'ins_time_loss
         '
@@ -424,4 +439,5 @@ Partial Class ins_time_loss
     Friend WithEvents PictureBox10 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents Lb_PartNo As Label
+    Friend WithEvents lbDetailLoss As Label
 End Class

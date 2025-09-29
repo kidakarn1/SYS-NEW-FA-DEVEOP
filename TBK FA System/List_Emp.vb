@@ -6,17 +6,17 @@ Public Class List_Emp
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim i = ListView1.Items.Count
         If i >= MaxManPower Then
-            MsgBox("ไลน์นี้มีพนักงานเดินไลน์ได้ " & MaxManPower & " คนเท่านั้น")
+            'msgBox("ไลน์นี้มีพนักงานเดินไลน์ได้ " & MaxManPower & " คนเท่านั้น")
         Else
             Dim sc_type As String = MainFrm.lb_scanner_port.Text
             If sc_type = "USB" Then
-                'MsgBox("Data")
+                ''msgBox("Data")
             Else
                 MainFrm.lb_ctrl_sc_flg.Text = "emp"
             End If
             Sc.TextBox2.Select()
-            Me.Enabled = False
-            Sc.Show()
+            ' Me.Enabled = False
+            Sc.ShowDialog()
         End If
     End Sub
     Public Function set_data_Month(lotSubstMonth)
@@ -72,14 +72,15 @@ Public Class List_Emp
         Return lotFirstDigit
     End Function
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'MsgBox(DateTime.Now.ToString("yyyy").Substring(3, 1))
-        'MsgBox(DateTime.Now.ToString("HH"))
+        ''msgBox(DateTime.Now.ToString("yyyy").Substring(3, 1))
+        ''msgBox(DateTime.Now.ToString("HH"))
         Sc.SerialPort1.Close()
         'Sc.SerialPort1.Close()
         Dim tclient As New WebClient
         Dim i As Integer = ListView1.Items.Count
         lb_count_emp.Text = i
         MainFrm.LB_Number_worker.Text = lb_count_emp.Text
+        Backoffice_model.gobal_DateTimeComputerDown = "" ' set คือ ให้เวลา com ดับ ไม่มีผล
         If i > 0 Then
             flag_emp.Text = "1"
         ElseIf i = 0 Then
@@ -100,13 +101,13 @@ Public Class List_Emp
             MainFrm.PictureBox6.Image = Nothing
             MainFrm.PictureBox7.Image = Nothing
         End If
-        'MsgBox(temp_co_emp)
+        ''msgBox(temp_co_emp)
         For i = 0 To temp_co_emp - 1
             If i = 0 Then
-                'MsgBox("SOON")
+                ''msgBox("SOON")
                 Try
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                     Backoffice_model.img_user1 = tImage
                     MainFrm.PictureBox2.Image = tImage
@@ -137,7 +138,7 @@ Public Class List_Emp
                     Working_Pro.PictureBox7.Image = Nothing
                 Catch ex As Exception
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     Backoffice_model.img_user1 = tImage
                     MainFrm.PictureBox2.Image = tImage
                     MainFrm.lb_emp1.Visible = True
@@ -169,7 +170,7 @@ Public Class List_Emp
             ElseIf i = 1 Then
                 Try
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                     Backoffice_model.img_user2 = tImage
                     MainFrm.PictureBox3.Image = tImage
@@ -186,7 +187,7 @@ Public Class List_Emp
 
                 Catch ex As Exception
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     MainFrm.PictureBox3.Image = tImage
                     MainFrm.lb_emp2.Visible = True
                     MainFrm.lb_emp2.Text = emp_cd
@@ -202,7 +203,7 @@ Public Class List_Emp
             ElseIf i = 2 Then
                 Try
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                     Backoffice_model.img_user3 = tImage
                     MainFrm.PictureBox4.Image = tImage
@@ -217,7 +218,7 @@ Public Class List_Emp
                     Working_Pro.PictureBox5.Image = Nothing
                 Catch ex As Exception
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     MainFrm.PictureBox4.Image = tImage
                     MainFrm.lb_emp3.Visible = True
                     MainFrm.lb_emp3.Text = emp_cd
@@ -233,7 +234,7 @@ Public Class List_Emp
             ElseIf i = 3 Then
                 Try
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                     Backoffice_model.img_user4 = tImage
                     MainFrm.PictureBox5.Image = tImage
@@ -249,7 +250,7 @@ Public Class List_Emp
 
                 Catch ex As Exception
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     Backoffice_model.img_user4 = tImage
                     MainFrm.PictureBox5.Image = tImage
                     MainFrm.lb_emp4.Visible = True
@@ -266,7 +267,7 @@ Public Class List_Emp
             ElseIf i = 4 Then
                 Try
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                     MainFrm.PictureBox6.Image = tImage
                     MainFrm.lb_emp5.Visible = True
@@ -281,7 +282,7 @@ Public Class List_Emp
                     Working_Pro.PictureBox7.Image = Nothing
                 Catch ex As Exception
                     Dim emp_cd As String = ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     MainFrm.PictureBox6.Image = tImage
                     MainFrm.lb_emp5.Visible = True
                     MainFrm.lb_emp5.Text = emp_cd
@@ -300,7 +301,7 @@ Public Class List_Emp
                 If temp_co_emp <= 6 Then
                     Try
                         Dim emp_cd As String = ListView1.Items(i).Text
-                        Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                        Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                         Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                         MainFrm.PictureBox7.Image = tImage
                         MainFrm.lb_emp6.Visible = True
@@ -311,7 +312,7 @@ Public Class List_Emp
                         Working_Pro.lb_emp6.Text = emp_cd
                     Catch ex As Exception
                         Dim emp_cd As String = ListView1.Items(i).Text
-                        Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                        Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                         Backoffice_model.img_user6 = tImage
                         MainFrm.PictureBox7.Image = tImage
                         'MainFrm.lb_emp6.Visible = True
@@ -319,7 +320,7 @@ Public Class List_Emp
                     End Try
                 Else
                     Dim emp_cd As String = "OTHER" 'ListView1.Items(i).Text
-                    Dim url As String = "Http://192.168.161.102/fa_system/asset/img/detail.png"
+                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg"
                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                     MainFrm.PictureBox7.Image = tImage
                     MainFrm.lb_emp6.Visible = True
@@ -382,19 +383,20 @@ Public Class List_Emp
         Dim lotthirdDigit = DateTime.Now.ToString("dd")
         Dim d As Date = DateTime.Now.ToString("dd-MM-yyyy")
         Dim timeShift As String = DateTime.Now.ToString("HH")
+        ''msgBox("List EMP timeShift===>" & timeShift)
         Dim time_now As String = DateTime.Now.ToString("HH:mm:ss tt")
         Dim date_st As Integer = lotthirdDigit
         If time_now >= "00:00:00 AM" And time_now <= "08:00:00 AM" Then
             date_st = lotthirdDigit - 1
             If date_st <= 0 Then
                 Dim tmp_date As String = d.AddDays(-1)
-                'MsgBox(tmp_date)
-                'MsgBox("day = " & tmp_date.Substring(0, 2))
+                ''msgBox(tmp_date)
+                ''msgBox("day = " & tmp_date.Substring(0, 2))
                 lotthirdDigit = tmp_date.Substring(0, 2)
                 lotSecondDigit = set_data_Month(tmp_date.Substring(3, 2))
-                'MsgBox("M = " & tmp_date.Substring(3, 2))
+                ''msgBox("M = " & tmp_date.Substring(3, 2))
                 lotFirstDigit = set_data_Year(tmp_date.Substring(6, 2))
-                'MsgBox("Y = " & tmp_date.Substring(6, 2))
+                ''msgBox("Y = " & tmp_date.Substring(6, 2))
             Else
                 lotthirdDigit = date_st
             End If
@@ -402,18 +404,16 @@ Public Class List_Emp
             'lotthirdDigit -= 1
         End If
         Dim defaultShift As String = ""
-        If timeShift = "05" Or timeShift = "06" Or timeShift = "07" Then
-            'defaultShift = "N (05:00 - 08:00)"
-            defaultShift = "Q (20:00 - 08:00)"
-        ElseIf timeShift = "08" Or timeShift = "09" Or timeShift = "10" Or timeShift = "11" Or timeShift = "12" Or timeShift = "13" Or timeShift = "14" Or timeShift = "15" Or timeShift = "16" Or timeShift = "17" Then
-            defaultShift = "P (08:00 - 20:00)"
-        ElseIf timeShift = "17" Or timeShift = "18" Or timeShift = "19" Then
-            ' defaultShift = "M (17:00 - 20:00)"
-            defaultShift = "P (08:00 - 20:00)"
-        ElseIf timeShift = "20" Or timeShift = "21" Or timeShift = "22" Or timeShift = "23" Or timeShift = "24" Or timeShift = "00" Or timeShift = "01" Or timeShift = "02" Or timeShift = "03" Or timeShift = "04" Or timeShift = "05" Then
-            defaultShift = "Q (20:00 - 08:00)"
-        End If
-        Prd_detail.Label12.Text = defaultShift
+        'If timeShift = "05" Or timeShift = "06" Or timeShift = "07" Then
+        'defaultShift = "Q (20:00 - 08:00)"
+        'ElseIf timeShift = "08" Or timeShift = "09" Or timeShift = "10" Or timeShift = "11" Or timeShift = "12" Or timeShift = "13" Or timeShift = "14" Or timeShift = "15" Or timeShift = "16" Or timeShift = "17" Then
+        'defaultShift = "P (08:00 - 20:00)"
+        'ElseIf timeShift = "17" Or timeShift = "18" Or timeShift = "19" Then
+        'defaultShift = "P (08:00 - 20:00)"
+        'ElseIf timeShift = "20" Or timeShift = "21" Or timeShift = "22" Or timeShift = "23" Or timeShift = "24" Or timeShift = "00" Or timeShift = "01" Or timeShift = "02" Or timeShift = "03" Or timeShift = "04" Or timeShift = "05" Then
+        'defaultShift = "Q (20:00 - 08:00)"
+        'End If
+        ' Prd_detail.Label12.Text = defaultShift
         If Len(date_st) <= 9 Then
             lotthirdDigit = "0" & date_st
             Dim date_digit = "0" & date_st
@@ -429,7 +429,7 @@ Public Class List_Emp
             Me.Hide()
         ElseIf lb_link.Text = "working" Then
             If ListView1.Items.Count = 0 Then
-                MsgBox("Please scan employee card")
+                'msgBox("Please scan employee card")
             Else
                 Working_Pro.check_seq_data()
                 Dim pd As String = MainFrm.Label6.Text
@@ -441,6 +441,7 @@ Public Class List_Emp
                 Dim date_starts As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Dim GET_SEQ = Backoffice_model.GET_SEQ_PLAN_current(Working_Pro.wi_no.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_starts, date_starts) ' Working_Pro.Label22.Text
                 Dim seq_no As String = ""
+
                 Try
                     If GET_SEQ.Read() Then
                         If MainFrm.chk_spec_line = "2" Then
@@ -471,6 +472,7 @@ Public Class List_Emp
                         Dim pwi_shift As String = itemPlanData.IND_ROW
                         rsInsertData = Backoffice_model.INSERT_production_working_info(indRow, Working_Pro.Label18.Text, Iseq, Working_Pro.Label14.Text)
                         Working_Pro.pwi_id = Backoffice_model.GET_DATA_PRODUCTION_WORKING_INFO(indRow, Working_Pro.Label18.Text, Iseq)
+                        rsInsertDataSqlite = model_api_sqlite.mas_INSERT_production_working_info(indRow, Working_Pro.Label18.Text, Iseq, Working_Pro.Label14.Text, Working_Pro.pwi_id)
                         Dim temp_co_emp_realtime As Integer = ListView1.Items.Count
                         Dim emp_cd_realtime As String
                         Dim wi As String = itemPlanData.wi
@@ -484,6 +486,7 @@ Public Class List_Emp
                 Else
                     rsInsertData = Backoffice_model.INSERT_production_working_info(Working_Pro.LB_IND_ROW.Text, Working_Pro.Label18.Text, seq_no, Working_Pro.Label14.Text)
                     Working_Pro.pwi_id = Backoffice_model.GET_DATA_PRODUCTION_WORKING_INFO(Working_Pro.LB_IND_ROW.Text, Working_Pro.Label18.Text, seq_no)
+                    rsInsertDataSqlite = model_api_sqlite.mas_INSERT_production_working_info(Working_Pro.LB_IND_ROW.Text, Working_Pro.Label18.Text, seq_no, Working_Pro.Label14.Text, Working_Pro.pwi_id)
                     Dim temp_co_emp_realtime As Integer = ListView1.Items.Count
                     Dim emp_cd_realtime As String
                     For i = 0 To temp_co_emp_realtime - 1
@@ -528,7 +531,7 @@ Public Class List_Emp
                     avarage_act_prd_time = 0
                 End Try
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         transfer_flg = "1"
                         'Backoffice_model.Insert_prd_close_lot(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
                         Backoffice_model.Insert_prd_close_lot_sqlite(wi_plan, line_cd, item_cd, plan_qty, act_qty, seq_no, shift_prd, staff_no, prd_st_datetime, prd_end_datetime, lot_no, comp_flg2, transfer_flg, del_flg, prd_flg, close_lot_flg, avarage_eff, avarage_act_prd_time)
@@ -548,6 +551,8 @@ Public Class List_Emp
                 End Try
                 'Working_Pro.Label22.Text = Convert.ToInt32(Working_Pro.Label22.Text) + 1
                 GET_SEQ = Backoffice_model.GET_SEQ_PLAN_current(Working_Pro.wi_no.Text, Backoffice_model.GET_LINE_PRODUCTION(), date_starts, date_starts) ' Working_Pro.Label22.Text
+                Backoffice_model.date_time_click_start = DateTime.Now.ToString("yyyy-MM-dd HH:mm") & ":00"
+                '                Working_Pro.DateTimeStartofShift.Text = Backoffice_model.date_time_click_start
                 Try
                     If GET_SEQ.Read() Then
                         seq_no = GET_SEQ("seq_no")
@@ -578,7 +583,8 @@ Public Class List_Emp
                 Working_Pro.lb_ch_man_flg.Text = "1"
                 Working_Pro.Label20.Text = " -- : --"
                 Working_Pro.Enabled = True
-                Backoffice_model.Check_detail_actual_insert_act_no_api() 'ทำให้ช้า'
+                Backoffice_model.Check_detail_actual_insert_act_no_api(Me) 'ทำให้ช้า'
+                Working_Pro.showWorkker()
                 Working_Pro.Enabled = True
                 Working_Pro.Show()
                 Me.Hide()
@@ -597,7 +603,7 @@ Public Class List_Emp
     Private Sub Button4_Click(sender As Object, e As EventArgs)
         Dim list_item As ListViewItem
         Dim str As String = lb_count_emp.Text
-        'MsgBox(str)
+        ''msgBox(str)
         Dim temp1 As Integer = Convert.ToInt32(lb_count_emp.Text)
         Dim ListView1_count As Integer = ListView1.Items.Count
         Dim flag_emp2 As Integer = Convert.ToInt32(flag_emp.Text)
@@ -617,7 +623,7 @@ Public Class List_Emp
                 End If
             Next
         End If
-        'MsgBox(temp2)
+        ''msgBox(temp2)
         lb_count_emp.Text = ListView1.Items.Count
         MainFrm.Enabled = True
         MainFrm.Show()
@@ -648,7 +654,7 @@ Public Class List_Emp
 
         For Each item As ListViewItem In ListView1.SelectedItems
             Dim temp_selected As Integer = ListView1.SelectedIndices(0)
-            'MsgBox(temp_selected)
+            ''msgBox(temp_selected)
             Dim lb_count As Integer = Convert.ToInt32(lb_count_emp.Text)
             lb_count = lb_count - 1
             lb_count_emp.Text = lb_count
@@ -682,7 +688,7 @@ Public Class List_Emp
             End If
 
             'Lit = ListBox1.Items.Count - 1
-            'MsgBox("Code is : " & ListBox1.Items(0).ToString, 0, "Show")
+            ''msgBox("Code is : " & ListBox1.Items(0).ToString, 0, "Show")
             'ListBox1.Items.RemoveAt(0)
         Next
 

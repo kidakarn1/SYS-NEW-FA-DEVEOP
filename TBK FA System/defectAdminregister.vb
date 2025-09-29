@@ -17,11 +17,15 @@
     Public actTotal = dfAdminselecttype.actTotal
     Public ncTotal = dfAdminselecttype.ncTotal
     Public ngTotal = dfAdminselecttype.ngTotal
+    Public Shared swi = ""
     Public Shared dtShift
     Public Shared sPart
     Public Shared GmaxQty As Integer = 0
+    Public Shared source_cd_supplier
+    Public Shared SeqSpc = defectAdminregister.dtSeqno
+    Public Shared PwiSpc
+    Public Shared mainCP
     Private Sub defectRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         setVariable()
         Dim dfType
     End Sub
@@ -113,7 +117,8 @@
                 GmaxQty = maxQty
             Else
                 Dim md = New modelDefect
-                Dim UseQty = md.mGetdefectdetailncPartno(dtWino, dtSeqno, dtLotno, dtType, dtItemcd)
+                'Dim UseQty = md.mGetdefectdetailncPartno(dtWino, dtSeqno, dtLotno, dtType, dtItemcd)
+                Dim UseQty = md.mGetdefectdetailPartno(dtWino, dtSeqno, dtLotno, dtType, dtItemcd)
                 maxQty = (999 - Convert.ToInt32(UseQty))
                 maxQty = maxQty
                 GmaxQty = maxQty
@@ -124,7 +129,8 @@
                 GmaxQty = maxQty
             Else
                 Dim md = New modelDefect
-                Dim UseQty = md.mGetdefectdetailncPartno(dtWino, dtSeqno, dtLotno, dtType, dtItemcd)
+                '  Dim UseQty = md.mGetdefectdetailncPartno(dtWino, dtSeqno, dtLotno, dtType, dtItemcd)
+                Dim UseQty = md.mGetdefectdetailPartno(dtWino, dtSeqno, dtLotno, dtType, dtItemcd)
                 maxQty = (999 - Convert.ToInt32(UseQty))
                 maxQty = maxQty
                 GmaxQty = maxQty
@@ -135,7 +141,7 @@
         If rsCheck Then
             lbQtydefect.Text = CDbl(Val(lbQtydefect.Text)) + number
         Else
-            MsgBox("Please Check QTY Input")
+            'msgBox("Please Check QTY Input")
         End If
     End Sub
 
@@ -147,7 +153,7 @@
         If rsCheck Then
             lbQtydefect.Text = CDbl(Val(lbQtydefect.Text)) + number
         Else
-            MsgBox("Please Check QTY Input")
+            'msgBox("Please Check QTY Input")
         End If
     End Sub
     Private Sub tbQtydefectnc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbQtydefect.Click, Panel1.Click
@@ -162,9 +168,8 @@
             Dim dfAlert As New defectAlertsuredefect
             dfAlert.Show()
         Else
-            MsgBox("Please Check QTY Input")
+            'msgBox("Please Check QTY Input")
         End If
-
     End Sub
     Public Function updateDefectdata(dtWino As String, dtLotNo As String, dtSeqno As String, dtType As String, dtCode As String, ItemCd As String, dtItemtype As String)
         Dim md As New modelDefect()
@@ -189,16 +194,16 @@
             Dim mdDefectSqlite = New ModelSqliteDefect()
             ' Dim rsData = mdDefect.mInsertdefectregister(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, dtMenu, dtActualdate, Apwi_id)
             Dim name_en As String = mdDefect.mGetmasterDataDefect(dtCode)
-            Dim rsData = mdDefectSqlite.mSqliteInsertDefectTransection(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, dtMenu, dtActualdate, Apwi_id, name_en)
+            Dim rsData = mdDefectSqlite.mSqliteInsertDefectTransection(dtWino, dtLineno, dtItemcd, dtItemtype, dtLotno, dtSeqno, dtType, dtCode, dtQty, dtMenu, dtActualdate, Apwi_id, name_en, mainCP, source_cd_supplier)
             mdDefectSqlite.UpdateStatusCloselotSqlite("1", Apwi_id)
             If rsData Then
                 Return True
             Else
-                MsgBox("insertDefectregister FAILL Please Check rsData=" & rsData)
+                'msgBox("insertDefectregister FAILL Please Check rsData=" & rsData)
                 Return False
             End If
         Catch ex As Exception
-            MsgBox("insertDefectregister FAILL Please Check" & ex.Message)
+            'msgBox("insertDefectregister FAILL Please Check" & ex.Message)
             Return False
         End Try
     End Function

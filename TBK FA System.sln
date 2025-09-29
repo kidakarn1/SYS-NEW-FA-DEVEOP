@@ -6,10 +6,13 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TBK FA System", "TBK FA System\TBK FA System.vbproj", "{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{956DE0CE-A682-453E-A6D8-AAB09ECF5B1D}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NEW FA SYSTEM", "NEW FA SYSTEM\NEW FA SYSTEM.vdproj", "{98C522E6-7641-409A-AE4C-B616D05E3E5E}"
+	ProjectSection(SolutionItems) = preProject
+		MyApplication.vb = MyApplication.vb
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "unitTestnewfa", "unitTestnewfa\unitTestnewfa.vbproj", "{3CB001A8-C97F-4858-AA8F-960618137EB8}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NEW FA SYSTEM", "NEW FA SYSTEM2\NEW FA SYSTEM.vdproj", "{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +26,8 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Debug|64.ActiveCfg = Debug|Any CPU
-		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Debug|64.Build.0 = Debug|Any CPU
+		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Debug|64.ActiveCfg = Debug|x64
+		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Debug|64.Build.0 = Debug|x64
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -33,19 +36,11 @@ Global
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Debug|x86.Build.0 = Release|x86
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|64.ActiveCfg = Release|x64
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|64.Build.0 = Release|x64
-		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|Any CPU.ActiveCfg = Release|x64
-		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|Any CPU.Build.0 = Release|x64
+		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|x64.ActiveCfg = Release|x64
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|x86.ActiveCfg = Release|x86
 		{98EDA25F-4115-40AB-BFB1-FB93AA6AC7C3}.Release|x86.Build.0 = Release|x86
-		{98C522E6-7641-409A-AE4C-B616D05E3E5E}.Debug|64.ActiveCfg = Debug
-		{98C522E6-7641-409A-AE4C-B616D05E3E5E}.Debug|Any CPU.ActiveCfg = Debug
-		{98C522E6-7641-409A-AE4C-B616D05E3E5E}.Debug|x64.ActiveCfg = Debug
-		{98C522E6-7641-409A-AE4C-B616D05E3E5E}.Debug|x86.ActiveCfg = Debug
-		{98C522E6-7641-409A-AE4C-B616D05E3E5E}.Release|64.ActiveCfg = Release
-		{98C522E6-7641-409A-AE4C-B616D05E3E5E}.Release|Any CPU.ActiveCfg = Release
-		{98C522E6-7641-409A-AE4C-B616D05E3E5E}.Release|x64.ActiveCfg = Release
-		{98C522E6-7641-409A-AE4C-B616D05E3E5E}.Release|x86.ActiveCfg = Release
 		{3CB001A8-C97F-4858-AA8F-960618137EB8}.Debug|64.ActiveCfg = Debug|Any CPU
 		{3CB001A8-C97F-4858-AA8F-960618137EB8}.Debug|64.Build.0 = Debug|Any CPU
 		{3CB001A8-C97F-4858-AA8F-960618137EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -62,6 +57,15 @@ Global
 		{3CB001A8-C97F-4858-AA8F-960618137EB8}.Release|x64.Build.0 = Release|Any CPU
 		{3CB001A8-C97F-4858-AA8F-960618137EB8}.Release|x86.ActiveCfg = Release|Any CPU
 		{3CB001A8-C97F-4858-AA8F-960618137EB8}.Release|x86.Build.0 = Release|Any CPU
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Debug|64.ActiveCfg = Debug
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Debug|64.Build.0 = Debug
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Debug|Any CPU.ActiveCfg = Debug
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Debug|x64.ActiveCfg = Debug
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Debug|x86.ActiveCfg = Debug
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Release|64.ActiveCfg = Release
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Release|Any CPU.ActiveCfg = Release
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Release|x64.ActiveCfg = Release
+		{D8C1212C-0447-4447-A75E-4E7B58CCD6AD}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

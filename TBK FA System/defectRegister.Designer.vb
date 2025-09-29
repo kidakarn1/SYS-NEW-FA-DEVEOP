@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class defectRegister
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class defectRegister
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(defectRegister))
         Me.lbType = New System.Windows.Forms.Label()
@@ -44,11 +44,11 @@ Partial Class defectRegister
         '
         Me.lbType.AutoSize = True
         Me.lbType.BackColor = System.Drawing.Color.Transparent
-        Me.lbType.Font = New System.Drawing.Font("Yu Gothic", 18.0!, System.Drawing.FontStyle.Bold)
-        Me.lbType.ForeColor = System.Drawing.Color.MistyRose
-        Me.lbType.Location = New System.Drawing.Point(139, 195)
+        Me.lbType.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbType.Location = New System.Drawing.Point(51, 192)
         Me.lbType.Name = "lbType"
-        Me.lbType.Size = New System.Drawing.Size(46, 31)
+        Me.lbType.Size = New System.Drawing.Size(55, 38)
         Me.lbType.TabIndex = 45
         Me.lbType.Text = "XX"
         '
@@ -56,11 +56,11 @@ Partial Class defectRegister
         '
         Me.lbPart.AutoSize = True
         Me.lbPart.BackColor = System.Drawing.Color.Transparent
-        Me.lbPart.Font = New System.Drawing.Font("Yu Gothic", 18.0!, System.Drawing.FontStyle.Bold)
-        Me.lbPart.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lbPart.Location = New System.Drawing.Point(309, 199)
+        Me.lbPart.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbPart.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbPart.Location = New System.Drawing.Point(326, 192)
         Me.lbPart.Name = "lbPart"
-        Me.lbPart.Size = New System.Drawing.Size(78, 31)
+        Me.lbPart.Size = New System.Drawing.Size(93, 38)
         Me.lbPart.TabIndex = 46
         Me.lbPart.Text = "XXXX"
         '
@@ -68,11 +68,11 @@ Partial Class defectRegister
         '
         Me.lbDefectcode.AutoSize = True
         Me.lbDefectcode.BackColor = System.Drawing.Color.Transparent
-        Me.lbDefectcode.Font = New System.Drawing.Font("Yu Gothic", 18.0!, System.Drawing.FontStyle.Bold)
-        Me.lbDefectcode.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lbDefectcode.Location = New System.Drawing.Point(133, 324)
+        Me.lbDefectcode.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbDefectcode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbDefectcode.Location = New System.Drawing.Point(51, 317)
         Me.lbDefectcode.Name = "lbDefectcode"
-        Me.lbDefectcode.Size = New System.Drawing.Size(62, 31)
+        Me.lbDefectcode.Size = New System.Drawing.Size(74, 38)
         Me.lbDefectcode.TabIndex = 49
         Me.lbDefectcode.Text = "XXX"
         '
@@ -80,58 +80,58 @@ Partial Class defectRegister
         '
         Me.lbDefectdetail.AutoSize = True
         Me.lbDefectdetail.BackColor = System.Drawing.Color.Transparent
-        Me.lbDefectdetail.Font = New System.Drawing.Font("Yu Gothic", 18.0!, System.Drawing.FontStyle.Bold)
-        Me.lbDefectdetail.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lbDefectdetail.Location = New System.Drawing.Point(310, 324)
+        Me.lbDefectdetail.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbDefectdetail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbDefectdetail.Location = New System.Drawing.Point(326, 317)
         Me.lbDefectdetail.Name = "lbDefectdetail"
-        Me.lbDefectdetail.Size = New System.Drawing.Size(78, 31)
+        Me.lbDefectdetail.Size = New System.Drawing.Size(93, 38)
         Me.lbDefectdetail.TabIndex = 50
         Me.lbDefectdetail.Text = "XXXX"
         '
         'btnDecreasingnc
         '
         Me.btnDecreasingnc.BackColor = System.Drawing.Color.Transparent
-        Me.btnDecreasingnc.Location = New System.Drawing.Point(174, 414)
+        Me.btnDecreasingnc.Location = New System.Drawing.Point(214, 422)
         Me.btnDecreasingnc.Name = "btnDecreasingnc"
-        Me.btnDecreasingnc.Size = New System.Drawing.Size(99, 96)
+        Me.btnDecreasingnc.Size = New System.Drawing.Size(77, 82)
         Me.btnDecreasingnc.TabIndex = 100
         Me.btnDecreasingnc.TabStop = False
         '
         'btnPlusnc
         '
         Me.btnPlusnc.BackColor = System.Drawing.Color.Transparent
-        Me.btnPlusnc.Location = New System.Drawing.Point(522, 414)
+        Me.btnPlusnc.Location = New System.Drawing.Point(516, 421)
         Me.btnPlusnc.Name = "btnPlusnc"
-        Me.btnPlusnc.Size = New System.Drawing.Size(99, 96)
+        Me.btnPlusnc.Size = New System.Drawing.Size(83, 84)
         Me.btnPlusnc.TabIndex = 101
         Me.btnPlusnc.TabStop = False
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.Transparent
-        Me.Button1.Location = New System.Drawing.Point(-4, 492)
+        Me.Button1.Location = New System.Drawing.Point(25, 511)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(129, 111)
+        Me.Button1.Size = New System.Drawing.Size(191, 82)
         Me.Button1.TabIndex = 102
         Me.Button1.TabStop = False
         '
         'oK
         '
         Me.oK.BackColor = System.Drawing.Color.Transparent
-        Me.oK.Location = New System.Drawing.Point(671, 484)
+        Me.oK.Location = New System.Drawing.Point(587, 511)
         Me.oK.Name = "oK"
-        Me.oK.Size = New System.Drawing.Size(129, 119)
+        Me.oK.Size = New System.Drawing.Size(193, 85)
         Me.oK.TabIndex = 103
         Me.oK.TabStop = False
         '
         'tbQtydefectnc
         '
         Me.tbQtydefectnc.AutoSize = True
-        Me.tbQtydefectnc.Font = New System.Drawing.Font("Microsoft Sans Serif", 45.0!)
-        Me.tbQtydefectnc.ForeColor = System.Drawing.Color.White
-        Me.tbQtydefectnc.Location = New System.Drawing.Point(80, 2)
+        Me.tbQtydefectnc.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 36.75!, System.Drawing.FontStyle.Bold)
+        Me.tbQtydefectnc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.tbQtydefectnc.Location = New System.Drawing.Point(80, 7)
         Me.tbQtydefectnc.Name = "tbQtydefectnc"
-        Me.tbQtydefectnc.Size = New System.Drawing.Size(63, 69)
+        Me.tbQtydefectnc.Size = New System.Drawing.Size(59, 63)
         Me.tbQtydefectnc.TabIndex = 104
         Me.tbQtydefectnc.Text = "0"
         '
@@ -140,9 +140,9 @@ Partial Class defectRegister
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.Controls.Add(Me.tbQtydefectnc)
         Me.Panel1.ForeColor = System.Drawing.Color.Black
-        Me.Panel1.Location = New System.Drawing.Point(278, 427)
+        Me.Panel1.Location = New System.Drawing.Point(298, 427)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(246, 74)
+        Me.Panel1.Size = New System.Drawing.Size(213, 74)
         Me.Panel1.TabIndex = 105
         '
         'defectRegister
@@ -175,13 +175,13 @@ Partial Class defectRegister
 
     End Sub
     Friend WithEvents lbType As Label
-	Friend WithEvents lbPart As Label
-	Friend WithEvents lbDefectcode As Label
-	Friend WithEvents lbDefectdetail As Label
+    Friend WithEvents lbPart As Label
+    Friend WithEvents lbDefectcode As Label
+    Friend WithEvents lbDefectdetail As Label
     Friend WithEvents btnDecreasingnc As PictureBox
     Friend WithEvents btnPlusnc As PictureBox
-	Friend WithEvents Button1 As PictureBox
+    Friend WithEvents Button1 As PictureBox
     Friend WithEvents oK As PictureBox
-    Friend WithEvents tbQtydefectnc As Label
     Friend WithEvents Panel1 As Panel
+    Public WithEvents tbQtydefectnc As Label
 End Class

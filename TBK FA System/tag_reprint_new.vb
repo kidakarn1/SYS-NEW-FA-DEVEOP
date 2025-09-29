@@ -24,13 +24,14 @@ Public Class tag_reprint_new
             Sel_prd_setup.Show()
             Me.Close()
         Else
-            Show_reprint_wi.Show()
+            ' Show_reprint_wi.Show()
+            MenuReprint.Show()
             Me.Close()
         End If
     End Sub
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 tag_print()
                 Dim numOfindex As Integer = ListView1.SelectedIndices(0)
                 Dim qr_code As String = ListBox1.Items(numOfindex)
@@ -57,7 +58,7 @@ Public Class tag_reprint_new
         Dim seq_plan = ListView1.Items(g_index).SubItems(2).Text
         Dim seq_box = ListView1.Items(g_index).SubItems(4).Text
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 Dim numOfindex As Integer = ListView1.SelectedIndices(0)
                 Dim qr_code As String = ListBox1.Items(numOfindex)
                 Backoffice_model.update_data_new_qr_detail(qr_code)
@@ -95,7 +96,7 @@ Public Class tag_reprint_new
         Dim DLV_DATE As String = "NO_DATA"
         Dim WI As String = "NO_DATA"
         Dim line_cd As String = MainFrm.Label4.Text
-        Dim check_tag_type = Backoffice_model.B_check_format_tag() ' api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
+        Dim check_tag_type = Backoffice_model.B_check_format_tag() ' api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
         If check_tag_type = "0" Then
             While next_process.read()
                 value_next_process = next_process("NEXT_PROCESS").ToString
@@ -115,7 +116,7 @@ Public Class tag_reprint_new
             lot_no = "NO_DATA"
             aPen.Width = 2.0F
             Try
-                If My.Computer.Network.Ping("192.168.161.101") Then
+                If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                     If Application.OpenForms().OfType(Of Sel_prd_setup).Any Then
                         part_no = Working_Pro.Label3.Text
                         part_name = Working_Pro.Label12.Text
@@ -131,7 +132,7 @@ Public Class tag_reprint_new
                         'Backoffice_model.NEXT_PROCESS = Backoffice_model.F_NEXT_PROCESS(part_no)
                     Else
                         Dim data = qr_detailss.Split(" ")
-                        'MsgBox(data(0).Substring(19))
+                        ''msgBox(data(0).Substring(19))
                         '		If qr_detailss.Substring(19, 15) <> "" Then
                         '		part_no = qr_detailss.Substring(19, 14)
                         'ElseIf qr_detailss.Substring(19, 12) <> "" Then
@@ -154,7 +155,7 @@ Public Class tag_reprint_new
                         lot_no = qr_detailss.Substring(58, 4)
                         Backoffice_model.NEXT_PROCESS = ListView1.Items(g_index).SubItems(5).Text
                     End If
-                    'MsgBox(Label10.Text)
+                    ''msgBox(Label10.Text)
                     'vertical
                     e.Graphics.DrawLine(aPen, 150, 10, 150, 290)
                     e.Graphics.DrawLine(aPen, 300, 175, 300, 290)
@@ -233,9 +234,9 @@ Public Class tag_reprint_new
                             DLV_DATE = result_date
                         End Try
                     Catch ex As Exception
-                        MsgBox("error data1 = " & ex.Message)
+                        'msgBox("error data1 = " & ex.Message)
                     End Try
-                    'MsgBox(lb_dlv_date.Text)
+                    ''msgBox(lb_dlv_date.Text)
                     'Dim ssdate As String = lb_dlv_date.Text
                     'Dim dDate As Date = lb_dlv_date.Text
                     'lb_dlv_date.Text = Format(lb_dlv_date.Text, "dd/MM/yyyy")
@@ -268,10 +269,10 @@ Public Class tag_reprint_new
                     End If
                     'Dim plan_date As String
                     'If Working_Pro.lb_dlv_date.Text = Nothing Then
-                    ' MsgBox("if")
+                    ' 'msgBox("if")
                     ' plan_date = Working_Pro.lb_dlv_date.Text.Substring(6, 4) & Working_Pro.lb_dlv_date.Text.Substring(3, 2) & Working_Pro.lb_dlv_date.Text.Substring(0, 2)
                     ' Else
-                    ' MsgBox("else")
+                    ' 'msgBox("else")
                     'plan_date = Show_reprint_wi.hide_wi_select.Text
                     'End If
                     If Working_Pro.lb_dlv_date.Text Is Nothing Then
@@ -366,7 +367,7 @@ Public Class tag_reprint_new
                     End If
                     aPen = New Pen(Color.Black)
                     aPen.Width = 2.0F
-                    'MsgBox(Label10.Text)
+                    ''msgBox(Label10.Text)
                     'vertical ตรง
                     e.Graphics.DrawLine(aPen, 10, 10, 10, 290)
                     e.Graphics.DrawLine(aPen, 330, 58, 330, 95)
@@ -421,7 +422,7 @@ Public Class tag_reprint_new
                     Dim box_no_new As String = qr_detailss.Substring(100, 3)
                     e.Graphics.DrawString("PRO SEQ", lb_font5.Font, Brushes.Black, 585, 98)
                     e.Graphics.DrawString(plan_seq_new, lb_font4_B.Font, Brushes.Black, 610, 115)
-                    Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & WI)
+                    Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & WI)
                     Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(load_data)
                     Dim plan_date As String = ""
                     For Each item As Object In dict
@@ -509,7 +510,7 @@ Public Class tag_reprint_new
                         factory_cd = "Phase10"
                         plan_cd = "51"
                     End If
-                    Dim id_tag = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_detailss)
+                    Dim id_tag = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_detailss)
                     Dim qr_sub = Backoffice_model.get_qr_detail_sub(id_tag)
                     'For j = 1 To 5 Step 1
                     Dim j As Integer = 1
@@ -531,7 +532,7 @@ Public Class tag_reprint_new
                     part_no_res1 = Working_Pro.Label3.Text & part_no_res
                     ' Dim numOfindex2 As Integer = ListView1.SelectedIndices(0)
                     Dim qr_code2 As String = ListBox1.Items(numOfindex)
-                    Console.WriteLine(qr_code2)
+                    ''Console.WriteLine(qr_code2)
                     Dim qr_code As String = qr_code2 'iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no_new
                     bitmap_qr_box = QR_Generator.Encode(qr_code)
                     e.Graphics.DrawImage(bitmap_qr_box, 15, 120, 90, 90) 'left
@@ -541,7 +542,7 @@ Public Class tag_reprint_new
                     e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
                     Backoffice_model.update_data_new_qr_detail_main(qr_code2)
                 Catch ex As Exception
-                    MsgBox("error data2 =  " & ex.Message)
+                    'msgBox("error data2 =  " & ex.Message)
                 End Try
             Else
                 Try
@@ -560,7 +561,7 @@ Public Class tag_reprint_new
                         'Backoffice_model.NEXT_PROCESS = Backoffice_model.F_NEXT_PROCESS(part_no)
                     Else
                         Dim data = qr_detailss.Split(" ")
-                        'MsgBox(data(0).Substring(19))
+                        ''msgBox(data(0).Substring(19))
                         '		If qr_detailss.Substring(19, 15) <> "" Then
                         '		part_no = qr_detailss.Substring(19, 14)
                         'ElseIf qr_detailss.Substring(19, 12) <> "" Then
@@ -588,7 +589,7 @@ Public Class tag_reprint_new
                     End If
                     aPen = New Pen(Color.Black)
                     aPen.Width = 2.0F
-                    'MsgBox(Label10.Text)
+                    ''msgBox(Label10.Text)
                     'vertical ตรง
                     e.Graphics.DrawLine(aPen, 10, 10, 10, 290)
                     e.Graphics.DrawLine(aPen, 330, 58, 330, 95)
@@ -643,7 +644,7 @@ Public Class tag_reprint_new
                     Dim box_no_new As String = qr_detailss.Substring(100, 3)
                     e.Graphics.DrawString("PRO SEQ", lb_font5.Font, Brushes.Black, 585, 98)
                     e.Graphics.DrawString(plan_seq_new, lb_font4_B.Font, Brushes.Black, 610, 115)
-                    Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & WI)
+                    Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & WI)
                     Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(load_data)
                     Dim plan_date As String = ""
                     For Each item As Object In dict
@@ -748,7 +749,7 @@ Public Class tag_reprint_new
                     e.Graphics.DrawString("Phase10", lb_font3.Font, Brushes.Black, 33, 250)
                     e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
                 Catch ex As Exception
-                    MsgBox("error data3 =  " & ex.Message)
+                    'msgBox("error data3 =  " & ex.Message)
                 End Try
             End If
         End If

@@ -86,6 +86,7 @@ Public Class ManagePlan
                 Prd_detail.lb_remain_qty.Text = (item("QTY").ToString() - item("prd_qty_sum").ToString())
                 Prd_detail.lb_wi.Text = item("WI").ToString()
                 Prd_detail.LB_PLAN_DATE.Text = item("WORK_ODR_DLV_DATE").ToString().Substring(0, 10)
+                MainFrm.ArrayDataPlan.Add(New DataPlan With {.IND_ROW = item("IND_ROW").ToString(), .PS_UNIT_NUMERATOR = "PS_UNIT_NUMERATOR", .CT = item("CT").ToString(), .seq_no = item("seq_no").ToString(), .WORK_ODR_DLV_DATE = item("WORK_ODR_DLV_DATE").ToString(), .LOCATION_PART = item("LOCATION_PART").ToString(), .MODEL = item("MODEL").ToString(), .PRODUCT_TYP = item("PRODUCT_TYP").ToString(), .wi = item("WI").ToString(), .item_cd = item("ITEM_CD").ToString(), .item_name = item("ITEM_NAME").ToString()})
                 Dim seqPlan As String = ""
                 If Len(item("order_flg")) = 1 Then
                     seqPlan = "00" & item("order_flg").ToString
@@ -130,7 +131,7 @@ Public Class ManagePlan
             Mwi = ListView1.Items(sel_cd).SubItems(1).Text
             SelectPlan(Mwi)
         Catch ex As Exception
-            MsgBox("Please Check Plan.")
+            'msgBox("Please Check Plan.")
         End Try
     End Sub
 

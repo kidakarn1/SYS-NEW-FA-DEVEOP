@@ -7,8 +7,9 @@ Public Class Confrime_work_production
     Public Shared ArrayDataPlan As New List(Of DataPlan)
     Public Shared Function next_pae()
         Dim count_reload As Integer = 0
+        Backoffice_model.gobal_DateTimeComputerDown = "" ' ห้ามลบ ตัวเช็คคอมดับ
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 Dim line_cd_na As String = Prd_detail.Label3.Text
                 Dim LoadSQL1 = Backoffice_model.Get_Last_part(line_cd_na)
                 While LoadSQL1.Read()
@@ -16,19 +17,20 @@ Public Class Confrime_work_production
                 End While
                 Prd_detail.Enabled = False
                 Prd_detail.lb_temp_txt.Text = Prd_detail.lb_item_cd.Text
-                If Prd_detail.lb_temp_txt.Text = Prd_detail.lb_item_cd.Text Then
-                    Dim line_id As String = MainFrm.line_id.Text
+                ' If Prd_detail.lb_temp_txt.Text = Prd_detail.lb_item_cd.Text Then
+                Dim line_id As String = MainFrm.line_id.Text
                     Dim date_st As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                     Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                     If Prd_detail.check_network() = 1 Then
                         Backoffice_model.line_status_ins(line_id, date_st, date_end, "1", "0", "24", "0", Prd_detail.lb_wi.Text)
-re_load:
-                        If count_reload = 200 Then
-                            Backoffice_model.Check_detail_actual_insert_act() 'กรณีเครื่องดับ'
-                        Else
-                            count_reload += 1
-                            GoTo re_load
-                        End If
+                        're_load:
+
+                        'If count_reload = 200 Then
+                        '  Dim a = Backoffice_model.Check_detail_actual_insert_act() 'กรณีเครื่องดับ'
+                        'Else
+                        ' count_reload += 1
+                        '  GoTo re_load
+                        'End If
                         Backoffice_model.NEXT_PROCESS = Backoffice_model.F_NEXT_PROCESS(Prd_detail.lb_item_cd.Text)
                         Insert_list.Label3.Text = MainFrm.Label4.Text
                         Insert_list.ListView1.View = View.Details
@@ -47,10 +49,11 @@ re_load:
                                 Working_Pro.lbPosition2.Text = item("SPOSITION2").ToString()
                             End If
                             ArrayDataPlan.Add(New DataPlan With {.IND_ROW = item("IND_ROW").ToString(), .PS_UNIT_NUMERATOR = "PS_UNIT_NUMERATOR", .CT = item("CT").ToString(), .seq_no = item("seq_no").ToString(), .WORK_ODR_DLV_DATE = item("WORK_ODR_DLV_DATE").ToString(), .LOCATION_PART = item("LOCATION_PART").ToString(), .MODEL = item("MODEL").ToString(), .PRODUCT_TYP = item("PRODUCT_TYP").ToString(), .wi = item("WI").ToString(), .item_cd = item("ITEM_CD").ToString(), .item_name = item("ITEM_NAME").ToString()})
-                            Working_Pro.LB_IND_ROW.Text = item("IND_ROW").ToString()
-                            Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
-                            '		Prd_detail.lb_snp.Text = LoadSQL("PS_UNIT_NUMERATOR")
-                            Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
+                        Working_Pro.LB_IND_ROW.Text = item("IND_ROW").ToString()
+                        Working_Pro.Product_type = item("PRODUCT_TYP").ToString()
+                        Working_Pro.Label27.Text = item("PS_UNIT_NUMERATOR").ToString()
+                        '		Prd_detail.lb_snp.Text = LoadSQL("PS_UNIT_NUMERATOR")
+                        Prd_detail.lb_snp.Text = item("PS_UNIT_NUMERATOR").ToString()
                             Prd_detail.lb_ct.Text = item("CT").ToString()
                             Prd_detail.lb_seq.Text = item("seq_no").ToString()
                             Prd_detail.lb_dlv_date.Text = item("WORK_ODR_DLV_DATE").ToString()
@@ -110,15 +113,17 @@ re_load:
                             If status_check_ping = 1 Then
                                 Try
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
-                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
-                                    Working_Pro.PictureBox2.Image = tImage
-                                    'Working_Pro.lb_emp1.Visible = True
-                                    Working_Pro.lb_emp1.Text = emp_cd
-                                Catch ex As Exception
-                                    Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
-                                    Working_Pro.PictureBox2.Image = tImage
+                                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
+                                ''Console.WriteLine(url)
+                                Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
+                                Working_Pro.PictureBox2.Image = tImage
+                                'Working_Pro.lb_emp1.Visible = True
+                                Working_Pro.lb_emp1.Text = emp_cd
+                            Catch ex As Exception
+                                Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
+                                Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
+                                ''Console.WriteLine("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")
+                                Working_Pro.PictureBox2.Image = tImage
                                     'Working_Pro.lb_emp1.Visible = True
                                     Working_Pro.lb_emp1.Text = emp_cd
                                 End Try
@@ -132,14 +137,14 @@ re_load:
                             If status_check_ping = 1 Then
                                 Try
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                                     Working_Pro.PictureBox3.Image = tImage
                                     'Working_Pro.lb_emp2.Visible = True
                                     Working_Pro.lb_emp2.Text = emp_cd
                                 Catch ex As Exception
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                                     Working_Pro.PictureBox3.Image = tImage
                                     'Working_Pro.lb_emp2.Visible = True
                                     Working_Pro.lb_emp2.Text = emp_cd
@@ -154,14 +159,14 @@ re_load:
                             If status_check_ping = 1 Then
                                 Try
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                                     Working_Pro.PictureBox4.Image = tImage
                                     'Working_Pro.lb_emp3.Visible = True
                                     Working_Pro.lb_emp3.Text = emp_cd
                                 Catch ex As Exception
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                                     Working_Pro.PictureBox4.Image = tImage
                                     'Working_Pro.lb_emp3.Visible = True
                                     Working_Pro.lb_emp3.Text = emp_cd
@@ -176,14 +181,14 @@ re_load:
                             If status_check_ping = 1 Then
                                 Try
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                                     Working_Pro.PictureBox5.Image = tImage
                                     'Working_Pro.lb_emp4.Visible = True
                                     Working_Pro.lb_emp4.Text = emp_cd
                                 Catch ex As Exception
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                                     Working_Pro.PictureBox5.Image = tImage
                                     'Working_Pro.lb_emp4.Visible = True
                                     Working_Pro.lb_emp4.Text = emp_cd
@@ -198,14 +203,14 @@ re_load:
                             If status_check_ping = 1 Then
                                 Try
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                                     Working_Pro.PictureBox6.Image = tImage
                                     'Working_Pro.lb_emp5.Visible = True
                                     Working_Pro.lb_emp5.Text = emp_cd
                                 Catch ex As Exception
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                                     Working_Pro.PictureBox6.Image = tImage
                                     'Working_Pro.lb_emp5.Visible = True
                                     Working_Pro.lb_emp5.Text = emp_cd
@@ -220,14 +225,14 @@ re_load:
                             If status_check_ping = 1 Then
                                 Try
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim url As String = "http://192.168.161.207/tbkk_shopfloor/asset/img_emp/" & emp_cd & ".jpg"
+                                    Dim url As String = "http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/" & emp_cd & ".jpg"
                                     Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData(url)))
                                     Working_Pro.PictureBox7.Image = tImage
                                     'Working_Pro.lb_emp6.Visible = True
                                     Working_Pro.lb_emp6.Text = emp_cd
                                 Catch ex As Exception
                                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                                     Working_Pro.PictureBox7.Image = tImage
                                     'Working_Pro.lb_emp6.Visible = True
                                     Working_Pro.lb_emp6.Text = emp_cd
@@ -240,14 +245,18 @@ re_load:
                             End If
                         End If
                     Next
-                    Working_Pro.Button1.Text = MainFrm.cavity.Text & " Qty."
+                    'Working_Pro.Button1.Text = MainFrm.cavity.Text & " Qty."
                     Working_Pro.Label18.Text = Prd_detail.Label6.Text
                     Working_Pro.Label29.Text = Prd_detail.Label2.Text
                     Working_Pro.Label14.Text = Prd_detail.Label12.Text.Substring(0, 1)
                     Working_Pro.wi_no.Text = Prd_detail.lb_wi.Text
                     Working_Pro.Label3.Text = Prd_detail.lb_item_cd.Text
                     Working_Pro.Label12.Text = Prd_detail.lb_item_name.Text
-                    Working_Pro.Label8.Text = Prd_detail.lb_plan_qty.Text
+                    Working_Pro.newPartname.Text = Prd_detail.lb_item_name.Text
+                If Working_Pro.newPartname.Text.Length > 17 Then
+                    Working_Pro.newPartname.Text = Working_Pro.newPartname.Text.ToString.Substring(0, 17) & "..."
+                End If
+                Working_Pro.Label8.Text = Prd_detail.lb_plan_qty.Text
                     'Working_Pro.Label6.Text = ListView1.Items(numOfindex).SubItems(4).Text.ToString
                     'SNP
                     'Working_Pro.Label27.Text = Prd_detail.lb_snp.Text
@@ -260,71 +269,71 @@ re_load:
                     Working_Pro.Label34.Text = time_req
                     Working_Pro.Label38.Text = Format((Prd_detail.lb_ct.Text * 60) * cavi_ty, "0.0")
                     Working_Pro.Label37.Text = "0.0"
-                    'MsgBox(lb_seq.Text)
-                    'SEQ = ListBox3
-                    If Convert.ToInt32(Prd_detail.lb_seq.Text) < 10 Then
-                        'MsgBox("dfsdfg")
-                        If MainFrm.chk_spec_line = "2" Then
-                            Working_Pro.Label22.Text = "0" & Prd_detail.lb_seq.Text + MainFrm.ArrayDataPlan.ToArray.Length
-                        Else
-                            Working_Pro.Label22.Text = "0" & Prd_detail.lb_seq.Text + 1
-                        End If
+                ''msgBox(lb_seq.Text)
+                'SEQ = ListBox3
+                If Convert.ToInt32(Prd_detail.lb_seq.Text) < 10 Then
+                    ''msgBox("dfsdfg")
+                    If MainFrm.chk_spec_line = "2" Then
+                        Working_Pro.Label22.Text = "0" & Prd_detail.lb_seq.Text + MainFrm.ArrayDataPlan.ToArray.Length
                     Else
-                        If MainFrm.chk_spec_line = "2" Then
-                            Working_Pro.Label22.Text = Prd_detail.lb_seq.Text + MainFrm.ArrayDataPlan.ToArray.Length
-                        Else
-                            Working_Pro.Label22.Text = Prd_detail.lb_seq.Text + 1
-                        End If
+                        Working_Pro.Label22.Text = "0" & Prd_detail.lb_seq.Text + 1
                     End If
-                    'DLV DATE
-                    Working_Pro.lb_dlv_date.Text = Prd_detail.lb_dlv_date.Text
-                    'MODEL
-                    Working_Pro.lb_model.Text = Prd_detail.lb_model.Text
-                    'LOCATION
-                    Working_Pro.lb_location.Text = Prd_detail.lb_location.Text
-                    'PRODUCT_TYPE
-                    Try
-                        Working_Pro.lb_prd_type.Text = Prd_detail.lb_prd_type.Text
-                    Catch ex As Exception
-                        Working_Pro.lb_prd_type.Text = "30"
-                    End Try
-                    Dim sum_progress As Integer = (Prd_detail.lb_remain_qty.Text * 100) / Prd_detail.lb_plan_qty.Text
-                    sum_progress = 100 - sum_progress
-                    ' Dim total_defect As Integer = CDbl(Val(Prd_detail.QTY_NG.Text)) - CDbl(Val(Prd_detail.QTY_NC.Text))
-                    Dim sum_act As Integer = (Prd_detail.lb_plan_qty.Text - Prd_detail.lb_remain_qty.Text) '- total_defect
-                    Working_Pro.Label6.Text = sum_act
-                    Close_lot_cfm.lb_qty_count.Text = sum_act
-                    Dim sum_diff As String = Prd_detail.lb_remain_qty.Text
-                    sum_diff = "-" & sum_diff
-                    Working_Pro.Label10.Text = sum_diff
-                    Working_Pro.Label33.Text = Prd_detail.lb_remain_qty.Text
-                    Working_Pro.CircularProgressBar1.Text = sum_progress & "%"
-                    Working_Pro.CircularProgressBar1.Value = sum_progress
-                    Working_Pro.CircularProgressBar2.Text = 0 & "%"
-                    Working_Pro.CircularProgressBar2.Value = 0
-                    Working_Pro.Panel1.BackColor = Color.Red
-                    Working_Pro.Label30.Text = "STOPPED"
-                    Working_Pro.btn_start.Visible = True
-                    Working_Pro.btn_stop.Visible = False
-                    loadData_Working_OEE()
-
-                    Prd_detail.Hide()
                 Else
-                    Prd_detail.Enabled = False
-                    Model_change_alert.Show()
+                    If MainFrm.chk_spec_line = "2" Then
+                        Working_Pro.Label22.Text = Prd_detail.lb_seq.Text + MainFrm.ArrayDataPlan.ToArray.Length
+                    Else
+                        Working_Pro.Label22.Text = Prd_detail.lb_seq.Text + 1
+                    End If
                 End If
+                'DLV DATE
+                Working_Pro.lb_dlv_date.Text = Prd_detail.lb_dlv_date.Text
+                'MODEL
+                Working_Pro.lb_model.Text = Prd_detail.lb_model.Text
+                'LOCATION
+                Working_Pro.lb_location.Text = Prd_detail.lb_location.Text
+                'PRODUCT_TYPE
+                Try
+                    Working_Pro.lb_prd_type.Text = Prd_detail.lb_prd_type.Text
+                Catch ex As Exception
+                    Working_Pro.lb_prd_type.Text = "30"
+                End Try
+                Dim sum_progress As Integer = (Prd_detail.lb_remain_qty.Text * 100) / Prd_detail.lb_plan_qty.Text
+                sum_progress = 100 - sum_progress
+                ' Dim total_defect As Integer = CDbl(Val(Prd_detail.QTY_NG.Text)) - CDbl(Val(Prd_detail.QTY_NC.Text))
+                Dim sum_act As Integer = (Prd_detail.lb_plan_qty.Text - Prd_detail.lb_remain_qty.Text) '- total_defect
+                Working_Pro.Label6.Text = sum_act
+                Close_lot_cfm.lb_qty_count.Text = sum_act
+                Dim sum_diff As String = Prd_detail.lb_remain_qty.Text
+                sum_diff = "-" & sum_diff
+                Working_Pro.Label10.Text = sum_diff
+                Working_Pro.Label33.Text = Prd_detail.lb_remain_qty.Text
+                Working_Pro.CircularProgressBar1.Text = sum_progress & "%"
+                Working_Pro.CircularProgressBar1.Value = sum_progress
+                Working_Pro.CircularProgressBar2.Text = 0 & "%"
+                Working_Pro.CircularProgressBar2.Value = 0
+                Working_Pro.Panel1.BackColor = Color.Red
+                Working_Pro.Label30.Text = "STOPPED"
+                Working_Pro.btn_start.Visible = True
+                Working_Pro.btn_stop.Visible = False
+                loadData_Working_OEE()
+                Prd_detail.Hide()
+                ' Else
+                ' Prd_detail.Enabled = False
+                ' Model_change_alert.Show()
+                'End If
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'msgBox("Over Plan Or  ===> " & ex.Message)
             load_show.Show()
+            Prd_detail.Enabled = True
         End Try
     End Function
     Public Shared Sub loadData_Working_OEE()
         Working_Pro.Show()
-        'Working_OEE.lbLine.Text = MainFrm.Label4.Text
-        'Working_OEE.lbPartNo.Text = Prd_detail.lb_item_cd.Text
-        'Working_OEE.lbPartName.Text = Prd_detail.lb_item_name.Text
-        'Working_OEE.Show()
+        '  Working_OEE.lbLine.Text = MainFrm.Label4.Text
+        '  Working_OEE.lbPartNo.Text = Prd_detail.lb_item_cd.Text
+        '  Working_OEE.lbPartName.Text = Prd_detail.lb_item_name.Text
+        '  Working_OEE.Show()
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         next_pae()
@@ -352,19 +361,15 @@ re_load:
         End If
         Timer1.Enabled = True
     End Sub
-
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
 
     End Sub
-
     Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
 
     End Sub
-
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
     End Sub
-
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
 
     End Sub
@@ -383,8 +388,5 @@ re_load:
                 Button2.Visible = True
             End If
         End If
-    End Sub
-    Private Sub Timer_delay_Tick(sender As Object, e As EventArgs) Handles Timer_delay.Tick
-
     End Sub
 End Class

@@ -1,21 +1,26 @@
+Imports System.Globalization
 Imports System.Web.Script.Serialization
-
 Public Class Change_Loss2
     Public Shared S_index As Integer = 0
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Working_Pro.Enabled = True
         Me.Close()
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
-                ins_time_loss.Label2.Text = Working_Pro.Label16.Text
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
+                If Backoffice_model.S_chk_spec_line = 0 Then
+                    ins_time_loss.Label2.Text = Working_Pro.Label16.Text
+                Else ' for K1M025
+                    ' ins_time_loss.Label2.Text = Backoffice_model.date_time_start_master_shift.ToString("HH:mm:ss", CultureInfo.InvariantCulture)
+                    Dim dateTimeValue As DateTime = DateTime.Parse(Working_Pro.DateTimeStartofShift.Text)
+                    ins_time_loss.Label2.Text = dateTimeValue.ToString("HH:mm:ss")
+                End If
                 Loss_reg_pass.Label2.Text = MainFrm.Label4.Text
                 Dim sel_cd As Integer = ListView2.SelectedIndices(0)
                 Dim line_id As String = MainFrm.line_id.Text
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         Backoffice_model.line_status_upd(line_id)
                         Backoffice_model.line_status_upd_sqlite(line_id)
                     Else
@@ -29,7 +34,7 @@ Public Class Change_Loss2
                 Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Loss_reg_pass.date_start_data = date_st
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         If MainFrm.chk_spec_line = "2" Then
                             Dim j As Integer = 0
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -69,7 +74,7 @@ Public Class Change_Loss2
                 Loss_reg_pass.loss_cd.Text = ListView2.Items(sel_cd).SubItems(0).Text
                 Loss_reg_pass.Label7.Text = ListView2.Items(sel_cd).SubItems(1).Text
                 Loss_reg_pass.TextBox1.Text = ListView2.Items(sel_cd).SubItems(2).Text
-                If My.Computer.Network.Ping("192.168.161.101") Then
+                If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                     Dim LoadSQL = Backoffice_model.get_loss_op_mst(MainFrm.Label4.Text)
                     If LoadSQL <> "0" Then
                         Dim numm As Integer = 0
@@ -89,11 +94,10 @@ Public Class Change_Loss2
                 Me.Close()
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'msgBox(ex.Message)
             load_show.Show()
         End Try
     End Sub
-
     Private Sub ListView2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView2.SelectedIndexChanged
         If ListView2.SelectedItems.Count <= 0 Then
             Button1.Enabled = False
@@ -108,7 +112,7 @@ Public Class Change_Loss2
         Try
             ListView2.Items(1).Selected = True
         Catch ex As Exception
-            MsgBox("Please Check Loss Master.")
+            'msgBox("Please Check Loss Master.")
         End Try
         Timer1.Start()
     End Sub

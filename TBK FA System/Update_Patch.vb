@@ -12,8 +12,8 @@ Public Class Update_Patch
 	Public Shared Property ArchiveFactory As Object
 	Public Sub loading()
 		AddHandler _WebClient.DownloadFileCompleted, AddressOf _DownloadFileCompleted
-		'_WebClient.DownloadFileAsync(New System.Uri("http://192.168.161.207/Version_New_FA/NEW FA SYSTEM.zip"), My.Application.Info.DirectoryPath & "/New_folder/NEW FA SYSTEM.zip")
-		_WebClient.DownloadFileAsync(New System.Uri("http://192.168.161.207/Version_New_FA/NEW FA SYSTEM.zip"), "C:/Program Files/New FA/NEW FA SYSTEM.zip")
+		'_WebClient.DownloadFileAsync(New System.Uri("http://" & Backoffice_model.svApi & "/Version_New_FA/NEW FA SYSTEM.zip"), My.Application.Info.DirectoryPath & "/New_folder/NEW FA SYSTEM.zip")
+		_WebClient.DownloadFileAsync(New System.Uri("http://" & Backoffice_model.svApi & "/Version_New_FA/NEW FA SYSTEM.zip"), "C:/Program Files/New FA/NEW FA SYSTEM.zip")
 		'wc.DownloadFileAsync(New System.Uri(My.Application.Info.DirectoryPath & "\New_FA.zip"), My.Application.Info.DirectoryPath & "\New_folder\New_FA.zip")
 	End Sub
 	Public Sub _DownloadFileCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
@@ -50,8 +50,8 @@ Public Class Update_Patch
 		ProgressBar1.Value = 200
 		AddHandler _WebClient.DownloadFileCompleted, AddressOf _DownloadFileCompleted
 		My.Computer.FileSystem.CreateDirectory("C:\New FA")
-		_WebClient.DownloadFileAsync(New System.Uri("http://192.168.161.207/Version_New_FA/NEW FA SYSTEM.Zip"), "C:/New FA/NEW_FA_SYSTEM.Zip")
-		'_WebClient.DownloadFileAsync(New System.Uri("http://192.168.161.207/Version_New_FA/NEW FA SYSTEM.zip"), My.Application.Info.DirectoryPath & "/New_folder/NEW FA SYSTEM.zip")
+		_WebClient.DownloadFileAsync(New System.Uri("http://" & Backoffice_model.svApi & "/Version_New_FA/NEW FA SYSTEM.Zip"), "C:/New FA/NEW_FA_SYSTEM.Zip")
+		'_WebClient.DownloadFileAsync(New System.Uri("http://" & Backoffice_model.svApi & "/Version_New_FA/NEW FA SYSTEM.zip"), My.Application.Info.DirectoryPath & "/New_folder/NEW FA SYSTEM.zip")
 		'wc.DownloadFileAsync(New System.Uri(My.Application.Info.DirectoryPath & "\New_FA.zip"), My.Application.Info.DirectoryPath & "\New_folder\New_FA.zip")
 	End Sub
 End Class

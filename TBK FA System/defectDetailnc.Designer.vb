@@ -22,7 +22,6 @@ Partial Class defectDetailnc
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(defectDetailnc))
         Me.lbType = New System.Windows.Forms.Label()
         Me.lvDefectdetails = New System.Windows.Forms.ListView()
         Me.NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -34,6 +33,7 @@ Partial Class defectDetailnc
         Me.WI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.supplier_cd = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnUp = New System.Windows.Forms.PictureBox()
         Me.btnDown = New System.Windows.Forms.PictureBox()
         Me.btnBack = New System.Windows.Forms.PictureBox()
@@ -50,7 +50,7 @@ Partial Class defectDetailnc
         Me.lbType.BackColor = System.Drawing.Color.Transparent
         Me.lbType.Font = New System.Drawing.Font("Yu Gothic", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbType.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.lbType.Location = New System.Drawing.Point(700, 30)
+        Me.lbType.Location = New System.Drawing.Point(727, 108)
         Me.lbType.Name = "lbType"
         Me.lbType.Size = New System.Drawing.Size(68, 45)
         Me.lbType.TabIndex = 2
@@ -62,12 +62,12 @@ Partial Class defectDetailnc
         Me.lvDefectdetails.AllowColumnReorder = True
         Me.lvDefectdetails.AllowDrop = True
         Me.lvDefectdetails.AutoArrange = False
-        Me.lvDefectdetails.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
+        Me.lvDefectdetails.BackColor = System.Drawing.Color.White
         Me.lvDefectdetails.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.lvDefectdetails.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.PARTNO, Me.TYPE, Me.CODE, Me.DETAIL, Me.QTY, Me.WI, Me.SEQ, Me.pwi_id})
+        Me.lvDefectdetails.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.NO, Me.PARTNO, Me.TYPE, Me.CODE, Me.DETAIL, Me.QTY, Me.WI, Me.SEQ, Me.pwi_id, Me.supplier_cd})
         Me.lvDefectdetails.Cursor = System.Windows.Forms.Cursors.Default
         Me.lvDefectdetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Bold)
-        Me.lvDefectdetails.ForeColor = System.Drawing.Color.White
+        Me.lvDefectdetails.ForeColor = System.Drawing.Color.Black
         Me.lvDefectdetails.FullRowSelect = True
         Me.lvDefectdetails.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvDefectdetails.HideSelection = False
@@ -122,12 +122,16 @@ Partial Class defectDetailnc
         '
         Me.pwi_id.Width = 0
         '
+        'supplier_cd
+        '
+        Me.supplier_cd.Width = 0
+        '
         'btnUp
         '
         Me.btnUp.BackColor = System.Drawing.Color.Transparent
-        Me.btnUp.Location = New System.Drawing.Point(682, 239)
+        Me.btnUp.Location = New System.Drawing.Point(679, 177)
         Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(110, 111)
+        Me.btnUp.Size = New System.Drawing.Size(110, 159)
         Me.btnUp.TabIndex = 42
         Me.btnUp.TabStop = False
         '
@@ -136,25 +140,25 @@ Partial Class defectDetailnc
         Me.btnDown.BackColor = System.Drawing.Color.Transparent
         Me.btnDown.Location = New System.Drawing.Point(682, 352)
         Me.btnDown.Name = "btnDown"
-        Me.btnDown.Size = New System.Drawing.Size(110, 111)
+        Me.btnDown.Size = New System.Drawing.Size(110, 156)
         Me.btnDown.TabIndex = 43
         Me.btnDown.TabStop = False
         '
         'btnBack
         '
         Me.btnBack.BackColor = System.Drawing.Color.Transparent
-        Me.btnBack.Location = New System.Drawing.Point(9, 504)
+        Me.btnBack.Location = New System.Drawing.Point(24, 504)
         Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(117, 99)
+        Me.btnBack.Size = New System.Drawing.Size(198, 94)
         Me.btnBack.TabIndex = 44
         Me.btnBack.TabStop = False
         '
         'btnOk
         '
         Me.btnOk.BackColor = System.Drawing.Color.Transparent
-        Me.btnOk.Location = New System.Drawing.Point(682, 499)
+        Me.btnOk.Location = New System.Drawing.Point(574, 514)
         Me.btnOk.Name = "btnOk"
-        Me.btnOk.Size = New System.Drawing.Size(117, 99)
+        Me.btnOk.Size = New System.Drawing.Size(225, 84)
         Me.btnOk.TabIndex = 45
         Me.btnOk.TabStop = False
         '
@@ -162,7 +166,7 @@ Partial Class defectDetailnc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.defectDetailadjustNew231
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.btnDown)
         Me.Controls.Add(Me.btnUp)
@@ -197,4 +201,5 @@ Partial Class defectDetailnc
     Friend WithEvents SEQ As ColumnHeader
     Friend WithEvents pwi_id As ColumnHeader
     Friend WithEvents TYPE As ColumnHeader
+    Friend WithEvents supplier_cd As ColumnHeader
 End Class

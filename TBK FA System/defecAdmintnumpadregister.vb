@@ -15,7 +15,8 @@ Public Class defecAdmintnumpadregister
                 lbMaxqty.Text = calMaxqtyregisternc(actTotal, ncTotal, ngTotal)
             Else
                 Dim md = New modelDefect
-                Dim UseQty = md.mGetdefectdetailncPartno(defectAdmindetailnc.sWi, defectAdmindetailnc.dSeq, defectAdmindetailnc.sLot, "2", lbPartno.Text)
+                ' Dim UseQty = md.mGetdefectdetailncPartno(defectAdmindetailnc.sWi, defectAdmindetailnc.dSeq, defectAdmindetailnc.sLot, "2", lbPartno.Text)
+                Dim UseQty = md.mGetdefectdetailPartno(defectAdmindetailnc.sWi, defectAdmindetailnc.dSeq, defectAdmindetailnc.sLot, "2", lbPartno.Text)
                 maxQty = (999 - Convert.ToInt32(UseQty))
                 lbMaxqty.Text = maxQty
             End If
@@ -24,7 +25,8 @@ Public Class defecAdmintnumpadregister
                 lbMaxqty.Text = calMaxqtyregisterng(actTotal, ncTotal, ngTotal)
             Else
                 Dim md = New modelDefect
-                Dim UseQty = md.mGetdefectdetailncPartno(defectAdmindetailng.sWi, defectAdmindetailng.dSeq, defectAdmindetailng.sLot, "1", lbPartno.Text)
+                ' Dim UseQty = md.mGetdefectdetailncPartno(defectAdmindetailng.sWi, defectAdmindetailng.dSeq, defectAdmindetailng.sLot, "1", lbPartno.Text)
+                Dim UseQty = md.mGetdefectdetailPartno(defectAdmindetailng.sWi, defectAdmindetailng.dSeq, defectAdmindetailng.sLot, "1", lbPartno.Text)
                 maxQty = (999 - Convert.ToInt32(UseQty))
                 lbMaxqty.Text = maxQty
             End If
@@ -62,7 +64,7 @@ Public Class defecAdmintnumpadregister
             Me.Close()
             defectAdminregister.Show()
         Else
-            MsgBox("Please Check QTY Input")
+            'msgBox("Please Check QTY Input")
         End If
     End Sub
     Public Shared Function calNumpadregister(rtQty As Integer, maxQty As Integer)
@@ -125,7 +127,7 @@ Public Class defecAdmintnumpadregister
         If maxQty < 0 Then
             maxQty = actTotal
         End If
-        'MsgBox(actTotal & " - " & "(" & ncTotal & " + " & ngTotal & ") = " & maxQty)
+        ''msgBox(actTotal & " - " & "(" & ncTotal & " + " & ngTotal & ") = " & maxQty)
         Return maxQty
     End Function
 

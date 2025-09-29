@@ -12,46 +12,47 @@ Public Class defectNumpadregister
             lbMaxqty.Text = calMaxqtyregister(actTotal, ncTotal, ngTotal)
         Else
             Dim md = New modelDefect
-            Dim UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, defectSelecttype.dtType, lbPartno.Text)
+            ' Dim UseQty = md.mGetdefectdetailncPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, defectSelecttype.dtType, lbPartno.Text)
+            Dim UseQty = md.mGetdefectdetailPartno(Working_Pro.wi_no.Text, Working_Pro.Label22.Text, Working_Pro.Label18.Text, defectSelecttype.dtType, lbPartno.Text)
             Dim maxQty As Integer = (999 - Convert.ToInt32(UseQty))
             lbMaxqty.Text = maxQty '999 '"Unlimited"
         End If
     End Sub
     Public Sub setVariable()
         Dim objdefectregis As New defectRegister()
-        'MsgBox("objdefectregis.lbPart.Text =  " & objdefectregis.lbPart.Text)
+        ''msgBox("objdefectregis.lbPart.Text =  " & objdefectregis.lbPart.Text)
         lbPartno.Text = objdefectregis.lbPart.Text
         tbAddqty.Text = objdefectregis.dfQty
         lbPartno.Text = objdefectregis.sPart
         actTotal = objdefectregisSelect.actTotal
         ncTotal = objdefectregisSelect.ncTotal
         ngTotal = objdefectregisSelect.ngTotal
-        'MsgBox("actTotal = >>>" & actTotal)
+        ''msgBox("actTotal = >>>" & actTotal)
     End Sub
-	Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-		clickOk()
-	End Sub
+    Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
+        clickOk()
+    End Sub
     Public Sub clickOk()
 
         If defectSelecttype.type = "1" Then
-                If tbAddqty.Text = "" Then
-                    tbAddqty.Text = "0"
-                End If
-                Dim rsCheck = calNumpadregister(tbAddqty.Text, lbMaxqty.Text)
-                If rsCheck Then
-                    ' Dim objdefectregis As New defectRegister()
-                    defectRegister.dfQty = CDbl(Val(tbAddqty.Text))
-                    defectRegister.tbQtydefectnc.Text = CDbl(Val(tbAddqty.Text))
-                    Me.Close()
-                    defectRegister.Show()
-                Else
-                    MsgBox("Please Check QTY Input")
-                End If
+            If tbAddqty.Text = "" Then
+                tbAddqty.Text = "0"
+            End If
+            Dim rsCheck = calNumpadregister(tbAddqty.Text, lbMaxqty.Text)
+            If rsCheck Then
+                ' Dim objdefectregis As New defectRegister()
+                defectRegister.dfQty = CDbl(Val(tbAddqty.Text))
+                defectRegister.tbQtydefectnc.Text = CDbl(Val(tbAddqty.Text))
+                Me.Close()
+                defectRegister.Show()
             Else
-                If tbAddqty.Text = "" Then
-                    tbAddqty.Text = "0"
-                End If
-                Dim rsCheck = calNumpadregister(tbAddqty.Text, lbMaxqty.Text)
+                'msgBox("Please Check QTY Input")
+            End If
+        Else
+            If tbAddqty.Text = "" Then
+                tbAddqty.Text = "0"
+            End If
+            Dim rsCheck = calNumpadregister(tbAddqty.Text, lbMaxqty.Text)
             If rsCheck Then
                 If CDbl(Val(Working_Pro.LB_COUNTER_SEQ.Text)) > 0 Then
                     ' Dim objdefectregis As New defectRegister()
@@ -60,11 +61,11 @@ Public Class defectNumpadregister
                     Me.Close()
                     defectRegister.Show()
                 Else
-                    MsgBox("Please Input Actaual QTY")
+                    'msgBox("Please Input Actaual QTY")
                 End If
             Else
-                MsgBox("Please Check QTY Input")
-                End If
+                'msgBox("Please Check QTY Input")
+            End If
                 'defectRegister.dfQty = CDbl(Val(tbAddqty.Text))
                 'defectRegister.tbQtydefectnc.Text = CDbl(Val(tbAddqty.Text))
                 'Me.Close()
@@ -130,4 +131,8 @@ Public Class defectNumpadregister
         Dim maxQty = actTotal - (ncTotal + ngTotal)
         Return maxQty
     End Function
+
+    Private Sub lbMaxqty_Click(sender As Object, e As EventArgs) Handles lbMaxqty.Click
+
+    End Sub
 End Class

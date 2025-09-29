@@ -36,6 +36,7 @@ Partial Class print_back
         Me.LB_FONT_DATA = New System.Windows.Forms.Label()
         Me.BTitle = New System.Windows.Forms.Label()
         Me.batchModel = New System.Windows.Forms.Label()
+        Me.lb_incomp = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'PrintDocument1
@@ -115,7 +116,7 @@ Partial Class print_back
         '
         Me.Label_wi_type.AutoSize = True
         Me.Label_wi_type.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_wi_type.Location = New System.Drawing.Point(397, 256)
+        Me.Label_wi_type.Location = New System.Drawing.Point(208, 246)
         Me.Label_wi_type.Name = "Label_wi_type"
         Me.Label_wi_type.Size = New System.Drawing.Size(75, 13)
         Me.Label_wi_type.TabIndex = 7
@@ -164,11 +165,22 @@ Partial Class print_back
         Me.batchModel.TabIndex = 11
         Me.batchModel.Text = "batchModel"
         '
+        'lb_incomp
+        '
+        Me.lb_incomp.AutoSize = True
+        Me.lb_incomp.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
+        Me.lb_incomp.Location = New System.Drawing.Point(208, 270)
+        Me.lb_incomp.Name = "lb_incomp"
+        Me.lb_incomp.Size = New System.Drawing.Size(54, 13)
+        Me.lb_incomp.TabIndex = 12
+        Me.lb_incomp.Text = "lb_incomp"
+        '
         'print_back
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.lb_incomp)
         Me.Controls.Add(Me.batchModel)
         Me.Controls.Add(Me.BTitle)
         Me.Controls.Add(Me.LB_FONT_DATA)
@@ -202,4 +214,5 @@ Partial Class print_back
     Friend WithEvents LB_FONT_DATA As Label
     Friend WithEvents BTitle As Label
     Friend WithEvents batchModel As Label
+    Friend WithEvents lb_incomp As Label
 End Class

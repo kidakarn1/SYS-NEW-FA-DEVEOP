@@ -353,15 +353,10 @@
         End If
     End Sub
     Private Sub btnm_Click(sender As Object, e As EventArgs) Handles btnm.Click
-        If Application.OpenForms().OfType(Of List_Emp).Any Then
-            Sc.TextBox2.Text = Sc.TextBox2.Text & "M"
-            TextBoxKeyboard.Text = TextBoxKeyboard.Text & "M"
-        Else
-            TextBoxKeyboard.Text = TextBoxKeyboard.Text & "M"
-            Adm_login.TextBox1.Text = TextBoxKeyboard.Text
-        End If
+        Sc.TextBox2.Text = Sc.TextBox2.Text & "M"
+        TextBoxKeyboard.Text = TextBoxKeyboard.Text & "M"
     End Sub
-    Private Sub btnh_Click(sender As Object, e As EventArgs) Handles btnm.Click, btnh.Click
+    Private Sub btnh_Click(sender As Object, e As EventArgs) Handles btnh.Click
         If Application.OpenForms().OfType(Of List_Emp).Any Then
             Sc.TextBox2.Text = Sc.TextBox2.Text & "H"
             TextBoxKeyboard.Text = TextBoxKeyboard.Text & "H"

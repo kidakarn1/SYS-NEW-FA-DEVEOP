@@ -15,6 +15,7 @@ Public Class defectDetailng
     Public Shared dtCode As String = ""
     Public Shared dtQty As String = ""
     Public Shared dtMenu As String = "1"
+    Public Shared mainCP As String = ""
     Public Shared dtActualdate As String = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
     Dim cBuottndown As Integer = 0
     Dim cListview As Integer = 0
@@ -23,6 +24,7 @@ Public Class defectDetailng
     Public Shared dtnameItemtype As String = ""
     Public Shared dtpwi_id As String = ""
     Public Shared dtName As String = ""
+    Public Shared source_code_supplier As String = ""
     Private Sub defectDetailng_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'SEQ = Working_Pro.seqNo
         dtSeqno = Working_Pro.seqNo
@@ -76,6 +78,8 @@ Public Class defectDetailng
                         datlvDefectdetails.SubItems.Add(item("dt_seq_no").ToString()) 'seq
                         datlvDefectdetails.SubItems.Add(item("pwi_id").ToString())
                     End If
+                    datlvDefectdetails.SubItems.Add(item("dt_main_cp").ToString())
+                    datlvDefectdetails.SubItems.Add(item("dt_supplier_code").ToString())
                     lvDefectdetails.Items.Add(datlvDefectdetails)
                     i += 1
                 End If
@@ -104,20 +108,25 @@ Public Class defectDetailng
                     Me.sNg = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
                     Me.dtQty = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
                     Me.dtName = lvDefectdetails.Items(lvItem.Index).SubItems(4).Text
+                    Me.mainCP = lvDefectdetails.Items(lvItem.Index).SubItems(7).Text
+                    Me.source_code_supplier = lvDefectdetails.Items(lvItem.Index).SubItems(8).Text
                     If MainFrm.chk_spec_line = "2" Then
                         dtWino = lvDefectdetails.Items(lvItem.Index).SubItems(6).Text
                         dtSeqno = lvDefectdetails.Items(lvItem.Index).SubItems(7).Text
                         dtpwi_id = lvDefectdetails.Items(lvItem.Index).SubItems(8).Text
+                        Me.mainCP = lvDefectdetails.Items(lvItem.Index).SubItems(9).Text
+                        Me.source_code_supplier = lvDefectdetails.Items(lvItem.Index).SubItems(10).Text
                     End If
                 Next
                 Dim dfNumpadafjust = New defectNumpadadjust
+                dfNumpadafjust.GdfNumpadafjust = dfNumpadafjust
                 dfNumpadafjust.Show()
                 Me.Close()
             Else
-                MsgBox("Please Select Data")
+                'msgBox("Please Select Data")
             End If
         Catch ex As Exception
-            MsgBox("Please Select Data")
+            'msgBox("Please Select Data")
         End Try
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

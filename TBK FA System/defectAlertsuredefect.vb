@@ -15,7 +15,7 @@ Public Class defectAlertsuredefect
         End If
     End Sub
     Public Sub manage_Adjust()
-        'MsgBox("defectAdminregister.tbQtydefect.Text = " & defectAdminregister.tbQtydefect.Text)
+        ''msgBox("defectAdminregister.tbQtydefect.Text = " & defectAdminregister.tbQtydefect.Text)
         Dim dfAdminHome As New defectAdminhome
         Dim dfAdminRegister As New defectAdminregister
         If defectAdminAdjustnumpadadjust.tbAddjust.Text < 0 Then
@@ -30,7 +30,7 @@ Public Class defectAlertsuredefect
             dfType = "1"
         End If
         Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
-        'MsgBox("defectAdminregister.dtQty = " & defectAdminregister.dtQty)
+        ''msgBox("defectAdminregister.dtQty = " & defectAdminregister.dtQty)
         Dim clSumarry As New closeLotsummary()
         Dim trFlg As String = "1"
         Dim dFlg As String = "0"
@@ -49,7 +49,7 @@ Public Class defectAlertsuredefect
         Me.Close()
     End Sub
     Public Sub manage_Register()
-        'MsgBox("defectAdminregister.tbQtydefect.Text = " & defectAdminregister.tbQtydefect.Text)
+        ''msgBox("defectAdminregister.tbQtydefect.Text = " & defectAdminregister.tbQtydefect.Text)
         Dim dfAdminHome As New defectAdminhome
         Dim dfAdminRegister As New defectAdminregister
         If defectAdminregister.lbQtydefect.Text < 0 Then
@@ -62,12 +62,13 @@ Public Class defectAlertsuredefect
         If dfAdminHome.dfType = "NC" Then
             dfType = "2"
             Apiw_id = defectAdmindetailnc.Apwi_id
-            ' MsgBox("Apiw_id === > " & Apiw_id)
+            ' 'msgBox("Apiw_id === > " & Apiw_id)
         ElseIf dfAdminHome.dfType = "NG" Then
             dfType = "1"
             Apiw_id = defectAdmindetailng.Apwi_id
         End If
         Dim dtActualdate = DateTime.Now.ToString("yyyy-MM-dd H:m:s")
+        ' asdasd
         Dim rs = defectAdminregister.insertDefectregister(defectAdminregister.dtWino, defectAdminregister.dtLineno, defectAdminregister.dtItemcd, defectAdminregister.dtItemtype, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, dfType, defectAdminregister.dtCode, defectAdminregister.lbQtydefect.Text, "2", dtActualdate, Apiw_id)
         If rs Then
             Dim clSumarry As New closeLotsummary()
@@ -150,7 +151,6 @@ Public Class defectAlertsuredefect
         Dim mdsqlie = New ModelSqliteDefect
         'rsNc = md.GetdatachildpartsummarychildgrouppartAdminAdjust(wi, seq, lot, dfType, obj.SPART) 'NC
         'rsFgNc = md.Getdatachildpartsummaryfggrouppart(wi, seq, lot, dfType) 'NC
-
         rsNc = mdsqlie.mSqliteGetdatachildpartsummarychildgrouppartAdminAdjust(wi, seq, lot, dfType, obj.SPART)
         rsFgNc = mdsqlie.mSqliteGetdatachildpartsummaryfggrouppart(wi, seq, lot, dfType)
         Dim itemType = "1"
@@ -227,7 +227,7 @@ Public Class defectAlertsuredefect
                 Apiw_id = defectAdmindetailng.Apwi_id
             End If
             Dim rsDatainsert = md.mInsertdefectactual(defectAdminregister.dtWino, defectAdminregister.dtLineno, defectAdminregister.dtItemcd, defectAdminregister.dtItemtype, defectAdminregister.dtLotno, defectAdminregister.dtSeqno, dfType, defectAdminregister.dtCode, dtQty, "2", dtActualdate, Apiw_id)
-            Dim rsApi = md.mGetdatepartdetail(defectAdminregister.dtItemcd, defectAdminselecttypeng.type)
+            Dim rsApi = md.mGetdatepartdetail(defectAdminregister.sPart, defectAdminselecttypeng.type)
             Dim dChild As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rsApi)
             Dim factory_cd As String = "NO DATA"
             Dim plan_cd As String = "NO_DATA"

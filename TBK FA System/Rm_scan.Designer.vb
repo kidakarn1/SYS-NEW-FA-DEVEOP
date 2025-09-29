@@ -22,12 +22,15 @@ Partial Class Rm_scan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Rm_scan))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel_scan_picking = New System.Windows.Forms.Panel()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.scan_item_cd = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.Panel_scan_picking.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -44,6 +47,7 @@ Partial Class Rm_scan
         '
         Me.Panel_scan_picking.BackColor = System.Drawing.Color.CadetBlue
         Me.Panel_scan_picking.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.scanMaterial
+        Me.Panel_scan_picking.Controls.Add(Me.PictureBox1)
         Me.Panel_scan_picking.Controls.Add(Me.Button3)
         Me.Panel_scan_picking.Controls.Add(Me.scan_item_cd)
         Me.Panel_scan_picking.Location = New System.Drawing.Point(0, 0)
@@ -77,6 +81,17 @@ Partial Class Rm_scan
         Me.scan_item_cd.TabIndex = 0
         Me.scan_item_cd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(626, 210)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(105, 98)
+        Me.PictureBox1.TabIndex = 8
+        Me.PictureBox1.TabStop = False
+        '
         'Rm_scan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -90,6 +105,7 @@ Partial Class Rm_scan
         Me.Panel1.ResumeLayout(False)
         Me.Panel_scan_picking.ResumeLayout(False)
         Me.Panel_scan_picking.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -98,4 +114,5 @@ Partial Class Rm_scan
     Friend WithEvents Button3 As Button
     Friend WithEvents scan_item_cd As TextBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

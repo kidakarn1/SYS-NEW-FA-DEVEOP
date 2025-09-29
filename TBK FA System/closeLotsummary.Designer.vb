@@ -51,7 +51,6 @@ Partial Class closeLotsummary
         Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader11 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Button1 = New System.Windows.Forms.PictureBox()
-        Me.btnOk = New System.Windows.Forms.PictureBox()
         Me.btnUp = New System.Windows.Forms.PictureBox()
         Me.btnDown = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -62,6 +61,7 @@ Partial Class closeLotsummary
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lbDefectAll = New System.Windows.Forms.Label()
         Me.pbSpecialSummary = New System.Windows.Forms.PictureBox()
         Me.ListView2 = New System.Windows.Forms.ListView()
         Me.NO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -72,25 +72,30 @@ Partial Class closeLotsummary
         Me.NC = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.NG = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.btnOk = New System.Windows.Forms.PictureBox()
+        Me.loadNet = New System.Windows.Forms.PictureBox()
         CType(Me.Button1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnOk, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         CType(Me.pbSpecialSummary, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnOk, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.loadNet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbWi
         '
         Me.lbWi.AutoSize = True
         Me.lbWi.BackColor = System.Drawing.Color.Transparent
-        Me.lbWi.Font = New System.Drawing.Font("Catamaran", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbWi.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbWi.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbWi.Location = New System.Drawing.Point(382, 109)
+        Me.lbWi.Location = New System.Drawing.Point(322, 121)
         Me.lbWi.Name = "lbWi"
-        Me.lbWi.Size = New System.Drawing.Size(213, 32)
+        Me.lbWi.Size = New System.Drawing.Size(226, 38)
         Me.lbWi.TabIndex = 4
         Me.lbWi.Text = "XXXXXXXXXXX"
         '
@@ -98,11 +103,11 @@ Partial Class closeLotsummary
         '
         Me.lbModel.AutoSize = True
         Me.lbModel.BackColor = System.Drawing.Color.Transparent
-        Me.lbModel.Font = New System.Drawing.Font("Catamaran", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.lbModel.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 14.75!, System.Drawing.FontStyle.Bold)
         Me.lbModel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbModel.Location = New System.Drawing.Point(90, 85)
+        Me.lbModel.Location = New System.Drawing.Point(93, 95)
         Me.lbModel.Name = "lbModel"
-        Me.lbModel.Size = New System.Drawing.Size(153, 23)
+        Me.lbModel.Size = New System.Drawing.Size(155, 25)
         Me.lbModel.TabIndex = 6
         Me.lbModel.Text = "XXXXXXXXXXX"
         '
@@ -130,35 +135,37 @@ Partial Class closeLotsummary
         Me.lbNc.BackColor = System.Drawing.Color.Transparent
         Me.lbNc.Font = New System.Drawing.Font("Catamaran", 24.0!)
         Me.lbNc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lbNc.Location = New System.Drawing.Point(534, 481)
+        Me.lbNc.Location = New System.Drawing.Point(39, 6)
         Me.lbNc.Name = "lbNc"
         Me.lbNc.Size = New System.Drawing.Size(35, 34)
         Me.lbNc.TabIndex = 13
         Me.lbNc.Text = "0"
         Me.lbNc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbNc.Visible = False
         '
         'lbNg
         '
         Me.lbNg.AutoSize = True
         Me.lbNg.BackColor = System.Drawing.Color.Transparent
-        Me.lbNg.Font = New System.Drawing.Font("Catamaran", 24.0!)
+        Me.lbNg.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbNg.ForeColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.lbNg.Location = New System.Drawing.Point(533, 525)
+        Me.lbNg.Location = New System.Drawing.Point(418, 504)
         Me.lbNg.Name = "lbNg"
-        Me.lbNg.Size = New System.Drawing.Size(35, 34)
+        Me.lbNg.Size = New System.Drawing.Size(39, 41)
         Me.lbNg.TabIndex = 14
         Me.lbNg.Text = "0"
         Me.lbNg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbNg.Visible = False
         '
         'lbLine
         '
         Me.lbLine.AutoSize = True
         Me.lbLine.BackColor = System.Drawing.Color.Transparent
-        Me.lbLine.Font = New System.Drawing.Font("Catamaran", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.lbLine.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbLine.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbLine.Location = New System.Drawing.Point(71, 57)
+        Me.lbLine.Location = New System.Drawing.Point(67, 64)
         Me.lbLine.Name = "lbLine"
-        Me.lbLine.Size = New System.Drawing.Size(88, 23)
+        Me.lbLine.Size = New System.Drawing.Size(96, 26)
         Me.lbLine.TabIndex = 17
         Me.lbLine.Text = "XXXXXX"
         '
@@ -168,20 +175,20 @@ Partial Class closeLotsummary
         Me.lvSumarychild.AllowColumnReorder = True
         Me.lvSumarychild.AllowDrop = True
         Me.lvSumarychild.AutoArrange = False
-        Me.lvSumarychild.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
+        Me.lvSumarychild.BackColor = System.Drawing.Color.White
         Me.lvSumarychild.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvSumarychild.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.TYPE, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.lvSumarychild.Cursor = System.Windows.Forms.Cursors.Default
-        Me.lvSumarychild.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.lvSumarychild.ForeColor = System.Drawing.Color.White
+        Me.lvSumarychild.Font = New System.Drawing.Font("Panton-Trial", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lvSumarychild.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.lvSumarychild.FullRowSelect = True
-        Me.lvSumarychild.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lvSumarychild.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lvSumarychild.HideSelection = False
-        Me.lvSumarychild.Location = New System.Drawing.Point(44, 326)
+        Me.lvSumarychild.Location = New System.Drawing.Point(25, 368)
         Me.lvSumarychild.MultiSelect = False
         Me.lvSumarychild.Name = "lvSumarychild"
         Me.lvSumarychild.ShowGroups = False
-        Me.lvSumarychild.Size = New System.Drawing.Size(661, 137)
+        Me.lvSumarychild.Size = New System.Drawing.Size(644, 133)
         Me.lvSumarychild.TabIndex = 41
         Me.lvSumarychild.UseCompatibleStateImageBehavior = False
         Me.lvSumarychild.View = System.Windows.Forms.View.Details
@@ -189,27 +196,27 @@ Partial Class closeLotsummary
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "NO"
-        Me.ColumnHeader1.Width = 43
+        Me.ColumnHeader1.Width = 56
         '
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "PART NO"
-        Me.ColumnHeader2.Width = 205
+        Me.ColumnHeader2.Width = 146
         '
         'TYPE
         '
         Me.TYPE.Text = "TYPE"
-        Me.TYPE.Width = 80
+        Me.TYPE.Width = 88
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "CODE"
-        Me.ColumnHeader3.Width = 80
+        Me.ColumnHeader3.Width = 91
         '
         'ColumnHeader4
         '
         Me.ColumnHeader4.Text = "DETAIL"
-        Me.ColumnHeader4.Width = 200
+        Me.ColumnHeader4.Width = 178
         '
         'ColumnHeader5
         '
@@ -238,11 +245,11 @@ Partial Class closeLotsummary
         '
         Me.lbGood.AutoSize = True
         Me.lbGood.BackColor = System.Drawing.Color.Transparent
-        Me.lbGood.Font = New System.Drawing.Font("Catamaran", 24.0!)
+        Me.lbGood.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbGood.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lbGood.Location = New System.Drawing.Point(351, 526)
+        Me.lbGood.Location = New System.Drawing.Point(359, 540)
         Me.lbGood.Name = "lbGood"
-        Me.lbGood.Size = New System.Drawing.Size(35, 34)
+        Me.lbGood.Size = New System.Drawing.Size(39, 41)
         Me.lbGood.TabIndex = 48
         Me.lbGood.Text = "0"
         Me.lbGood.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -251,11 +258,11 @@ Partial Class closeLotsummary
         '
         Me.lbAct.AutoSize = True
         Me.lbAct.BackColor = System.Drawing.Color.Transparent
-        Me.lbAct.Font = New System.Drawing.Font("Catamaran", 24.0!)
+        Me.lbAct.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbAct.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbAct.Location = New System.Drawing.Point(349, 481)
+        Me.lbAct.Location = New System.Drawing.Point(245, 541)
         Me.lbAct.Name = "lbAct"
-        Me.lbAct.Size = New System.Drawing.Size(35, 34)
+        Me.lbAct.Size = New System.Drawing.Size(39, 41)
         Me.lbAct.TabIndex = 47
         Me.lbAct.Text = "0"
         Me.lbAct.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -284,20 +291,20 @@ Partial Class closeLotsummary
         Me.lvSumaryfg.AllowColumnReorder = True
         Me.lvSumaryfg.AllowDrop = True
         Me.lvSumaryfg.AutoArrange = False
-        Me.lvSumaryfg.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
+        Me.lvSumaryfg.BackColor = System.Drawing.Color.White
         Me.lvSumaryfg.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvSumaryfg.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9, Me.ColumnHeader10, Me.ColumnHeader11})
         Me.lvSumaryfg.Cursor = System.Windows.Forms.Cursors.Default
-        Me.lvSumaryfg.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.lvSumaryfg.ForeColor = System.Drawing.Color.White
+        Me.lvSumaryfg.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvSumaryfg.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.lvSumaryfg.FullRowSelect = True
         Me.lvSumaryfg.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvSumaryfg.HideSelection = False
-        Me.lvSumaryfg.Location = New System.Drawing.Point(45, 178)
+        Me.lvSumaryfg.Location = New System.Drawing.Point(24, 201)
         Me.lvSumaryfg.MultiSelect = False
         Me.lvSumaryfg.Name = "lvSumaryfg"
         Me.lvSumaryfg.ShowGroups = False
-        Me.lvSumaryfg.Size = New System.Drawing.Size(661, 73)
+        Me.lvSumaryfg.Size = New System.Drawing.Size(645, 83)
         Me.lvSumaryfg.TabIndex = 41
         Me.lvSumaryfg.UseCompatibleStateImageBehavior = False
         Me.lvSumaryfg.View = System.Windows.Forms.View.Details
@@ -310,79 +317,70 @@ Partial Class closeLotsummary
         'ColumnHeader7
         '
         Me.ColumnHeader7.Text = "PART NO"
-        Me.ColumnHeader7.Width = 205
+        Me.ColumnHeader7.Width = 159
         '
         'ColumnHeader8
         '
         Me.ColumnHeader8.Text = "TYPE"
-        Me.ColumnHeader8.Width = 80
+        Me.ColumnHeader8.Width = 88
         '
         'ColumnHeader9
         '
         Me.ColumnHeader9.Text = "CODE"
-        Me.ColumnHeader9.Width = 80
+        Me.ColumnHeader9.Width = 92
         '
         'ColumnHeader10
         '
         Me.ColumnHeader10.Text = "DETAIL"
-        Me.ColumnHeader10.Width = 200
+        Me.ColumnHeader10.Width = 176
         '
         'ColumnHeader11
         '
         Me.ColumnHeader11.Text = "QTY"
-        Me.ColumnHeader11.Width = 80
+        Me.ColumnHeader11.Width = 84
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.Transparent
-        Me.Button1.Location = New System.Drawing.Point(2, 509)
+        Me.Button1.Location = New System.Drawing.Point(10, 509)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(194, 88)
         Me.Button1.TabIndex = 51
         Me.Button1.TabStop = False
         '
-        'btnOk
-        '
-        Me.btnOk.BackColor = System.Drawing.Color.Transparent
-        Me.btnOk.Location = New System.Drawing.Point(600, 509)
-        Me.btnOk.Name = "btnOk"
-        Me.btnOk.Size = New System.Drawing.Size(207, 88)
-        Me.btnOk.TabIndex = 52
-        Me.btnOk.TabStop = False
-        '
         'btnUp
         '
         Me.btnUp.BackColor = System.Drawing.Color.Transparent
-        Me.btnUp.Location = New System.Drawing.Point(712, 317)
+        Me.btnUp.Location = New System.Drawing.Point(684, 353)
         Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(67, 76)
+        Me.btnUp.Size = New System.Drawing.Size(95, 75)
         Me.btnUp.TabIndex = 53
         Me.btnUp.TabStop = False
         '
         'btnDown
         '
         Me.btnDown.BackColor = System.Drawing.Color.Transparent
-        Me.btnDown.Location = New System.Drawing.Point(712, 396)
+        Me.btnDown.Location = New System.Drawing.Point(684, 431)
         Me.btnDown.Name = "btnDown"
-        Me.btnDown.Size = New System.Drawing.Size(67, 76)
+        Me.btnDown.Size = New System.Drawing.Size(95, 76)
         Me.btnDown.TabIndex = 54
         Me.btnDown.TabStop = False
         '
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.Location = New System.Drawing.Point(712, 163)
+        Me.PictureBox1.Location = New System.Drawing.Point(684, 165)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(67, 50)
+        Me.PictureBox1.Size = New System.Drawing.Size(95, 72)
         Me.PictureBox1.TabIndex = 55
         Me.PictureBox1.TabStop = False
         '
         'PictureBox2
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Location = New System.Drawing.Point(712, 214)
+        Me.PictureBox2.Location = New System.Drawing.Point(684, 243)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(67, 50)
+        Me.PictureBox2.Size = New System.Drawing.Size(95, 80)
         Me.PictureBox2.TabIndex = 56
         Me.PictureBox2.TabStop = False
         '
@@ -413,7 +411,7 @@ Partial Class closeLotsummary
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
-        Me.Panel1.Location = New System.Drawing.Point(325, 480)
+        Me.Panel1.Location = New System.Drawing.Point(222, 545)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(113, 36)
         Me.Panel1.TabIndex = 59
@@ -424,7 +422,7 @@ Partial Class closeLotsummary
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BackColor = System.Drawing.Color.Transparent
-        Me.Panel2.Location = New System.Drawing.Point(325, 525)
+        Me.Panel2.Location = New System.Drawing.Point(333, 544)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(113, 36)
         Me.Panel2.TabIndex = 60
@@ -435,6 +433,7 @@ Partial Class closeLotsummary
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.BackColor = System.Drawing.Color.Transparent
+        Me.Panel3.Controls.Add(Me.lbNc)
         Me.Panel3.Location = New System.Drawing.Point(489, 480)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(113, 36)
@@ -446,17 +445,31 @@ Partial Class closeLotsummary
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.BackColor = System.Drawing.Color.Transparent
-        Me.Panel4.Location = New System.Drawing.Point(488, 523)
+        Me.Panel4.Controls.Add(Me.lbDefectAll)
+        Me.Panel4.Location = New System.Drawing.Point(450, 544)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(113, 36)
         Me.Panel4.TabIndex = 61
         '
+        'lbDefectAll
+        '
+        Me.lbDefectAll.AutoSize = True
+        Me.lbDefectAll.BackColor = System.Drawing.Color.Transparent
+        Me.lbDefectAll.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbDefectAll.ForeColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.lbDefectAll.Location = New System.Drawing.Point(37, -3)
+        Me.lbDefectAll.Name = "lbDefectAll"
+        Me.lbDefectAll.Size = New System.Drawing.Size(39, 41)
+        Me.lbDefectAll.TabIndex = 15
+        Me.lbDefectAll.Text = "0"
+        Me.lbDefectAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'pbSpecialSummary
         '
         Me.pbSpecialSummary.BackgroundImage = CType(resources.GetObject("pbSpecialSummary.BackgroundImage"), System.Drawing.Image)
-        Me.pbSpecialSummary.Location = New System.Drawing.Point(1, 1)
+        Me.pbSpecialSummary.Location = New System.Drawing.Point(1, 0)
         Me.pbSpecialSummary.Name = "pbSpecialSummary"
-        Me.pbSpecialSummary.Size = New System.Drawing.Size(798, 596)
+        Me.pbSpecialSummary.Size = New System.Drawing.Size(801, 597)
         Me.pbSpecialSummary.TabIndex = 62
         Me.pbSpecialSummary.TabStop = False
         Me.pbSpecialSummary.Visible = False
@@ -477,7 +490,7 @@ Partial Class closeLotsummary
         Me.ListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.ListView2.HideSelection = False
         Me.ListView2.HoverSelection = True
-        Me.ListView2.Location = New System.Drawing.Point(28, 233)
+        Me.ListView2.Location = New System.Drawing.Point(25, 234)
         Me.ListView2.MultiSelect = False
         Me.ListView2.Name = "ListView2"
         Me.ListView2.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -537,17 +550,39 @@ Partial Class closeLotsummary
         Me.PictureBox3.TabStop = False
         Me.PictureBox3.Visible = False
         '
+        'btnOk
+        '
+        Me.btnOk.BackColor = System.Drawing.Color.Transparent
+        Me.btnOk.Location = New System.Drawing.Point(585, 508)
+        Me.btnOk.Name = "btnOk"
+        Me.btnOk.Size = New System.Drawing.Size(202, 84)
+        Me.btnOk.TabIndex = 65
+        Me.btnOk.TabStop = False
+        '
+        'loadNet
+        '
+        Me.loadNet.BackgroundImage = CType(resources.GetObject("loadNet.BackgroundImage"), System.Drawing.Image)
+        Me.loadNet.Image = CType(resources.GetObject("loadNet.Image"), System.Drawing.Image)
+        Me.loadNet.Location = New System.Drawing.Point(1, 0)
+        Me.loadNet.Name = "loadNet"
+        Me.loadNet.Size = New System.Drawing.Size(107, 65)
+        Me.loadNet.TabIndex = 66
+        Me.loadNet.TabStop = False
+        Me.loadNet.Visible = False
+        '
         'closeLotsummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.closeLotsummary1
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.closeLotsummaryNew23
         Me.ClientSize = New System.Drawing.Size(801, 600)
+        Me.Controls.Add(Me.loadNet)
+        Me.Controls.Add(Me.lbNg)
+        Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.lbLine)
         Me.Controls.Add(Me.ListView2)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.pbSpecialSummary)
         Me.Controls.Add(Me.statusPage)
         Me.Controls.Add(Me.lbPart)
@@ -563,8 +598,6 @@ Partial Class closeLotsummary
         Me.Controls.Add(Me.lbAct)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.lbNg)
-        Me.Controls.Add(Me.lbNc)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.lbModel)
@@ -578,13 +611,18 @@ Partial Class closeLotsummary
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "WWW"
         CType(Me.Button1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnOk, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnDown, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         CType(Me.pbSpecialSummary, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnOk, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.loadNet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -617,7 +655,6 @@ Partial Class closeLotsummary
     Friend WithEvents ColumnHeader10 As ColumnHeader
     Friend WithEvents ColumnHeader11 As ColumnHeader
     Friend WithEvents Button1 As PictureBox
-    Friend WithEvents btnOk As PictureBox
     Friend WithEvents btnUp As PictureBox
     Friend WithEvents btnDown As PictureBox
     Friend WithEvents PictureBox1 As PictureBox
@@ -638,4 +675,7 @@ Partial Class closeLotsummary
     Friend WithEvents OK As ColumnHeader
     Friend WithEvents NC As ColumnHeader
     Friend WithEvents NG As ColumnHeader
+    Friend WithEvents btnOk As PictureBox
+    Friend WithEvents loadNet As PictureBox
+    Friend WithEvents lbDefectAll As Label
 End Class

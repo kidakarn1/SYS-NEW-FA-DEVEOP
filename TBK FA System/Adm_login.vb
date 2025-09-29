@@ -4,7 +4,6 @@ Public Class Adm_login
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Adm_page.Enabled = True
         Me.Close()
-
     End Sub
 
     Private Sub Label2_Click(sender As Object, e As EventArgs)
@@ -34,7 +33,7 @@ Public Class Adm_login
                 Next
             End If
             If mp_adm_control_flg = "1" Then
-                'MsgBox("OK")
+                ''msgBox("OK")
                 Adm_manage.Label2.Text = name_sur
                 Adm_manage.Label3.Text = "(" & emp_cd & ")"
                 Adm_manage.Show()
@@ -42,20 +41,20 @@ Public Class Adm_login
                 Adm_page.Hide()
                 Adm_page.Enabled = True
                 '  ElseIf tempp = "" Then
-                '      MsgBox("Error! Please login by Admin")
+                '      'msgBox("Error! Please login by Admin")
                 '      TextBox1.Text = ""
                 '      'TextBox1.Select()
                 '      Adm_page.Enabled = True
                 '      Me.Close()
             Else
-                MsgBox("Error! Please login by Admin")
+                'msgBox("Error! Please login by Admin")
                 TextBox1.Text = ""
                 'TextBox1.Select()
                 Adm_page.Enabled = True
                 Me.Close()
             End If
         Else
-            MsgBox("Can't to login! Please scan your employee card.")
+            'msgBox("Can't to login! Please scan your employee card.")
             TextBox1.Text = ""
             TextBox1.Focus()
             TextBox1.Select()
@@ -75,6 +74,6 @@ Public Class Adm_login
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         Me.Enabled = False
-        Keyboards.Show()
+        KeyboardAdmin.Show()
     End Sub
 End Class

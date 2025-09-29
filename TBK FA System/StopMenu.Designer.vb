@@ -40,7 +40,7 @@ Partial Class StopMenu
         'btnBreakTime
         '
         Me.btnBreakTime.BackColor = System.Drawing.Color.Transparent
-        Me.btnBreakTime.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.Untitled_4
+        Me.btnBreakTime.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.IconBreakTime
         Me.btnBreakTime.FlatAppearance.BorderSize = 0
         Me.btnBreakTime.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnBreakTime.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent

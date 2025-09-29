@@ -24,6 +24,8 @@ Friend Class defectDetailnc
     Public Shared ChildPartNC As Integer = 0
     Public Shared ChildPartNG As Integer = 0
     Public Shared dtpwi_id As String = ""
+    Public Shared mainCP As String = ""
+    Public Shared source_code_supplier As String = ""
     Private Sub defectDetailnc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dtSeqno = Working_Pro.seqNo
         dtWino = Working_Pro.wi_no.Text
@@ -52,7 +54,7 @@ Friend Class defectDetailnc
             ' rs = md.mGetdefectdetailnc(wi, seq, lot, type)
             rs = mdSQLite.mSqliteGetdefectdetailnc(wi, seq, lot, type)
         End If
-        Console.WriteLine(rs)
+        ''Console.WriteLine(rs)
         cListview = 0
         If rs <> "0" Then
             Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
@@ -79,6 +81,8 @@ Friend Class defectDetailnc
                         datlvDefectdetails.SubItems.Add(item("dt_seq_no").ToString()) 'seq
                         datlvDefectdetails.SubItems.Add(item("pwi_id").ToString())
                     End If
+                    datlvDefectdetails.SubItems.Add(item("dt_main_cp").ToString())
+                    datlvDefectdetails.SubItems.Add(item("dt_supplier_code").ToString())
                     lvDefectdetails.Items.Add(datlvDefectdetails)
                     i += 1
                 End If
@@ -105,6 +109,8 @@ Friend Class defectDetailnc
                     Me.sNc = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
                     Me.dtQty = lvDefectdetails.Items(lvItem.Index).SubItems(5).Text
                     Me.dtName = lvDefectdetails.Items(lvItem.Index).SubItems(4).Text
+                    Me.mainCP = lvDefectdetails.Items(lvItem.Index).SubItems(7).Text
+                    Me.source_code_supplier = lvDefectdetails.Items(lvItem.Index).SubItems(8).Text
                     If MainFrm.chk_spec_line = "2" Then
                         dtWino = lvDefectdetails.Items(lvItem.Index).SubItems(6).Text
                         dtSeqno = lvDefectdetails.Items(lvItem.Index).SubItems(7).Text
@@ -113,14 +119,13 @@ Friend Class defectDetailnc
                 Next
                 ' Dim dfNumpadafjust = New defectNumpadadjust
                 'dfNumpadafjust.Show()
-
                 defectNumpadadjust.Show()
                 Me.Close()
             Else
-                MsgBox("Please Select Data")
+                'msgBox("Please Select Data")
             End If
         Catch ex As Exception
-            MsgBox("Please Select Data")
+            'msgBox("Please Select Data")
         End Try
     End Sub
 

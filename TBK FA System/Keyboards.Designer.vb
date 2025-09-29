@@ -27,7 +27,6 @@ Partial Class Keyboards
         Me.btnenter = New System.Windows.Forms.PictureBox()
         Me.btnClose = New System.Windows.Forms.PictureBox()
         Me.btnshiftleft = New System.Windows.Forms.PictureBox()
-        Me.btnm = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnp1 = New System.Windows.Forms.PictureBox()
         Me.btnn = New System.Windows.Forms.PictureBox()
@@ -46,6 +45,7 @@ Partial Class Keyboards
         Me.btns = New System.Windows.Forms.PictureBox()
         Me.btna = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnm = New System.Windows.Forms.PictureBox()
         Me.btnDelete = New System.Windows.Forms.PictureBox()
         Me.btnp = New System.Windows.Forms.PictureBox()
         Me.btno = New System.Windows.Forms.PictureBox()
@@ -70,7 +70,6 @@ Partial Class Keyboards
         CType(Me.btnenter, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnClose, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnshiftleft, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnm, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnp1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnn, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,6 +88,7 @@ Partial Class Keyboards
         CType(Me.btns, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btna, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        CType(Me.btnm, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDelete, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btno, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -147,15 +147,6 @@ Partial Class Keyboards
         Me.btnshiftleft.Size = New System.Drawing.Size(56, 46)
         Me.btnshiftleft.TabIndex = 86
         Me.btnshiftleft.TabStop = False
-        '
-        'btnm
-        '
-        Me.btnm.BackColor = System.Drawing.Color.Transparent
-        Me.btnm.Location = New System.Drawing.Point(480, 228)
-        Me.btnm.Name = "btnm"
-        Me.btnm.Size = New System.Drawing.Size(56, 46)
-        Me.btnm.TabIndex = 85
-        Me.btnm.TabStop = False
         '
         'PictureBox2
         '
@@ -314,11 +305,11 @@ Partial Class Keyboards
         '
         Me.Panel1.BackColor = System.Drawing.Color.Black
         Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
+        Me.Panel1.Controls.Add(Me.btnm)
         Me.Panel1.Controls.Add(Me.TextBoxKeyboard)
         Me.Panel1.Controls.Add(Me.btnenter)
         Me.Panel1.Controls.Add(Me.btnClose)
         Me.Panel1.Controls.Add(Me.btnshiftleft)
-        Me.Panel1.Controls.Add(Me.btnm)
         Me.Panel1.Controls.Add(Me.PictureBox2)
         Me.Panel1.Controls.Add(Me.btnp1)
         Me.Panel1.Controls.Add(Me.btnn)
@@ -361,6 +352,15 @@ Partial Class Keyboards
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(768, 305)
         Me.Panel1.TabIndex = 47
+        '
+        'btnm
+        '
+        Me.btnm.BackColor = System.Drawing.Color.Transparent
+        Me.btnm.Location = New System.Drawing.Point(477, 228)
+        Me.btnm.Name = "btnm"
+        Me.btnm.Size = New System.Drawing.Size(56, 46)
+        Me.btnm.TabIndex = 91
+        Me.btnm.TabStop = False
         '
         'btnDelete
         '
@@ -563,7 +563,6 @@ Partial Class Keyboards
         CType(Me.btnenter, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnClose, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnshiftleft, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnm, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnp1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnn, System.ComponentModel.ISupportInitialize).EndInit()
@@ -583,6 +582,7 @@ Partial Class Keyboards
         CType(Me.btna, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.btnm, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnDelete, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btno, System.ComponentModel.ISupportInitialize).EndInit()
@@ -611,7 +611,6 @@ Partial Class Keyboards
     Friend WithEvents btnenter As PictureBox
     Friend WithEvents btnClose As PictureBox
     Friend WithEvents btnshiftleft As PictureBox
-    Friend WithEvents btnm As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents btnp1 As PictureBox
     Friend WithEvents btnn As PictureBox
@@ -651,4 +650,5 @@ Partial Class Keyboards
     Friend WithEvents btn2 As PictureBox
     Friend WithEvents btn1 As PictureBox
     Friend WithEvents btn0 As PictureBox
+    Friend WithEvents btnm As PictureBox
 End Class

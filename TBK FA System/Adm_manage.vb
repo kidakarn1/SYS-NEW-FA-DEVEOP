@@ -1,15 +1,11 @@
 ﻿Imports System.Web.Script.Serialization
-
 Public Class Adm_manage
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         Adm_page.Show()
         Me.Close()
-
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         Dim LoadSQL = Backoffice_model.get_information()
-
         While LoadSQL.Read()
             Inf_manage.TextBox1.Text = LoadSQL("inf_txt").ToString
         End While
@@ -38,8 +34,6 @@ Public Class Adm_manage
             ComboBox1.Visible = True
         End If
         ' End If
-
-
         'user_manage.ComboBox1.Items.Add("ALL")
         'Dim LoadSQLdep = Backoffice_model.get_department()
         'While LoadSQLdep.Read()
@@ -75,7 +69,6 @@ Public Class Adm_manage
         Me.Hide()
 
     End Sub
-
     ' Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
     ' Dim objDefectAdminhome As New defectAdminhome()
     '     objDefectAdminhome.Show()
@@ -86,7 +79,6 @@ Public Class Adm_manage
         'Scan_reprint.TextBox1.Select()
         Scan_reprint.Show()
     End Sub
-
     Private Sub Adm_manage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lbLine.Text = MainFrm.Label4.Text
         'If Backoffice_model.user_pd = "K1PD01" Then
@@ -101,25 +93,22 @@ Public Class Adm_manage
         End If
         ' End If
     End Sub
-
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
-        'Dim objDefectAdminhome As New defectAdminhome()
-        defectAdminhome.Show()
-        Me.Hide()
+        'defectAdminhome.Show()
+        'Me.Hide()
+        'msgBox("Not Permission")
     End Sub
-
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles pbOK.Click
         'If Backoffice_model.user_pd = "K1PD01" Then
         Panel_configLine.Visible = False
-            Panel_configLine.Enabled = False
-            ComboBox1.Enabled = False
-            ComboBox1.Visible = False
-            Backoffice_model.UpdateLineConfig(ComboBox1.Text)
-            MainFrm.Label4.Text = ComboBox1.Text
-            lbLine.Text = ComboBox1.Text
+        Panel_configLine.Enabled = False
+        ComboBox1.Enabled = False
+        ComboBox1.Visible = False
+        Backoffice_model.UpdateLineConfig(ComboBox1.Text)
+        MainFrm.Label4.Text = ComboBox1.Text
+        lbLine.Text = ComboBox1.Text
         '  End If
     End Sub
-
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles pb_back.Click
         Panel_configLine.Visible = False
         Panel_configLine.Enabled = False

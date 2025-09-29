@@ -12,15 +12,15 @@ Public Class Chang_Loss
         Working_Pro.Enabled = True
         Me.Close()
     End Sub
-
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+    Public Async Function btnNextLossCrr() As Task
         Dim sel_cd As Integer = ListView2.SelectedIndices(0)
         Dim line_id As String = MainFrm.line_id.Text
         Dim status_loss As Integer = 0
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
+                Await check_loss_sys()
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         Backoffice_model.line_status_upd(line_id)
                         Backoffice_model.line_status_upd_sqlite(line_id)
                     Else
@@ -32,7 +32,7 @@ Public Class Chang_Loss
                 Dim date_st As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         If MainFrm.chk_spec_line = "2" Then
                             Dim j As Integer = 0
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -74,7 +74,7 @@ Public Class Chang_Loss
                 If ListBox1.Items(sel_cd) = 1 Then
                     Dim LoadSQL
                     Try
-                        If My.Computer.Network.Ping("192.168.161.101") Then
+                        If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                             LoadSQL = Backoffice_model.get_loss_op_mst(MainFrm.Label4.Text)
                             If LoadSQL <> "0" Then
                                 Dim numm As Integer = 0
@@ -91,12 +91,12 @@ Public Class Chang_Loss
                         End If
                     Catch ex As Exception
                         status_loss = 1
-                        MsgBox(ex.Message)
+                        'msgBox(ex.Message)
                         load_show.Show()
                     End Try
                     Loss_reg.ComboBox1.Visible = True
                     Loss_reg.ComboBox1.SelectedIndex = 0
-                    Loss_reg.Button4.Visible = True
+                    Loss_reg.btnMaintenance.Visible = True
                 End If
                 Loss_reg.Label8.Text = TimeOfDay.ToString("H:mm:ss")
                 Dim pd As String = MainFrm.Label6.Text
@@ -120,8 +120,9 @@ Public Class Chang_Loss
                     op_id = ListBox1.Items(sel_combo).ToString()
                 End If
                 Loss_reg.date_start_data = Date.Parse(TimeOfDay.ToString("H:mm:ss"))
+                Dim statusManualE1 As Integer = 0
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         transfer_flg = "1"
                         If MainFrm.chk_spec_line = "2" Then
                             Dim j As Integer = 0
@@ -131,13 +132,13 @@ Public Class Chang_Loss
                                 Iseq += 1
                                 Dim special_wi As String = itemPlanData.wi
                                 Dim special_item_cd As String = itemPlanData.item_cd
-                                Backoffice_model.ins_loss_act(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j))
-                                Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j))
+                                Backoffice_model.ins_loss_act(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j), statusManualE1)
+                                Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j), statusManualE1)
                                 j += 1
                             Next
                         Else
-                            Backoffice_model.ins_loss_act(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id)
-                            Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id)
+                            Backoffice_model.ins_loss_act(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id, statusManualE1)
+                            Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id, statusManualE1)
                         End If
                     Else
                         transfer_flg = "0"
@@ -149,11 +150,11 @@ Public Class Chang_Loss
                                 Iseq += 1
                                 Dim special_wi As String = itemPlanData.wi
                                 Dim special_item_cd As String = itemPlanData.item_cd
-                                Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j))
+                                Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j), statusManualE1)
                                 j += 1
                             Next
                         Else
-                            Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id)
+                            Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id, statusManualE1)
                         End If
                     End If
                 Catch ex As Exception
@@ -166,11 +167,11 @@ Public Class Chang_Loss
                             Iseq += 1
                             Dim special_wi As String = itemPlanData.wi
                             Dim special_item_cd As String = itemPlanData.item_cd
-                            Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j))
+                            Backoffice_model.ins_loss_act_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.Spwi_id(j), statusManualE1)
                             j += 1
                         Next
                     Else
-                        Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id)
+                        Backoffice_model.ins_loss_act_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, start_loss, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "0", Working_Pro.pwi_id, statusManualE1)
                     End If
                 End Try
                 If status_loss = 0 Then
@@ -181,6 +182,14 @@ Public Class Chang_Loss
         Catch ex As Exception
             load_show.Show()
         End Try
+    End Function
+    Public Shared Async Function check_loss_sys() As Task
+        Dim statusLossManualE1 As Integer = 0
+        Await Working_Pro.insLossClickStart_Loss_E1(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("HH:mm:ss"), statusLossManualE1)
+        Working_Pro.insLossClickStart_Loss_X(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("HH:mm:ss"))
+    End Function
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        btnNextLossCrr()
     End Sub
     Private Sub ListView2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView2.SelectedIndexChanged
 
@@ -205,7 +214,7 @@ Public Class Chang_Loss
         Try
             ListView2.Items(0).Selected = True
         Catch ex As Exception
-            MsgBox("Please Check Loss Master.")
+            'msgBox("Please Check Loss Master.")
         End Try
         Timer1.Start()
     End Sub

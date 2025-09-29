@@ -95,7 +95,6 @@ Public Class defectAdminselecttypeng
     Private Sub lvChildpart_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvChildpart.SelectedIndexChanged
 
     End Sub
-
     Private Sub btnPartfg_Click(sender As Object, e As EventArgs) Handles btnPartfg.Click
         Dim mdDefect = New modelDefect
         If mdDefect.mGetDataEnableFGPart(MainFrm.Label4.Text) = "1" Then
@@ -108,7 +107,6 @@ Public Class defectAdminselecttypeng
             Me.Hide()
         End If
     End Sub
-
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs)
         'create two scroll bars
         Dim hs As HScrollBar
@@ -172,7 +170,7 @@ Public Class defectAdminselecttypeng
             sDefectcode.Show()
             Me.Hide()
         Else
-            MsgBox("PLEASE SELECT ROW. ")
+            'msgBox("PLEASE SELECT ROW. ")
         End If
 
     End Sub

@@ -45,7 +45,7 @@ Public Class tag_print_normal
                     partNo = item("ITEM_CD").ToString
                 Next
             Else
-                MsgBox("NO PRINT SPECIAL")
+                'msgBox("NO PRINT SPECIAL")
             End If
         Else
             Dim getData = md.mGetTagprintDetailNormal(lwi, llot, lseq, lshift)
@@ -63,7 +63,7 @@ Public Class tag_print_normal
                     partNo = item("ITEM_CD").ToString
                 Next
             Else
-                MsgBox("NO PRINT NORAML")
+                'msgBox("NO PRINT NORAML")
             End If
         End If
         tag_print()
@@ -88,7 +88,7 @@ Public Class tag_print_normal
         Dim product_type As String = "NO_DATA"
         Dim DLV_DATE As String = "NO_DATA"
         Dim line_cd As String = MainFrm.Label4.Text
-        Dim check_tag_type = Backoffice_model.B_check_format_tag() ' api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
+        Dim check_tag_type = Backoffice_model.B_check_format_tag() ' api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
         If check_tag_type = "0" Then
             While next_process.read()
                 value_next_process = next_process("NEXT_PROCESS").ToString
@@ -108,7 +108,7 @@ Public Class tag_print_normal
             lot_no = "NO_DATA"
             aPen.Width = 2.0F
             Try
-                If My.Computer.Network.Ping("192.168.161.101") Then
+                If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
 
                     Dim data = qr_detailss.Split(" ")
                     part_no = data(0).Substring(19)
@@ -125,7 +125,7 @@ Public Class tag_print_normal
                     return_result.close()
                     lot_no = qr_detailss.Substring(58, 4)
                     Backoffice_model.NEXT_PROCESS = nextProcess
-                    'MsgBox(Label10.Text)
+                    ''msgBox(Label10.Text)
                     'vertical
                     e.Graphics.DrawLine(aPen, 150, 10, 150, 290)
                     e.Graphics.DrawLine(aPen, 300, 175, 300, 290)
@@ -204,9 +204,9 @@ Public Class tag_print_normal
                             DLV_DATE = result_date
                         End Try
                     Catch ex As Exception
-                        MsgBox("error data1 = " & ex.Message)
+                        'msgBox("error data1 = " & ex.Message)
                     End Try
-                    'MsgBox(lb_dlv_date.Text)
+                    ''msgBox(lb_dlv_date.Text)
                     'Dim ssdate As String = lb_dlv_date.Text
                     'Dim dDate As Date = lb_dlv_date.Text
                     'lb_dlv_date.Text = Format(lb_dlv_date.Text, "dd/MM/yyyy")
@@ -239,10 +239,10 @@ Public Class tag_print_normal
                     End If
                     'Dim plan_date As String
                     'If Working_Pro.lb_dlv_date.Text = Nothing Then
-                    ' MsgBox("if")
+                    ' 'msgBox("if")
                     ' plan_date = Working_Pro.lb_dlv_date.Text.Substring(6, 4) & Working_Pro.lb_dlv_date.Text.Substring(3, 2) & Working_Pro.lb_dlv_date.Text.Substring(0, 2)
                     ' Else
-                    ' MsgBox("else")
+                    ' 'msgBox("else")
                     'plan_date = Show_reprint_wi.hide_wi_select.Text
                     'End If
                     If Working_Pro.lb_dlv_date.Text Is Nothing Then
@@ -322,7 +322,7 @@ Public Class tag_print_normal
                 lot_no = qr_detailss.Substring(58, 4)
                 aPen = New Pen(Color.Black)
                 aPen.Width = 2.0F
-                'MsgBox(Label10.Text)
+                ''msgBox(Label10.Text)
                 'vertical ตรง
                 e.Graphics.DrawLine(aPen, 10, 10, 10, 290)
                 e.Graphics.DrawLine(aPen, 330, 58, 330, 95)
@@ -377,7 +377,7 @@ Public Class tag_print_normal
                 Dim box_no_new As String = qr_detailss.Substring(100, 3)
                 e.Graphics.DrawString("PRO SEQ", lb_font5.Font, Brushes.Black, 585, 98)
                 e.Graphics.DrawString(plan_seq_new, lb_font4_B.Font, Brushes.Black, 610, 115)
-                Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & wi)
+                Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & wi)
                 Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(load_data)
                 Dim plan_date As String = ""
                 For Each item As Object In dict
@@ -465,7 +465,7 @@ Public Class tag_print_normal
                     factory_cd = "Phase10"
                     plan_cd = "51"
                 End If
-                Dim id_tag = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_detailss)
+                Dim id_tag = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_ID_PRINT_DETAIL_MAIN?qr_code=" & qr_detailss)
                 Dim qr_sub = Backoffice_model.get_qr_detail_sub(id_tag)
                 'For j = 1 To 5 Step 1
                 Dim j As Integer = 1
@@ -487,7 +487,7 @@ Public Class tag_print_normal
                 part_no_res1 = Working_Pro.Label3.Text & part_no_res
                 ' Dim numOfindex2 As Integer = ListView1.SelectedIndices(0)
                 Dim qr_code2 As String = get_qr
-                Console.WriteLine(qr_code2)
+                ''Console.WriteLine(qr_code2)
                 Dim qr_code As String = qr_code2 'iden_cd & Working_Pro.Label24.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & Working_Pro.Label18.Text & cus_part_no & act_date & plan_seq & plan_cd & box_no_new
                 bitmap_qr_box = QR_Generator.Encode(qr_code)
                 e.Graphics.DrawImage(bitmap_qr_box, 15, 120, 90, 90) 'left
@@ -497,7 +497,7 @@ Public Class tag_print_normal
                 e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
                 Backoffice_model.update_data_new_qr_detail_main(qr_code2)
             Catch ex As Exception
-                MsgBox("error data2 =  " & ex.Message)
+                'msgBox("error data2 =  " & ex.Message)
             End Try
             'Else
             Try
@@ -516,7 +516,7 @@ Public Class tag_print_normal
                     'Backoffice_model.NEXT_PROCESS = Backoffice_model.F_NEXT_PROCESS(part_no)
                 Else
                     Dim data = qr_detailss.Split(" ")
-                    'MsgBox(data(0).Substring(19))
+                    ''msgBox(data(0).Substring(19))
                     '		If qr_detailss.Substring(19, 15) <> "" Then
                     '		part_no = qr_detailss.Substring(19, 14)
                     'ElseIf qr_detailss.Substring(19, 12) <> "" Then
@@ -543,7 +543,7 @@ Public Class tag_print_normal
                 End If
                 aPen = New Pen(Color.Black)
                 aPen.Width = 2.0F
-                'MsgBox(Label10.Text)
+                ''msgBox(Label10.Text)
                 'vertical ตรง
                 e.Graphics.DrawLine(aPen, 10, 10, 10, 290)
                 e.Graphics.DrawLine(aPen, 330, 58, 330, 95)
@@ -598,7 +598,7 @@ Public Class tag_print_normal
                 Dim box_no_new As String = qr_detailss.Substring(100, 3)
                 e.Graphics.DrawString("PRO SEQ", lb_font5.Font, Brushes.Black, 585, 98)
                 e.Graphics.DrawString(plan_seq_new, lb_font4_B.Font, Brushes.Black, 610, 115)
-                Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & wi)
+                Dim load_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_DATA_WORKING?WI=" & wi)
                 Dim dict As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(load_data)
                 Dim plan_date As String = ""
                 For Each item As Object In dict
@@ -645,7 +645,6 @@ Public Class tag_print_normal
                 Next
                 Dim qrcode As New MessagingToolkit.QRCode.Codec.QRCodeEncoder
                 qrcode.QRCodeScale = 10
-
                 Dim bitmap_qr_box As Bitmap = qrcode.Encode("TEST")
                 Dim qr_by_model = 120
                 Dim qr_by_model_left = 118
@@ -703,19 +702,23 @@ Public Class tag_print_normal
                 e.Graphics.DrawString("Phase10", lb_font3.Font, Brushes.Black, 33, 250)
                 e.Graphics.DrawImage(bitmap_qr_box, 600, 205, 75, 75) 'Right top
             Catch ex As Exception
-                MsgBox("error data3 =  " & ex.Message)
+                'msgBox("error data3 =  " & ex.Message)
             End Try
         End If
         'End If
     End Sub
     Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
-        Dim Newbox = GenNewBox(CDbl(Val(get_qr.Substring(100, 3))))
-        If MainFrm.chk_spec_line = "2" Then
-            printSpecial(e)
-        Else
-            Adminkeep_data_and_gen_qr_tag_fa_completed(GgoodQty, UseDefect, SNP, Seq, Newbox, dateAct, productType, MainFrm.chk_spec_line, "0", lot)
-            priontNornal(e)
-        End If
+        Try
+            Dim Newbox = GenNewBox(CDbl(Val(get_qr.Substring(100, 3))))
+            If MainFrm.chk_spec_line = "2" Then
+                printSpecial(e)
+            Else
+                Adminkeep_data_and_gen_qr_tag_fa_completed(GgoodQty, UseDefect, SNP, Seq, Newbox, dateAct, productType, MainFrm.chk_spec_line, "0", lot)
+                priontNornal(e)
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
     Public Function GenNewBox(box As Integer)
         Dim newBox As Integer = box + 1
@@ -746,7 +749,7 @@ Public Class tag_print_normal
         Dim product_type As String = "NO_DATA"
         Dim DLV_DATE As String = "NO_DATA"
         Dim line_cd As String = MainFrm.Label4.Text
-        Dim check_tag_type = Backoffice_model.B_check_format_tag() ' api.Load_data("http://192.168.161.207/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
+        Dim check_tag_type = Backoffice_model.B_check_format_tag() ' api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_LINE_TYPE?line_cd=" & MainFrm.Label4.Text)
         While next_process.read()
             value_next_process = next_process("NEXT_PROCESS").ToString
         End While
@@ -765,7 +768,7 @@ Public Class tag_print_normal
         lot_no = "NO_DATA"
         aPen.Width = 2.0F
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 Dim data = qr_detailss.Split(" ")
                 part_no = data(0).Substring(19)
                 ' qty = 'qr_detailss.Substring(52, 6)
@@ -799,7 +802,7 @@ Public Class tag_print_normal
                 return_result.close()
                 lot_no = qr_detailss.Substring(58, 4)
                 Backoffice_model.NEXT_PROCESS = nextProcess
-                'MsgBox(Label10.Text)
+                ''msgBox(Label10.Text)
                 'vertical
                 e.Graphics.DrawLine(aPen, 150, 10, 150, 290)
                 e.Graphics.DrawLine(aPen, 300, 175, 300, 290)
@@ -853,7 +856,7 @@ Public Class tag_print_normal
                     'Dim inputDate As String = "06/05/24"
                     Dim parsedDate As Date = Date.ParseExact(dateAct, "dd/MM/yy", CultureInfo.InvariantCulture)
                     Dim da As String = parsedDate.ToString("yyyy-MM-dd")
-                    'Console.WriteLine(convertedDate)
+                    '''Console.WriteLine(convertedDate)
                     ' Dim dateActCon As String = dateAct
                     ' Dim da As Date = Date.ParseExact(dateActCon, "yyyy-MM-dd", CultureInfo.InvariantCulture)
                     Dim date_act_date = parsedDate.ToString("dd/MM/yyyy")
@@ -883,9 +886,9 @@ Public Class tag_print_normal
                         DLV_DATE = result_date
                     End Try
                 Catch ex As Exception
-                    MsgBox("error data1 = " & ex.Message)
+                    'msgBox("error data1 = " & ex.Message)
                 End Try
-                'MsgBox(lb_dlv_date.Text)
+                ''msgBox(lb_dlv_date.Text)
                 'Dim ssdate As String = lb_dlv_date.Text
                 'Dim dDate As Date = lb_dlv_date.Text
                 'lb_dlv_date.Text = Format(lb_dlv_date.Text, "dd/MM/yyyy")
@@ -918,10 +921,10 @@ Public Class tag_print_normal
                 End If
                 'Dim plan_date As String
                 'If Working_Pro.lb_dlv_date.Text = Nothing Then
-                ' MsgBox("if")
+                ' 'msgBox("if")
                 ' plan_date = Working_Pro.lb_dlv_date.Text.Substring(6, 4) & Working_Pro.lb_dlv_date.Text.Substring(3, 2) & Working_Pro.lb_dlv_date.Text.Substring(0, 2)
                 ' Else
-                ' MsgBox("else")
+                ' 'msgBox("else")
                 'plan_date = Show_reprint_wi.hide_wi_select.Text
                 'End If
                 If Working_Pro.lb_dlv_date.Text Is Nothing Then
@@ -1077,7 +1080,9 @@ Public Class tag_print_normal
         box_no = newbox
         Dim qr_detailss As String = ""
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            Dim tr_status As Integer = 0
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
+                tr_status = 1
                 If specialLine = "2" Then
                     Dim the_Label_bach As String
                     If Trim(Len(batch)) = 1 Then
@@ -1092,7 +1097,25 @@ Public Class tag_print_normal
                 End If
                 Dim tag_group_no As Integer = 0
                 Dim qr_detailsss = iden_cd & MainFrm.Label4.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & lotNo & cus_part_no & act_date & plan_seq & plan_cd & box_no
-                Backoffice_model.Insert_tag_print(wi, qr_detailsss, box_no, 1, plan_seq, shift, Admincheck_tagprint(), Label3.Text, pwi_id, tag_group_no, GoodQty)
+                Backoffice_model.Insert_tag_print(wi, qr_detailsss, box_no, 1, plan_seq, shift, Admincheck_tagprint(), Label3.Text, pwi_id, tag_group_no, GoodQty, Working_Pro.Gobal_NEXT_PROCESS, tr_status)
+                model_api_sqlite.mas_Insert_tag_print(wi, qr_detailsss, box_no, 1, plan_seq, shift, Admincheck_tagprint(), Label3.Text, pwi_id, tag_group_no, GoodQty, Working_Pro.Gobal_NEXT_PROCESS, tr_status)
+                ' Else
+                '     tr_status = 0
+                '     If specialLine = "2" Then
+                '      Dim the_Label_bach As String
+                '       If Trim(Len(batch)) = 1 Then
+                '        the_Label_bach = "00" & batch
+                '     ElseIf Trim(Len(batch)) = 2 Then
+                '          the_Label_bach = "0" & batch
+                '       Else
+                '            the_Label_bach = batch
+                '             the_Label_bach = batch
+                '          End If
+                '               box_no = the_Label_bach
+                '            End If
+                '                Dim tag_group_no As Integer = 0
+                '                Dim qr_detailsss = iden_cd & MainFrm.Label4.Text & plan_date & plan_seq & part_no_res1 & act_date & qty_num & lotNo & cus_part_no & act_date & plan_seq & plan_cd & box_no
+                '                model_api_sqlite.mas_Insert_tag_print(wi, qr_detailsss, box_no, 1, plan_seq, shift, Admincheck_tagprint(), Label3.Text, pwi_id, tag_group_no, GoodQty, Working_Pro.Gobal_NEXT_PROCESS, tr_status)
             End If
         Catch ex As Exception
         End Try

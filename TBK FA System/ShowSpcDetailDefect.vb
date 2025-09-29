@@ -10,7 +10,7 @@ Public Class ShowSpcDetailDefect
     End Sub
     Public Function getDefectdetail()
         Try
-            'If My.Computer.Network.Ping("192.168.161.101") Then
+            'If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
             Dim md As New modelDefect()
                 Dim mdSqlite As New ModelSqliteDefect()
                 Dim arrayWI As List(Of String) = New List(Of String)

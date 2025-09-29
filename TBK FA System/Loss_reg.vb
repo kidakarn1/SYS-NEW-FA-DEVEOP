@@ -1,11 +1,10 @@
-﻿Imports System.Globalization
-Imports System.IO
+﻿Imports System.IO
 Imports System.IO.Pipes
 Public Class Loss_reg
     Public date_start_data As Date
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 Try
                     Chang_Loss.ListView2.View = View.Details
                     'Chang_Loss.ListView2.Scrollable = Size()
@@ -32,7 +31,7 @@ Public Class Loss_reg
                     Dim pd As String = MainFrm.Label6.Text
                     Dim transfer_flg As String = "0"
                     Try
-                        If My.Computer.Network.Ping("192.168.161.101") Then
+                        If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                             transfer_flg = 1
                             If MainFrm.chk_spec_line = "2" Then
                                 Dim GenSEQ As Integer = seq_no - 5
@@ -48,8 +47,8 @@ Public Class Loss_reg
                                     Backoffice_model.alert_loss(special_wi, "2", pd, loss_cd_id)
                                 Next
                             Else
-                                Backoffice_model.Update_flg_loss(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
-                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                                Backoffice_model.Update_flg_loss(pd, line_cd, Working_Pro.wi_no.Text, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, Working_Pro.wi_no.Text, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
                                 Backoffice_model.alert_loss(wi_plan, "2", pd, loss_cd_id)
                             End If
                         Else
@@ -66,7 +65,7 @@ Public Class Loss_reg
                                     Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
                                 Next
                             Else
-                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                                Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, Working_Pro.wi_no.Text, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
                             End If
                         End If
                     Catch ex As Exception
@@ -83,15 +82,15 @@ Public Class Loss_reg
                                 Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, special_wi, special_item_cd, Iseq, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
                             Next
                         Else
-                            Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, wi_plan, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
+                            Backoffice_model.Update_flg_loss_sqlite(pd, line_cd, Working_Pro.wi_no.Text, item_cd, seq_no, shift_prd, date_start_data, end_loss, total_loss, loss_type, loss_cd_id, op_id, transfer_flg, "2")
                         End If
                     End Try
                     Dim LoadSQL = Backoffice_model.get_loss_mst()
                     While LoadSQL.Read()
                         If LoadSQL("loss_type").ToString() = "1" Then
-                            Button4.Visible = True
+                            btnMaintenance.Visible = True
                         Else
-                            Button4.Visible = False
+                            btnMaintenance.Visible = False
                         End If
                         Chang_Loss.ListView2.ForeColor = Color.Blue
                         Chang_Loss.ListView2.Items.Add(LoadSQL("id_mst").ToString()).SubItems.AddRange(New String() {LoadSQL("loss_cd").ToString(), LoadSQL("description_th").ToString()})
@@ -110,10 +109,10 @@ Public Class Loss_reg
     End Sub
     Public Sub Submit_loss()
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 Dim line_id As String = MainFrm.line_id.Text
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         Backoffice_model.line_status_upd(line_id)
                         Backoffice_model.line_status_upd_sqlite(line_id)
                     Else
@@ -125,7 +124,7 @@ Public Class Loss_reg
                 Dim date_st As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Dim date_end As String = DateTime.Now.ToString("yyyy/MM/dd H:m:s")
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         If MainFrm.chk_spec_line = "2" Then
                             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
                                 Dim special_wi As String = itemPlanData.wi
@@ -182,7 +181,7 @@ Public Class Loss_reg
                 Dim pd As String = MainFrm.Label6.Text
                 Dim transfer_flg As String = "0"
                 Try
-                    If My.Computer.Network.Ping("192.168.161.101") Then
+                    If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                         transfer_flg = "1"
                         If MainFrm.chk_spec_line = "2" Then
                             Dim GenSEQ As Integer = seq_no - 5
@@ -241,6 +240,8 @@ Public Class Loss_reg
                 End Try
                 Working_Pro.ResetRed()
                 Working_Pro.Enabled = True
+                Working_Pro.setlvA(Working_Pro.Label24.Text, Working_Pro.Label18.Text, Working_Pro.Label14.Text, DateTime.Now.ToString("yyyy-MM-dd"), Prd_detail.Label12.Text.Substring(3, 5), Working_Pro.gobal_stTimeModel, MainFrm.chk_spec_line)
+                Dim A = Working_Pro.cal_progressbarA(Working_Pro.Label24.Text, Prd_detail.Label12.Text.Substring(3, 5), Prd_detail.Label12.Text.Substring(11, 5))
                 Me.Close()
             Else
                 load_show.Show()
@@ -250,7 +251,7 @@ Public Class Loss_reg
         End Try
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+        Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text, Working_Pro.Label14.Text) ' for set data 
         If MainFrm.chk_spec_line = "2" Then
             Dim GenSEQ As Integer = CDbl(Val(Working_Pro.Label22.Text)) - 5
             Dim Iseq = GenSEQ
@@ -282,35 +283,40 @@ Public Class Loss_reg
         Label9.Text = TimeOfDay.ToString("H:mm:ss")
         'Label1.Text = DateTime.Now.ToString("yyyy/MM/dd")
     End Sub
-
     Private Sub Loss_reg_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
+        GetDefectMenuMaintenance()
         date_time_commit_data.Visible = False
         test_time_loss_time.Visible = False
         Label2.Text = MainFrm.Label4.Text
         Working_Pro.TowerLamp(6, 9800)
     End Sub
-
+    Public Sub GetDefectMenuMaintenance()
+        statusDefect = Backoffice_model.GetDefectMenuMaintenance(MainFrm.Label4.Text)
+        If statusDefect = "0" Then
+            btnMaintenance.Enabled = False
+        Else
+            btnMaintenance.Enabled = True
+        End If
+    End Sub
     Private Sub Label6_Click(sender As Object, e As EventArgs)
 
     End Sub
-
     Private Sub Label5_Click(sender As Object, e As EventArgs)
-
     End Sub
-
     Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
 
     End Sub
-
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
     End Sub
-
     Private Sub Label1_Click(sender As Object, e As EventArgs)
 
     End Sub
-    Private Async Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Async Sub Button4_Click(sender As Object, e As EventArgs) Handles btnMaintenance.Click
+        LoadMN()
+    End Sub
+    Public Async Function LoadMN() As Task
         If MainFrm.chk_spec_line = "2" Then
             Dim j As Integer = 0
             For Each itemPlanData As DataPlan In Confrime_work_production.ArrayDataPlan
@@ -327,11 +333,11 @@ Public Class Loss_reg
             Shell("C:\TicketMaintenances\TicketMaintenances\MaintenanceSystem.exe")
             Await AnotherAsyncMethod()
         Catch ex As Exception
-            MsgBox("Maintenance System Open.")
+            '  'msgBox("Maintenance System Open.")
         End Try
-    End Sub
+    End Function
     Public Sub Wait_DATA()
-        Console.WriteLine("OK Connect MS SYS")
+        ''Console.WriteLine("OK Connect MS SYS")
     End Sub
     Public Async Function AnotherAsyncMethod() As Task
         ' Call the Main() method asynchronously
@@ -341,19 +347,19 @@ Public Class Loss_reg
     Public Async Function ConnectMaintenanceSys() As Task
         ' สร้าง PipeServer
         Dim pipeServer As New NamedPipeServerStream("mypipe", PipeDirection.In)
-        Console.WriteLine("Waiting for connection...")
+        ''Console.WriteLine("Waiting for connection...")
         ' รอการเชื่อมต่อจาก Client
         Await pipeServer.WaitForConnectionAsync()
-        Console.WriteLine("Client connected.")
+        ''Console.WriteLine("Client connected.")
         ' อ่านคำสั่งจาก Client
         Dim reader As New StreamReader(pipeServer)
         Dim command As String = Await reader.ReadLineAsync()
-        Console.WriteLine("Received command from client: " & command)
+        ''Console.WriteLine("Received command from client: " & command)
         ' ตรวจสอบคำสั่ง
         If command = "click button" Then
             ' ทำงานเมื่อได้รับคำสั่ง "click button"
             ' เช่น คลิกปุ่ม
-            Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text) ' for set data 
+            Dim BreakTime = Backoffice_model.GetTimeAutoBreakTime(MainFrm.Label4.Text, Working_Pro.Label14.Text) ' for set data 
             If MainFrm.chk_spec_line = "2" Then
                 Dim GenSEQ As Integer = CDbl(Val(Working_Pro.Label22.Text)) - 5
                 Dim Iseq = GenSEQ
@@ -375,7 +381,7 @@ Public Class Loss_reg
             reader.Close()
             pipeServer.Close()
         ElseIf command = "Wait_DATA" Then
-            Console.WriteLine("Wait_DATA")
+            ''Console.WriteLine("Wait_DATA")
         End If
         Try
             reader.Close()
@@ -384,6 +390,6 @@ Public Class Loss_reg
 
         End Try
         ' ปิดการเชื่อมต่อ
-        Console.WriteLine("close Connection main")
+        ''Console.WriteLine("close Connection main")
     End Function
 End Class

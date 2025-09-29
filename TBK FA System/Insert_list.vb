@@ -40,7 +40,7 @@ Public Class Insert_list
                     Working_Pro.lb_emp1.Text = emp_cd
                 Catch ex As Exception
                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     Working_Pro.PictureBox2.Image = tImage
                     Working_Pro.lb_emp1.Visible = True
                     Working_Pro.lb_emp1.Text = emp_cd
@@ -55,7 +55,7 @@ Public Class Insert_list
                     Working_Pro.lb_emp2.Text = emp_cd
                 Catch ex As Exception
                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     Working_Pro.PictureBox3.Image = tImage
                     Working_Pro.lb_emp2.Visible = True
                     Working_Pro.lb_emp2.Text = emp_cd
@@ -70,7 +70,7 @@ Public Class Insert_list
                     Working_Pro.lb_emp3.Text = emp_cd
                 Catch ex As Exception
                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     Working_Pro.PictureBox4.Image = tImage
                     Working_Pro.lb_emp3.Visible = True
                     Working_Pro.lb_emp3.Text = emp_cd
@@ -85,7 +85,7 @@ Public Class Insert_list
                     Working_Pro.lb_emp4.Text = emp_cd
                 Catch ex As Exception
                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     Working_Pro.PictureBox5.Image = tImage
                     Working_Pro.lb_emp4.Visible = True
                     Working_Pro.lb_emp4.Text = emp_cd
@@ -100,7 +100,7 @@ Public Class Insert_list
                     Working_Pro.lb_emp5.Text = emp_cd
                 Catch ex As Exception
                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     Working_Pro.PictureBox6.Image = tImage
                     Working_Pro.lb_emp5.Visible = True
                     Working_Pro.lb_emp5.Text = emp_cd
@@ -115,7 +115,7 @@ Public Class Insert_list
                     Working_Pro.lb_emp6.Text = emp_cd
                 Catch ex As Exception
                     Dim emp_cd As String = List_Emp.ListView1.Items(i).Text
-                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData("Http://192.168.161.102/fa_system/asset/img/no_user.jpg")))
+                    Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tclient.DownloadData("http://" & Backoffice_model.svApi & "/tbkk_shopfloor_sys/asset/img_emp/no_user.jpg")))
                     Working_Pro.PictureBox7.Image = tImage
                     Working_Pro.lb_emp6.Visible = True
                     Working_Pro.lb_emp6.Text = emp_cd
@@ -126,24 +126,24 @@ Public Class Insert_list
 
 
 
-        'MsgBox(data)
+        ''msgBox(data)
 
-        Working_Pro.Button1.Text = MainFrm.cavity.Text & " Qty."
+        'Working_Pro.Button1.Text = MainFrm.cavity.Text & " Qty."
 
         Working_Pro.Label18.Text = Prd_detail.Label6.Text
         Working_Pro.Label29.Text = Prd_detail.Label2.Text
         Working_Pro.Label14.Text = Prd_detail.Label12.Text.Substring(0, 1)
 
-        'MsgBox(Prd_detail.Label12.Text.Substring(0, 1))
+        ''msgBox(Prd_detail.Label12.Text.Substring(0, 1))
         Dim numOfindex As Integer = ListView1.SelectedIndices(0)
 
         lb_temp_selected.Text = numOfindex
         Working_Pro.lb_temp.Text = numOfindex
-        'MsgBox(ListView1.SelectedIndices(0))
-        'MsgBox(ListView1.Items(10).Text.ToString)
-        'MsgBox(ListView1.Items(10).SubItems(1).Text.ToString)
-        'MsgBox(ListView1.Items(10).SubItems(2).Text.ToString)
-        'MsgBox(ListView1.Items(numOfindex).SubItems(0).Text.ToString)
+        ''msgBox(ListView1.SelectedIndices(0))
+        ''msgBox(ListView1.Items(10).Text.ToString)
+        ''msgBox(ListView1.Items(10).SubItems(1).Text.ToString)
+        ''msgBox(ListView1.Items(10).SubItems(2).Text.ToString)
+        ''msgBox(ListView1.Items(numOfindex).SubItems(0).Text.ToString)
         Working_Pro.wi_no.Text = ListView1.Items(numOfindex).SubItems(0).Text.ToString
         Working_Pro.Label3.Text = ListView1.Items(numOfindex).SubItems(1).Text.ToString
         Working_Pro.Label12.Text = ListView1.Items(numOfindex).SubItems(2).Text.ToString
@@ -213,7 +213,7 @@ Public Class Insert_list
 
         Dim sum_progress As Integer = (ListView1.Items(numOfindex).SubItems(4).Text * 100) / ListView1.Items(numOfindex).SubItems(3).Text
         sum_progress = 100 - sum_progress
-        'MsgBox(sum_progress)
+        ''msgBox(sum_progress)
 
         Dim sum_act As Integer = ListView1.Items(numOfindex).SubItems(3).Text - ListView1.Items(numOfindex).SubItems(4).Text
         Working_Pro.Label6.Text = sum_act

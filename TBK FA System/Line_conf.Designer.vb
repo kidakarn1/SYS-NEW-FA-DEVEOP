@@ -42,6 +42,7 @@ Partial Class Line_conf
         Me.PictureBox16 = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.tower_lamp = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -278,14 +279,27 @@ Partial Class Line_conf
         Me.Panel2.TabIndex = 4652
         Me.Panel2.Visible = False
         '
+        'tower_lamp
+        '
+        Me.tower_lamp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tower_lamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tower_lamp.Font = New System.Drawing.Font("Catamaran", 22.0!, System.Drawing.FontStyle.Bold)
+        Me.tower_lamp.FormattingEnabled = True
+        Me.tower_lamp.Items.AddRange(New Object() {"BUTTON", "TOUCH", "AUTO"})
+        Me.tower_lamp.Location = New System.Drawing.Point(568, 423)
+        Me.tower_lamp.Name = "tower_lamp"
+        Me.tower_lamp.Size = New System.Drawing.Size(182, 40)
+        Me.tower_lamp.TabIndex = 4654
+        '
         'Line_conf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(14, Byte), Integer))
-        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.configLine2
+        Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.configLineGemba
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
+        Me.Controls.Add(Me.tower_lamp)
         Me.Controls.Add(Me.PictureBox16)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.PictureBox6)
@@ -333,4 +347,5 @@ Partial Class Line_conf
     Friend WithEvents PictureBox16 As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel2 As Panel
+    Public WithEvents tower_lamp As ComboBox
 End Class

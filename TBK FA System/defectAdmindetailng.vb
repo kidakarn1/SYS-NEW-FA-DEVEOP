@@ -1,30 +1,29 @@
 Imports System.Web.Script.Serialization
-
 Public Class defectAdmindetailng
-	Shared sLinecd = ""
-	Shared sDate = DateTime.Now.ToString("yyyy-MM-dd")
-	Shared eDate = DateTime.Now.ToString("yyyy-MM-dd")
-	Public Shared sWi As String = ""
-	Public Shared sPartno As String = ""
+    Shared sLinecd = ""
+    Shared sDate = DateTime.Now.ToString("yyyy-MM-dd")
+    Shared eDate = DateTime.Now.ToString("yyyy-MM-dd")
+    Public Shared sWi As String = ""
+    Public Shared sPartno As String = ""
     Public Shared sshift As String = ""
     Public Shared sLot As String = ""
-	Public Shared dSeq As String = ""
-	Public Shared sAct As Integer = 0
-	Public Shared sNc As Integer = 0
+    Public Shared dSeq As String = ""
+    Public Shared sAct As Integer = 0
+    Public Shared sNc As Integer = 0
     Public Shared sNg As Integer = 0
     Public Shared S_index As Integer = 0
     Public Shared Apwi_id As String = ""
     Private Sub defectAdmindetailnc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		setVariable()
-		getDatadefect(sLinecd, sDate, eDate)
-	End Sub
-	Public Sub setVariable()
+        setVariable()
+        getDatadefect(sLinecd, sDate, eDate)
+    End Sub
+    Public Sub setVariable()
         sLinecd = MainFrm.Label4.Text
         lbLine.Text = sLinecd
-	End Sub
-	Public Sub getDatadefect(sLinecd As String, sDate As String, eDate As String)
-		Dim md As New modelDefect()
-		Dim rs = md.mGetDefectadmindetailng(sLinecd, sDate, eDate)
+    End Sub
+    Public Sub getDatadefect(sLinecd As String, sDate As String, eDate As String)
+        Dim md As New modelDefect()
+        Dim rs = md.mGetDefectadmindetailng(sLinecd, sDate, eDate)
         If rs <> "0" Then
             Dim dcResultdata As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(rs)
             Dim i As Integer = 1
@@ -62,7 +61,7 @@ Public Class defectAdmindetailng
         Else
             btnOk.Visible = False
         End If
-	End Sub
+    End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         For Each lvItem As ListViewItem In lvDefectact.SelectedItems
@@ -82,7 +81,7 @@ Public Class defectAdmindetailng
             dfAdminselecttype2.Show()
             Me.Close()
         Catch ex As Exception
-            MsgBox("Please Click Back.")
+            'msgBox("Please Click Back.")
         End Try
     End Sub
 
@@ -90,9 +89,9 @@ Public Class defectAdmindetailng
         Dim dfAdminhome As New defectAdminhome
         defectAdminhome.Show()
         Me.Close()
-	End Sub
+    End Sub
 
-	Private Sub btnDown(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub btnDown(sender As Object, e As EventArgs) Handles PictureBox1.Click
         BTNDOWN1()
     End Sub
 

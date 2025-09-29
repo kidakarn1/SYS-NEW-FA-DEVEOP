@@ -22,8 +22,8 @@ Public Class Line_conf
     Dim s_dio_detail As String = ""
     Dim s_mecg_name As String = ""
     Dim me_sig_del As String = ""
+    Dim tower_lamps As String = ""
     Dim BF = New Backoffice_model()
-
     Private Sub Label11_Click(sender As Object, e As EventArgs)
 
     End Sub
@@ -63,7 +63,6 @@ Public Class Line_conf
         ' Next
         ' End If
     End Sub
-
     Private Sub Line_conf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim api = New api()
         Timer2.Start()
@@ -78,10 +77,12 @@ Public Class Line_conf
             dio_port1 = load_sqlite_master_line("dio_port").ToString()
             cat_dio = load_sqlite_master_line("cat_dio").ToString()
             dio_detail = load_sqlite_master_line("dio_detail").ToString()
+            ' tower_lamps = load_sqlite_master_line("Towerlamp").ToString()
+            tower_lamps = "NO_DEVICE"
         End While
         load_sqlite_master_line.close()
         If load_defeult_master_server(line_cd) <> "0" Then 'load data on server
-            ' MsgBox("HAVE")
+            ' 'msgBox("HAVE")
             load_data_defeult_master_server(line_cd)
             Load_PD()
             Load_Line()
@@ -92,8 +93,9 @@ Public Class Line_conf
             device_id = Load_CAT_COUNTER()
             Load_DIO_PORT(device_id)
             Load_delay()
+            Load_TowerLamp()
         Else ' load data on sqlite
-            '   MsgBox("NO HAVE")
+            '   'msgBox("NO HAVE")
             Load_PD()
             Load_Line()
             Load_COUNTER()
@@ -103,6 +105,29 @@ Public Class Line_conf
             Load_DIO_PORT(device_id)
             combo_cavity.SelectedIndex = 0
             Load_delay()
+            Load_TowerLamp()
+        End If
+    End Sub
+    Private Sub Load_TowerLamp()
+        tower_lamp.Items.Clear()
+        Dim api = New api()
+        Dim BF = New Backoffice_model()
+        Dim I_Towerlamp As Integer = 0
+        Dim check_I_Towerlamp As Integer = 0
+        Dim PD As String = ""
+        ' Dim towerLampSqlite = BF.Get_default_pd_detail_PD("TowerLamp")
+        Dim towerLampSqlite = "NO_DEVICE"
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_TowerLamp")
+        If result_data <> "0" Then
+            Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
+            For Each item As Object In dict2
+                tower_lamp.Items.Add(item("metl_comport").ToString())
+                If item("metl_comport").ToString() = towerLampSqlite Then
+                    check_I_Towerlamp = I_Towerlamp
+                End If
+                I_Towerlamp += 1
+            Next
+            tower_lamp.SelectedIndex = check_I_Towerlamp
         End If
     End Sub
     Private Sub S_Load_COUNTER()
@@ -112,7 +137,7 @@ Public Class Line_conf
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
         Dim PD As String = ""
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_COUNTER")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_COUNTER")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -127,7 +152,7 @@ Public Class Line_conf
     End Sub
     Public Function load_data_defeult_master_server(line_cd As String)
         Dim api = New api()
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -145,7 +170,7 @@ Public Class Line_conf
     End Function
     Public Function load_defeult_master_server(line_cd As String)
         Dim api = New api()
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/JOIN_CHECK_LINE_MASTER?line_cd=" & line_cd)
         Return result_data
     End Function
     Private Sub Load_scanner()
@@ -155,7 +180,7 @@ Public Class Line_conf
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
         Dim PD = BF.Get_default_pd_detail_PD("scanner_port")
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_SCANNER")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_SCANNER")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -175,7 +200,7 @@ Public Class Line_conf
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
         Dim PD = BF.Get_default_pd_detail_PD("pd")
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_PD")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_PD")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -192,7 +217,7 @@ Public Class Line_conf
         ComboBox2.Items.Clear()
         Dim api = New api()
         Dim BF = New Backoffice_model()
-        Dim result_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_LINE?PD=" & ComboBox3.Text)
+        Dim result_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_LINE?PD=" & ComboBox3.Text)
         Dim PD As String = "NO_DATA"
         Dim I_PD As Integer = 0
         Dim check_I_LINE As Integer = 0
@@ -232,7 +257,7 @@ Public Class Line_conf
         Dim I_PD_CD As Integer = 0
         Dim check_I_PD As Integer = 0
         Dim PD As String = ""
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_COUNTER")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_COUNTER")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -249,7 +274,7 @@ Public Class Line_conf
         printer.Items.Clear()
         Dim api = New api()
         Dim BF = New Backoffice_model()
-        Dim result_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_PRINTER")
+        Dim result_data = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_PRINTER")
         Dim PD As String = "NO_DATA"
         Dim LINE_CD As String = "NO_DATA"
         Dim I_PD As Integer = 0
@@ -275,7 +300,7 @@ Public Class Line_conf
         Dim check_I_PD As Integer = 0
         Dim PD As String = ""
         Dim ID As Integer = 0
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_CAT_COUNTER")
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_CAT_COUNTER")
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -295,7 +320,7 @@ Public Class Line_conf
         Dim api = New api()
         Dim check_cat_dio As Integer = 0
         Dim i = 0
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/GET_DATA_NEW_FA/GET_DIO_PORT?device_name=" & ComboBox_master_device.Text)
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/GET_DATA_NEW_FA/GET_DIO_PORT?device_name=" & ComboBox_master_device.Text)
         If result_data <> "0" Then
             Dim dict2 As Object = New JavaScriptSerializer().Deserialize(Of List(Of Object))(result_data)
             For Each item As Object In dict2
@@ -320,8 +345,9 @@ Public Class Line_conf
         Dim scanner_port As String = scanner.Text
         Dim printer_port As String = printer.Text
         Dim dio_port As String = Me.DIO_PORT.Text
+        Dim Towerlampss As String = tower_lamp.Text
 
-        Backoffice_model.saveLineConfig(pd, line_cd, count_type, cavity, scanner_port, printer_port, dio_port)
+        Backoffice_model.saveLineConfig(pd, line_cd, count_type, cavity, scanner_port, printer_port, dio_port, Towerlampss)
         'Dim f2 = New MainFrm()
         Dim sqlss = Backoffice_model.ConnectDBSQLite()
         While sqlss.Read()
@@ -333,7 +359,7 @@ Public Class Line_conf
             MainFrm.lb_printer_port.Text = sqlss("printer_port").ToString()
             MainFrm.lb_dio_port.Text = sqlss("dio_port").ToString()
             Backoffice_model.SCANNER_PORT = sqlss("scanner_port").ToString()
-            'MsgBox(sqlss("pd").ToString())
+            ''msgBox(sqlss("pd").ToString())
         End While
         sqlss.close
         If Backoffice_model.SCANNER_PORT <> "" And Backoffice_model.SCANNER_PORT <> "USB" Then
@@ -343,8 +369,8 @@ Public Class Line_conf
         Prd_detail.Label3.Text = MainFrm.Label4.Text
         Dim total_delay As Integer = (CDbl(Val(delay_sec.Text)) * 10)
         Dim api = New api()
-        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/INSERT_DATA_NEW_FA/INSERT_COTROL_MASTER?line_cd=" & ComboBox2.Text & "&ComboBox_master_device=" & ComboBox_master_device.Text & "&device_dio_port_id=" & dio_port & "&printer=" & printer.Text & "&typ_counter=" & type_counter.Text & "&cavity=" & combo_cavity.Text & "&total_delay=" & total_delay & "&scanner=" & scanner.Text)
-
+        Dim result_data As String = api.Load_data("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/INSERT_DATA_NEW_FA/INSERT_COTROL_MASTER?line_cd=" & ComboBox2.Text & "&ComboBox_master_device=" & ComboBox_master_device.Text & "&device_dio_port_id=" & dio_port & "&printer=" & printer.Text & "&typ_counter=" & type_counter.Text & "&cavity=" & combo_cavity.Text & "&total_delay=" & total_delay & "&scanner=" & scanner.Text & "&TowerLamp=" & tower_lamp.Text)
+        ''Console.WriteLine("http://" & Backoffice_model.svApi & "/API_NEW_FA/index.php/INSERT_DATA_NEW_FA/INSERT_COTROL_MASTER?line_cd=" & ComboBox2.Text & "&ComboBox_master_device=" & ComboBox_master_device.Text & "&device_dio_port_id=" & dio_port & "&printer=" & printer.Text & "&typ_counter=" & type_counter.Text & "&cavity=" & combo_cavity.Text & "&total_delay=" & total_delay & "&scanner=" & scanner.Text & "&TowerLamp=" & tower_lamp.Text)
         ' Button1.Enabled = False
         'btn_start.Enabled = False
         'btn_back.Enabled = False
@@ -365,7 +391,7 @@ Public Class Line_conf
         MainFrm.LB_Number_worker.Text = 0
         List_Emp.ListView1.Items.Clear()
         List_Emp.ListBox2.Items.Clear()
-        'MsgBox("Update Success.")
+        ''msgBox("Update Success.")
     End Sub
     Private Sub menu3_Click(sender As Object, e As EventArgs)
         Me.Enabled = False
@@ -374,9 +400,9 @@ Public Class Line_conf
             If My.Computer.Network.Ping("192.168.161.102") Then
                 Dim webClient As New System.Net.WebClient
                 Dim result As String = webClient.DownloadString("http://192.168.161.102/exp_api3party/Api_sync_newfa/update_line_mst")
-                MsgBox("Synchronous completed")
+                'msgBox("Synchronous completed")
             Else
-                MsgBox("Synchronous not completed")
+                'msgBox("Synchronous not completed")
             End If
         Catch ex As Exception
 
@@ -412,11 +438,11 @@ Public Class Line_conf
         'Command.CommandTimeout = 30
         'Reader = Command.ExecuteReader()
         Dim LoadSQL = Backoffice_model.GetLine_mst()
-        'MsgBox("test")
+        ''msgBox("test")
         ' While LoadSQL.Read()
         'Label6.Text = LoadSQL("pd").ToString()
         'Label4.Text = LoadSQL("line_cd").ToString()
-        'MsgBox(LoadSQL("dep_cd").ToString())
+        ''msgBox(LoadSQL("dep_cd").ToString())
         'End While
         If LoadSQL.HasRows = True Then
             While LoadSQL.Read()
@@ -459,7 +485,7 @@ Public Class Line_conf
             ComboBox2.Items.Clear()
             Load_Line()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'msgBox(ex.Message)
         End Try
 
     End Sub

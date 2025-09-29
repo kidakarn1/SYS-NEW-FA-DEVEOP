@@ -6,10 +6,9 @@ Public Class Sel_prd_setup
         Working_Pro.Enabled = True
         Me.Hide()
     End Sub
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Public Sub loadDataLossCrr()
         Try
-
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 Chang_Loss.ListView2.View = View.Details
                 'Chang_Loss.ListView2.Scrollable = Size()
                 'List_Emp.ListBox2.Items.Add(Trim(TextBox2.Text))
@@ -29,17 +28,19 @@ Public Class Sel_prd_setup
                     Chang_Loss.Show()
                     Me.Hide()
                 Else
-                    MsgBox("Please Check Master Loss.")
+                    'msgBox("Please Check Master Loss.")
                 End If
             End If
         Catch ex As Exception
             load_show.Show()
         End Try
     End Sub
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        loadDataLossCrr()
+    End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Try
-
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 Change_Loss2.ListView2.View = View.Details
                 Dim checkRs As Integer = 0
                 Loss_reg_pass.Label2.Text = MainFrm.Label4.Text
@@ -55,7 +56,7 @@ Public Class Sel_prd_setup
                     Change_Loss2.Show()
                     Me.Hide()
                 Else
-                    MsgBox("Please Check Master Loss.")
+                    'msgBox("Please Check Master Loss.")
                 End If
             Else
                 load_show.Show()
@@ -78,7 +79,7 @@ Public Class Sel_prd_setup
     End Sub
     Public Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Try
-            If My.Computer.Network.Ping("192.168.161.101") Then
+            If My.Computer.Network.Ping(Backoffice_model.svp_ping) Then
                 Dim check_format_tag As String = Backoffice_model.B_check_format_tag()
                 Dim LoadSQL
                 Dim num As Integer = 0
@@ -115,7 +116,7 @@ Public Class Sel_prd_setup
                 load_show.Show()
             End If
         Catch ex As Exception
-            'MsgBox("error==>" & ex.Message)
+            ''msgBox("error==>" & ex.Message)
             load_show.Show()
         End Try
     End Sub
@@ -123,7 +124,7 @@ Public Class Sel_prd_setup
         Rm_scan.Panel_scan_picking.Visible = True
         Rm_scan.scan_item_cd.Select()
         Rm_scan.scan_item_cd.Focus()
-        Rm_scan.Show()
+        Rm_scan.ShowDialog()
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs)
 

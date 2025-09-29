@@ -204,7 +204,7 @@ Partial Class Confrime_work_production
         '
         'Timer_delay
         '
-        Me.Timer_delay.Interval = 6000
+        Me.Timer_delay.Interval = 6100
         '
         'Confrime_work_production
         '

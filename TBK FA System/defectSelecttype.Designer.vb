@@ -31,11 +31,12 @@ Partial Class defectSelecttype
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ITEMNAME = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.lbType = New System.Windows.Forms.Label()
         Me.wis = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.seq = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.pwi_id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.mainChildPart = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.lbType = New System.Windows.Forms.Label()
         CType(Me.btnUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnBack, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -44,15 +45,15 @@ Partial Class defectSelecttype
         '
         'btnPartfg
         '
-        Me.btnPartfg.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
+        Me.btnPartfg.BackColor = System.Drawing.Color.White
         Me.btnPartfg.FlatAppearance.BorderSize = 0
         Me.btnPartfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPartfg.Font = New System.Drawing.Font("Yu Gothic", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPartfg.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnPartfg.Location = New System.Drawing.Point(42, 174)
+        Me.btnPartfg.Font = New System.Drawing.Font("Panton-Trial", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPartfg.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btnPartfg.Location = New System.Drawing.Point(42, 179)
         Me.btnPartfg.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPartfg.Name = "btnPartfg"
-        Me.btnPartfg.Size = New System.Drawing.Size(550, 32)
+        Me.btnPartfg.Size = New System.Drawing.Size(550, 41)
         Me.btnPartfg.TabIndex = 38
         Me.btnPartfg.Text = "XXXX"
         Me.btnPartfg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -61,7 +62,7 @@ Partial Class defectSelecttype
         'btnUp
         '
         Me.btnUp.BackColor = System.Drawing.Color.Transparent
-        Me.btnUp.Location = New System.Drawing.Point(692, 289)
+        Me.btnUp.Location = New System.Drawing.Point(682, 298)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(97, 103)
         Me.btnUp.TabIndex = 39
@@ -70,7 +71,7 @@ Partial Class defectSelecttype
         'btnDown
         '
         Me.btnDown.BackColor = System.Drawing.Color.Transparent
-        Me.btnDown.Location = New System.Drawing.Point(692, 394)
+        Me.btnDown.Location = New System.Drawing.Point(682, 408)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(97, 102)
         Me.btnDown.TabIndex = 40
@@ -79,29 +80,30 @@ Partial Class defectSelecttype
         'btnBack
         '
         Me.btnBack.BackColor = System.Drawing.Color.Transparent
-        Me.btnBack.Location = New System.Drawing.Point(-2, 496)
+        Me.btnBack.Location = New System.Drawing.Point(27, 514)
         Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(128, 108)
+        Me.btnBack.Size = New System.Drawing.Size(192, 78)
         Me.btnBack.TabIndex = 41
         Me.btnBack.TabStop = False
         '
         'lvChildpart
         '
         Me.lvChildpart.Activation = System.Windows.Forms.ItemActivation.OneClick
-        Me.lvChildpart.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(35, Byte), Integer))
-        Me.lvChildpart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ITEMNAME, Me.wis, Me.seq, Me.pwi_id})
+        Me.lvChildpart.BackColor = System.Drawing.Color.White
+        Me.lvChildpart.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lvChildpart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ITEMNAME, Me.wis, Me.seq, Me.pwi_id, Me.mainChildPart})
         Me.lvChildpart.Cursor = System.Windows.Forms.Cursors.Default
-        Me.lvChildpart.Font = New System.Drawing.Font("Yu Gothic", 15.75!, System.Drawing.FontStyle.Bold)
-        Me.lvChildpart.ForeColor = System.Drawing.Color.White
+        Me.lvChildpart.Font = New System.Drawing.Font("Panton-Trial", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.lvChildpart.ForeColor = System.Drawing.Color.Black
         Me.lvChildpart.FullRowSelect = True
         Me.lvChildpart.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvChildpart.HideSelection = False
         Me.lvChildpart.HotTracking = True
         Me.lvChildpart.HoverSelection = True
         Me.lvChildpart.LabelEdit = True
-        Me.lvChildpart.Location = New System.Drawing.Point(43, 289)
+        Me.lvChildpart.Location = New System.Drawing.Point(38, 305)
         Me.lvChildpart.Name = "lvChildpart"
-        Me.lvChildpart.Size = New System.Drawing.Size(643, 201)
+        Me.lvChildpart.Size = New System.Drawing.Size(629, 201)
         Me.lvChildpart.TabIndex = 46
         Me.lvChildpart.UseCompatibleStateImageBehavior = False
         Me.lvChildpart.View = System.Windows.Forms.View.Details
@@ -118,28 +120,7 @@ Partial Class defectSelecttype
         '
         'ITEMNAME
         '
-        Me.ITEMNAME.Width = 275
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox4.Location = New System.Drawing.Point(672, 499)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(128, 108)
-        Me.PictureBox4.TabIndex = 47
-        Me.PictureBox4.TabStop = False
-        '
-        'lbType
-        '
-        Me.lbType.AutoSize = True
-        Me.lbType.BackColor = System.Drawing.Color.Transparent
-        Me.lbType.Font = New System.Drawing.Font("Yu Gothic", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbType.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.lbType.Location = New System.Drawing.Point(701, 30)
-        Me.lbType.Name = "lbType"
-        Me.lbType.Size = New System.Drawing.Size(68, 45)
-        Me.lbType.TabIndex = 52
-        Me.lbType.Text = "XX"
+        Me.ITEMNAME.Width = 262
         '
         'wis
         '
@@ -152,6 +133,31 @@ Partial Class defectSelecttype
         'pwi_id
         '
         Me.pwi_id.Width = 1
+        '
+        'mainChildPart
+        '
+        Me.mainChildPart.Width = 0
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox4.Location = New System.Drawing.Point(589, 515)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(190, 77)
+        Me.PictureBox4.TabIndex = 47
+        Me.PictureBox4.TabStop = False
+        '
+        'lbType
+        '
+        Me.lbType.AutoSize = True
+        Me.lbType.BackColor = System.Drawing.Color.Transparent
+        Me.lbType.Font = New System.Drawing.Font("Panton-Trial ExtraBold", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbType.ForeColor = System.Drawing.SystemColors.ButtonFace
+        Me.lbType.Location = New System.Drawing.Point(8, 6)
+        Me.lbType.Name = "lbType"
+        Me.lbType.Size = New System.Drawing.Size(51, 35)
+        Me.lbType.TabIndex = 52
+        Me.lbType.Text = "XX"
         '
         'defectSelecttype
         '
@@ -191,4 +197,5 @@ Partial Class defectSelecttype
     Friend WithEvents wis As ColumnHeader
     Friend WithEvents seq As ColumnHeader
     Friend WithEvents pwi_id As ColumnHeader
+    Friend WithEvents mainChildPart As ColumnHeader
 End Class

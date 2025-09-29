@@ -66,6 +66,8 @@ Partial Class MainFrm
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
+        Me.PanelShowInformation = New System.Windows.Forms.Panel()
+        Me.PanelWebviewInformation = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,6 +84,8 @@ Partial Class MainFrm
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelShowInformation.SuspendLayout()
+        CType(Me.PanelWebviewInformation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
@@ -93,11 +97,11 @@ Partial Class MainFrm
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.Label9.Font = New System.Drawing.Font("Catamaran", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(624, 135)
+        Me.Label9.Location = New System.Drawing.Point(571, 137)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(162, 19)
+        Me.Label9.Size = New System.Drawing.Size(222, 19)
         Me.Label9.TabIndex = 23
-        Me.Label9.Text = "FA VERSION 1.8.3"
+        Me.Label9.Text = "FA VERSIONS 2.1.7 TT04"
         '
         'Panel1
         '
@@ -356,7 +360,7 @@ Partial Class MainFrm
         'Timer2
         '
         Me.Timer2.Enabled = True
-        Me.Timer2.Interval = 50000.0R
+        Me.Timer2.Interval = 300000.0R
         Me.Timer2.SynchronizingObject = Me
         '
         'menu3
@@ -591,6 +595,28 @@ Partial Class MainFrm
         Me.PictureBox12.TabStop = False
         Me.PictureBox12.Visible = False
         '
+        'PanelShowInformation
+        '
+        Me.PanelShowInformation.BackColor = System.Drawing.Color.Transparent
+        Me.PanelShowInformation.Controls.Add(Me.PanelWebviewInformation)
+        Me.PanelShowInformation.Location = New System.Drawing.Point(586, 37)
+        Me.PanelShowInformation.Name = "PanelShowInformation"
+        Me.PanelShowInformation.Size = New System.Drawing.Size(38, 34)
+        Me.PanelShowInformation.TabIndex = 4705
+        Me.PanelShowInformation.Visible = False
+        '
+        'PanelWebviewInformation
+        '
+        Me.PanelWebviewInformation.AllowExternalDrop = True
+        Me.PanelWebviewInformation.CreationProperties = Nothing
+        Me.PanelWebviewInformation.DefaultBackgroundColor = System.Drawing.Color.White
+        Me.PanelWebviewInformation.Location = New System.Drawing.Point(395, 249)
+        Me.PanelWebviewInformation.Name = "PanelWebviewInformation"
+        Me.PanelWebviewInformation.Size = New System.Drawing.Size(151, 19)
+        Me.PanelWebviewInformation.TabIndex = 4705
+        Me.PanelWebviewInformation.Visible = False
+        Me.PanelWebviewInformation.ZoomFactor = 1.0R
+        '
         'MainFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -600,6 +626,7 @@ Partial Class MainFrm
         Me.BackgroundImage = Global.TBK_FA_System.My.Resources.Resources.MainMenu4
         Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.ControlBox = False
+        Me.Controls.Add(Me.PanelShowInformation)
         Me.Controls.Add(Me.PictureBox12)
         Me.Controls.Add(Me.PictureBox11)
         Me.Controls.Add(Me.Panel3)
@@ -622,7 +649,7 @@ Partial Class MainFrm
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "MainFrm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form1"
+        Me.Text = "MainFrm"
         Me.TransparencyKey = System.Drawing.Color.Red
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
@@ -642,6 +669,8 @@ Partial Class MainFrm
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelShowInformation.ResumeLayout(False)
+        CType(Me.PanelWebviewInformation, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -689,4 +718,6 @@ Partial Class MainFrm
     Friend WithEvents PictureBox10 As PictureBox
     Friend WithEvents PictureBox11 As PictureBox
     Friend WithEvents PictureBox12 As PictureBox
+    Friend WithEvents PanelShowInformation As Panel
+    Friend WithEvents PanelWebviewInformation As Microsoft.Web.WebView2.WinForms.WebView2
 End Class
