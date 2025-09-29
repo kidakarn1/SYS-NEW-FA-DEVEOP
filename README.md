@@ -151,8 +151,9 @@ _สำหรับ Admin / Engineer_
 ### Steps
 1. Clone the repository
    ```bash
-   git clone https://github.com/your-username/fa-system.git
-   cd fa-system
+   
+   git clone https://github.com/kidakarn1/SYS-NEW-FA-DEVEOP.git
+   cd SYS-NEW-FA-DEVEOP
 2. Install DB Browser for SQLite
 
 3. Copy folder sqlite3 → C:\sqlite3\
